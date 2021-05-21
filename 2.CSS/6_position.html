@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /*
+        position : static (default), absolute, relative , fixed , sticky 
+
+        1. relative : 
+            a. relative to its normal position 
+            b. if use relative position then we can use top left bottom right  
+            c. Gap will generate
+            
+                position: relative;
+                top: 40px;
+                left: 30px;
+                
+        2. Absolute
+            a. Relative to its parent div 
+            b. if use relative position then we can use top left bottom right  
+            c. Gap will not generate      
+
+                position: relative;
+                top: 40px;
+                left: 30px;  
+        
+        3. fixed 
+            a. it will fixed in browser screen and this is used to create chat
+
+        4. fixed 
+            a. it will stick in browser screen and this is used to create navigation links    
+        */
+        
+        .container {
+            background-color: lightgreen;
+            border: 2px solid red;
+            height: 3444px;
+        }
+        
+        .container2 {
+            background-color: yellow;
+            border: 2px solid black;
+            height: 3444px;
+        }
+        
+        .box {
+            height: 150px;
+            width: 150px;
+            border: 2px solid red;
+            margin: 2px;
+            display: inline-block;
+        }
+        
+        #box2 {
+            position: static;
+        }
+        
+        #box1 {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            ;
+        }
+        
+        #box3 {
+            position: fixed;
+            right: 4px;
+            bottom: 5px;
+        }
+        
+        #box5 {
+            position: sticky;
+            top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box" id="box1">1 Absolte</div>
+        <div class="box" id="box2">2 Static</div>
+        <div class="box" id="box3">3 Fixed</div>
+        <div class="box" id="box4">4</div>
+        <div class="box" id="box5">5 Sticky</div>
+        <div class="box" id="box6">6</div>
+    </div>
+    <div class="container2">
+
+    </div>
+</body>
+
+</html>

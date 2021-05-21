@@ -1,0 +1,51 @@
+PHP and Mysql Programming steps 
+	1. Connection -> 2.Run Sql Query -> 3. Close Connection  
+
+
+1. Connection
+	$con=mysqli_connect(Server name, User Name, Password , Database name) or die('Database 							Fail'.mysqli_connect_error());
+	
+2. Run Sql Query
+	$result=mysqli_query(Connection Name,SQL Query) or die('Query Fail'.mysqli_error($con));
+
+
+
+	for multiquery 
+
+
+	$sql = "INSERT INTO post values(null,'$title','$description','$category','$date','$auther','$file_name');";
+	$sql.= "UPDATE category SET post=post+1 where category_id=$category";
+	$result = mysqli_multi_query($con, $sql) or die('Query Failed. ' . mysqli_error($con));
+	
+3. Close Connection 
+	mysqli_close(Connection Name);
+
+4. Fetch No. Rows
+	mysqli_num_rows($result); 	
+	
+4 Fetch Query
+	
+	procedural : while($row=mysqli_fetch_assoc($result))  
+
+	a. mysqli_fetch_assoc($result)	or mysqli_fetch_array($result,MYSQLI_ASSOC)		return associative array and  column name as index (key) 
+	b. mysqli_fetch_array($result)	or mysqli_fetch_array($result,MYSQLI_BOTH)		return index and associative array of column name  
+ 	c. mysqli_fetch_row($result)	or mysqli_fetch_array($result,MYSQLI_NUM)		return index array 
+	d. mysqli_fetch_all($result)	   MYSQLI_ASSOC,MYSQLI_BOTH,MYSQLI_NUM			return whole rows in a multi-dimiensional					
+	e. mysqli_fetch_field($result)													return all the column names and Columns details 
+	
+5. Affected Rows
+	mysqli_affected_rows($con);			return every thing when we effect database using select,insert,delete,update
+
+6. Errors
+			   	
+	a. mysqli_connect_error($con)		return the error realted to connection		
+	b. mysqli_connect_errno($con)		return the error number 
+	c. mysqli_error($con)				return the error realted to query 
+	d. mysqli_error_list()				return every thing in array 		
+	
+
+7.  for serach 
+	SELECT * FROM table name where LIKE '%titleName%' or Like '%Body%' or LIKE '%Any Thing%';
+
+8. basename()	// it return only name of file and rest of the things ignore
+	we can use this concept as show title in browser (yahoo baba video no 160 php )	

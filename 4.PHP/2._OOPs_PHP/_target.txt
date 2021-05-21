@@ -1,0 +1,27 @@
+1.  Core PHP
+2.  OOPS PHP
+3.  MVC PHP
+4.  MYSQL 
+5.  HTML 
+6.  CSS
+7.  BOOTSTRAP
+8.  JAVASCRIPT 
+9.  CODEIGNITER 3
+10. CODEIGNITER 4
+11. LARVAL 
+12. CAKE YII
+13. JAVASCRIPT (DEEP)
+14. REACT 
+15. ANGULAR 
+16. JAVA 
+17. DOTNET #C 
+18. PYTHON
+19. Xml
+20. flash or Flask
+21. Djong 
+22. Ruby on Rails 
+23. C/C++
+24. TypeScript
+25. Wordpress
+26. Linux
+27. Git Hub

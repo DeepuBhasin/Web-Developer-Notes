@@ -1,0 +1,38 @@
+There are 3 methods to use PHP and Mysql
+
+1. Mysqli Procedural
+2. Mysqli Object-oriented
+3. PDO
+
+==============================================================================================================================
+1. Connection
+	$con= new mysqli(Server name, User Name, Password , Database name);
+
+2. Run Sql Query
+	$con->query(Sql Query);
+
+3. Close Connection 
+	$con->close();
+
+we can use all function of mysqli in oops just remove mysqli eg: mysqli_query to $con->query etc
+
+4. Fetch Query
+	 $result=$con->query(Sql Query) 																|
+	 
+	 a. $result->fetch_assco();
+	 b. $result->fetch_array();
+	 c. $result->fetch_row();
+	 d. $result->fetch_all();
+	 e. $result->fetch_field();
+	
+5. Affected Rows
+	
+	$con->affected_rows();
+
+6. Errors
+	 a. $con->connect_error();
+	 b. $con->connect_errno();
+	 c. $con->error();
+	 d. $con->error_list();
+	
+

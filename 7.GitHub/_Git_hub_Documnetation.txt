@@ -1,0 +1,212 @@
+====================================================================Short Cuts =========================================================
+1. Zoom in or Zoom out 				: ctrl + or Ctrl -
+2. List of commands  				: git (press enter)       {commands also run in power shell}
+3. q (key) 							: to quit
+4. paste 							: shift + ins (key)
+
+1. What is Git ?	
+	it is version Control System (to keep tracsk of files) and main advantages of this
+	a. Easily recovers files 
+	b. Who intrduce issue and when
+	c. RollBack to previous working state
+	d. it is based on Distribution System 
+	e. It capture sanpshot not the difference
+	d. Almost every operation is local 
+	f. Git has integrity (Check sum (is used to check the origniality (kind of public and private key))) 
+	g. Git Generaly only adds data (increasing Reposirtoy)
+
+2. What is GitHub 
+	a. it is git is website which store the git hub repository
+	b. github alternatives are gitlab, bitbucket 
+
+
+Downlaod : type git install ( web site name : git-scm)
+	gitbash (called terminal or powershell)   :  it is command line Tool
+
+
+3. Git - Three Stages Acrhitecture 
+
+								Local Operations 
+	1. Working Directory 		2. Staging Area 		3. git directory(repository)
+			|<--------------------------|-----------------------|
+			|	(Checkout the project)	|						|
+			|-------------------------->|						|
+			|	 (Stage files)			|						|
+			|							|---------------------->|	
+												(commit)
+
+4. File Status Life Cycle :
+		how will u understand this : 
+			1. First enter git status : you will notice that files are not staged here
+			2. second enter git add --a : you will stage all the files it means unmodified files 
+			3. if we edit files after staging then enter status : change file will reflect in modifed as well in stage area     (here if you use commit command then only staging area will 	run and modified area will ignore )
+			4. after that again git add -a : then all files will reflect into stage area (unmodifed)
+
+			hence we can commit only those files which are in Staging area (green Color files) and can not commit those files which is in modified area/untracked area (red color files)
+
+											 Local Operations 
+
+							   (also stage area)			 
+	1. Untarcked 				2. unmodified 			3. modified				4. Staged
+			|                           |---------------------->|               	 |
+			|-------------------------->|    (Edit the file)  	|					 |
+			|     (add the file)        |                       |------------------->|
+			|<--------------------------|                       |	(stage the file) |			
+			|     (remove the file)     |<----------------------|--------------------|
+			|                           |                    (commit)                |
+
+
+
+5. Branch By default branch is master (main directoty or main branch)
+
+================================================================= commands ==============================================================
+
+a. User name and Email 
+
+	1. git config --global user.name "Deepinder Singh"   									:: To set the name 
+	2. git config --global user.emial "Deepinder999@gmail.com"  							:: To set the email address
+	3. git config user.name 																:: return the usernane 
+	4. git config user.email 																:: return the email 
+	3. git config --global --list 															:: return Username and Email address + other infromations
+
+
+b. To start 
+
+(initial)	1. git init 										:: will create git Directory
+			2. rm -rf .git 										:: to delete git Repository 
+			3. git -rm fileName									:: to delete file and also add file into stage area
+	
+(status)	4. git status										:: return the current directory status like staging , branch details , commits 
+	
+(staging)	5. git add --a / git add .							:: put all the files into staging area 
+			6. git add first.txt								:: put particular file (name is first.txt) into staging area 	
+			7. git restore --staged fileName
+	
+(commit)	8. git commit -m "Initial Commit" 					:: use to commit the staging area with commit Message 
+
+
+(clone)		9. go to any git hub repository -> click on clone -> copy the link of the clone address -> open git bash
+			->	git clone (use shit + ins key to paste the addres) https://github.com/tensorflow/tensorflow.git 
+			or 
+			->	git clone (use shit + ins key to paste the addres) https://github.com/tensorflow/tensorflow.git shortName	
+
+				example :  	
+					Cloning into 'tensorflow'...
+					remote: Enumerating objects: 12, done.
+					remote: Counting objects: 100% (12/12), done.
+					remote: Compressing objects: 100% (10/10), done.
+					remote: Total 1090924 (delta 2), reused 6 (delta 2), pack-reused 1090912
+					Receiving objects: 100% (1090924/1090924), 649.18 MiB | 18.16 MiB/s, done.
+					Resolving deltas: 100% (889372/889372), done.
+					Updating files: 100% (24448/24448), done.
+
+			10. pwd 										:: return Present Directory 
+			11. ls 											:: return the list of files and directory in current repositroy	
+			12. cd											:: change Directory example cd shortName/ (move to shortName Directory)
+
+(file)		13. touch fileName 								:: create blank file in directory	example touch error.log
+(Rename)	14. git mv first.txt first_rename.txt			:: this is used to rename the files and also add into stage area 
+
+(ignore files)	15. .gitignore								:: this file is used to ignore the all files in directory which are written in this file while staging 
+					a. *.log								:: this line is ignore all the files with .log extention which are written in the gitignore file
+					b. folderName/							:: this line is ignore folder which are wriiten in the gitignore file for example "dir/" gitignore file will ignore this 													directory in all the folders  
+					c. /folderName/							:: this will ignore only outer folder(main Directory) not the inner folders (other than main directory)
+					d. folderName/folderName/   			:: this will ignore only particalur folder 
+					c. Gitignore ignore all the blank folder by default 
+
+(diff)			16. a. git diff 					:: return the difference between the stage area and working directory (modified area (changes done after staging))		
+					b. git diff --stages 			:: return the difference between the two stages 
+
+(Skip staging area)
+				17. git add -am "Direct Commit"     :: it will skip the staging area but in this command will not commit that files which are untracked area 
+
+
+(log)			18.a. git log											:: return all the commits in the directory 
+
+					example 	commit 8d234b6501d4569dc2fdf4350fca334f97d18b78 (HEAD -> master)			:: hash with directory name 			
+					Author: Deepinder Singh <Deepinder999@gmail.com>							:: Done by the person 		
+					Date:   Mon Feb 15 00:01:21 2021 +0530										:: Time stamp	
+
+					    Initial Commit 															:: Commit Message 
+					
+					b. git log -p 					:: return the difference between the commits 
+					c. git log -p -2				:: return the difference between the 2 commits 	
+					d. git log --stat 				:: return the difference between the commits very small information 
+					e. git log --pretty=oneline		:: return all the commits with message and hash (shot description)
+					f. git log --pretty=full 		:: return all the commits with message and hash (full description)
+					g. git log --since=2.days		:: return the 2 days work 
+					h. git log --since=2.months		:: return the 2 months work 
+					i. git log --amend 				:: use to change the commit data
+						after this command window will open called wim editior -> Change any thing that you want to do -> esc (key) -> ':wq' + enter
+
+(unmodified/rollback)
+				19. a. git checkout -- fileName 		:: will roll back all the changes upto lastest commit in the particular file 
+					b. git checkout -f 					:: will roll back all the changes upto lastest commit in all the files/directories 
+
+(working with Remote Repositores)
+				20. login to git hub -> Click on '+'' sign(right hand at top) -> select 'New Repository' -> enter Repository Name -> Enter Discription -> 
+					a. ->git remote add origin https://github.com/DeepuBhasin/gitTituorial_demo.git    		:: add remote git repository
+											or
+					->git remote add anyShortName https://github.com/DeepuBhasin/gitTituorial_demo.git   	:: add remote git repository  
+					b. git remote 																			:: to get remote name
+					c. git remote -v 																		:: to get push and pull remote address 
+
+(Permisssions)		d. go to settings -> SSH & GPG keys -> New SHS key -> enter title -> to add key first go to ssh git hub website (just enter ssh git hub in google) 
+						-> Generating a new SSH key and adding it to the ssh-agent -> enter this in git bash '$ ssh-keygen -t ed25519 -C "your_email@example.com" '			
+						-> press enter -> agian enter -> again ->enter -> eval `ssh-agent -s` (to check agent) -> command ' ssh-add ~/.ssh/id_ed25519 ' is used to private key press enter -> key will added successfullly -> click on this ' Add the SSH key to your GitHub account. ' -> then ' tail ~/.ssh/id_ed25519.pub' to print ssh key in git bash 
+						-> ' ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIITbmVNe877PXIoq7lzbkMvGOvqE/19c6dJTUYDGiIz0 ' this kind of key will generate then copy this key -> paste this key into your account where you are creating key -> click on Add SSH -> '$ git push -u origin master' use this command
+									
+									Enumerating objects: 13, done.
+									Counting objects: 100% (13/13), done.
+									Delta compression using up to 8 threads
+									Compressing objects: 100% (7/7), done.
+									Writing objects: 100% (13/13), 971 bytes | 485.00 KiB/s, done.
+									Total 13 (delta 2), reused 0 (delta 0), pack-reused 0
+									remote: Resolving deltas: 100% (2/2), done.
+									To https://github.com/DeepuBhasin/gitTituorial_demo.git
+									 * [new branch]      master -> master
+									Branch 'master' set up to track remote branch 'master' from 'origin'.
+(push)					e. git push -u origin master	 :: is use push data in the repository
+						f. git push -u origin branchName :: is use to push data into the branch 
+						g. git push -u origin branchName:NewName    		 :: is use to push data into the branch with new name
+						h. git push -d origin BranchName         			 :: is use to delete repository from github	 
+
+
+											   	
+(alias)			21. a. git config --global alias.st stauts 						:: alias status to st key word ->	then git st
+					b. git config --global alias.unstage 'restore --staged --'  :: alias to make unstage   	-> git unstage fileName
+					c. git config --global alias.last 'log -p -1'               :: alias to get last commit -> git last
+ 										  (Short name) (Command Name)
+
+(Branching)		22. git checkout -b develop						:: git checkout -b BrnachName
+					exmpale
+						HP@DeepuBhasin MINGW64 /c/wamp64/www/AAAA/7.GitHub/Practise (master)
+						git checkout -b develop	
+						HP@DeepuBhasin MINGW64 /c/wamp64/www/AAAA/7.GitHub/Practise (develop)
+
+				23. git checkout master 						:: move to master branch folder
+				24. git checkout BranchName						:: move to branch folders 				(git checkout develop)
+				25. git branch 									:: return all the names  of branches (with green color and star on it will reflect current branch)		
+
+(note) when ever you want to switch the branch you should always commit before changing
+
+(mergin) 		26. git merge BranchName 						:: it will merge the branch to master branch (if conflict occur it will ask you to accept incoming changes and current 																				chnages )
+					 after -> git status
+
+					 get -> HP@DeepuBhasin MINGW64 /c/wamp64/www/AAAA/7.GitHub/Practise/mywebsite (master|MERGING) 
+					 
+					 git -> commit  	(this commit is called merge commit)
+
+				27. git branch -v  								:: will return all the last commit message + branches + hash numbers 
+				28. git branch --merged 						:: will return all the merge branches
+				29.	git branch --no-merged						:: will return all the non merge branches 
+				30. git branch -d BranchName 					:: wiil delete merge branch (if branch is not merge it will show error message)	 
+
+(note) when ever you want to merge you should be in the master branch and and every thing should be commit before merging every thing 
+
+
+
+	
+
+
+

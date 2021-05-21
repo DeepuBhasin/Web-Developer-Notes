@@ -1,0 +1,22 @@
+1. echo is a language construct not a function (for showing output in any kind of language is called Language construct)
+2. Excape Character \ in php
+3. != and <> are same thing called not Equal to 
+4. $number=$number + 1 is same thing $number +=1;
+5. @mysqli_connect('localhost','test','root','') or die('Database not Connected');
+6. function add($x,$y){
+	$result=$x+$y;
+	return $result;
+}
+	echo add(10,10) + 10;        here add(10,10) is now become 20 hence answer is 30;
+
+7. Addslashes for SQL injections 
+8. Define and Defined 
+9. rand(1,6) and getrandmax()
+10. file size is reprsent in KB 
+11. magic_quotes_runtime() protect from SQL injections 
+12. Throw,Catch,Exceptions  
+
+==============Code with Harry ============================
+
+1. Syntax Highlighting 
+2. Resource > network > listening Ports  Moniter to find Ports 

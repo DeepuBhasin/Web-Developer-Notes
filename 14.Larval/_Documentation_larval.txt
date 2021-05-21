@@ -1,0 +1,432 @@
+1. In codeigniter there is no Command Line, we also do not use Composer and Advance things 
+
+
+what is composer 
+	1. it is dependence manager of PHP (basically its kind of dwonloader which help to download every thing automatically)
+	2. All files exist in vendor 
+	3. there is no need of composer in Core PHP and also in Codeigniter
+
+==================================================================================================================================
+To instal 
+	1. composer create-project laravel/laravel laravel "5.1.*"
+	2. then go to public folder -> cut .htaccess file and paste int main directory
+	3. change server.php to index.php which is exist in main Directoty
+
+===============================================================================================================================
+	1. DD : Die and Dumb  : it will stop the script and execute the things which  is written in it	
+
+=====================================================================================================================================
+View : 
+	Resources -> views -> create new file -> hello.blade.php
+
+	what does Blade means ?
+	 its a template engine 
+==============
+	 includer 'header.php' or include 'footer.php'  -> master.blade.php
+
+	 layout/master.php
+	 	<!DOCTYPE html>
+		<html>
+		<head>
+			<meta charset="utf-8">
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			<title>Hello View</title>
+			<link rel="stylesheet" href="">
+		</head>
+		<body>
+		<h1>Nav bar in header</h1>
+		<!-- -->
+
+		@yield('body')
+		</body>
+		</html>
+
+
+
+	other files 
+		@extends('layout/master')
+
+
+		@section('body')
+				<h1>Hello World</h1>
+				<?php print_r($mysubject);?>
+				<?php print_r($subjectsmarks)?>
+		@endsection('body')	
+
+
+
+
+Note : return view('Home.index');	it means the file is in the Home folder		
+
+
+================
+
+
+
+Send Data from Controller to views
+
+	Code write in Controller 
+		public function sendDataFunction()
+		{
+			$subjects = ['Math','physics','Chemistry'];
+			$marks = [30,40,50];
+			$data = "This is another way to print the values of data";
+			1. return view('hello')->with(['mysubject'=$subjects,'subjectsmarks'=>$marks,'datavalue'=>$data]);
+				
+				or 
+
+			return view('hello')->withmysubject($subjects)->withsubjectsmarks($marks)->withdatavalue($data);
+		}
+
+
+			Code write in View file 
+			<?php print_r($mysubject);?>
+			<?php print_r($subjectsmarks);?>	
+		
+						or 
+
+			{{ $datavalue }}					// this same meaning <?php echo $datavalue?>
+
+Note : 1. {{ $datavalue }} have great  advantage, it escape string values for example 
+			
+			$datavlue = "<script>alert('hello')</script>"; it will escap this value 
+
+		2. if we print the same {{$data}} as it is in html then we use @{{$data}}	
+
+		3. some times we need to run script then we use {!! $data !!}
+
+===================================================================================================================================
+
+if else conditon 
+	
+		1. terniary Condiiton 
+					{{ isset($data) ? $data: 'Data Not found'}}
+						or 
+			    	{{ $data or 'Data not found'}}			
+
+		2. if else Condition 
+			
+			@if($data=='hello')					// in this thing we are not using php keywords again and again 
+			  {{$data}}
+			 @elseif($data=='hi')
+			  {{$data}} 
+			 @else 
+			  	{{$default}}
+			 @endif	
+
+
+
+
+
+
+
+
+
+
+
+=====================================================================================================================================
+controller:
+	app -> Http -> Controllers -> hellocontroller.php
+
+		<?php 
+		namespace App\Http\Controllers;
+
+		use Illuminate\Foundation\Bus\DispatchesJobs;
+		use Illuminate\Routing\Controller as BaseController;
+		use Illuminate\Foundation\Validation\ValidatesRequests;
+		use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
+		Class HelloController extends Controller{								Class name same as files name 
+			
+		} 
+
+		?>
+
+	create controller with proper way 
+		open cmd in project folder -> php artisan make:controller test 			// file name is test 
+
+
+		file name be like TestController 	(best practise)
+=======================================================================================================================================
+Route : basically help to create custome Address in address bar 	
+	app -> Http -> Route.php -> write route
+
+	1.	Route::get('sayhello','Hellocontroller@index');
+			getMethod	Route name,Controllername@FunctionName 
+
+	2. Route::get('sayhello',function () {				// this function is used when we dont want to create controller 
+			return view('hello');						// hello is file name of view 	
+		}); 											// this function is called closer function 
+
+
+Note :	1. Route is class name 
+		2. get is static method 
+		3. Name of route is case-sensitive	
+		
+get data from Route
+
+		1. Route::get('test/{fname}/{lname}','Hellocontroller@newTest');	 // write this in route
+
+		2. 	public function newTest($fname,$lname){							// write this thing in controller
+				echo "Hello $fname $lname";
+			}
+
+		3. http://localhost/AAAA/14.Larval/larval/test/deepinder/Singh		// write this thing in address bar	
+
+				or 
+
+		Route::get('test/{fname}/{lname}/{age}',function($fname,$lname,$age){		// for closer function 
+			echo  "$fname $lname $age"; 
+		});		
+
+get data with validations 
+		
+	Route::get('test/{fname}/{lname}/{age}',function($fname,$lname,$age){
+		echo  "$fname $lname $age"; 
+	})->where(['fname'=>"^[a-zA-Z]+$",'lname'=>"^[a-zA-Z]+$","age"=>"[0-9]+"]);		//fname and lname in alphabates and age in numbers
+
+get date with optional Parameters
+
+	Route::get('test/{fname}/{lname?}/{age?}',function($fname,$lname='',$age=''){
+		echo  "$fname $lname $age"; 
+	})->where(['fname'=>"^[a-zA-Z]+$",'lname'=>"^[a-zA-Z]+$","age"=>"[0-9]+"]);	
+
+
+======= 
+another method for get Request methods 
+	
+a. Steps 
+	1. use Illuminate\Http\Request;						write this line in the controller 
+	    public function index(Request  $request)			
+		{
+			return $request->name;
+		}		
+
+	2. http://localhost/AAAA/14.Larval/larval/?name=Deepinder 			add value in the address bar	
+
+
+various function in Request class 
+	1. dd($request)							// will print all the values of request class 
+	2. $request->header variable name;		// print particuler variable name 
+	3. $request->all;						// return the all variable with values from address bar
+
+			for example : http://localhost/AAAA/14.Larval/larval/?name=Deepinder&class=Webdeveloper&phonenumber=9915099247
+
+			array:3 [▼
+			  "name" => "Deepinder"
+			  "class" => "Webdeveloper"
+			  "phonenumber" => "9915099247"
+			]
+
+b. 		$request ->get('name','Default value for name variable');
+		for example : http://localhost/AAAA/14.Larval/larval/?name=Deepinder&class=Webdeveloper&phonenumber=9915099247
+=======================================================================================================================================
+Middleware (is like intermediate between)
+
+ run between after send http request and before loading page
+
+ Middleware provide a convenient mechanism for inspecting and filtering HTTP requests entering your application. For example, Laravel includes a middleware that verifies the user of your application is authenticated. If the user is not authenticated, the middleware will redirect the user to your application's login screen. However, if the user is authenticated, the middleware will allow the request to proceed further into the application.  	
+
+ Location app -> http -> middleware 
+
+ to create meddileware just go to folder (laraval) then open CMD -> command is - > 
+	
+	php artisan make:middleware test    // php artisan is php command library , use to make files then we are making middleware name 										is test
+
+
+ Route::get('middlewareHello',function(){
+		return view('hello');
+	})->middleware('test');	
+
+ after that goes to test.php (middleware file)
+
+	public function handle($request, Closure $next)						// here $request is variable from whete we get request
+    {
+        $ip = $request->ip();
+
+        if($ip=='127.0.0.1' || $ip=='::1'){
+            return redirect('/')
+        }   
+        return $next($request);
+    }
+
+ after that go to app -> http -> requests ->kernal.php
+ 
+ 	'test'  => \App\Http\Middleware\test::class,		then add this line at the last of the function    
+
+================================================================================================================================
+Model
+
+1. every table have their own model in larval 
+2. every table have auto increment column name always 'id'
+3. always create two extra fields names are created_at and updated_at with datatype is timestamp
+4. table name always in plural form and class name will be in singular form { because at one time we are inserting value one by one and if fecthing value then it is also fetching one by one}
+
+a. open .env file and change the values.
+b. to create model -> app folder -> create file here 
+		 open cmd -> Php artison make:model filename
+
+
+========== 
+insert into database using model 
+
+	then add line in controller 
+		use App\Student;					here student model exsit in app folder 
+
+	1. Simple Method 
+
+		public function index(){
+
+			$student = new Student();				// here we are creating object of student table , and this is most important line 
+
+			$student->sname="Deepinder";			// assign value into variables  {sname is column name}
+			$student->standerd=12;					// assign value into variables  {standerd is column name}
+
+			$student->save();						// insert value to database
+
+			echo "value inserted";
+		}
+
+	2. Constructor method 	
+
+			$student = new Student(['sname'=>'Simran','standard'=>'23']);
+
+			protected $fillable = ['sname','standerd']; 		// write this line in model , this line will allow uset to  only enter 														data in these columns and also prevents from hacking 
+
+===========
+	if we want to remove created_at and update_at then just add line in ur model 
+
+		class Student extends Model
+		{
+		    //
+
+		    public  $timestamps = false;
+
+		    protected $fillable = ['sname','standerd']; 
+
+		    protected $table="students";					// this is used to change the name of table 
+
+		}
+
+==============================================================================================================================================
+Cross Site Request Forgery : this is a security feature which help us when we submit the form a token is generated before submition and then token is match at the time of submiiton process
+
+view.php
+	<form action="{{route('contactstore')}}" method="post">				// passing value from the particluar route 
+				or
+	<form action="{{url('contactstore')}}" method="post">				{in this case name function is not allowed in routes}		
+
+
+	{{csrf_field()}}	or @csrf										// this key word is used to make csrf field 
+		<label for="name">Name : </label>
+		<input type="text" name="name">
+		<input type="submit" value="submit">
+	</form>
+
+
+route.php
+	Route::post('/contact','contactController@store')->name('contactstore');	// setting the variable for a particaluer route	
+
+
+controller.php
+	
+	 public function store(Request $request)		
+	 {	
+        dd($request->all());			// getting the values along the token value  
+    }
+=================================================================================================================================
+Email Validation 
+
+controller.php
+
+ public function store(Request $request){
+        
+        $this->validate($request,['email'=>'required|email']);
+
+        dd($request->all());
+    }
+
+note :: for custome Message 
+
+1. Local Technique (means works for only single form)
+
+		email.required 		// name_of_field.options			// this is concept
+
+	 $this->validate($request,['email'=>'required|email'],
+            [ 
+                'email.required'=>'Email Cannot be Empty',				// check for value is empty of not 
+                'email'=>'Email format is not valid.'					// Check for format is valid or not
+            ]);
+
+2. Global Way
+	 
+resources -> lang -> en -> validation.php -> custome(array)	 	// just add the brlow code 
+
+		  'custom' => [
+		        'email' => [
+		            'required' => 'It is required from global',
+		            'email'   => 'This is not right from global'
+		        ],
+		    ],
+
+
+	OR 
+		
+	// for creating email according to field
+
+	 'custom' => [
+        'email' => [
+            'required' => 'This :attribute filed is required',
+            'email'   => 'This :attribute filed need proper Valid Email'
+        ],
+    ],		    	
+
+
+
+route.php
+	Route::post('/contact','contactController@store')->name('contactstore');	// setting the variable for a particaluer route	
+
+
+view.php
+@if($errors->any()) 
+@foreach($errors->all() as $error)
+	<li>{{$error}}</li>
+
+@endforeach
+@endif
+
+<form action="{{route('contactstore')}}" method="post">
+{{csrf_field()}}
+	<label for="email">Email : </label>
+	<input type="text" name="email">
+	<input type="submit" value="submit">
+</form>    
+
+to show single Message 
+	@error('email')						// this is use to show particular message 
+	<p style="color:red">{{$message}}</p>
+	@enderror
+
+
+
+=============================================================================================================================
+create login system
+
+1. command to create Table in database -> php artisan migrate then enter 
+
+	Migration table created successfully.
+	Migrated: 2014_10_12_000000_create_users_table
+	Migrated: 2014_10_12_100000_create_password_resets_table
+
+2. php artisian make:auth 
+	
+	a. (only works in >5.1 framework)
+		
+		Download new project 
+		
+			composer create-project --prefer-dist laravel/laravel laravel "5.2.*"			
+
+
+			or 
+	b. update composer using command : Comploser update 
+

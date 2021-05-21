@@ -1,0 +1,144 @@
+Codeing with mysql contain 3 patterns 
+	1. Mysqli Procedural 
+	2. Mysqli Object-Oriental 
+	3. PDO (PHP Data Object)
+
+
+a. Mysqli Prodcedural and Mysqli Object-Oriental is only Can connect with Mysql but PDO can connect with many databas like Oracle, Postgress, SQlite, MS Sql Server. 
+b. PDO is secure and Fast 
+
+==============================================================================================================================================================
+1. Connection
+	$db_name = "mysql:host=localhost;dbname=Database";
+	$conn = new PDO($db_name,Username,Password);
+
+2. Run Sql Query
+	1. $con->query(Sql Query);
+	2. $conn->prepare(Sql Query)		// secure
+
+			
+			a. bindParam/bindValue 
+
+				$con->perpare("SELECT * FROM users WHERE uset=? and pass=?");
+				$sql->bindParam(1,$username);								or bindValue(1,$username);
+				$sql->bindParam(2,$password);
+				$sql->execute();
+				$conn=null;
+
+
+					Pass Datatype in BindParam() Function 
+						1. PDO::PARAM_INT
+						2. PDO::PARAM_STR
+						3. PDO::PARAM_LOB
+						4. PDO::PARAM_BOOL
+						5. PDO::PARAM_NULL
+
+						example : $sql->bindParam(1,$id,PDO::PARAM_INT);
+
+			b. Without bindParam/bind()
+
+				$con->perpare("SELECT * FROM users WHERE uset=? and pass=?");
+				$sql->execute([$city]);
+
+			c. Using Colun insted of ?
+					
+				$con->perpare("SELECT * FROM users WHERE user=:user and pass=:pass");
+				$sql->bindParam(':user',$username);
+				$sql->bindParam(':pass',$password);
+				$sql->execute();
+
+
+			d. without bindParam/bindValue
+					
+				$con->perpare("SELECT * FROM users WHERE user=:user and pass=:pass");
+				$sql->execute([':use'=>$user,':pass'=>$pass]);						
+
+					
+
+
+3. Close Connection 
+	$conn = null;
+
+4. Fetch Query
+	 
+	 	$result=$sql->fetch() 				
+	
+		fetch style for fetch function 
+		1. PDO::FETCH_ASSOC
+		2. PDO::FETCH_NUM
+		3. PDO::FETCH_BOTH
+		4. PDO::FETCH_OBJ
+
+		advance Search (only work with fetchAll())
+		1. PDO::FETCH_COLUMN
+		2. PDO::FETCH_GROUP
+		3. PDO::FETCH_UNIQUE
+		1. PDO::FETCH_KEY_PAIR	
+		1. PDO::FETCH_CLASS
+	 
+		 a. $result->fetch();
+		 b. $sql->fetchAll(); 		// best beacuse it get all the data only in once call 
+
+
+5. Row Count 
+
+	$sql = $con->perpare("SELECT * FROM users WHERE user=:user and pass=:pass"); 
+	$sql->rowCount();	
+
+
+		or 
+
+	$sql= "Update query";
+	$result = $con->exec($sql);		// this query will not work on select query 
+
+	echo $result;	
+
+6. Last insert query 
+	
+	echo $conn->lastInsertedId(); 			// only work with insert query 	
+
+===========================================================================================================================================================
+Exceptional Handling : normal exceptional handling will not wotk in the pdo 
+	
+	$sql->errorInfo()
+
+==================================================================================
+Use transaction in PDO 
+	try {
+			$conn->beginTransaction();					// use to off autoCommit off features 
+
+
+
+			$conn->commit();
+	}catch{
+
+			$conn->rollback();
+	}	
+
+
+
+
+practical Example 
+
+	try{
+			$conn->beginTransaction();
+			$check  = mysql_query($con,"INSERT query");
+			if(!$check){
+				throw new Exemption("insert query fail");
+			}
+
+
+			$check  = mysql_query($con,"Update query");
+			if(!$check){
+				throw new Exemption("insert query fail");
+			}
+			$conn->commit();
+	}catch{
+			$conn->rollBack();
+	}
+
+
+note : $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION)		// after this we can remove if statements from above codes
+
+
+

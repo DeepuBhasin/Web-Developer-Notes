@@ -1,0 +1,35 @@
+	1. Connection
+	$con=mysqli_connect(Server name, User Name, Password , Database name);
+	$con= new mysqli(Server name, User Name, Password , Database name);
+
+2. Run Sql Query
+	mysqli_query(Connection Name,SQL Query);
+	$con->query(Sql Query);
+
+3. Close Connection 
+	mysqli_close(Connection Name);
+	$con->close();
+
+we can use all function of mysqli in oops just remove mysqli eg: mysqli_query to $con->query etc
+
+4. Fetch Query
+	
+	procedural : $result=mysqli_fetch_assoc()       |  oops : $result=$con->query(Sql Query) 																|
+	a. mysqli_fetch_assoc()							| a. $result->fetch_assco();
+	b. mysqli_fetch_array()							| a. $result->fetch_array();
+	c. mysqli_fetch_row()							| a. $result->fetch_row();
+	d. mysqli_fetch_all()							| a. $result->fetch_all();
+	e. mysqli_fetch_field()							| a. $result->fetch_field();
+	
+5. Affected Rows
+	mysqli_affected_rows();
+	$con->affected_rows();
+
+6. Errors
+			procedural :       					 	|  oops 										
+	a. mysqli_connect_error()						| a. $con->connect_error();
+	b. mysqli_connect_errno()						| b. $con->connect_errno();
+	c. mysqli_error()								| c. $con->error();
+	d. mysqli_error_list()							| d. $con->error_list();
+	
+

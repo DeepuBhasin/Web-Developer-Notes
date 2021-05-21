@@ -1,0 +1,422 @@
+========================================Topics================================================
+A. Introduction and Installation 
+B. Directory Structure (complete)
+c. How it is work 
+	http://localhost/AAAA/6.Codeigniter/index.php/welcome/index
+												/controller/method/parameters
+
+	Then Create a controler with name test
+d. Controller : it is create communication btw model and View	
+	1.here we create a business logic , calculations or form validation are done here 
+	2. Here CI_controller is a base class 
+	3. http://localhost/AAAA/6.Codeigniter/application/   (to show security)
+	4. then create a blog controller 
+
+e. Model : it is use to create backend, api , text files 
+	1. create model 
+		file name should be in small letters and class first name should be capital 
+		abc.php   Class Abc extends  CI_Model{}
+	2. create public function 
+	3. $this->load->model('abc');	// loading Model 
+		$this->abc->test();	// function name 	
+		
+		$this->load->model('abc','shortname');	// loading Model 
+		$this->shortname->test();	// function name calling with shortname 	
+
+	4. create model with first_name all that and return array
+
+		got to autoload to set paramters 
+		$autoload['libraries'] = array('database', 'session','email');
+		
+
+		call  in controller 
+		show in view (using tables)	and passing data then use foreach loop 
+
+
+		$this->db->query()->result() // return objects
+		$this->db->query()->result_array() // return arrays
+
+
+
+	5.  write query  	
+
+		(standard query)	
+				 
+				$this->db->query("SELECT * FROM tableName");		// this query only work on mysql database 
+
+				1. we use functions and pass parameters which generate query automatically
+				2. it is usefull to write query in short from
+				3. it also make database independent application 
+				4. in database config file we are defining that we are using mysql dbdriver means using mysql database 
+				5. the query which is generate using active records are escaped 
+				6. this query is using method chaining concept 
+
+
+
+			(these queries called active records / Query Builder Query )	
+
+					 $this->db->get('tableName');						// this query will work on all database 
+
+					 $this->db->where(['columnName'=>'value'])->get('tableName');
+
+
+
+			1. SELECT * FROM tableName limit 10,20 
+				$this->db->get('tableName',10,20);
+
+				select()->from('tableName')
+
+			2. 	SELECT * FROM tableName where columnname = valuelimit 10,20 
+				$this->db->get_where('mytable',[id=>30],$limit,$offset)
+
+			3. $this->db->select('title','date');			// this is method chaining process 
+				$quey=$this->db->get('tableName');
+
+						or 
+
+				$q=$this->db->select('column1','column 2')
+						->where(['column'=>value])
+						->get('tableName');			
+
+
+
+			4. Also have aggregate functions
+
+			5. every query is avaialble in active records  	
+
+
+	6. Libraries (know as reusable classes which contains individual functions )
+		sending emials 
+		paginations 
+		forms  
+		table 		
+
+		$this->load->library('form_validation'); 			// single loading library 
+		$this->form_validation->function_names();			//creating object 
+
+		$this->load->library(['form_validation','email']); 			// multiple loading library 
+		$this->form_validation->function_names();			//creating object 
+		$this->email->function_names();			//creating object 
+
+
+
+
+
+		custom library 
+			go to library folder 
+				syntax -> class name and file name first letter should be capital 
+
+					Test.php
+
+					class Test {
+						function abc {
+							echo "Abc function of test library ";
+						}
+					}	
+
+
+
+					now in controller 
+
+					$this->load->library->('test');
+					$this->test->abc();
+
+
+
+		custom library 
+			in library folder -> MY_Emial.php					MY_Filename.php
+
+			class MY_Email extneds CI_Email{
+
+				public function test (){
+					echo "test function of emial library extnded";
+				}
+
+			}
+
+
+			$this->load->library('emial');
+			$this->emial->test()/;
+
+
+		Complete override the library 
+			filename -> CI_Email.php
+
+			class CI_Email {					// here email library completely overide by new functions 
+				public function test (){
+					echo "Test function of email library extends"
+				}
+			} 
+
+
+			$this->load->library('emial');				
+			$this->emial->test()/;
+
+
+
+
+			inbuilt libraries are exist in the system ->libraries -> email 
+
+
+	7. helpers
+		
+		1. also know as reuseable classes which contains individual functions
+		2. it help to  create Dom Feature automatically
+		3. why we use : when ever we close the php tage to use html it make problem so they reduce that problem
+		4. librarries and helpers are loaded in controller and view 
+
+
+
+(laoding helper)	
+		1. $this->load->helper('nameHelper');
+		2. $this->load->helper(array('url','html'));
+		3. in auto Load file , fill all the data in helper array 
+
+		a. html helper 
+
+			Helper Name : $this->load->helper('html');
+
+			1. echo heading('online Ustad',1);			// h1  (basic)
+
+				echo heading('online Class',2,'class="abc"')
+
+			2. echo br(3)								// br 
+
+			3. echo img('path of image');
+						or
+				 echo img(base_url('different website').'path of image');	
+
+		b. url helper 
+
+			Helper Name : $this->load->helper('url');
+
+			1. anchor('https//www.google.com','Click Here to open Google');
+
+			2. anchor(current_url(),'Refresh')			// will print the current complete url path 
+					echo current_url();
+
+		c. form helper 
+			
+			Helper Name : $this->load->helper('form');
+
+			1.	echo form_open('uploadImage/image/',['class'=>'submit','name'=>'formName','method'=>'get']);
+
+				echo form_label('FirstName','firstName');
+
+				echo form_input('firstName',['class'=>'form-control','id'=>'firstName','placeholder'=>'Enter First Name']);
+
+				echo form_label('Password','pass');
+				
+				echo form_password('pass',['class'=>'form-control'])
+
+
+				echo_from_dropdown('selectName',['1'=>'1','2'=>'2','3'=>'3'],'2');
+
+				echo_from_submit('send','Submit');
+
+				echo form_close();					
+						
+
+
+(custom helper)
+		1. helper folder 
+		2. syntax is (filename) -> 	abc_helper.php
+
+		<?php function test (){ echo 'abc';}?>
+
+		$this->load->helper('abc');
+		test();				// function name 
+
+
+
+		incase u want to over-ride
+
+			in helper folder -> syntax	My_filename_helper.php						using my keyword as prefix then it automatically extends array helper class 
+
+			function test(){
+			echo "test function from array helper";
+			}
+
+
+
+			 $this->load->helper('array');
+			 $arr=['abc'=>'ABC','xyz'=>'XYZ'];
+
+			 echo element ('abc',$arr,'not Found');           find abc key in $arr if yes then return value otherwise return not found 
+
+
+			 if u want to over-ride then go to helper folder and define the elment function 
+
+			 function element (){
+			 echo "element function is over-riden";
+			 }
+
+
+		
+		
+
+
+		8. autoload (load autoload particular)
+	
+		config folder -> auoload.php explain every thing 
+
+
+
+		
+
+
+	9. Core Classes (are called base classes ex ci_controller means extentds every where in the codeigniter )	  
+
+		1. use when we need to use that function whch we use in all classes
+
+		go to core folder -> My_controller.php
+
+
+		Class MY_Controller extends CI_controller {
+
+			write functions 
+
+		} 
+
+		Class MY_Model extends CI_Model {
+
+			write functions 
+
+		} 
+
+
+
+		then go to controller 
+
+		Class Users extends MY_Controller {
+
+			write functions 
+
+		}
+
+
+		then go to model 
+
+		Class modelClass extends MY_Model {
+
+			write functions 
+
+		}
+
+
+
+
+
+		we can write two classes in single class if want to use same functinality 
+
+		Class MY_model extends CI_Model {
+
+			write functions 
+
+		} 
+
+		Class Adminmodel extends MY_model {
+
+			write functions 
+
+		} 
+		Class UserModel extends MY_model {
+
+			write functions 
+
+		} 
+
+	10. Reserver Names {very use full }	
+
+===========================================Details==================================================
+1. Codeigniter is MVC pattern 
+
+2. What is Framework 
+	its a collection of libraries which can be use again and again 
+
+3. Why use codeigniter 
+	1. Very light weight 
+	2. easy to learn 
+	3. Great Documentation 	
+
+4. Provde Reuseability 
+	Means avoid Copy Past 	
+
+5. Maaintabilty 
+	Anyone can Edit or extend your application 	
+
+6. To remove index.php from header (exist in url in user guide)
+	
+	1.	$config['index_page'] = 'index.php';				replace				$config['index_page'] = '';
+		$config['uri_protocol']	= 'REQUEST_URI';			to this				$config['uri_protocol']	= 'AUTO';		
+		
+	2. place .htaccess file in codeigniter folder
+	
+	3. wamp icon -> apache -> apache modules -> should check rewrite_module    (rewrite module should be unabl)e
+
+	3. restart wamp 
+
+7. PDO and active records follow same concept
+
+8. To create log file : go config folder -> config.php -> find thrashhold -> $config['log_threshold'] = 1; (set 1,2)
+	$config['log_path'] = ''; set path if u want then go to log_message() function 
+
+9. show_404()	// will return 404 page 
+
+10. 0.0.0.0
+
+	1. main changes 
+	2. less main Changes
+	3. very less changes 
+	4. very very less changes 
+
+
+	IEEE : Code + data + Documentation 	(defination of software)
+
+
+==============================================================================================================================================
+
+
+create mini project 
+
+1. download all codeigniter files 
+2. create boostrap files (bootswatch -> paper theme -> download css file -> min.css )
+3. setup database (see all database from video)
+4. configration Database 
+5. Make Ci controler in core folder (Base Contoller)
+6. Remove Index.php from Address bar (is called masking) {also exist in user guide codes}
+7. Remove default contoller
+8. Create Folder in View (user and admin) then create index files 
+9. Creating navbar 
+10. Create login Controller
+11. Create header and footer 
+12. create login from add login form method
+13. form validation (library)
+		$autoload['libraries'] = array('form_validation');
+
+		set color for individual : <?= form_error('uname','<p class="text-danger">','</p>');?>
+
+		set color for all 		 : $this->form_validation->set_error_delimiters("<p class='text-info'>","</p>");
+14. $this->input->post();
+15. Create My_model	
+16. Create login system and insert values in database in users tables 
+17. session in session librari 
+18. set session values 	 
+19. set encryption id in config.php file 
+20 . create dashboard.php in admin folder
+21. create admin_header and admin_footer
+
+22. check session if not exist then redirect to login index page
+23. logout function
+24. flashdata  library for wrong password (in session libraray)
+25. if session exist then redirect to dashboard
+26. Add article function + file + add form 
+27. form validation with different concept (add config file in config folder)
+
+28. Add Article into database 
+29. show message with flash message 
+
+30. Edit Article Complete 
+31. Delete Article (by my self)
+32. pagination 29 lecture 
+ 

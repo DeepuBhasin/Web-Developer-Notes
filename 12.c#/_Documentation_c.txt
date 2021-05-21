@@ -1,0 +1,1368 @@
+Object is intance of Class : means object is example of class 
+
+
+===================================================================================================================================
+Short Cut 
+	1. ctrl + alt + click	// mutiple cursor		
+	2. Ctrl + d             // copy same line           	             
+	3. ctrl + k + ctrl + c 		// comment
+	4. ctrl + k + ctrl + u  	// uncomment 
+	5. CW + tab 			// console.writeline();
+	
+======================================================================================================================================================
+How data is stored in memory?
+
+1. when ever we run any program that will be run in RAM Memory 
+
+	1 Cell == 1 byte
+
+	int x = 2748 (int -> 4 bytes)
+
+	then number will stored in the binary form using 4 bytes (means 4 cells) 
+
+As we all know, computer is a electronic device where data is stored in the form of electronic signals.
+
+
+Bit is the basic unit of memory. At a time, it can be either on or off. Generally, bits are represented using electrical voltage.
+
+Voltage presense indicates that the bit is in ON state. Voltage absense indicates that the bit is in OFF state.
+
+Here, OFF state is considered as 0. ON state is considered as 1.
+
+Computer memory is the collection of several bits. Group of 8 bits are called byte.	
+
+=========================================================== Theory===================================================================================
+we can use c# for building variety of application 
+1. Window application : using console application or winfrom application 
+2. Mobile application : for phone such as Nokia Lumia (built-in support) but we can use a third party tool or library called "XAMARIN" to create mobile 	      	application for Andriod and IOS as well 
+3. web Appplication : usig Asp.net web forms or ASP.NET MVC.
+4. Gaming Application : unity.
+
+Note : in .net covers all most 40 languages 
+
+
+what is CLR (same as jvm (java virtual machine))?
+a. is the foundation of the .net framework 
+b. acts as an execution engine for the .net framework  (in simple word it is compiler )
+c. manages the execution of program and provides as suitable environment for program to run 
+d. Provides a muiti-langauge execution environment 
+
+(c#,vb.net,f#,other)----->
+(c# compiler, vb.net compiler, f# compiler, other Compiler)---> 
+CIL (common intermediate language also known as Microsoft Intermediate language) -----> 
+CLR|JIT {CLR has JIT compiler known as just in time compiler which convert source code to native code} ---------> 
+1010101010101001010001110101 {Executable Code/Native Code/ Birnary Code}
+
+
+anylanguage -> then compiler convter into -> cil {source code}-> CLR (then CLR has JIT which understand that code and convert into machine code called Native Code (Binary Code))
+
+
+JIT convert only those codes which we required for output
+
+(Main Concept )
+	When a code is executed for the first time 
+		1. The CIL code is converted to a code native to the operating system 
+		2. This is done at runtime by the JUST-IN-TIME (JIT) compiler present in the CLR 
+		3. The clr converts the CIL code to the machine language code 
+		4. once this is done, the code can be directly executed by the CPU
+
+{Compile time : when we are assiging value in coding}
+{Run time : when we are atking value from the user	}		
+
+=====================================================================================================================================================
+What is name space 
+	A namespace is used to organise your code and is collection of Classes, interfaces, Struct, enums and delegates 
+
+	note : if you don't want to use namespace you can use fully qualified name(FQN)
+
+	if you remove this line 'using System' then -> System.Console.writeline('Hello world') will use {nameSpace.ClassName.MethodName}
+
+
+what is main Method 
+	Main method is the entry point into your application 	
+
+
+where we write all the codes called code editor window
+	
+			using System;										// called header files or Import files or package files or namespace
+			using System.Collections.Generic;					// using key work is used to import files or namespace 
+			using System.Linq;									// system is calles package and system.linq etc are called classes
+			using System.Text;									// these all namespace are declared in framework
+			using System.Threading.Tasks;
+
+			namespace ConsoleApp2						// called package name 
+			{
+			    class Program
+			    {
+			        static void Main(string[] args)		// Main Method Name Called Entry Point and cannot change otherwise our work will not execue
+			        {
+			        }
+			    }
+			} 
+
+
+	Console.writeLine('hello World')				// here Console is class name and writeline is method name and console class is exist in System namespace 
+	
+	console.readline();								//this function is use to get input from the user and always return string value 
+
+	int num1 = int.Parse(Console.readline());		// this convetion will help to get input as integer 
+
+
+=====================================================================================================================================================
+Data Type 
+	
+	a. integral data type 
+		1. Signed Integers : which takes Negative and Postive Value 
+		2. Unsigned Integers : which only takes Postive Values (ex age)
+
+			SByte		-128 to 127		
+			Byte 		0 to 255		
+			Short 		U+0000 to U + ffff	
+			Ushort 			 `
+			int 			 
+			uint 			 
+			long 			 
+			ulong 			 
+
+		   MaxValue					// property to check maximum value of datatype
+		   MinValue					// property to check Min value of datatype
+
+		   Console.WriteLine(int.MaxValue);
+           Console.ReadLine();
+
+     b. Boolen Data type 
+     		1. True
+     		2. False
+			
+			syntax  bool c;
+			jjb
+
+			int a=1;
+			int b=2;
+
+			bool c = a > b;
+
+			console.writeline(c);
+			console.readline();
+
+	 c. Float 				system.Single    	7 digits					float = 34.448f					// prefix always use
+	 	double 				system.Double       15-16 digits				double = 80606.6969D
+	 	Decimal 			system.Decimal 		28-29 digits				decimal = 8697.8669M
+
+	 d. String   	" "		// used
+	 	Char 		''		// used
+
+	 e. Escape Sequence
+	 		"\"Well"			-> "Well
+	 		"\\Well\\"			-> \Well\
+
+	 f. Verbatim Literal 	
+	 	    1. Verbatim literal is a string with an @symbol 
+	 	    2. Verbatim literal make escape sequence translate as normal printable chracters to enhance readability
+
+			string x = @"D:\Adil\Web\video\php";					use intsted of this "D:\\Adil\\Web\\video\\php"
+
+=========================================================================================================================================================
+	Converstaion 
+
+	there are two type of conversion 
+
+		1. Implicit Conversion (when C# compiler done conversion example : int -> float)
+			
+			Implicit Conversion is Done by the complier 
+			
+			a. when there is no loss of information in the converstion is done
+			b. if there is no possiblity of throwing exception during the conversion 
+
+			Example : Converting an 'int' to a 'Float' will not loose any data and no exception will be thrown, Henec an implicit convesrion can be done 
+
+			Where as when converting a float to an int, we loose the fractional part and also a possiblity of overflow execption. Hence, in the case an explicit conversion is required 
+
+
+		2. Explicit Convertion (When convert by user example : float -> int)
+				
+			For Explicit Conversion we can use the Convert Class in C#
+		 	Parse Function of Int
+
+
+				float a = 20.576f;
+				int b = (int) a;
+				console.writeLine(b);
+				console.readline();
+
+					or 	
+
+				float a = 20.576f;
+				int b = Convert.ToInt32(a);								// convert is class , which is use to convert things 
+				console.writeLine(b);
+				console.readline();		
+
+			->for string to int then we use Parse Class 				// parse Class always take String 
+
+				string a = "10";
+				string b = "60";
+				int c = int.Parse(a) + int.Parse(b);					// for Float it will be float.Pares();
+				Console.writeLine(c);
+				Console.Readline();
+
+						or 
+
+				string a = "10";
+				string b = "60";
+				int c = Convert.ToInt32(a); + Convert.ToInt32(b);;
+				Console.writeLine(c);
+				Console.Readline();	
+
+						or
+
+				string a = "23.455";				// we decaler number in string then we did not use 'F' prefix like float declaretion 
+	            string b = "45.55";
+				float c = float.Parse(a) + float.Parse(b);
+				Console.WriteLine(c);
+	            Console.ReadLine();			
+
+
+	Note : string a = "1243abd"; this this will not convert into 'int' because it contains Charcaters also
+========================================================================================================================================================
+Constant :
+
+		note : refernece types are those types which store multiple values like string , array etc. and forach loop is always use with refernce type variables 	
+
+
+		Note :  int a ; // Declaration 
+				a = 10 ; // initilization 
+
+				int a = 10 ; // only called Decelarartion
+
+				'identifiers' is called name of variable or name of function 
+
+
+				int a=10, b=17,v,d,e,r,t,y,h,j,j;
+					 
+		
+
+		a. A constant has a fixed value that remains unchanged throughtout the program 
+		b. in c#, you can Declare constants for all data types
+		c. You have to initilize a Constant at the time of its declaration // 
+		d. Constants are declared of 'value types' rather than for 'reference types' 
+		e. To declare an 'identifiers' as a constant, the 'Const' keyword is used in the identifer deceleartion. the complier can identify constants at the time of compilation, beacuse of the 'const' keyword.  
+		
+		1. When we declaring OutSide out stide the static void function 
+
+			public const double PI = 3.14D;
+	        static void Main(string[] args)
+	        {
+	            Console.WriteLine(PI);
+	            Console.ReadLine();
+	        } 
+
+
+	    2. When we declaring inside the static or any function
+	    
+	    	static void Main(string[] args)
+	        {
+	        	const double PI = 3.14D;
+	            Console.WriteLine(PI);
+	            Console.ReadLine();
+	        } 
+
+============================================================================================================================================================
+Standard Date and Time Fromat Sepecfiers in c#
+	1.		DateTime dt = DateTime.Now;					// creating object of DateTime class and DateTime.Now id property ot this class;
+            Console.WriteLine(dt);
+            Console.ReadLine();
+
+
+     --> Format of the Date 
+     		DateTime dt = DateTime.Now;
+            
+            a. Console.WriteLine("{0:d}",dt);			(Short Date)						// 'd' is use to print 06-03-2021	
+            	      									
+            b. Console.WriteLine("{0:D}",dt);			(Long Date)      					// 'D' is use to print 06 March 2021
+
+            c. Console.WriteLine("{0:f}",dt);			(Full Date/time (short))			// 'f' is used to print 06 March 2021 01:11 PM
+
+            d. Console.WriteLine("{0:F}",dt);			(Full Date/time (long time))		// 'F' is used to print 06 March 2021 01:12:26 PM
+
+            e. Console.WriteLine("{0:g}",dt);			(General Date/time (Short Time))	// 'g' is used to print 06-03-2021 01:13 PM
+
+            f. Console.WriteLine("{0:G}",dt);			(General Date/time (Long Time)) 	// 'G' is used to print 06-03-2021 01:24:15 PM
+
+            g. Console.WriteLine("{0:m}",dt);			(Month day) 						// 'm' is used to print 6 March
+
+            h. Console.WriteLine("{0:M}",dt);			(Month day) 						// 'M' is used to print 6 March
+
+            i. Console.WriteLine("{0:t}",dt);			(Short Time) 						// 't' is used to print 01:28 PM
+
+            j. Console.WriteLine("{0:T}",dt);			(Long Time) 						// 'T' is used to print 01:28:39 PM
+
+            k. Console.WriteLine("{0:y}",dt);			(Year month Pattern) 				// 'y or Y' is used to print March 2021
+
+            l. Console.WriteLine("{0:yyyy}",dt);		(Year month Pattern) 			// 'yyyy' is used to print 2021
+
+            m. Console.WriteLine("{0:dddd}",dt);		(full name of day) 				// 'dddd' is used to print Staurday
+
+            n. Console.WriteLine("{0:HH}",dt);			(00-23 (24 hours)) 				// 'HH' is used to print 14
+
+            0. Console.WriteLine("{0:mm}",dt);			(00-59 Minitue) 				// 'mm' is used to print 40
+
+            p. Console.WriteLine("{0:MM}",dt);			(1-12 Month) 					// 'MM' is used to print 3
+
+            q. Console.WriteLine("{0:ss}",dt);			(0-59 seconds) 							// 'ss' is used to print 12
+
+(Best)   	r. Console.WriteLine("{0:HH:mm:ss tt}",dt);	(24 hours - minute - sec)			// 01:38:20 PM
+
+(Best)   	s. Console.WriteLine("{0:dd-MM-yyyy}",dt);										//06-03-2021
+
+========================================================================================================================================================
+Statement 
+
+	1. A C# program is a set of tasks that perform to achive the overall functioanlity of the program
+	2. To perform the tasks, prgrammers provide instructions. these instructions are called statements 
+	3. A c# statement can contain expressions that evaluates to a value.
+	4. Statements are referred to as logical grouping of variables, operators and c# keywords that performs a specific task 
+	5. For example the line which initilizes a variable by assigning is a value is a statment 
+	6. in C# a statement ends with a semicolon 
+	7. A c# program contains multiple statement grouped in blocks. A block is a code segment enclosed in curly braces.
+	8. For example, the set of statments included in the Main() method of a c# code is a Block 
+
+	note : Block is also called Scope
+
+
+	9. Statement are used to specifiy the input, the process, and the output tasks of a program. statments can consist of: 
+		1. Datatype 
+		2. Variables 
+		3. Constants 
+		4. Literals					// when we assign value to variable is called literals
+		5. Keywords 				// for, while, int all are reserve keywords 
+		6. Escape Sequence Characters
+
+	10. statements help you build a logical flow in the program. with the help of statements, you can 
+		1. initialize variable and objects 
+		2. Take the input 
+		3. Call a method of a class 
+		4. Display of the output
+
+	11. Similar to statements in C and C++, the C++ statements are , there are 7
+		1. Selection Statments : if,else, switch
+		2. iteration Statments : loop
+		3. jump Statements 
+		4. Execption Handling Statements
+
+
+Expression 
+	
+	1. Expression are used to minpulate data. Like in mathematics, expression in programming languages, including c# are constructed from the operands and operators 
+	2. Example 2 + 2;
+	3. An Expression statement in C# ends with a semicolon (;)
+	4. The following code Demonstrates and example for expression 
+	5. SimpleInterst = (principle * time * rate) / 100;	
+
+Operators 
+	1. Expression in C# comprise one or more operators that performs some opeartions on variables 
+	2. An opeartion is an action performed on single or multiple values stored in variables in order to modify them or to gerenate a new value with the help minimum one symbole and a value
+	3. The Symbol is called an opeartor and it determines the type of ation to be performed on the value
+	4. the value on which the operation is to be performed is called an operand. 
+	5. Operators are used to Simplify Expressions 
+	6. there are 7 operators 
+		a. Arithmetic : are called Binary Operators 
+		b. Relational or comparison 
+		c. Logical or Conditional 
+		d. Bitwise 
+		e. Conditional or ternary 
+		f. Incerment/Decrement (pre and Post)
+		h. Assignemnt (1. Simple Assignment(=) and 2. Compount Assignment (+=,-=,*= ....))
+
+	7. Operators are classify into 3 Category 
+		1. Unary	-> single value (incerment/decrement)
+		2. Binary 	-> two Values (Arithmatic)
+		3. Ternary 	-> three values	 {C# includes a special type of decision making operators ?: called the ternary operator}
+								1				2					3
+						(Boolen Expression ? first Statement : Second Statement) 
+
+				
+
+		note : int a= 20 ,b= 20 ;
+				c= a==b;
+				console.WiteeLine(c)			// true 
+
+
+		note : int a = 5;
+				console.WriteLine(a++);			//5
+				console.WriteLine(a);			//6
+
+		note : int a = 5;
+				console.WriteLine(++a);			//6
+				console.WriteLine(a);			//6		
+=======================================================================================================================================================
+Precedence of Operators 
+	1. Operators in C# have certian associated priority Levels 
+	2. The C# complier executes operators in the sequence defined by the priority level of the operators 
+	3. Example : 
+		8 / 2 - 3 + 2 * 2 
+
+
+		BODMAS -- Bracket OF DIVIDE MULTIPLE ADDITION SUBTRACT
+======================================================================================================================================================
+Loops 
+	1. Forloop
+	2. while loop
+	3. Do while Loop
+	4. foreach loop
+
+
+	Note : Continue statement : The continue  statment is used to end the current iteration of the loop and transfer the program control back to the beginning of the loop 
+
+	goto : the goto statement allows you to  directly execute a labled statement or a labled block of statments 
+======================================================================================================================================================
+
+Array : An array is a collection of elements of a signal data type stored in adjacent memory locations 
+
+		index called -> subscript 
+		values called -> elements 
+	
+	1. Interger Array
+
+		int[] my_array = new int[4];			// 
+        my_array[0] = 11;
+        my_array[1] = 12;
+        my_array[2] = 13;
+        my_array[3] = 14;
+
+        Console.WriteLine(my_array[2]);
+        Console.ReadLine();
+
+    2. string Array 
+    	
+    	String[] my_array = new String[4];			// 
+    	
+    			or 
+
+		String[] my_array = new String[] {"abc","bcd","efg","fgh"};
+
+				or 
+(best)	String[] my_array = {"abc","bcd","efg","fgh"};		 
+
+
+	1. Arrays are refernce type variables whose creation involves two steps : 
+		a. Decelaration 
+			1. An array decelaration specificss the type of data that it can hold and an i'dentifier (name)' 
+			2. This identifier is basically an array name and is used with a subscript to retireve or set the data values at that location 
+
+		b. Memory allocation 
+			1. Declaring an array does not allocate memory to the array 	(means when we build the program then array get memory in ram )	
+
+	I An array can be : 
+		1. Created using the new keyword and then initialized.
+				int[] my_array = new int[4];			// 
+		        my_array[0] = 11;
+		        my_array[1] = 12;
+		        my_array[2] = 13;
+		        my_array[3] = 14;
+
+		2. Initilized at the time of declaration itself, in which case the new keyword is not used 
+
+				String[] my_array = new String[] {"abc","bcd","efg","fgh"};
+
+	II Creating and initializing an array with the new keywords involves specifying the size of an array 
+				int[] my_array = new int[4];
+
+	III The number of elements strored in an array depends upon the specified size 
+
+	IV The new keyword allocates memory to the array and values can then be assigned to the array 		
+
+
+print Variable using foreach loop 
+		
+			int[] my_array = new int[4];			
+	        my_array[0] = 11;
+	        my_array[1] = 12;
+	        my_array[2] = 13;
+	        my_array[3] = 14;
+
+	        foreach(int item in my_array){				// int is use here beacuse our array is of integer type, if it is string type then use string 
+	        	console.writeline(item);
+	        }
+
+
+multi-dimensional Array 
+	1. Rectangular array : rows and columns are fix
+	2. Jagged array 	 : rows are fix but columns are not fix	
+
+	a. Rectangular Array 
+		Example :  
+			
+			
+
+			int[,] my_array = new int[3, 4]						{row and columns}
+            {
+                { 11,12,13,14},
+                { 21,22,23,24},
+                { 31,32,33,44},
+
+            };
+			Console.WriteLine(my_array[1,0]);
+            Console.ReadLine();
+
+            		OR  
+
+            int[,] arr = new int[3,3] = {{1,2,4},{4,5,6},{7,8,9}};
+
+            		OR
+
+            int[,] arr = new int[,] {{1,2,3} ,{4,5,6},{7,8,9}};
+            
+            		OR
+
+            int[,] arr = {{1,2,3},{4,5,6},{7,8,9}};				
+
+
+
+       ->Methods to get the dimesnion of the arrays 
+       		1. GetLength(0)
+
+       		   my_array.GetLength(0) is used to get the First dimesnsion of the  int[3, 4]  {3 array }  
+        	   my_array.GetLength(1) is used to get the Second dimesnsion of the  int[3, 4]  {4 array }
+
+        -> Propert  to get the dimension of the array 
+        	my_array.Rank			// return the the number of dimension of the array 
+
+
+
+ ## write a program to print Multi-Dimensional Array (Rectangualar array)
+
+(using For Loop)  		
+						1. int[,] my_array = new int[3, 4]
+			            {
+			                { 11,12,13,14},
+			                { 21,22,23,24},
+			                { 31,32,33,44},
+
+			            };
+
+			           for(int i = 0; i < my_array.GetLength(0); i++)
+							            {
+				                for(int y= 0; y < my_array.GetLength(1); y++)
+				                {
+				                    Console.WriteLine("Array Dimension : { " + i +","+y+" } "+ my_array[i,y]);
+				                    						or
+									Console.WriteLine("Array Dimension {0},{1} : {2} ",i,y,my_array[i,y]);                    						
+
+				                }
+				                 Console.WriteLine();
+				            }
+				            Console.ReadLine();      
+
+
+(using Forach Loop)		2.
+							foreach(int itm in my_array)
+				            {
+				                Console.WriteLine(itm);
+				            }
+
+## write a program to Print Multi-Dimensional Array (Jagged array)
+1. (using For Loop) 
+
+			int[][] my_array = new int[3][];							//column are not fixed 
+            my_array[0] = new[] { 11, 22, 33, 44, 55, 66,77,88,99 };
+            my_array[1] = new[] { 21, 32, 43, 54, 65, 76,87,98 };
+            my_array[2] = new[] { 31, 42, 53, 64, 75, 86,67  };
+
+            for (int i = 0; i < my_array.GetLength(0); i++)
+            {
+                for (int y = 0; y < my_array[i].Length; y++)
+                {
+                   Console.WriteLine("Array Dimension {0},{1} : {2} ", i, y, my_array[i][ y]);
+
+                }
+                Console.WriteLine();
+            }
+            Console.ReadLine();
+
+2. (using for Each Loop)
+			foreach(int[] itm in my_array)
+            {
+                foreach(int i in itm)
+                {
+                    Console.WriteLine(i + " ");
+                }
+                Console.WriteLine();
+            }
+            Console.ReadLine();
+
+## write a program to creating array with user input 
+	Console.WriteLine("How many numbers that you want to enter ?");
+            int number = int.Parse(Console.ReadLine());
+
+            int[] array = new int[number];   
+
+            for(int i=0; i < number; i++)
+            {
+                Console.WriteLine("Enter the {0} Number : ",i+1);
+                int array_number = int.Parse(Console.ReadLine());
+                array[i] = array_number;
+            }
+            Console.WriteLine("<--------------------------Your Values ---------------------->");
+
+            foreach(int itm in array)
+            {
+                Console.WriteLine("Array Value is {0}", itm);
+            }
+            Console.ReadLine();
+
+
+====================================================================================================================================================    	
+
+Methods or Functions 
+
+synatx : <access Specifiers> <return Type> <Method Name> (Parameters List){Method Body}
+
+	1. A method is group of statments that together perform a task 
+	2. Methods are function declared in a class and may be used to perform operations on class variables 
+	3. They are block of code that can take parameters and may or may not return a value 
+	4. it is used to perform specific task 
+	5. Methods are resusble 
+	6. Every C# program has at least one class with a method named main
+	7. Some Examples of valid method names are : Add(),Sum_Add() and @Add();
+	8. A method can be invoked in a class by creating an object of the class where the object name is followed by a period(.) and the name of the method followed by parantheeses
+	9. in C#, a method is always invoked from another method 
+	10. this is referred to as the calling method and the invoked method is referred to as the called method 
+
+Mtehods parameters and Argument 
+	1. Parameters : 
+		a. the variables included in a method defination are called parameters 
+		b. Which may have zero or more parameters, enclosed in parantheses and separated by commas
+		c. if the method takes no parameters, it is indicated by empty parantheses.
+
+	2. Argument 
+		a. when the method is called, the data that you send into the arguments method's parameters are called arguments 		
+
+
+	1. No return Type method with Non-static method / Instance Method with non parameterizsed method
+
+		 public void getShow()										// is declaring function with no return type becasue we using void Type
+        {
+            Console.WriteLine("Welcome To C# Programming");
+            Console.WriteLine("Hey Vro wassupp...");
+        }
+       public  static void Main(string[] args)
+        {
+            Program p1 = new Program();								// creating object {classname objectName = new Classname()}
+
+            p1.getShow();											// calling function 
+
+            Console.ReadLine();
+		}
+
+Note : 1. when ever non static method is created then we have to create object always 
+	   2. Signature of functions is : functionName(para1,para2);		
+
+	2. No Return type method with Static Method
+
+		static public void getshow1()
+        {
+            Console.WriteLine("Calling to Static Method");
+        }
+
+		static void Main(string[] args)
+        {
+            Program.getShow1();											// calling function {Classname.functionName()}
+
+            Console.ReadLine();
+		}
+
+Note :1. when ever static method is created then object is not created;
+	  2. public static void Add(int num1=0, int num2=0)						// to set default values
+
+## write a program to add two numbers using 2 parameters 
+		public static void Add(int num1, int num2)
+        {
+            int c = num1 + num2;
+            Console.WriteLine("Addition result is : {0}",c);
+            
+        } 
+         static void Main(string[] args)
+        {
+            Program.Add(9, 9);
+            
+            Console.ReadLine();
+        }
+
+    3. Name argument Method
+    	
+    	public static void Add(String name, int age)					// we can shuffle names 
+        {
+            Console.WriteLine("Your Name is : {0}", name);
+            Console.WriteLine("Your age is : {0}", age);
+
+        } 
+
+        
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter your Name");
+            string name = Console.ReadLine();
+            Console.WriteLine("Enter your age");
+            int age = int.Parse(Console.ReadLine());
+
+            Program.Add(age: age, name: name);
+            
+
+            Console.ReadLine();
+        } 
+
+    4. Function with return      
+==================
+	
+	string Function 
+		1. if(value=="+")				or (value.Equals("+"))
+
+======================================================================================================================================================
+value type and reference type (in java primetive and rerfernce type)
+
+
+Struct vs Class
+
+
+1. struct -- Value Type -- Stack Memory (limited memory type)
+	
+2. Class -- reference Type  -- Heap Memory (Large memory Type)
+
+
+1. the object of the Struct is created in stack Memory becasue it use value type and The object of the class is created in Heap memory because it use Reference 	types
+
+2. In Class "Employee e = new Employee();" this thing contains two parts 
+	a. Employee e -> this will create reference variable (it will store address for reference object) declare and it will create in Stack Memory
+	b. new Employee() ->  this will create reference object(it will store properties and methods with there values ) and it will create in Heap Memory 
+
+	so according to this object has more memory than reference Hence stack will fill lower 	
+
+3. When we create objects in Struct every object have there own memory Block hence Stack Memory will fill fast, If memory fill faster then Exception which is 		known as Stack over flow 
+ 
+
+## Creating Struct 
+	 struct Employee
+    {
+        public int salary;
+        public int age;
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Employee e = new Employee();
+            e.salary = 5000;
+            e.age = 23;
+
+            Employee e1 = e;
+            Employee e2 = e;
+
+            e.age = 35;
+
+            Console.WriteLine(e.age);
+            Console.WriteLine(e1.age);
+            Console.WriteLine(e2.age);
+            Console.ReadLine();
+
+        }
+    }
+
+
+## creating Class
+	class Employee
+    {
+        public int salary;
+        public int age;
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Employee e = new Employee();
+            e.salary = 5000;
+            e.age = 23;
+
+            Employee e1 = e;
+            Employee e2 = e;
+
+            e.age = 35;
+
+            Console.WriteLine(e.age);
+            Console.WriteLine(e1.age);
+            Console.WriteLine(e2.age);
+            Console.ReadLine();
+
+        }
+    }
+
+Values type :
+	A data type is a value type if ot hold a data value within its own memory space. It means variables of these data types directly contain their value
+
+	The following Data types are all of value type
+		1. Bool
+		2. byte 
+		3. char
+		4. decimal 
+		5. double 
+		6. enum 
+		7. float 
+		8. int 
+		9. long 
+		10. sbyte 
+		11. short
+		12. struct
+		13. uint
+		14. ulong
+		15. ushort
+
+Reference 
+	Unlike value type, a reference type doesn't store its value directly. Instead, it stores and address where the value is being stored. In other words, a refernce type contains a pointer to another memeory location that holds the data.
+
+		the following data types are of reference type :
+			1. String 
+			2. All arrays, even if their elements are value types 
+			3. Class
+			4. object 
+			5. interface		
+
+	Differenec between value type and reference  types 
+			
+			Value Type 								|			Reference Type 
+1. They are stored on stack memory 					|	1. They are stored on heap Memeory 
+2. Contains actuall value			 				|	2. Contains refernce to a value 
+3. Connot contain null value.However 				|	3. Can Contain null values 			
+   this can be achived by nullable types			|	4. Memory is allocated at run time 	
+4. Memory is allocatd at Compiler time				|		 					|			
+			 					
+	Difference between stack and heap 			 					
+			
+			Stack  									|				Heap		
+1. Values are stored one another like a stack 		|	1. They are stored on heap Memeory 
+2. used for value type							 	|	2. used for reference types 
+======================================================================================================================================================
+pass by value and pass by reference and pass by out 
+
+1. Call by value 
+		static void passByValue(int a)				// creating another momery block and getting copy of value (means getting value)
+        {
+            a = a + 10;
+            Console.WriteLine("Value is : {0}",a);
+        }
+       
+        static void Main(string[] args)
+        {
+            int value = 5;				// creating a memory block
+            passByValue(5);				// sending value to the function 	
+            Console.WriteLine(value);
+            Console.ReadLine();
+
+        }
+
+2. Call by Reference 
+   		static void passByValue(ref int a)							// Receiving address of the value
+        {
+            a = a + 10;
+            Console.WriteLine("Value is : {0}",a);
+        }
+        static void Main(string[] args)
+        {
+            int value = 5;
+            passByValue(ref value);							// sending the address of the value 
+            Console.WriteLine(value);
+            Console.ReadLine();
+
+        }     
+
+3. Call by out 
+		   static void passByValue(out int a)			// Receiving address of the value
+        {
+            a = 10;
+            Console.WriteLine("Value is : {0}",a);
+
+        }
+        static void Main(string[] args)				
+        {							
+            int value;									// Here we are not assigning the value this is the only differernce between reference and out 
+            passByValue(out value);						// sending the address of the value 
+            Console.WriteLine(value);
+            Console.ReadLine();
+
+        }	
+
+  Pass by reference 
+  	1. The 'ref' keyword causes arguments to be passed in a method by reference (reference means address).
+  	2. In call by Reference, the Called method changes the value of the parameters passed to it from the calling method 
+  	3. Any Changes made to the parametes in the called will be reflected in the parameters passed from the calling method when control passes back to the calling method 
+  	4. It is necessary that both the called method and the calling method must explicity specify the ref keyword before required parameters 
+  	5. The variables passed by reference from the calling method must be first initialized (important)
+
+  pass by out
+  	1. The out keyword is similar to the ref keyword and causes arguments to be passed by reference 
+  	2. The only difference between the two is that the out 	keyword does not require the variables that are passed by reference to be initilized 
+  	3. Both the called method and the calling method must explicity use the out keyword
+============================================================================================================================================================
+Var and Dynamic Keywords
+
+	var b = "Deepinder";		// will converted string type at complie time
+	var b = 12;					// will converted into intiger at complie time 
+
+	b.GetType()					// will return the type of any variable exmpale : System.Int32  	(systme ic namespace in which it is concidered)	 
+
+  	1. var keyword is used to store any type of data in its variable
+  	2. Value of var variable is decided at complie Time
+  	3. We have to initilize the variable with var keyword 
+  	4. If we want to check the the type of value which is stored in var variable then we can use GetType() method with the var variable 
+  	5. When we initalize the var variable with some value then we cannot change the value of var variable with some other data type Value 
+  	6. We can use all the methods of a particluar type value which is stored in var variable 
+  	7. var variabales cannot be used for property or return values from a function. They can only be used as local variable in a function 
+  	8. We cannot use variable as a function variable.
+  	9. var keyword is of value type
+  	10. Intellisence help is available for var type of variables 
+
+
+Note : when we get option after place dot is called intellicense for example : Console. -> writeline , write etc... {these are intelisence}
+  	
+(best)  	Dynamic is complete reverse of Var
+
+  	1. Dynamic keyword is also used to store any type of data n its variable 
+  	2. value of dyanmic variables is decided at Run Time 
+  	3. Initialization is not mandatory when we declare a variable with dynamic Keyword 
+  	4. If we want to check the type of value which is stored in Dynamic variable then we can use GetType() method with the var variable 
+  	5. When we initalize the var variable with some value then we change the value of var variable with some other data type Value 
+  	6. Intellisence help is not available for dyanmic type of variables since their type is unknown until run time. so intellisence help is not available 
+  	7. Dynamic variabales  be used for property or return values from a function.
+  	8. We use variable as a function variable.
+  	9. var keyword is of Reference type
+======================================================================================================================================
+Classes and Objects : same as php ======================================================================================================================================
+Constructors 
+	
+	1. A class constructor is a special memeber function of a class that is executed whenever we create new objects of that class 
+	2. A construct has exactly the same name as that of class and it does not have any return type 
+
+	Default Constructor 
+		A consturctor which has not defined any parameters or we can say without any parameters is called default constructor. it initilizes the same value of every instance of class 
+
+	Parameterized Constructor
+		A constructor which has a least one parameter is called Parameterized constructor. Using this type of constructor we can initialize each 
+
+
+syntax 	(Default)
+	class Program
+    {
+        public Program()											// contructor function name and Class name is Same
+        {
+            Console.WriteLine("Construct program is calling");
+        }
+        static void Main(string[] args)
+        {
+            Program p = new Program();
+
+            Console.ReadLine();
+        }
+        
+    }		
+
+syntax (parameterized)
+	class Program
+    {
+        public Program(int a)
+        {
+            Console.WriteLine("Construct program is calling and parameter is : {0}",a);
+        }
+        static void Main(string[] args)
+        {
+            int a = 20;
+            Program p = new Program(a);
+
+            Console.ReadLine();
+        }
+        
+    } 
+ ===================================================================================================================================
+ 1. we can create multiple constructors in C# (hence overloading is possible)
+ 2. Program will decide at compile time which construct will be call 
+ Contructor Overloading
+ 	class Program
+    {
+        public Program(int a)
+        {
+            Console.WriteLine("1st Construct program is calling and parameter is : {0}",a);
+        }
+        public Program(int a,int b)
+        {
+            Console.WriteLine("2nd Construct program is calling and parameter is : {0}", (a+b));
+        }
+        public Program(int a, int b,int c)
+        {
+            Console.WriteLine("3rd Construct program is calling and parameter is : {0}", (a + b +c));
+        }
+        public Program(string a, string b, string c)
+        {
+            Console.WriteLine("3rd Construct program is calling and parameter is : {0}", (a + b + c));
+        }
+        static void Main(string[] args)
+        {
+            int a = 20;
+            int b = 15;
+            int c = 10;
+            Program p = new Program(a);
+            Program p1 = new Program(a,b);
+            Program p2 = new Program(a,b,c);
+            Program p3 = new Program("A","B","C");
+
+            Console.ReadLine();
+        }
+        
+    }     
+=====================================================================================================================================
+Static and instance members of class in c# 
+
+	Access modifer by default private in c# (so while coding if it is not public then it will not show after '.' dot )
+
+instance memebers 
+	
+	1. Instance memeber have a separate copy for each and every object of the class 
+	2. instance memeber belongs to the objects of the class 
+	3. when no static keyword is present the class memeber is called non-static or instance memeber
+	4. instance or non-static memebrs are invoked using object of the class 	
+
+static Memebers 
+	
+	1. Static memebers belongs to the class 
+	2. We can define class memebers as static using the static keyword
+	3. when we declare a member of a class as static, it means no matter how many objects of the class are created, there is only one copy of the static member 
+	4. static variables are used for defining constants because their values can be retrived by invoking the class without creating an isntance of it. 
+	5. static varibles can be initialized outside the memebrs function or class defination. 
+	6. You can also initialize static variables inside the class definiation.
+	7. You can also declare a member function as static. 
+	8. Sych function can access only static variables. 
+	9. static member are invoking using class name.
+
+	Note : Class memebers can be fields, methods, properties, events, indexers, constructors 
+
+Static and instance  
+	class Program
+    {
+        class Student
+        {
+            public int rollno;
+            public string firstname;									// instnace variable 
+            public string lastname;
+            public int standard;
+            public static string schoolname = "Abc School";
+            public static int fee = 4000;								// static variable 
+            public void printFullname(string fname,string lname)
+            {
+                this.firstname = fname;
+                this.lastname = lname;
+                Console.WriteLine("Full name is : {0}",this.firstname + "  " +this.lastname);
+            }
+            public static int getfee()
+            {
+                return fee;
+            }
+        }
+        static void Main(string[] args)
+        {
+            Student s1 = new Student();
+            s1.rollno = 23;
+
+            Student s2 = new Student();
+            s2.rollno = 45;
+
+            Console.WriteLine(s1.rollno+" "+s2.rollno);				// accessing instance variable 
+            s1.printFullname("Deepinder", "Singh");
+            Console.WriteLine(Student.schoolname);					// accessing static variable 
+            Console.WriteLine(Student.getfee());					// accessing static function 
+            Console.ReadLine();
+		}
+        
+    }
+=====================================================================================================================================
+static Constructor 
+	1. A static Constrctor is used to initalize static variables of the class and to perform a particluar action only once.
+	2. Static constructor is called only once, no matter how many objects you create 
+	3. Static Constructor is called before instance (default or paramterized) constructor 
+	4. A static Constructor does not take any parameters and does not  use any access modifiers 
+
+key points of static Constructor 
+	1. Only one static Construcot can be created in the class 
+	2. It is called automatiaclly bfore the first instance of the class created 
+	3. we Cannot call static constructor directly      
+======================================================================================================================================
+A. Writing In Line
+
+	1.  Console.WriteLine("Hello World");  							write in new line 
+	2.  Console.write('hello'); Console.WriteLine("World");			write in single line 
+
+B. Commenting 
+	1. // Single Line Comment 
+	2. /**/ Multi line Comment 
+
+c. Variable 
+	1. int Deepu = 32;					4 bytes					-> 8 bit
+	2. float 							4 bytes
+	3. char								2 bytes
+	4. bool								1 bit
+	5. string							2 bytes per characters
+	
+
+d. Concatination 
+	1. Addition Sign 
+
+		'+' Sign is used to Concatinate 	
+
+	2. This concept called Placeholder sytnax
+		 
+		string name = console.Readline();
+		string candies = console.Readline();		
+
+		console.writeLine($"Your name is {name}. You will get {candies} candies"); 		
+					
+	   						or
+
+		string name = Console.ReadLine();
+		string candies = Console.ReadLine();
+
+		Console.WriteLine("This is name of : {0} and You have Candies {1}", name,candies);
+		Console.ReadLine();					
+
+
+
+e. get Data from the console Window
+	
+	string inp = Console.ReadLine();
+    
+    Console.WriteLine(inp);
+
+    Console.ReadLine();
+
+f. It is type safe language so we have add prefix at the send of value
+	
+	float a = 29.5F;			
+	double b = 65.5D ;
+
+	char a = 'd'		// always use single inverted commas 
+
+g. Type casting 
+		
+		int a = (int) 3.4;
+
+	There are two type of type casting 
+		
+		1. Implicit Casting 
+			
+			char to int to long to float to double (rule is left to right) 
+			
+			Example 	int x = 3;
+						double y = x;		
+
+		2. Explicit Casting
+			
+			example 	int a = (int) 3.4;	
+
+
+			float ab =	convert.ToInt32(3.55); 					// converting into 32 bit 
+
+						convert.ToString32()
+						convert.ToDouble32()
+
+
+
+			a. Sting to Int
+					
+					int num1 = int.Parse(Console.readline());			
+						
+h. operatores 
+	1. arithmatic 
+	2. Assignment 
+	3. Logical 
+	4. Comparison 
+
+i. Math class 
+		int a = Math.Max(34, 55);			// return maximum number;
+		int a = Math.Min(34,55);			// return minimum numbers;
+		double a = Math.Sqrt(36);			// return sqyar root value and always use double ;
+
+j. string functions 
+			1. string hello = "This is string line";
+				console.writeline(hello.Length);				will return the length of string 
+				console.readline();
+
+			2. hello.ToUpper()				// print all sting captial case 
+			3. hello.ToLower()				// print all string in lower case
+			4. hello + "hello once again"	// adding Sting 
+				
+							or 
+			  
+			   string.Concat(hello,"hello once again")	adding string 
+
+
+			   				or
+
+			   string name = console.Readline();
+			   string candies = console.Readline();		
+
+			   console.writeLine($"Your name is {name}. You will get {candies} candies"); 		
+
+			5. Console.writeline(hello[0])		// print first Character 
+			
+			6. 	string hello ="Hello world this is harry";
+
+				Console.writeline(hello.Indexof("Hello"))   		// return the index of the hello string example 0
+
+			7. console.writeline(hello.Substring(5))				// 	return "world this is harry"
+
+			8. "hello this is Deepu\"s Computers"					// to parse the double inverted commas
+
+				"hello this is Deepu \n Computer"					// print in new line
+				"hello this is Deepu \t Computer"					// print tab in a line 	
+
+k. loops 
+	while initializing always use 
+			int i=0;																
+
+l. Functions 
+		
+	namespace hello 												
+		{
+		    class Program  										// static key word is used to connect function to the current class				
+		    {													// void will not return any thing 
+			    1.   	static void Great(){							// creating function
+						Console.writeline('Good Morning');
+					}
+
+				2.	static int greetReturn(){						//function with returing values
+						return 1;
+					}
+
+				3. static void greet(string name)					// function with parameters but no return 
+				{
+					console.writeline("this is parameter "+ name);
+				}	
+
+				4. static float average (int a, int b, int c)			// function with paramaters and with return float value
+				{
+					int sum= a+ b+ c;
+					return sum/3;										
+				}
+
+				4. static float average (int a, int b)			// function  Overloading example with paramaters and with return float value
+				{
+					int sum= a+ b+ c;
+					return sum/3;										
+				}
+		        static void Main(string[] args)
+		        {
+		            greet();									// calling function 	
+
+
+		            console.writeline(avaerage(3,4,5));			// calling function 	
+
+		            console.writeline(avaerage(3,4));			// calling function 				// function overloading 							
+		        }
+		    }
+		}
+
+m. Class and object 
+
+	we cannot access private properties directly but we can access using public functions 			
+
+
+			//	created new class
+			class player{
+				public string name="Deepinder";
+				public int health=49;
+
+				public viod setHealth (int h){
+					health = h;
+				}
+			}
+
+
+
+			class hello{
+				
+				Player tommy = new Player();
+				console.writeline(tommy.health);				// 49 will print 
+				tommy.setHealth(57);
+				console.writeline(tommy.health);				// 57 will print 
+				console.readline();
+
+			}
+
+
+
+##1. Write a program to add two Numbers 
+		
+		Console.WriteLine("Enter First Number");
+        int a = int.Parse(Console.ReadLine());
+        Console.WriteLine("Enter Second Number");
+        int b = int.Parse(Console.ReadLine());
+
+        int sum = a + b;
+
+        Console.WriteLine("The sum of Two number is : {0}", sum);
+        Console.ReadLine();
+
+##2. Write a program to restart program with user input
+		
+		1. using Do While 
+			
+			string confirm;
+            do
+            {
+                Console.WriteLine("Enter First Number");
+                int num1 = int.Parse(Console.ReadLine());
+                Console.WriteLine("Enter Second Number");
+                int num2 = int.Parse(Console.ReadLine());
+                int add = num1 + num2;
+                Console.WriteLine("Addition Result is : " + add);
+                Console.WriteLine("Do you want to repeat your program ? Yes / No");
+                confirm = Console.ReadLine();
+
+
+            } while (confirm.ToLower() == "yes");
+            Console.WriteLine("You are Out from Loop Now");
+            Console.ReadLine();
+
+        2. Using While Loop 
+        	
+        	while (true)
+            {
+                
+                Console.WriteLine("Enter First Number");
+                int num1 = int.Parse(Console.ReadLine());
+                Console.WriteLine("Enter Second Number");
+                int num2 = int.Parse(Console.ReadLine());
+                int add = num1 + num2;
+                Console.WriteLine("Addition Result is : " + add);
+                Console.WriteLine("Do you want to repeat your program ? Yes / No");
+                string confirm = Console.ReadLine();
+
+                if (confirm == "yes")
+                {
+                    continue;
+                }
+                else if(confirm != "yes")
+                {
+                    break;
+                }
+            }
+            Console.WriteLine("You are Out from Loop Now");
+            Console.ReadLine();    
+
+
+
+## 2. write a program do add to values using user input
+	
+			Console.WriteLine("Enter your name");
+           string name = Console.ReadLine();
+            Console.WriteLine("Hey hello " + name);
+            Console.WriteLine("How many candies do you want ?");
+            string can = Console.ReadLine();
+            Console.WriteLine("you will get 4 more candies " + (Convert.ToInt32(can) + 4));
+            Console.ReadLine();
+

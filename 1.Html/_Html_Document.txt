@@ -1,0 +1,65 @@
+==================================================Tips================================================== 
+1. Open any folder > right click in the folder > click on the Open with Code : your files and directory will open in the visual studio
+
+2. p*4 
+
+3 Lorem45 then enter 
+
+4. Ctrl + Enter jump into the new line 
+
+5. input:radio,button,text,password ect
+
+6. select some text then Alt+downArrow , Alt+UpArrow
+
+7. to make a Class : 
+   // this process called Emmet
+   a. span.redbg then enter
+   b. div.btn.btn-success.btn-sm then enter        
+   c. div.btn.btn-success.btn-sm*4 then enter, enter some values between the tag and press tab next cursor will automatically in next between tags  
+   d. div.box#box$*4 
+   		<div class="box" id="box1"></div>
+	    <div class="box" id="box2"></div>
+	    <div class="box" id="box3"></div>
+	    <div class="box" id="box4"></div>
+
+8. to make a Id : span#redbg then enter
+
+9. Div tag as defult : .bgcolor ->  <div class="bgcolor"></div>
+
+10. Visual Studio Code is an IDE: Integrated(sara kuj ik he jgha) Development Enviornment 
+
+==============================================Html ===================================
+1. <!DOCTYPE html>
+   ----------------
+   telling to the browser that this is html document type
+
+2. <meta charset="UTF-8">   
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   ----------------------------------------------------------------------
+   meta data means discription about data and also help in SEO for Google, ping, etc 
+
+3. Div 
+   ---
+   a. means create division and it is Block element (which accured the whole block of line)
+   b. use Div instead of br with CSS properties 
+
+4. Span
+   ----
+   It is a Inline element
+
+5. input,image
+   -----------
+   it is Inline element
+
+6. id 
+   ---
+   means indentify and multiply id cannot be possible for a single element but in Class it is possible 
+
+7. Entities
+   --------
+   Use for write special Characters 
+
+8. Semantic Elements
+   -----------------
+   a. Means give a meaning to a word example : header, nav, section, article, aside, footer, details, Summary
+   b. It help in ranking our website and easy to recoganise by any search engine 

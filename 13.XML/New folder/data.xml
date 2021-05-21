@@ -1,0 +1,20 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE people SYSTEM "peopleDTD.dtd">
+<people>
+   <husband employed="yes">
+      <name>Deepinder Singh</name>
+      <age>27</age>
+      <wife>
+         <wname>Simranjeet Kaur</wname>
+         <age>28</age>
+      </wife>
+   </husband>
+   <husband employed="no">
+   <name>Inderdeep Singh</name>
+   <age>24</age>
+   <wife>
+      <wname>Manminder Kaur</wname>
+      <age>22</age>
+   </wife>
+ </husband>  
+</people>     

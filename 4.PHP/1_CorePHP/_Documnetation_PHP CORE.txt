@@ -1,0 +1,701 @@
+1.what is PHP ?
+	PHP is a server side or Backend Scripting Language.
+
+2. Why we use Mysql Datbase with php 
+	Because it is perform fast and very compatible with php 
+
+3. upload image code is in the CMS project with proper validations 
+
+
+
+######################################### MUST Watch #################################################
+32.Php CRUD Operations Tutorial Using MySQLi in Hindi - Select, Insert, Update, Delete-PHP Tutorial #32
+47.PHP Project-Creating An Online Forum In php From Scratch - PHP Tutorial #47
+70.Managing Multiple Virtual Private Servers for PHP Hosting - PHP Tutorial #70.mp4
+	to 
+	74
+
+	 
+
+
+
+
+
+
+
+
+
+======================================= PHP Pattern ===============================================
+1. Core PHP  / 	Procedural Oriented Programming  (POP)
+2. Object Oriented PHP	OOPs
+3. Model View Controler 
+
+
+=======================Source of PHP ===============================
+https://www.php.net/
+https://www.phpmyadmin.net/
+
+https://source.unsplash.com/		// for random images
+
+
+
+=========================== Web hosting =========================================
+
+1. Digital Ocean 					// best one  use harry code link
+2. Vultr 
+3. linode 
+4. amazone aws
+5. 000webhost.com
+
+=========================== Filezila ======================================
+
+a. Login with cpanel Details 
+	
+	1. Host : 192.185.129.64
+	2. Username : wavelinx				// cpanel Username 
+	3. Password : Wave!@2020			// cpanel Password 
+	4. Port : 80 
+
+b. login with ftp Details 
+	
+	go to FTP Account (in file section ) then Enter details 
+
+	1.Log In : Deepinder@wavelinx.in
+	2. Domain : wavelinx.in
+	3. Password : 9915099247
+	4. Password (Again) : 9915099247
+	5. Directory : /home/wavelinx/public_html			// this is important (My current Directory is now 																				public_html) 
+
+	set directory also 
+
+	1. Host : ftp.wavelinx.in
+	2. Username : Deepinder@wavelinx.in				// cpanel Username 
+	3. Password : 9915099247			// cpanel Password 
+	4. Port : 22 
+
+
+
+
+=================================Extra Points =====================================
+
+1.warning errors cannot stop the whole page while fatel error stop the entire page 
+
+	1. requires gives fatel errors (use in databases files)
+	2. include gives warning errors (use in the html files)
+
+	difference between include/include once and require/require once when we include write two time then file will include two times but if we write include once two time files will include only one time
+
+2. Always Close Connections in php eg: Database Connection,File Connection  after open Connections to protect our resources. 
+
+3. Lorem PRESS Tab
+
+4. partial file/Common Files start with '_' underscore eg: _db.connection, _header.php 
+
+5. wamp = window apache mysql php
+   lamp = linax apache mysql php
+
+ <pre style="text-align: center;">
+ ---------------------------------------------------------
+ |  ---------------------------------------------------  |
+ |  |                                                 |  |
+ |  |  YOU DON'T HAVE PERMISSION TO ACCESS THIS PAGE  |  |
+ |  |                                                 |  |
+ |  ---------------------------------------------------  |
+ ---------------------------------------------------------
+ </pre>
+
+6. We can transfer datafrom one page to another using Global Variables 
+	1. POST
+	2. GET
+	3. REQUEST
+	4. SERVER (very use full for development/developers)
+		a. Http Conncetion 
+		b. server information
+		c. Host Information
+		d. Url information
+	5. SESSION
+	6. COOKIE
+	7. FILE	
+
+7. list()		function, best to see result with for loop 
+
+======================== Passord Hash==============================
+1. $password = password_hash('1234',PASSWORD_DEFAULT);      // Generate One way Hash
+	echo $password;
+	echo "<br>";
+
+
+	echo password_verify('1234',$password );				// use to match value and Return True or False
+
+
+======================== Continue =================================
+
+The continue statement breaks one iteration (in the loop), if a specified condition occurs, and continues with the next iteration in the loop.
+
+This example skips the value of 4:
+<?php  
+$x = 0;
+ 
+while($x < 10) {
+  if ($x == 4) {
+    $x++;
+    continue;
+  }
+  echo "The number is: $x <br>";
+  $x++;
+} 
+?> 
+
+======================== Globale Variable ==========================
+1. print_r($GLOBALS);    // print all Global Variables 
+2. print_r($GLOBALS[_POST]) or $_POST   are same Things 
+
+3. $a=2; and $GLOBALS['a'] = 2;			// Both are same meaing
+
+function printValue(){
+	global $a;				// Accessing Globale variable from out side the function 
+	echo "<br>";
+	echo $a;
+}
+printValue();
+echo "<br>";
+echo $a;
+
+========================Server Request Method ======================
+
+1. $_SERVER['REQUEST_METHOD']=='POST' and also use isset with it 
+
+2. <a href='/dashboard.php'>Click</a>
+
+======================== Sting Functions ===========================
+1. Strlen : Count the letters;
+
+2. str_word_count : count Words in Single sentance
+
+3. strrev : Reverse the Whole words/Sentence 
+
+4. strpos : To Find Words in a Sentance 
+
+5. str_replace : To Replace any word in Sentence 
+
+6. str_repeat : To Repeat Words 
+
+7. Substr : to print words from staring to end point 
+======================== Operators ===================================
+
+a. Arithmetic operators 
+b. Assignments Operators
+c. Comparison Operators 
+d. Logical Operators 
+
+
+a. Arithmetic 
+	1. Add +
+	2. Subtract -
+	3. Multiply *
+	4. Divide /
+	5. Modulas %
+	6. Power **
+
+b. Assignment Operators 
+	1. Assignment : =
+	2. Add-Assign  : +=
+	3. Subtract-Assign  : -=
+	4. Multiply-Assign  : *=
+	5. Divide-Assign  : /=
+
+c. Comarison Operators
+	1. Equal to : ==
+	2. Triple Equal to : ===
+	3. Not Equal to : != , <>
+	4. Greater than : >
+	5. Greater then or Equal to : >=
+	6. Less than : <
+	7. Less than or Equal to : <=
+
+d. Logical Operators (return boolen Values)
+	1. AND : && , and 
+	2. OR : || , or
+	3. NOT : ! , not 
+
+===============Switch Case========================
+$day=3;
+switch ($day) {
+ 		case 1:
+ 			echo 'Day is Monday';
+ 			break;
+ 		case 2: 
+ 			echo 'Day is Tusday';
+ 			break;
+ 		case 3:
+ 			echo 'Day is Wednesday';
+ 			break;
+ 		case 4:
+ 			echo 'Day is Thursday';
+ 			break;
+ 		case 5:
+ 			echo 'Day is Friday';
+ 			break;
+ 		case 6:
+ 			echo 'Day is Saturday';
+ 			break;
+ 		case 7;	
+ 			echo 'Day is Sunday';
+ 			break;
+
+ 		default:
+ 			echo 'Day is Not Available';
+ 			break;
+ 	}
+ ==================Loops ================
+ 1. While 
+ 2. For
+ 3. Do While 
+ 4. Foreach 	
+
+ 	Do While Loop
+ 	-------------
+ 		$i=11 ;
+
+		do {
+				echo $i;
+				$i++;
+			} while ( $i<= 10);
+
+		Program is Fail becuse Conditon get Failed but it will execute for one time hence 11 will echo ;
+	 
+
+	ForEach (only Works on Arrays or Objects and Always Works in Sequential way)
+	-------
+
+	$z=array(
+		'First_name'=>'Deepinder',	
+		'last_name'=>'Singh',
+		'class'=>'Computer/Civil',
+		'Habbits'=>'study'
+	);
+
+	foreach ($z as $key =>$value) {
+		echo "Key : ".$key.' value : '.$value.'<br>';
+	}
+
+==================Functions =================
+1. Adding Program using Foreach loop
+	function addMarks($arrayList){
+		$sum=0;
+		foreach($arrayList as $key => $value){
+			$sum +=$value;
+		}
+		return $sum;
+	}
+
+
+
+	$Deepinder =[90,12,34,56,78,90];
+
+
+	echo "Marks Obatin out of 600 is ".addMarks($Deepinder);
+
+ ====================Date Functions=============================
+ 1. Date("H:i:s Y-m-d");
+ 	Print Date with Format parameters 
+ 2. Add/Subtracting Date 
+ 	Date("H:i:s Y-m-d",strtotime("-1 year -1 month -1 min -1 week"));
+
+
+===================== File Handling ============================
+
+a. file function are use to create files on servers with permission like read and write all that 
+b. file read by cursor system 
+c. make securities while uploading files 
+
+		1. readfile('filename')						:: return the content of the file with number of characters 
+		2. file_exist('filename')					:: check file exist of not 	and also for check folder
+		3. copy('oldFileName','newFileName')		:: copy file content and create new file 
+		4. rename('oldFileName','newfileName')		:: rename 		
+		
+		5. mkdir('folderName')						:: create folder 
+		6. rmdir('folderName')						:: remove folder	
+		
+		7. delete('filename')						:: delete file
+		8. unlink('filename')						:: delete file
+		
+		9. fliesize('filename')						:: return the file size (bytes/number of characters)
+		10. filetype('filname')						:: return the file type (file/folder)
+		11. realpath('filename')					:: return complete path of the file 
+(BEST)	12. pathinfo('filename')					:: return array with multiple file details (bset :: pathinfo(realpath('filename')))
+
+				pathinfo(realpath('filename',PATHINFO_DIRNAME))			:: return Directory Name
+				pathinfo(realpath('filename',PATHINFO_BASENAME))		:: return File Name
+				pathinfo(realpath('filename',PATHINFO_EXTENTION))		:: return extention of the file
+				pathinfo(realpath('filename',PATHINFO_FILENAME))		:: return only file name 
+
+		13. driname(realpath('filename'))					:: return the parent directory of file 
+				dirname(realpath('filename'),2)				:: return the path of the file upto level 2 
+		14. basename(realpath('filename'))					:: return file name 
+				basename(realpath('filename'),'.txt')		:: remove extention keyword from string
+
+(Advance)
+		15. $file = fopen('filename',mode)							:: use to open file :: mode -> r(read),w(write),a(append)
+		16. fread($file,noOfchacters)					:: use to read characters in file
+		17. fgets($file)								:: return only single from file 
+		18. ftell($file)								:: return the cusror position from the file 
+		19. feof('filname')								:: use in while loop to print line till end 
+		20. file('filname')								:: return array read line by line 	
+		21. fgetc('filname')							:: read single character 
+		
+		22. fwrite('filname','string')					:: use to write in file 
+		23. fputs('filname')							:: same functnailty of fwrite 
+		24. fclose('filname')							:: to close connection
+		25. ftruncate('filname',noOfCharacters)			:: to truncate the charcters after noOfCharacters 
+
+
+(is_functions of Files)
+		
+		1. is_dir()									:: check folder exist or not 
+		2. is_file('fileName')						:: check file exist or not 
+		3. is_readable('filename')					:: check that file is readable only (setting done by right click on file then check properties)
+		4. is_writeable()							:: check that file can be writbale
+		5. is_executable()							:: check that .exe file to execute (while uplaoding files)
+
+
+(connection_open write/read/append connection_close in single function)
+	1. file_put_contents('filename','string',FILE_APPEND | LOCK_EX)					:: write data
+	2. file_get_contents('filename')												:: get the data from file
+
+
+
+(seraching files,folder,particular files, in sub folders in directory)
+(best thing )
+		A. glob(patterns,flags)				
+					flags 		1. GLOB_MARK
+								2. GLOB_ONLYDIR
+								3. GLOB_BRACE
+								4. GLOB_NOCHECK				glob("{*.html,*.txt}",GLOB_BRACR)		return only .html , .txt files
+
+
+		example : 
+		1. glob('*')			:: return all file name and folder in current path 
+		2. glob('css/*')		:: return all the file and folder in css folder 
+		3. glob('*.php')		:: return only php file in current folder
+		4. glob('t*')			:: return all the file which start with 't' character
+		5. glob('*t*')			:: return all the file in which 't' is exist in between
+		6. glob('t*ml')			:: return all the files starting with 't' and end with 'ml'
+		7. glob('[st]*') 		:: return all the files starting with 's' or 't'
+		8. glob('*[st]*')		:: rerurn all the files in which 't' or 's' is exist in between
+		9. glob('css/s*')		:: return all the file which start with 't' character in 'css' folder
+
+
+
+
+Note:
+a. while we open any file we creata a pointer. These pointers are like tokens in shoping mall.
+b. we can create html.txt file and put all html data in text file then it will display proper html out put 
+
+1. Create File (open and Write into file)
+   --------------------------------------
+
+		$data=fopen('file.txt','w');                        or $data=fopen('file.txt','a');
+		fwrite($data,"Deepinder Singh \n");							for append text
+		fwrite($data,"Simranjeet Kaur \n");
+
+		fclose($data);
+		
+2. To Count words in php File 
+   --------------------------
+
+		echo filesize('file.txt')			
+
+3. Read file 
+   ---------
+			
+		a. echo readfile('file.txt')				// printing Direct File text 
+
+			  OR
+
+		b. $data=fopen('file.txt','r');			// converting file into a pointer 
+
+		   $read=fread($data,filesize('file.txt'));
+
+		   echo $read;	
+
+			  OR 
+		
+		c. $data=file('file.txt');					// convert text file into Array 
+		
+			foreach ($data as $key => $value) {
+				echo 'key : '.$key.'  & value : '.$value;
+			}	
+
+			  OR
+		
+		d. $data=fopen('file.txt','r');				
+
+			while($row=fgets($data))				// print Line by line 
+			{
+				echo $row;
+			}
+
+		e. $data=fopen('file.txt','r');				// print character by character 
+
+			while($row=fgetc($data))
+			{
+				echo $row;
+			}				
+
+3. Check File exist  
+   -----------------
+
+	echo file_exists('file.txt') 				// return True or False
+
+4. Delete File
+   ----------- 	
+	@unlink('abx.txt');
+
+==============================Directory Functions =====================================
+
+1. getcwd()			return current path of current directory name
+2. chdir()			to change directoty
+3. scandir()		
+		example : scandir('.')  or scan(getcwd())    :: return all the files and folder in current directory in ascending way
+
+(note)
+		. means -> current folder
+		.. means -> outside folder	
+
+
+		example : scandir('js',1)					:: return all data in js folder in decsending way
+
+4. openDir()				:: open dir 
+5. readdir()				:: use with while loop and return all file name and folder name 	
+6. closedir()				:: 	
+
+
+=============================================== Regular expression ==========================================================
+regular expression (find and replace)		regex/regexp/rational Expression
+	it is a technique for passing and extracting data from text 
+
+	1. preg_match(/pattern/modifiers,string,array)				to match charcter in a string 
+
+
+		example : $string ="PHP is the web scripting laguage of choice";
+
+		$exp = preg_match('/PHP/',$string)					// return true or false and case-sensitive function 
+
+				modifier -> i 			:: for case-insensitive
+
+		$exp = preg_match('/PHP/i',$string)		
+
+
+
+
+	2. preg_match_all('/PHP|the|choice/',$string)				to match characters in a string  
+
+
+
+in google -> regular expression tester 
+
+ =============================== Cookies ============================================
+
+a. To store unsecure Data like what kind books you like, My wishlist 
+b. To Store Data in browser or userside then cookies is used and if Data is stored in server side then session is used
+
+1. For Set Cookie
+	-------------
+		setcookie('nameOfCookie','valueCookie',time() + timeInSeconds,'/');
+
+	here '/' means use in whole website  
+
+2. For Fetch Cookies
+	----------------
+
+		$_COOKIE['nameOfCookie'];
+
+================================= Session ==========================================
+a. Information Store across different pages 
+b. Data store in server side 
+
+
+
+++++++++++++++++++++++++++++++++   DATABASE  +++++++++++++++++++++++++++++++++++++++++	
+# What is MYSQL 
+ 1. MYSQL is a RDBMS Database 
+ 2. Data is structured into tables (in columns and Rows form)
+ 3. SQL is used a medium to communicate with the database 
+
+
+# Connection 
+ 1. MYSQLi (i stand for improved) : can be connect using OOPS or Procedural 
+ 2. PDO 
+
+ Note: If you only connect mysql Database then you can use MYSQLi extention but if you want to connect different different databases then you have to use PDO extention but we have to write queries according to databases in PDO eg: orcal database quueries, Sqlite queries 
+
+ Connection Syntex
+ -----------------
+ 	$con=@mysqli_connect('localhost','root','hbhbhb','classes_project') ;
+
+	if(!$con){
+		die('Date Base is Not Conncted. <br/>Error : '.mysqli_connect_error());
+	}
+
+
+	$con=mysqli_connect($x,$x,$x,$x);
+	mysqli_connect_error();
+	mysqli_query();
+	mysqli_error($con);
+	mysqli_close($con);
+	mysqli_affected_row($con);     // give you the number of affected rows
+
+Note: In Update and delete query mysqli_affected_row() gives you the total number of updated rows
+
+=======================================Queries=========================================
+
+1. For search/Match 
+	
+	First alter that table with Full text then use query 
+	
+	ALTER TABLE classdata ADD FULLTEXT(descrpt);    
+	
+	SELECT * FROM `classdata` WHERE MATCH(descrpt) against('love'); 
+
+
+============================Creating Recaptcha ===================
+  header('Content-type: image/jpeg');				// creaing html page into image calling this function 
+  
+  $font_size=30;
+  $image_width=200;
+  $image_height=40;
+
+  $image=imagecreate($image_width,$image_height);
+  imagecolorallocate($image, 255,255,255);
+
+	$textcolor = imagecolorallocate($image, 0, 0, 0);
+  
+  $font_file = 'myfont.ttf';
+  
+  // $custom_text = "Watermark Text";
+  
+  imagettftext($image, $font_size, 0, 15, 30, $textcolor, $font_file, rand(1000,9999));
+ 
+  
+  imagejpeg($image);
+ 
+  imagedestroy($image); // for clearing memory
+
+====================================== is functions ==========================================================
+1. is_int($var) 					return true/false that variable is interger or not 
+2. is_integer($var)					return true/false that variable is interger or not 
+3. is_long($var)					return true/false that variable is interger or not 
+4. is_float($var)					return true/false that varable is decimal or not 
+5. is_double($var)					return true/false that varable is decimal or not 
+6. is_numberic($var)				return true/false that variable is numeric or not 
+7. is_string($var)					return true/false that variable is string or not
+8. is_bool($var)					return true/false that variable is boolen or not
+9. is_null($var)					return true/false that variable is null or not
+10. is_array($array)				return true/false that array is array or not  
+11. is_callable('functionName') 	rteurn true/false that function exist or not 
+
+
+======================================= filter validation ======================================================
+1. filter validation 
+
+	Is use to filters the various values of inputs 
+
+	syntac :: filter_var(var,filtername,option/flags)
+		
+
+
+
+
+		example :: filter_var($_POST[''],FILTER_VALIDATE_INT)
+
+
+	(filtername)	1. FILTER_VALIDATE_INT					(option/flages)	: array("options"=>array('min_range'=>20,'max_range'=>30))
+					2. FILTER_VALIDATE_FLOAT
+					3. FILTER_VALIDATE_BOOLEN
+					4. FILTER_VALIDATE_EMAIL
+					5. FILTER_VALIDATE_URL					http or https is compolsoury
+					6. FILTER_VALIDATE_IP
+					7. FILTER_VALIDATE_MAC
+					8. FILTER_VALIDATE_REGEXP
+
+2. Sanitize filter (same above syntax)
+	1. FILTER_SANITIZE_MAGIC_QUOTES		or 		add slash 
+	2. FILTER_SANITIZE_STRING			or      htmlentities
+
+
+3. filter input
+
+	<form action="#" method="get">												method="post"
+	<input type="text" name="email">
+
+	syntax filter_input(INPUT_GET,'email',FILTER_VALIDATE_EMIAL)				INPUT_POST,INPUT_COOKIE,INPUT_SERVER,INPUT_ENV
+
+
+========================================================== Error Handling ==========================================================================
+in simple words : show user defined error insted of Computer Errors 
+
+				try{
+					if(condition){
+
+					}else{
+						throw new Exception("Some Message Goer Here");
+					}
+				}catch(Excprion $e){
+					echo $e->getMessage();
+				}finally{
+					
+				}
+
+getMessage() − message of exception
+
+getCode() − code of exception
+
+getFile() − source filename
+
+getLine() − source line
+
+getTrace() − n array of the backtrace()
+
+getTraceAsString() − formated string of trace
+
+
+
+Exception handling is a powerful mechanism of PHP, which is used to handle runtime errors (runtime errors are called exceptions). So that the normal flow of the application can be maintained.
+
+			or 
+
+Error handling is the process of catching errors raised by your program and then taking appropriate action. If you would handle errors properly then it may lead to many unforeseen consequences.
+
+1. Exceptions are used to change the normal flow of a script if a specified error occurs.
+2. When an exception is thrown, the code following it will not be executed, and PHP will try to find the matching "catch" block.
+
+Proper exception code should include:
+
+	try - A function using an exception should be in a "try" block. If the exception does not trigger, the code will continue as normal. However if the exception triggers, an exception is "thrown"
+	throw - This is how you trigger an exception. Each "throw" must have at least one "catch"
+	catch - A "catch" block retrieves an exception and creates an object containing the exception information
+
+
+
+practical Example 
+
+	try{
+			$conn->beginTransaction();
+			$check  = mysql_query($con,"INSERT query");
+			if(!$check){
+				throw new Exemption("insert query fail");
+			}
+
+
+			$check  = mysql_query($con,"Update query");
+			if(!$check){
+				throw new Exemption("insert query fail");
+			}
+			$conn->commit();
+	}catch{
+			$conn->rollBack();
+	}
+
+note : $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION)		// after this we can remove if statements from above codes
+	

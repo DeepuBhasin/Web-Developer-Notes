@@ -1,0 +1,220 @@
+1. Query to find all customers
+
+DELIMITER //
+
+CREATE PROCEDURE sp_getAllCustomers()
+BEGIN
+SELECT * FROM customers;
+END //
+DELIMITER ;
+
+CALL sp_getAllCustomers();
+
+
+2.Query to join table book and publisher. And print publisher id, publisher name, book id, book name.
+
+DELIMITER //
+CREATE PROCEDURE sp_book_publisher()
+BEGIN
+SELECT p.publisher_id,p.publisher_name,b.book_id,b.book_name FROM publisher_has_books as phb INNER JOIN books as b ON phb.book_id=b.book_id INNER JOIN publisher as p ON p.publisher_id=phb.publisher_id;
+END //
+DELIMITER ;
+
+CALL sp_book_publisher();
+
+
+3.Query to find a book by author name.
+
+DELIMITER //
+CREATE PROCEDURE sp_authorName(IN autherName varchar(300))
+BEGIN
+SELECT * FROM books WHERE book_author=autherName
+End //
+DELIMITER ;
+
+CALL sp_authorName('Carlos James');
+
+
+4.Query to find all the books printed by a publication.
+
+DELIMITER //
+CREATE PROCEDURE sp_publisherBook(IN publisher_name varchar(300))
+BEGIN
+SELECT b.* FROM publisher_has_books as phb INNER JOIN books as b ON phb.book_id=b.book_id INNER JOIN publisher as p ON p.publisher_id=phb.publisher_id WHERE p.publisher_name=publisher_name ORDER BY b.book_name ASC;
+END //
+DELIMITER ;
+
+CALL sp_publisherBook('J&J');
+
+5. Query to add a customer
+
+DELIMITER //
+CREATE PROCEDURE sp_addCustomer(IN first_name varchar(45),
+                                IN last_name varchar(45),
+                                IN address varchar(45),
+                               IN state varchar(45),
+                               IN country varchar(45),
+                               IN phone_number varchar(45),
+                               IN email varchar(45),
+                               IN DOB date)
+BEGIN 
+INSERT INTO customers (first_name, last_name, address, state, country, phone_number, email, DOB) VALUES (first_name,last_name,address,state,country,phone_number,email,DOB);
+END //
+DELIMITER ;
+
+Call sp_addCustomer('Deepinder','Singh','#51-d','Punjab','India','919915099247','Deepinder999@hmail.com','2020-12-08');
+
+
+6. Query to find staff by the last name
+
+DELIMITER //
+CREATE PROCEDURE sp_staffLastName(IN t_last_name varchar(45))
+BEGIN 
+SELECT * FROM staff WHERE last_name=t_last_name;
+END //
+DELIMITER ;
+
+CALL sp_staffLastName('Jacob ');
+
+
+7. Query to find customers who haven't returned the book after the due date has surpassed.
+
+DELIMITER //
+CREATE PROCEDURE sp_dueDate()
+BEGIN 
+SELECT c.* FROM loan as l INNER JOIN customers as c ON l.customers_customer_id=c.customer_id WHERE CURRENT_DATE>l.issue_date and l.return_date IS NULL;
+END //
+DELIMITER ;
+
+CALL sp_dueDate();
+
+
+8. Remove Customer 
+DELIMITER //
+CREATE PROCEDURE sp_deleteCustomer(sp_emialid varchar(100))
+BEGIN
+DELETE FROM customers WHERE email=sp_emialid;
+END //
+DELIMITER ;
+
+Call sp_deleteCustomer('Deepinder999@hmail.com');
+
+
+9. Query to find the names, address (along with state and country), email, phone_number of all the employees and customers in a state.
+
+DELIMITER //
+CREATE PROCEDURE sp_getCustomerState(sp_state varchar(45))
+BEGIN 
+SELECT * FROM customers as c WHERE c.state=sp_state ORDER BY c.first_name;
+END //
+DELIMITER ;
+
+CALL sp_getCustomerState('NY');
+
+10. Customer who get book , issue by staff , book details 
+DELIMITER //
+CREATE PROCEDURE sp_loan()
+BEGIN
+SELECT b.book_name,c.first_name,c.last_name,c.phone_number,c.email,s.first_name as staff_first_name,s.last_name as staff_last_name,s.phone_number as staff_phone_number,l.issue_date,l.book_due_date,l.return_date FROM loan as l INNER JOIN customers as c ON c.customer_id=l.customers_customer_id INNER JOIN books as b ON b.book_id=l.books_book_id INNER JOIN staff as s ON l.staff_emp_id=s.emp_id ORDER BY l.issue_date ;
+END //
+DELIMITER ;
+
+CALL sp_loan();
+
+
+
+11. Find the customer and books which are due in the next 7 day.
+
+DELIMITER //
+CREATE PROCEDURE sp_comingDue()
+BEGIN
+SELECT l.loan_id, b.book_name,c.first_name,c.last_name FROM loan as l INNER JOIN customers as c ON c.customer_id=l.customers_customer_id INNER JOIN books as b ON b.book_id=l.books_book_id WHERE DATEDIFF(l.book_due_date,CURRENT_DATE)<=7 and l.is_loan_active=1;
+END //
+DELIMITER ;
+
+CALL sp_comingDue();
+
+================Triggers=========================
+1. Insert a row in customer_insert_date table after inserting data in customer table 
+
+DELIMITER //
+CREATE TRIGGER tr_afterInsertCustomer
+AFTER INSERT ON customers
+FOR EACH ROW
+BEGIN
+DECLARE tr_customer_id int;
+SET tr_customer_id=new.customer_id;
+INSERT INTO customer_insert_date(explanation,customer_id,created_dt) VALUES('A row is inserted in customer table',tr_customer_id,CURRENT_TIMESTAMP());
+END //
+DELIMITER ;
+
+SELECT * FROM customer_insert_date;
+
+Call sp_addCustomer('abc','bcd','#51-d','Punjab','India','919915099247','xyz@hmail.com','2020-12-08');
+
+SELECT * FROM customer_insert_date;
+
+
+
+2. Insert a row in customer_delete_date table after deleteing data from customer table
+
+DELIMITER //
+CREATE TRIGGER tr_afterDeletCustomer
+AFTER DELETE ON customers
+FOR EACH ROW
+BEGIN
+DECLARE tr_customer_id int;
+DECLARE tr_customer_first_name varchar(45);
+DECLARE tr_customer_last_name varchar(45);
+
+SET tr_customer_id=old.customer_id;
+SET tr_customer_first_name=old.first_name;
+SET tr_customer_last_name=old.last_name;
+
+INSERT INTO customer_delete_date(customer_id,customer_first_name,customer_last_name,explanation,created_dt) VALUES(tr_customer_id,tr_customer_first_name,tr_customer_last_name,'A row is Deleted in Customer table',CURRENT_TIMESTAMP());
+END //
+DELIMITER ;
+
+SELECT * FROM customer_delete_date;
+
+Call sp_deleteCustomer('Deepinder999@hmail.com');
+
+SELECT * FROM customer_delete_date;
+
+
+
+SHOW PROCEDURE STATUS;
+SHOW TRIGGERS;
+
+
+
+=================Cursor=======================
+
+1. getting firstname, lastname, phonenumber From Customer table and show data using cursor 
+
+
+DELIMITER //
+CREATE PROCEDURE cr_getAllCustomers()
+BEGIN
+DECLARE cr_first_name varchar(45);
+DECLARE cr_last_name varchar(45);
+DECLARE cr_phone_number varchar(45);
+DECLARE v_finished integer DEFAULT 0;
+DECLARE c1 CURSOR FOR SELECT c.first_name,c.last_name,c.phone_number FROM customers as c ;
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_finished=1;
+OPEN c1;
+    get_cust: LOOP
+    FETCH c1 INTO cr_first_name,cr_last_name ,cr_phone_number;
+    IF v_finished=1 THEN
+    	LEAVE get_cust;
+    end IF;
+    SELECT cr_first_name,cr_last_name,cr_phone_number;
+    END LOOP get_cust;
+CLOSE c1;
+END //
+DELIMITER ;
+
+
+
+
+

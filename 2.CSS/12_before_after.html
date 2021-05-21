@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Before and After Pseudo Selector</title>
+    <style>
+        body {
+            color: white;
+            margin: 0px;
+            padding: 0px;
+        }
+        
+        header::before {
+            content: "";
+            background-image: url('https://images.unsplash.com/photo-1611379437239-a9b47a1f97ac?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=900&ixid=MXwxfDB8MXxyYW5kb218fHx8fHx8fA&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1600');
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.8;
+        }
+        
+        section::before {
+            content: "This is Simple Flex website and its Before Text";
+        }
+        
+        section::after {
+            content: "This is Developed By Deepinder Singh and its after Text";
+        }
+        
+        header {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .navigation {
+            font-size: 20px;
+            display: flex;
+        }
+        
+        li {
+            list-style-type: none;
+            padding: 34px 24px;
+        }
+        
+        section {
+            height: 344px;
+            display: flex;
+            flex-direction: column;
+            margin: 3px;
+            align-items: center;
+            /*make text center between horizonatal direction */
+            justify-content: center;
+            /*make text center between vertical direction */
+        }
+        
+        h1 {
+            font-size: 4rem;
+        }
+        
+        p {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+
+        <nav class="navbar">
+            <ul class="navigation">
+                <li class="item">Home</li>
+                <li class="item">About</li>
+                <li class="item">Services</li>
+                <li class="item">Contact us</li>
+            </ul>
+        </nav>
+    </header>
+    <section>
+        <h1>Welcome to the coding world</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit, alias, officia rem enim saepe modi dolorum aliquam, dolores illo officiis fugit totam? Ducimus commodi nostrum non eveniet! Minima repellendus ducimus fugit omnis! Numquam, asperiores.</p>
+    </section>
+
+
+</body>
+
+</html>

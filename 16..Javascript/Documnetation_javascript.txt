@@ -1,0 +1,114 @@
+Client Side script always Stroe first in the computer then it run 
+
+Why we learn Javascript ?
+	1. Javascript is a event based Programming Language {click, double click, mouse hover, mouse out, drag drop etc}
+
+==============================
+Benifit of Javscaript
+
+Web development 
+1.jquery 
+2. Angular js
+3. React js
+4. Vue js
+5. Node js	
+
+Desktop App Devlopment 
+Electron Js
+
+
+Mobile App Development 
+1. Angular Js
+2. React Js
+3. Vueb JS
+4. React Native 
+5. Node js	 	
+==================================================================================================================================================================
+1. Internal Javascript 
+	<script>	
+
+	</script>
+
+	a. near Head 
+	b. any where in the body {best is before the body tag close}
+
+	Always use second option beacuse it wil speed up your web page
+
+
+2. External Javascript 	
+	<script src="path"></script>
+
+==================================================================================================================================================================	
+write in html 
+	document.write('Deepinder Singh');
+
+Type of variable 
+	1. var 
+	2. Let 
+	3. Const	: value cannot be change
+
+	In 'var' we can redeclare variable again and we will not get any kind of error but In 'Let' we cannot redecaler the variable 	
+
+===============================================================================================================================================================
+Differernt Data type 
+	1. String 					var x ="Hello World"
+	2. Number 					var x = 25
+	3. Boolen 					var x = true
+	4. Array					var x = ['html','css','js']
+	5. Object 					var x = {first:'Deepinder',last:'Singh'}
+	6. Null 					var x = null
+	7. undefined 				var x 
+
+1. you can check the data type by : typeof 
+2. in javascript array and object both are concidered as object 
+=============================================================================================================================================================
+Console Window in Chrome 
+
+	1. cosnole.log('Print Any thing');
+	2. console.table([1,2,3]);					// print in tabular form
+	3. console.error('Print Error');
+	4. conosle.warn('Print warning');
+	5. console.clear();							// to clear all the screen
+	6. cosole.timeEnd();						// tell the execution time
+=============================================================================================================================================================
+1. .innerHtml 		// give text + html tags
+2. .innerText		// give text only
+
+=============================================================================================================================================================
+various Events in javascript 
+
+	1. click 				: onclick
+	2. double Click 		: ondbclick
+	3. Right Click 			: oncontextmenu
+	4. Mouse Hover 			: onmouseenter
+	5. Mouse out 			: onmouseout
+	6. Mouse Down			: onmousedown
+	7. mouseup				: onmouseup
+	8. keypress				: onkeypress
+	9. keyup				: onkeyup
+	10. load				: onload
+	11. unload				: onunload
+	12. resize				: onresize
+	13. scroll				: onscroll
+===========================================================================================================================================================	
+creating arrays 
+	1. var a = []
+	2. var a = new array();
+
+
+	Array funtions 
+		1. sort()
+		2. reverse()
+		3. pop()					delete from last
+		4. push()					add in last
+		5. shift()					delete from first
+		6. unshift()				add in first
+		7. concat()					merge 2 or more arrays
+		8. join()					marge 2 or more arrays
+		9. Slice()					means delete particular value from array (like slice from pizza)
+		10. splice()				means add value any where in the array (means any index)
+		11. isArray()				to check the value in the array
+		12. indexof()				get the index of particular value from the stating of array {if the value is not match then we get -1}		 
+		13. lastIndexOf()			get the index of particular value from the last of arrat {if the value is not match then we get -1}
+		14. includes()				search any kind of value from array 
+		15. some()					check the particular value or greater than that value 

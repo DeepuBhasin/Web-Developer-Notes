@@ -1,0 +1,54 @@
+what is ajax
+	AJAX is a technique for creating fast and dynamic webpages 
+
+	Asynhcronous javascript and xml 
+
+without ajax	
+	submit -> phpfile(PHP code + mysql code) -> database
+
+with ajax
+	submit -> javascript ajax code -> phpfile(PHP code + mysql code) -> database
+
+
+javascript/jquery -> client Side language
+php and mysql 	  -> server side language 
+
+
+========================================= Syntax ======================================================
+ajax with jquery 
+
+	$.ajax({
+		url:'fileName.php',
+		type:'POST/GET',					// get is default value 
+		data:string/array/object			// with kind of data we are sending along parameters 
+		success : function(data){
+			
+		}
+	});
+
+=================================== jQuery serialize() Method =========================================
+
+ 	$(selector).serialize()				// this function convert input filed into a string like fname=valeu&lname=value 
+
+ 	$(selector).serializeArray()		// this function convert input field into array 
+												
+											[
+												0: {name: "sname", value: "okok"}
+												1: {name: "sage", value: "2"}
+												2: {name: "scity", value: "ijij}
+											]	
+
+
+
+
+
+=========================================== POST ======================================================
+
+
+$.post(
+	'file.php',
+	string/object,
+	function(result){
+
+	}
+);

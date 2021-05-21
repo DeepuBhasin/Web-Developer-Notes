@@ -1,0 +1,864 @@
+================================ Basic Information ===========================================================
+1. What is mysql 
+	it is Database management system( Simple words it is a Software)
+
+2. what is Database
+	a. Database is a collection of data stored in a format(tabular Form) that can easily be accessed and related Data
+	b. Database store infromation in a organised manner in the form of a table 
+	c. A database management system can be used to handle the data in a database 
+	d. A database can contain duplicate records in tables if the database is not normalized and table are not indexed 
+	e. You can normalized the database and index the table to eliminate redundancy and enhance the speed of data search and interval operations 
+
+3. What is DBMS
+	a. A database store data in a structural format. A Database managment is responnsible to store, access and delete data fro ma database in short manner it is 	a systme that can be used to handle the data in a database 
+	b. is a software program that stores and manage databases 
+	c. is Responsible for managing the various database opertaions 
+		1. Adding 
+		2. accessing 
+		3. Processing of Data
+
+	d. Helps to manage data in two ways 
+		1. by providing an interface to manage data (php myadmin)
+		2. by supporting connectivity to the other application that can be used to manage data (php mysql quries) 	
+	e. Mysql is an open source RDBMS, it was developed and distributed by MySql AB (orginization), which is now owned by oracle 	
+
+		Data send from Client -> DBMS -> Database and vice versa
+
+		means we cannot deal direct to the database so DBMS help here to deal with database 
+
+4. Difference between DBMS and RDBMS
+	1. RDBMS performs the same task of storing and managing data
+	2. One of the key difference between DBMS and RDBMS is that RDBMS splits large amount of data into smaller tables and establish relationship bwteen the tables
+	3. DBMS store large amount od data in a single table. Also the RDBMS is based on a realtional model where as DBMS is not 
+	
+	two types of Database 
+		a. Relational : data is stored in tables form and have relations with each other 
+		b. NoSql : data is stored in document based 
+
+5. Scalabilty and limits 
+	1. Handles large database that have upto 5 billions rows 
+	2. allows upto indexs per table 
+	3. allows upto 16 keys per table {primary key , forigen keys etc}		
+
+6. Case sensitive conventions 
+	1. Case sensitivity of database, tables, and triggers names depends on the opearting system
+	2. if the underlying operating system is case senstive, then the names of database, tables and triggers 
+	3. for example, Microsoft windows is not a case sensitive and so database, tables and triggers names in mysql running on the microsoft Windows are not 			case-sensitive
+	4. Linux is case sensitive and so database, tables and triggers names under a linux intallation of mysql are case-sensitive
+	5. This is because these object are stored as files on the file system
+
+6. What does Constraints means
+	restriction on Column
+
+7. Veiw: supports views where data is copied into temporary or virtual tables during processing. this features ensures data security 	
+
+8. Batch means execute multiple queries for example inserting multiple query using comma(,)
+
+9. Select query always gives result in the form of result set 
+	
+	Select is use to Display Data
+
+10. When use relation ship of primary key and foreign key then always us innnodb to create realtionships functions(query will not work in insert case and update case if error occure) 
+
+11. When we delete foreign key from a table ,you will notice there will be a key sign that will be index key sign not the foreign key sign on that column 
+
+12. Mysql is not Case-sensitive
+
+13. Ctrl + Enter To execute the Query 
+
+14. To develop create query of excisting table just export that table and copy create query from it
+
+15. Comment in Mysql /*  Here is Your Comment */
+
+16. We use Gregorian Calender 
+
+17. EXPLAIN SELECT * FROM Table_name WHERE column=data	
+============================================ Commands ======================================================
+Datebase
+
+1. Create Database 
+	->CREATE DATABASE my_new_db;;	
+ 
+2. Show Database
+	->SHOW DATABASES;
+
+3. Use Databse 
+	->USE my_new_db;	// this command is used to select the database to perform the task on it
+
+4. Get currently active Database 
+	-> USE my_new_db;
+	   SELECT DATABASE();	 	
+=============================================  Tables ================================================================
+Tables 
+
+1. Get all the table of selected Table
+	USE my_new_db;						// select the database 
+	SHOW TABLES;						// showing all the tables of currently active database
+
+2. Create table 
+	USE my_new_db;
+	CREATE TABLE employee(
+		id int PRIMARY KEY AUTO_INCREMENT,
+		Employee_name varchar(50) NOT NULL,    
+		age int NOT NULL,
+		gender varchar(50) NOT NULL,
+		desigination varchar(50) not null,
+		salary int NOT null
+	)ENGINE=INNODB;
+
+3. Insert 
+	a. Insert into 	// this statment is used to insert new records in a table 
+	b. insert into have two ways to insert 
+		1. insert into table(column_name1,column_ name2...) values(value1,value2,....)	
+		2. insert into table values (value1,value2,.......)
+
+Note : we can insert rows in a batch 
+
+================================================================================================================================
+
+2. NOT query 
+	-> Select * from table name where Not column(age)>=10    means we will get result lest then 10 
+
+3. IN query (you can use this command instead of OR query)
+	-> SELECT * FORM TableName where age=18 or age=21
+
+(Solution)-> SELECT * FROM TableName where age IN (18,21)	
+
+	-> Select * from tableName where age=18
+
+(Solution)-> SELECT * from TableName where age IN(18)		
+	
+	-> SELECT * FORM TableName where age<>18 or age<>21
+
+(Solution)-> SELECT * FROM TableName where age NOT IN (18,21)		
+
+4. Between Query(you can use this command instead of AND query)
+	a. Basically use for Range
+	b. best use for Date Range Concept
+
+	-> SELECT * FROM TableName where Date>18 and age<21
+
+(Solution)-> SELECT * FROM TableName where age Between 18 and 20	 
+
+	
+
+(Solution)-> SELECT * FROM TableName where age NOT Between 18 and 20	
+
+
+SELECT * FROM personal where name between 'a' and 'k';
+
+	it will select all names which start from a to k match with first Character of the name  
+=========================================================================================================================================================
+5. LIKE Query
+	a. is commonly used to select data based on patterns )
+	b. Like operator is often used in the where clause of the Select Statment
+	c. Like operator in the right way is essential to increse the query performance 
+
+	1. SELECT * FROM tableName where name LIKE 's%' ==> Select those chracter which start with s letters after that select all 
+
+	2. SELECT * FROM tableName where name NOT  LIKE 's%'
+
+	3. SELECT * FROM tableName where BINARY name LIKE 's%' (to make case-sensitivity)
+
+	wildCard Characters 
+		a. % (Percentage sign)-> % wildcard allows you to match any string of zero or more characters 
+		b. _ (Underscore)-> 	_ wildcard allows you to match any single charcter
+
+		Example 
+			1. LIKE 'a%' start with a 
+			2. LIKE '%a' End with a
+			3. LIKE '%am%' Have 'am' in any position 
+			4. LIKE 'a%a' Hav Staring with a and end with a
+			5. LIKE 'a%m' Start with 'a' and Ends with 'm'
+			6. LIKE '_a%' 'a' in the second position 
+			7. LIKE '__a%' 'a' in the third Position
+			8. LIKE '_oy' 'o' in the second and 'y' in the third position
+			9. LIKE '_am%' return those character which conatain second and third 
+			10. LIKE 'a___' return word in which starting with a after that have 3 characters 
+			10. LIKE '_a__' return word in which starting with anyword after that a after that two anyword
+
+	for search 
+	
+	SELECT * FROM table name where LIKE '%titleName%' or Like '%Body%' or LIKE '%Any Thing%';		
+
+6. REGEXP (Regular Expression)
+	it is advance over like query for search
+	1. SELECT * FROM TableName where name REGEXP Pattern 
+
+
+7. IS NULL
+	-> SELECT * FROM TableName Where ColumnName IS NULL;
+
+	-> SELECT * FROM TableName Where ColumnName IS NOT NULL;
+===================================================================================================================================================
+8. LIMIT and OFFSET
+
+	SELECT * FROM TableName LIMIT 0,3;
+
+			or
+
+	SELECT * FROM tablename Limit 3 offset 0		
+
+
+	it means starting from 1 with only 3 records returns means out put will be 1 ,2 , 3 
+====================================================================================================================================================
+
+9. Aggregate Functions or scalar function (
+	a. are functions perform a calculation on a set of values and return a single value and 
+	b. also are functions operates on a group of values and return a single value a s the final result
+	c. mysql provides many aggregates functions that include avg, count, sum, min, max etc. an aggregates function ignores null values when it performs calculation except for the Count Function  )
+	1. Count 
+	2. Max 
+	3. Min
+	4. Sum
+	5. Avg 
+	6. Count(Distinct column_name)	
+
+10. Commit and Role back 
+	a. by default in database commit is enable. 
+	b. Commit means Save all the changes 
+	c. commit and role back only works on insert, update, delete
+==========================================================================================================================================================
+Mysql constraints are used to specify rules for data in a table
+
+
+11. Constraints (restriction on Column)
+	a. Not null
+	b. Unique (can store null value also but in primary key not possible)
+	c. Default (is used to provide a default value for a column )
+	d. Check (for validate data for a column or a group of columns before insert and update)
+	e. Primary Key (only one in whole table)
+	f. Foreign Key	(can be mutiple in a table) 
+	g. Commposit Key (when make multiple column make a primary key)
+
+	note : 1. when we use primary key -> unique, not null, index get automatically
+		   2. when we use unique -> index get automatically 
+==============
+1. Unique
+		a. normal way 
+			-> create table_name (
+				column_name data_type unique,
+			)
+		
+		b. Alter Unique constraint (add)     -> Alter Table table_name Add Constraint constraint_name Unique(Column_list)
+
+==============
+2. Not Null : the NOT NULL constraint is a column constraint that forces the values of a column to non-null values only
+		
+		a. column_name data_type NOT NULL;
+
+		b. alter (Add) - > Alter table_name CHANGE old_column_name new_column_name data_type not null;
+
+		c. alter (Delete) - > Alter table_name CHANGE old_column_name new_column_name data_type null;
+
+===============
+3. (Check) {it is not working in mysql but we can use in triggers}
+
+		-> create table persons (age int check(age>=18));
+===============
+4. Default : 
+		a. the default constraint is used to provide a default value for a column.
+		
+		b. the default value will be added to all new records if no other values is specified.	
+
+		1. -> create table_name (
+				column_name data_type DEFAULT 'any_value',
+			)
+
+		2. Alter Table (Add) : Alter table table_name alter column_name SET DEFAULT 'any_value'; {while typing this query u will get error but query is perfect}
+		
+		3. Alter Table (Remove) : Alter table table_name Alter column_name DROP 'value which u provided'; 
+			{when ever you delete the deafult value database add not null to the column}
+
+
+
+==============
+5. Primary key and Foreign_key : 
+		
+		a. A primary key is used to uniquely identify each row in a table 
+		b. The primary key does not allow blank or NULL values for the column 
+		c. is unique for each record 
+		d. primary key is integer 
+		e. only one primary key is allowed in one table 
+
+
+	Foreign_key 
+		a. A foreign key is used to setablish relationship two tables 
+		b. A foreign key is a column in a table that has a corresponding primary key column in a different table 
+		c. The main goal of a forgien key is maintain referential integrity of the data 
+		d. you can define a column as a forigen key only if both that tables have Innodb as their storage engine.
+		e. By default, Mysql assigns the Myisam storage engine when you create a table 
+		f. A storage engine engine is a software modules that a database managament systen uses to create, read, update, data from a database.
+		g. foreign key + primary key make referential intigrity 
+		h. the advantage of using Innodb as the storage engine are : Cancels insert and update commands that attempt to add records to the child table without 		having a corresponding record in the parent table  		
+		i. When ever you add primary key or foreign key index with these keys get automatically added 
+
+(Foreign Key and Primary Key)
+	->create table customer(
+		c_id int Primary key,
+		c_name varchar(50) not null,
+		c_age int not null,
+		c_address varchar (500)not null ,
+		c_city varchar(50) not null
+		)engine=innodb;
+
+		->Alter Primary key (ADD) -> Alter Table Table_name ADD PRIMARY KEY (column_name)
+
+		->Alter Primary key (DELETE) -> Alter Table Table_name DROP PRIMARY KEY;
+
+	-> create table order_tl(
+		order_id int Primary key,
+		order_item varchar(50) not null,
+		order_quantity int not null,
+		customer id int,
+		Constraint FK_CustomerOrder FOREIGN KEY(customer_id) REFERENCES Customer(c_id)
+		)engine=innodb;	
+
+		->Alter FOREIGN key (ADD) -> Alter Table Table_name ADD Constraint FK_CustomerOrder FOREIGN KEY(customer_id) REFERENCES Customer(c_id)
+
+		->Alter FOREIGN key (DELETE) -> Alter Table Table_name DROP FOREIGN KEY foreign_key_name;
+
+
+
+================================================================================================================
+1. The alter table command creates a temporary copy of the original table, on which the alteration is performed 
+2. Mysql uses this features as a security measure to prevent data loss in case the table modification fails 
+
+
+
+12. Alter 
+
+(Key)						-> Alter Table table_name Add primary key (column Name);	
+							-> Alter Table table_name Add Constraint Foreign_key_nam Foreign key(city) References city (cid)
+
+
+(delete Primary Key) 			 -> Alter Table table_name Drop Primary Key  
+ 			
+
+(delete froeign Key)			 -> Alter Table table_name Drop Foreign key name_of_key
+ 			
+
+(Add Column after column)		 -> ALter Table table_name Add Column column_name data_type constraints after column_name
+
+
+(Add Column at Beginning)   	 -> Alter Table table_name Add Column column_name data_type Constraints First;
+
+
+(Modified Data type)			 -> Alter Table Table_name Modify Column column_name Datatype constraints
+
+
+(Delete Column)					-> Alter Table Table_name Drop Column column_name
+
+
+(Add Not 					-> Alter Table table_name change old_column_name new_column_name data_type contraints
+null Column)
+ &	
+(Rename table)				-> Alter Table old_table_name Rename new_table_name
+							-> Rename Table old_table_name To new_table_name 
+
+(Rename Column)				-> Alter Table table_name Change old_column_name new_column_name datatype constraint
+				
+
+(Deafult)		-> Alter table table_name Alter column_name SET default 'Unknown'
+
+(Engine)		-> Alter Table table_name Engine=innodb
+
+(procedure)		->Alter Command Not work on Store Procedure
+
+(Auto Increment) ->Alter Table table_name Auto_Increment=initial value (eg : 1, 10,100, etc)
+
+============================================================================================================================================================
+
+13. Group By (best in urdu lecture)
+	a. You can use GROUP BY to group values from a column and if you wish, perform calculations on that column 
+	b. The GROUP BY statement is used with aggregate functions to group the result-set by one or more columns.
+	c. you can use aggregate funstions like count,sum,avg etc functions on the grouped column 
+	d. we can select only those columns which were present in group by command (important) { means group columns should be same as select columns }
+
+
+								columns,aggregate function
+	basic syntax is : SELECT gender,city,Count(*) from table_name group by gender,city 
+
+
+	-> SELECT sum(columns) From table_name where condition GROUP BY column_name order by column name 
+			
+			->	example select city,sum(salary) from table_name group by city order by city asc;
+			->	example select desgination,city,gender,sum(salary) from table_name group by gender,city,designation order by city asc;
+
+(More Than two columns) ->example select city, gender, sum(salary) from table_name group by city,gender
+
+===========================================================================================================================================================
+
+14. Having (best in urdu)
+	
+	1. Having group is used to specify conditions like where clause 
+	2. but Having clause is used with group by command 
+	3. we cannot use where clause with group by command
+	4. where clause is used for filtering rows and having clause is used to filtering groups 
+	5. where clause does not work with aggregates functions like sum, min, max, count, avg
+	6. if we use where clause then we have to use where clause before group
+	7. from the point of view of performance having is slower than where and should be avoided when possible 
+	
+	-> SELECT columns FROM  table_name Group by column_name(s) having Condition 
+	
+	->	example select city,sum(salary) from table_name group by city order by city having city in ('city_1','city_2');
+
+	->	example select city,sum(salary) from table_name group by city order by city having sum(salary)>3000;
+
+	-> SELECT columns FROM  table_name Group by column_name(s) having Condition order by column name 
+
+(if where to use instead of having )
+
+->example SELECT city sum(salary) FROM table_name where city in('city_1','city_2') group by city (select city,sum(salary) from table_name group by city order by city having city in ('city_1','city_2'))		
+
+where condition is filtering first selected column then group by query execute
+
+(if use where and having )
+
+->example SELECT city sum(salary) FROM table_name where city in('city_1','city_2') group by city having salary >3000 
+
+where condition is filtering first selected column then group by query execute and then having condition		
+
+
+======================================================================================================
+15. Distinct 
+	-> SELECT Distinct column_name from table name
+=====================================================================================================
+16. Describe (get Structure of table)
+	->Describe Table_name	
+=======================================================================================================
+17. Show 
+(Database)	-> Show Databases
+			-> Show Databases like 's%'
+	
+(Tables)	->Show Tables 
+			->Show Tables from Database_name 
+			->Show Tables from Database_name like 's%'
+
+(Columns)	->Show COLUMNS from table_name
+			->SHOW COLUMNS FROM DatabaseName.TableName (or SHOW COLUMNS FROM connect_table FROM rfi_tags)
+			->Show COLUMNS from table_name Like 's%';
+
+(Index)		->Show Index From table_name From Database Name
+
+(Procedure) ->Show Procedure Status
+			->Show Procedure stauts where name like 'pattern'
+
+(Triggers)  ->SHOW TRIGGERS
+
+========================================================================================================================================
+18. Joins 
+	a. Joins create a virtual table by combining the fields of the both tables that satisfy the query for  		both the tables 	
+
+
+	1. Inner Join 
+	2. Left Join (left outer join)
+	3. Right Join
+	4. Self Join 
+	5. Full Outer Join(union operator)
+
+(Delete query using join : this command will deletes matching rows from the tables specified in the form clauses and before the using clause)
+	
+		this will delete from student table only 
+	->	DELETE from Student USING teacher INNER JOIN student on teacher.t_id=student.t_id
+
+		
+
+(1. Union : means mearging two result with each others and also remove duplication values)
+	
+	SELECT a.*,b.* from a left join b on a.id=b.id 
+		union 
+	SELECT a.*,b.* from a right join b on a.id=b.id	
+
+(2. union all : means margigng two result with each others and also include all duplicate values)
+
+Note : 	1. when you use union and union all your number of columan should be same in both queries and also column name should same AND exist in both tables
+		2. We can use Sorting in union all also 
+		3. We can use Where clause in union all also 
+		4. The Columns must also have similar datatype 
+		5. The Columns in each Select statement must also be in the same order 
+===========================================================================================================================================================
+
+19. Store Procedure 
+
+	a. Store procedure is a collection of sql statements that are stored in the database 
+	b. A store procedure can contain business logic (where clause), which is one of the key aspects that differentiate  stored procedures from views
+	c. A strored procedure can accept parameters, and you can set variables, write if statements, etc with 		in a stored precedure
+	d. Same as functions
+	e. best use when you are using thousands of query for result sets	
+	f. A stored procedure is a prepared SQL code that yo can save, so the code can be reused over and over agin 
+	g. so if you have an sql query that you write over and over again, save it as a stored preocedure and then just call it to execute it
+
+	1. Delimiters are called terminates which terminates the line
+	2. In strore procedure ';'(smicolon) Delimeters not works 
+	3. We can use delimeters // , $$ and any other symbols
+	4. Parameters Modes are IN,OUT,INOUT 
+
+
+	Syntax
+	------
+
+	1.	Delimiters //						// for store procedure we are setting delimetrs which is '//'
+		Create Procedure sp_name(p_1 int)
+		Begin
+			...... Code goes here .......;
+		End //								// here the work of '//' deleimter is end 
+		Delimeters ;						// after that we are setting delimeters to ; default 
+
+		why we using this '//' because if we do not use this '//' the code will run  from starting to ';'(...... Code goes here .......;) this and 'END' will not execute so our store procedure will not work because 'end' in the part of store procedure 
+
+	2. Call sp_name();	 
+
+	3. Drop Procedure sp_name;
+
+
+
+
+	a. Store Procedure with input(assignment)
+	b. Store Procedure with if else condition
+
+
+		DELIMITER //
+		CREATE PROCEDURE sp_getEvenOdd(IN num int)
+		BEGIN
+		IF num%2=0 THEN
+		SELECT 'number is even ' as result;
+		ELSE
+		SELECT 'number is odd ' as result;
+		end IF;
+		end //
+		DELIMITER ;
+
+		call sp_getEvenOdd(20);
+
+	c. Store Procedure with out(assignment)
+
+		DELIMITER //
+		CREATE PROCEDURE sp_getEmpCount(out CountEmployees int)
+		BEGIN
+		SEKECT Count(*) INTO CountEmployees From employess_table 
+		end //
+		DELIMITER ;
+
+		call sp_getEmpCount(@count);
+		SELECT @count;   or SELECT @count as count;
+
+	d. Store Procedure with both parameters 
+		
+		DELIMITER //
+		CREATE PROCEDURE sp_getSum(IN num1 int, IN num2 int, OUT result int)
+		BEGIN
+		set result=num1+num2;
+		END//
+		DELIMITER ;	
+
+		CALL sp_getSum(10,20,@result);
+		SELECT @result as sum;
+
+	e. In Parameters use passby value Concept (varibale value not Change)
+	f. Out Parameters use pass by refernce concept 	(variable value Change)
+==============================================================================================================================
+20. AutoIncrement 
+	1. insert into table_nam values(null,'value1','value2');
+===============================================================================================================================	
+
+21. Sub Query(nested thing)
+	->A Mysql subquery is called an inner query while the query that conatins the subquery is called an outer query. A subquery can be used anywhere that expression is used and must be closed in 	parantheses
+	-> When a Select query is placed inside another query, then the inned select query is said to be a 	subquery 
+	-> Also know as nested query 
+	->embeded within the where clause
+	->A subquery is used to return data that will be used in the main query as a condition of further restrict the data to be retrieved (sub query execute first)
+	->A Subquery can have only one column in the select clause, unless multiple columns are in the main query for the subquery to compare its selected columns 
+	->An order by command can be used in a subquery, as well as the main query can use an order by
+	->sub queries that return more than one row can only be used with maultiple value operatores such as the in operator 
+	->we can use subquery with two tables also   
+
+
+
+
+
+	Example : 
+		1. select * from employee_details where id in/not in (select from employee_details where salary>16000)
+(Best 
+and 	2. SELECT * From employee_details where salary > (SELECT avg(salary) From employee_details)
+practical)	
+
+
+In this query your employee_details1 tables should be created first with same number of columns and Column Name 
+		3. insert into employee_details1 select * from employee_details where id in (SELECT id From employes_details )
+
+(rfid database)		
+		4. INSERT into device_table1 SELECT * FROM device_table WHERE device_id IN (SELECT device_id FROM device_table WHERE device_name LIKE '%out%');
+
+		5. SELECT * FROM employee where dept_id IN (SELECT dept_id from department where dept_name ='H-R')
+			Same like (SELECT employee.* From employee Inner join department ON department.d_id=employee.d_id and where department.dept_name='H_R') 
+
+		6. SELECT * FROM employee where dept_id IN (SELECT dept_id from department where dept_name IN 			('H-R','Accounts'))
+			Same like (SELECT employee.* From employee Inner join department ON department.d_id=employee.d_id and where department.dept_name='H_R' or department.dept_name='Accounts') 	
+
+Note : in query we can also use = and != in place of IN and NOT IN operator 
+ 
+============================================================================================================================================ 
+
+22. Built In Functions 
+	
+	1. Add or Subtarct in Date/Time
+		a. AddDate('2020-12-09',20) :: add 20 days in the date 
+		b. Date_add('2020-12-09',INTERVAL 1 year) :: add 1 year 
+		c. Date_sub(CURRENT_TIMESTAMP(),INTERVAL 1 Day) :: subtract 1 Day
+		d. AddTime('10:20:20','01:02:35') :: add Time
+		e. Date_sub(CURRENT_TIMESTAMP(),INTERVAL 1 hour) :: subtract 1 hour
+		f. subTime('10:20:20','01:02:35') :: subtract Time
+		
+	2. CURDATE()/CURRENT_DATE() :: To print Curent Date from your system
+	3. CURTIME()/CURRENT_TIME() :: To Print Current Time from your System 24 hour format
+	
+	4. Complte Date and Time
+(best)	a. CURRENT_TIMESTAMP() :: TO print Current Date and Time from Your system YYYY-MM-DD HH:MM:SS
+		b. Now() :: return the Current Date and Time zone YYYY-MM-DD HH:MM:SS
+		c. LOCALTIME() :: TO print Current Date and Time from Your system YYYY-MM-DD HH:MM:SS
+		d. LOCALTIMESTAMP(); TO print Current Date and Time from Your system YYYY-MM-DD HH:MM:SS
+	
+	5. Extract Date/time
+		a. Date(Now()) :: Print Only Date
+		b. Time(Now()) :: Print Only Time
+(Best)	c. Extract(day FROM CURRENT_TIMESTAMP()); extract particular part from given date 
+			1. Day
+			2. Month
+			3. Year
+			4. Hour
+			5. Minute
+			6. Second	
+
+			
+	6. datediff('2020-03-28','2020-03-15') :: getting Differenec Between two dates
+	7. Timediff('10:10:10','05:05:05') :: getting Differenec Between two times
+	
+	8. Date_Format(current_date(),'%M-%D-%Y')/Date_Format(NOW(),'%M-%D-%Y') :: specified date in a 				particular format
+	9. Time_Format(current_Time(),'%h:%i:%s') :: specified Time in a particular format
+		
+		1. %a - abbrevaited week days name 
+		2. %f - Microseconds 
+		3. %H - Hours (00-23)
+		4. %h - hours (00-12)
+		5. %M - Month Name (january -December)
+		6. %m - Month numeric (01-12)
+		7. %i - minuts 
+		8. %p - AM or PM
+		9. %s - Seconds 
+		10. %D - Date in wors 
+		11. %d - Date in numbers 
+		12. %Y - Year, numeric four digit
+		13. %y - Year, Numeric two digits 
+
+	10. Day(CURRENT_DATE())/Dayofmonth() :: Day function returns the day of the month for the specified 		date (1-31)
+	11. DayName(CURRENT_DATE())	:: return the day Name 
+	12. month(CURRENT_DATE())	:: Return the Month Number
+	13. monthName(CURRENT_DATE()) :: Return the Month Name
+	14. Year(CURRENT_DATE());
+	15. Week(CURRENT_TIMESTAMP(),mode) :: return the week {mode value : 0(sunday),1(monday)}
+	
+	16. Hour(CURRENT_TIME()) :: return the Hour From Time
+	17. Minute(CURRENT_TIME()) :: return the Minute From Time
+	18. Seconds(CURRENT_TIME()) :: return the Seconds From Time
+	
+	19. sec_to_time(3600) :: convert into seconds into HH:ii:ss
+	20. time_to_sec(current_Time()) :: convert into seconds into HH:ii:ss
+
+	21. DayofYear(CURRENT_TIMESTAMP()) :: return the day between 1-366
+	22. LAST_DAY(CURRENT_TIMESTAMP())  :: Return the last day of the given date
+
+	23. concat('FirstName',' : ',' Deepinder') :: use for Concatination
+	
+	24. char(65,65,67,68,69,70,71)	: return Key word ABCDE (ascii Table)
+
+(Concept)	Char A stored at 65 which is Decimal Number then convart in to Binary Number
+
+	25.	char_length('abc')/length('abc'); return the character length
+
+	26. lcase('DEEP') :: convert into lower Case
+	27. ucase('deep') :: convert into upper case
+
+	28. Bin(8) :: Convert into Binary
+
+	power->	 5  4 3 2 0					
+(Concept)	32 16 8 4 1
+
+	29. SELECT ltrim(rtrim('              Deepinder                '));    :: Trim    Trim()
+
+	30. SELECT CURRENT_USER() :: return user and Host name
+	31. User Database; SELECT DATABASE() :: return the current Active Database
+	32. SELECT Version();  :: Returns the current version 
+======================================================================================================================
+23 Indexes
+	1. Indexes support faster data storage and retrival capabilities
+	2. if there are no index to help the query then query engine performs a entire table scan
+	3. indexes in a database are similar to the indexes in books 
+	4. indexes in a database use the same concept 
+	5. You can define indexes on a field in a table within a database  
+	6. When we place index on column then sorting of table exist by default 
+
+
+
+(Before Query)	EXPLAIN SELECT * FROM Table_name WHERE column=data	
+
+(creating Indexes)
+	1. You can use indexes to improve the serach characteristics of the database
+	2. indexing enables the search operations on a database to be faster 
+	3. Mysql creates separates files to store and track indexes when you define an index for a table 
+	4. Mysql allows upto 64 indexes for each table 
+	5. each index allows upto 16 columns to be included 
+	6. if you apply primary key or unique on any columns then an index is automatically created
+	7. Never use on small tables 
+	8. Never use on the column which have null values 
+
+(You can index the field that)
+	1. is used in the where clause of query 
+	2. is used in order by clause of the query
+	3. is having a unique value 
+	4. if you do not specify an index key, mysql automtically indexes the primary key 
+
+	Syntax 
+(create)	CREATE INDEX index_nam ON table_name(column1,column2,......columnN)
+
+(show)		SHOW INDEX FROM table_name
+
+		
+Delete 		1. -> Drop Index index_name on Table_name 
+			2. -> ALter Table table_name Drop Index index_name 
+
+	
+24 Transactions 
+	1. A transaction is a sequence of one or more sql statements that together form a logical unit of work 
+	2. Every statement that forms a trsansaction executes certain portions of an operation 
+	3. all the statments must be complete successfully to conclude the operation 
+	4. A trasaction must pass the Acid Test 
+	5. By default all quries are commit 
+	6. When we use start transaction it will off auto commit mode 
+	7. If one or more than one query fail in multiple quries then no queries will be commit beside you have 		written Commit at the end 
+
+
+
+(Example 1)		START TRANSACTION;
+				DELETE FROM table_name;
+
+				SELECT * FROM table_name;
+
+				ROLLBACK/Commit;
+
+				SELECT * FROM table_name;
+
+(Example 2)
+			START TRANSACTION;
+			UPDATE device_table1 SET device_name=1 WHERE device_id=2;
+			SELECT * FROM device_table1;
+			ROLLBACK/Commit;
+			SELECT * FROM device_table1;
+
+
+A transaction Must pass the Acid Test
+	A - Atomic 
+	C - Consistency 
+	I - Isolated 
+	D - Durabilty 
+
+(Atomic Means)
+	1. If the trsansaction has many operations then all should be committed or rollback. It means all or None. It manages by transaction manager 
+
+	Example : 2 Accounts 
+		
+		a. A trsansaction has to be atomic by nature, means either none of the tasks in a transaction is executed or all of them are 
+		b. In case of failure after a few statments are processed, the action of the processed statements must be rolled back 
+
+(Consistent)
+	1. A transaction must maintain consistency of the database even if there is a failure 
+	2. A = 3000 , B= 4000 = 7000	before transaction
+		A=3000-1000 = 2000			After Transaction 
+		B=4000+1000 = 5000
+
+(Isolated)
+	1. A transaction must work independently without affecting other tranacton 
+	2. No Transaction can modify data from other transactions until those transactions have executed 			completely 
+
+(Durable)
+	1. After a transaction is completed, all the modification done by it must be saved  	
+
+
+25. IF/Else Statement 
+ 	
+	 Select column1, Column2 IF(condition, True result, False Result) as alias_name From table_name
+
+(rfi tags) 
+	Example : SELECT device_name, IF(device_id>2,'Good','Fudu') as myColumn FROM device_table1
+
+
+26. Case Clause (yahoo baba)
+(syntax)	Select Column1, Column2 
+			Case
+				When condition1 Then result1
+				When condition2 Then result2
+				When condition3 Then result3
+				When condition4 Then result4
+				Else result 
+			End as alias_name
+			From table_name		
+
+
+(example)1.		Select id, name, percentage 
+				Case
+					When percentage>=80 and percentage<=100 Then 'Merit'
+					When percentage>=60 and percentage<80 Then 'First Division'
+					When percentage>=45 and percentage<59 Then 'Second Division'
+					When percentage>=33 and percentage<45 Then 'Third Divison'
+					When percentage<33 Then 'Fail'
+					Else 'Not correct %'
+				End as Grade
+				From students;	
+
+		
+		2. Update Students SET percentage = (case Id 
+				When 3 Then 39
+				When 7 then 62
+				End)
+
+				where id IN(3,7) 
+
+27. View Query(yahoo baba)
+	
+		1. To Store query in database (to reduce redentency)
+		2. Can Create to big queries 
+		3. Permanet store in database same like procedure 
+		4. View is not a table its just a commant which excecute when call
+		5. View should not name of exsiting Database tables names
+		6. Provide Extra layer of security 
+		7. Perfromance Decrease (user request -> view -> table response back to view -> view -> user)
+		8. Dependency on table  
+		
+(Syntax)	
+
+(Create) ->create view view_name as Select a.*,b.* From a INNER JOIN b ON b.id=a.id 
+		
+		 //you can see on side menu same like procedure or table 
+			
+(SELECT) ->SELECT * FROM view_name 
+
+
+(ALter) -> Alter view view_name as Select a.*,b.* From a INNER JOIN b ON b.id=a.id INNER JOIN c ON 						c.id=a.c_id 
+
+			or 
+
+		-> Create or Replace view view_name as Select a.*,b.* From a INNER JOIN b ON b.id=a.id INNER JOIN c 	ON c.id=a.c_id 	
+
+(Rename) -> Rename table view_name  to New_view_name 
+
+(Drop)	 -> Drop View View_name;	
+
+=============================================================================================================================================
+set variables 
+	SET @some_var = (SELECT COUNT(*) FROM mytable); 
+
+		or
+	SELECT COUNT(*), MAX(col)
+		INTO   @some_var, @some_other_var
+		FROM   tab;
+

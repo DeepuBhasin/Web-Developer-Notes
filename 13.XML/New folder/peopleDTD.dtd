@@ -1,0 +1,4 @@
+<!ELEMENT people (husband)*>
+<!ATTLIST husband employed CDATA "yes">
+<!ELEMENT husband (name,age,wife)>
+ <!ELEMENT age (#PCDATA)*>

@@ -1,0 +1,7 @@
+1. Curl stands for Client Url 
+
+	basic syntax 
+		curl_init();									// use for initilize
+		curl_setopt(ch, option, value)					// use for send data 
+		curl_exec();									// use for execute
+		curl_close(ch)									// use for close

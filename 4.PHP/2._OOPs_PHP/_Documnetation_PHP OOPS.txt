@@ -1,0 +1,657 @@
+49.Object Oriented Programming in PHP Part 3 - Object.mp4 
+
+=============================== Topics =====================================================
+1. Class and Objects
+2. Access Modifiers
+3. Inheritence
+4. Over Ridding
+5. Abstract Class 
+6. Interfaces (multiple inheritance systme)
+7. Static Members (properties and methods)
+8. Late Static Binding 
+9. Traits (single function use in various)
+10. Type hinting 
+11. Namespace
+12. Method Chaining 
+13. Magic Methods : calls automatically when object is created and its colur is blue 
+		a. Constructor 	: for creating connection 
+		b. Destructor 	: use for closing Connection database 
+		c. Autoload 	: Check for class
+		d. get & Set	: Check for variables and Set Private value 	
+		e. call     	: Check for methods 
+		f. callStatic 	: Check for private static methods 
+		g. isset 		: check  variable set or not 
+		h. unset 		: to unset variable
+		i. tostring 	: call when we print object as a string 
+		j. sleep 		: convert object into array
+		k. wakeUp 		: convert array to object
+		l. Clone 		: send values by value
+		m. invoke 		: use object as function
+14. Magic Constants : 
+		a. __LINE__		: print line number 
+		b. __FILE__		: return absolut Path of file 
+		c. __DIR__		: Absolute Directory Path
+		d. __FUNCTION__	: return Function name  , if name space is used then return along with name sapce
+		e. __CLASS__	: return Class Name 	, if name space is used then return along with name sapce
+		f. __METHOD__	: return Class method name , if name space is used then return along with name sapce
+		g. __NAMESPACE__: return namespace name  
+		h. __TRAIT__	: return trait name
+15. Conditional Function 
+		a. class_exists()				: return if class exist
+		b. interface_exists()			: return if interface exist
+		c. method_exists()				: return if method exist
+		d. trait_exists()				: reurn if trait exist
+		e. property_exists()			: return property
+		f. is_a()						: return object of that class
+		g. is_subclass_of() 			: return oject of the parent class
+16. get Function 
+		a. get_class()					: return the class name 
+		b. get_parent_class()			: retnrn the parent Class name 
+		c. get_class_method()			: return all the functions names 
+		d. get_class_vars()				: return all the variables names with values
+		e. get_object_vars()			: return all the variables names with values
+		f. get_called_class()			: return name of class from where it is call   
+		g. get_declared_classes()		: return all the classes which is declared on the file 
+		h. get_declared_interfaces()	: return all the interface names which is declared in the file
+		i. get_declared_traits()		: return all the traits name which is declared in the file
+		j. class_alias()				: set another name of the class 
+
+============================== Tips in OOPS progrming =====================================
+
+
+1.in simple words object in which we store the infromartion in it 
+2.We create the object from Class 
+3.The process of creating an object is also known as instantiation 
+4.the object is an instance of the class means an example of class 
+
+5. syntax -----> 	class ClassName{
+						access modifier static/non-static function functionName(){
+					}
+				}	
+
+1. variable 
+	POP variable is $balance ;
+	OOP variable is $this->balance and we have to mention access specifiers in front of the variable
+
+	
+
+2. function return
+	always use return concept insted of echo 	
+
+3. when Object is created a  momery block is created which store variable and functions.... practially the object we created it will point that momery block 
+
+if we create to many objects then momery block will be different for every objects while have there variable values and functions 
+
+4. arrguments (function variables and parameters) have local scope example 
+
+class student{
+	private $name, $address,$contactno;
+
+	public function getData($sname=null,$sadd=null,$scon=null){
+		global $name;
+		$name=$sname;
+		$this->address=$sadd;
+		$this->contactno=$scon;
+	}
+	public function showData(){
+		global $name;
+		return $name;
+	}
+}
+
+$studentObject=new student();
+
+
+$studentObject->getData('Deepinder Singh','India','9915099247');
+echo $studentObject->showData();
+
+
+
+5. while we extends the class parent class always protected
+
+6. $this means current object of the class which is accessing the things in class 
+
+7. we can pass the class name like this 
+	fxn('classname') or fxn($object) or fxn($this) or fxn(new classname) or fxn(__CLASSNAME__)
+
+=============================================================================================================================================================x
+Difference between OOP and POP
+------------------------------
+	
+	OOP:
+	----
+	Related with the real life objects and their properties. OOP Concepts:
+
+	1. Class and Objects
+	2. Data abstraction
+	3. Encapsulation
+	4. Polymorphism
+	5. Inheritance 
+	6. Overloading 
+	7. inheritance
+	
+	POP:
+	----
+	Related with the conventional style. This approach is also known as the top-down approach. In this approach, a program is divided into functions that perform specific tasks. This approach is mainly used for medium-sized applications. Data is global, and all the functions can access global data. The basic drawback of the procedural programming approach is that data is not secured because data is global and can be accessed by any function. Program control flow is achieved through function calls and go to statements.
+
+	Difference between OOP and POP:
+	-------------------------------
+
+	OOPs										|  POP
+	-----										|  ---
+	1. Object oriented.					 		|  1. Structure oriented.
+	2. Program is divided into objects as well 	|  2. Program is divided into functions as well as 
+		a real world							|	  the sequence of action to be done  
+	3. Bottom-up approach.				 		|  3. Top-down approach.
+	4. Inheritance property is used.	 		|  4. Inheritance is not allowed.
+	5. It uses access specifier.	     		|  5. It doesn’t use access specifier.
+	6. Encapsulation is used to hide the data.	|  6. No data hiding.
+	7. Concept of virtual function.				|  7. No virtual function.
+	8. data is hidding so it is 				|  8. no way of data hidding so it is less 
+		secure									|	  secure
+	9. We can control the access of data 		|  9. Most function uses shared global data
+		using access specifiers	 				|
+	10. Modification is easier as object 		|  10. Modification are difficult as they can affect 
+		are independent 						|	  the entire program
+	11. Data can move and communicate with each |  11. Data can move from function to function in the 
+	    other through member function  from     |	   system
+	    function to function 					|  
+		in the system  							|
+	12. C++, Java,.net							|  12. C, Pascal,Fortran
+	13. Use For small Project in php 			|  13. Use for very large project
+
+
+
+1. OOPS is about  creating classes and objects. Classes serves as a templates and multiple objects can be created using a classes.
+
+2. what are classes and objects : Classes are templates for creating objects. Eg : if car is a class then maruti suzuki alto and maruti swift are two objects 
+
+3. why OOPs : OOPs make it easy to keep the code DRY?..... DRY - Do not repeat yourself- the code written by the program should be reuseable.
+
+
+Spose in class there are 30 students, now teacher have to show numbers of each students so he can show in two way 
+1. make a Template for each student to show marks : called Procedural Programming
+2. make a single template and use that single template to show marks by calling functions : Called OOPs programming 
+
+
+Syntax
+------
+	Class player{
+		public $name;					// properties (variable of current class)
+		public $speed = 5;				// properties (variable of current class)
+
+			OR
+
+		pulbic $name,$speed=5;			// another method	
+
+		function set_name($name){		// Methods 
+
+
+
+			$this->name = $name;		here $this->name means $player1->name means object its self
+
+										$this->name // current class variable accessing in function and 								then assiging value from paramaters of functions   
+		} 
+	}
+
+$player1= new Player();		// creating object of the class
+
+$player1->set_name('Deepinder Singh');		// calling Function and passing paramaters  
+	
+echo $player1->get_name();					// calling function and getting return value 
+
+echo $player1->speed;						// accessing direct variable;
+
+
+========================================================= __construct() =====================================================================================
+
+A constructor allows you to initialize an object's properties upon creation of the object.
+
+If you create a __construct() function, PHP will automatically call this function when you create an object from a class.
+
+Notice that the construct function starts with two underscores (__)!
+
+
+class Employee{
+	// properties of our Class
+	public $name;
+	public $salary;
+
+
+	//Method of our Class
+
+	// constructor- It allows you to initilization objects. It is the code which is executed whenever a new object is intantiated 
+
+	function __construct(){
+		echo "This is my construct for Employee";
+	}
+}	
+
+$deep=new Employee();
+
+
+
+=========================================================== __Destruct() =====================================================================================
+
+A destructor is called when the object is destructed or the script is stopped or exited.
+
+If you create a __destruct() function, PHP will automatically call this function at the end of the script. : eg we can place here all close connection queries ;
+(means it work only once at the end of the script)
+
+Notice that the destruct function starts with two underscores (__)!
+
+
+class Employee{
+	// properties of our Class
+	public $name;
+	public $salary;
+
+// function __construct(){							// without arguments 
+	// 	echo "This is my construct for Employee";
+	// }
+
+	
+
+	function __construct($name,$salary){				// with arguments 
+		$this->name=$name;
+		$this->salary=$salary;
+	}	
+
+	function getData(){
+		return $this->name.' : '.$this->salary;
+	}
+	function getMore(){
+		return $this->salary+300;
+	}
+
+	function __destruct(){								// it never received any arguments
+		echo "</br> this is destruct $this->name : $this->salary";
+	}
+}	
+
+$deep=new Employee('Deepinder','3000');
+
+echo $deep->getData();
+
+echo "<br/>";
+
+echo $deep->getMore();
+
+
+================================ Access Modifiers ========================================
+
+Properties and methods can have access modifiers which control where they can be accessed.
+
+There are three access modifiers:
+
+public - the property or method can be accessed from everywhere. This is default
+ 
+protected - the property or method can be accessed within the class and by classes derived from that class
+
+private - the property or method can ONLY be accessed within the class
+
+
+In the following example we have added three different access modifiers to the three properties. Here, if you try to set the name property it will work fine (because the name property is public). However, if you try to set the color or weight property it will result in a fatal error (because the color and weight property are protected and private):
+
+<?php
+class Fruit {
+  public $name;
+  protected $color;
+  private $weight;
+}
+
+$mango = new Fruit();
+$mango->name = 'Mango'; // OK
+$mango->color = 'Yellow'; // ERROR
+$mango->weight = '300'; // ERROR
+?>
+
+
+class Employee{
+	
+		// $name="Deepinder";		// create error beacuse we are not defining access specifier
+
+	var $name="Deepinder";			// var is key word to create access specifier and its public  
+
+	function getName(){
+		return $this->name;
+	}
+}	
+
+$deep=new Employee();
+
+echo $deep->getName();
+
+
+=============================================================== Inheritance ===================================================================================
+
+Inheritance in OOP = When a class derives from another class.
+
+The child class will inherit all the public and protected properties and methods from the parent class. In addition, it can have its own properties and methods.
+
+function cannot be inherit in POP so we have to write whole codes with some additon codes , OOPs concept remove this problem by inheritance 
+
+An inherited class is defined by using the extends keyword.
+
+<?php
+class Fruit {
+  public $name;
+  public $color;
+  public function __construct($name, $color) {
+    $this->name = $name;
+    $this->color = $color;
+  }
+  public function intro() {
+    echo "The fruit is {$this->name} and the color is {$this->color}.";
+  }
+}
+
+// Strawberry is inherited from Fruit
+class Strawberry extends Fruit {
+  public function message() {
+    echo "Am I a fruit or a berry? ";
+  }
+}
+$strawberry = new Strawberry("Strawberry", "red");
+$strawberry->message();
+$strawberry->intro();
+?>
+
+
+Note: Check Example of Access specifiers and Inheritence : 04_access_specifiers_and_inheritence
+
+note : function __constructor(){
+			parent :: __constructor();
+		}
+
+
+
+======================================================= Overloading and Over Ridding =========================================================================
+
+Overloading 
+------------
+1. Function overloading or method overloading is a feature that allows creating several methods with the same name which differ from each other in the type of the input parameters. It is simply defined as the ability of one function to perform different tasks. For example, doTask() and doTask(object O) are overloaded methods. To call the latter, an object must be passed as a parameter, whereas the former does not require a parameter, and is called with an empty parameter field. It is a form of static polymorphism which .The decision to call an implementation or another is taken at coding time. 
+
+2. This is erroneous  since php will say you have declared this method twice . Other languages says its fine and calls it static polymorphic i.e method overloading. You have to use PHP's magic methods to achieve method overloading in PHP.
+
+<?php 
+	class overLoad{												// this program produce error 
+		public $area;
+
+		public function area($length=null){
+			$this->area=$length*$length;
+			return $this->area;
+		}
+		public function area($length=null,$breadth=null){
+			$this->area=$length*$breadth;
+			return $this->area;
+		}
+	}
+
+	$areaObject=new overLoad();
+
+	echo $areaObjecte->area(4);;
+?>
+
+Over Ridding
+------------
+Function Overriding: Function overriding is same as other OOPs programming languages. In function overriding, both parent and child classes should have same function name with and number of arguments. It is used to replace parent method in child class. The purpose of overriding is to change the behavior of parent class method. The two methods with the same name and same parameter is called overriding.
+
+<?php 
+class classA{
+	
+	public function get(){
+		echo "Hello world";
+	}
+}
+
+class classB extends classA{
+
+	public function get(){
+		echo "Hello Boo BOO";
+	}
+}
+
+$classBobject=new classB();
+
+$classBobject->get();
+?>
+
+
+================================ Constant =================================================
+
+Constants cannot be changed once it is declared.
+
+Class constants can be useful if you need to define some constant data within a class.
+
+A class constant is declared inside a class with the const keyword.
+
+Class constants are case-sensitive. However, it is recommended to name the constants in all uppercase letters.
+
+We can access a constant from outside the class by using the class name followed by the scope resolution operator (::) followed by the constant name, like here:
+
+Or, we can access a constant from inside the class by using the self keyword followed by the scope resolution operator (::) followed by the constant name, like here:
+
+
+class Circle{
+
+	const PI=3.14;									// declaring contant variable 
+
+	private $area;
+	
+	public function area($radius){
+		$this->area = self::PI * $radius * $radius;				// accessing constant variable using Self
+		return $this->area;
+	}
+}
+
+$circleObject= new Circle();
+
+echo $circleObject::PI;										// accessing variable using object 
+
+echo "<br/>";
+	
+echo Circle::PI;						// accessing variable using Class name and not a good methos 
+
+echo "<br/>";
+
+echo $circleObject->area(10);
+
+
+===================================================================== Abstract Class ==========================================================================
+
+1. we use abstract classes when we want to commit the programmer to write a certian class method, but we are only sure about the name of the method, and not the details of how is should be write 
+
+2. An abstarct class is a class that has at least on abstract method 
+
+3. Abstarct methods can only have names and arguments and no other code. thus we cannot create objects out of abstract classes. Insted we need to create child classes that add the code into the bodies of the month and use these child classes to create objects 
+
+program written in file 
+
+==================================================================== Interface Class ==========================================================================
+when we inherit one or more class in a single class then we use interface (basically inherit multiple classes in single class)
+
+Interfaces make it easy to use a variety of different classes in the same way. When one or more classes use the same interface, it is referred to as "polymorphism".
+
+Interfaces allow you to specify what methods a class should implement.
+
+Interfaces are declared with the interface keyword:
+	
+interface InterfaceName {
+  public function someMethod1();
+  public function someMethod2($name, $color);
+  public function someMethod3() : string;
+}  
+
+PHP - Interfaces vs. Abstract Classes
+Interface are similar to abstract classes. The difference between interfaces and abstract classes are:
+
+1. Interfaces cannot have properties, while abstract classes can
+2. All interface methods must be public, while abstract class methods is public or protected
+3. All methods in an interface are abstract, so they cannot be implemented in code and the abstract keyword is not necessary
+4. Classes can implement an interface while inheriting from another class at the same time
+
+
+To implement an interface, a class must use the implements keyword.
+
+A class that implements an interface must implement all of the interface's methods.
+
+interface a {
+  public function hello();
+}
+interface b {
+  public function hi();
+  public function bye();
+}
+
+class Cat implements a,c {
+  public function hello() {
+
+  }
+  public function hi() {
+
+  }
+  public function bye() {
+
+  }
+}
+
+$animal = new Cat();
+$animal->hello();
+
+program written in file 
+
+=====================================================================PHP Namespaces =============================================================================
+Namespaces are qualifiers that solve two different problems:
+
+1.They allow for better organization by grouping classes that work together to perform a task
+2.They allow the same name to be used for more than one class
+
+
+For example, you may have a set of classes which describe an HTML table, such as Table, Row and Cell while also having another set of classes to describe furniture, such as Table, Chair and Bed. Namespaces can be used to organize the classes into two different groups while also preventing the two classes Table and Table from being mixed up.
+
+
+In computer prorgamming name is feature to segregate your code to prevent the clashes in the name of your variables, constants. procedural methods and classes. Name spaces in the computer programming is same as directoty bifurcation in the file system where the file with the same can exists but in two seperate directories for folders.
+
+with a large number of audience, it is a misconception that namespace is only part of object oriented programming where it can be used for classes but this is not true. You can use the namespace is procedural programming as well. You can use namespace in the procedural to club your code to prvent from clashes.  
+
+
+Namespaces are declared at the beginning of a file using the namespace keyword: 
+
+===================================================================== Traits =================================================================================
+
+Traits are used to declare methods that can be used in multiple classes (means use to create single function in various classes by extending)
+
+
+PHP only supports single inheritance: a child class can inherit only from one single parent.
+
+So, what if a class needs to inherit multiple behaviors? OOP traits solve this problem.
+
+Traits are used to declare methods that can be used in multiple classes. Traits can have methods and abstract methods that can be used in multiple classes, and the methods can have any access modifier (public, private, or protected).
+
+Traits are declared with the trait keyword:
+
+program written in file
+
+=================================================================== Static Methods/Memebers ====================================================================
+ 
+
+1. Static methods can be called directly - without creating an instance of the class first. 
+
+2. Static methods are declared with the static keyword:
+
+3. We use self:: insted of $this-> beacuse here we are not creating Objects 
+
+4. To access a static method use the class name, double colon (::), and the method name:
+
+5. program wriitten in file
+
+6. Late static bending -> program is witten in program
+
+
+
+#program of static 
+<?php
+
+class staticClass{
+
+	public static $name="Deepinder Singh";
+
+	public static function setName(){
+		self::$name="Simranjeetkaur";
+	}
+	 
+}
+
+echo staticClass::$name;
+
+staticClass::setName();
+
+echo staticClass::$name;
+
+?>
+
+
+
+A class can have both static and non-static methods. A static method can be accessed from a method in the same class using the self keyword and double colon (::):
+
+<?php
+class greeting {
+  public static function welcome() {
+    echo "Hello World!";
+  }
+
+  public function __construct() {
+    self::welcome();
+  }
+}
+
+new greeting();
+?>
+
+
+
+Static methods can also be called from methods in other classes. To do this, the static method should be public:
+
+<?php
+class greeting {
+  public static function welcome() {
+    echo "Hello World!";
+  }
+}
+
+class SomeOtherClass {
+  public function message() {
+    greeting::welcome();
+  }
+}
+?>
+
+
+
+To call a static method from a child class, use the parent keyword inside the child class. Here, the static method can be public or protected.
+
+<?php
+class domain {
+  protected static function getWebsiteName() {
+    return "W3Schools.com";
+  }
+}
+
+class domainW3 extends domain {
+  public $websiteName;
+  public function __construct() {
+    $this->websiteName = parent::getWebsiteName();
+  }
+}
+
+$domainW3 = new domainW3;
+echo $domainW3 -> websiteName;
+?>
+======================================================================= Type Hinting ========================================================================
+In simple word, type hinting means providing hints to function to only accept the given data type.
+In technical word we can say that Type Hinting is method by which we can force function to accept the desired data type.
+In PHP, we can use type hinting for Object, Array and callable data type.
+
+program written in program 
+ 

@@ -1,0 +1,374 @@
+		XML  (Extensible Markup Language ) 											Html
+
+1. Xml is used to exchange data or structure Data 					| 1. Html is used to Structure a webpage 
+2. Xml uses user defined tags. Xml does not have predefined tags 	| 2. Html is used to Structure a webpage 
+3. xml tags are case Senstivie 										| 3. Html tages are case-insenstive
+4. Xml tags must be closed otherwise you will get an error 			| 4. Html tags should also be closed but browser won't mind if you forget to close any tag 
+5. Xml is strict Language						 					| 5. Html is not a strict Language 
+6. Xml file must have .xml Extention 			 					| 6. Html file must have .html or .htm Extention 
+7. We can add our own attributes and values 						| 7. we cannot add our own attributes and but predefined values 
+
+The Difference Between XML and HTML
+	XML and HTML were designed with different goals:
+
+	XML was designed to carry data - with focus on what data is
+	HTML was designed to display data - with focus on how data looks
+	XML tags are not predefined like HTML tags are
+
+================================================================================================================================================================
+website for xml is : 
+	https://www.w3.org/XML/
+================================================================================================================================================================
+Topics for xml
+	XML AJAX
+	XML DOM
+	XML XPath
+	XML XSLT
+	XML XQuery
+	XML DTD
+	XML Schema
+	XML Services
+===============================================================================================================================================================
+XML Tree Structure
+
+	XML documents are formed as element trees.
+	An XML tree starts at a root element and branches from the root to child elements.
+	All elements can have sub elements (child elements):
+	<root>
+	  <child>
+	    <subchild>.....</subchild>
+	  </child>
+	</root>
+
+	The terms parent, child, and sibling are used to describe the relationships between elements.
+
+	Parents have children. Children have parents. Siblings are children on the same level (brothers and sisters).
+
+	All elements can have text content (Harry Potter) and attributes (category="cooking").
+
+	Self-Describing Syntax
+	XML uses a much self-describing syntax.
+
+	A prolog defines the XML version and the character encoding:
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	The next line is the root element of the document:
+
+	<bookstore>
+	The next line starts a <book> element:
+
+	<book category="cooking">
+	The <book> elements have 4 child elements: <title>, <author>, <year>, <price>.
+
+	<title lang="en">Everyday Italian</title>
+	<author>Giada De Laurentiis</author>
+	<year>2005</year>
+	<price>30.00</price>
+	The next line ends the book element:
+
+	</book>
+	You can assume, from this example, that the XML document contains information about books in a bookstore.
+===============================================================================================================================================================
+Entity References
+Some characters have a special meaning in XML.
+
+If you place a character like "<" inside an XML element, it will generate an error because the parser interprets it as the start of a new element.
+
+&lt;	<	less than
+&gt;	>	greater than
+&amp;	&	ampersand 
+&apos;	'	apostrophe
+&quot;	"	quotation mark	
+===============================================================================================================================================================
+Comments in XML
+The syntax for writing comments in XML is similar to that of HTML:
+
+<!-- This is a comment -->
+
+White-space is Preserved in XML
+XML does not truncate multiple white-spaces (HTML truncates multiple white-spaces to one single white-space):
+
+XML:	Hello           Tove
+HTML:	Hello Tove
+
+===============================================================================================================================================================
+XML Elements 
+	
+An XML document contains XML Elements.
+
+What is an XML Element?
+An XML element is everything from (including) the element's start tag to (including) the element's end tag.
+
+<bookstore>
+  <book category="children">
+    <title>Harry Potter</title>
+    <author>J K. Rowling</author>
+    <year>2005</year>
+    <price>29.99</price>
+  </book>
+  <book category="web">
+    <title>Learning XML</title>
+    <author>Erik T. Ray</author>
+    <year>2003</year>
+    <price>39.95</price>
+  </book>
+</bookstore>
+
+In the example above:
+
+<title>, <author>, <year>, and <price> have text content because they contain text (like 29.99).
+
+<bookstore> and <book> have element contents, because they contain elements.
+
+<book> has an attribute (category="children").	
+================================================================================================================================================================
+XML Attributes
+XML elements can have attributes, just like HTML.
+
+Attributes are designed to contain data related to a specific element.
+
+XML Attributes Must be Quoted
+Attribute values must always be quoted. Either single or double quotes can be used.
+
+For a person's gender, the <person> element can be written like this:
+
+<person gender="female">
+or like this:
+
+<person gender='female'>
+=================================================================================================================================================================
+XML HttpRequest
+All modern browsers have a built-in XMLHttpRequest object to request data from a server.
+
+The XMLHttpRequest Object
+The XMLHttpRequest object can be used to request data from a web server.
+
+The XMLHttpRequest object is a developers dream, because you can:
+
+Update a web page without reloading the page
+Request data from a server - after the page has loaded
+Receive data from a server  - after the page has loaded
+Send data to a server - in the background
+=================================================================================================================================================================
+What is the DOM?
+The DOM defines a standard for accessing and manipulating documents:
+
+"The W3C Document Object Model (DOM) is a platform and language-neutral interface that allows programs and scripts to dynamically access and update the content, structure, and style of a document."
+
+The HTML DOM defines a standard way for accessing and manipulating HTML documents. It presents an HTML document as a tree-structure.
+
+The XML DOM defines a standard way for accessing and manipulating XML documents. It presents an XML document as a tree-structure.
+
+Understanding the DOM is a must for anyone working with HTML or XML.
+
+
+
+
+The XML DOM
+All XML elements can be accessed through the XML DOM.
+
+This code retrieves the text value of the first <title> element in an XML document:
+<?xml version="1.0" encoding="UTF-8"?>
+<bookstore>
+
+  <book category="cooking">
+    <title lang="en">Everyday Italian</title>
+    <author>Giada De Laurentiis</author>
+    <year>2005</year>
+    <price>30.00</price>
+  </book>
+
+  <book category="children">
+    <title lang="en">Harry Potter</title>
+    <author>J K. Rowling</author>
+    <year>2005</year>
+    <price>29.99</price>
+  </book>
+
+</bookstore>
+Example
+txt = xmlDoc.getElementsByTagName("title")[0].childNodes[0].nodeValue;
+The XML DOM is a standard for how to get, change, add, and delete XML elements.
+===============================================================================================================================================================
+What is an XML Schema?
+An XML Schema describes the structure of an XML document, just like a DTD.
+
+An XML document with correct syntax is called "Well Formed".
+
+An XML document validated against an XML Schema is both "Well Formed" and "Valid".
+
+
+Why Use an XML Schema?
+
+With XML Schema, your XML files can carry a description of its own format.
+
+With XML Schema, independent groups of people can agree on a standard for interchanging data.
+
+With XML Schema, you can verify data.
+
+
+XML Schema
+XML Schema is an XML-based alternative to DTD:
+
+<xs:element name="note">
+
+<xs:complexType>
+  <xs:sequence>
+    <xs:element name="to" type="xs:string"/>
+    <xs:element name="from" type="xs:string"/>
+    <xs:element name="heading" type="xs:string"/>
+    <xs:element name="body" type="xs:string"/>
+  </xs:sequence>
+</xs:complexType>
+
+</xs:element>
+The Schema above is interpreted like this:
+
+<xs:element name="note"> defines the element called "note"
+<xs:complexType> the "note" element is a complex type
+<xs:sequence> the complex type is a sequence of elements
+<xs:element name="to" type="xs:string"> the element "to" is of type string (text)
+<xs:element name="from" type="xs:string"> the element "from" is of type string
+<xs:element name="heading" type="xs:string"> the element "heading" is of type string
+<xs:element name="body" type="xs:string"> the element "body" is of type string
+
+
+
+type of Schema 
+	1. two types : DTD or XSD
+
+		a. DTD : Document Type Defination 
+
+		b. XML Schema 
+			1. XSD (XL Schema Defination)
+			2. Relax NG
+			3. W#C XML Schema Language 
+=================================================================================================================================================================
+DTD Basics 
+	1. Documnet type Defination 
+	2. Not xml based
+	3. De facto Standard
+	4. Defines XML documents structure 
+	5. Inline or Separate Document 
+	6. What elements can/must be in 
+	7. Inromation about the data they contain
+	8. Attribute infromation/requirments 
+
+	Does not Determine 
+		1. What the root element is 
+		2. number of instance of elements
+		3. Data types
+		4. Semantic meaning of an element 
+
+DTD elements 
+	1. Elements are the alowed/required tags 
+	2. Created with an element Declaration 
+
+		<!ELEMENT ElementNam Type>		
+
+		ElementName : XML Tag
+		Type : Tag Type 
+
+	DTD Data Types
+		1. #PCDATA
+
+		<!ATTLIST element attribute attType default>
+			1. CDATA	: Character Data
+			2. Enumerated : Series of string value 
+			3. Notation : Something declared elsewhere in DTD
+			4. Entity : External Binary Entity 
+
+
+
+	Four types of elements 
+	1. Empty : Does not content
+	2. Element-only : Contains only Child elements 
+	3. Four Types of Elements : Mixed : Combo of Child elements & character data
+	4. Any : Any Content allowed by the DTD
+
+
+	Example :
+
+		<?xml version="1.0" standalone="no"?>
+
+		<!DOCTYPE people SYSTEM "peopleDTD.dtd">
+
+
+
+
+
+
+==================================================================================================================================================================
+Basic Syntax 
+<?xml version="1.0" encoding="UTF-8" ?>
+<person>
+   <user>
+   		<fname>Deepinder</fname>
+   		<lname>Singh</lname>
+   		<phone>9915099247</phone>
+   </user>
+    <user>
+   		<fname>Simranjeet</fname>
+   		<lname>Kaur</lname>
+   		<phone>9780038419</phone>
+   </user>
+</person>
+
+Note : in xml there should always a root element in above example is <person></person>
+===================================================================================================================================================================
+namespace : to stop the conflict between data 
+<?xml version="1.0" encoding="UTF-8" ?>
+
+1. Namespace in root element
+<person  
+	xmlns:a="http://xyz.com/mynamespace"
+	xmlns:b="http://xyz.com/abc"
+>
+   <user>
+   		<a:fname>Deepinder</a:fname>
+   		<a:lname>Singh</a:lname>
+   		<a:phone>9915099247</a:phone>
+   </user>
+    <user>
+    	
+   		<b:fname>Deepinder</b:fname>
+   		<b:lname>Singh</b:lname>
+   		<b:phone>9915099247</b:phone>
+   </user>
+    <user>
+
+   		<fname>Simranjeet</fname>
+   		<lname>Kaur</lname>
+   		<phone>9780038419</phone>
+   </user>
+</person>
+
+
+2. Name Space in elements	
+<person>
+   <user xmlns:a="http://xyz.com/mynamespace">
+   		<a:fname>Deepinder</a:fname>
+   		<a:lname>Singh</a:lname>
+   		<a:phone>9915099247</a:phone>
+   </user>
+    <user xmlns:b="http://xyz.com/abc">
+    	
+   		<b:fname>Deepinder</b:fname>
+   		<b:lname>Singh</b:lname>
+   		<b:phone>9915099247</b:phone>
+   </user>
+    <user>
+
+   		<fname>Simranjeet</fname>
+   		<lname>Kaur</lname>
+   		<phone>9780038419</phone>
+   </user>
+</person>
+=============================================================================================================================================================
+1. XSLT (its like css of xml and its extention is xsl) stands for extensible Stylesheet Langauge  
+2. XSL-FO
+3. XPATH	
+4. XLINK
+5. XPOINTER
+
+===============================================
