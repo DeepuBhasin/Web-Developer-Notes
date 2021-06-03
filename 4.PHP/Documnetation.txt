@@ -1,22 +1,107 @@
-1. echo is a language construct not a function (for showing output in any kind of language is called Language construct)
-2. Excape Character \ in php
-3. != and <> are same thing called not Equal to 
-4. $number=$number + 1 is same thing $number +=1;
-5. @mysqli_connect('localhost','test','root','') or die('Database not Connected');
-6. function add($x,$y){
-	$result=$x+$y;
-	return $result;
+=================================================
+example of oops 
+types of in heritence 
+1. Single 
+2. Multiple   (multiple class merging into one single class)
+3. Multilevel (when one class extends the other class and this class further becomes the parent of third class and so on. )
+4. Diamond    (it is basically a combination of hierarchical and multiple inheritance. )
+5. Hierarchical ( When one class becomes parent of many child classes. This makes a tree like structure.)
+6. Hybrid     (this is a combination of any type of inheritance.)
+
+==========================================================
+1. PHP - Interfaces vs. Abstract Classes
+
+Interface are similar to abstract classes. The difference between interfaces and abstract classes are:
+
+1. Interfaces cannot have properties, while abstract classes can
+2. All interface methods must be public, while abstract class methods is public or protected
+3. All methods in an interface are abstract, so they cannot be implemented in code and the abstract keyword is not necessary
+4. Classes can implement an interface while inheriting from another class at the same time
+
+=======================================================================================================================================================
+2. What is the use of header() function in PHP?
+The header() function is used to send a raw HTTP header to a client. It must be called before sending the actual output. For example, you can't print any HTML element before using this function.
+
+======================================================================================================================================================
+3 Explain some of the PHP array functions?
+There are many array functions in PHP:
+
+array()
+array_change_key_case()
+array_chunk()
+count()
+sort()
+array_reverse()
+array_search()
+array_intersect()
+
+=======================================================================================================================
+4. Explain some of the PHP string functions?
+There are many array functions in PHP:
+
+strtolower()
+strtoupper()
+ucfirst()
+lcfirst()
+ucwords()
+strrev()
+strlen()
+
+========================================================================================================================
+5. What is a session?
+
+Sessions generally store temporary data to allow multiple PHP pages to offer a complete functional transaction for the same user.
+Simply, it maintains data of an user (browser).
+
+What is $_SESSION in PHP?
+A session creates a file in a temporary directory on the server where registered session variables and their session id are stored. This data will be available to all pages on the site amid that visit.
+
+The area of the temporary record is controlled by a setting in the php.ini document called session.save_path.
+
+At the point when a session is begun following things happen -
+
+PHP first makes two duplicates of one of a kind session id for that particular session of the client which is an arbitrary string of 32 hexadecimal numbers, for example, 3c7foj34c3jjhkyepop2fc937e3443.
+One copy of unique session id automatically sent to the user?s computer for the sake of synchronization in future ahead, and one copy is being maintained at server side till the session is running.
+Whenever you want to access the page of website or web app, then session id of the current user will be associated with the HTTP header, and that will be compared by the session id which is being maintained at the server. After completing the comparison process, you can easily access the page of the website or web app
+A session ends when the user closes the browser, or after leaving the site, the server will terminate the session after a predetermined period, commonly 30 minutes duration.
+
+==========================================================================
+<?php
+try {
+    $var_msg = "This is an exception example";
+    throw new Exception($var_msg);
 }
-	echo add(10,10) + 10;        here add(10,10) is now become 20 hence answer is 30;
+catch (Exception $e) {
+    echo "Message: " . $e->getMessage();
+    echo "";
+    echo "getCode(): " . $e->getCode();
+    echo "";
+    echo "__toString(): " . $e->__toString();
+}
+?>
 
-7. Addslashes for SQL injections 
-8. Define and Defined 
-9. rand(1,6) and getrandmax()
-10. file size is reprsent in KB 
-11. magic_quotes_runtime() protect from SQL injections 
-12. Throw,Catch,Exceptions  
+===============================================
+GET
+	 the GET method is used to retrieve whatever information is identified by the Request-URL.Parameters in this method are saved in the browser’s history.	Parameters are not archived in the browser history or other web server logs.Information is visible to everyone in the URL
 
-==============Code with Harry ============================
+HEAD
+	
+	 The HEAD technique requests a reaction that is similar to that of GET request, but doesn’t have a message-body in the response. 
 
-1. Syntax Highlighting 
-2. Resource > network > listening Ports  Moniter to find Ports 
+POST 
+	
+	In web communication, POST requests are utilized to send data to a server to create or update a resource.One example is when a user uploads a profile photo.
+	Parameters are not archived in the browser history or other web server logs
+
+PUT
+	PUT is similar to POST as it is used to send data to the server to create or update a resource. It is idempotent, meaning that putting a resource twice will have no effect This means that if you call the same PUT requests multiple times, the results will always be the same	
+
+DELETE
+Just as it sounds, the DELETE request method is used to delete resources indicated by a specific URL. Making a DELETE request will remove the targeted resource.
+
+
+PATCH
+A PATCH request is similar to POST and PUT. However, its primary purpose is to apply partial modifications to the resource. And just like a POST request, the PATCH request is also non-idempotent. Additionally, unlike POST and PUT which require a full user entity, with PATCH requests, you may only send the updated username.
+
+CONNECT
+The CONNECT request method is used by the client to create a network connection to a web server over a particular HTTP	

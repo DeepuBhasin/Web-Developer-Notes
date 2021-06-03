@@ -420,3 +420,10 @@ create mini project
 31. Delete Article (by my self)
 32. pagination 29 lecture 
  
+
+
+ ===============================================
+questions 
+ 1. hooks 
+ 2. $this->db->last_query(); to print last query 
+ 3. $this->load->library('unit_test'); 				// testing 

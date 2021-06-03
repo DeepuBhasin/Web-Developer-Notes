@@ -55,6 +55,7 @@
 		h. get_declared_interfaces()	: return all the interface names which is declared in the file
 		i. get_declared_traits()		: return all the traits name which is declared in the file
 		j. class_alias()				: set another name of the class 
+17. Final Key word		
 
 ============================== Tips in OOPS progrming =====================================
 
@@ -321,7 +322,12 @@ class Employee{
 $deep=new Employee();
 
 echo $deep->getName();
-
+============================================================== Encapsulation  =================================================================================
+1. Encapsulation is a concept where we encapsulate all the data and member functions together to form an object.
+2. Wrapping up data member and method together into a single unit is called Encapsulation.
+3. Encapsulation also allows a class to change its internal implementation without hurting the overall functioning of the system.
+4. Binding the data with the code that manipulates it.
+5. It keeps the data and the code safe from external interference.
 
 =============================================================== Inheritance ===================================================================================
 
@@ -466,14 +472,37 @@ echo $circleObject->area(10);
 
 3. Abstarct methods can only have names and arguments and no other code. thus we cannot create objects out of abstract classes. Insted we need to create child classes that add the code into the bodies of the month and use these child classes to create objects 
 
+4. Classes extending an abstract class must implement all of the abstract methods defined in the abstract class.
+
 program written in file 
+=================================================================== Inheritencae ==========================================================================
+Inheritance
+It is a concept of accessing the features of one class from another class. If we inherit the class features into another class, we can access both class properties. We can extends the features of a class by using 'extends' keyword.
+
+1. It supports the concept of hierarchical classification.
+2. Inheritance has three types, single, multiple and multilevel Inheritance.
+3. PHP supports only single inheritance, where only one class can be derived from single parent class.
+4. We can simulate multiple inheritance by using interfaces.
+
 
 ==================================================================== Interface Class ==========================================================================
-when we inherit one or more class in a single class then we use interface (basically inherit multiple classes in single class)
+1. An interface is similar to a class except that it cannot contain code.
+2. An interface can define method names and arguments, but not the contents of the methods.
+3. Any classes implementing an interface must implement all methods defined by the interface.
+4. A class can implement multiple interfaces.
+5. An interface is declared using the "interface" keyword.
+6. Interfaces can't maintain Non-abstract methods.
 
-Interfaces make it easy to use a variety of different classes in the same way. When one or more classes use the same interface, it is referred to as "polymorphism".
 
-Interfaces allow you to specify what methods a class should implement.
+
+
+
+1. when we inherit one or more class in a single class then we use interface (basically inherit multiple classes in single class)
+
+2. Interfaces make it easy to use a variety of different classes in the same way.
+	concept => When one or more classes use the same interface, it is referred to as "polymorphism".
+
+3. Interfaces allow you to specify what methods a class should implement.
 
 Interfaces are declared with the interface keyword:
 	
@@ -483,14 +512,17 @@ interface InterfaceName {
   public function someMethod3() : string;
 }  
 
+
+================
 PHP - Interfaces vs. Abstract Classes
+
 Interface are similar to abstract classes. The difference between interfaces and abstract classes are:
 
 1. Interfaces cannot have properties, while abstract classes can
 2. All interface methods must be public, while abstract class methods is public or protected
 3. All methods in an interface are abstract, so they cannot be implemented in code and the abstract keyword is not necessary
 4. Classes can implement an interface while inheriting from another class at the same time
-
+=======================
 
 To implement an interface, a class must use the implements keyword.
 
@@ -568,7 +600,7 @@ program written in file
 
 6. Late static bending -> program is witten in program
 
-
+7. when we declare static variables and its values then it will share by all the objects of class. Thus static variables will be assigned memory once rather assigning it to each and every object.
 
 #program of static 
 <?php
@@ -655,3 +687,34 @@ In PHP, we can use type hinting for Object, Array and callable data type.
 
 program written in program 
  
+
+ ==================================================================== final Key word ========================================================================
+Final Keyword
+1. In PHP, Final keyword is applicable to only class and class methods. We cannot declare as Final in PHP.
+2. So if we declare class method as a Final then that method cannot be override by the child class.
+3. Same as method if we declare class as a Final then that class cannot be extended any more.
+
+
+<?php  
+      
+    class base  
+    {  
+        final public function dis1()  							// final key word for function 
+        {  
+            echo "Base class..";  
+        }     
+    }  
+    class derived extends base  
+    {  
+        public function dis1()  
+        {  
+            echo "derived class";  
+        }  
+    }  
+    $obj = new derived();  
+    $obj->dis1();  
+  
+?>  
+
+======================================================================== Concrete class ==========================================================
+concrete is opposite of abstract class whihc have complete implementation of function

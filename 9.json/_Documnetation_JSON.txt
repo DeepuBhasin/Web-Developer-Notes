@@ -31,6 +31,38 @@ json Methos
 	1. JSON.parse()
 	2. JSON.stringify()
 
+json placeholder -> search data -> then check first website -> route section 
+
+Extention is : .json
+
+=================================================================================================================
+json : javascript object notation (its nothing just data exchange format)
+used : used to store and exchange data (its a universal format to exchange data)
+format: its text format written with javascript object notation and it can easily be sent and from a server and used as a data format by any programming language  
+
+
+there is no relation between javascript and json. While desiging of json, its format look like javascript object (also Called javascript object notations or javascript object literals)
+
+Mainly use is in Api (application program interface)
+	
+	andriod App + website + iphone App  + MYsql (want to show similar data on these three platform then we use api with json fromat) 
+=====================================================================================================================
+Access json
+1. using Dot 		: .key
+2. using bracket 	: ["key"]
+
+printing using for loop 
+	for(var i in obj){
+	console.log(obj[i])
+	}
+
+for nested 
+	.key.key.key
+=====================================================================================================================
+json Method 
+	1. JSON.parse()
+	2. JSON.stringify()
+
 
 =====================================================================================================================
 JSON format  : {"key":"value","key":value}
@@ -41,7 +73,7 @@ JSON format  : {"key":"value","key":value}
 						  ]
 				}
 
-xml fromat 	: <tag>Value</tag>
+xml format 	: <tag>Value</tag>
 
 	example : <students>
 					<student>
@@ -55,12 +87,19 @@ xml fromat 	: <tag>Value</tag>
 						<city>Delhi</city>
 					</student>
 			</students>		
-							
+
+1. xml strict language for example paired tags are used. 
+   JSON is not strict.
+2. xml use more bandwidth to share a data
+   json use less bandwidth thus works faster.
+3. xml has advantages too. xml can send media.
+    json cannot.				
+
 ======================================================================================================================
 			JSON									|								XML
 													|				
-	1. Javascript object Notation 					|		1. Exetnesible Markup Language (means it is a language)
-	2. Text Based Fromat                        	|       2. Mark up Language 
+	1. Javascript object Notation 					|		1. Extensible Markup Language (means it is a language)
+	2. Text Based Format                        	|       2. Mark up Language 
 	3. Light Weight 								|		3. Heavier 
 	4. Does not support comments and namespaces 	|		4. Supports comments and namespaces 			
 

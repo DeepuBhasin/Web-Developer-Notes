@@ -150,7 +150,7 @@ SELECT * FROM personal where name between 'a' and 'k';
 	it will select all names which start from a to k match with first Character of the name  
 =========================================================================================================================================================
 5. LIKE Query
-	a. is commonly used to select data based on patterns )
+	a. is commonly used to select data based on patterns 
 	b. Like operator is often used in the where clause of the Select Statment
 	c. Like operator in the right way is essential to increse the query performance 
 

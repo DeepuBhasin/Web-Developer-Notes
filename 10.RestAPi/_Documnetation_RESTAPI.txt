@@ -44,5 +44,30 @@ example : header('Access-control-Allow-Headers:Content-Type,Access-Control-Allow
 
 		Authorization    : only authorize person can access this page 
 		X-Requested-With : means data only accepted using Ajax only 	
+=======================================================================================================================================================
+GET
+	 the GET method is used to retrieve whatever information is identified by the Request-URL.Parameters in this method are saved in the browser’s history.	Parameters are not archived in the browser history or other web server logs.Information is visible to everyone in the URL
+
+HEAD
+	
+	 The HEAD technique requests a reaction that is similar to that of GET request, but doesn’t have a message-body in the response. 
+
+POST 
+	
+	In web communication, POST requests are utilized to send data to a server to create or update a resource.One example is when a user uploads a profile photo.
+	Parameters are not archived in the browser history or other web server logs
+
+PUT
+	PUT is similar to POST as it is used to send data to the server to create or update a resource. It is idempotent, meaning that putting a resource twice will have no effect This means that if you call the same PUT requests multiple times, the results will always be the same	
+
+DELETE
+Just as it sounds, the DELETE request method is used to delete resources indicated by a specific URL. Making a DELETE request will remove the targeted resource.
+
+
+PATCH
+A PATCH request is similar to POST and PUT. However, its primary purpose is to apply partial modifications to the resource. And just like a POST request, the PATCH request is also non-idempotent. Additionally, unlike POST and PUT which require a full user entity, with PATCH requests, you may only send the updated username.
+
+CONNECT
+The CONNECT request method is used by the client to create a network connection to a web server over a particular HTTP			
 		
 
