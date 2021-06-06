@@ -1,0 +1,132 @@
+What gets printed?
+	$var = 0;
+	if ($var) {
+	    echo 'true';
+	} else {
+	    echo 'false';
+	}
+
+●	true
+●	false
+
+
+How do we access the value of 'd'?
+$a = array(
+    'a',
+    3 => 'b',
+    1 => 'c',
+    'd'
+);
+
+●	$a[0]
+●	$a[1]
+●	$a[2]
+●	$a[3]
+●	$a[4]
+
+
+
+Which of the following is NOT a valid PHP comparison operator?
+●	!= 
+●	>=
+●	<=> 
+●	<>
+●	===
+
+All Valid 
+
+
+
+
+
+
+
+
+
+
+
+
+
+What gets printed?
+	class MyException extends Exception {}
+try {
+  throw new MyException('Oops!');
+} catch (Exception $e) {
+  echo "Caught Exception
+";
+} catch (MyException $e) {
+  echo "Caught MyException
+";
+}
+
+●	Caught Exception
+●	Caught MyException
+
+
+
+Which statement about the code below is correct?
+
+class A {}
+class B {}
+class C extends A, B {}
+
+●	the code is perfectly fine 
+●	classes can not be empty
+●	class C can not extend both A and B
+●	qualifiers 'public' or 'private' are missing in class definitions
+
+
+
+How do I create PHP arrays in a HTML <form>?
+●	<input name= MyArray[]/> 
+●	<input ="MyArray[]" />
+●	<input name="MyArray[]" />
+●	<input MyArray[] />
+
+
+Which is the correct way to write a JavaScript array?
+●	 A. var txt = new Array(1:"arr",2:"kim",3:"jim") 
+●	 B. var txt = new Array:1=(" arr ")2=("kim")3=("jim")
+●	 C. var txt = new Array("arr ","kim","jim") 
+●	 D. var txt = new Array=" arr ","kim","jim"
+
+
+
+
+
+
+Why do Java and JavaScript have similar names?
+●	Java Script is a stripped-down version of Java
+●	The syntax of JavaScript is loosely based on Java syntax
+●	They both support Object Oriented Programming
+
+
+
+ How to append a value to an array of Java Script?
+●	arr[arr.length] = value 
+●	arr[arr.length+1] = new Arrays()
+●	arr[arr.length-1] = value 
+●	arr[arr.length*1] = value
+
+
+
+Write a query to delete a row from a table “academy” in database “wscube” whose “id” field have the value ‘2’ assuming that you are in the same database?
+●	 A. DELETE FROM wscube.academy where academy.id=2; 
+●	 B. DELETE FROM `wscube`.`academy` where `academy`.`id`=2;
+●	 C. DELETE FROM 'wscube'.'academy' where 'academy'.'id'=2; 
+●	 D. DELETE FROM “wscube”.”academy” where “academy”.”id”=2;
+●	 E. Both (a) and (b)
+
+
+Write a select query to retrieve the records from the table “students”?
+A. SELECT * FROM students 
+B. SELECT * FROM ` students `;
+C. SELECT * FROM " students "; 
+D. SELECT * FROM ' students ';
+E. Both (a) and (b)
+
+
+
+
+
+
