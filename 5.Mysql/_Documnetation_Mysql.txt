@@ -200,7 +200,7 @@ SELECT * FROM personal where name between 'a' and 'k';
 	SELECT * FROM tablename Limit 3 offset 0		
 
 
-	it means starting from 1 with only 3 records returns means out put will be 1 ,2 , 3 
+	it means starting from 1 with only 3 records returns means out put will be 1, 2, 3 
 ====================================================================================================================================================
 
 9. Aggregate Functions or scalar function (
