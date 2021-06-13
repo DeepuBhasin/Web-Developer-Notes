@@ -1,0 +1,152 @@
+Introduction 
+PHP supports ten primitive types.
+
+	Four scalar types:
+
+		bool
+		int
+		float (floating-point number, aka double)
+		string
+	
+	Four compound types:
+
+		array
+		object
+		callable
+		iterable
+	
+	And finally two special types:
+
+		resource
+		NULL
+
+	Some references to the type "double" may remain in the manual. Consider double the same as float; the two names exist only for historic reasons.
+
+	The type of a variable is not usually set by the programmer; rather, it is decided at runtime by PHP depending on the context in which that variable is used.
+
+	Note: To check the type and value of an expression, use the var_dump() function.
+
+	To get a human-readable representation of a type for debugging, use the gettype() function. To check for a certain type, do not use gettype(), but rather the is_type functions. Some examples:
+
+	<?php
+		$a_bool = TRUE;   // a boolean
+		$a_str  = "foo";  // a string
+		$a_str2 = 'foo';  // a string
+		$an_int = 12;     // an integer
+
+		echo gettype($a_bool); // prints out:  boolean
+		echo gettype($a_str);  // prints out:  string
+
+		// If this is an integer, increment it by four
+		if (is_int($an_int)) {
+		    $an_int += 4;
+		}
+
+		// If $a_bool is a string, print it out
+		// (does not print out anything)
+		if (is_string($a_bool)) {
+		    echo "String: $a_bool";
+		}
+	?>
+	To forcibly convert a variable to a certain type, either 'cast' the variable or use the 'settype()' function on it.
+
+	Note : Null will be cast to the empty string, i.e. the key null will actually be stored under "".
+
+
+	Note : The unset() function allows removing keys from an array. Be aware that the array will not be reindexed. If a true "remove and shift" behavior is desired, the array can be reindexed using the array_values() function.
+=====================================================================================================================================
+Converting to object 
+			If an object is converted to an object, it is not modified. If a value of any other type is converted to an object, a new instance of the stdClass built-in class is created. If the value was null, the new instance will be empty. An array converts to an object with properties named by keys and corresponding values. Note that in this case before PHP 7.2.0 numeric keys have been inaccessible unless iterated.
+
+			<?php $genericObject = new stdClass(); ?>
+
+====================================================================================================================================
+Resources 
+	A resource is a special variable, holding a reference to an external resource. Resources are created and used by special functions. 		
+	As resource variables hold special handles to opened files, database connections, image canvas areas and the like, converting to a resource makes no sense.
+
+	Thanks to the reference-counting system being part of Zend Engine, a resource with no more references to it is detected automatically, and it is freed by the garbage collector. For this reason, it is rarely necessary to free the memory manually.
+==================================================================================================================================
+NULL 
+The special null value represents a variable with no value. null is the only possible value of type null.
+
+A variable is considered to be null if:
+
+it has been assigned the constant null.
+
+it has not been set to any value yet.
+
+it has been unset().
+
+<?php
+$var = NULL;       
+?>
+See also the functions is_null() and unset().
+
+==================================================================================================================================
+Callbacks / Callables
+
+1. A callback function is a function passed into another function as an argument, which is then invoked inside the outer function to complete some kind of routine or action. ... A good example is the callback functions executed inside a . then() block chained onto the end of a promise after that promise fulfills or rejects.
+
+2. A callback function (often referred to as just "callback") is a function which is passed as an argument into another function.
+
+3. Any existing function can be used as a callback function. To use a function as a callback function, pass a string containing the name of the function as the argument of another function:	
+
+Pass a callback to PHP's array_map() function to calculate the length of every string in an array:
+
+<?php
+function my_callback($item) {
+  return strlen($item);
+}
+
+$strings = ["apple", "orange", "banana", "coconut"];
+$lengths = array_map("my_callback", $strings);
+print_r($lengths);
+?>
+		or 
+
+function call_user_func(){
+	code here ....
+}
+
+function my_callback_function(){
+	code here .....
+}
+
+call_user_func('my_callback_function');
+==========================================================================================================================
+
+$a = 'abc';
+$$a = 123;
+
+echo $a;			// abc 
+echo "<br/>";
+echo $$a;			// 123
+echo "<br/>";		
+echo $abc;			// 123
+
+
+or 
+
+echo "$a ${$a}";		// abc 123	
+
+
+
+//You can even add more Dollar Signs
+
+  $Bar = "a";
+  $Foo = "Bar";
+  $World = "Foo";
+  $Hello = "World";
+  $a = "Hello";
+
+  echo $a; //Returns Hello
+  echo $$a; //Returns World
+  echo $$$a; //Returns Foo
+  echo $$$$a; //Returns Bar
+  echo $$$$$a; //Returns a
+
+  echo $$$$$$a; //Returns Hello
+  echo $$$$$$$a; //Returns World
+
+  //... and so on ...//

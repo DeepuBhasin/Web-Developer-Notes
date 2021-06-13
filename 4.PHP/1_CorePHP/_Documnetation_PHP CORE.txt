@@ -6,25 +6,6 @@
 
 3. upload image code is in the CMS project with proper validations 
 
-
-
-######################################### MUST Watch #################################################
-32.Php CRUD Operations Tutorial Using MySQLi in Hindi - Select, Insert, Update, Delete-PHP Tutorial #32
-47.PHP Project-Creating An Online Forum In php From Scratch - PHP Tutorial #47
-70.Managing Multiple Virtual Private Servers for PHP Hosting - PHP Tutorial #70.mp4
-	to 
-	74
-
-	 
-
-
-
-
-
-
-
-
-
 ======================================= PHP Pattern ===============================================
 1. Core PHP  / 	Procedural Oriented Programming  (POP)
 2. Object Oriented PHP	OOPs
@@ -699,3 +680,14 @@ practical Example
 
 note : $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION)		// after this we can remove if statements from above codes
 	
+Extar Commands 
+1. Upload Large Data 
+							datebase name  	file name 
+ 	mysql -u root -p -h localhost getmyuni < getmyuni.sql	
+
+ 	1. comands 
+
+
+		1. composer install
+		2. Compopser update
+		3. composer global require phpunit/phpunit

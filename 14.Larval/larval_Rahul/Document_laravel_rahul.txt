@@ -1,0 +1,43 @@
+1. Composer init
+        example : file will create after these completion of Commands
+            PS C:\wamp\www\AAAA\14.Larval\larval_Rahul> composer init
+             Welcome to the Composer config generator
+             This command will guide you through creating your composer.json config.
+
+            Package name (<vendor>/<name>) [hp/larval_rahul]: vendor/package
+            Description []:
+            Author [Deepinder Singh <Deepinder999@gmail.com>, n to skip]:
+            Minimum Stability []:
+            Package Type (e.g. library, project, metapackage, composer-plugin) []:
+            License []:
+
+            Define your dependencies.
+
+            Would you like to define your dependencies (require) interactively [yes]? n
+            Would you like to define your dev dependencies (require-dev) interactively [yes]? n
+
+                {
+                    "name": "vendor/package",
+                    "authors": [
+                        {
+                            "name": "Deepinder Singh",
+                            "email": "Deepinder999@gmail.com"
+                        }
+                    ],
+                    "require": {}
+                }
+
+                Do you confirm generation [yes]? y
+
+
+2. Packagist : website which contains lots of packages     
+
+        a. for installing a new pacakge by Mannually             
+                 "require": {
+                     "dompdf/dompdf" : "*"                      // installing dompdf package with lastest version using *
+                 }
+
+            then use the 'Composer update' Command   
+
+        b. For installing a package using terminal 
+            Composer require dompdf/dompdf                       // will install the latest verison      

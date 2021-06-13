@@ -1,0 +1,117 @@
+what is .Htaccess
+1. .htaccess stands for Hyper Text Access, is a file which is used to enable the localized fine-tuning of Apache’s universal system-configuration directives, which are defined in Apache’s main configuration file           
+2. .htaccess is a configuration file for use on web servers running the appache web server software 
+3. appache web server software to enable/disable additonal functionality and features like hide show also 
+4. Can Block Youtube links also
+
+====================================================================================================================================
+How to Change Path or OverWrite 
+
+    #it means which file will run first when we opwn the directory From server and in case it not fond the first file then it will run the second File automatcially  for example if it does not find index.html then it will load index.php
+    ->DirectoryIndex index.html index.php
+==================================
+Error Doecument 
+
+#this is use when we get 404 error, we load the file from the errorFolder Folder then 404.html file  
+ErrorDocument 404 /errorFolder/404.html
+
+===================================
+Hidding Index 
+
+This is best when write wrong file name in .htaccess file then our directory will visible to all the users so in that case we use indexing concept
+
+DirectoryIndex sss.php
+
+#this options is used to hide all the files from the server simple say Hide index
+Options -Indexes        // for localhost
+Options +Indexes        // for server
+======================================
+Hide file dierctoy/File
+
+1. IndexIgnore password.txt    // hidding password.txt File from Server    
+2. IndexIgnore *                // hide all the files
+
+
+==================================================================================================
+
+
+
+
+
+Clean Url Rewrite Htaccess 
+
+Example : 
+    1. website.com/user.php?u=jack    ->  website.com/user/jack
+
+
+    2. website.com/article.php?id=1&title=Rewrite-Url  -> website.com/article/1/Rewrite-Url
+
+
+ 
+1. Comment 
+    #           -> keyword
+    #this is Exmaple of Comment 
+===============================================
+2. Write your own Address 
+    RewriteEngine on                            // this query is use to enable Rewrite Engine ON
+    RewriteRule ^custom data.php [NC,L]         // we are renaming the data.php file name to custom. In Directory there is no Custome Folder or no Custome File so when 
+                                                    we hit http://localhost/AAAA/17.RewriteEngine/custome it will open data.php file
+
+    NC -> makes the rule Non case Senstive 
+    L  -> makes this last rule that this specific condition will match 
+
+
+{1.Example folder Code}
+===============================================================
+3. Write address with Parameters
+
+   a. Single Parameters
+        #Rewrite for user.php?u=xxxxx
+        RewriteRule ^user/([0-9a-zA-Z]+)  user.php?u=$1 [NC,L]         
+
+        // this user.php?u=$1 is replace with  ^user/([0-9a-zA-Z]+)  in address 
+
+
+
+    b. Multiple Parameters
+        RewriteRule ^article/([0-9]+)/([0-9a-zA-Z_-]+)  article.php?id=$1&title=$2 [NC,L]
+
+PHP code
+        $url = $_SERVER['REQUEST_URI'];
+        $url_array = explode('/',$url);
+        print_r($url_array);
+
+        $endString = end($url_array);
+
+        echo "End Value : ". $endString;
+
+{1.Example folder Code}      
+===============================================================
+3. Write address with Parameters (best one)
+
+    RewriteEngine on
+    RewriteCond %{REQUEST_FILENAME}% !-f
+    RewriteCond %{REQUEST_FILENAME}% !-d
+
+    RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]             // in this we are setting all the values to the url Parameters
+
+    $url = $_GET['url']
+
+{2.AssadUllahCh folder code}  
+==============================================================
+
+RewriteCond %{REQUEST_FILENAME}% !-f            -1
+RewriteCond %{REQUEST_FILENAME}% !-d            -2
+
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]       -3
+
+Line 1 and 2 make condition if file is not found and Directory not found then it will execute line no 3 otherwise it will open that file 
+
+{2.AssadUllahCh folder code}  
+
+    
+various Codes include on this website : https://techwebs.in/htaccess-tutorial
+================================================================
+
+
+try $_SERVER['QUERY_STRING'];           // to get the address from the address bar

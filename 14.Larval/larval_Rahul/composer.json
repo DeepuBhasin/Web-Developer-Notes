@@ -1,0 +1,10 @@
+{
+    "name": "vendor/package",
+    "authors": [{
+        "name": "Deepinder Singh",
+        "email": "Deepinder999@gmail.com"
+    }],
+    "require": {
+        "dompdf/dompdf": "^0.8.3"
+    }
+}
