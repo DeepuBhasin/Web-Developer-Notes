@@ -30,7 +30,7 @@
 5. Restful api with PHP
 		when we use php we have some addition infromation called header infromation 
 
-			header('Content-type:application/json');				// means response is in json format and  compulsory
+			header("Content-type: application/json; charset=utf-8");				// means response is in json format and  compulsory
 			header('Access-Control-Allow-Methods:Put,DELETE');				// declraing HTTP method  and optional
 			
 			header('Access-Control-Allow-Origin:*');					// give access to all sites andn optional

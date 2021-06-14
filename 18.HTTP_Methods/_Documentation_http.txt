@@ -1,0 +1,63 @@
+HTTPS - > Hyper Text Transfer Protocol Secure 
+
+1. Various Http Methods are 
+    a. POST             : Insert data on the server 
+    b. GET              : Retrieves data from the server
+    c. PUT              : Update data already on the server (Complete Update)
+    d. Delete           : Delete data from the server 
+    e. Patch            : Update (partially)
+================================================================================================================
+        Client                          Servere
+    Request Data                     Response Data 
+   (Request Message)                 (Response Message)
+==================================================
+
+   1. Http Header   (you can check in network layer on inspect elements )
+        a. General Header               
+                1. Request URL                  www.abc.com
+                2. Request Method               get,post,patch
+                3. Status Code                  404,200        
+                4. Remote address               ip address
+                5. Referrer Policy              
+        
+        b. Response  
+                1. Server                           apache    
+                2. Set-cookies                      store in client Side 
+                3. Content-type                     json,xml,html
+                4. Content-length                   octa 
+                5. Date
+        
+        c. Request 
+                1. cookies                          
+                2. Accept-xxx
+                3. Content-type
+                4. Content-length
+                5. Authorization
+                6. User-agent 
+                7. Referrer 
+
+   Note While sending Request http Body is empty and while Response Request http body contains Source Codes 
+
+=================================================================================================================
+HTTP Status Code 
+
+1xx : Information                   Request received/Processing 
+2xx : Success                       Successfully Received, Understood and accepted 
+3xx : Redirect                      Further action Must be taken / Redirect
+4xx : Client Error                  Request does not  have what it needs     
+5xx : Serever Error                 Server Failed to fulfill an apparent valid Request 
+
+
+200 : ok 
+201 : Ok Created 
+301 : Moved to new Url 
+304 : Not Modified (Cached version)
+400 : Bad Request (Means not Sending Correct Data to the server )
+401 : Unauthorized (Means you are missing Token then you are not authorized)
+404 : Not Found (Means Files does not exist on the server that we are Founding)
+500 : Internal Server error (any thing on ther server side) 
+==================================================================================================================
+HTTP/1.1 Baseline 
+HTTP/2 Muptiplexing 
+
+=======================
