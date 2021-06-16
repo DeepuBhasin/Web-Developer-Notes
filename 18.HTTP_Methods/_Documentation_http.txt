@@ -1,4 +1,37 @@
+Client-Serever Architecture 
+    Server 
+        Machine or component that is the service provider and provides uninterrupted services to the client as per request.
+
+     Client 
+        Machine or component that request for the service and receive service.
+
+    1. Client Server Architecture in the other words, Seperation of Concerns
+    2. Both many be impleemented and deployed independenty, using any language or technology 
+    3. Both could be different such as window,Linux or Mac
+    4. While sending and receiving request, there should be well defined communication protocol, common format of request and Response and error handling machanism       
+
+
+Protocol
+    When client And Browser Connect with each other they use same languge and Some kind of Rules like grammer  etc this is called. Like in Real world we use any kind of Language to Communicate with each other in Computer world language is Called Protocol
+    there are many protocol 
+        1. FTP 
+        2. HTTP (most popular)
+        3. web socket
+        4. SMTP
+
+What is web Resource 
+    its a Document like HTML , PDF , JSON document etc and these document Client can access through Web server 
+        a. static Resource  -> not using Database
+        b. Dyanimc Resource -> using of Database
+
+Http Transaction (connection Cycle)
+    When ever Client Request for any web Resource , first Connection is on then then request is send then Response back server then Connection is close
+
+==========================================================================================================================
 HTTPS - > Hyper Text Transfer Protocol Secure 
+
+    Note : 1. HTTP Domain Works on port Number 80 by Default
+           2. HTTPS Domain Works on the port Number 443 by Default  
 
 1. Various Http Methods are 
     a. POST             : Insert data on the server 
@@ -14,12 +47,15 @@ HTTPS - > Hyper Text Transfer Protocol Secure
 
    1. Http Header   (you can check in network layer on inspect elements )
         a. General Header               
-                1. Request URL                  www.abc.com
+                1. Request URL                  www.abc.com (Domain Name)
                 2. Request Method               get,post,patch
                 3. Status Code                  404,200        
-                4. Remote address               ip address
+                4. Remote address               ip address (ip address of that particular Domain)
                 5. Referrer Policy              
-        
+    Note : convertsion Of IP address is done By DNS (Domain name System) 
+
+
+
         b. Response  
                 1. Server                           apache    
                 2. Set-cookies                      store in client Side 
@@ -36,16 +72,18 @@ HTTPS - > Hyper Text Transfer Protocol Secure
                 6. User-agent 
                 7. Referrer 
 
+         d. Payload                             : send Post Data and it is visible only when we are sending Post Request       
+
    Note While sending Request http Body is empty and while Response Request http body contains Source Codes 
 
 =================================================================================================================
-HTTP Status Code 
+HTTP Status Code (like these are reply send to clients[Browsre])
 
 1xx : Information                   Request received/Processing 
 2xx : Success                       Successfully Received, Understood and accepted 
 3xx : Redirect                      Further action Must be taken / Redirect
-4xx : Client Error                  Request does not  have what it needs     
-5xx : Serever Error                 Server Failed to fulfill an apparent valid Request 
+4xx : Client Error                  Request does not  have what it needs  (means Client Done some Thing Wrong)   
+5xx : Serever Error                 Server Failed to fulfill an apparent valid Request (means Server Done Some thing wrong)
 
 
 200 : ok 
@@ -61,3 +99,5 @@ HTTP/1.1 Baseline
 HTTP/2 Muptiplexing 
 
 =======================
+Header('x-auth-token')      for varifivation 
+in postman - > user 'x-auth-token' in header then put value in the value field

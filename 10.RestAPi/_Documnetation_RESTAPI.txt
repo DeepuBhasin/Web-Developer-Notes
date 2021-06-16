@@ -39,6 +39,8 @@
 
 			header('Access-Control-Allow-Header:<header-name>')			// deifned which type of header can use and optional 
 
+			Header('x-auth-token');										// for send value in the header
+
 
 example : header('Access-control-Allow-Headers:Content-Type,Access-Control-Allow-Origin,Access-control-Allow-Method,Authorization,X-Requested-With');
 
