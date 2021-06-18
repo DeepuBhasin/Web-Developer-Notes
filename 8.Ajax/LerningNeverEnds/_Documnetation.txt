@@ -1,3 +1,6 @@
+Ajax In simple words :  data exchanging process in the background.
+
+
 Jquery Ajax - Ajax is the art of exchanging data with a server and updating parts of a web page - without reloading the whole page. 
 
 What is ajax ?
@@ -7,3 +10,84 @@ What is ajax ?
 	4. In Shot; Ajax is about loading data in the background and display it on the webpage, without reloading the whole page 
 	5. web application using ajax enables partial page updates, ie only the related section of the page is updated, wihtout realoading the entire page 
 	6. Examples of applications using ajax : Gmail, Google Maps, youtube and facebooks tabs 
+
+There are 2 2 types of request/ Communication ways in client server Architecture 
+	1. Synchronous 
+	2. Asynchronous 
+
+#Synchronous	
+	1. we have a client-server application and in that application we have a button on a form and let say button event handler takes 10 seconds
+	2. so in a Synchronous request when we click the button, request is send to the server and server takes 10 seconds to process that request so while server is processing the request the client is blocked and client waits for the server to complete the process and send request back to the client, at the time the user interface of the client is blocked and we cannot do anything with our interface of website
+
+	Drawbacks of Synchronous programming
+	1. Synchronous web programming results in lengthy postbacks (complete cycle of send request and receive response is called postbacks) 
+	2. lack of continous interactivity on webpages
+	3. Reduced responsiveness due to long waiting Periods
+	4. Reduced efficency
+	5. Decrease in prdocutivity of users 
+
+						Request
+		Client 	------------------------> Server 	
+						Response	
+		Client <------------------------  Server 
+
+		Only One Request will send to the server at a same time and vice verse in this Architecture 
+
+
+
+
+#Asynchronous
+	1. Ajax applications are non-blocking as ajax requests are Asynchronous, the user doesn't have to wait for the request processing to complete.	
+	2. Even while the request is still being processed by the server, the application remains responsive and the user can interact with the application 
+	3. When the request processingis complete, the user interface is automatically updated. this is not the case with Synchronous request. The user interface is blocked and the user cannot do anything else until the request has completed processing
+	4. Asynchronous means that we are exchanging data to / from the server in the background without having to refresh the page
+	5. Ajax enables an applications to send and receive only the data that is required. as the a result that is Reduced traffic between the client and the server and better performance 
+	6. The keystone of Ajax is the XMLHttpRequest object
+						Request
+						
+		Client 	------------------------> Server 		// request 1 
+		Client 	------------------------> Server 		// request 2 	
+		Client 	------------------------> Server 		// request 3 
+		Client 	------------------------> Server 		// request 4  
+		Client 	------------------------> Server 		// request 5  	
+						Response	
+		Client <------------------------  Server 		// response 1 	
+		Client <------------------------  Server 		// response 2 
+		Client <------------------------  Server 		// response 3
+		Client <------------------------  Server 		// response 4
+		Client <------------------------  Server 		// response 5
+
+	Multiple Request will send to server at a same time  and vice verse in this Architecture 
+
+#The XMLHttpRequest object
+	1. All modern browsers support the XMLHttpRequest object
+	2. The XMLHttpRequest object can be used to exchanging data with a server behind the scenes. This means that it is possible to update parts of a webpage wihtout reloading the whole page.
+	3. All Modern browsers (Chrome, Firefox, IE7+, Edge, Safari opera)have a built-in XMLHttpRequest object.
+	4. XMLHttpRequest is used by javascript for Communication with server-side components
+	5. Transfer data in the form fo the plain text, XML or JSON format
+	6. Retrieves data from the server Asynchronous
+	7. Allows web pages to request data from a server using client-side code 
+	8. Provides properties and methods to access the server response (means XMLHttpRequest have so many properties and methods)
+	9. Ajax improves performance of the page by enabling users to carry on with their tasks after sending a request to the server.  
+
+# GET and POST Request
+	1. it Specifies how to send the form data to a web server.
+	2. the data can be sent as url variables, by using the get method or the HTTP post, by using the post Method 
+		a. GET(default)
+		b. POST
+
+	#GET		
+		a. GET sends the data as part of the url 
+		b. appends from-data into the url in name/value pairs
+		c. The length of a url is limited 2048 characters 
+		d. Never use GET method if you have password or other sensitive information to be sent to the server 
+		e. Useful for form submissions where a user want to bookmarks the pages 
+		f. GET is better for non-secure data, like query strings in Google
+		g. GET can't be used to binary data ex :- images or word documents 
+
+	#POST
+		a. HTTP POST requests supply additional data from the client(browser) to the server in the message boday 
+		b. appends form-data inside the body of the HTTP request (data is not shown is in URL)
+		c. The POST method does not have any restriction on data size to b sent 
+		d. From submissions with POST cannot be bookmarked 		
+
