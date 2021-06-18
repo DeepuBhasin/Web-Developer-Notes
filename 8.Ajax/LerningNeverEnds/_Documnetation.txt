@@ -90,4 +90,27 @@ There are 2 2 types of request/ Communication ways in client server Architecture
 		b. appends form-data inside the body of the HTTP request (data is not shown is in URL)
 		c. The POST method does not have any restriction on data size to b sent 
 		d. From submissions with POST cannot be bookmarked 		
+		e. The post methods can be used to send ASCII as well as binary data. ex-images and word documents
+		f. The Data sent by POST method goes through HTTP protocol. Bt using Secure HTTP you can make sure that your information is Secure.
+		g. POST is a little safer than GET because the parameters are not stored in browser history or in web server logs. 
 
+#Jquery and Ajax
+	1. Jquery Provides several methods for ajax functionality 
+	2. with the Jquery Ajax methods, you can request TEXT, HTML, XML or JSON from the remote server using both HTTP GET and HTTP POST - and you can load the external data directly into the selected HTML elements of your web page!
+	
+	Note : 	without Jquery, Ajax Coding can be a bit tricky!
+
+	3. writing regular AJAX code can be a bit trikcy, because different browsers have different syntax for ajax implementation. This means that you will have to write extra code to test for different browser 
+	4. However, the Jquery team has taken care of this for us, so that we can write AJAX functionality with only one single Line of 
+
+#jquery Ajax Methods 
+	1. Load 
+	2. GET
+	3. POST
+	4. ajax
+
+#Jquery Ajax Load() Method
+	syntax : $(select).load(url,data,callback)
+	1. The required URL parameter Specifies the URL you wish to load 
+	2. The optional data parameter Specifies a set of querystring key/value pair to send along with the request 
+	3. The optional callback parameter is the name of a function to be executed after the load() method is completd. 	
