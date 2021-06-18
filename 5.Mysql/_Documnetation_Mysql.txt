@@ -72,7 +72,9 @@
 
 16. We use Gregorian Calender 
 
-17. EXPLAIN SELECT * FROM Table_name WHERE column=data	
+17. 
+	a. EXPLAIN SELECT * FROM Table_name WHERE column=data	
+	b. Describe table_name
 ============================================ Commands ======================================================
 Datebase
 
@@ -946,3 +948,20 @@ Note :
 
 		2. Varchar (variable Characters)
 			a. Store data with Variable amount 	
+========================================================================================================================
+# IF & Case Claues 
+
+1. SELECT column1, Column2, If(Condition,True Result,False Result) as alias_name From Table
+
+2. Select column1, Column2 
+	Case 
+		When Condition1 Then result1
+		When Condition2 Then result2
+		When condition3 Thne result3
+		ELSE as alias_name
+	END as alias_name
+	FROM table_name
+
+
+	exmaple : when percentage>=80 and perctange <=100 THEN "Merit"
+

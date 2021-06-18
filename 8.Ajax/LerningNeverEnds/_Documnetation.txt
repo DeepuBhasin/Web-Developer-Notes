@@ -1,0 +1,9 @@
+Jquery Ajax - Ajax is the art of exchanging data with a server and updating parts of a web page - without reloading the whole page. 
+
+What is ajax ?
+	1. Ajax = Asynchronous javascript and XML
+	2. Ajax is not a programming langauge 
+	3. Ajax is a technique used by a web developers in order to make websites behave like Desktop Applications 
+	4. In Shot; Ajax is about loading data in the background and display it on the webpage, without reloading the whole page 
+	5. web application using ajax enables partial page updates, ie only the related section of the page is updated, wihtout realoading the entire page 
+	6. Examples of applications using ajax : Gmail, Google Maps, youtube and facebooks tabs 

@@ -427,3 +427,6 @@ questions
  1. hooks 
  2. $this->db->last_query(); to print last query 
  3. $this->load->library('unit_test'); 				// testing 
+ 4.  $collegeId = mysqli_real_escape_string($this->db->conn_id, $this->input->post('clgId'));
+ 5. define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'production');		// To show error on live server 
+ 6. define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development'); 		// to Show Error on the localhost 
