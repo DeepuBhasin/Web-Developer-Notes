@@ -965,3 +965,54 @@ Note :
 
 	exmaple : when percentage>=80 and perctange <=100 THEN "Merit"
 
+==================================================================================================================================
+#optimize Queries 
+1. USE EXPLAIN keyword to see the execution plan for the query 
+	a. Check index usage
+	b. check Rows scanned 
+
+2. Use Limit 1 Claues when retrieving unique row (if you know that there is only one query result, it is recommended to use limit 1)
+	Helps aggregate function like Min or MAx 
+
+3. Try to Convert <> or != operator to = operatores (You should avoid using != or <> opertor in the where clause as much as possible, otherwise the engine will give up using the index and perform a full table scan)
+	=operator increse chance of index usage 
+
+	Select aga,name from user where age <> 18 -> 
+		-> select age,name from user where age < 18
+		-> select age, name from user where age >18; 
+
+	 
+
+
+4. Avoid Select * 
+	a. Force full table scan 
+	b. wastes network bandwidth
+
+5. Split big delete, Update or insert query into multiple smaller quries 
+
+6. Use appropriate data type for columns 
+	smaller columns are faster for performance 
+
+7. Mysql query Cache is case and space sensitive
+	use same query case for repeat quries
+
+8. index columns in the where clause 
+	Generic Practice 
+
+9. Index columns used in Join 
+	Generic Practice
+
+10. Use Union all instead of union if dupicate data is permissible in resultset
+
+11. Table order does not matter when INNER JOIN clause is used 
+
+12. If column used in order by clause are indexed they help with performance 
+
+13. use Limit clause to implemenation pagination logic 
+
+14. User vrachar instead for Char and Use int instead of varchar to increse the perfomance
+
+15. Use Distinct keyword with catuion example 
+	Select Distinct(*) form user -> select Distinct name from user 
+====================================================================================================================================
+	
