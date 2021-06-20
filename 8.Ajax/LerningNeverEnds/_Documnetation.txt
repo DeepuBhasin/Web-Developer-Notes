@@ -119,9 +119,19 @@ There are 2 2 types of request/ Communication ways in client server Architecture
 		b. statusTxt   : conatins the status of the call 
 		c. xhr 		   : contains the XMLHttpRequest object	 	
 
-#load function 
-	1. only load text and html files 
-	2. if we want to import a particular element from external file then use below example 
-		$('#getDatahtml').load('htmlFile.html h1');		// here we are loading only h1 element from the htmlFile.html
-	3. if we want to import a particular element using id or class from the external file then use below example
-		$('#getDatahtml').load('htmlFile.html #p1');	// here we are loading only id contain p1 element from the htmlFile.html
+	Note : 	#load function 
+			1. only load text and html files 
+			2. if we want to import a particular element from external file then use below example 
+				$('#getDatahtml').load('htmlFile.html h1');		// here we are loading only h1 element from the htmlFile.html
+			3. if we want to import a particular element using id or class from the external file then use below example
+				$('#getDatahtml').load('htmlFile.html #p1');	// here we are loading only id contain p1 element from the htmlFile.html
+
+#jquery Ajax GET() Method  
+	1. The $.get() method requests data from the server with an HTTP GET request.
+	2. syntax
+		$,get(URL,data,callback,dataType)
+		a. The required URL parameter Specifies the URL you wish to request.
+		b. The optional data parameter, A plain object or string that is sent to thet server with the request 
+		c. The optional callback parameter is the name of a function to be executed if the request succeeds.
+		d. The optional dataType parameter, the types of data expected from the server.  Default :Intelligent Guess (xml,json,script,text,html)
+		 
