@@ -75,6 +75,9 @@
 17. 
 	a. EXPLAIN SELECT * FROM Table_name WHERE column=data	
 	b. Describe table_name
+
+18. How queries are works 
+	From -> where -> group -> having -> select -> Distinct -> order by 	
 ============================================ Commands ======================================================
 Datebase
 
@@ -701,6 +704,15 @@ Note : in query we can also use = and != in place of IN and NOT IN operator
 	6. When we place index on column then sorting of table exist by default 
 
 
+#various types of indexing 
+	1. B-tree (common)
+	2. Fractel Tree 
+	3. LSM Tree
+	4. R-Tree (Spatial)
+	5. Hash (Memory)
+	6. Engine-Dependent	
+
+
 
 (Before Query)	EXPLAIN SELECT * FROM Table_name WHERE column=data	
 
@@ -977,12 +989,18 @@ Note :
 3. Try to Convert <> or != operator to = operatores (You should avoid using != or <> opertor in the where clause as much as possible, otherwise the engine will give up using the index and perform a full table scan)
 	=operator increse chance of index usage 
 
-	Select aga,name from user where age <> 18 -> 
+	a. Select aga,name from user where age <> 18 -> 
 		-> select age,name from user where age < 18
 		-> select age, name from user where age >18; 
 
-	 
+	b. Negative clause and subqueries aren't a good as positive clauses:
+		1. IS NOT
+		2. IS NOT NULL
+		3. NOT IN
+		4. NOT LIKE
 
+	Note : 1. Database optimizer is design for matching criteria , not design for not-matching criteria 
+		   2. If you want to use not matching criteria then use in programming not in database side  		 
 
 4. Avoid Select * 
 	a. Force full table scan 
@@ -1014,5 +1032,13 @@ Note :
 
 15. Use Distinct keyword with catuion example 
 	Select Distinct(*) form user -> select Distinct name from user 
+
+16. User Inner instead of LEFT where you can SQL Joins  
+
+Note : when ever there is small set of data then perform task on the application side beacuse application has batter caching things and can easly handle every thing.
+
+17. Order by can be expensive 
+	SELECT * FROM t1 order by idx_c1,idx_c2
+		Aviod while sorting small set of data (use Code)
 ====================================================================================================================================
 	

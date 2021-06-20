@@ -104,7 +104,7 @@ There are 2 2 types of request/ Communication ways in client server Architecture
 	4. However, the Jquery team has taken care of this for us, so that we can write AJAX functionality with only one single Line of 
 
 #jquery Ajax Methods 
-	1. Load 
+	1. Load 							// in LoadFunction Folder 
 	2. GET
 	3. POST
 	4. ajax
@@ -113,4 +113,15 @@ There are 2 2 types of request/ Communication ways in client server Architecture
 	syntax : $(select).load(url,data,callback)
 	1. The required URL parameter Specifies the URL you wish to load 
 	2. The optional data parameter Specifies a set of querystring key/value pair to send along with the request 
-	3. The optional callback parameter is the name of a function to be executed after the load() method is completd. 	
+	3. The optional callback parameter is the name of a function to be executed after the load() method is completd. 
+	4. The optional callback parameter Specifies a callback function to run when the load() method is completed. The Callback function can have different parameter
+		a. responseTxt : Conatins the resulting content if the call succeeds 
+		b. statusTxt   : conatins the status of the call 
+		c. xhr 		   : contains the XMLHttpRequest object	 	
+
+#load function 
+	1. only load text and html files 
+	2. if we want to import a particular element from external file then use below example 
+		$('#getDatahtml').load('htmlFile.html h1');		// here we are loading only h1 element from the htmlFile.html
+	3. if we want to import a particular element using id or class from the external file then use below example
+		$('#getDatahtml').load('htmlFile.html #p1');	// here we are loading only id contain p1 element from the htmlFile.html
