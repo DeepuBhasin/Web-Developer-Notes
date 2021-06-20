@@ -77,7 +77,7 @@ There are 2 2 types of request/ Communication ways in client server Architecture
 		b. POST
 
 	#GET		
-		a. GET sends the data as part of the url 
+(best)	a. GET sends the data as part of the url 
 		b. appends from-data into the url in name/value pairs
 		c. The length of a url is limited 2048 characters 
 		d. Never use GET method if you have password or other sensitive information to be sent to the server 
@@ -87,7 +87,7 @@ There are 2 2 types of request/ Communication ways in client server Architecture
 
 	#POST
 		a. HTTP POST requests supply additional data from the client(browser) to the server in the message boday 
-		b. appends form-data inside the body of the HTTP request (data is not shown is in URL)
+(best)	b. appends form-data inside the body of the HTTP request (data is not shown is in URL)
 		c. The POST method does not have any restriction on data size to b sent 
 		d. From submissions with POST cannot be bookmarked 		
 		e. The post methods can be used to send ASCII as well as binary data. ex-images and word documents
@@ -129,9 +129,75 @@ There are 2 2 types of request/ Communication ways in client server Architecture
 #jquery Ajax GET() Method  
 	1. The $.get() method requests data from the server with an HTTP GET request.
 	2. syntax
-		$,get(URL,data,callback,dataType)
+		$.get(URL,data,callback,dataType)
 		a. The required URL parameter Specifies the URL you wish to request.
 		b. The optional data parameter, A plain object or string that is sent to thet server with the request 
 		c. The optional callback parameter is the name of a function to be executed if the request succeeds.
 		d. The optional dataType parameter, the types of data expected from the server.  Default :Intelligent Guess (xml,json,script,text,html)
-		 
+
+Note : when ever we want to send large number of Key:value pair then we use 'serialize' Method it will make query string with key:value 
+		example : firstname=Deepinder&lastname=Singh&mobile=9915099247
+
+		#To use serialize method
+		1. Html Code
+			<form id="formId">
+				<input type="text" name="uname" id="uname" placeholder="Enter Your Username"><br/>
+				<input type="text" name="sname" id="sname" placeholder="Enter Your Surname"><br/>
+				<input type="button" value="Send" id="send">
+			</form>
+
+		2. jquery Code 
+			   $(document).ready(function(){
+					$('#send').click(function(){
+						var uname = $('#uname').val();
+						var sname = $('#sname').val();
+						if(uname!='' || sname!=''){
+							$.get(
+								'processing.php',
+								$('#formId').serialize(),
+								function(response,status,xhr){
+									alert(response);
+									alert(status);
+									alert(xhr);
+									$('#result').text(response);
+								}
+								
+								); 
+						} else{
+							alert('Please Enter Values');
+						} 
+					});
+				});
+
+#Jquery $.POST() Method
+	1. The $.POST()method requests data from the server using an HTTP POST request 
+	2. syntax
+	$.post(URL,data,callback,dataType)
+	a. The required URL parameter Specifies the URL you wish to request.
+	b. The optional data parameter, A plain object or string that is sent to thet server with the request 
+	c. The optional callback parameter is the name of a function to be executed if the request succeeds.
+	d. The optional dataType parameter, the types of data expected from the server.  Default :Intelligent Guess (xml,json,script,text,html)
+
+
+#Difference Between Load and Get 
+	LOAD()														GET()
+1. Loads only Html data.						|	1. Loads any type of data, such as JSON and script
+2. Send a get or post request.					|	2. Sends a get request always.
+   If data parameteris sepecified,				|
+   POST is used. Otherwise, GET is used 		|	
+3. Follows a selector for inserting the 		|	3. Does not follow a selector while coding. 
+   retrieved content into the element 			|	   Instead, it invokes a callback function to insert thet data 
+   that matches with the selector				|	   from the server	
+4. There are 3 parameter in load() 				|	4. There are 4 parameter in Get() method. 
+	method.url,data,callback					|		url,data,callback,dataType
+5. Returns the data to a selector in html 		|	5. Returns the data to a callback function parameter.
+	page.										|			
+
+
+
+#Simplarities & Difference Between GET and POST 
+1. The jquery's $.get() and $.post() methods Provides simple tools to send and retrieve data Asynchronous from a web server.
+2. Both the methods are pretty much identical, apart from one major difference - the $.get() makes Ajax requests using the HTTP GET method, where as the $.post makes Ajax requests using the HTTP POST method 
+3. GET - Request data from a sepecified resource
+   POST - Submits data to be processed to a sepecified resource
+4. syntax is also same for GET & POST method    	
