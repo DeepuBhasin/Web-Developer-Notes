@@ -200,4 +200,55 @@ Note : when ever we want to send large number of Key:value pair then we use 'ser
 2. Both the methods are pretty much identical, apart from one major difference - the $.get() makes Ajax requests using the HTTP GET method, where as the $.post makes Ajax requests using the HTTP POST method 
 3. GET - Request data from a sepecified resource
    POST - Submits data to be processed to a sepecified resource
-4. syntax is also same for GET & POST method    	
+4. syntax is also same for GET & POST method    
+
+
+
+#ajax Method jquery
+	1. The jquery ajax() method Provides core functionality of ajax in jquery
+	2. it sends Asynchronous HTTP request to the server.
+	3. One thing is very great about $.ajax method is that we can use this method in place of $.get,$.post() and $.load methods
+
+	syntax	
+		1. $.ajax('url',{options});
+		2. $.ajax({options});
+		   $.ajax({name:value.name:value,......;})
+
+
+		   <div id="loader" style="display:none"><img src="loading.gif" alt="loading" height=100 width=100></div>
+
+		     $.ajax({
+						url:'processing.php',
+						type:'POST',
+						data:{'sname':sname,'uname':uname},
+						dataType : 'json',
+						beforeSend:function(){
+                            $('#loader').css({'display':'block'});
+                         },
+                         success:function(result,status,xhr){
+                             alert('success Message : ' + result);
+                             alert('success Message : ' + status);
+                             alert('success Message : ' + xhr);
+                             $('#loader').css({'display':'none'});
+                         },
+                         error: function(xhr,status,result){
+                            alert('erorr Message : ' + result);
+                             alert('erorr Message : ' + status);
+                             alert('erorr Message : ' + xhr);
+                         },complete(xhr,status) {
+                             alert('complete Message : ' + status);
+                             alert('complete Message : ' + xhr);
+                         }     
+					}); 
+
+
+	options
+		1. url : it i used to Specify the url to send the request 
+		2. type : it is used to specify the type of request. (get or post)
+		3. data : it is used to specify data to sent to the server. {key: value pair}
+		4. success(result,status,xhr) : it is to be run when the request succeeds.
+		5. error(xhr,status,result) : it is used to run if the request fails	  
+		6.  async: it's default values is true. It insdicates whether the request should be handled Asynchronous or not.
+		7. dataType : The data type expected of the server response. eg : json,xml,html, etc
+		8. complete(xhr,status) : it is a function which is to be run when the request is being finished.
+		9. beforeSend(xhr): it is a function which is to be run before the request is being sent to the client. 
