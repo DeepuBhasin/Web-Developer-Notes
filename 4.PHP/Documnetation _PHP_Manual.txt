@@ -149,4 +149,118 @@ echo "$a ${$a}";		// abc 123
   echo $$$$$$a; //Returns Hello
   echo $$$$$$$a; //Returns World
 
-  //... and so on ...//
+  //... and so on ...// 
+
+============================================================================================================================================
+##CONSTANTS and PHP Class Definitions
+
+Using "define('MY_VAR', 'default value')" INSIDE a class definition does not work as expected. You have to use the PHP keyword 'const' and initialize it with a scalar value -- boolean, int, float, string (or array in PHP 5.6+) -- right away.
+
+<?php
+
+define('MIN_VALUE', '0.0');   // RIGHT - Works OUTSIDE of a class definition.
+define('MAX_VALUE', '1.0');   // RIGHT - Works OUTSIDE of a class definition.
+
+//const MIN_VALUE = 0.0;         RIGHT - Works both INSIDE and OUTSIDE of a class definition.
+//const MAX_VALUE = 1.0;         RIGHT - Works both INSIDE and OUTSIDE of a class definition.
+
+class Constants
+{
+  //define('MIN_VALUE', '0.0');  WRONG - Works OUTSIDE of a class definition.
+  //define('MAX_VALUE', '1.0');  WRONG - Works OUTSIDE of a class definition.
+
+  const MIN_VALUE = 0.0;      // RIGHT - Works INSIDE of a class definition.
+  const MAX_VALUE = 1.0;      // RIGHT - Works INSIDE of a class definition.
+
+  public static function getMinValue()
+  {
+    return self::MIN_VALUE;
+  }
+
+  public static function getMaxValue()
+  {
+    return self::MAX_VALUE;
+  }
+}
+
+?>
+
+#Example 1:
+You can access these constants DIRECTLY like so:
+* type the class name exactly.
+* type two (2) colons.
+* type the const name exactly.
+
+#Example 2:
+Because our class definition provides two (2) static functions, you can also access them like so:
+* type the class name exactly.
+* type two (2) colons.
+* type the function name exactly (with the parentheses).
+
+<?php
+
+#Example 1:
+$min = Constants::MIN_VALUE;
+$max = Constants::MAX_VALUE;
+
+#Example 2:
+$min = Constants::getMinValue();
+$max = Constants::getMaxValue();
+
+?>
+
+Once class constants are declared AND initialized, they cannot be set to different values -- that is why there are no setMinValue() and setMaxValue() functions in the class definition -- which means they are READ-ONLY and STATIC (shared by all instances of the class).
+
+Note : When using the const keyword, only scalar (bool, int, float and string) expressions and constant arrays containing only scalar expressions are accepted. It is possible to define constants as a resource, but it should be avoided, as it can cause unexpected results.
+
+<?php
+	// Simple scalar value
+	const CONSTANT = 'Hello World';
+
+	echo CONSTANT;
+
+	// Scalar expression
+	const ANOTHER_CONST = CONSTANT.'; Goodbye World';
+	echo ANOTHER_CONST;
+
+	const ANIMALS = array('dog', 'cat', 'bird');
+	echo ANIMALS[1]; // outputs "cat"
+
+	// Constant arrays
+	define('ANIMALS', array(
+		'dog',
+		'cat',
+		'bird'
+	));
+	echo ANIMALS[1]; // outputs "cat"
+?>
+
+There are nine magical constants that change depending on where they are used. For example, the value of __LINE__ depends on the line that it's used on in your script. All these "magical" constants are resolved at compile time, unlike regular constants, which are resolved at runtime. These special constants are case-insensitive and are as follows:
+
+PHP's magic constants
+Name	Description
+__LINE__	The current line number of the file.
+__FILE__	The full path and filename of the file with symlinks resolved. If used inside an include, the name of the included file is returned.
+__DIR__	The directory of the file. If used inside an include, the directory of the included file is returned. This is equivalent to dirname(__FILE__). This directory name does not have a trailing slash unless it is the root directory.
+__FUNCTION__	The function name, or {closure} for anonymous functions.
+__CLASS__	The class name. The class name includes the namespace it was declared in (e.g. Foo\Bar). When used in a trait method, __CLASS__ is the name of the class the trait is used in.
+__TRAIT__	The trait name. The trait name includes the namespace it was declared in (e.g. Foo\Bar).
+__METHOD__	The class method name.
+__NAMESPACE__	The name of the current namespace.
+ClassName::class	The fully qualified class name.
+See Also
+::class
+get_class()
+get_object_vars()
+file_exists()
+function_exists()
+
+
+
+
+
+Note 
+	1. Expressions are the most important building blocks of PHP. In PHP, almost anything you write is an expression. The simplest yet most accurate way to define an expression is "anything that has a value".
+			The most basic forms of expressions are constants and variables.
+	
+	2.  (scalar values are values that you can't 'break' into smaller pieces, unlike arrays, for instance).
