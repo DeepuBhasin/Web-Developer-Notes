@@ -1,5 +1,21 @@
 <?php
-$x = ['deepinder','Singh','testings',2,3,4,5,6,6];
-// list($a,$b,$c)=$x;
+function foo() 
+{
+  function bar() 
+  {
+    echo "I don't exist until foo() is called.\n";
+  }
+}
 
-print_r(each($x));
+/* We can't call bar() yet
+   since it doesn't exist. */
+
+foo();
+
+/* Now we can call bar(),
+   foo()'s processing has
+   made it accessible. */
+
+bar();
+
+?>

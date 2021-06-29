@@ -435,6 +435,7 @@ where condition is filtering first selected column then group by query execute a
 17. Show 
 (Database)	-> Show Databases
 			-> Show Databases like 's%'
+			-> Show Full Tables
 	
 (Tables)	->Show Tables 
 			->Show Tables from Database_name 
@@ -583,7 +584,7 @@ Note : 	1. when you use union and union all your number of columan should be sam
 
 
 	Example : 
-		1. select * from employee_details where id in/not in (select from employee_details where salary>16000)
+		1. select * from employee_details where id in/not in (select id from employee_details where salary>16000)
 (Best 
 and 	2. SELECT * From employee_details where salary > (SELECT avg(salary) From employee_details)
 practical)	

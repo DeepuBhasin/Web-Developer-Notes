@@ -1,3 +1,15 @@
+1. vi ~/.bashrc  			: 			to open source Editior Files 
+		
+		example : 
+			1. alias gl="git pull orign dev"
+			2. alias gcm="git commit -m "
+
+2. to save: esc -> : ->wq -> enter
+3. to read all the aliases to currently opened terminal : source ~/.bashrc 
+4. to quit : esc -> : -> q   -> enter
+5. to show all Commands : type : alias -> enter
+
+
 ====================================================================Short Cuts =========================================================
 1. Zoom in or Zoom out 				: ctrl + or Ctrl -
 2. List of commands  				: git (press enter)       {commands also run in power shell}
