@@ -171,12 +171,13 @@ Downlaod : type git install ( web site name : git-scm)
 =====================================================================================================================================
 #undoing/Reverting/Reset Codes / RollBack
 	
-	1. git checkout --fileName 		:: this will roll back all the changes upto lastest commit in the particular file 
-	2. git checkout --.					:: this will roll back all the changes upto lastest commit in all the files 
+	1. git checkout -- fileName 				:: this will roll back all the changes upto lastest commit in the particular file 
+	2. git checkout -- . /git checkout -f 		:: this will roll back all the changes upto lastest commit in all the the files/directories 
 
 	Note : 
 		1. if you have to perform this action then your file should already in stagging area before these commands  
 		2. This is ver usefull when have to do so many undo, its same alot of time
+
 
 ======================================================================================================================================
 				:: will roll back all the changes upto lastest commit in all the files/directories 
