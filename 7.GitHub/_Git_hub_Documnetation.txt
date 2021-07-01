@@ -1,20 +1,4 @@
-1. vi ~/.bashrc  			: 			to open source Editior Files 
-		
-		example : 
-			1. alias gl="git pull orign dev"
-			2. alias gcm="git commit -m "
-
-2. to save: esc -> : ->wq -> enter
-3. to read all the aliases to currently opened terminal : source ~/.bashrc 
-4. to quit : esc -> : -> q   -> enter
-5. to show all Commands : type : alias -> enter
-
-
-====================================================================Short Cuts =========================================================
-1. Zoom in or Zoom out 				: ctrl + or Ctrl -
-2. List of commands  				: git (press enter)       {commands also run in power shell}
-3. q (key) 							: to quit
-4. paste 							: shift + ins (key)
+#Documentation 
 
 1. What is Git ?	
 	it is version Control System (to keep tracsk of files) and main advantages of this
@@ -29,7 +13,9 @@
 
 2. What is GitHub 
 	a. it is git is website which store the git hub repository
-	b. github alternatives are gitlab, bitbucket 
+	b. it is not just a cloud storage but a full version control System powered by git.
+	
+	c. github alternatives are gitlab, bitbucket 
 
 
 Downlaod : type git install ( web site name : git-scm)
@@ -67,32 +53,56 @@ Downlaod : type git install ( web site name : git-scm)
 			|     (remove the file)     |<----------------------|--------------------|
 			|                           |                    (commit)                |
 
-
-
 5. Branch By default branch is master (main directoty or main branch)
+==========================================================================================================================================
+#alias and Vi Editior
 
-================================================================= commands ==============================================================
+	1. vi ~/.bashrc  			: 			to open source Editior Files 
+			
+			example : 
+				1. alias gl="git pull orign dev"
+				2. alias gcm="git commit -m "
 
-a. User name and Email 
-
-	1. git config --global user.name "Deepinder Singh"   									:: To set the name 
-	2. git config --global user.emial "Deepinder999@gmail.com"  							:: To set the email address
-	3. git config user.name 																:: return the usernane 
-	4. git config user.email 																:: return the email 
-	3. git config --global --list 															:: return Username and Email address + other infromations
+	2. to save: esc -> : ->wq -> enter
+	3. to read all the aliases to currently opened terminal : source ~/.bashrc 
+	4. to quit : esc -> : -> q   -> enter
+	5. to show all Commands : type : alias -> enter
 
 
-b. To start 
+======================================================================================================================================
+#Various Shortcut for GITBASH code editior
 
-(initial)	1. git init 										:: will create git Directory
-			2. rm -rf .git 										:: to delete git Repository 
-			3. git -rm fileName									:: to delete file and also add file into stage area
+	1. Zoom in or Zoom out 				: ctrl + or Ctrl -
+	2. List of commands  				: git (press enter)       {commands also run in power shell}
+	3. q (key) 							: to quit
+	4. paste 							: shift + ins (key)
+
+=======================================================================================================================================
+#Configuration of Username and Email  
+
+	1. git config --global user.name "Deepinder Singh"   					:: To set the username 
+	2. git config --global user.emial "Deepinder999@gmail.com"  			:: To set the email address
+	3. git config user.name 												:: return the usernane 
+	4. git config user.email 												:: return the email 
+	3. git config --global --list 											:: return Username and Email address + other infromations
+
+========================================================================================================================================
+#Initialisation
 	
-(status)	4. git status										:: return the current directory status like staging , branch details , commits 
+	1. git init 				:: will create git Directory
+	2. rm -rf .git 				:: to delete git Repository 
+	3. git -rm fileName			:: to delete file and also add file into stage area
+========================================================================================================================================
+#Status	
 	
-(staging)	5. git add --a / git add .							:: put all the files into staging area 
-			6. git add first.txt								:: put particular file (name is first.txt) into staging area 	
-			7. git restore --staged fileName
+	1. git status				:: return the current directory status like staging , branch details 
+
+==========================================================================================================================================
+#Staging
+	
+	1. git add --a / git add .				:: put all the files into staging area 
+	2. git add first.txt					:: put particular file (name is first.txt) into staging area 	
+	3. git restore --staged fileName
 	
 (commit)	8. git commit -m "Initial Commit" 					:: use to commit the staging area with commit Message 
 
@@ -113,7 +123,7 @@ b. To start
 					Updating files: 100% (24448/24448), done.
 
 			10. pwd 										:: return Present Directory 
-			11. ls 											:: return the list of files and directory in current repositroy	
+			11. ls 											:: return the list of all the files and directory in current repositroy	
 			12. cd											:: change Directory example cd shortName/ (move to shortName Directory)
 
 (file)		13. touch fileName 								:: create blank file in directory	example touch error.log
