@@ -55,7 +55,7 @@ Downlaod : type git install ( web site name : git-scm)
 
 5. Branch By default branch is master (main directoty or main branch)
 =========================================================================================================================================
-3Linux Commnds 
+#Linux Commnds 
 
 		1. pwd 										:: return Present Directory 
 		2. ls 										:: return the list of all the files and directory in current repositroy	
