@@ -110,7 +110,10 @@ Downlaod : type git install ( web site name : git-scm)
 	
 	1. git add --a / git add .				:: put all the files into staging area 
 	2. git add first.txt					:: put particular file (name is first.txt) into staging area 	
-	3. git restore --staged fileName
+	4. git restore filename 				:: unstage or even discard uncommitted local changes. (work when your file)
+	3. git restore --staged fileName		:: it will remove particalur file from stagging area (work when your file is in stagging area)
+	4. git restore --staged .				:: it will remove all the file from stagging area (work when your file is in stagging area)
+
 
 =========================================================================================================================================
 #commit
@@ -185,7 +188,7 @@ a. Revert back on files
 b. Revert back on files after commit
 ===================================
 
-	1. git revert gitCommitId				:: it will revert all the revert back upto a particular commit id
+	1. git revert gitCommitId				:: it will revert all the revert back upto a particular commit id but it will maintain History as well
 
 ======================================================================================================================================
 (working with Remote Repositores)
