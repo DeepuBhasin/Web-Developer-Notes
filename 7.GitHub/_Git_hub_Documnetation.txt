@@ -54,6 +54,14 @@ Downlaod : type git install ( web site name : git-scm)
 			|                           |                    (commit)                |
 
 5. Branch By default branch is master (main directoty or main branch)
+=========================================================================================================================================
+3Linux Commnds 
+
+		1. pwd 										:: return Present Directory 
+		2. ls 										:: return the list of all the files and directory in current repositroy	
+		3. cd										:: change Directory example cd shortName/ (move to shortName Directory)
+		4. touch fileName 							:: create blank file in directory example touch error.log
+		5. git mv first.txt first_rename.txt		:: this is used to rename the files and also add into stage area 
 ==========================================================================================================================================
 #alias and Vi Editior
 
@@ -103,67 +111,74 @@ Downlaod : type git install ( web site name : git-scm)
 	1. git add --a / git add .				:: put all the files into staging area 
 	2. git add first.txt					:: put particular file (name is first.txt) into staging area 	
 	3. git restore --staged fileName
+
+=========================================================================================================================================
+#commit
 	
-(commit)	8. git commit -m "Initial Commit" 					:: use to commit the staging area with commit Message 
+	1. git commit -m "Initial Commit" 		:: use to commit the staging area with commit Message
+	2. git commit -am "Initial commit" 		:: use to commit the by skipping the stagging the files 
 
+========================================================================================================================================
+#clone		
+	
+	1. git clone https://github.com/tensorflow/tensorflow.git 
 
-(clone)		9. go to any git hub repository -> click on clone -> copy the link of the clone address -> open git bash
-			->	git clone (use shit + ins key to paste the addres) https://github.com/tensorflow/tensorflow.git 
-			or 
-			->	git clone (use shit + ins key to paste the addres) https://github.com/tensorflow/tensorflow.git shortName	
+	example :  	
+		Cloning into 'tensorflow'...
+		remote: Enumerating objects: 12, done.
+		remote: Counting objects: 100% (12/12), done.
+		remote: Compressing objects: 100% (10/10), done.
+		remote: Total 1090924 (delta 2), reused 6 (delta 2), pack-reused 1090912
+		Receiving objects: 100% (1090924/1090924), 649.18 MiB | 18.16 MiB/s, done.
+		Resolving deltas: 100% (889372/889372), done.
+		Updating files: 100% (24448/24448), done.
 
-				example :  	
-					Cloning into 'tensorflow'...
-					remote: Enumerating objects: 12, done.
-					remote: Counting objects: 100% (12/12), done.
-					remote: Compressing objects: 100% (10/10), done.
-					remote: Total 1090924 (delta 2), reused 6 (delta 2), pack-reused 1090912
-					Receiving objects: 100% (1090924/1090924), 649.18 MiB | 18.16 MiB/s, done.
-					Resolving deltas: 100% (889372/889372), done.
-					Updating files: 100% (24448/24448), done.
+=========================================================================================================================================
+#Ignore
+	
+	1. .gitignore							:: this file ignore all files or  directory which are written in this file  
+		a. *.log							:: ignore all the files with .log extention which are written in the gitignore file
+		b. folderName/						:: ignore folder which are wriiten in the gitignore file for example "dir/" gitignore file will ignore this 													directory in all the folders  
+		c. /folderName/						:: this will ignore only outer folder(main Directory) not the inner folders (other than main directory)
+		d. folderName/folderName/   		:: this will ignore only particalur folder 
+		
+	Note : 	Gitignore ignore all the blank folder by default 
 
-			10. pwd 										:: return Present Directory 
-			11. ls 											:: return the list of all the files and directory in current repositroy	
-			12. cd											:: change Directory example cd shortName/ (move to shortName Directory)
+===========================================================================================================================================
+#difference
+	
+	1. git diff 			:: return the difference between the stage area and working directory (modified area (changes done after staging))		
+	2. git diff --staged 	:: return the difference between the two stages 
 
-(file)		13. touch fileName 								:: create blank file in directory	example touch error.log
-(Rename)	14. git mv first.txt first_rename.txt			:: this is used to rename the files and also add into stage area 
+===========================================================================================================================================
+#log
+	1. git log				:: return all the commits in the directory 
 
-(ignore files)	15. .gitignore								:: this file is used to ignore the all files in directory which are written in this file while staging 
-					a. *.log								:: this line is ignore all the files with .log extention which are written in the gitignore file
-					b. folderName/							:: this line is ignore folder which are wriiten in the gitignore file for example "dir/" gitignore file will ignore this 													directory in all the folders  
-					c. /folderName/							:: this will ignore only outer folder(main Directory) not the inner folders (other than main directory)
-					d. folderName/folderName/   			:: this will ignore only particalur folder 
-					c. Gitignore ignore all the blank folder by default 
-
-(diff)			16. a. git diff 					:: return the difference between the stage area and working directory (modified area (changes done after staging))		
-					b. git diff --stages 			:: return the difference between the two stages 
-
-(Skip staging area)
-				17. git add -am "Direct Commit"     :: it will skip the staging area but in this command will not commit that files which are untracked area 
-
-
-(log)			18.a. git log											:: return all the commits in the directory 
-
-					example 	commit 8d234b6501d4569dc2fdf4350fca334f97d18b78 (HEAD -> master)			:: hash with directory name 			
-					Author: Deepinder Singh <Deepinder999@gmail.com>							:: Done by the person 		
-					Date:   Mon Feb 15 00:01:21 2021 +0530										:: Time stamp	
-
-					    Initial Commit 															:: Commit Message 
+		example commit 8d234b6501d4569dc2fdf4350fca334f97d18b78 (HEAD -> master)	:: hash with directory name 			
+		Author: Deepinder Singh <Deepinder999@gmail.com>							:: Done by the person 		
+		Date:   Mon Feb 15 00:01:21 2021 +0530										:: Time stamp	
+		 Initial Commit 															:: Commit Message 
 					
-					b. git log -p 					:: return the difference between the commits 
-					c. git log -p -2				:: return the difference between the 2 commits 	
-					d. git log --stat 				:: return the difference between the commits very small information 
-					e. git log --pretty=oneline		:: return all the commits with message and hash (shot description)
-					f. git log --pretty=full 		:: return all the commits with message and hash (full description)
-					g. git log --since=2.days		:: return the 2 days work 
-					h. git log --since=2.months		:: return the 2 months work 
-					i. git log --amend 				:: use to change the commit data
-						after this command window will open called wim editior -> Change any thing that you want to do -> esc (key) -> ':wq' + enter
+	2. git log -p 					:: return the difference between the commits 
+	3. git log -p -2				:: return the difference between the 2 commits 	
+	4. git log --stat 				:: return the difference between the commits very small information 
+	5. git log --pretty=oneline		:: return all the commits with message and hash (shot description)
+	6. git log --pretty=full 		:: return all the commits with message and hash (full description)
+	7. git log --since=2.days		:: return the 2 days work 
+	8. git log --since=2.months		:: return the 2 months work 
+	9. git log --amend 				:: use to change the commit data
+		after this command window will open called wim editior -> Change any thing that you want to do -> esc (key) -> ':wq' + enter
+=====================================================================================================================================
+#undoing/Reverting/Reset Codes / RollBack
+	
+	1. git checkout -- fileName 		:: will roll back all the changes upto lastest commit in the particular file 
+	2. git checkout -f 	
 
-(unmodified/rollback)
-				19. a. git checkout -- fileName 		:: will roll back all the changes upto lastest commit in the particular file 
-					b. git checkout -f 					:: will roll back all the changes upto lastest commit in all the files/directories 
+	Note : if you have to perform this action then your file should already in stagging area before these commands  
+
+
+======================================================================================================================================
+				:: will roll back all the changes upto lastest commit in all the files/directories 
 
 (working with Remote Repositores)
 				20. login to git hub -> Click on '+'' sign(right hand at top) -> select 'New Repository' -> enter Repository Name -> Enter Discription -> 
