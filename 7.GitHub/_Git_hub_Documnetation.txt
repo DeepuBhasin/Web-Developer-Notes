@@ -187,7 +187,6 @@ b. Revert back on files after commit
 
 	1. git revert gitCommitId				:: it will revert all the revert back upto a particular commit id
 
-
 ======================================================================================================================================
 (working with Remote Repositores)
 				20. login to git hub -> Click on '+'' sign(right hand at top) -> select 'New Repository' -> enter Repository Name -> Enter Discription -> 
