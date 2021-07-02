@@ -1,5 +1,7 @@
 #Documentation 
 
+Best Website : https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud
+
 1. What is Git ?	
 	it is version Control System (to keep tracsk of files) and main advantages of this
 	a. Easily recovers files 
@@ -150,8 +152,12 @@ Downlaod : type git install ( web site name : git-scm)
 ===========================================================================================================================================
 #difference
 	
-	1. git diff 			:: return the difference between the stage area and working directory (modified area (changes done after staging))		
-	2. git diff --staged 	:: return the difference between the two stages 
+	1. git diff 								:: return the difference between the stage area and working directory (modified area (changes done after staging))		
+	2. git diff --staged 						:: return the difference between the two stages 
+	3. git difftool gitCommitId gitCommitId		:: return the difference between two commits with two windows 
+	4. git difftool HEAD gitCommitId			:: return the difference between two commits with two windows  
+
+	Note : you can use MELD Software to see difference its like VI editior
 
 ===========================================================================================================================================
 #log
@@ -172,7 +178,13 @@ Downlaod : type git install ( web site name : git-scm)
 	9. git log --amend 				:: use to change the commit data
 		after this command window will open called wim editior -> Change any thing that you want to do -> esc (key) -> ':wq' + enter
 =====================================================================================================================================
-#undoing/Reverting/Reset Codes / RollBack
+#HEAD
+
+	1. git show Head 			:: show the last commit detail with commit id
+	2. git show gitCommitId 	:: show the last commit detail with commit id
+
+=====================================================================================================================================
+#undoing/Reverting/Reset Codes/RollBack
 
 a. Revert back on files	
 ======================	
@@ -188,9 +200,40 @@ a. Revert back on files
 b. Revert back on files after commit
 ===================================
 
-	1. git revert gitCommitId				:: it will revert all the revert back upto a particular commit id but it will maintain History as well
+	1. git revert gitCommitId				:: it will revert all the data upto a particular commit-id but it will maintain History as well
+	2. git reset --hard gitCommitId			:: iit will revert all the data upto a particular commit-id 
 
 ======================================================================================================================================
+#Branching
+	1. git checkout -b branchName			:: to create new branch 
+	2. git checkout branchName 				:: Switch to another branch
+	3. git branch 							:: return all the names of branches 
+	4. git checkout -D branchName
+		
+		Note : 1. with green color and star on it will reflect current branch		
+			   2. when ever you want to switch the branch you should always commit before changing
+======================================================================================================================================
+#Merging
+
+	Note : which ever you want to merge branch in a particalur branch you have to go in that branch first for example you want to merge 'test-mail' branch into 'master' branch so you have to go first in master branch then make a requst to merge like -> git merge test-mail 		
+
+	1. git merge branchName 			:: it will merge the branch to master branch (if conflict occur it will ask you to accept incoming changes and current changes )
+			
+			after -> git status
+
+			get -> HP@DeepuBhasin MINGW64 /c/wamp64/www/AAAA/7.GitHub/Practise/mywebsite (master|MERGING) 
+			
+			git -> commit  	(this commit is called merge commit)
+
+	2. git branch -v  				:: will return all the last commit message + branches + hash numbers 
+	3. git branch --merged 			:: will return all the merge branches
+	4. git branch --no-merged		:: will return all the non merge branches 
+	5. git branch -d branchName 	:: wiil delete merge branch (if branch is not merge it will show error message)	 
+
+(note) when ever you want to merge you should be in the master branch and and every thing should be commit before merging every thing 
+
+=====================================================================================================================================
+
 (working with Remote Repositores)
 				20. login to git hub -> Click on '+'' sign(right hand at top) -> select 'New Repository' -> enter Repository Name -> Enter Discription -> 
 					a. ->git remote add origin https://github.com/DeepuBhasin/gitTituorial_demo.git    		:: add remote git repository
@@ -226,31 +269,7 @@ b. Revert back on files after commit
 					c. git config --global alias.last 'log -p -1'               :: alias to get last commit -> git last
  										  (Short name) (Command Name)
 
-(Branching)		22. git checkout -b develop						:: git checkout -b BrnachName
-					exmpale
-						HP@DeepuBhasin MINGW64 /c/wamp64/www/AAAA/7.GitHub/Practise (master)
-						git checkout -b develop	
-						HP@DeepuBhasin MINGW64 /c/wamp64/www/AAAA/7.GitHub/Practise (develop)
 
-				23. git checkout master 						:: move to master branch folder
-				24. git checkout BranchName						:: move to branch folders 				(git checkout develop)
-				25. git branch 									:: return all the names  of branches (with green color and star on it will reflect current branch)		
-
-(note) when ever you want to switch the branch you should always commit before changing
-
-(mergin) 		26. git merge BranchName 						:: it will merge the branch to master branch (if conflict occur it will ask you to accept incoming changes and current 																				changes )
-					 after -> git status
-
-					 get -> HP@DeepuBhasin MINGW64 /c/wamp64/www/AAAA/7.GitHub/Practise/mywebsite (master|MERGING) 
-					 
-					 git -> commit  	(this commit is called merge commit)
-
-				27. git branch -v  								:: will return all the last commit message + branches + hash numbers 
-				28. git branch --merged 						:: will return all the merge branches
-				29.	git branch --no-merged						:: will return all the non merge branches 
-				30. git branch -d BranchName 					:: wiil delete merge branch (if branch is not merge it will show error message)	 
-
-(note) when ever you want to merge you should be in the master branch and and every thing should be commit before merging every thing 
 
 
 
