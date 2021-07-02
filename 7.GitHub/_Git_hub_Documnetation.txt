@@ -20,8 +20,8 @@
 2. What is GitHub 
 	a. it is git is website which store the git hub repository
 	b. it is not just a cloud storage but a full version control System powered by git.
-	
-	c. github alternatives are gitlab, bitbucket 
+	c. Central online repository which mutiple team-members could access 
+	d. github alternatives are gitlab, bitbucket 
 
 
 Downlaod : type git install ( web site name : git-scm)
@@ -230,10 +230,11 @@ b. Revert back on files after commit
 
 ======================================================================================================================================
 #Branching
-	1. git checkout -b branchName			:: to create new branch 
-	2. git checkout branchName 				:: Switch to another branch
-	3. git branch 							:: return all the names of branches 
-	4. git checkout -D branchName
+	1. git checkout -b branchName	:: to create new branch 
+	2. git checkout branchName 		:: Switch to another branch
+	3. git branch 					:: return all the names of branches 
+	4. git checkout -D branchName	:: use to delete the branch no matter its merge or not 
+	5. git branch -d branchName 	:: wiil delete merge branch (if branch is not merge it will show error message)	
 		
 		Note : 1. with green color and star on it will reflect current branch		
 			   2. when ever you want to switch the branch you should always commit before changing
@@ -243,29 +244,45 @@ b. Revert back on files after commit
 	Note : which ever you want to merge branch in a particalur branch you have to go in that branch first for example you want to merge 'test-mail' branch into 'master' branch so you have to go first in master branch then make a requst to merge like -> git merge test-mail 		
 
 	1. git merge branchName 			:: it will merge the branch to master branch (if conflict occur it will ask you to accept incoming changes and current changes )
-			
-			after -> git status
+	
+	303a192 (HEAD -> master, testing1) commit 4 in testing branch	//representing  two branches has merged example (master and testing1) and listed below commits are no get merge into a single sheet
+	dd1f5bb commit 3 in testing branch
+	87586c4 commit 2 in testing branch
+	81384a9 commit 1 in testing branch
+	f5a56c6 commit 4
+	f9b6f8c commit 3
+	39c9586 commit 2
+	9699a44 commit 1
+		
 
-			get -> HP@DeepuBhasin MINGW64 /c/wamp64/www/AAAA/7.GitHub/Practise/mywebsite (master|MERGING) 
-			
-			git -> commit  	(this commit is called merge commit)
-
-	2. git branch -v  				:: will return all the last commit message + branches + hash numbers 
+	2. git branch -v  				:: will return all the last commit message [branches , hash numbers , last commit message ] 
 	3. git branch --merged 			:: will return all the merge branches
 	4. git branch --no-merged		:: will return all the non merge branches 
-	5. git branch -d branchName 	:: wiil delete merge branch (if branch is not merge it will show error message)	 
+	 
 
 (note) when ever you want to merge you should be in the master branch and and every thing should be commit before merging every thing 
 
 =====================================================================================================================================
+#Push and Pull
 
-(working with Remote Repositores)
-				20. login to git hub -> Click on '+'' sign(right hand at top) -> select 'New Repository' -> enter Repository Name -> Enter Discription -> 
-					a. ->git remote add origin https://github.com/DeepuBhasin/gitTituorial_demo.git    		:: add remote git repository
-											or
-					->git remote add anyShortName https://github.com/DeepuBhasin/gitTituorial_demo.git   	:: add remote git repository  
-					b. git remote 																			:: to get remote name
-					c. git remote -v 																		:: to get push and pull remote address 
+	1. git push origin branchName	:: is use to push data in the repository (branchName)
+	2. git pull origin branchName	:: is use to pull data from the repository (branchName)
+
+=====================================================================================================================================
+#working with Remote Repositores
+
+	1. Add Repository :: login to git hub -> Click on '+'' sign(right hand at top) -> select 'New Repository' -> enter Repository Name -> Enter Discription -> 
+
+	2. git remote add origin https://github.com/DeepuBhasin/gitTituorial_demo.git		:: to add remote 
+			
+			-> remote 		:: remote repository
+			-> add 	  		:: adding address of repository
+			-> origin 		:: means alias the name of http address example https://github.com/DeepuBhasin/gitTituorial_demo.git is now become origin
+	
+	3. git remote 			:: to get remote name
+	4. git remote -v 		:: to get push and pull remote address 
+
+======================================================================================================================================	
 
 (Permisssions)		d. go to settings -> SSH & GPG keys -> New SHS key -> enter title -> to add key first go to ssh git hub website (just enter ssh git hub in google) 
 						-> Generating a new SSH key and adding it to the ssh-agent -> enter this in git bash '$ ssh-keygen -t ed25519 -C "your_email@example.com" '			
@@ -282,18 +299,6 @@ b. Revert back on files after commit
 									To https://github.com/DeepuBhasin/gitTituorial_demo.git
 									 * [new branch]      master -> master
 									Branch 'master' set up to track remote branch 'master' from 'origin'.
-(push)					e. git push -u origin master	 :: is use push data in the repository
-						f. git push -u origin branchName :: is use to push data into the branch 
-						g. git push -u origin branchName:NewName    		 :: is use to push data into the branch with new name
-						h. git push -d origin BranchName         			 :: is use to delete repository from github	 
-
-
-											   	
-(alias)			21. a. git config --global alias.st stauts 						:: alias status to st key word ->	then git st
-					b. git config --global alias.unstage 'restore --staged --'  :: alias to make unstage   	-> git unstage fileName
-					c. git config --global alias.last 'log -p -1'               :: alias to get last commit -> git last
- 										  (Short name) (Command Name)
-
 
 
 
