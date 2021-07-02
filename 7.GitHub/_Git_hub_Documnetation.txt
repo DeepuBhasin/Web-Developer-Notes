@@ -64,7 +64,8 @@ Downlaod : type git install ( web site name : git-scm)
 #Extra 
 	1. Best Website : https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud
 	2. Command Line Interface : https://cmder.net/
-	3. For Merging Interface  : MELD Software	
+	3. For Merging Interface  : MELD Software
+	4. Git Bash command line environment is used for interacting with Git .	
 
 
 =========================================================================================================================================
@@ -131,6 +132,7 @@ Downlaod : type git install ( web site name : git-scm)
 	5. git restore --staged fileName	:: it will remove particalur file from stagging area (work when your file is in stagging area)
 	6. git restore --staged .			:: it will remove all the file from stagging area (work when your file is in stagging area)
 	7. git rm --cached fileName			:: remove the file from the stagging area
+	8. git clean -f 					:: git clean removes untracked files from your working directory.
 
 
 =========================================================================================================================================
@@ -168,7 +170,7 @@ Downlaod : type git install ( web site name : git-scm)
 ===========================================================================================================================================
 #difference
 	
-	1. git diff 								:: return the difference between the stage area and working directory (modified area (changes done after staging))		
+	1. git diff 								:: return the difference between the stage area and working directory (modified area (changes done after staging)) and also command compares two specified branches		
 	2. git diff --staged 						:: return the difference between the two stages 
 	3. git difftool gitCommitId gitCommitId		:: return the difference between two commits with two windows 
 	4. git difftool HEAD gitCommitId			:: return the difference between two commits with two windows  
@@ -184,7 +186,7 @@ Downlaod : type git install ( web site name : git-scm)
 		Date:   Mon Feb 15 00:01:21 2021 +0530										:: Time stamp	
 		 Initial Commit 															:: Commit Message 
 					
-	2. git log -p 					:: return the difference between the commits 
+	2. git log -p 					:: return the difference between the commits (git log -p command displays the patch representing each commit.) 
 	3. git log -p -2				:: return the difference between the 2 commits 	
 	4. git log --stat 				:: return the difference between the commits very small information 
 	6. git log --oneline			:: return all the commits with message and hash (very shot description)
@@ -205,8 +207,10 @@ Downlaod : type git install ( web site name : git-scm)
 a. Revert back on files	
 ======================	
 	
-	1. git checkout -- fileName 				:: this will roll back all the changes upto lastest commit in the particular file 
-	2. git checkout -- . /git checkout -f 		:: this will roll back all the changes upto lastest commit in all the the files/directories 
+		1. git checkout -- fileName 			:: this will roll back all the changes upto lastest commit in the particular file 
+		2. git checkout -- . /git checkout -f 	:: this will roll back all the changes upto lastest commit in all the the files/directories 
+	
+(best) 3. git checkout gitCommitId				:: you will move to the particular commitid (best use to get back in time to see what was there actually) and also if you want to go back to the current commitid then use -> Git checkout branchName (this comand should run after 'git checkout gitCommitId' command )
 
 	Note : 
 		1. if you have to perform this action then your file should already in stagging area before these commands  
@@ -216,8 +220,9 @@ a. Revert back on files
 b. Revert back on files after commit
 ===================================
 
-	1. git revert gitCommitId				:: it will revert all the data upto a particular commit-id but it will maintain History as well
-	2. git reset --hard gitCommitId			:: iit will revert all the data upto a particular commit-id 
+		1. git revert gitCommitId										:: it will revert all the data upto a particular commit-id but it will maintain History as well
+(best)	2. git reset --hard gitCommitId									:: it will revert all the data upto a particular commit-id 
+		3. git reset gitCommitId /	git reset --soft gitCommitId		:: it will revert all the data upto a particular commit-id but also the changes will stay there which we have done after this selected commitid will remain there and it will reflect in modifed stagging area (use full when you want to save every commit into single commit)
 
 	Note : 	1. Checkout Commit : is save 
 			2. Revert commit   : between save and Danger
