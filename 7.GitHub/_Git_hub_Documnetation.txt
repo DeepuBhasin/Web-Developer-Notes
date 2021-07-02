@@ -75,6 +75,9 @@ Downlaod : type git install ( web site name : git-scm)
 		3. cd										:: change Directory example cd shortName/ (move to shortName Directory)
 		4. touch fileName 							:: create blank file in directory example touch error.log
 		5. git mv first.txt first_rename.txt		:: this is used to rename the files and also add into stage area 
+		6. rm fileName								:: to delete the file
+		7. rmdir folderName							:: to delete the directory 	
+
 ==========================================================================================================================================
 #alias and Vi Editior
 
@@ -122,11 +125,12 @@ Downlaod : type git install ( web site name : git-scm)
 ==========================================================================================================================================
 #Staging
 	
-	1. git add --a / git add .				:: put all the files into staging area 
-	2. git add first.txt					:: put particular file (name is first.txt) into staging area 	
-	4. git restore filename 				:: unstage or even discard uncommitted local changes. (work when your file)
-	3. git restore --staged fileName		:: it will remove particalur file from stagging area (work when your file is in stagging area)
-	4. git restore --staged .				:: it will remove all the file from stagging area (work when your file is in stagging area)
+	1. git add --a / git add .			:: put all the files into staging area 
+	2. git add first.txt				:: put particular file (name is first.txt) into staging area 	
+	4. git restore filename 			:: unstage or even discard uncommitted local changes. (work when your file)
+	5. git restore --staged fileName	:: it will remove particalur file from stagging area (work when your file is in stagging area)
+	6. git restore --staged .			:: it will remove all the file from stagging area (work when your file is in stagging area)
+	7. git rm --cached fileName			:: remove the file from the stagging area
 
 
 =========================================================================================================================================
@@ -183,12 +187,12 @@ Downlaod : type git install ( web site name : git-scm)
 	2. git log -p 					:: return the difference between the commits 
 	3. git log -p -2				:: return the difference between the 2 commits 	
 	4. git log --stat 				:: return the difference between the commits very small information 
-	5. git log --pretty=oneline		:: return all the commits with message and hash (shot description)
-	6. git log --pretty=full 		:: return all the commits with message and hash (full description)
-	7. git log --since=2.days		:: return the 2 days work 
-	8. git log --since=2.months		:: return the 2 months work 
-	9. git log --amend 				:: use to change the commit data
-		after this command window will open called wim editior -> Change any thing that you want to do -> esc (key) -> ':wq' + enter
+	6. git log --oneline			:: return all the commits with message and hash (very shot description)
+	7. git log --pretty=oneline		:: return all the commits with message and hash (shot description)
+	8. git log --pretty=full 		:: return all the commits with message and hash (full description)
+	9. git log --since=2.days		:: return the 2 days work 
+	10. git log --since=2.months	:: return the 2 months work 
+	11. git log --amend 			:: use to change the commit data ->after this command window will open called wim editior -> Change any thing that you want to do -> esc (key) -> ':wq' + enter
 =====================================================================================================================================
 #HEAD
 
