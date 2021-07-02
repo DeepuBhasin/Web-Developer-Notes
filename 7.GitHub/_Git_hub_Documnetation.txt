@@ -1,9 +1,13 @@
 #Documentation 
 
-Best Website : https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud
-
 1. What is Git ?	
-	it is version Control System (to keep tracsk of files) and main advantages of this
+	
+	1. it is Distribution version Control System (to keep tracks of files) 
+	2. it's system that records changes to our files over time 
+	3. we can recally specfic versions of those files at any given time
+	4. Many people can easily collaborate on a project and have their own version project files on their computer 
+
+	and main advantages of this
 	a. Easily recovers files 
 	b. Who intrduce issue and when
 	c. RollBack to previous working state
@@ -57,6 +61,13 @@ Downlaod : type git install ( web site name : git-scm)
 
 5. Branch By default branch is master (main directoty or main branch)
 =========================================================================================================================================
+#Extra 
+	1. Best Website : https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud
+	2. Command Line Interface : https://cmder.net/
+	3. For Merging Interface  : MELD Software	
+
+
+=========================================================================================================================================
 #Linux Commnds 
 
 		1. pwd 										:: return Present Directory 
@@ -90,11 +101,12 @@ Downlaod : type git install ( web site name : git-scm)
 =======================================================================================================================================
 #Configuration of Username and Email  
 
-	1. git config --global user.name "Deepinder Singh"   					:: To set the username 
-	2. git config --global user.emial "Deepinder999@gmail.com"  			:: To set the email address
-	3. git config user.name 												:: return the usernane 
-	4. git config user.email 												:: return the email 
-	3. git config --global --list 											:: return Username and Email address + other infromations
+	1. git config --global user.name "Deepinder Singh"   		:: To set the username 
+	2. git config --global user.emial "Deepinder999@gmail.com"  :: To set the email address
+	3. git config user.name 									:: return the usernane 
+	4. git config user.email 									:: return the email 
+	5. git config --global --list 								:: return Username and Email address + other infromations
+	6. git version												:: return the current version of git 
 
 ========================================================================================================================================
 #Initialisation
