@@ -219,6 +219,10 @@ b. Revert back on files after commit
 	1. git revert gitCommitId				:: it will revert all the data upto a particular commit-id but it will maintain History as well
 	2. git reset --hard gitCommitId			:: iit will revert all the data upto a particular commit-id 
 
+	Note : 	1. Checkout Commit : is save 
+			2. Revert commit   : between save and Danger
+			3. Reset Commit	   : Complete Danger
+
 ======================================================================================================================================
 #Branching
 	1. git checkout -b branchName			:: to create new branch 
