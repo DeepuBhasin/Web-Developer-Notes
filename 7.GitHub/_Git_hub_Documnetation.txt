@@ -142,6 +142,23 @@ Downlaod : type git install ( web site name : git-scm)
 	2. git commit -am "Initial commit" 		:: use to commit the by skipping the stagging the files 
 
 ========================================================================================================================================
+#Squash : Combining commits into a single Commit
+
+	1. git rebase -i Head~3		:: add 3 commit from the starting combining into single commit
+
+	after this command vi editior will open to edit the commit with below commands 
+
+	Note : 1. # -> means ignore 
+		   2. pick 	 -> use the commit
+		   3. reward -> use the commit, but edit the commit message 
+		   4. edit 	 -> use commit, but stop for amending 
+		   5. Squash -> meld into previous commit
+		   4. drop 	 -> remove commit	
+
+	after that vi editior will open to create commit message 	   
+
+
+========================================================================================================================================
 #clone		
 	
 	1. git clone https://github.com/tensorflow/tensorflow.git 
@@ -241,7 +258,9 @@ b. Revert back on files after commit
 ======================================================================================================================================
 #Merging
 
-	Note : which ever you want to merge branch in a particalur branch you have to go in that branch first for example you want to merge 'test-mail' branch into 'master' branch so you have to go first in master branch then make a requst to merge like -> git merge test-mail 		
+	Note a. which ever you want to merge branch in a particalur branch you have to go in that branch first for example you want to merge 'test-mail' branch into 'master' branch so you have to go first in master branch then make a requst to merge like -> git merge test-mail
+
+		b. When you changes in same file in  master as well in branche  and when you merge after changing then conflict always generate		
 
 	1. git merge branchName 			:: it will merge the branch to master branch (if conflict occur it will ask you to accept incoming changes and current changes )
 	
@@ -253,6 +272,14 @@ b. Revert back on files after commit
 	f9b6f8c commit 3
 	39c9586 commit 2
 	9699a44 commit 1
+
+
+	Steps : 1. Git checkout master
+			2. git Pull
+			3. git checkout branchName
+			4. doing codes all the things etc 
+			5. git checkout master 
+			6. git merge branchName
 		
 
 	2. git branch -v  				:: will return all the last commit message [branches , hash numbers , last commit message ] 
@@ -267,6 +294,34 @@ b. Revert back on files after commit
 
 	1. git push origin branchName	:: is use to push data in the repository (branchName)
 	2. git pull origin branchName	:: is use to pull data from the repository (branchName)
+
+	Note : here origin is the http address of your git hub repository
+====================================================================================================================================
+#cherry-pick		
+		
+		a. Bring in changes from a a specfic commitid
+		b. choose one or more commits
+		c. cherry picking in git means to choose a commit from one branch and apply it into another
+		d. This is contrast with other way such as merge and rebase which normally applies many commits into another branch
+	
+	1. git cherry-pick gitCommitId
+====================================================================================================================================
+#Rebase
+
+	a. Rebase is also a way of combining the work between different branches. Rebasing takes a set of commits, copies them and stores them outside your repository. The advantage of rebasing is that it can be used to make linear sequence of commits. The commit log or History of the repository stays clean if rebasing is done 
+	b. first go into the branch where you want to start the base of master exmaple checkout into testing branch then exceute the rebase command 
+	c. difference between merge and rebase is : in merge command only last commit is merge into parent branch but in rebase command all commit are marge into parent branch
+
+		1. git rebase master 	:: to start the base from master branch of the branch 
+
+
+		steps -> 	1. git checkout testing			// now in testing 
+					2. git rebase master			// now in testing 
+					3. git checkout master			// now in master
+					4. git merge testing			// now in master
+
+	Note : best explanation on this : https://www.youtube.com/watch?v=f1wnYdLEpgI	
+
 
 =====================================================================================================================================
 #working with Remote Repositores
