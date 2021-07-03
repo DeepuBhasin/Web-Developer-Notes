@@ -79,6 +79,7 @@ Downlaod : type git install ( web site name : git-scm)
 		5. git mv first.txt first_rename.txt		:: this is used to rename the files and also add into stage area 
 		6. rm fileName								:: to delete the file
 		7. rmdir folderName							:: to delete the directory 	
+(best)	8. rm -rf folderName/fileName				:: to delete the directory or file
 
 ==========================================================================================================================================
 #alias and Vi Editior

@@ -92,8 +92,63 @@
 #Date Command 
 
     The Data Command can be used only by the system adminnistartor to change the system date and time
+
+    Command  : date "+%m"
     
-    1. %m  :: Display month of the year       
+    1. %m  :: Display month of the year(in digits) 
+    2. %d  :: Display day of the month(in digits)
+    3. %y  :: Display year(last two digits)
+    4. %D  :: Display date as mm/dd/yy
+
+    5. %H  :: Display Hours(00 to 23)
+    6. %M  :: Display minutes(00 to 59)
+    7. %S  :: Display seconds(00 to 59)
+    8. %T  :: Display time as HH:MM:SS for options of the date Command
+    9. %r  :: Display time in 12 hours format 
+
+=========================================================================================================================================
+#Basic Commands Part 2 (best one) 
+    1. PWD (Print working Directory)    :: this command prints the currrent folder/ Directory you are working on.
+    2. LS  (Lists)                      :: is a linux command that lists directory contents of files and directories/ folder
+    3. CD  (Change Directory)           :: is used to change the directory/ folder.  
+        a. cd ..                        :: This command is used to move to previous Directory/ Folder 
+        b. cd test                      :: goes into test directory
+        c. cd ~ or cd --                :: This Command is used to move to root Directory
+    4. clear                            :: This command Clear up all the stuff in terminal Window  
+    5. mkdir (make Directory)           :: This Command is used to create a directory / folder
+
+    6. rm filename                      :: to remove Filename
+    7. mv (Move)                        :: this command is used to move one file to another place. 
+        a. mv Filename directoryName/   :: this command is used to move one file to another place.
+        b. mv Filename ..               :: this command is used to move one file to previous directory.       
+
+
+============================================================================================================================================
+#Concatenate 
+
+    1. Cat      :: the cat (short for "concatenate") command is one of the most frequently used command in Linux/UNIX like operating system. Cat command allows us to create single or multiple files, view content of file, concatenate files and Redirect output in terminal ir files 
+
+        a. cat > filename.extention     :: create file with extention and add content in it 
+        b. cat  filename                :: for Display text in a file in terminal 
+        c. cat -n filename              :: precedes each line with a line number 
+        d. cat -e filename              :: Displays a Character $ at the end of each line 
+        e. cat -b filename              :: Omits line numbers from blank lines 
+==============================================================================================================================================
+#Copy 
+
+    1. cp        :: Copy                        -> this command is used to copy one file to another place 
+    
+       a. cp Filename directoryName/            -> this command is used to copy the one file and place into directory
+       b. cp Filename newFileName.extention     -> newFileName is newly created that doesn't exist before, and content of first file will be copied to newly created second file.
+       c. cp file_1 file_2 directory            -> copy mutiple files to some Directory 
+       d. cp -i file_1 file_2 directory/        -> When copying files there is a possibility of overwriting 
+       e. cp -R directory_1 directory_2         -> second directory is newly created that doesn't exist before, and files of first directory will be copied to newly created second directory 
+
+
+
+
+
+
 
 
 
