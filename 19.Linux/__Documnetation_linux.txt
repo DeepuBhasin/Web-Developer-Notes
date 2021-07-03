@@ -1,0 +1,5 @@
+# What is an operating System
+    1. Every time you switch on your computer, you see a screen where youo can perform different activities like write, browse the internet or watch a video etc.
+    2. What is is that make the computer hardware work like that ? How does the processor on your computer know that you are asking it to run a mp3 file 
+    3. Well, it is the operating System or the kernel which does this work. A kernal is a program at the heart of any operating system that takes care of fundamental (important) stuff, like letting hardware communicate with software.
+    4. 

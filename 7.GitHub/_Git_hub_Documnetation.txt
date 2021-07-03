@@ -66,6 +66,7 @@ Downlaod : type git install ( web site name : git-scm)
 	2. Command Line Interface : https://cmder.net/
 	3. For Merging Interface  : MELD Software
 	4. Git Bash command line environment is used for interacting with Git .	
+	5. best you tube tutorials : https://www.youtube.com/watch?v=8JJ101D3knE
 
 
 =========================================================================================================================================
