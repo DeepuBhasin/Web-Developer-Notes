@@ -109,15 +109,28 @@
 =========================================================================================================================================
 #Basic Commands Part 2 (best one) 
     1. PWD (Print working Directory)    :: this command prints the currrent folder/ Directory you are working on.
+    
     2. LS  (Lists)                      :: is a linux command that lists directory contents of files and directories/ folder
+        a. ls -a                        :: List all the files including hidden files 
+        b. ls -F                        :: Display the file type along with the name 
+        c. ls -R                        :: Display the content of sepecified directory and sub-directory
+            1. ls -R directoryName      :: Display the content of sepecified directory
+        d. ls -r                        :: Displays files and sub-directories in the reverse order 
+        e. ls -S                        :: Lists all files sorted by Size
+        f. Ls -A                        :: Displays hidden files and files beginnine with '.'
+        g. ls -l                        :: Displays a detailed list of files and directories 
+
     3. CD  (Change Directory)           :: is used to change the directory/ folder.  
         a. cd ..                        :: This command is used to move to previous Directory/ Folder 
         b. cd test                      :: goes into test directory
-        c. cd ~ or cd --                :: This Command is used to move to root Directory
+        c. cd ~ or cd --                :: This Command is used to move to root Directory (in window my computer is root)
+    
     4. clear                            :: This command Clear up all the stuff in terminal Window  
+    
     5. mkdir (make Directory)           :: This Command is used to create a directory / folder
-
+    
     6. rm filename                      :: to remove Filename
+    
     7. mv (Move)                        :: this command is used to move one file to another place. 
         a. mv Filename directoryName/   :: this command is used to move one file to another place.
         b. mv Filename ..               :: this command is used to move one file to previous directory.       
