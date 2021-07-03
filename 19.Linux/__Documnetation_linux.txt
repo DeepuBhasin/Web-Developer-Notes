@@ -1,5 +1,106 @@
 # What is an operating System
-    1. Every time you switch on your computer, you see a screen where youo can perform different activities like write, browse the internet or watch a video etc.
+    1. Every time you switch on your computer, you see a screen where you can perform different activities like write, browse the internet or watch a video etc.
     2. What is is that make the computer hardware work like that ? How does the processor on your computer know that you are asking it to run a mp3 file 
     3. Well, it is the operating System or the kernel which does this work. A kernal is a program at the heart of any operating system that takes care of fundamental (important) stuff, like letting hardware communicate with software.
-    4. 
+    4. So, to work on your computer, you need an operating system (OS). Infact, you are using one as you read this on your computer. Now, you may have used popular OS's like Windows, Apple OS X but here we will learn what linux is and what benefits it offers over other OS choices 
+
+
+    Hardware (CPU,Memeory, Hard Drive)----------> Operating System(Windows, Apple OS X, linux)--------> END USER 
+
+    Example : if END USE need to listen Songs then it will excute the command or interact with Operating System then OS will enables the Hardware to excute the operation 
+
+==============================================================================================================================================
+ #What is linux 
+    
+    1. Linux is an operating system or a kernal. it is Distributed under an open source license. Its functionality list is quite like UNIX because its derived from UNIX.
+    2. An Operating system is a software program that acts as an interface between a user and a computer.
+    3. Consists of instructions that are given to the hardware components of the computer to perform sepecifc tasks, such as creating or copying documents and viewing them etc.   
+
+==============================================================================================================================================
+#Who Created Linux?
+
+    1. Linux is an operating System or a kernal which germinated as an idea in the mind of young and bright Linus Trovalds when he was a computer science student. He used to work on the UNIX OS and thought that it needed improvments.
+    2. However, when his suggestions were rejected by the designers of UNIX, he thought of launching an OS which will be receptive to changes, Modifcations suggested by its users.
+
+============================================================================================================================================= 
+#Linux Mascot(means logo)
+
+    1. Official Mascot for linux is the linus Panguin, Tux
+
+============================================================================================================================================= 
+#Early Days of Linux
+    
+    1. Linux Launched in September 17,1991. though he would need programs like a File Manager (like my computer) Document Editior(like notepad , wordpad etc), Audio- Video (vlc players, mp3 players) programs to run on it. Something  as you have a cone but no ice-cream on top.
+    2. As Time passed by, he collaborated with other programmers in places like MIT (Massachusetts Institute of Technology) and applications fo Linux started to appear. so around 1991, a working operating System with Some appplicaton was officially launched and this was the start of one of the most loved and open-source OS options available Today.
+    3. The Earlier versions of Linux were not so user-friendly as they were is use by computer programmers and linus Trovalds never had it in mind to commercialize his product.
+    4. This definitely curbed the linux's popularity as other commercially oriented Operating system Windows got famous. Nonetheless, the open-source aspect of the linux operating system made it more robust (more Power full).
+
+============================================================================================================================================= 
+#Defining Open Source 
+    
+    1. Open Source implies free software. The software allows users to freely use the source code and customize it to meet individual requiments.
+    2. Open source allows users to perform the following tasks 
+        a. Access the source code of the software 
+        b. Run the Software for commercial(for Company) or personal use 
+        c. customize the source code to meet sepecifc requiments
+        d. Redistribution copies of the software 
+        e. Relase the customize software to the public in general   
+
+============================================================================================================================================= 
+#Defining Closed Source
+    
+    1. The proprietary Software source code in Closed source is not released to end users and is only available in a compiled excutable state.
+    2. The end users have to purchase the software to use it for personal or commercial purposes.
+    3. copying or Redistribution of the software can be restricted by the licence agreement between the vendor and the end user. 
+    4. Owned, developed and Distributed by a single vendor to end users who purchase the software for a licence fee.
+    5. Services, such as upgrade, add-ons and support are defined by the licence agreement between the vendor(Company) and the end user.
+
+============================================================================================================================================= 
+#Benefits of Using Linux
+
+    1. Linux Now enjoys popularity at its prime, and it;s famous among programmers as well as regular computer users around the world. its Modifcations benefits are 
+        a. it Offer a free Operating system. You do not have a shell hundreds of dollars to get OS like Windows!
+
+============================================================================================================================================= 
+#versions of Linux
+    
+    1. UBUNTU
+    2. FEDORE
+    3. Linux MINT
+    4. RED HAT LINUX
+    5. OPENSUSE
+    6. DEBIAN
+    7. ARCHLINUX
+
+============================================================================================================================================= 
+#Operating System Virtulization 
+
+    1. Operating system Virtulization refers to the user of software to allows system hardware to run multiple instnace of different operating system concurrently, allowing you to sun different applications requiring different operating system on one computer system. The operating system do not interfere with each other or the various applications.
+
+    In this series we are using
+        a. VMWARE(Software that provides Virtulization)
+        b. RED HAT LINUX versions 6 (operating system)
+
+
+============================================================================================================================================= 
+#Basic Linux Commands 
+    1. Linux is command line operating system. In Windows DOS/CMD for command Line 
+    2. The command in linux are case-sensitive and usually in lower case  
+    3. The general sytnax for a command is :
+            Command [options]
+=========================================================================================================================================
+#Date Command 
+
+    The Data Command can be used only by the system adminnistartor to change the system date and time
+    
+    1. %m  :: Display month of the year       
+
+
+
+
+
+
+
+
+    
+
