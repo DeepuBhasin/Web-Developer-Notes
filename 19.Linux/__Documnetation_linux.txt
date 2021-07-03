@@ -120,6 +120,8 @@
         f. Ls -A                        :: Displays hidden files and files beginnine with '.'
         g. ls -l                        :: Displays a detailed list of files and directories 
 
+        Note : ls -l and vdir are similar command
+
     3. CD  (Change Directory)           :: is used to change the directory/ folder.  
         a. cd ..                        :: This command is used to move to previous Directory/ Folder 
         b. cd test                      :: goes into test directory
@@ -134,6 +136,17 @@
     7. mv (Move)                        :: this command is used to move one file to another place. 
         a. mv Filename directoryName/   :: this command is used to move one file to another place.
         b. mv Filename ..               :: this command is used to move one file to previous directory.       
+
+    8. Touch filename                   :: Touch command is used to 
+        
+        a. Create a new File 
+        b. update the file's modifcation date 
+        c. Touch is similar to 'cat' command but in cat command we have to write Something in a file while creating a file.
+
+    9. Exit                            :: The exit command is used to terminate the linux session.   
+
+    10. Shutdown                       :: The Shutdown command is used to Shutdown the linux operating system  
+
 
 
 ============================================================================================================================================
