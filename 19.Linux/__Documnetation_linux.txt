@@ -9,6 +9,56 @@
 
     Example : if END USE need to listen Songs then it will excute the command or interact with Operating System then OS will enables the Hardware to excute the operation 
 
+    Note : 1. CMD or terminal are CLI Command Line Interface Example Linux
+           2. GUI : Grpahical User Interface Example Window 
+============================================================================================================================================
+#difference between Window and Linux    
+
+1. Layer Structure 
+        
+            Window  -> Hardware -> OS -> shell -> END User
+            Linux   -> Hardware -> kernal -> shell -> end User
+
+2. Folder
+
+            Window  -> Folder
+            Linux   -> Directory
+
+3. Software  
+
+            window  -> Software
+            Linux   -> Package
+
+4. User 
+            Window  -> Adminnistartor
+            linux   -> root user 
+            
+5. File system Hieracarchy 
+
+        Window  -> c:\  _____________________________________________
+                            |             |         |               |
+                        Program File    Users   program(xre)    perflog
+
+        Linux   -> / (Top level root directory) __________________________________________
+                                                |         |       |       |        |      |  
+                                                /root   /home   /boot   /etc    /user   /bin
+
+
+        /home   :: home directory of other user
+        /root   :: it is the home directoty for the root user 
+        /boot   :: it contains bootable files for linux 
+        /etc    :: it contains all configuration files 
+        /user   :: by default software are installed in this directory
+        /bin    :: it contains commands used by all users
+        /sbin   :: it Contains commands used by only root user 
+        /opt    :: optional applications software Package
+        /dev    :: essential device files this include terminal devices, usb or any device attached to the system
+
+
+
+
+
+
 ==============================================================================================================================================
  #What is linux 
     
@@ -143,11 +193,7 @@
         b. update the file's modifcation date 
         c. Touch is similar to 'cat' command but in cat command we have to write Something in a file while creating a file.
 
-    9. Exit                            :: The exit command is used to terminate the linux session.   
-
-    10. Shutdown                       :: The Shutdown command is used to Shutdown the linux operating system  
-
-
+    9. Exit                             :: The exit command is used to terminate the linux session.   
 
 ============================================================================================================================================
 #Concatenate 
@@ -169,6 +215,12 @@
        c. cp file_1 file_2 directory            -> copy mutiple files to some Directory 
        d. cp -i file_1 file_2 directory/        -> When copying files there is a possibility of overwriting 
        e. cp -R directory_1 directory_2         -> second directory is newly created that doesn't exist before, and files of first directory will be copied to newly created second directory 
+=============================================================================================================================================
+#DF Command
+    
+    1. Df           :: The df command stands for disk free, it is used to Display the amount of space used and the amount of free disk space available on the currently mounted file systems.
+
+        a. df -h    :: Displays the size in megabytes and gigabytes and appends the data with M and G respectively  
 
 
 

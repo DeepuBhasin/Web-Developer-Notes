@@ -103,6 +103,7 @@ Downlaod : type git install ( web site name : git-scm)
 	2. List of commands  				: git (press enter)       {commands also run in power shell}
 	3. q (key) 							: to quit
 	4. paste 							: shift + ins (key)
+	5. close terminal 					: ctrl + d
 
 =======================================================================================================================================
 #Configuration of Username and Email  
