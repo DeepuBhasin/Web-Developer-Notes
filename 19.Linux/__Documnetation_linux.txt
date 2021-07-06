@@ -54,6 +54,12 @@
         /opt    :: optional applications software Package
         /dev    :: essential device files this include terminal devices, usb or any device attached to the system
 
+6. Command Wriiten style 
+    
+    linux   -> [user@localhost Desktop]$ command
+    window  -> HP@DeepuBhasin MINGW64 /c/wamp/www/AAAA (main)
+                command 
+
 
 
 
@@ -180,6 +186,7 @@
     4. clear                            :: This command Clear up all the stuff in terminal Window  
     
     5. mkdir (make Directory)           :: This Command is used to create a directory / folder
+        a. mkdir newDirectory/test      :: new directory will created in test directory. 
     
     6. rm filename                      :: to remove Filename
     
@@ -189,22 +196,34 @@
 
     8. Touch filename                   :: Touch command is used to 
         
-        a. Create a new File 
-        b. update the file's modifcation date 
+        a. Create a new File or create multiple files 
+        b. update the file's modifcation date or update multiple files
+        
+                touch filename          :: if you run the command again the creation time will change of the file.
+
         c. Touch is similar to 'cat' command but in cat command we have to write Something in a file while creating a file.
 
     9. Exit                             :: The exit command is used to terminate the linux session.   
 
+    Note : 
+            1. to see any kind of file then 'cat' command is best in every case
+            2. to see History of your commands 'history' command is used    
 ============================================================================================================================================
 #Concatenate 
 
     1. Cat      :: the cat (short for "concatenate") command is one of the most frequently used command in Linux/UNIX like operating system. Cat command allows us to create single or multiple files, view content of file, concatenate files and Redirect output in terminal ir files 
 
         a. cat > filename.extention     :: create file with extention and add content in it 
-        b. cat  filename                :: for Display text in a file in terminal 
-        c. cat -n filename              :: precedes each line with a line number 
-        d. cat -e filename              :: Displays a Character $ at the end of each line 
-        e. cat -b filename              :: Omits line numbers from blank lines 
+        b. cat >> filename              :: to add more content in file
+        c. cat file_1 file_2 > filename :: it will create new file and get the data from file_1 data and file_2 data
+        d. cat  filename                :: for Display text in a file in terminal 
+        e. cat -n filename              :: precedes each line with a line number 
+        f. cat -e filename              :: Displays a Character $ at the end of each line 
+        g. cat -b filename              :: Omits line numbers from blank lines 
+        h. tac filename                 :: write reverse every thing
+
+        Note : if want to exit from writting terminal then use 'Ctrl + d'
+
 ==============================================================================================================================================
 #Copy 
 
@@ -216,21 +235,101 @@
        d. cp -i file_1 file_2 directory/        -> When copying files there is a possibility of overwriting 
        e. cp -R directory_1 directory_2         -> second directory is newly created that doesn't exist before, and files of first directory will be copied to newly created second directory 
 =============================================================================================================================================
+#Status
+
+    1. Stat filename        :: return the created date, size, modified Date etc. 
+
+=============================================================================================================================================
+#Vi Editior
+
+    1. a Program Editior 
+    2. it can be use to edit all kinds of plain text. it is specially usefull for editing programs mainly used for unix programs
+
+    Steps 
+    1. Vi filename -> enter 
+    2. First Insert 'i' means insert then -> enter the data -> Esc -> : -> following keywords 
+        a. :w               :: write 
+        b. :wq or :x        :: to save and quit 
+        c. :q               :: quit
+        d. :q!              :: force Quit, no save
+
+    keys 
+        1. h    :: left 
+        2. j    :: top 
+        3. k    :: down
+        4. l    :: bottom    
+
+=============================================================================================================================================
+#nano Editior
+
+   Steps
+    1. nano filename -> enter 
+    2. Enter text or any thing you want -> Ctrl + x
+
+
+
+=============================================================================================================================================
 #DF Command
     
     1. Df           :: The df command stands for disk free, it is used to Display the amount of space used and the amount of free disk space available on the currently mounted file systems.
 
-        a. df -h    :: Displays the size in megabytes and gigabytes and appends the data with M and G respectively  
+        a. df -h    :: Displays the size in megabytes and gigabytes and appends the data with M and G respectively 
 
+ =============================================================================================================================================
+#PS Command (simple like Task Manager)       
 
+    1. ps       :: The ps or Proccess Status command Display the Proccess that are currently running on the linux system.
 
+        a. ps -f        :: Generate a full listing of all the process
+        b. ps -A        :: Displays information of all process
+        c. ps -a        :: Displays information about all frequently request 
+        d. ps -e        :: Displays information about every process that is currently running  
+    
+    Note : 1. PID -> Process Id - Short for process identifier, a PID is a unique number that identifies each of the running Proccess in an operating system. a process is an excuting (i.e running) instnace of a program. each process is guaranteed a unique PID, which always a non-negative integer.
 
+           2. PPID: Parent Process Id(the one which launched this PID) 
 
+     output
+        $ ps
+            PID    PPID    PGID     WINPID   TTY         UID    STIME COMMAND
+            1485       1    1485      12068  cons0     197609 22:35:38 /usr/bin/bash       
+            1506    1485    1506      14148  cons0     197609 22:51:31 /usr/bin/ps  
 
+            TTY -> teletype     :: means terminal namd or number  
 
+     Note : bash ::  // its a shell which help to execute  all the comands    
 
+ =============================================================================================================================================
+#Kill Command 
 
+    1. Kill PID              :: The Kill command is used along with the 'ps' command. It stops the execution of one process.
+    2. PidOf PidName         :: command is used to print process id of a particular process.
+    3. Kill all              :: Kill all process by name    
+    4. Kill -l               :: dscribe the signals 
 
+=============================================================================================================================================
+#Uname 
+
+    1. Uname                :: Used to Display the system information
+        a. Uname -a         :: Prints all the basic information currently available from the system 
+        b. Uname -r         :: print the operating system realse level 
+        c. Uname -s         :: prints the operating system name
+        d. uname -m         :: prints the machine hardware type (32 or 64 bit)
+        e. uname -p         :: prints the machine processor type (32 or 64 bit)
+        f. uname -v         :: prints the operating system kernel versions    
+
+=============================================================================================================================================
+#TTY
+    
+    1. tty      :: Linux treats even the terminals as files. tty(teletype) command is used to display the names of these terminals. it also show the number of terminal.
+
+=============================================================================================================================================
+#Filters
+
+    1. Used to restructure the ouptut based on a certain conditions 
+    2. It transforms plain-text data into a meaningful way 
+    3. Helps in talking the input, modifying is as per requiment and then passes it as output.
+    
 
 
 
