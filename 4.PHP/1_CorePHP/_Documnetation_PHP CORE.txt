@@ -761,13 +761,7 @@ practical Example
 note : $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION)		// after this we can remove if statements from above codes
 	
 =================================================================================================================================
-Notes 
-Extar Commands 
-1. Upload Large Data 
-							datebase name  	file name 
- 	mysql -u root -p -h localhost getmyuni < getmyuni.sql	
-
- 	1. comands 
+1. comands 
 
 
 		1. composer install
