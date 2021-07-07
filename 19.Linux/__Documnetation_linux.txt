@@ -396,13 +396,33 @@
             #sytnax 
                 tr 'old_char' 'new_char' < filename  
 
+        d. If you want to want to store parmanent changes data into another file then (work in all cases in this filter)
 
+            #syntax 
+                tr 'old_char' 'new_char' < filename > newFileName 
 
+        e. All lower case character converted to uppercase charcters using this 
 
+            #syntax 
 
+                tr 'a-z' 'A-Z' < filename  
 
+    
+     #SORT CUT Filter
+     =================
+     a. Sort Lines of text files 
+     b. Used to arrange each line of the standard input in ascending order.
+     c. to use the command, type the sort command, and then enter the data that has to be sorted.
 
+        #syntax
+            sort file_1 file_2 
 
+            a. sort -r          :: Reverse the sorting/ Descending sorting 
+            b. sort -n          :: sorting on numeric data 
+            c. sort -rn         :: reverse the numeric data/ Descending
+            
+=============================================================================================================================================
+#Filters
 
 
 
