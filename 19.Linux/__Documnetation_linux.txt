@@ -329,7 +329,79 @@
     1. Used to restructure the ouptut based on a certain conditions 
     2. It transforms plain-text data into a meaningful way 
     3. Helps in talking the input, modifying is as per requiment and then passes it as output.
-    
+
+    Using Filters
+    The functions of filters are :
+        a. Takes its input from the standard input file 
+        b. Filters the input 
+        c. Sends the output to the standard output file
+
+    various Type of filters 
+        a. RHEL has filters  that are used to work on data in an effective way such as :
+            1. grep 
+            2. wc
+            3. cut
+            4. tr 
+            5. sort
+
+    #Using GREP Filter
+    ================= 
+        1. Used to search and display the lines in a file with particular pattern of characters.
+        2. The pattern that is searched in a file is the regular expression.
+        3. The grap filter can be used only by specifying a regular expression.
+
+        #Syntax 
+            grep [options] pattern [filename]
+
+            a. grep 'Deepinder' filename        :: it fill find 'Deepinder' keyword in File and return the whole line
+            b. grep -i 'Deepinder' filename     :: it will find 'deepinder' keyword in file and return the whole line without case-insesitivity
+
+            c. grep -n "deep" filename          :: Prints each line that matches the pattern, along with its line number. The number is printed at the beginning of the line.
+            d. grep -c 'deep' filename          :: prints a count of the line that match a pattern
+            e. grep -v 'deep' filename          :: prints all the line that do not match the pattern specified by the regular expression.
+
+
+     #Using GREP Filter
+     =================         
+        Counts the number of lines, words and character in a disk file or in the standard input file.
+
+        #sytnax 
+
+            wc [options] filename
+
+            a. wc -l            :: Used to display the number of lines.
+            b. wc -w            :: used to display the number of words.
+            c. wc -c            :: used to display the number of characters.
+
+    #Using CUT Filter
+    =================     
+        used when specified columns from the output of certain commands such as 'ls' and who have to be extracted.
+
+        #syntax 
+            cut [options] [filename]
+
+            a. cut -f<column_number(s)>         :: Display the specified columns
+            b. cut -c<column_number(s)>         :: Display the specified chracter
+            c. cut -d<column_number(s)>         :: sepcfies the column delimeter
+
+            exmaple cut -f 1 filename           :: return the first column from the file
+            exmaple cut -f 1,4 filename         :: return the first and fourth column from the file
+
+     #Using CUT Filter
+     =================
+        a. Translate or convert or delete character
+        b. Translates one set of character to another
+        c. Can be used to compress repeated occurance of character into one. 
+
+            #sytnax 
+                tr 'old_char' 'new_char' < filename  
+
+
+
+
+
+
+
 
 
 
