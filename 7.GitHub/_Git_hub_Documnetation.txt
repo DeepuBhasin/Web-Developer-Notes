@@ -109,7 +109,7 @@ Downlaod : type git install ( web site name : git-scm)
 #Configuration of Username and Email  
 
 	1. git config --global user.name "Deepinder Singh"   		:: To set the username 
-	2. git config --global user.emial "Deepinder999@gmail.com"  :: To set the email address
+	2. git config --global user.email "Deepinder999@gmail.com"  :: To set the email address
 	3. git config user.name 									:: return the usernane 
 	4. git config user.email 									:: return the email 
 	5. git config --global --list 								:: return Username and Email address + other infromations
