@@ -456,4 +456,49 @@
     Linux Shell
         1. Linux shell is a command line interpreter.
         2. interpreter -> execute cmmand line by line.
-        3. complier    -> execute the whole program at once.  
+        3. complier    -> execute the whole program at once. 
+
+
+      Note : code execution     ::       End user (command) -> shell -> kernal  -> hardware
+        Shell plays a role between kernal and end User , it convert whole commands so that kernal can understand and then kernal perform that task. For example openning of calculator ,proving memory, providing resources all the things will provide by kernal 
+
+       4. In linux you call a terminal as a shell 
+       5. We have many types of shells.
+       6. First shell is Bourne Shell (sh)
+       7. In Today's Linux we are using Bourne again Shell (Bash) 
+            [Deepu@localhost Desktop] $
+
+
+       #Shell : A term used for the interactive user interface of an operating system. It is the layer of programmig that understand and execute the commands.
+
+       #shell Script : a File that contains the sequence of command to perform a particular operation on the computer.
+
+       8. execution of such shell script saves effort and time.
+       9. Allows users to handle a system with flexibility and to automate tasks in the form of shell scripts. 
+       10. Shell acts as an interface between the user and the kernal. 
+
+       #The kernal is in charge of : 
+            a. The user interaction with the hardware.
+            b. Scheduling tasks.
+            c. Allocating resources to the running processes.  
+
+        11. Shells are called command processor or command interpreter's in MS-DOS. In a Microsoft Windows Platform, cmd.exe is a shell
+        
+        12. There are 2 Types of shells 
+            a. Login-shell
+            b. Non-Login Shell
+
+            #Login-shell  
+                a. interactive shell that set up a certain pre-defined environment when a user logs on.
+                b. set up a pre-defined user environment before being launched
+
+            #Non-Login shell
+                a. Created when users execute a command or a shell script, invoke a graphical terminal or run the bash or sh Command
+
+
+
+
+
+
+
+              
