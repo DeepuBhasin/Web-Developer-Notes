@@ -420,11 +420,40 @@
             a. sort -r          :: Reverse the sorting/ Descending sorting 
             b. sort -n          :: sorting on numeric data 
             c. sort -rn         :: reverse the numeric data/ Descending
-            
+
 =============================================================================================================================================
-#Filters
+#Pipes
 
-
-
+    a. RHEL provides a feature that allows combining multiple commands to perform a task.
+    b. Using Pipes, direct the output of one command to another command as an input.
     
+                            -------->
+            example :: command_1 | command_2
+    
+    c. Pipe is used to combine two or more commands. 
+    d. A pipe is a form of redirection (transfer of standard output to some other destination) that is used in Linux and other unix-like Operating systems to send the output of one command to another command for further processing.
+    e. The vertical bar '|'
+    f. The Pipe character, indicates to the shell that the output of the command before the '|' is to be sent as input to the command after the '|'
 
+    Exmaple : 1. cat new.txt | grep "am"
+                    My name is Deepinder Singh 
+                    My name is Simranjeet Kaur   
+                    i am fine and what about you 
+                    i am completely fine
+              
+              2. sort new.txt | uniq                    // return sorting file then non repeated word will print 
+
+              3. $ cat new.txt | grep "am" | wc         // return only the line which contains am then return line , word and character also 
+
+=============================================================================================================================================
+#Shell   
+        
+    We can use 2 types of interface to interact with our operating system.
+        1. GUI (Grpahical user interface)
+        2. CLI (Command Line Interface)        
+
+
+    Linux Shell
+        1. Linux shell is a command line interpreter.
+        2. interpreter -> execute cmmand line by line.
+        3. complier    -> execute the whole program at once.  
