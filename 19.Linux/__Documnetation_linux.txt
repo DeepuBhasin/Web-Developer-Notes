@@ -175,13 +175,15 @@
         e. ls -S                        :: Lists all files sorted by Size
         f. Ls -A                        :: Displays hidden files and files beginnine with '.'
         g. ls -l                        :: Displays a detailed list of files and directories 
+        h. ls *                         :: Displays a detailed of list and list of all sub directory
+        i. ls *ap                       :: Displays a detailed of list and list of all sub directory (starting with any name but end with ap)
 
         Note : ls -l and vdir are similar command
 
     3. CD  (Change Directory)           :: is used to change the directory/ folder.  
         a. cd ..                        :: This command is used to move to previous Directory/ Folder 
         b. cd test                      :: goes into test directory
-        c. cd ~ or cd --                :: This Command is used to move to root Directory (in window my computer is root)
+        c. cd ~ or cd -- or cd /        :: This Command is used to move to root Directory (in window my computer is root)
     
     4. clear                            :: This command Clear up all the stuff in terminal Window  
     
@@ -496,8 +498,8 @@
         3. complier    -> execute the whole program at once. 
 
 
-      Note : code execution     ::       End user (command) -> shell -> kernal  -> hardware
-        Shell plays a role between kernal and end User , it convert whole commands so that kernal can understand and then kernal perform that task. For example openning of calculator ,proving memory, providing resources all the things will provide by kernal 
+      Note : code execution     ::       End user (command)->terminal -> shell -> kernal  -> hardware
+        Shell plays a role between kernal and end User , it convert whole commands which is end user write on Terminal (its nothing its just a toll for writing commands) so that kernal can understand and then kernal perform that task. For example openning of calculator ,proving memory, providing resources all the things will provide by kernal 
 
        4. In linux you call a terminal as a shell 
        5. We have many types of shells.
@@ -565,14 +567,10 @@
         3. Displays a menu interface that lists the various operating system installed on the system. 
 
 =============================================================================================================================================
-#Redirecting i/o Channel to Files
-
-    1. Redirection Changes the assignment fo the :
-        a. Standard input 
-        b. Output 
-        
-
-
+#Wild Card 
+    1. *            all 
+    2. ?            single word 
+    3. []           Multiple choices
 
 
 
