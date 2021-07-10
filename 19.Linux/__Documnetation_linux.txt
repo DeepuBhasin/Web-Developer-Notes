@@ -167,18 +167,22 @@
     1. PWD (Print working Directory)    :: this command prints the currrent folder/ Directory you are working on.
     
     2. LS  (Lists)                      :: is a linux command that lists directory contents of files and directories/ folder
-        a. ls -a                        :: List all the files including hidden files 
-        b. ls -F                        :: Display the file type along with the name 
-        c. ls -R                        :: Display the content of sepecified directory and sub-directory
+        a. li folderName/
+        b. ls -a                        :: List all the files including hidden files 
+        c. ls -F                        :: Display the file type along with the name 
+        d. ls -R                        :: Display the content of sepecified directory and sub-directory
             1. ls -R directoryName      :: Display the content of sepecified directory
-        d. ls -r                        :: Displays files and sub-directories in the reverse order 
-        e. ls -S                        :: Lists all files sorted by Size
-        f. Ls -A                        :: Displays hidden files and files beginnine with '.'
-        g. ls -l                        :: Displays a detailed list of files and directories 
-        h. ls *                         :: Displays a detailed of list and list of all sub directory
-        i. ls *ap                       :: Displays a detailed of list and list of all sub directory (starting with any name but end with ap)
+        e. ls -r                        :: Displays files and sub-directories in the reverse order 
+        f. ls -S                        :: Lists all files sorted by Size
+        g. Ls -A                        :: Displays hidden files and files beginnine with '.'
+        h. ls -l                        :: Displays a detailed list of files and directories 
+        i. ls *                         :: Displays a detailed of list and list of all sub directory
+        j. ls *ap                       :: Displays a detailed of list and list of all sub directory (starting with any name but end with ap)
+        k. ls /                         :: Display list of root Directory  
+        l. ls -d  */                    :: display all the directory only
 
-        Note : ls -l and vdir are similar command
+        Note : 1. ls -l and vdir are similar command
+               2. ls -al -> combining two options 
 
     3. CD  (Change Directory)           :: is used to change the directory/ folder.  
         a. cd ..                        :: This command is used to move to previous Directory/ Folder 
@@ -568,7 +572,7 @@
 
 =============================================================================================================================================
 #Wild Card 
-    1. *            all 
+    1. *(astric)    all 
     2. ?            single word 
     3. []           Multiple choices
 
