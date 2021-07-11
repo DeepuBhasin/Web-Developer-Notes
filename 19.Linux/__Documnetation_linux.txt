@@ -193,8 +193,13 @@
     
     5. mkdir (make Directory)           :: This Command is used to create a directory / folder
         a. mkdir newDirectory/test      :: new directory will created in test directory. 
+        b. mkdir -p names/mark          :: create new parent as well as subdirectory
+        c. mkdir -p names/{a,b,c,d}     :: create new parent as well as  various subdirectories
     
     6. rm filename                      :: to remove Filename
+        a. rmdir directoryName          :: remove directory
+        b. rmdir -p a/b/c/d             :: remove all directories
+        c. rmdir -pv a/b/c/d            :: remove all directories and also show information by using 'v' command 
     
     7. mv (Move)                        :: this command is used to move one file to another place. 
         a. mv Filename directoryName/   :: this command is used to move one file to another place.
@@ -220,7 +225,7 @@
     1. Cat      :: the cat (short for "concatenate") command is one of the most frequently used command in Linux/UNIX like operating system. Cat command allows us to create single or multiple files, view content of file, concatenate files and Redirect output in terminal ir files 
 
         a. cat > filename.extention     :: create file with extention and add content in it 
-        b. cat >> filename              :: to add more content in file
+        b. cat >> filename              :: to add more content in file (append)
         c. cat file_1 file_2 > filename :: it will create new file and get the data from file_1 data and file_2 data
         d. cat  filename                :: for Display text in a file in terminal 
         e. cat -n filename              :: precedes each line with a line number 
@@ -229,7 +234,13 @@
         h. tac filename                 :: write reverse every thing
 
         Note : if want to exit from writting terminal then use 'Ctrl + d'
-
+==============================================================================================================================================
+#Less Command 
+    1. Less filename                    :: show large data into small parts        
+==============================================================================================================================================
+#Echo Command 
+    1. varibaleName=varibaleValue       :: assigning value    
+        echo $varibaleName              :: printing variable
 ==============================================================================================================================================
 #Copy 
 
@@ -546,7 +557,7 @@
         2. The processor searches for the BIOS(Basic Input output system) program in the memory and execute it.
         3. BIOS stands for Basic input output. It is built in sodtware. It is the first software run by the computer when you turned on your computer system. This software is usally stored in Read Only Memory (ROM)  
 
-                processor -> BIOS -> check all the devices -> send infromation to processor -> operating start work 
+                processor -> BIOS -> check all the devices -> send information to processor -> operating start work 
         
         4. It is not possible for an operating system to continue without BIOS as it the BIOS that leads the drivers of the harddisk and primary portions of the operating system
         5. When power is turned on, POST (Power-On-Self-test) is the diagonstic testing sequence that a computer's basic input/output system. 
