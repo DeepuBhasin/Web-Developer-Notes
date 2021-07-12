@@ -1,0 +1,75 @@
+#Download Projetc 
+    composer.phar create-project yiisoft/yii2-app-basic basic
+
+ # php yii              :: will show all the commands 
+
+ #php serve             :: will show the running port
+ ============================================================================================================================================
+ #Controller 
+   
+   1. Directory Structure 
+
+        basic -> Controller -> FilenameController.php
+    
+   2. Code 
+     
+        namespace app\controllers;
+
+        use yii\web\Controller;
+
+
+        class FirstController extends Controller
+        {
+            public function actionIndex()
+            {
+                echo "testing";
+            }
+        }
+
+    3. Calling Controller
+
+                                          ControllerName/Function name
+        http://localhost/yii/basic/web/index.php?r=first/index
+
+        a. actionDemo               :: demo
+        b. actionDemoFirst          :: demo-first
+        c. actionDemo_second        :: demo_second    
+
+
+
+    Note : 1. Function Name allways start wih 'action' keyword 
+           2. Function name should be capital but in address bar it should be lower case to call that function
+           3. Controller file name always end with 'Controller' keyword. 
+           4. DemoTest means demo-test in every case like files, functions etc 
+
+ ============================================================================================================================================
+ #View
+    1. Directory Structure
+        basic -> Views -> FolderName -> viewFiles
+
+    Note : ControllerName and Folder name in View should be same exmaple 
+            ControllerName      -> FirstController
+            ViewFolderName      -> First
+
+            Store all the files in the first folder which belongs to FirstController only.
+
+
+    2. Controller File Code 
+
+        public function actionTest(){
+
+             $this->layout = false;                              // to stop by default layout (optional) 
+                    or 
+               return $this->renderPartial('index');            // to stop by default layout (optional) 
+
+            return $this->render('index');
+            
+        }
+
+    3. View Folder
+        View Folder -> First (folder) -> index.php 
+
+
+
+    
+        
