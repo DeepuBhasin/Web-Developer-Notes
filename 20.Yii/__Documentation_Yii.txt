@@ -215,3 +215,185 @@ b. Individual JS and CSS
 		use app\assets\TestAsset;									// load to variable that files 
 
 		TestAsset::register($this);									// loading function 
+=================================================================================================================================================================
+#Routes 
+	
+	basics -> config -> web.php
+	
+a. Adding Slashes in Address bar  
+
+	1. 	uncomment The Below Code 
+
+		/*
+	        'urlManager' => [
+	            'enablePrettyUrl' => true,
+	            'showScriptName' => false,
+	            'rules' => [
+	            ],
+	        ],
+        */	
+
+     2. Hit address in the address bar 
+     	
+     		http://localhost/yii/basic/web/first/demo_second 
+
+b. Creating your own Routes 
+	
+	a. Create Dynamic Routes
+
+		1. 	uncomment The Below Code 
+
+		 'urlManager' => [
+	                'enablePrettyUrl' => true,
+	                'showScriptName' => false,
+	                'rules' => [
+	                    'second'=>'first/demo_second',								// creating own address 
+	                    'first'=>'first/demo-first'									// creating own address 
+	                ],
+	            ],
+
+
+	    2. Hit address in the address bar 
+	     	
+	     		a. http://localhost/yii/basic/web/second
+	     		
+	     		b. http://localhost/yii/basic/web/first   
+
+
+	b. Creating Dynamic Routes and sending values in address bar 
+
+		1. hitting Address 
+
+			a. http://localhost/yii/basic/web/first/testing
+			b. http://localhost/yii/basic/web/second/testing
+
+		2. setting Code 
+			
+			basic -> config -> web.php 	
+
+		'rules' => [
+                    [
+                        'pattern'=>'first/<others>',										// setting key where we will get the value 
+                        'route'=>'first/info',												// controller Name/Function Name
+                        'defaults'=>[														// setting Default Values Array 
+                                'default-value-1'=>'hello 1',								// setting Default Values	
+                                'dafult-value-2'=>'hello 2'									// setting Default Values		
+                        ]
+                        
+                    ],
+                    [
+                        'pattern'=>'second/<others>',										// setting key where we will get the value 
+                        'route'=>'first/demo-first',										// controller Name/Function Name
+                        'defaults'=>[														// setting Default Values Array 
+                                'default-value-1'=>'hello 1',
+                                'dafult-value-2'=>'hello 2'
+                        ]
+                        
+                    ]
+
+                ],
+        
+         3. Controller Code 
+         	
+         	use Yii;
+
+         	public function actionInfo(){
+		        $data= Yii::$app->request->get() ;
+		        echo "yes";
+		        echo "<br/>";
+		        print_r($data);
+
+
+		    }
+
+		    public function actionDemoFirst()
+		    {
+		        $data= Yii::$app->request->get() ;
+		        echo 'demofirst';
+		        echo "<br/>";
+		        print_r($data);
+		    }  
+
+		  4. Output 
+		  	 
+		  	 a. yes
+				 Array ( [default-value-1] => hello 1 [dafult-value-2] => hello 2 [others] => testing )
+
+
+			  b. demofirst
+				 Array ( [default-value-1] => hello 1 [dafult-value-2] => hello 2 [others] => testing )            		     
+
+=================================================================================================================================================================
+#Database 
+	
+a. Setting up Single Database 
+
+	1. Setting up Connection
+
+		basic -> config -> db.php
+
+		Add database name 	
+
+	2. Write Query in controller 
+
+			 use Yii
+
+			public function actionDemo_second()
+			{
+			    $data = Yii::$app->db->createCommand('SELECT * FROM employees')->queryAll();		// select Table from the database 
+			}
+
+b. Setting Mutiple Database
+	
+	1. Setting up Connection
+
+		basic -> config -> db.php
+
+			return $db=['db1'=>[
+		    'class' => 'yii\db\Connection',
+		    'dsn' => 'mysql:host=localhost;dbname=tutorial',
+		    'username' => 'root',
+		    'password' => '',
+		    'charset' => 'utf8',
+
+		    // Schema cache options (for production environment)
+		    //'enableSchemaCache' => true,
+		    //'schemaCacheDuration' => 60,
+		    //'schemaCache' => 'cache',
+		],
+		'db2'=>[
+		    'class' => 'yii\db\Connection',
+		    'dsn' => 'mysql:host=localhost;dbname=codeigniterproject ',
+		    'username' => 'root',
+		    'password' => '',
+		    'charset' => 'utf8',
+
+		    // Schema cache options (for production environment)
+		    //'enableSchemaCache' => true,
+		    //'schemaCacheDuration' => 60,
+		    //'schemaCache' => 'cache',
+		]]; 
+
+	2. 	Setting Up Array
+
+		'db1' => $db['db1'],
+        'db2' => $db['db2'],	
+
+    3. creating Query
+    	
+    	  public function actionDemo_second()
+		    {
+		        $data1 = Yii::$app->db1->createCommand('SELECT * FROM employees')->queryAll();			// calling from the another database 
+		        $data2 = Yii::$app->db2->createCommand('SELECT * FROM users')->queryAll();				// calling from the another database 
+		        echo "<pre>";
+		        print_r($data1);
+		        print_r($data2);
+
+		        // $this->layout = 'main2';
+		        // return $this->render('index');
+		    }    
+
+
+		
+
+	
