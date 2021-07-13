@@ -60,7 +60,7 @@
 
              $this->layout = false;                              // to stop by default layout (optional) 
                     or 
-               return $this->renderPartial('index');            // to stop by default layout (optional) 
+            return $this->renderPartial('index');            // to stop by default layout (optional) 
 
             return $this->render('index');
             
@@ -69,7 +69,149 @@
     3. View Folder
         View Folder -> First (folder) -> index.php 
 
+ ============================================================================================================================================
+ #Change Layout 
+
+ 	1. Folder and File 
+ 		basic -> view -> create New Folder (layouts2) -> create file (main2.php)
+
+ 		basic Code(below) 
+
+ 		<?php
+			use yii\helpers\Html;
+			use app\assets\AppAsset;
+
+			AppAsset::register($this);
+			?>
+			<?php $this->beginPage() ?>																// Starting of html Page 
+			    <!DOCTYPE html>
+			    <html lang="<?= Yii::$app->language ?>">
+			    <head>
+			        <meta charset="<?= Yii::$app->charset ?>">
+			        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+			        <meta name="viewport" content="width=device-width, initial-scale=1">
+			        <?php $this->registerCsrfMetaTags() ?>
+			        <title><?= Html::encode($this->title) ?></title>								// Print title , which will comes from index or other page
+			        <?php $this->head() ?>															// Printing of All the Heads
+			    </head>
+			    <body>
+			    <?php $this->beginBody() ?>															// Starting of body 	
+
+			        <div class="wrap">
+			            <div class="container">
+			                <h1>This is my aanother main layout Page</h1>  
+			            <?= $content ?>
+			            </div>
+			        </div>
+
+			        <footer class="footer">
+			            <div class="container">
+			                <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+			            </div>
+			        </footer>
+
+			    <?php $this->endBody() ?>															// Ending of body
+			    </body>
+			    </html>
+			<?php $this->endPage() ?>																// Ending of html Page 	
 
 
-    
+	2. Configuration of Layout file 
+ 		
+ 		#basic -> config -> web.php
+
+ 			Add these lines in Config array 
+
+ 				'layoutPath'=>'@app/views/layouts2',
+    			'layout'=>'main2',	
+
+					OR
+
+    	#in controller you can directly call 
+
+    		public function actionDemo_second()
+		    {
+		        $this->layout = 'main2';
+		        return $this->render('index');
+		    }		
+
+    3. creating meta Tags 
+
+    	view -> folder (first) -> index.php
+
+    		$this->title = 'This is My Web page';									// for creating your own title 
+			$this->params['breadcrumbs'][] = $this->title;							
+
+
+			#add below written codes just below the above codes 
+
+    		Yii::$app->view->registerMetaTag([
+			    'title'=>'my first Page',
+			    'content'=>'test test',
+			]);			
+
+	4. Adding js Code 
+		view -> folder (first) -> index.php
+		
+		at the end of the page 
+		<?php
+			
+			$this->registerJs('alert(12)');								// when you dont want to add common js  
+
+		?>		
+=================================================================================================================================================================
+#load Css and JS (common in all files)
+	
+
+a. Common in all
+	1. Folder 
+		basic -> assets -> AppAssets.php
+
+		class AppAsset extends AssetBundle
+		{
+		    public $basePath = '@webroot';
+		    public $baseUrl = '@web';
+		    public $css = [
+		        'css/site.css',										// add here your Css here
+		    ];
+		    public $js = [											// add here your js here
+		    ];			
+		    public $depends = [
+		        'yii\web\YiiAsset',
+		        'yii\bootstrap\BootstrapAsset',
+		    ];
+		}
+
+	2. load in layout File 
+
+		basic -> view -> layouts -> main.php	 
+		
+		use app\assets\AppAsset;									// load to variable that files 
+
+		AppAsset::register($this);									// loading function 
         
+b. Individual JS and CSS
+	
+	1. Create new File 
+
+		basic -> assets -> TestAssets.php
+
+		class TestAsset extends AssetBundle
+		{
+		    public $basePath = '@webroot';
+		    public $baseUrl = '@web';
+		    public $css = [
+		        'mytest.css'										// add css
+		    ];
+		    public $js = [
+		        'test.js'											// add js 
+		    ];
+		}
+
+	2. load in layout File  	
+
+		basic -> view -> layouts -> main.php	 
+		
+		use app\assets\TestAsset;									// load to variable that files 
+
+		TestAsset::register($this);									// loading function 
