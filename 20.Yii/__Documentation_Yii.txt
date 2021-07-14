@@ -393,7 +393,42 @@ b. Setting Mutiple Database
 		        // return $this->render('index');
 		    }    
 
+=================================================================================================================================================================
+#Using GUI 
+	
+
+a. Creating Controller
+
+	1. hit Address 
+
+		http://localhost/yii/basic/web/index.php?r=gii 
+
+	2. Click on Controller 
+
+		1. app\controllers\DemoController					// provide Controller Name
+					|
+			rest of thinks should Blanks 
+					|
+			Click on Preview button 
+					|
+			Click on Generate Button
+				
+			Then Controller and View File will automatcially Created				
 
 		
-
+b. Creating Model
 	
+	1. hit Address 
+
+		http://localhost/yii/basic/web/index.php?r=gii 
+	
+	2. Click on Model		
+
+		Note : In database you should Select only one database 
+
+
+		1. Select Table from the Drop down (which is automatically generated)
+						|
+			Click on Genereta Button 
+
+			then go to Basic -> Model Folder -> ModelName.php
