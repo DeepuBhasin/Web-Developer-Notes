@@ -396,9 +396,14 @@ b. Setting Mutiple Database
 =================================================================================================================================================================
 #Using GUI 
 	
+	Note 
+		 'enablePrettyUrl' => false,
+         'showScriptName' => false,
+
+         both paremeter should set False 
 
 a. Creating Controller
-
+	
 	1. hit Address 
 
 		http://localhost/yii/basic/web/index.php?r=gii 
@@ -485,4 +490,72 @@ d. creating Crud
 			
 			@app\views\article	
 
-		click on Generate Button 		
+		click on Generate Button 
+
+=================================================================================================================================================================
+#Model
+	
+	1. Call Model in controller 
+
+		Write these lines in Controller 
+
+		use app\models\Articles;
+		use Yii
+		
+
+	
+	#Various CRUD function 
+
+		1. Insert 				
+
+			$data = new Articles();					// Createing Object
+			$data->title='test';					// Column Name
+	        $data->body='test';						// Column Name
+	        $data->user_id=1;						// column name
+	        $data->save();							// function is used to save 
+	        echo "yes";
+
+
+	    2. Updating 
+
+	    	$data = Articles::findOne(8);			// finding the value from the objects 
+			$data->title='updating test';
+	        $data->body='updating body';
+	        $data->user_id=2;
+	        $data->save();    
+
+
+
+==============================================================================================================================================
+#ORM
+	
+	Object Relation Mapping  
+
+		1. An ORM is layer thats site between your database and your application 
+		2. ORM in computer is a programming technique (machanism) for converting data between incompatible type systems using (OOPS) object -oriented programming language 
+		3. An ORM is the layer between the database and your application. By using an ORM, a lot of the hardwork of creating, updating, reading and deleting from the databae is taken care for us.
+
+
+		OOPS Objects------>ORM-------->SQL
+
+		OOPS Objects<------ORM<--------SQL
+
+		 a. all data of application will be in Objects form and database date will be in Tables form 
+		 b. application pass his object to the ORM so it can store data or da any thing in Sql(tables) , every thing done automatcially ORM , we just simply pass our application Object to ORM  
+		 c. so map Objects and SQL using Classes name which is same as table name of the SQL and variable of class are same the column name of the tables 
+
+		There are two types of ORM	
+			1. Data Mapper ORM
+			2. Active Record ORM 
+
+		Example's of ORM are : 
+			1. Docttrine		-> sybiny
+			2. Eloquent			-> Laravel
+			3. Propel 			
+			4. Redbean	
+
+			these all are PHP ORM
+
+
+	Why we use ORM 
+		In Object oriented programming, you work with objects as your main point of reference. (means we only want to work in objects)		
