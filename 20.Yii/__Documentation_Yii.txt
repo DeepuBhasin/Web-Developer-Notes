@@ -492,40 +492,6 @@ d. creating Crud
 
 		click on Generate Button 
 
-=================================================================================================================================================================
-#Model
-	
-	1. Call Model in controller 
-
-		Write these lines in Controller 
-
-		use app\models\Articles;
-		use Yii
-		
-
-	
-	#Various CRUD function 
-
-		1. Insert 				
-
-			$data = new Articles();					// Createing Object
-			$data->title='test';					// Column Name
-	        $data->body='test';						// Column Name
-	        $data->user_id=1;						// column name
-	        $data->save();							// function is used to save 
-	        echo "yes";
-
-
-	    2. Updating 
-
-	    	$data = Articles::findOne(8);			// finding the value from the objects 
-			$data->title='updating test';
-	        $data->body='updating body';
-	        $data->user_id=2;
-	        $data->save();    
-
-
-
 ==============================================================================================================================================
 #ORM
 	
@@ -559,3 +525,255 @@ d. creating Crud
 
 	Why we use ORM 
 		In Object oriented programming, you work with objects as your main point of reference. (means we only want to work in objects)		
+
+
+==============================================================================================================================================
+#Model
+	
+	1. Call Model in controller 
+
+		Write these lines in Controller 
+
+		use app\models\Articles;
+		use Yii
+		
+
+	
+	#Various CRUD function 
+
+		1. Insert 				
+
+			$data = new Articles();					// Createing Object
+			$data->title='test';					// Column Name
+	        $data->body='test';						// Column Name
+	        $data->user_id=1;						// column name
+	        $data->save();							// function is used to save 
+	        echo "yes";
+
+
+	    2. Updating 
+
+	    	$data = Articles::findOne(8);			// finding the value from the objects 
+			$data->title='updating test';
+	        $data->body='updating body';
+	        $data->user_id=2;
+	        $data->save();  
+
+
+		3. Delete 
+
+			$data = Articles::findOne(8);			// finding the value from the objects 
+        	$data->delete();	  					//delete particluar row
+
+		4. Select 
+
+			a. Print All Values 
+				  
+				$data= Articles::find()->all();
+				echo "<pre>";
+				print_r($data);
+				exit;	
+
+			b. Print all the data in the array From 
+
+				$data= Articles::find()->asArray()->all();
+
+			c. Print all data with where Conditon 
+
+				$data= Articles::find()->where(['id'=>9])->all();
+			
+			d. print all data with where and in query 
+
+				 $data= Articles::find()->where(['id'=>[8,9,7,6]])->all(); 
+
+			e. print all data with where , in , order by query 
+
+				 $data= Articles::find()->where(['id'=>[8,9,7,6]])->groupBy('id')->orderBy('user_di')->all(); 
+
+				 SELECT * FROM `articles` WHERE `id` IN (7, 8, 9) GROUP BY `user_id` ORDER BY `id`	  		
+
+			f. to Create Sql Command as Raw
+				
+				$data= Articles::find()->where(['id'=>9])->all();
+				echo $data->createCommand()->getRawSql();
+
+				SELECT * FROM `articles` WHERE `id`=9
+				
+
+			g. Print All with the where condition 
+
+				 $data= Articles::findAll(['user_id'=>2]);				// finding with which contain user_id 2
+
+			h. print top one Asc 
+
+				$data= Articles::find()->one();
+
+			i. Print One particluar Result 
+
+				$data= Articles::findOne(9);					//filling Id number	  	
+
+			k. Select and joins 
+
+				$data = Articles::find()
+				 ->select('*')
+				->innerJoin('user as u','u.id=articles.user_id')
+				->leftJoin('a as a','a.id=articles.a_id')
+				->where(['id'=>[7,8,9]])
+				->groupBy('user_id')
+				->orderBy('id')->all();
+
+			l. Normal Query	
+
+				$data = Yii::$app->db->createCommand("SELECT * FROM Atricles")->queryAll();	
+==============================================================================================================================================
+#Query Builder
+	 
+	1. Model 	 
+	 	
+		 use yii\db\Query;
+
+		a. Insert Query
+		 	public function getData(){														// create your own function 
+					$sql = Yii::$app->db->createCommand()->insert('articles',[			// insert query 
+						'title'=>'queryBuilder',
+						'body'=>'queryBuilderBody',
+						'user_id'=>1
+				])->execute();
+
+					$lastId = Yii::$app->db->getLastInsertId();					// lastinserted Id
+					return $lastId;										
+			}
+
+		b. Update Query 
+			 $sql = Yii::$app->db->createCommand()->update('articles',[
+                'title'=>'UpdatequeryBuilder',
+                'body'=>'UpdatequeryBuilderBody',
+                'user_id'=>1
+            ],array('id'=>[1,2,3,4,5,6,7,8]))->execute();
+
+		c. Delete Query 
+			$sql = Yii::$app->db->createCommand()->delete('articles',array('id'=>[1,2,3,4,5,6,7,8]))->execute();	
+
+
+		d. Select Query 
+
+			1.	// Normal Query 
+				
+				$query =(new Query())->select('*')->from('articles')->where(['id'=>10])->all();
+
+			2. // Only One Result
+				
+				$query =(new Query())->select('*')->from('articles')->where(['id'=>10])->one();
+
+			3. // Create Raw Query 
+
+				$query =(new Query())->select('*')->from('articles')->where(['id'=>10]);
+            	echo $query->createCommand()->getRawSql();
+
+			4. Create query With where and Conditon 
+				
+				$query =(new Query())->select(['user_id','title','body'])->from('articles')->where(['id'=>10])->andWhere(['email'=>'xx@gmail.com']);		
+
+			4. Create query With where,and, or Conditon 
+				
+				$query =(new Query())->select('*')->from('articles')->where(['id'=>10])->andWhere(['email'=>'xx@gmail.com'])->orWhere(['name'=>'Deepinder']);
+
+			5. Create Or Query 
+
+				$query =(new Query())->select('*')->from('articles')->where(['id'=>10])->andFilterWhere(['or',['Like','article.title','test'],['Like','article.body','bodytest']]);
+            echo $query->createCommand()->getRawSql();
+
+				SELECT * FROM `articles` WHERE (`id`=10) AND ((`article`.`title` LIKE '%test%') OR (`article`.`body` LIKE '%bodytest%'))	
+
+			6. Groupby and orderBy
+
+				 $query =(new Query())->select('*')->from('articles')->where(['id'=>10])->andFilterWhere(['or',['Like','article.title','test'],['Like','article.body','bodytest']])->groupBy('user_id')->orderBy('id')->limit(5)->offset(4);
+            	echo $query->createCommand()->getRawSql();
+
+				SELECT * FROM `articles` WHERE (`id`=10) AND ((`article`.`title` LIKE '%test%') OR (`article`.`body` LIKE '%bodytest%')) GROUP BY `user_id` ORDER BY `id`			
+
+
+			5. // Create Raw Query 
+
+				$query =(new Query())->select('*')->from('articles')->leftJoin()->innerJoin()->where(['id'=>10]);
+            	echo $query->createCommand()->getRawSql();	
+
+	2. Controller 
+
+		$data= new Articles;
+       echo $data->getData();	
+
+=============================================================================================================================================
+#Components 
+
+	Same like helper in Codeigniter where we can call this function to every where 
+
+
+	1. create folder 
+
+		basics -> Folder anyname (Components)
+
+
+	2. Create File 
+		
+		basics -> Folder anyname -> anyFilename (Commoncomponent)
+
+
+		namespace app\components;															//provide any name 
+		use yii\base\Component;						
+
+			Class CommonComponents extends Component{										// create class according to filename
+
+					public function getToken(){
+						return 'DJDIDJFHUIEKDPWIEURYEUIOWSLXMCNVBFDHUWISLD';
+					}
+			}	
+
+	3. Create Controller 
+
+		  public function actionComponent(){
+				echo Yii::$app->common->getToken();										//calling component
+			}				
+
+=============================================================================================================================================
+#Widgets
+
+	Location Of all Widgets
+
+		basic -> vender -> yiisoft -> yii2 -> base -> widget -> all widget there
+
+
+	#breadcrumbs widget 
+
+		$arrayList=[                                                                             // creating array   
+			'dashboard',                                                                        // creating simple text
+			[
+				'label'=>'Home',                                                                //creating Text     
+				'url'=>'home'                                                                   //making link using text     
+			],
+			[
+				'label'=>'about',
+				'url'=>['about','id'=>1],                                                       // providing id with link 
+			],
+			[
+				'label'=>'testing',
+				'url'=>['testing','id'=>3],
+				'template'=>'<li><span style="font-style: italic;">{link}</li>',                // adding html element to particular 
+			]
+		]
+	
+			<?= Breadcrumbs::widget([                                                           //calling the breadcrumbs 
+				'itemTemplate'=>"<li><b>{link}</b></li>",                                       // making html element to all the breadcrumbs
+				'links'=>$arrayList                                                             // making breadcrumbs using array
+			]);?>
+
+
+
+
+
+
+
+
+
+
+
