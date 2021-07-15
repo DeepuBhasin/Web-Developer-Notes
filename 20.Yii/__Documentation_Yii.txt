@@ -767,8 +767,74 @@ d. creating Crud
 				'links'=>$arrayList                                                             // making breadcrumbs using array
 			]);?>
 
+=============================================================================================================================================
+#Custome Widgets
+
+	1. creating File 
+
+		basic -> widget -> filename (Form.php)
+
+		Code 
+
+		namespace app\widgets;
+
+		use yii\base\Widget;
+
+		Class Form extends Widget{
+
+			public $pageType;									//variable name  
+			public $Tag;										//variable name
+			public $records;									//variable name
+
+			public function init(){								// this function always run first before any other function 
+				parent::init();
+				echo "run first in this file";				
+
+			}
 
 
+
+			public function run(){								// default function 
+				echo "<pre>";
+				print_r($this->records);
+				return $this->pageType.' '.$this->Tag.' '.'<input type="text" name="firstName" value="" placeholder="Enter FirstName"/>';
+			}
+
+		}
+
+	2. View file Code 
+
+		basic -> view -> folderName -> anyFilename
+
+			use app\widgets\Form;
+			echo Form::widget(['pageType'=>'Home Page','Tag'=>'Label','records'=>[1,2,3,4,5]]);				// key which we passed in this sholud be same as variable name in class 
+===========================================================================================================================================
+#Sessions
+
+	1. Set Session 
+		
+		Yii::$app->session->set('username','Code Improved');
+
+	2. Get Session 
+
+		Yii::$app->session->get('username');
+
+	3. Unset Session
+
+		  unset(Yii::$app->session['username']); 			// to unset particluar key
+    	  Yii::$app->session->remove('username');			// to unset particluar key
+          Yii::$app->session->destory();					// to unset all keys
+
+===========================================================================================================================================
+#Flash Session
+
+	1. Set Session Data
+
+		Yii::$app->session->setFlash('message','Success');
+
+	2. Get Session Data 	
+
+		Yii::$app->session->getFlash('message');
 
 
 
