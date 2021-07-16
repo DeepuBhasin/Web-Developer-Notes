@@ -837,7 +837,124 @@ d. creating Crud
 		Yii::$app->session->getFlash('message');
 
 
+===========================================================================================================================================
+#Module Generater (basically its a separation conecept of various modules)
 
+	1. hit address
+
+		http://localhost/yii/basic/web/index.php?r=gii
+
+	2. Create Module Generator
+
+		Module Class 		::		app\modules\admin\Module							
+		Module ID			:: 		Generate automatically
+
+		Click on Generate
+
+		Note i write 'admin' but i can write any name 
+
+	3. Create Module Code 
+
+		Paste the below Code any where in web.php -> $config (array) 
+
+		  'modules' => [										
+				'admin' => [
+					'class' => 'app\modules\admin\Module',							// admin Module
+				],
+				'demo' => [
+					'class' => 'app\modules\demo\Module',							// demo Module
+				],
+			],
+
+
+	4. Hit address to run Module 
+
+		1. http://localhost/yii/basic/web/admin					(work in 'enablePrettyUrl' =>true)
+
+		2. http://localhost/yii/basic/web/index.php?r=admin		(work in 'enablePrettyUrl' =>false)
+
+
+	Note : To call Yii controller in the Module Controller
+
+		1. Change namespace of Yii Controller
+
+			namespace app\modules\admin\models;  	by		 namespace app\models; 
+
+		2. To Call yii Controller
+
+			Add the below code in New Module
+
+				use app\modules\admin\models\ModelName (like Articles)			
+
+				Then write functions or programs
+
+===========================================================================================================================================
+#Behaviors and Before Request Event
+
+	Behaviour are always calls first when ever we load controller
+
+	1. Create file 
+
+		basic -> Components -> MyBehaviour.php
+
+		Code 
+
+		namespace app\components;
+		use yii\base\Behavior;
+		use Yii;
+
+		Class MyBehaviour extends Behavior{
+
+				public $variable1;										// variable created for run time 
+				public $variable2;										// variable created for run time
+
+				public function events(){								//default function 
+						echo $this->variable1;
+						echo "<br/>";
+						echo $this->variable2;
+						echo "<br/>";
+						echo "Behaviour Yes";
+						echo "<br/>";
+						return [];
+				}
+		} 
+
+	2. Call Behavior 
+
+		a. Calling in Controller 
+
+			namespace app\controllers;
+			use app\Components\MyBehaviour;
+			use Yii;
+
+
+			public function behaviors()											//by default function and run always first 
+			{	
+				return [
+				MyBehaviour::className(),                                        // anonymous behaviour
+				[                                                
+					'class'=>MyBehaviour::className(),                           // anonymous behaviour 
+					'variable1'=>'Variable Data 1',                              // setting variable         
+					'variable2'=>'Variable Data 2'
+				],   
+				'behaviour'=> MyBehaviour::className()                           // name behaviour     
+				];
+			}
+
+			Note : 1. Calling behaviour in above 3  different Methods 
+
+		b. Calling all Controller using web.php
+
+			copy this code in the web.php file anywhere 
+
+					'as myBehaviour'=>[                                                
+				'class'=>'\app\components\MyBehaviour',                           
+				'variable1'=>'Variable Data 1',                              
+				'variable2'=>'Variable Data 2'
+			],
+
+
+			   	
 
 
 
