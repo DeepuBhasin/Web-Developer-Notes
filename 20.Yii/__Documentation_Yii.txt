@@ -492,6 +492,8 @@ d. creating Crud
 
 		click on Generate Button 
 
+		Note Before creating CRDU Create Model First by using Model Generator
+
 ==============================================================================================================================================
 #ORM
 	
@@ -891,7 +893,7 @@ d. creating Crud
 ===========================================================================================================================================
 #Behaviors and Before Request Event
 
-	Behaviour are always calls first when ever we load controller
+	Behaviour are always calls first when ever we load controller (we can use this as for authentication , ip validations)
 
 	1. Create file 
 
@@ -952,6 +954,290 @@ d. creating Crud
 				'variable1'=>'Variable Data 1',                              
 				'variable2'=>'Variable Data 2'
 			],
+
+===========================================================================================================================================
+#Events 
+
+	Trigger Something Like Sending Email, Sending any kind Of notification etc and it is created Globally 
+
+	1. create File  
+
+		a. 1. Global Event	
+			
+
+			1. Setting up files 
+
+				basic -> web -> events.php
+
+				#Code 
+
+				use yii\base\Event;
+
+					function upperData(Event $event){
+						echo strtoupper($event->data);
+					}	
+
+			2. Call event File 
+
+				basic -> web -> index.php 
+
+				#Code 
+
+					 require 'events.php';
+
+			3. Create Code In controller
+
+				Const Event_DEMO = 'Event_DEMO';
+   
+				public function actionIndex()
+				{
+					$this->on(self::Event_DEMO,'upperData','Hello World');  
+					$this->trigger(self::Event_DEMO);
+					$this->off(self::Event_DEMO);
+					//  return  $this->render('demo');
+				}	
+		2. Global 
+
+			Const Event_DEMO = 'Event_DEMO';
+
+			 public function actionIndex()
+			{
+			\Yii::$app->on(self::Event_DEMO,'upperData','Hello World');  
+			\Yii::$app->trigger(self::Event_DEMO);
+			\Yii::$app->off(self::Event_DEMO);
+				//  return  $this->render('demo');
+			} 		 			
+
+		b. 1. Local event 
+
+			Const Event_DEMO = 'Event_DEMO';
+
+			public function actionMySelfEvent()
+			{
+				$this->on(self::Event_DEMO,
+					function (Event $event){
+						echo strtoupper($event->data);
+
+						// create here code 
+
+					},'Hello World'); 
+				$this->trigger(self::Event_DEMO);
+				$this->off(self::Event_DEMO);
+				//  return  $this->render('demo');
+			}
+
+			2. Local Event  
+
+			Const Event_DEMO = 'Event_DEMO';
+
+			 public function actionTest()												
+			{
+				$this->on(self::Event_DEMO,[$this,'upperData'],'HHHHHHHHHH WWWWWWWWWW');  	// calling the function 
+				$this->trigger(self::Event_DEMO);
+				$this->off(self::Event_DEMO);
+				//  return  $this->render('demo');
+			}
+
+			public   function upperData(Event $event){						// this function is already exist in events files 
+				echo strtolower($event->data);
+			}	
+
+			3. Local Event 
+
+				public static  function upperData(Event $event){
+					echo strtolower($event->data);
+				}
+
+				 public function actionMySelfEvent()
+				{
+					Event::on(self::className(),self::Event_DEMO,
+						function (Event $event){
+							echo strtoupper($event->data);
+
+							// create here code 
+
+
+
+
+
+							},'Hello World'); 
+					Event::trigger(self::className(),self::Event_DEMO);
+					Event::off(self::className(),self::Event_DEMO);
+					//  return  $this->render('demo');
+				}
+===========================================================================================================================================
+#Before and After Action  (this is controller wise)
+
+	1. When ever we call any controller before function and after function Calls Its self automaticlly for Example you call Index function before and after function Call its self when we call index 
+
+	2. Majorly beforeAction Use in authentication or session checking and afterAction use in appending Data 
+
+	1. Settin Up Code 
+
+	basic -> controller -> ControllerName
+
+	#code 
+		public function beforeAction($action){
+			parent::beforeAction($action);
+			echo  "Before Action";
+			return True;
+		}
+	
+		public function actionIndex()
+		{
+		echo " Index action";
+			return True;
+		}
+		public function afterAction($action,$result){
+			echo " After Action";
+			$result = parent::beforeAction($action,$result);
+			return $result;
+		}
+		public function actionTest()
+		{
+		echo " Test action";
+			return True;
+		}
+
+	2. Hit Url 
+
+		1. http://localhost/yii/basic/web/articles/index
+
+		2. http://localhost/yii/basic/web/articles/test
+
+	Before and After call every time its self when ever we call any controller
+
+===========================================================================================================================================
+ #Before Request & Before Action (this is global wise)
+
+		every Point are same as above the main difference is that its work on global 
+
+		1. setting up codes
+
+			basic -> web -> config.php
+
+
+			Paste this code in the config array 
+
+			  'on beforeAction'=>function($event){							
+				echo "<pre>";
+				echo ($event->action->id);
+				echo "<br/>";
+				print_r ($event->action->controller->id);
+				echo "<br/>";
+				// print_r ($event->action->controller);
+				exit;
+			echo  "Before Action From Web.php";
+			},
+			'on beforeRequest'=>function(){
+				echo "yes";
+			},
+
+
+		Note : beforeRequest always work first as compair to beforeAction 	
+
+
+
+
+
+===========================================================================================================================================
+#Internationalization 
+
+	1. 	Setting up Folder 
+
+		basic -> message -> folderName (like en,hi,pun etc) -> app.php (filename)
+
+		note : filename should be same in all the folder 
+
+		#Code
+		
+		// for english code 
+		return [
+			'Welcome'=>'Hello Killer'
+			]; 
+
+		// for Hindi code 
+		return [
+			'Welcome'=>'नमस्ते'
+			]; 	
+
+		// for Punjabi code 	
+		return [
+			'Welcome'=>'ਸਤ ਸ੍ਰੀ ਅਕਾਲ'
+			];	
+
+	2. Setting up Codes in Web.php
+
+		basic -> config -> web.php
+
+		copy paste this code in Components array 
+
+			  'components' => [
+						'i18n' => [
+							'translations' => [
+								'app*' => [
+									'class' => 'yii\i18n\PhpMessageSource',
+									'basePath' => '@app/messages',
+									'sourceLanguage' => 'en-US',
+									'fileMap' => [
+										'app' => 'app.php',
+										'app/error' => 'error.php',
+									], 
+								],
+							],
+						],
+			  ]	
+
+	3. Calling Fill in Controller 
+
+		 public function actionIndex()
+		{   
+			\Yii::$app->language = 'pun';						// calling punjabi folder
+			echo \Yii::t('app','Welcome');						// calling Welcome Message in punjabi langauge
+
+			echo "<br/>";
+
+			\Yii::$app->language = 'hi';						// calling hindi folder
+			echo \Yii::t('app','Welcome');						// calling Welcome Message in hindi langauge
+
+
+			echo "<br/>";
+
+			\Yii::$app->language = 'en';						// calling english folder
+			echo \Yii::t('app','Welcome');						// calling Welcome Message in english langauge
+
+			exit; 
+			
+		}		  				
+===========================================================================================================================================
+#Pagination 
+
+	1. Setting Up Codes 
+
+		Models-> ModelName.php
+
+		#code 
+			$dataProvider = new ActiveDataProvider([
+				'query' => $query,
+				// 'pagination'=>													//this function is used to create pagination 
+				// [
+				//     'pageSize'=>2
+				// ],
+				'pagination'=>false, 
+				'sort'=>[															//sorting accoring to title
+					'attributes'=>['title'],
+					'defaultOrder'=>['title'=>SORT_ASC],							// for setting default values 
+				],
+				'sort'=>false,														//incase to make sort false
+				// 'pagination'=>true,												//incase to make pagination true 
+			]);	
+
+===========================================================================================================================================
+#Pagination 
+	
+
+
+
 
 
 			   	
