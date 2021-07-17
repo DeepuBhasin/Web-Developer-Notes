@@ -1438,8 +1438,64 @@ d. creating Crud
 			]);
 		?>	
 
-	Note : Local is use full when you want to make small code while External is usefull when you want to make very very large codes
+	Note :
+	1.  Local is use full when you want to make small code while External is usefull when you want to make very very large codes
 
+	2.    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
+			if you uncomment this line this will make a search on your view File
+
+===========================================================================================================================================
+#Detail View 
+
+	When ever you create a CRUD using gii then you get 'View.php' file in the view folder 
+
+	basic -> view -> FolderName (article) -> view.php
+
+	#Add the code in the  widget function Array 
+
+		DetailView::widget([
+        'model' => $model,
+        'attributes' => [
+            'id',
+            'title',
+            'body:ntext',
+            'user_id',
+        ],
+    ]
+
+
+	Add below Code 
+
+		 DetailView::widget([
+        'model' => $model,
+        'attributes' => [									
+            [
+                'attribute'=>'title',						// select column name 
+                'label'=>'Article Title',					// replace column name with User Defined column name 
+                'format'=>'html'							// showing Data in html from like <b>Hello</b> will in bold	
+					or
+				'format'=>'text'							// showing Data in text from like <b>Hello</b> will not in bold					
+            ],
+				'body:ntext',
+				[
+					'attribute'=>'user_id',					// select column name 
+					'value'=>function($data){				// createing function for there data , $data contains the data value	
+						if($data->user_id==1){
+							$newData = "Deep";
+						}else{
+							$newData='Sim';
+						}
+						return $newData;					// returning the data
+					},
+					'contentOptions'=>['style'=>'background-color:red;']		// adding style sheet 
+
+				],
+			],
+		])				
+
+===========================================================================================================================================
+#Form Validation Rule
 
 
 
