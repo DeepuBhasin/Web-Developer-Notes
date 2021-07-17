@@ -99,7 +99,7 @@
 
 			        <div class="wrap">
 			            <div class="container">
-			                <h1>This is my aanother main layout Page</h1>  
+			                <h1>This is my another main layout Page</h1>  
 			            <?= $content ?>
 			            </div>
 			        </div>
@@ -1233,7 +1233,224 @@ d. creating Crud
 			]);	
 
 ===========================================================================================================================================
-#Pagination 
+#Grid View
+	
+	1. Change Column name 
+
+		basic -> view folder -> index.php (any file which created by yii)
+
+		#code exist 
+
+			'columns' => [
+				['class' => 'yii\grid\SerialColumn'],
+
+				'id',
+				'title',
+				'body:ntext',
+				'user_id',
+
+				['class' => 'yii\grid\ActionColumn'],
+			],
+
+
+			we have to Change in these code 
+
+
+			#'id' change with 
+
+			[
+				'attribute'=>'id',						//column name 
+				'label'=>'Art Id',						//User Defined Name (enable Sorting of Asc or Desc option)
+				'visible'=>false,						//visbility option 
+				// 'header'=>'Article Id'				// user Defined name (disable sorting of Asc or Desc option)
+			],
+
+
+	2. make if else using column valuse and also add some data in Column values 
+		
+		1. First Method (directly in index File)
+
+			[
+				'attribute'=>'title',											//Column name 			
+				'label'=>'Article Title',										//User Defined Name 	
+				'contentOptions'=>['style'=>'background-color:red;font-size:20px'],	// add css
+				'value'=>function($data,$key,$index){                           // anonymous function with default parameter           	
+						$newData = $data->title.' ( this title) key : '.$key.' Index: '.$index;			// adding Data into column Data 	
+						return $newData;	
+
+				},
+				 'filter'=>['1'=>'Deepinder Singh','2'=>'Simran'],		// make drop dwon list in filter to serach according to options
+			
+
+			],	
+
+		2. Second Method (Calling Function from Controller to index)
+
+			basic -> Model -> ArticleCrud
+
+			#Code (Add below Codei in controller)
+
+				public static function userIdData($data,$key,$index){
+						$newData = $data->title.' ( this title) key : '.$key.' Index: '.$index;
+						return $newData;    
+				}
+
+
+			basic -> View -> folderName -> index.php
+
+			#'title' change with 
+				
+				[
+					'attribute'=>'title',
+					'label'=>'Article Title',
+					'value'=>[ArticlesCrud->className(),'userIdData']
+
+				],		
+
+	3. Make Filter disable (which is showing above on tables)
+
+		  basic -> View -> folderName -> index.php	
+
+		  'filterModel' => $searchModel,				make this code comment 	
+
+	4. Not Display Table Header and Search bar 	  		
+
+		basic -> View -> folderName -> index.php
+
+		'showHeader'=>false,
+
+		add the above code in widget function array 
+
+	5. Show Footer below thw table 
+		
+		basic -> View -> folderName -> index.php
+
+		 'showFooter'=>true,
+
+		 add the above code in widget function array 
+
+
+		if incase you want to add value in the footer of particluar column then add below code in the column array  
+
+		  'footer'=>100,
+
+	6. Do Some Changes on the Action's Column 
+
+
+		Add the below Code in the Widget function -> columns array 
+
+		 [
+			'class' => 'yii\grid\ActionColumn',						//enable or disable the Action column 
+			'header' => 'action',									//Header name 
+			'headerOptions'=>['width'=>'150'],						//Increase the width of the column 
+			'template'=>'{delete} {view} {update}'					//Chanhe the appearnce of buttons 
+		],
+
+	7. Do some Changes on the Rows of the table 
+
+		add the below code in the widget function array 
+			
+        'rowOptions'=>function($data,$key,$index){									//anonymous function with default parameter
+            $class='bg-success';	
+            $style='background-color:yellow;';
+            
+            return ['key'=>$key,'index'=>$index,'class'=>$class,'style'=>$style];	// return the values and refelect in the tr tags 	
+        },	
+
+	8. Layout of the Grid Page 
+
+		add the below code in the widget function array 
+
+		'layout'=>'{pager} {items} {summary}',	 			// it first show pagination , table , number of records 
+
+	9. when Now record Found 
+
+		add the below code in the widget function array 
+
+		'showOnEmpty'=>false,								// it will disapper the table in case no table found 
+        'emptyCell'=>'NA'	 								// it will set by default value when the column is empty
+
+======================================================================================================================================
+#list View 
+
+	basic -> view -> index.php
+
+	1. Make List View in index file(External file)
+
+		a. Indxe.php File Code 
+
+			#Code
+
+			use yii\widgets\ListView; 
+
+			Delete all code of the GridView From the file and add the Below code in Index.php file 
+
+				<?php
+				
+					echo ListView::widget([
+						'dataProvider'=>$dataProvider,							
+						'itemView'=>'list_view',								// file name which is placed in the same folder
+						'viewParams'=>[											// Adding parameter to send array 
+							'testData'=>'Hello Test Data',						// sending key and value in External file				
+						],
+						//'options'=>['class'=>'well'],							// if we want to make class for whole container div 
+							'itemOptions'=>['class'=>'well']					// if we want to make class for each dive 
+					]);
+				?>
+		b. Make External file with in the View Folder 
+
+			<?php
+				use yii\helpers\Html;
+			?>
+
+
+				<div>
+					<p><h3><?php echo $model->id;?></h3></p>					//name of the Column 
+					<p><?php echo $model->title;?></p>							//name of the Column 
+					<p><?php echo $model->body;?></p>							//name of the Column 
+					<p><?php echo $model->user_id;?></p>						//name of the Column 
+					<p><?= $testData?></p>										//Data sending from the parameter
+
+				</div>
+			<br/>
+			<br/>	
+
+	2. Make List View in index file(Local file)		
+
+		<?php
+		
+			echo ListView::widget([
+				'dataProvider'=>$dataProvider,
+				'itemView'=>function($model,$item,$key,$wedgets)
+				{
+					?>
+							<div>
+								<p><?php echo $model->id;?></p>
+								<p><?php echo $model->title;?></p>
+								<p><?php echo $model->body;?></p>
+								<p><?php echo $model->user_id;?></p>
+
+							</div>
+							<br/>
+							<br/>
+					<?php
+				}
+			]);
+		?>	
+
+	Note : Local is use full when you want to make small code while External is usefull when you want to make very very large codes
+
+
+
+
+
+
+
+
+
+
+
+
 	
 
 
