@@ -1497,6 +1497,150 @@ d. creating Crud
 ===========================================================================================================================================
 #Form Validation Rule
 
+	1. For front end Validation (browser Side)
+
+		basic -> Controller -> controllerfile.php (find the actionCreate function then check view file name) -> in create.php (find the file name of the view like _from)-> All code is written in ActiveForm
+
+		here is you all html code of Forms
+
+		<?php $form = ActiveForm::begin(); ?>												// starting Form 
+
+			<?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>			// making Fields 
+
+			<?= $form->field($model, 'body')->textarea(['rows' => 6]) ?>					// making Fields 
+
+			<?= $form->field($model, 'user_id')->textInput() ?>								// making Fields 
+
+			<div class="form-group">
+				<?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>			// Ending Form 
+			</div>
+
+		<?php ActiveForm::end(); ?>
+
+	2. For back end Validation (Server Side)
+
+		every rule is defined in the Model Side 
+
+		public function rules()
+		{
+			return [
+				[['body', 'user_id'], 'required'],													// make common validations				
+				['body','compare','compareAttribute'=>'title','message'=>'Body text not matched'],  // making value compare of two fields
+				['user_id','compare','compareValue'=>'1','operator'=>'>=','type'=>'Number'],		// making compair and check for value	
+				[['body'], 'string'],
+				['title','required','message'=>'User Name must be Submit'],							// making our own message
+				['body','required','message'=>'Please type some thing in Body'],					// making our own message 
+				[['user_id'], 'integer'],															
+				[['title'], 'string', 'max' => 225,'min'=>10],										
+			];
+		}
+		public function attributeLabels()
+		{
+			return [
+				'id' => 'ID',											// Label name of the filed
+				'title' => 'Title',										// Label name of the filed 
+				'body' => 'Body',										// Label name of the filed 	
+				'user_id' => 'User ID',									// Label name of the filed 
+			];
+		}	
+
+
+
+	
+
+
+===========================================================================================================================================
+#Image Upload
+
+	1. Create folder for uploading Images 
+
+		basic -> web -> create folder (Uploads)
+
+	2. Make html file input 
+
+		basic -> view -> artcile -> _form.php
+
+		#Code 
+
+			 <?= $form->field($model, 'profile')->fileInput() ?>								// name is profile 
+
+	3. 	Add rule in the Model File
+
+		  public function rules()
+			{
+				return [
+					['profile','file'],										// set rule of file 
+				];
+			}
+
+			/**
+			* {@inheritdoc}
+			*/
+			public function attributeLabels()
+			{
+				return [
+					'profile'=>'Upload Image'								// set label Name 
+				];	
+			}
+	4. 	Add Code in the Controller File 
+
+		public function actionCreate()
+		{
+			$model = new Articles();
+			
+			if ($model->load(Yii::$app->request->post())) 
+			{
+				$model -> profile = UploadedFile::getInstance($model,'profile');				// get instance of the class 
+				$filename = time().'.'.$model->profile->extension;								// setting name and extention of the file
+				$model->profile->saveAs('uploads/'.$filename);									// moving the file to the folder 
+				$model->profile = $filename;													// sending the value to the variable 
+				$model->save();																	// save the value in the database	
+			}
+		}
+
+	Note : Web Folder is the public directory where we can set up CSS, JS, Upload , Theme Files	
+===========================================================================================================================================
+#Theme Set Up 
+
+	1. Create folder for Setting up new theme 
+
+		basic -> web -> themes -> folderName (new/old) -> Views -> Site (same as ControllerName) -> create File which you want to replace (about .php , contact.php)
+		
+		Create Code there 
+
+			<h1>About New theme</h1>
+
+	2. Setting code in the web.php
+
+		basic -> config -> web 
+
+		#add below code in the config -> component array
+		  
+		  'view'=>[
+            'theme'=>[
+                'basePath'=>'@webroot/themes/new',							//root path 
+                'baseUrl'=>'@web/themes/new',								//root path 
+                'pathMap'=>[
+                    '@app/views'=>[											//setting up two options 		
+                        '@webroot/themes/news/views',						//setting up first template				
+                        '@webroot/themes/old/views', 						//setting up Second template				
+                    ]															
+                ]
+            ]
+         ],			
+
+	Note : in options , if first did not works then second theme will works , if second not work then default theme will works 			 
+=============================================================================================================================================
+#Advanced Application Template setup
+
+
+
+
+
+
+
+
+
 
 
 
