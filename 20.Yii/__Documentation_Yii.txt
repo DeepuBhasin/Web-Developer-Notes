@@ -1631,8 +1631,114 @@ d. creating Crud
 
 	Note : in options , if first did not works then second theme will works , if second not work then default theme will works 			 
 =============================================================================================================================================
-#Advanced Application Template setup
+#Advanced Application Template setup (front End back end)
 
+	1. For Downlaod 
+
+		php composer.phar create-project yiisoft/yii2-app-advanced advanced
+
+	2. Run 'php init' command -> select Development option by pressing 0 -> type yes -> then automtically files will generate 
+
+	3. For Help 
+
+		Command -> Php yii 
+
+		command -> php yii serve --docroot="frontend/web/" 				// to run front End Code
+
+		Command -> php yii serve --docroot="backend/web/"				// to run Back end Code
+
+	4. Directory Structure 
+
+		Front end -> For front end data
+
+		Back end  -> For back end Data
+
+		Comman	  -> works in front and back end 
+
+=============================================================================================================================================
+#Cron Set 
+
+	1.Directoty Structure 
+
+		Advanced -> Console -> 	Controllers -> controllerfile (TestController.php)
+
+		#code 
+
+		namespace console\controllers;
+		use yii\console\Controller;
+
+		Class TestController extends Controller{
+			
+			public function actionIndex(){
+				echo "Cron complete";
+			}
+			public function actionEmail($email,$subject){
+				echo "Hello $email, This mail regarding $subject";
+			}
+		}
+
+	2. Run Commands 
+
+		1. for testing that every thing is perfect -> php yii 
+			(if you get the all commands means every code is perfect or if you get any kind of error then means you have error in your file)
+
+		2. Run Controller using command 
+
+			php yii test/index 												-> to run index Controller 
+
+			php yii test/email 'Deepinder999@gmail.com' 'Learning Yii'		-> to run email Controller
+
+
+
+	Note : when you run  php yii Command then you will get all the list of various controller which you have created in cron as well of userDefined Commands 		
+
+=============================================================================================================================================
+#Create Custom Command
+
+	we can use these things which we perfom daily like delete log files, trucate databases (just write the code in the function body and execute that function using Command)
+
+	1. Directory Structure 
+
+		basic -> commands -> ControllerName (DemoController.php)
+
+		#code 
+
+			namespace app\commands;
+
+			use yii\console\Controller;
+			use yii\console\ExitCode;
+
+			class DemoController extends Controller
+			{
+				public function actionIndex($message = 'Demo command')
+				{
+					echo $message . "\n";
+
+					return ExitCode::OK;
+				}
+				public function actionTest()
+				{
+					echo "testing the codes";
+
+					return ExitCode::OK;
+				}
+			}	
+
+	2. Run Command
+
+		php yii demo/index
+
+=============================================================================================================================================
+#Queue Job 
+
+
+
+
+
+
+		
+
+	 
 
 
 
