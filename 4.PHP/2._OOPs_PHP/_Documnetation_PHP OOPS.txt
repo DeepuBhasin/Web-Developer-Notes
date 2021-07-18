@@ -1,6 +1,4 @@
-49.Object Oriented Programming in PHP Part 3 - Object.mp4 
-
-=============================== Topics =====================================================
+#Topic 
 1. Class and Objects
 2. Access Modifiers
 3. Inheritence
@@ -14,19 +12,20 @@
 11. Namespace
 12. Method Chaining 
 13. Magic Methods : calls automatically when object is created and its colur is blue 
-		a. Constructor 	: for creating connection 
-		b. Destructor 	: use for closing Connection database 
-		c. Autoload 	: Check for class
-		d. get & Set	: Check for variables and Set Private value 	
-		e. call     	: Check for methods 
-		f. callStatic 	: Check for private static methods 
-		g. isset 		: check  variable set or not 
-		h. unset 		: to unset variable
-		i. tostring 	: call when we print object as a string 
-		j. sleep 		: convert object into array
-		k. wakeUp 		: convert array to object
-		l. Clone 		: send values by value
-		m. invoke 		: use object as function
+		a. Constructor 							: for creating connection 
+		b. Destructor 							: use for closing Connection database 
+		c. Autoload/sp_autoload_register		: load that class that which object is calling 
+		d. get & Set							: Check for variables and Set Private value 	
+		e. call     							: Check for methods 
+		f. callStatic 							: Check for private static methods 
+		g. isset 								: check  variable set or not 
+		h. unset 								: to unset variable
+		i. tostring 							: call when we print object as a string 
+		j. sleep 								: convert object into array
+		k. wakeUp 								: convert array to object
+		l. Clone 								: Copy of functions and variables of one object to another object (same as pass by value)
+		m. invoke 								: use object as function
+		
 14. Magic Constants : 
 		a. __LINE__		: print line number 
 		b. __FILE__		: return absolut Path of file 
@@ -36,6 +35,7 @@
 		f. __METHOD__	: return Class method name , if name space is used then return along with name sapce
 		g. __NAMESPACE__: return namespace name  
 		h. __TRAIT__	: return trait name
+
 15. Conditional Function 
 		a. class_exists()				: return if class exist
 		b. interface_exists()			: return if interface exist
@@ -44,6 +44,7 @@
 		e. property_exists()			: return property
 		f. is_a()						: return object of that class
 		g. is_subclass_of() 			: return oject of the parent class
+
 16. get Function 
 		a. get_class()					: return the class name 
 		b. get_parent_class()			: retnrn the parent Class name 
@@ -55,115 +56,15 @@
 		h. get_declared_interfaces()	: return all the interface names which is declared in the file
 		i. get_declared_traits()		: return all the traits name which is declared in the file
 		j. class_alias()				: set another name of the class 
+
 17. Final Key word		
 
-============================== Tips in OOPS progrming =====================================
 
 
-1.in simple words object in which we store the infromartion in it 
-2.We create the object from Class 
-3.The process of creating an object is also known as instantiation 
-4.the object is an instance of the class means an example of class 
+=============================================================================================================================================
+#OOPS
 
-5. syntax -----> 	class ClassName{
-						access modifier static/non-static function functionName(){
-					}
-				}	
-
-1. variable 
-	POP variable is $balance ;
-	OOP variable is $this->balance and we have to mention access specifiers in front of the variable
-
-	
-
-2. function return
-	always use return concept insted of echo 	
-
-3. when Object is created a  momery block is created which store variable and functions.... practially the object we created it will point that momery block 
-
-if we create to many objects then momery block will be different for every objects while have there variable values and functions 
-
-4. arrguments (function variables and parameters) have local scope example 
-
-class student{
-	private $name, $address,$contactno;
-
-	public function getData($sname=null,$sadd=null,$scon=null){
-		global $name;
-		$name=$sname;
-		$this->address=$sadd;
-		$this->contactno=$scon;
-	}
-	public function showData(){
-		global $name;
-		return $name;
-	}
-}
-
-$studentObject=new student();
-
-
-$studentObject->getData('Deepinder Singh','India','9915099247');
-echo $studentObject->showData();
-
-
-
-5. while we extends the class parent class always protected
-
-6. $this means current object of the class which is accessing the things in class 
-
-7. we can pass the class name like this 
-	fxn('classname') or fxn($object) or fxn($this) or fxn(new classname) or fxn(__CLASSNAME__)
-
-=============================================================================================================================================================x
-Difference between OOP and POP
-------------------------------
-	
-	OOP:
-	----
-	Related with the real life objects and their properties. OOP Concepts:
-
-	1. Class and Objects
-	2. Data abstraction
-	3. Encapsulation
-	4. Polymorphism
-	5. Inheritance 
-	6. Overloading 
-	7. inheritance
-	
-	POP:
-	----
-	Related with the conventional style. This approach is also known as the top-down approach. In this approach, a program is divided into functions that perform specific tasks. This approach is mainly used for medium-sized applications. Data is global, and all the functions can access global data. The basic drawback of the procedural programming approach is that data is not secured because data is global and can be accessed by any function. Program control flow is achieved through function calls and go to statements.
-
-	Difference between OOP and POP:
-	-------------------------------
-
-	OOPs										|  POP
-	-----										|  ---
-	1. Object oriented.					 		|  1. Structure oriented.
-	2. Program is divided into objects as well 	|  2. Program is divided into functions as well as 
-		a real world							|	  the sequence of action to be done  
-	3. Bottom-up approach.				 		|  3. Top-down approach.
-	4. Inheritance property is used.	 		|  4. Inheritance is not allowed.
-	5. It uses access specifier.	     		|  5. It doesn’t use access specifier.
-	6. Encapsulation is used to hide the data.	|  6. No data hiding.
-	7. Concept of virtual function.				|  7. No virtual function.
-	8. data is hidding so it is 				|  8. no way of data hidding so it is less 
-		secure									|	  secure
-	9. We can control the access of data 		|  9. Most function uses shared global data
-		using access specifiers	 				|
-	10. Modification is easier as object 		|  10. Modification are difficult as they can affect 
-		are independent 						|	  the entire program
-	11. Data can move and communicate with each |  11. Data can move from function to function in the 
-	    other through member function  from     |	   system
-	    function to function 					|  
-		in the system  							|
-	12. C++, Java,.net							|  12. C, Pascal,Fortran
-	13. Use For small Project in php 			|  13. Use for very large project
-
-
-
-1. OOPS is about  creating classes and objects. Classes serves as a templates and multiple objects can be created using a classes.
+1. OOPS is about creating classes and objects. Classes serves as a templates and multiple objects can be created using a classes.
 
 2. what are classes and objects : Classes are templates for creating objects. Eg : if car is a class then maruti suzuki alto and maruti swift are two objects 
 
@@ -178,158 +79,203 @@ Spose in class there are 30 students, now teacher have to show numbers of each s
 Syntax
 ------
 	Class player{
-		public $name;					// properties (variable of current class)
-		public $speed = 5;				// properties (variable of current class)
+		public $name;											// properties (variable of current class)
+		public $speed = 5;										// properties (variable of current class)
+				
+				OR
 
-			OR
+		pulbic $name,$speed=5;									// another method	
 
-		pulbic $name,$speed=5;			// another method	
-
-		function set_name($name){		// Methods 
-
-
-
-			$this->name = $name;		here $this->name means $player1->name means object its self
-
-										$this->name // current class variable accessing in function and 								then assiging value from paramaters of functions   
+		function set_name($name)
+		{							
+			$this->name = $name;								here $this->name means $player1->name means object its self
 		} 
 	}
 
-$player1= new Player();		// creating object of the class
+	Note : $this->name means  current class variable accessing in function and then assiging value from paramaters of functions
 
-$player1->set_name('Deepinder Singh');		// calling Function and passing paramaters  
-	
-echo $player1->get_name();					// calling function and getting return value 
+	$player1= new Player();											// creating object of the class
 
-echo $player1->speed;						// accessing direct variable;
+	$player1->set_name('Deepinder Singh');							// calling Function and passing paramaters  
+		
+	echo $player1->get_name();										// calling function and getting return value 
+
+	echo $player1->speed;											// accessing direct variable;
+
+==============================================================================================================================================
+#Tips in OOPS progrming 
+
+1. Concept of Object 
+
+	1.in simple words object in which we store the infromartion in it 
+	2.We create the object from Class 
+	3.The process of creating an object is also known as instantiation 
+	4.the object is an instance of the class means an example of class 
+
+2. variable 
+	POP variable is $balance ;
+	OOP variable is $this->balance and we have to mention access specifiers in front of the variable and this variable is called Pseudo Variable 
 
 
-========================================================= __construct() =====================================================================================
+	if we create to many objects then momery block will be different for every objects while have there variable values and functions 
 
-A constructor allows you to initialize an object's properties upon creation of the object.
+3. arrguments (function variables and parameters) have local scope example 
 
-If you create a __construct() function, PHP will automatically call this function when you create an object from a class.
+	class student{
+		private $name, $address,$contactno;
 
-Notice that the construct function starts with two underscores (__)!
-
-
-class Employee{
-	// properties of our Class
-	public $name;
-	public $salary;
-
-
-	//Method of our Class
-
-	// constructor- It allows you to initilization objects. It is the code which is executed whenever a new object is intantiated 
-
-	function __construct(){
-		echo "This is my construct for Employee";
+		public function getData($sname=null,$sadd=null,$scon=null){
+			global $name;
+			$name=$sname;
+			$this->address=$sadd;
+			$this->contactno=$scon;
+		}
+		public function showData(){
+			global $name;
+			return $name;
+		}
 	}
-}	
 
-$deep=new Employee();
-
+	$studentObject=new student();
 
 
-=========================================================== __Destruct() =====================================================================================
-
-A destructor is called when the object is destructed or the script is stopped or exited.
-
-If you create a __destruct() function, PHP will automatically call this function at the end of the script. : eg we can place here all close connection queries ;
-(means it work only once at the end of the script)
-
-Notice that the destruct function starts with two underscores (__)!
+	$studentObject->getData('Deepinder Singh','India','9915099247');
+	echo $studentObject->showData();
 
 
-class Employee{
-	// properties of our Class
-	public $name;
-	public $salary;
+4. we can pass the class name like this 
+	fxn('classname') or fxn($object) or fxn($this) or fxn(new classname) or fxn(__CLASSNAME__)
 
-// function __construct(){							// without arguments 
-	// 	echo "This is my construct for Employee";
-	// }
+5. Object in the class become $this and outside the Class its name of variable 	
 
+6. the function which is used to set the values of the variable is Called 'Setter Function' and the function which is used to retrived the values from the variables are called 'Getter Function'. 
+=========================================================================================================================================
+#concept of $this ($this Pseudo Variable) {$this means current object of the class which is accessing the things in class }
+
+	1. Example 1
+
+		#Code 
+			class Student{
+
+				private $name = "Deepnder Singh";
+
+			}
+			$obj = new Student();
+
+			print_r($obj);
+
+		#Output
+			
+			Student Object ( [name:Student:private] => Deepnder Singh )
+
+			classname, we are printing object ([variable name: ClassName : access Modifier] => value)
+
+	2. Exmaple 2
+
+		#Code 	
+
+			class Student{
+
+				private $name ;
+
+				public function setName($name){
+					$this->name= $name;
+				}
+				public function getName(){
+					print_r($this);
+				}
+
+			}
+			$obj1 = new Student();
+			$obj2 = new Student();
+
+			$obj1->setName('Deepinder Singh');
+			$obj2->setName('Simranjeet Kaur');
+
+
+			echo "<pre>";
+			$obj1->getName();
+			$obj2->getName();	
+
+
+		#Output
+
+			Student Object
+			(
+				[name:Student:private] => Deepinder Singh
+			)
+			Student Object
+			(
+				[name:Student:private] => Simranjeet Kaur
+			)
+			
+	1. Means every object have there own values and properties
+	2. when Object is created a momery block is created in Ram  which store variable and functions.... practially the object we created it will point that momery block and also when script is executed whole memory dealocate automatcially by PHP when the scripte execution ends. in other languages memory dealocation process done manually. 
+
+
+
+==============================================================================================================================================
+# __construct() 
+
+	1. It allows you to initilization objects. It is the code which is executed whenever a new object is intantiated 
+	2. If you create a __construct() function, PHP will automatically call this function when you create an object from a class.
 	
+	
+	class Employee{
+	
+		function __construct(){									// without arguments 
+			echo "This is my construct for Employee";
+		}
 
-	function __construct($name,$salary){				// with arguments 
-		$this->name=$name;
-		$this->salary=$salary;
+		function __construct($name,$salary)						// with arguments 
+		{				
+			$this->name=$name;
+			$this->salary=$salary;
+		}	
+
+		function Employee(){									//this is old constructor but it is deprecated
+			echo "Old Constructor";								
+		}
 	}	
 
-	function getData(){
-		return $this->name.' : '.$this->salary;
-	}
-	function getMore(){
-		return $this->salary+300;
-	}
-
-	function __destruct(){								// it never received any arguments
-		echo "</br> this is destruct $this->name : $this->salary";
-	}
-}	
-
-$deep=new Employee('Deepinder','3000');
-
-echo $deep->getData();
-
-echo "<br/>";
-
-echo $deep->getMore();
+	$deep=new Employee();
 
 
-================================ Access Modifiers ========================================
 
-Properties and methods can have access modifiers which control where they can be accessed.
+============================================================================================================================================
+#__Destruct() 
 
-There are three access modifiers:
+	1. A destructor is called when the object is destructed or the script is stopped or exited.
+	2. If you create a __destruct() function, PHP will automatically call this function at the end of the script. : eg we can place here all close connection queries ;(means it work only once at the end of the script)
 
-public - the property or method can be accessed from everywhere. This is default
- 
-protected - the property or method can be accessed within the class and by classes derived from that class
+	class Employee{
 
-private - the property or method can ONLY be accessed within the class
+		function __destruct(){												// it never received any arguments
+			echo "</br> this is destruct $this->name : $this->salary";
+		}
+	}	
 
-
-In the following example we have added three different access modifiers to the three properties. Here, if you try to set the name property it will work fine (because the name property is public). However, if you try to set the color or weight property it will result in a fatal error (because the color and weight property are protected and private):
-
-<?php
-class Fruit {
-  public $name;
-  protected $color;
-  private $weight;
-}
-
-$mango = new Fruit();
-$mango->name = 'Mango'; // OK
-$mango->color = 'Yellow'; // ERROR
-$mango->weight = '300'; // ERROR
-?>
-
-
-class Employee{
+===========================================================================================================================================
+#Access Modifiers
 	
-		// $name="Deepinder";		// create error beacuse we are not defining access specifier
+	1. Properties and methods can have access modifiers which control where they can be accessed.
+	2. There are three access modifiers:
 
-	var $name="Deepinder";			// var is key word to create access specifier and its public  
+		a. public - the property or method can be accessed from everywhere. This is default
+		b. protected - the property or method can be accessed within the class and by classes derived from that class
+		c. private - the property or method can ONLY be accessed within the class
 
-	function getName(){
-		return $this->name;
-	}
-}	
+==========================================================================================================================================
+#Encapsulation 
 
-$deep=new Employee();
+	1. Encapsulation is a concept where we encapsulate all the data and member functions together to form an object.
+	2. Wrapping up data member and method together into a single unit is called Encapsulation.
+	3. Encapsulation also allows a class to change its internal implementation without hurting the overall functioning of the system.
+	4. Binding the data with the code that manipulates it.
+	5. It keeps the data and the code safe from external interference.
 
-echo $deep->getName();
-============================================================== Encapsulation  =================================================================================
-1. Encapsulation is a concept where we encapsulate all the data and member functions together to form an object.
-2. Wrapping up data member and method together into a single unit is called Encapsulation.
-3. Encapsulation also allows a class to change its internal implementation without hurting the overall functioning of the system.
-4. Binding the data with the code that manipulates it.
-5. It keeps the data and the code safe from external interference.
-
-=============================================================== Inheritance ===================================================================================
+============================================================================================================================================
+#Inheritance 
 
 Inheritance in OOP = When a class derives from another class.
 

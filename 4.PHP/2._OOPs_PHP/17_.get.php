@@ -9,6 +9,12 @@
 		statement;
 	}
 
+
+
+	set function is used to set private variables and values which does't exist in the class
+
+	get function is used to get private variables and values which does't exist in the class
+
 */
 class abc{
 	private $servername="localhost";
