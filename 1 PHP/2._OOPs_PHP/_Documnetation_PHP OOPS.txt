@@ -122,11 +122,11 @@ Syntax
 3. arrguments (function variables and parameters) have local scope example 
 
 	class student{
-		private $name, $address,$contactno;
+		private $name, $address,$contactno;										// these varibale have global scope
 
-		public function getData($sname=null,$sadd=null,$scon=null){
-			global $name;
-			$name=$sname;
+		public function getData($sname=null,$sadd=null,$scon=null){				// these varibale have local scope
+			global $name;														
+			$name=$sname;														
 			$this->address=$sadd;
 			$this->contactno=$scon;
 		}
@@ -571,8 +571,8 @@ $classBobject->get();
 			require 'test1.php';								//Calling First file
 			require 'test2.php';								//Calling Second file
 
-			new app1\student;									//calling 'app1' namespace
-			new app\student;									//calling 'app' namespace
+			use app1\student;									//calling 'app1' namespace
+			use app\student;									//calling 'app' namespace
 					
 
 		In Above Code, Both classes have same name but it will not Confluct with each beacuse they have different namespace name;		
