@@ -557,10 +557,16 @@ Syntax
 
 			namespace app1;										//namespace 
 				class Student{
-
+					public $name="Deepinder";
+	        		
+					public function getName()
+					{
+						return $this->name;
+					}
 				}
 
-		test2.php												//second File
+		test2.php	
+													//second File
 			namespace app;
 				class Student{									//namespace 
 
@@ -573,9 +579,75 @@ Syntax
 
 			use app1\student;									//calling 'app1' namespace
 			use app\student;									//calling 'app' namespace
-					
+			
+			
+			$obj = new student();								// we will get error in this part
+    		echo $obj->getName();								// we will get error in this part 
 
-		In Above Code, Both classes have same name but it will not Conflict with each beacuse they have different namespace name;		
+		In Above Code, Fatal error: Cannot use app1\student as student because the name is already in use in
+
+		To remove this error we to do following Code 
+
+		index.php
+
+			require 'test1.php';								//Calling First file
+			require 'test2.php';								//Calling Second file
+
+			use app1\student;									//calling 'app1' namespace
+			use app\student;									//calling 'app' namespace
+			
+			
+			$obj1 = app1\student();								// this will works perfect 
+			$obj2 = app\student();								// this will works perfect	
+    		echo $obj1->getName();								 
+		======================================================================================
+
+		#Example 2
+
+			namespace country
+			{
+				class Country{
+				
+					public $name="Deepinder";
+					
+					public function getName()
+					{
+						return $this->name;
+					}
+				}
+			}
+
+			namespace country1
+			{
+				class Country{
+				
+					public $name="test";
+					
+					public function getName(){
+						return $this->name;
+					}
+				}
+			}
+			namespace state
+			{
+				class state{
+				}
+			}
+
+			namespace state
+			 {
+				use country;
+				use country1;
+				use state;
+
+					$obj = new country\Country();
+					$obj1 = new country1\Country();
+					$obj2 = new State;
+					echo $obj->getName();
+					echo "<br/>";
+					echo $obj1->getName();
+			} 	
+
 
 =============================================================================================================================================
 #Traits 
@@ -591,16 +663,6 @@ Syntax
 			2. priority 
 			   Suppose hello function in parent class , trait and child class if i call hello function then child class has high priority then trait has and then parent class 	
 
-===========================================================================================================================================
-#Type Hinting 
-
-	1. In simple word, type hinting means providing hints to function to only accept the given data type.
-	2. In technical word we can say that Type Hinting is method by which we can force function to accept the desired data type.
-	3. In PHP, we can use type hinting for Object, Array and callable data type.
-
-	Note : program written in program 
-	
- 
  ============================================================================================================================================
 #Final Keyword
 
@@ -626,4 +688,127 @@ Syntax
     }  
     $obj = new derived();  
     $obj->dis1();  
+
+
+ ============================================================================================================================================
+#Dependency Injections
+
+	1. In software engineering, dependency injection is a technique in which an object receives other objects that it depends on. These other objects are called dependencies.
+	2. The "injection" refers to the passing of a dependency (a service) into the object (a client) that would use it.
+	3. In simple terms, Dependency Injection is a design pattern that helps avoid hard-coded dependencies for some piece of code or software
+	4. We can inject by Constructor or setter funtion.
+	
+	#Example
+	Let's see how we can easily take care of above issues by using Dependency Injection. The Dependency Injection is nothing but injecting a dependency explicitly.
+
+		class User 
+		{
+			private $database = null;
+
+			public function __construct(Database $database) {
+				$this->database = $database;
+			}
+
+			public function getUsers() {
+				return $this->database->getAll('users');
+			}
+		}
+
+		$database = new Database('host', 'user', 'pass', 'dbname');
+		$user = new User($database);
+		$user->getUsers();	
+	
+	And there you have much better code, thanks to Dependency Injection principle. Notice that instead of hard-coding database dependency:
+
+		$this->database = new database('host', 'user', 'pass', 'dbname');
+			We are now injecting it into the constructor, that's it:
+
+		public function __construct(Database $database)
+			Notice also how we are passing database instance now:
+
+		$database = new Database('host', 'user', 'pass', 'dbname');
+		$user = new User($database);
+		$user->getUsers();
+		
+
+
+
+
+===========================================================================================================================================
+
+#PHP 7
+
+===========================================================================================================================================
+#Type Hinting 
+
+	1. In simple word, type hinting means providing hints to function to only accept the given data type.
+	2. In technical word we can say that Type Hinting is method by which we can force function to accept the desired data type.
+	3. In PHP, we can use type hinting for Object, Array and callable data type.
+
+	Note : program written in program 
+	
+	4. declare(strict_type = 1); always use above namespace.
+
+		means if send '34' to any function which is receiving integer value , if above function is enable then we will get an error. 
+	
+===========================================================================================================================================
+#Retrun Type Declaration 
+
+	1. In simple word, return type Declaration means providing hints to function to only return the declare data type.
+		
+		function testing() : array							// means returning only array datatypes
+		{
+			return [3];
+		}
+
+		print_r(testing());
+
+==========================================================================================================================================
+#Null Coalesce Operator
+
+	$name = isset($_GET['name'])?$_GET['name']:'Not Found';
+
+	change into 
+
+	$name = $_GET['name'] ?? 'Not Found';	
+
+==========================================================================================================================================
+#Grouped Imports & Namespaces
+
+	namespace Country{
+		Class India {
+
+		}
+
+		Class Pakistan{
+
+		} 
+	} 
+
+	namespace Country\State
+	{
+		Class Punjab {
+
+		}
+	}
+
+	namespace App {
+		
+		use Contry\{India,Pakistan,State\Punjab};
+		
+		var_dump(India);
+		var_dump(Pakistan);
+		var_dump(Punjab);
+	}
+
+==========================================================================================================================================
+#Combined Comparison / Spaceship Opeartor (<=>)
+
+	1. Combination of 3 which are Less then , Equality, greater then 
+
+		
+		1. 4 < 7 		//less then  	->  1;
+		2. 4 == 4 		//equal then  	->  0;
+		3. 4  > 7 		//greater then 	-> -1;
+	
 
