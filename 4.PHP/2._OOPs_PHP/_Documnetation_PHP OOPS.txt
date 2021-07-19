@@ -406,7 +406,7 @@ Syntax
 
 		1. Extends 	: means wa can edit the parent function which is extend in the child class , so basically parent class has function that function 
 
-		2. Implement : means we cannot edit the parent function beacuse it is not exist over there only signutre is exist, so basically function should exist in the child class which is in the parent class 
+		2. Implements : means we cannot edit the parent function beacuse it is not exist over there only signutre is exist, so basically function should exist in the child class which is in the parent class 
 
 ===========================================================================================================================================
 #Overloading and Over Ridding 
@@ -466,7 +466,8 @@ $classBobject->get();
 	1. we use abstract classes when we want to commit the programmer to write a certian class method, but we are only sure about the name of the method, and not the details of how is should be write 
 	2. An abstarct class is a class that has at least on abstract method 
 	3. Abstarct methods can only have names and arguments and no other code. thus we cannot create objects out of abstract classes. Insted we need to create child classes that add the code into the bodies of the month and use these child classes to create objects 
-	4. Classes extending an abstract class must implement all of the abstract methods defined in the abstract class.
+	4. Classes extending an abstract class must implements all of the abstract methods defined in the abstract class.
+	
 
 	Note : program written in file 
 
@@ -475,8 +476,8 @@ $classBobject->get();
 
 	1. An interface is similar to a class except that it cannot contain code.
 	2. An interface can define method names and arguments, but not the contents of the methods.
-	3. Any classes implementing an interface must implement all methods defined by the interface.
-	4. A class can implement multiple interfaces.
+	3. Any classes implementing an interface must implements all methods defined by the interface.
+	4. A class can implements multiple interfaces.
 	5. An interface is declared using the "interface" keyword.
 	6. Interfaces can't maintain Non-abstract methods.
 
@@ -498,9 +499,9 @@ $classBobject->get();
 
 
 	#code 
-		To implement an interface, a class must use the implements keyword.
+		To implements an interface, a class must use the implements keyword.
 
-		A class that implements an interface must implement all of the interface's methods.
+		A class that implements an interface must implements all of the interface's methods.
 
 		interface a {
 			public function hello();
@@ -535,27 +536,48 @@ $classBobject->get();
 	1. Interfaces cannot have properties, while abstract classes can
 	2. All interface methods must be public, while abstract class methods is public or protected
 	3. All methods in an interface are abstract, so they cannot be implemented in code and the abstract keyword is not necessary
-	4. Classes can implement an interface while inheriting from another class at the same time
-	5. We cannot create object of both
+	4. Interface is complete Abstarct Class but abstarct class is practially Abstarct 
+	5. Interfaces can be extend another interface and implements in the class 
+	6. We cannot create object of both
+	7. We can implements many interface in single class but we can only extends one abstract at a time same as Concrete class  
 
-=====================================================================PHP Namespaces =============================================================================
-Namespaces are qualifiers that solve two different problems:
+============================================================================================================================================
+#PHP Namespaces
 
-1.They allow for better organization by grouping classes that work together to perform a task
-2.They allow the same name to be used for more than one class
+	Namespaces are qualifiers that solve two different problems:
 
-
-For example, you may have a set of classes which describe an HTML table, such as Table, Row and Cell while also having another set of classes to describe furniture, such as Table, Chair and Bed. Namespaces can be used to organize the classes into two different groups while also preventing the two classes Table and Table from being mixed up.
-
-
-In computer prorgamming name is feature to segregate your code to prevent the clashes in the name of your variables, constants. procedural methods and classes. Name spaces in the computer programming is same as directoty bifurcation in the file system where the file with the same can exists but in two seperate directories for folders.
-
-with a large number of audience, it is a misconception that namespace is only part of object oriented programming where it can be used for classes but this is not true. You can use the namespace is procedural programming as well. You can use namespace in the procedural to club your code to prvent from clashes.  
+		1.They allow for better organization by grouping classes that work together to perform a task
+		2.They allow the same name to be used for more than one class
+		3. Namespaces are declared at the beginning of a file using the namespace keyword: 
 
 
-Namespaces are declared at the beginning of a file using the namespace keyword: 
+	#Exmaple 
 
-===================================================================== Traits =================================================================================
+		test1.php 												//First File
+
+			namespace app1;										//namespace 
+				class Student{
+
+				}
+
+		test2.php												//second File
+			namespace app;
+				class Student{									//namespace 
+
+				}
+
+		index.php
+
+			require 'test1.php';								//Calling First file
+			require 'test2.php';								//Calling Second file
+
+			new app1\student;									//calling 'app1' namespace
+			new app\student;									//calling 'app' namespace
+					
+
+		In Above Code, Both classes have same name but it will not Confluct with each beacuse they have different namespace name;		
+
+=============================================================================================================================================
 
 Traits are used to declare methods that can be used in multiple classes (means use to create single function in various classes by extending)
 
@@ -579,18 +601,18 @@ In PHP, we can use type hinting for Object, Array and callable data type.
 program written in program 
  
 
- ==================================================================== final Key word ========================================================================
-Final Keyword
-1. In PHP, Final keyword is applicable to only class and class methods. We cannot declare as Final in PHP.
-2. So if we declare class method as a Final then that method cannot be override by the child class.
-3. Same as method if we declare class as a Final then that class cannot be extended any more.
+ ============================================================================================================================================
+#Final Keyword
 
+	1. In PHP, Final keyword is applicable to only class and class methods. We cannot declare as Final in PHP.
+	2. So if we declare class method as a Final then that method cannot be override by the child class.
+	3. Same as method if we declare class as a Final then that class cannot be extended any more.
 
-<?php  
-      
+	#code 
+
     class base  
     {  
-        final public function dis1()  							// final key word for function 
+        final public function dis1()  					// final key word for function 
         {  
             echo "Base class..";  
         }     
@@ -604,5 +626,4 @@ Final Keyword
     }  
     $obj = new derived();  
     $obj->dis1();  
-  
-?>  
+
