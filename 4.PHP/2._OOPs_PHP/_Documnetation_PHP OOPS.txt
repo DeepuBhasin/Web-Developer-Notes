@@ -155,6 +155,11 @@ Syntax
 	public function intro() {
 		echo "The fruit is {$this->name} and the color is {$this->color}.";
 	}
+8. When ever you know that you want to extend the class then always use Protected Access specifire
+
+9. Class Name should be firt Captital Charcter and Function name always Camal Casing -> it is good practice
+
+10. Concrete Class -> Concrete is opposite of abstract class which have complete implementation of function 
 =========================================================================================================================================
 #concept of $this ($this Pseudo Variable) {$this means current object of the class which is accessing the things in class }
 
@@ -340,44 +345,34 @@ Syntax
 		$domainW3 = new domainW3;
 		echo $domainW3 -> websiteName;
 
-================================ Constant =================================================
+=============================================================================================================================================
+# Constant
+	
+	1. Constants cannot be changed once it is declared.
+	2. Class constants can be useful if you need to define some constant data within a class.
+	3. A class constant is declared inside a class with the const keyword.
+	4. Class constants are case-sensitive. However, it is recommended to name the constants in all uppercase letters.
+	5. We can access a constant from outside the class by using the class name followed by the scope resolution operator (::) followed by the constant name, like here:
+	6. we can access a constant from inside the class by using the self keyword followed by the scope resolution operator (::) followed by the constant name, like here:
 
-Constants cannot be changed once it is declared.
-
-Class constants can be useful if you need to define some constant data within a class.
-
-A class constant is declared inside a class with the const keyword.
-
-Class constants are case-sensitive. However, it is recommended to name the constants in all uppercase letters.
-
-We can access a constant from outside the class by using the class name followed by the scope resolution operator (::) followed by the constant name, like here:
-
-Or, we can access a constant from inside the class by using the self keyword followed by the scope resolution operator (::) followed by the constant name, like here:
-
-
-	class Circle{
-
-		const PI=3.14;									// declaring contant variable 
-
-		private $area;
+	#code	
 		
-		public function area($radius){
-			$this->area = self::PI * $radius * $radius;				// accessing constant variable using Self
-			return $this->area;
+		class Circle{
+			const PI=3.14;												// declaring contant variable 
+			private $area;
+			public function area($radius)
+			{
+				$this->area = self::PI * $radius * $radius;				// accessing constant variable using Self
+				return $this->area;
+			}
 		}
-	}
 
-	$circleObject= new Circle();
-
-	echo $circleObject::PI;										// accessing variable using object 
-
-	echo "<br/>";
-		
-	echo Circle::PI;						// accessing variable using Class name and not a good methos 
-
-	echo "<br/>";
-
-	echo $circleObject->area(10);
+		$circleObject= new Circle();
+		echo $circleObject::PI;											// accessing variable using object 
+		echo "<br/>";
+		echo Circle::PI;												// accessing variable using Class name and not a good methos 
+		echo "<br/>";
+		echo $circleObject->area(10);
 
 ==============================================================================================================================================
 #Inheritance
@@ -405,6 +400,13 @@ Or, we can access a constant from inside the class by using the self keyword fol
 		4. Diamond    (it is basically a combination of hierarchical and multiple inheritance. )
 		5. Hierarchical ( When one class becomes parent of many child classes. This makes a tree like structure.)
 		6. Hybrid     (this is a combination of any type of inheritance.)
+
+
+	#basic Defination 
+
+		1. Extends 	: means wa can edit the parent function which is extend in the child class , so basically parent class has function that function 
+
+		2. Implement : means we cannot edit the parent function beacuse it is not exist over there only signutre is exist, so basically function should exist in the child class which is in the parent class 
 
 ===========================================================================================================================================
 #Overloading and Over Ridding 
@@ -487,11 +489,12 @@ $classBobject->get();
 		#Interfaces are declared with the interface keyword:
 			
 			interface InterfaceName {
-			public function someMethod1();
-			public function someMethod2($name, $color);
-			public function someMethod3() : string;
+			public function someMethod1();											// this also called Signature 
+			public function someMethod2($name, $color);								// this also called Signature 
+			public function someMethod3() : string;									// this also called Signature 
 		}  
 
+	Note : Signature is technical term which means only declaration and no body 
 
 
 	#code 
@@ -533,6 +536,7 @@ $classBobject->get();
 	2. All interface methods must be public, while abstract class methods is public or protected
 	3. All methods in an interface are abstract, so they cannot be implemented in code and the abstract keyword is not necessary
 	4. Classes can implement an interface while inheriting from another class at the same time
+	5. We cannot create object of both
 
 =====================================================================PHP Namespaces =============================================================================
 Namespaces are qualifiers that solve two different problems:
@@ -602,6 +606,3 @@ Final Keyword
     $obj->dis1();  
   
 ?>  
-
-======================================================================== Concrete class ==========================================================
-concrete is opposite of abstract class which have complete implementation of function 
