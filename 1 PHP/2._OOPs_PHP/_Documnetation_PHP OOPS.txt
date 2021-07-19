@@ -37,29 +37,27 @@
 		h. __TRAIT__							: return trait name
 
 15. Conditional Function 
-		a. class_exists()				: return if class exist
-		b. interface_exists()			: return if interface exist
-		c. method_exists()				: return if method exist
-		d. trait_exists()				: reurn if trait exist
-		e. property_exists()			: return property
-		f. is_a()						: return object of that class
-		g. is_subclass_of() 			: return oject of the parent class
+		a. class_exists()						: return if class exist
+		b. interface_exists()					: return if interface exist
+		c. method_exists()						: return if method exist
+		d. trait_exists()						: reurn if trait exist
+		e. property_exists()					: return property
+		f. is_a()								: return object of that class
+		g. is_subclass_of() 					: return oject of the parent class
 
 16. get Function 
-		a. get_class()					: return the class name 
-		b. get_parent_class()			: retnrn the parent Class name 
-		c. get_class_method()			: return all the functions names 
-		d. get_class_vars()				: return all the variables names with values
-		e. get_object_vars()			: return all the variables names with values
-		f. get_called_class()			: return name of class from where it is call   
-		g. get_declared_classes()		: return all the classes which is declared on the file 
-		h. get_declared_interfaces()	: return all the interface names which is declared in the file
-		i. get_declared_traits()		: return all the traits name which is declared in the file
-		j. class_alias()				: set another name of the class 
+		a. get_class()							: return the class name 
+		b. get_parent_class()					: retnrn the parent Class name 
+		c. get_class_method()					: return all the functions names 
+		d. get_class_vars()						: return all the variables names with values
+		e. get_object_vars()					: return all the variables names with values
+		f. get_called_class()					: return name of class from where it is call   
+		g. get_declared_classes()				: return all the classes which is declared on the file 
+		h. get_declared_interfaces()			: return all the interface names which is declared in the file
+		i. get_declared_traits()				: return all the traits name which is declared in the file
+		j. class_alias()						: set another name of the class 
 
-17. Final Key word		
-
-
+17. Final Key word
 
 =============================================================================================================================================
 #OOPS
@@ -160,6 +158,9 @@ Syntax
 9. Class Name should be firt Captital Charcter and Function name always Camal Casing -> it is good practice
 
 10. Concrete Class -> Concrete is opposite of abstract class which have complete implementation of function 
+
+11. When we did not deals with objects then we use 'self or parent' keyword and when we deals with object then we use '$this' 
+
 =========================================================================================================================================
 #concept of $this ($this Pseudo Variable) {$this means current object of the class which is accessing the things in class }
 
@@ -411,54 +412,49 @@ Syntax
 ===========================================================================================================================================
 #Overloading and Over Ridding 
 
-Overloading 
-------------
-1. Function overloading or method overloading is a feature that allows creating several methods with the same name which differ from each other in the type of the input parameters. It is simply defined as the ability of one function to perform different tasks. For example, doTask() and doTask(object O) are overloaded methods. To call the latter, an object must be passed as a parameter, whereas the former does not require a parameter, and is called with an empty parameter field. It is a form of static polymorphism which .The decision to call an implementation or another is taken at coding time. 
+	Overloading 
+	===========
+	1. Function overloading or method overloading is a feature that allows creating several methods with the same name which differ from each other in the type of the input parameters. It is simply defined as the ability of one function to perform different tasks. For example, doTask() and doTask(object O) are overloaded methods. To call the latter, an object must be passed as a parameter, whereas the former does not require a parameter, and is called with an empty parameter field. It is a form of static polymorphism which .The decision to call an implementation or another is taken at coding time. 
 
-2. This is erroneous  since php will say you have declared this method twice . Other languages says its fine and calls it static polymorphic i.e method overloading. You have to use PHP's magic methods to achieve method overloading in PHP.
+	2. This is erroneous  since php will say you have declared this method twice . Other languages says its fine and calls it static polymorphic i.e method overloading. You have to use PHP's magic methods to achieve method overloading in PHP.
 
-<?php 
-	class overLoad{												// this program produce error 
-		public $area;
+		#code 
+			class overLoad{												// this program produce error 
+				public $area;
 
-		public function area($length=null){
-			$this->area=$length*$length;
-			return $this->area;
-		}
-		public function area($length=null,$breadth=null){
-			$this->area=$length*$breadth;
-			return $this->area;
-		}
-	}
+				public function area($length=null){
+					$this->area=$length*$length;
+					return $this->area;
+				}
+				public function area($length=null,$breadth=null){
+					$this->area=$length*$breadth;
+					return $this->area;
+				}
+			}
+			$areaObject=new overLoad();
+			echo $areaObjecte->area(4);
 
-	$areaObject=new overLoad();
+	Over Ridding
+	============
+	Function Overriding: Function overriding is same as other OOPs programming languages. In function overriding, both parent and child classes should have same function name with and number of arguments. It is used to replace parent method in child class. The purpose of overriding is to change the behavior of parent class method. The two methods with the same name and same parameter is called overriding.
 
-	echo $areaObjecte->area(4);;
-?>
+		#code 
+			class classA{
+				
+				public function get(){
+					echo "Hello world";
+				}
+			}
 
-Over Ridding
-------------
-Function Overriding: Function overriding is same as other OOPs programming languages. In function overriding, both parent and child classes should have same function name with and number of arguments. It is used to replace parent method in child class. The purpose of overriding is to change the behavior of parent class method. The two methods with the same name and same parameter is called overriding.
+			class classB extends classA{
 
-<?php 
-class classA{
-	
-	public function get(){
-		echo "Hello world";
-	}
-}
+				public function get(){
+					echo "Hello Boo BOO";
+				}
+			}
 
-class classB extends classA{
-
-	public function get(){
-		echo "Hello Boo BOO";
-	}
-}
-
-$classBobject=new classB();
-
-$classBobject->get();
-?>
+			$classBobject=new classB();
+			$classBobject->get();
 
 =============================================================================================================================================
 #Abstract Class 
@@ -468,7 +464,6 @@ $classBobject->get();
 	3. Abstarct methods can only have names and arguments and no other code. thus we cannot create objects out of abstract classes. Insted we need to create child classes that add the code into the bodies of the month and use these child classes to create objects 
 	4. Classes extending an abstract class must implements all of the abstract methods defined in the abstract class.
 	
-
 	Note : program written in file 
 
 =============================================================================================================================================
@@ -539,7 +534,9 @@ $classBobject->get();
 	4. Interface is complete Abstarct Class but abstarct class is practially Abstarct 
 	5. Interfaces can be extend another interface and implements in the class 
 	6. We cannot create object of both
-	7. We can implements many interface in single class but we can only extends one abstract at a time same as Concrete class  
+	7. We can implements many interface in single class but we can only extends one abstract at a time same as Concrete class therefore 
+		a. multilevel and multilevel inheritance possible in Interfaces
+		b. multilevel inheritance possible in classes (abstract or Concret class)
 
 ============================================================================================================================================
 #PHP Namespaces
@@ -575,32 +572,32 @@ $classBobject->get();
 			use app\student;									//calling 'app' namespace
 					
 
-		In Above Code, Both classes have same name but it will not Confluct with each beacuse they have different namespace name;		
+		In Above Code, Both classes have same name but it will not Conflict with each beacuse they have different namespace name;		
 
 =============================================================================================================================================
+#Traits 
+	
+	1. It is used for multiple Inheritance. interface also use for multiple inheritance but they don't have body.
+	2. We can use multiple behaviors using multiple trait in single class 
+	3. Traits are used to declare methods that can be used in multiple classes. Traits can have methods and abstract methods that can be used in multiple classes, and the methods can have any access modifier (public, private, or protected).
+	4. Traits are declared with the 'trait' keyword and 'use' keyword is use for trait to inheritance
+	5. To resolve the Conflict between traits when they have same function in all traits then we use 'insteadof' keyword to resolve the issue or we can change the name of function using alias. 
 
-Traits are used to declare methods that can be used in multiple classes (means use to create single function in various classes by extending)
+	Note :
+			1. program written in file
+			2. priority 
+			   Suppose hello function in parent class , trait and child class if i call hello function then child class has high priority then trait has and then parent class 	
 
+===========================================================================================================================================
+#Type Hinting 
 
-PHP only supports single inheritance: a child class can inherit only from one single parent.
+	1. In simple word, type hinting means providing hints to function to only accept the given data type.
+	2. In technical word we can say that Type Hinting is method by which we can force function to accept the desired data type.
+	3. In PHP, we can use type hinting for Object, Array and callable data type.
 
-So, what if a class needs to inherit multiple behaviors? OOP traits solve this problem.
-
-Traits are used to declare methods that can be used in multiple classes. Traits can have methods and abstract methods that can be used in multiple classes, and the methods can have any access modifier (public, private, or protected).
-
-Traits are declared with the trait keyword:
-
-program written in file
-
-
-======================================================================= Type Hinting ========================================================================
-In simple word, type hinting means providing hints to function to only accept the given data type.
-In technical word we can say that Type Hinting is method by which we can force function to accept the desired data type.
-In PHP, we can use type hinting for Object, Array and callable data type.
-
-program written in program 
+	Note : program written in program 
+	
  
-
  ============================================================================================================================================
 #Final Keyword
 

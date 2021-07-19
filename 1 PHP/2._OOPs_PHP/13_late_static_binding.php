@@ -11,7 +11,7 @@ Class personal{
 	protected static $name='Deepinder Singh';
 	static public function show(){
 		echo 'Using Self : '.self::$name.'<br/>';						// not best method not get correct answer
-		echo 'Using Static : '.static::$name;						// best method get correct answer
+		echo 'Using Static : '.static::$name;							// best method get correct answer
 	}
 }
 class accounts extends personal{
