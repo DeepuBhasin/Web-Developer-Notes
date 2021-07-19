@@ -11,15 +11,6 @@
 2. Object Oriented PHP	OOPs
 3. Model View Controler 
 
-
-=======================Source of PHP ===============================
-https://www.php.net/
-https://www.phpmyadmin.net/
-
-https://source.unsplash.com/		// for random images
-
-
-
 =========================== Web hosting =========================================
 
 1. Digital Ocean 					// best one  use harry code link
@@ -99,6 +90,16 @@ b. login with ftp Details
 	7. FILE	
 
 7. list()		function, best to see result with for loop 
+
+8. In php code execution process 
+	
+	code -> Complie Time (automatically)	 -> Runtime execution		in php 
+	code -> Complie Time (manually) 		 -> Runtime execution		in other languages
+
+	in Compile Time every values is placed on the variable then code execute on run time
+
+
+
 
 ======================== Passord Hash==============================
 1. $password = password_hash('1234',PASSWORD_DEFAULT);      // Generate One way Hash

@@ -23,7 +23,10 @@
 		i. tostring 							: call when we print object as a string 
 		j. sleep 								: convert object into array
 		k. wakeUp 								: convert array to object
-		l. Clone 								: Copy of functions and variables of one object to another object (same as pass by value)
+		l. Clone (function and keyword )		: Copy of functions and variables of one object to another object (same as pass by value)
+
+		Note : $obj2 = $obj1 this pass the value by reference (its by default)  and if do same thing in variable then it is called pass by value. Clone Keyword is used in the class for pass by values. but in clone keword not use full in sub objects so then we use clone function for sub objects.
+
 		m. invoke 								: use object as function
 		
 14. Magic Constants : 
