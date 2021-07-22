@@ -1,9 +1,19 @@
 #Download Projetc 
-    composer.phar create-project yiisoft/yii2-app-basic basic
+							Create Command /pacakge name          /directory name
+Basic     	::composer.phar create-project yiisoft/yii2-app-basic basic
+
+Advanced   	::composer.phar create-project yiisoft/yii2-app-advanced advanced
+				
+
+
 
  # php yii              :: will show all the commands 
 
  #php serve             :: will show the running port
+
+ #php -v 				:: will show you the current version of the php
+
+ #Migrate or migration are those files which contains Database tables logics 
  ============================================================================================================================================
  #Controller 
    
@@ -1781,7 +1791,145 @@ d. creating Crud
 
  6. Where we have to use redirect 
  	1. when we are inserting new data then always use redirect function otherwise data will be remain in the fields
- 	                      
+
+ =============================================================================================================================================
+
+#Advanced Yii2
+
+=============================================================================================================================================
+#documentation and Installation
+	
+	1. link 			:: https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide/start-installation.md
+
+	2. Paste this Cdoe in the 
+
+		Directory Structure 
+
+			C:\xampp\apache\conf\extra\httpd-vhosts.conf          
+
+		Paste the Below Code
+			
+	    <VirtualHost *:80>
+		        ServerName freecodetube.test 													//set the server Name
+		        DocumentRoot "C:\xampp\htdocs\yii_advance\advanced\frontend\web"
+		        
+		        <Directory "C:\xampp\htdocs\yii_advance\advanced\frontend\web">
+		            # use mod_rewrite for pretty URL support
+		            RewriteEngine on
+		            # If a directory or a file exists, use the request directly
+		            RewriteCond %{REQUEST_FILENAME} !-f
+		            RewriteCond %{REQUEST_FILENAME} !-d
+		            # Otherwise forward the request to index.php
+		            RewriteRule . index.php
+
+		            # use index.php as index file
+		            DirectoryIndex index.php
+
+		            # ...other settings...
+		            # Apache 2.4
+		            Require all granted
+		            
+		            ## Apache 2.2
+		            # Order allow,deny
+		            # Allow from all
+		        </Directory>
+		    </VirtualHost>
+		    
+		    <VirtualHost *:80>
+		        ServerName studio.freecodetube.test 											//set the server Name
+		        DocumentRoot "C:\xampp\htdocs\yii_advance\advanced\backend\web"
+		        
+		        <Directory "C:\xampp\htdocs\yii_advance\advanced\backend\web">
+		            # use mod_rewrite for pretty URL support
+		            RewriteEngine on
+		            # If a directory or a file exists, use the request directly
+		            RewriteCond %{REQUEST_FILENAME} !-f
+		            RewriteCond %{REQUEST_FILENAME} !-d
+		            # Otherwise forward the request to index.php
+		            RewriteRule . index.php
+
+		            # use index.php as index file
+		            DirectoryIndex index.php
+
+		            # ...other settings...
+		            # Apache 2.4
+		            Require all granted
+		            
+		            ## Apache 2.2
+		            # Order allow,deny
+		            # Allow from all
+		        </Directory>
+		    </VirtualHost>
+
+	2. set the Host Name 
+		
+		c -> windows -> system32 -> drivers -> etc -> hosts (File name and open this file in visual Studio) -> Paste the Below Code
+
+		#code 
+
+		127.0.0.1	freecodetube.test
+		127.0.0.1	studio.freecodetube.test
+
+	3. Hit the address 
+		
+		localhost or freecodetube.test  				// for front end	  
+
+
+
+=======================================================================================================================================================
+#Set up Database and Setup Account for Login 
+	
+	1. Directory 
+		advance -> common -> main-local.php
+
+		Enter username, password and database name 
+
+	2. Open Command Prompt and run the command 
+
+		1. php init    -> enter 0 -> enter yes 
+		2. yii migrate -> enter yes 
+
+			in database 'user' and 'migration' table will created
+
+	3. Click on the Sign Up Page 
+		
+		Fill all the Details -> it will show you check the mail for verification 
+
+	4. To check The mail 
+		
+		advance -> frontend -> runtime -> mail -> 96r32e938123098.eml (kind of the file) -> open that file 
+
+
+		= 		: means new line
+		=3d		: means equal to 
+
+		so remove 3d word from the link and then copy that link , paste in the browser and hit enter > you email will verified
+
+	5. Sign in
+		
+		click on the Logout if you are login -> enter backend server name -> enter username and Password 
+
+	6. Make Pretty Url 
+		
+		advance -> front end -> config.php -> main.php -> uncomment the pretty variable	 	
+		advance -> back  end -> config.php -> main.php -> uncomment the pretty variable
+
+	7. Index.php File 
+
+		advance -> backend 	-> web -> index.php
+		advance -> frontend	-> web -> index.php	 	
+
+
+
+	
+
+
+
+		
+
+
+
+
 
 
 

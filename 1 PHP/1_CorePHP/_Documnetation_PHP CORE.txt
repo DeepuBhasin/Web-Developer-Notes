@@ -6,6 +6,8 @@
 
 3. upload image code is in the CMS project with proper validations 
 
+4. php -v command is used to print the version of the PHP
+
 ======================================= PHP Pattern ===============================================
 1. Core PHP  / 	Procedural Oriented Programming  (POP)
 2. Object Oriented PHP	OOPs
