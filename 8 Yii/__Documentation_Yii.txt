@@ -1497,11 +1497,35 @@ d. creating Crud
 ===========================================================================================================================================
 #Form Validation Rule
 
-	1. For front end Validation (browser Side)
+	1. Code in controller 
+
+		basic -> controller -> ControllerName
+
+		#code
+
+		use app\models\ModelName;
+
+		public function actionCreate(){
+			$model = new ModelName();
+			$this->render('create',compact('model'));
+		}
+	
+	
+	2. For front end Validation (browser Side)
 
 		basic -> Controller -> controllerfile.php (find the actionCreate function then check view file name) -> in create.php (find the file name of the view like _from)-> All code is written in ActiveForm
 
+		Note :
+				1.  Front end validation also Depend on the server Side Rules like if you mention required then it will show error on the front end as well if you did not metion required then front error will not occur 
+
+				2. If you fill the filed then border color become green means success but if You mention required then border color become green with error message at the bottom of the filed
+
+				3. Avoid Rquired on the front End
+
 		here is you all html code of Forms
+
+		use yii\helpers\Html;
+		use yii\widgets\ActiveForm;			or 		use yii\bootstrap\ActiveForm;
 
 		<?php $form = ActiveForm::begin(); ?>												// starting Form 
 
@@ -1517,7 +1541,7 @@ d. creating Crud
 
 		<?php ActiveForm::end(); ?>
 
-	2. For back end Validation (Server Side)
+	3. For back end Validation (Server Side)
 
 		every rule is defined in the Model Side 
 
@@ -1732,6 +1756,32 @@ d. creating Crud
 #Queue Job 
 
 
+
+=============================================================================================================================================
+
+#CRUD Application  
+
+=============================================================================================================================================
+
+1. When ever create Page is create for any kind of insertion then we need to create Object and pass to the View Page to create Form. 
+
+2. Html::a('text','link',options(array)); and also load Helper Class 
+
+3. To create Form we use Active Form Class;
+
+4. When creating a DB command from a SQL with parameters, you should almost always use the approach of binding parameters to prevent SQL injection attacks. in select Cases
+	
+	$post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status')
+           ->bindValue(':id', $_GET['id'])
+           ->bindValue(':status', 1)
+           ->queryOne()
+5. To Print all errors
+	$errores = $modesl->getErrors();
+                print_r($errores);    
+
+ 6. Where we have to use redirect 
+ 	1. when we are inserting new data then always use redirect function otherwise data will be remain in the fields
+ 	                      
 
 
 
