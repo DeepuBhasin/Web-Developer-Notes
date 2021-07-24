@@ -7,7 +7,7 @@ Advanced   	::composer.phar create-project yiisoft/yii2-app-advanced advanced
 
 
 
- # php yii              :: will show all the commands 
+ # php yii              :: will show all the commands (its a Command line application for yii or console application)
 
  #php serve             :: will show the running port
 
@@ -417,6 +417,9 @@ a. Creating Controller
 	1. hit Address 
 
 		http://localhost/yii/basic/web/index.php?r=gii 
+
+					or 
+		http://localhost/yii/basic/gii			
 
 	2. Click on Controller 
 
@@ -1917,20 +1920,105 @@ d. creating Crud
 	7. Index.php File 
 
 		advance -> backend 	-> web -> index.php
-		advance -> frontend	-> web -> index.php	 	
-
-
-
+		advance -> frontend	-> web -> index.php	 
+ 
+=====================================================================================================================================================
+#Set Bootstrap 
 	
+	1. Remove Old Bootstrap 				::composer remove yiisoft/yii2-bootstrap
 
+	2. Add Bootstrap 						::composer require yiisoft/yii2-bootstrap4	 			
 
+	after that Change every where bootstrap4 where you get the bootstrap
 
+=====================================================================================================================================================
+#Web.php
+
+	we can access every parmeter of this file by using 
+
+		echo Yii::$app->arrayName;
+
+	arrayname Like component, language, id etc what ever we written in the web.php array	
 		
+======================================================================================================================================================
+#links 
+	
+	echo \yii\helpers\Url::to(['/site/logout']);			// use to print the array
 
 
+======================================================================================================================================================
+#Render Function 
+	
+	When ever we call any view file the yii first call the layout page then in the Content variable it add the view file to show the output.
+
+	 <?= $content ?>		// (layout -> main.php file contains this variable)
+
+	Note 
+		1. Item 		:: 	array 
+		2. Option 		:: 	attributes add in html 
+
+======================================================================================================================================================
+#Migrate Function 
+
+	1. Create Table Migrate 
+
+		php yii migrate/create create_video_table 
+		--fields="video_id:string(16):notNull,title:string(512):notNull,description:text(),created_by:integer(11):foreignKey(user)"	
+
+		#then hit enter
+
+		#then advance -> console -> migrations -> m210724_071802_create_video_table.php (create by Above Console Command)
+
+		#then add these lines in the safeUp function 
+
+		$this->createTable('{{%video}}', [
+            'video_id' => $this->string(16)->notNull(),
+            'title' => $this->string(512)->notNull(),
+            'description' => $this->text(),
+            'tags'=>$this->string(512),
+            'status'=>$this->integer(1),
+            'has_thumbnail'=>$this->boolean(),
+            'video_name'=>$this->string(512),
+            'created_at'=>$this->integer(11),
+            'updated_at'=>$this->integer(11),
+            'created_by' => $this->integer(11),
+        ]);
+
+        $this->addPrimaryKey('Pk_video_video_id','{{%video}}','video_id'); 	
 
 
+        #then -> open Console 
 
+        	yii migrate -> yes -> hit Enter
+
+        Table Created Successfully 
+
+   2. To Drop the table 
+
+   		php yii migrate/down -> yes -> hit Enter
+
+   	Note : always create Table Name Singler like teacher , student , video etc  	
+
+=======================================================================================================================================================
+#AssetManager Cache 
+ 		
+	It will hardrefersh all the css and js when ever we done Some Changes in the CSS and JS files automatiaclly remove the cache 
+
+	1. Directory Structur  
+
+		advance -> config -> main.php
+
+		Add the below Code in the Add Componet array 
+
+		 	'assetManager'=>[
+		            'appendTimestamp'=>true
+		        ]
+
+
+		Output will be Like 
+
+			<link href="/assets/dd3953a5/css/bootstrap.css?v=1626971707" rel="stylesheet">
+			<link href="/css/site.css?v=1627117276" rel="stylesheet">        
 
 
 
