@@ -734,11 +734,11 @@ Syntax
 
 
 
-===========================================================================================================================================
+#################################################################################################################################################
 
 #PHP 7
 
-===========================================================================================================================================
+#################################################################################################################################################
 #Type Hinting 
 
 	1. In simple word, type hinting means providing hints to function to only accept the given data type.
@@ -811,4 +811,33 @@ Syntax
 		2. 4 == 4 		//equal then  	->  0;
 		3. 4  > 7 		//greater then 	-> -1;
 	
+#################################################################################################################################################
 
+#PHP OOPS Extra From PHP manual
+
+#################################################################################################################################################
+#Objects and references
+	
+	1.PHP treats objects in the same way as references or handles, meaning that each variable contains an object reference rather than a copy of the entire object.
+	2. One of the key-points of PHP OOP that is often mentioned is that "objects are passed by references by default". This is not completely true. This section rectifies that general thought using some examples.
+	3. A PHP reference is an alias, which allows two different variables to write to the same value. In PHP, an object variable doesn't contain the object itself as value. It only contains an object identifier which allows object accessors to find the actual object. When an object is sent by argument, returned or assigned to another variable, the different variables are not aliases: they hold a copy of the identifier, which points to the same object.
+
+	4. A class may contain its own constants, variables (called "properties"), and functions (called "methods").
+	5. The pseudo-variable $this is available when a method is called from within an object context. $this is the value of the calling object.
+
+
+======================================================================================================================================================	
+::class
+
+	1. The class keyword is also used for class name resolution. To obtain the fully qualified name of a class ClassName use ClassName::class. This is particularly useful with namespaced classes.
+
+	namespace College 
+	
+	 class Student {
+    	public static function getName(){
+    		echo __CLASS__;																//print the Class name 
+    	}	
+    	public static function getNameByClass(){
+    		echo self::class;															//print the Class Name Along Namepsace 
+    	}	
+    }
