@@ -105,10 +105,17 @@ Download Compress Images 	:: composer require yiisoft/yii2-imagine D
 			<?php $this->endBody() ?>
 		<?php $this->endPage() ?>	
 
+	7. For Query Builders 
 
-	
+		use yii\db\Query;	
 
+	8. For Models
 
+		use app\models\Articles	
+
+	9. For creating Form 
+
+		use yii\bootstrap\ActiveForm;
 
 ============================================================================================================================================
 #Controller 
@@ -451,12 +458,14 @@ a. Setting up Single Database
 
 	2. Write Query in controller 
 
-			 use Yii
+		use Yii
 
-			public function actionDemo_second()
-			{
-			    $data = Yii::$app->db->createCommand('SELECT * FROM employees')->queryAll();		// select Table from the database 
-			}
+		public function actionDemo_second()
+		{
+		    $data = Yii::$app->db->createCommand('SELECT * FROM employees')->queryAll();		// select Table from the database 
+		}
+
+		Note : in the above command we did not create Object of the Model
 
 b. Setting Mutiple Database
 	
@@ -489,7 +498,7 @@ b. Setting Mutiple Database
 		    //'schemaCache' => 'cache',
 		]]; 
 
-	2. 	Setting Up Array
+	2. 	Setting Up Array in the config -> web.php and add the below code the in the config array 
 
 		'db1' => $db['db1'],
         'db2' => $db['db2'],	
@@ -515,7 +524,7 @@ b. Setting Mutiple Database
 		 'enablePrettyUrl' => false,
          'showScriptName' => false,
 
-         both paremeter should set False 
+         both paremeter should set False (web.php)
 
 a. Creating Controller
 	
@@ -524,6 +533,7 @@ a. Creating Controller
 		http://localhost/yii/basic/web/index.php?r=gii 
 
 					or 
+
 		http://localhost/yii/basic/gii			
 
 	2. Click on Controller 
@@ -594,11 +604,11 @@ d. creating Crud
 	
 		1. Creating Model Class 
 
-			app\models\Articles
+			use app\models\Articles
 
 		2. Search Model Class
 			
-			app\models\ArticleSearch					// provide any name 
+			use app\models\ArticleSearch					// provide any name 
 
 		3. Create Model Name 
 
@@ -606,7 +616,7 @@ d. creating Crud
 
 		4. Create View 
 			
-			@app\views\article	
+			@app/views/article	
 
 		click on Generate Button 
 
@@ -656,7 +666,7 @@ d. creating Crud
 
 
 ==============================================================================================================================================
-#Model
+#Model (Active Records)
 	
 	1. Call Model in controller 
 
@@ -697,7 +707,7 @@ d. creating Crud
 
 			a. Print All Values 
 				  
-				$data= Articles::find()->all();
+				$data= Articles::find()->all();									// print all the data 
 				echo "<pre>";
 				print_r($data);
 				exit;	
@@ -754,7 +764,7 @@ d. creating Crud
 
 				$data = Yii::$app->db->createCommand("SELECT * FROM Atricles")->queryAll();	
 ==============================================================================================================================================
-#Query Builder
+#Query Builder (means binding a parameter same as like in pdo)
 	 
 	1. Model 	 
 	 	
@@ -762,13 +772,13 @@ d. creating Crud
 
 		a. Insert Query
 		 	public function getData(){														// create your own function 
-					$sql = Yii::$app->db->createCommand()->insert('articles',[			// insert query 
+					$sql = Yii::$app->db->createCommand()->insert('articles',[				// insert query 
 						'title'=>'queryBuilder',
 						'body'=>'queryBuilderBody',
 						'user_id'=>1
 				])->execute();
 
-					$lastId = Yii::$app->db->getLastInsertId();					// lastinserted Id
+					$lastId = Yii::$app->db->getLastInsertId();								// lastinserted Id
 					return $lastId;										
 			}
 
@@ -777,7 +787,7 @@ d. creating Crud
                 'title'=>'UpdatequeryBuilder',
                 'body'=>'UpdatequeryBuilderBody',
                 'user_id'=>1
-            ],array('id'=>[1,2,3,4,5,6,7,8]))->execute();
+            ],array('id'=>[1,2,3,4,5,6,7,8]))->execute();					// for binding, we can use this -> ,array('id=:id',array(':id'=>1))->execute
 
 		c. Delete Query 
 			$sql = Yii::$app->db->createCommand()->delete('articles',array('id'=>[1,2,3,4,5,6,7,8]))->execute();	
@@ -832,9 +842,7 @@ d. creating Crud
        echo $data->getData();	
 
 =============================================================================================================================================
-#Components 
-
-	Same like helper in Codeigniter where we can call this function to every where 
+#Components (Same like helper in Codeigniter where we can call this function to every where )
 
 
 	1. create folder 
@@ -844,23 +852,33 @@ d. creating Crud
 
 	2. Create File 
 		
-		basics -> Folder anyname -> anyFilename (Commoncomponent)
+		basics -> Folder anyname (components) -> anyFilename (Commoncomponent.php)
 
 
-		namespace app\components;															//provide any name 
-		use yii\base\Component;						
+		namespace app\components;													//write Folder Name
+		
+		use yii\base\Component;														//component Class				
 
-			Class CommonComponents extends Component{										// create class according to filename
+			Class CommonComponents extends Component{								// create class according to filename
 
 					public function getToken(){
 						return 'DJDIDJFHUIEKDPWIEURYEUIOWSLXMCNVBFDHUWISLD';
 					}
 			}	
 
-	3. Create Controller 
+	3. Define components in web.php 
+
+		add key-value pair in the config folder 
+
+		'common'=>[
+				class=>'app\components\CommonComponents',							//app\foldername\filename
+				class=>'app\components\CommonComponents2',							//app\foldername\filename	
+		]
+
+	4. Create Controller 
 
 		  public function actionComponent(){
-				echo Yii::$app->common->getToken();										//calling component
+				echo Yii::$app->common->getToken();									//calling component
 			}				
 
 =============================================================================================================================================
@@ -1023,7 +1041,7 @@ d. creating Crud
 
 	1. Create file 
 
-		basic -> Components -> MyBehaviour.php
+		basic -> Components (create Folder) -> MyBehaviour.php
 
 		Code 
 
@@ -1049,7 +1067,7 @@ d. creating Crud
 
 	2. Call Behavior 
 
-		a. Calling in Controller 
+		a. Calling behaviour in particular Controller (it will excute on all functions)
 
 			namespace app\controllers;
 			use app\Components\MyBehaviour;
@@ -1059,19 +1077,21 @@ d. creating Crud
 			public function behaviors()											//by default function and run always first 
 			{	
 				return [
-				MyBehaviour::className(),                                        // anonymous behaviour
+				MyBehaviour::className(),                                        // anonymous behaviour     -1
 				[                                                
-					'class'=>MyBehaviour::className(),                           // anonymous behaviour 
+					'class'=>MyBehaviour::className(),                           // anonymous behaviour   	-2
 					'variable1'=>'Variable Data 1',                              // setting variable         
 					'variable2'=>'Variable Data 2'
 				],   
-				'behaviour'=> MyBehaviour::className()                           // name behaviour     
+				'behaviour'=> MyBehaviour::className()                           // name behaviour     		-3
 				];
 			}
 
 			Note : 1. Calling behaviour in above 3  different Methods 
 
-		b. Calling all Controller using web.php
+					2. calling in the particalur function (i did not complete that video)
+
+		b. Calling behaviour in all Controller using web.php  (it will excute on particular functions)
 
 			copy this code in the web.php file anywhere 
 
@@ -1261,9 +1281,6 @@ d. creating Crud
 
 
 		Note : beforeRequest always work first as compair to beforeAction 	
-
-
-
 
 
 ===========================================================================================================================================
@@ -1880,7 +1897,54 @@ d. creating Crud
 
 =============================================================================================================================================
 #Queue Job 
+	
+	Mostly use for the Api in chunks 
 
+
+=============================================================================================================================================
+#Ajax Crud Gii Module
+
+	1. Command 			:: composer.phar require --prefer-dist johnitvn/yii2-ajaxcrud "~2.1"
+
+	2. Add Code in the web.php in config array
+
+		basic -> config-> web.php
+
+		'modules' => [
+		    'gridview' =>  [
+		        'class' => '\kartik\grid\Module'
+		    ]       
+		]	
+
+	3. Now go to gii -> there Ajax CRUD Generator Option will show
+
+		Note : Your Model should create before gii crud
+
+		1. Model Class 				:: app\models\Employees
+		2. Search Model Class 		:: app\models\EmployeesAjax
+		3. Controller class 		:: app\controllers\AjaxController
+		4. View Path 				:: @app/views/ajax
+
+		Click on generate 
+
+	4. Hit the address 
+		
+		http://localhost/yii/basic/web/index.php?r=ajax 	
+
+=============================================================================================================================================
+#Array Data Provider and pagination 
+	
+	Same Like Pagination which i have done in bigcola api 
+
+=============================================================================================================================================
+#UrlManager & UrlManagerFrontend 	
+
+	same as like routing system 
+
+=============================================================================================================================================
+#Relation hasOne() & hasMany()
+	
+	these are basically used for the primary key and forigen key and it is basically used for the data represantation for the html data	
 
 
 =============================================================================================================================================
