@@ -35,7 +35,12 @@
         2. Composite Data type 
             a. Objects 
             b. Functions 
-            c. Arrays          
+            c. Arrays  
+
+        Note :  1. typeOf           :: print the variable Type 
+                2. parseInt         :: convert any Datatype into Integer
+
+
 
 
 

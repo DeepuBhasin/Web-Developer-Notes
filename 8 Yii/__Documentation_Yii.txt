@@ -1,7 +1,10 @@
-Documentation 
+#Documentation 
 
 	1. Yii is a high performance, component-based PHP framework for rapidly developing modern Web applications. The name Yii (pronounced Yee or [ji:]) means "simple and evolutionary" in Chinese. It can also be thought of as an acronym for Yes It Is!
 	2. Additionally to the web application, there is a console script called yii, which is located in the applications base directory. This script can be used to run background and maintenance tasks for the application, which are described in the Console Application Section.
+
+#What is Yii Best for?
+	Yii is a generic Web programming framework, meaning that it can be used for developing all kinds of Web applications using PHP. Because of its component-based architecture and sophisticated caching support, it is especially suitable for developing large-scale applications such as portals, forums, content management systems (CMS), e-commerce projects, RESTful Web services, and so on.	
 
 
 
@@ -662,7 +665,9 @@ d. creating Crud
 
 
 	Why we use ORM 
-		In Object oriented programming, you work with objects as your main point of reference. (means we only want to work in objects)		
+		In Object oriented programming, you work with objects as your main point of reference. (means we only want to work in objects)	
+
+	Note : 1. Yii is a full-stack framework providing many proven and ready-to-use features: query builders and ActiveRecord for both relational and NoSQL databases; RESTful API development support; multi-tier caching support; and more.		
 
 
 ==============================================================================================================================================

@@ -646,8 +646,61 @@ Syntax
 					echo $obj->getName();
 					echo "<br/>";
 					echo $obj1->getName();
-			} 	
+			} 
 
+
+		===============================================================================================================
+
+		#Example 3 (When we did not add 'use' keyword in that case how we will call any namespace with including Class)		
+
+			#Student.php
+
+				namespace app\student;
+
+				    class Student{
+
+				    	public $name;
+
+				    	public function setName($test='Default')
+				        {
+				    		$this->name=$test;
+				    	}
+				    	
+				    	public function getName()
+				    	{
+				    		return $this->name;
+				    	}
+				    }
+
+			#index.php	 
+
+				namespace app\college;
+				require'student.php';
+				class College {
+
+				    	public $studentName;
+
+				    	public function setName($name)
+				    	{
+				    		$this->studentName=new  \app\student\Student();
+				    		$this->studentName->setName($name);
+				    	}
+				    	public function getName(){
+				    		return $this->studentName->getName();
+				    	}
+				    }
+				    
+				  $obj = new College();
+
+				  $obj->setName('Deepinder Singh');
+
+				  echo $obj->getName();
+
+
+		
+		Note : 	1. Add use 			: namespace app\student 	-> namespace		: new student() 					->class name
+				2. Not Add use 		: 		---					-> no namespace 	: new \app\student\student()		->class name
+				3. Not Add use 		: 		---					-> no namespace 	: \app\student\student::getName()	->Static Class	  
 
 =============================================================================================================================================
 #Traits 
