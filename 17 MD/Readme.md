@@ -87,4 +87,9 @@ ___
  |3.      |Devinder       |
  |4.      |Alisha         |
 
- 
+  <!----Task List -------->
+  * [x] Core PHP 
+  * [x] OOPS PHP 
+  * [x] OOPS Mysql
+  * [X] PDO
+  * [ ] javscript  
