@@ -1,0 +1,27 @@
+#what is Makrdown 
+
+    1. Lightweight markup language with a plain text formatting syntax 
+    2. can be converted into Html/xHtml and other fromats
+    3. It's main purpose is readability and ease of use
+
+ #What is it used for 
+
+    1. Readme files(Github, etc)
+    2. Forumn and Blog Posts 
+    3. Used in many Static Site Generators 
+
+#Some Things you can format
+
+    1. Heading 
+    2. Lists 
+    3. Emphasis 
+    4. Links 
+    5. Blocks Of Code 
+    6. Images 
+    7. Blockquotes 
+    8. Horizontal Rules 
+
+#Extention 
+	1. filename.md 
+	2. in Vs Code -> Auto-open MarkDown Preview     
+                
