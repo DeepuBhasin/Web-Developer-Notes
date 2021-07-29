@@ -1,5 +1,4 @@
 <!---Heading---->
-Heading Tages are made usig '#'Symbol 
 # Heading 1
 ## Heading 2
 ### Heading 3
