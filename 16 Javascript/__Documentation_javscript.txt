@@ -42,6 +42,55 @@
 
 
 
+=========================================================================================================================================
+#Objects 
+    
+    1. var obj = new object();                              //creating object
+
+        obj.name="Deepinder";                           //creating property     
+        obj.phone=9915099247;                           //creating property  
+        obj.run=function{                               //creating function / method  
+            return obj.name + "is Running";             // returning value      
+        }
+
+        Acessing Variable 
+            obj.name                                // Deepinder
+            obj.run();                              // Deepinder is Running 
+
+    2. var bike {                                       //createing object 
+        name : "aulto",                                 // creating property     
+        color : "black",                                // creating property 
+        company : "amruti",                             // creating property 
+        price   : 50000,
+        discount : function(){                          // creating function/method 
+        var amount = bike.price-5000;
+        }
+    }    
+
+=========================================================================================================================================
+#DOM
+    
+    1. When a webpage or html page loads the browsers, Browser create a DOM (Document Object Model) for the page.
+
+        Document    : Html page (Document)
+        Object      : Tags or Elements and attributes in html pages 
+        Model       : in Dom, tree structure of html elements 
+
+    2. so the Html, Dom is Browser created tree structure arrangment of elements and Attribute.     
+
+    3. Dom is a standard to understand the structure of the html page so that we can create, Read, Update and Delete and manages DOM Elements using javscript methods 
+
+    4. Html DOM helps you to understand and control the element structure using javscript methods. if you understand the Dom Structure of the Html page, You can easily control it elements, Attribute and all Nodes 
+
+    #What is Node ? 
+
+        1. According the Html Dom Every thing in a html page is node 
+        2. Entire Document is a Document Node.
+        3. Each element in a html page is element node.
+        4. all text of document is text nodes
+        5. all Attribute of elements are attribute nodes.
+        6. Comments of page are comment nodes 
+        
 
 
 

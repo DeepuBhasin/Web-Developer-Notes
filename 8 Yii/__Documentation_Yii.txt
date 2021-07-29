@@ -6,7 +6,130 @@
 #What is Yii Best for?
 	Yii is a generic Web programming framework, meaning that it can be used for developing all kinds of Web applications using PHP. Because of its component-based architecture and sophisticated caching support, it is especially suitable for developing large-scale applications such as portals, forums, content management systems (CMS), e-commerce projects, RESTful Web services, and so on.	
 
+#Namespace 
+	The most obvious change in Yii 2.0 is the use of namespaces. Almost every core class is namespaced, e.g., yii\web\Request. The "C" prefix is no longer used in class names. The naming scheme now follows the directory structure. For example, yii\web\Request indicates that the corresponding class file is web/Request.php under the Yii framework folder.
 
+	(You can use any core class without explicitly including that class file, thanks to the Yii class loader.)	
+
+#Component and Object
+	Yii 2.0 breaks the CComponent class in 1.1 into two classes: yii\base\BaseObject and yii\base\Component. The BaseObject class is a lightweight base class that allows defining object properties via getters and setters. The Component class extends from BaseObject and supports events and behaviors.
+
+	If your class does not need the event or behavior feature, you should consider using BaseObject as the base class. This is usually the case for classes that represent basic data structures.
+
+#Template engine 
+	  Yii 2.0 is also equipped with official support for two popular template engines: Smarty and Twig.The Prado template engine is no longer supported. 
+
+#Models
+	Yii 2.0 uses yii\base\Model as the base model.Yii 2 you should extend yii\base\Model to create a form model class.
+
+#Controllers
+	Yii 2.0 uses yii\web\Controller as the base controller class		
+
+		public function actionView($id)
+		{
+		    $model = \app\models\Post::findOne($id);
+		    if ($model) {
+		        return $this->render('view', ['model' => $model]);
+		    } else {
+		        throw new \yii\web\NotFoundHttpException;
+		    }
+		}
+
+	There are two types of Controller 
+		
+		1. Console Controller 				::  yii\console\Controller
+		2. Web Controller 					:: yii\web\Controller 	
+
+#Console Applications
+	Console applications are now organized as controllers, like Web applications. Console controllers should extend from yii\console\Controller.To run a console command, use yii <route>, where <route> stands for a controller route (e.g. sitemap/index). Additional anonymous arguments are passed as the parameters to the corresponding controller action method 	
+
+#Action Filters
+	
+	 Action filters are implemented via behaviors now.
+	 yii\base\ActionFilter	
+
+#Assets
+	Yii 2.0 introduces a new concept called asset bundle that replaces the script package concept found in Yii 1.1.
+
+	An asset bundle is a collection of asset files (e.g. JavaScript files, CSS files, image files, etc.) within a directory. Each asset bundle is represented as a class extending yii\web\AssetBundle. By registering an asset bundle via yii\web\AssetBundle::register(), you make the assets in that bundle accessible via the Web.	 
+
+#Forms
+	Yii 2.0 introduces the field concept for building a form using yii\widgets\ActiveForm. A field is a container consisting of a label, an input, an error message, and/or a hint text. A field is represented as an ActiveField object. Using fields, you can build a form more cleanly than before:
+
+	<?php $form = yii\widgets\ActiveForm::begin(); ?>
+	    <?= $form->field($model, 'username') ?>
+	    <?= $form->field($model, 'password')->passwordInput() ?>
+	    <div class="form-group">
+	        <?= Html::submitButton('Login') ?>
+	    </div>
+	<?php yii\widgets\ActiveForm::end(); ?>	
+
+#Query Builder
+	Yii 2.0 represents a DB query in terms of a Query object that can be turned into a SQL statement with the help of QueryBuilder behind the scene. For example:
+
+	$query = new \yii\db\Query();
+	$query->select('id, name')
+	      ->from('user')
+	      ->limit(10);
+
+	$command = $query->createCommand();
+	$sql = $command->sql;
+	$rows = $command->queryAll();
+
+#Active Records 
+	 Yii 2. That class extends from yii\db\Query, and thus inherits all query building methods. You call yii\db\ActiveRecord::find() to start building a query:
+
+	// To retrieve all *active* customers and order them by their ID:
+	$customers = Customer::find()
+	    ->where(['status' => $active])
+	    ->orderBy('id')
+	    ->all();
+
+#Recommended Apache Configuration
+	
+	Use the following configuration in Apache's httpd.conf file or within a virtual host configuration. Note that you should replace path/to/basic/web with the actual path for basic/web.
+
+	# Set document root to be "basic/web"
+	DocumentRoot "path/to/basic/web"
+
+	<Directory "path/to/basic/web">
+	    # use mod_rewrite for pretty URL support
+	    RewriteEngine on
+	    
+	    # if $showScriptName is false in UrlManager, do not allow accessing URLs with script name
+	    RewriteRule ^index.php/ - [L,R=404]
+	    
+	    # If a directory or a file exists, use the request directly
+	    RewriteCond %{REQUEST_FILENAME} !-f
+	    RewriteCond %{REQUEST_FILENAME} !-d
+	    
+	    # Otherwise forward the request to index.php
+	    RewriteRule . index.php
+
+	    # ...other settings...
+	</Directory>
+
+#First controller 
+
+	#controller.php
+
+		class FirstController extends Controller
+		{
+		    public function actionIndex($message="<b>Hello</b>")
+		    {
+				$message = $message;
+		        echo Html::encode($message);
+			}
+		}
+
+	#view.php
+
+		echo $message;
+
+	#address
+
+		https://localhost/yii/basic/web/index.php?r=first/index&message=HelloWorld	
+	
 
 	basic/                  application base path
     composer.json       used by Composer, describes package information
@@ -40,6 +163,293 @@
 
 	Note :  routes in Yii, which act as the bridge between user requests and controller actions.
 
+=====================================================================================================================================================
+#Working With Forms 
+	
+	1. Create Model 
+
+		The data to be requested from the user will be represented by an EntryForm model class as shown below and saved in the file models/EntryForm.php.
+
+		#Code 	
+
+			namespace app\models;
+
+			use Yii;
+			use yii\base\Model;
+
+			class EntryForm extends Model
+			{
+			    public $name;
+			    public $email;
+
+			    public function rules()
+			    {
+			        return [
+			            [['name', 'email'], 'required'],
+			            ['email', 'email','message'=>'Please Provide A valide Email'],
+			            ['name','string','message'=>'Please Enter The Name']
+			        ];
+			    }
+			}	
+
+		Note : 1. The class extends from yii\base\Model, a base class provided by Yii, commonly used to represent form data.
+			   2. yii\base\Model is used as a parent for model classes not associated with database tables. yii\db\ActiveRecord is normally the parent for model classes that do correspond to database tables.
+
+
+		The EntryForm class contains two public members, name and email, which are used to store the data entered by the user. It also contains a method named rules(), which returns a set of rules for validating the data. The validation rules declared above state that
+
+		both the name and email values are required
+		the email data must be a syntactically valid email address
+
+
+		Note: In this very simple example we just render the confirmation page upon valid data submission. In practice, you should consider using refresh() or redirect() to avoid form resubmission problems.
+
+
+
+	2. Create Controller 
+
+		#code	
+
+		namespace app\controllers;
+
+		use Yii;
+		use yii\web\Controller;
+		use app\models\EntryForm;
+
+		class FirstController extends Controller
+		{
+		    // ...existing code...
+
+		    public function actionIndex()
+		    {
+		        $model = new EntryForm();
+
+		        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+		            // valid data received in $model
+						
+						return $this->render('entry-confirm', ['model' => $model]);
+		        } else {
+					echo "soory";
+		            // either the page is initially displayed or there is some validation error
+		            return $this->render('entry', ['model' => $model]);
+		        }
+				exit;
+			}
+		}
+
+		The action first creates an EntryForm object. It then tries to populate the model with the data from $_POST, provided in Yii by yii\web\Request::post(). If the model is successfully populated (i.e., if the user has submitted the HTML form), the action will call validate() to make sure the values entered are valid.
+
+	3. Create View File 
+
+		1. entry.php
+
+			use yii\helpers\Html;
+			use yii\widgets\ActiveForm;
+			?>
+			<?php $form = ActiveForm::begin(); ?>
+
+			    <?= $form->field($model, 'name') ?>
+
+			    <?= $form->field($model, 'email') ?>
+
+			    <div class="form-group">
+			        <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
+			    </div>
+
+			<?php ActiveForm::end(); ?>	
+
+		2. entry-confirm.php
+			
+			use yii\helpers\Html;
+			?>
+			<p>You have entered the following information:</p>
+
+			<ul>
+			    <li><label>Name</label>: <?= Html::encode($model->name) ?></li>
+			    <li><label>Email</label>: <?= Html::encode($model->email) ?></li>
+			</ul>
+
+	#Magic Explained
+		
+		You may wonder how the HTML form works behind the scene, because it seems almost magical that it can display a label for each input field and show error messages if you do not enter the data correctly without reloading the page.
+
+		Yes, the data validation is initially done on the client-side using JavaScript, and secondarily performed on the server-side via PHP. yii\widgets\ActiveForm is smart enough to extract the validation rules that you have declared in EntryForm, turn them into executable JavaScript code, and use the JavaScript to perform data validation. In case you have disabled JavaScript on your browser, the validation will still be performed on the server-side, as shown in the actionEntry() method. This ensures data validity in all circumstances.
+
+		Warning: Client-side validation is a convenience that provides for a better user experience. Server-side validation is always required, whether or not client-side validation is in place.
+
+		The labels for input fields are generated by the field() method, using the property names from the model. For example, the label Name will be generated for the name property.
+
+		You may customize a label within a view using the following code:
+
+		<?= $form->field($model, 'name')->label('Your Name') ?>
+		<?= $form->field($model, 'email')->label('Your Email') ?>	
+
+		
+		#Summary
+		In this section of the guide, you have touched every part in the MVC architectural pattern. You have learned how to create a model class to 
+		represent the user data and validate said data.
+
+		You have also learned how to get data from users and how to display data back in the browser. This is a task that could take you a lot of time when developing an application, but Yii provides powerful widgets to make this task very easy.		
+				
+=====================================================================================================================================================
+#Working with Databases
+	
+	1. Creating an Active Record
+		
+		To represent and fetch the data in the country table, create an Active Record-derived class named Country, and save it in the file models/Country.php.
+
+		namespace app\models;
+
+		use yii\db\ActiveRecord;
+
+		class Country extends ActiveRecord
+		{
+		}
+
+	The Country class extends from yii\db\ActiveRecord. You do not need to write any code inside of it! With just the above code, Yii will guess the associated table name from the class name.
+	
+	Note : Active Record is a powerful way to access and manipulate database data in an object-oriented fashion. Alternatively, you may also interact with a database using a lower-level data accessing method called Database Access Objects.
+
+
+	2. Creating an Action
+
+
+		namespace app\controllers;
+
+		use yii\web\Controller;
+		use yii\data\Pagination;
+		use app\models\Country;
+
+		class CountryController extends Controller
+		{
+		    public function actionIndex()
+		    {
+		        $query = Country::find();
+
+		        $pagination = new Pagination([
+		            'defaultPageSize' => 5,
+		            'totalCount' => $query->count(),
+		        ]);
+
+		        $countries = $query->orderBy('name')
+		            ->offset($pagination->offset)
+		            ->limit($pagination->limit)
+		            ->all();
+
+		        return $this->render('index', [
+		            'countries' => $countries,
+		            'pagination' => $pagination,
+		        ]);
+		    }
+		}	
+
+		Save the above code in the file controllers/CountryController.php.
+
+		First, The index action calls Country::find(). This find() method creates a ActiveQuery query object, which provides methods to access data from the country table.
+
+		To limit the number of countries returned in each request, the query object is paginated with the help of a yii\data\Pagination object. The Pagination object serves two purposes:
+
+		Sets the offset and limit clauses for the SQL statement represented by the query object so that it only returns a single page of data at a time (at most 5 rows in a page).
+		It's used in the view to display a pager consisting of a list of page buttons, as will be explained in the next subsection.
+		Next, all() returns all country records based on the query results.
+
+		At the end of the code, the index action renders a view named index, and passes the returned country data as well as the pagination information to it.
+
+	3. Creating a View
+		
+		<?php
+		use yii\helpers\Html;
+		use yii\widgets\LinkPager;
+		?>
+		<h1>Countries</h1>
+		<ul>
+		<?php foreach ($countries as $country): ?>
+		    <li>
+		        <?= Html::encode("{$country->code} ({$country->name})") ?>:
+		        <?= $country->population ?>
+		    </li>
+		<?php endforeach; ?>
+		</ul>
+
+		<?= LinkPager::widget(['pagination' => $pagination]) ?>	
+
+		At first, you will see a page showing five countries. Below the countries, you will see a pager with four buttons. If you click on the button "2", you will see the page display another five countries in the database: the second page of records. Observe more carefully and you will find that the URL in the browser also changes to
+
+		http://hostname/index.php?r=country%2Findex&page=2
+		Behind the scenes, Pagination is providing all of the necessary functionality to paginate a data set:
+
+		Initially, Pagination represents the first page, which reflects the country SELECT query with the clause LIMIT 5 OFFSET 0. As a result, the first five countries will be fetched and displayed.
+		The LinkPager widget renders the page buttons using the URLs created by Pagination. The URLs will contain the query parameter page, which represents the different page numbers.
+		If you click the page button "2", a new request for the route country/index will be triggered and handled. Pagination reads the page query parameter from the URL and sets the current page number to 2. The new country query will thus have the clause LIMIT 5 OFFSET 5 and return the next five countries for display.
+
+		#Summary
+		In this section, you learned how to work with a database. You also learned how to fetch and display data in pages with the help of yii\data\Pagination and yii\widgets\LinkPager.
+
+========================================================================================================================================================
+#Overview 
+	Yii applications are organized according to the model-view-controller (MVC) architectural pattern. Models represent data, business logic and rules; views are output representation of models; and controllers take input and convert it to commands for models and views.
+
+
+	#Besides MVC, Yii applications also have the following entities:
+
+		entry scripts: they are PHP scripts that are directly accessible by end users. They are responsible for starting a request handling cycle.
+		applications: they are globally accessible objects that manage application components and coordinate them to fulfill requests.
+		application components: they are objects registered with applications and provide various services for fulfilling requests.
+		modules: they are self-contained packages that contain complete MVC by themselves. An application can be organized in terms of multiple modules.
+		filters: they represent code that need to be invoked before and after the actual handling of each request by controllers.
+		widgets: they are objects that can be embedded in views. They may contain controller logic and can be reused in different views.
+
+
+#entry Script 
+	
+	Entry scripts mainly do the following work:
+
+	Define global constants;
+	Register Composer autoloader;
+	Include the Yii class file;
+	Load application configuration;
+	Create and configure an application instance;
+	Call yii\base\Application::run() to process the incoming request.	
+
+
+	index.php
+
+		defined('YII_DEBUG') or define('YII_DEBUG', false);			false -> prodution , true -> development
+
+
+	Entry scripts are the best place for defining global constants. Yii supports the following three constants:
+
+	YII_DEBUG: specifies whether the application is running in debug mode. When in debug mode, an application will keep more log information, and will reveal detailed error call stacks if exceptions are thrown. For this reason, debug mode should be used mainly during development. The default value of YII_DEBUG is false.
+	YII_ENV: specifies which environment the application is running in. This will be described in more detail in the Configurations section. The default value of YII_ENV is 'prod', meaning the application is running in production environment.
+	YII_ENABLE_ERROR_HANDLER: specifies whether to enable the error handler provided by Yii. The default value of this constant is true		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+======================================================================================================================================================	
+#Yii Videos
+
+======================================================================================================================================================
 
 #Download Projetc 
 							Create Command /pacakge name          /directory name
@@ -55,6 +465,8 @@ Download Compress Images 	:: composer require yiisoft/yii2-imagine D
  #php serve             :: will show the running port
 
  #php -v 				:: will show you the current version of the php
+
+ #User Contribution 	:: https://www.yiiframework.com/extensions
 
 
 

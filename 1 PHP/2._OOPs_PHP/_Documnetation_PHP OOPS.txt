@@ -698,9 +698,9 @@ Syntax
 
 
 		
-		Note : 	1. Add use 			: namespace app\student 	-> namespace		: new student() 					->class name
-				2. Not Add use 		: 		---					-> no namespace 	: new \app\student\student()		->class name
-				3. Not Add use 		: 		---					-> no namespace 	: \app\student\student::getName()	->Static Class	  
+		Note : 	1. Add use 			: namespace app\student 	-> namespace		: use \app\student;  + 	 new student() 	->class name
+				2. Not Add use 		: 		---					-> no namespace 	: new \app\student\student()			->class name
+				3. Not Add use 		: 		---					-> no namespace 	: \app\student\student::getName()		->Static Class	  
 
 =============================================================================================================================================
 #Traits 
