@@ -1,5 +1,13 @@
 #Documentation 
 
+
+#path 
+	1. we can set any file path using namspeace or path 
+
+		@app means current root directory like basic or advance 
+
+		@app\view\about.php 		means basic->view->about.php 
+
 	1. Yii is a high performance, component-based PHP framework for rapidly developing modern Web applications. The name Yii (pronounced Yee or [ji:]) means "simple and evolutionary" in Chinese. It can also be thought of as an acronym for Yes It Is!
 	2. Additionally to the web application, there is a console script called yii, which is located in the applications base directory. This script can be used to run background and maintenance tasks for the application, which are described in the Console Application Section.
 
@@ -20,11 +28,16 @@
 	  Yii 2.0 is also equipped with official support for two popular template engines: Smarty and Twig.The Prado template engine is no longer supported. 
 
 #Models
+	
+	Models are basically used to Store the data to represent in the view
+
 	Yii 2.0 uses yii\base\Model as the base model.Yii 2 you should extend yii\base\Model to create a form model class.
 
-#Controllers
-	Yii 2.0 uses yii\web\Controller as the base controller class		
 
+#Controllers
+	
+	1.Yii 2.0 uses yii\web\Controller as the base controller class		
+	
 		public function actionView($id)
 		{
 		    $model = \app\models\Post::findOne($id);
@@ -35,10 +48,41 @@
 		    }
 		}
 
-	There are two types of Controller 
+	2. There are two types of Controller 
 		
-		1. Console Controller 				::  yii\console\Controller
-		2. Web Controller 					:: yii\web\Controller 	
+		1. Console Controller 				:: yii\console\Controller
+		2. Web Controller 					:: yii\web\Controller 
+
+	3. There are two types of actions 
+		1. createIndex 			:: inline action 					
+		2. standalone actions 											//they are use across multiple application or controller
+
+
+	4. When you create controller in the Sub directory 
+
+		1. basic -> controller -> admin -> siteController.php
+
+			namespace app\controllers\admin;
+
+			 public function actionIndex()
+			    {
+			        echo "yes";
+			        exit;
+			     
+			    }	
+
+		2. hit the address http://localhost/yii/basic/web/admin/site/index
+
+
+		Note : in the address bar you have write exact name , that controller name rule does not work here
+
+
+		
+
+
+
+
+
 
 #Console Applications
 	Console applications are now organized as controllers, like Web applications. Console controllers should extend from yii\console\Controller.To run a console command, use yii <route>, where <route> stands for a controller route (e.g. sitemap/index). Additional anonymous arguments are passed as the parameters to the corresponding controller action method 	
@@ -423,7 +467,24 @@
 	YII_ENV: specifies which environment the application is running in. This will be described in more detail in the Configurations section. The default value of YII_ENV is 'prod', meaning the application is running in production environment.
 	YII_ENABLE_ERROR_HANDLER: specifies whether to enable the error handler provided by Yii. The default value of this constant is true		
 
+======================================================================================================================================================	
+#Yii Videos best one 
 
+======================================================================================================================================================
+#config File 
+	
+	$config = [
+		'id'=> 'basic'								// set application Name,
+		'name'=> 'Deepu Bhasin'						// Show the name in the Nav bar 
+		'defaultRoute'=>'site/login'				// create default route
+		'language'=>'de'							// sent language into germen
+		'layout'=>'main2'							// set the other layout
+		'components'=> [
+			'assetManager'=[
+				'appendTimeStamp'=> true,			// it will set the time version with css and js files to remove the cache
+			]
+		]
+	]
 
 
 
@@ -1291,6 +1352,16 @@ d. creating Crud
 				class=>'app\components\CommonComponents',							//app\foldername\filename
 				class=>'app\components\CommonComponents2',							//app\foldername\filename	
 		]
+					or
+
+		'common'=>'app\components\CommonComponents'	
+		
+					or 
+		'common'=>function(){
+			return new \app\components\CommonComponents(); 
+		}	
+
+
 
 	4. Create Controller 
 
@@ -1644,7 +1715,17 @@ d. creating Crud
 			parent::beforeAction($action);
 			echo  "Before Action";
 			return True;
+
+			var_dump($action)							// var dump this object and you will get alot of information 
 		}
+
+		Note : we can make  condition according to that like 
+
+					if($action->id ==='index'){
+						$this->layout = 'admin';
+					}
+
+
 	
 		public function actionIndex()
 		{
@@ -1670,6 +1751,33 @@ d. creating Crud
 
 	Before and After call every time its self when ever we call any controller
 
+	Note : there is 'on' method also for before action 
+
+
+	Controller Life cycle 
+
+		1. yii\base\Controller::int()
+				|
+			Create an action 
+			Default action 
+			actions() map 
+			inline action 
+			invalidRoute Exception 						
+
+
+			Application::beforeAction 
+			Module::beforeAction 
+			Controller::beforeAction 
+				run action 
+			Controller::afterAction 			
+
+
+
+
+
+
+
+
 ===========================================================================================================================================
  #Before Request & Before Action (this is global wise)
 
@@ -1692,12 +1800,29 @@ d. creating Crud
 				exit;
 			echo  "Before Action From Web.php";
 			},
+
+						or 
+
+			'on beforeAction'=>function($event){
+				Yii::$app->controller->on(\yii\web\Controller::EVENT_BEFORE_ACTION,function(){
+					echo "hello before action here";
+				});
+
+			}				
+
+
+
+
+
+
 			'on beforeRequest'=>function(){
 				echo "yes";
 			},
 
 
-		Note : beforeRequest always work first as compair to beforeAction 	
+		Note : 
+				1. beforeRequest always work first as compair to beforeAction 	
+
 
 
 ===========================================================================================================================================
@@ -2410,8 +2535,11 @@ d. creating Crud
            ->bindValue(':status', 1)
            ->queryOne()
 5. To Print all errors
-	$errores = $modesl->getErrors();
+	1. $errores = $modesl->getErrors();
                 print_r($errores);    
+
+    2. $error=$models->error
+    	print_r($error);
 
  6. Where we have to use redirect 
  	1. when we are inserting new data then always use redirect function otherwise data will be remain in the fields

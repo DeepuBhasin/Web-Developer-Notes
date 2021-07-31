@@ -26,19 +26,124 @@
 #DATA TYPES IN JAVASCRIPT
 
     There are 2 Data types 
-        1. Primitive Data type 
+        1. Primitive Data type                                               :: Momery allocation in stack
             a. Boolen 
             b. Null 
             c. Strings 
             d. Numbers 
+            e. undefined
+            f. Symbol
 
-        2. Composite Data type 
-            a. Objects 
-            b. Functions 
-            c. Arrays  
+            Note : typeof return for null is object but it primitive data type
+
+        2. Composite Data type/ Reference Datatype                           :: Memory Allocation in Heap
+            a. Objects                 :: typeof return is object            
+            b. Functions               :: typeof return is function  
+            c. Arrays                  :: typeof return is object
+            d. dates 
 
         Note :  1. typeOf           :: print the variable Type 
                 2. parseInt         :: convert any Datatype into Integer
+                3. c , c++ are the static languages thats we have to declare every datatype before declarition of varaiable but javascript is flexibal language in which engine automatically understand the datatype of the varaiable         
+
+   
+=========================================================================================================================================
+#Console
+
+    1. Console.log
+    2. Console.table()                          // very usefull in the case of the objects
+    3. console.warn()                           // show waring 
+    4. console.clear();                         // clear all the console window
+    5. console.time()  + console.timeEnd()      // execution time
+    6. console.error()                          // to Show the error
+
+=========================================================================================================================================
+#var , let , const 
+    
+    1. var          :: are available globaly
+    2. let          :: have block scope only 
+    3. Const        :: value cannot change or redeclare 
+
+    Note : 1. declaring and initilization in constant in one step only 
+           2. when ever we declar array as const we can push elements from array but we cannot redeclare that array  
+           3. In Let we cannot redeclare the variable same as const
+
+    #various most common Programming case types: 
+        1. camalCase 
+        2. Kebab-Case 
+        3. snake_case
+        4. PascalCase
+
+=========================================================================================================================================
+#Type Conversation
+    
+    1. String(varibleName) or variable.toString()                 :: convert into string
+    2. Number(variable) or parseInt() or parseFloat()             :: convert into number  
+            toFixed()                                             :: convert into integer Number              
+            toFixed(4)                                            :: convert into Float Number upto four decimals  
+
+=========================================================================================================================================
+#String and string Functions, Template Literals 
+    
+    1. Concatination                                                :: add text to the existing text 
+        a. '+' using of this sign
+        b. variableName = VariableName.concat('Enter text Here');
+    2. variableName.toLowerCase()                                   :: lower the all the text      
+    3. variableName.toUpperCase()                                   :: Captalize the all the text  
+    4. varaiableName[2]                                             :: return the 3rd Character from the string 
+    5. variableName.indexOf('this')                                 :: return the starting index position of 'this' word from the string        
+                -1     :: not found 
+    6. variableName.lastIndexOf('this')                             :: return the last word starting position of 'this' word from the string        
+    7. variableName.charAt(3)                                       :: return the third charcter from the string  
+    8. variableName.inclides('test')                                :: return true or false if 'test' found in the string 
+    9. variableName.substring(0,3)                                  :: return the characters starting from the 0 positon and end with 3 position  
+    10. variableName.slice(0,3)                                     :: return the characters starting from the 0 positon and end with 3 position     
+        
+        Note slice function can also return characters from the end while substring cannot
+
+    11. variableName.split(' ')                                     :: convert string into array same like expload function;
+    12. varaibleName.replace('old word','new word')                 :: replace the first occurance word in the string 
+
+
+
+#template Literals 
+
+    1. Back Ticks  '`' Sign helps a lot like 
+
+            var a = `html ${variableName} 
+                        no need of concatination after enter
+                        thanku so much and 
+                        even i can add ' single or double inverted comma
+                        and we will not get any kind of error  
+                    `;    
+=========================================================================================================================================
+#Arrays 
+    
+    1. Decalaring 
+
+        1. var a = [1,2,4,5,6];                     :: with square brackets 
+        2. var a = new array(1,2,3,4,5)             :: with array Constructor
+
+    functions 
+
+        1. arrayName.length                         :: return the length of the arrat 
+        2. Array.isArray(arrayName)                 :: return true or false if arrayName is array
+        3. arrayName.indexOf(23)                    :: return the index position of 23 value from the array     
+        4. arrayName.push(23)                       :: add 23 value at the end of array 
+        5. arrayName.unshift(23)                    :: add 23 value ad the beigning of the array  
+        6. arrayName.pop()                          :: remove the last element from the array 
+        7. arrayName.shift()                        :: remove the first element from the array 
+        8. variableName.slice(0,3)                  :: remove the 3 elements from the array starting from the 0 index 
+        9. varaiableName.revers()                   :: reverse the original array 
+        10. newarray=array1.concate(array2)         :: combining two arrays
+
+
+        #foreach loop
+
+            let arr = [1,2,3,4,5,6,7,8,9,0];
+                arr.foreach(function(elements,index,array){
+                    console.log(elements);
+                });
 
 
 
@@ -57,15 +162,30 @@
             obj.name                                // Deepinder
             obj.run();                              // Deepinder is Running 
 
-    2. var bike {                                       //createing object 
-        name : "aulto",                                 // creating property     
-        color : "black",                                // creating property 
-        company : "amruti",                             // creating property 
-        price   : 50000,
-        discount : function(){                          // creating function/method 
+    2. var bike = {                                       //createing object 
+        name            : "aulto",                                 // creating property     
+        'color'         : "black",                                // creating property 
+        'company of'    : "maruti",                             // creating property 
+        price           : 50000,
+        discount        : function(){                          // creating function/method 
         var amount = bike.price-5000;
         }
-    }    
+    } 
+
+        bike.name               //aulto
+        bike['color']           //black    
+        bike['company of']      //maruti
+
+
+        #in forloop
+
+            for(let key in bike){
+                console.log(`The ${key} of object is ${obj[key]}`);  
+            }
+
+=========================================================================================================================================
+#Functions and Scopes 
+    
 
 =========================================================================================================================================
 #DOM
@@ -91,6 +211,5 @@
         5. all Attribute of elements are attribute nodes.
         6. Comments of page are comment nodes 
         
-
 
 

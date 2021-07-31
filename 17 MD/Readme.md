@@ -3,9 +3,9 @@ Heading Tages are made usig '#'Symbol
 # Heading 1
 ## Heading 2
 ### Heading 3
-#### HEading 4
-##### HEading 5
-###### HEading 6
+#### Heading 4
+##### Heading 5
+###### Heading 6
 </br>
 
 <!---Italics---->
