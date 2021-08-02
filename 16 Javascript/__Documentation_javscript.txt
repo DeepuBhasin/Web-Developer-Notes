@@ -250,6 +250,87 @@
             });
 
     
+=========================================================================================================================================
+#Dom Selector, ChildNode, Children 
+    
+    1. Id                           // every element have unique id 
+    2. Class                        // multiple elements can have same class  
+
+    1. Single Element Selector      
+        a. document.querySelector('#main');                 // only return the element which contains id main 
+        b. document.querySelector('.test');                 // only return first element which contains test class 
+        c. document.querySelector('div');                   // only return first div from whole dom
+        d. document.querySelector('div.main')               // select div which have main class name 
+
+
+
+    2. Multiple Element selector    
+        a. document.getElementsByClassName('main');         // select all the elements which contains main class 
+        b. document.getElementsByTagName('div')             // select all the elements which contains div element 
+
+    #concept 
+        <div id="container">
+            <div id="main" class="first second third forth">
+                <div id="test1">Child Node1</div>
+                <div id="test2">Child Node2</div>
+                <div id="test3">Child Node3</div>
+            </div>
+         </div>   
+
+        let element = document.getElementById('main');
+
+        document                :: object 
+        getElementbyEd          :: method of the document class 
+
+        1. element.className    :: accessing the object properties                      // example first second third forth
+
+        2. element.childNode    :: return the child between a particular element 
+
+                a. element.childNode[1].nodeName                  // it will return the node Name like h1, #text, comment etc    
+                b. element.childnode[0].nodeType                  // it will return a number 
+
+                        1. elements                 ::1
+                        2. Attribute                ::2
+                        3. Text Node                ::3
+                        4. Comment                  ::4
+                        5. document                 ::9
+                        6. docType                  ::10   
+        3. element.parentNode   :: return the parent Node element              // container 
+
+                a. element.firstElementChild.nextSibling                        // return next sibling 
+                a. element.firstElementChild.nextElementSibling                 // return next sibling element      
+
+
+        4. element.children     :: return only the elements between selected element
+
+                Note : 1. when ever we print childnode then it will print all the things which is included in that like text, comment, elements etc
+
+        5. element.firstChild                              // return only the first child
+        6. element.lastChild                               // return only the last child   
+        7. element.firstElementChild                       // return only the first child element only 
+        8. element.lastElementChild                        // return only the last child element only    
+
+        9. element.childelementCount                       // return only elements counts with in the selected element    
+
+       innertext    // will add only text in the element
+       innerHTML    // will add html + text in the element like <b> hello </b> 
         
+=========================================================================================================================================
+#createing Removing and Replacing elements  
+    
+    1. createing 
+        let element = document.createElement('li');                     // create list element 
+            element.className = 'main'                                  // create class attribute with main class name 
+            element.id        = 'credmain'                              // create id attribute with credmain id name 
+            element.setAttribute('title','mytitle');                    // create attribute in the element wiht title 
+            
+            element.innerText = "hello Deepinder"                       // adding text in the li element 
+
+                        or 
+            element.appendChild(document.createTextNode('Hello i am Developer'))    // adding text in the li element             
+            
+
+        let ul  = document.querySelector('ul.this')                     // select ul which contains this class 
+                  ul.appendChild(element)                               // add element to the ul element 
 
 

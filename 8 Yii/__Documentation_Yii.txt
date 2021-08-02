@@ -76,14 +76,6 @@
 
 		Note : in the address bar you have write exact name , that controller name rule does not work here
 
-
-		
-
-
-
-
-
-
 #Console Applications
 	Console applications are now organized as controllers, like Web applications. Console controllers should extend from yii\console\Controller.To run a console command, use yii <route>, where <route> stands for a controller route (e.g. sitemap/index). Additional anonymous arguments are passed as the parameters to the corresponding controller action method 	
 
@@ -206,6 +198,16 @@
 
 
 	Note :  routes in Yii, which act as the bridge between user requests and controller actions.
+
+#Application Components
+
+	Applications are service locators. They host a set of the so-called application components that provide different services for processing requests. For example, the urlManager component is responsible for routing Web requests to appropriate controllers; the db component provides DB-related services; and so on.
+
+	Each application component has an ID that uniquely identifies itself among other application components in the same application. You can access an application component through the expression:
+
+	\Yii::$app->componentID	
+
+	For example, you can use \Yii::$app->db to get the DB connection, and \Yii::$app->cache to get the primary cache registered with the application.
 
 =====================================================================================================================================================
 #Working With Forms 
@@ -808,6 +810,136 @@ b. Individual JS and CSS
 
 		TestAsset::register($this);									// loading function 
 =================================================================================================================================================================
+#Working with Request
+	
+	http://localhost/yii/basic/web/site/?id=10
+
+	$id = Yii::$app->request->get('id','default value');					//get method 
+	$id = Yii::$app->request->post();										//post method
+    echo $id;
+
+
+    #disable Csrf tokken 
+
+    	a. for all actions
+
+		    write this below code in the controller 
+
+		    	public $enableCsrfValidation = false;
+
+		b. for a particular action
+
+			public function beforeAction($action)
+			{
+				return parent::beforeAction($action)
+			}   
+
+	#various request in yii (to check the request before requet perform)
+		
+		1. Yii::$app->request->isGet();	
+		2. Yii::$app->request->isPost();	 		 	
+		3. Yii::$app->request->isDelete();	
+		4. Yii::$app->request->isPut();	
+		5. Yii::$app->request->isPatch();	
+		6. Yii::$app->request->hostInfo();							// return the host 
+		6. Yii::$app->request->pathInfo();							// return the other address info 
+
+
+	#fileinput() method same as in php 
+		
+		1. add code in the controlle in any function 
+
+			
+			public function actionCreate($idparam)
+			{
+				echo Yii::$app->request->get();
+				$id = Yii::$app->request->getBodyParams();
+
+			}
+		2. Select raw option from the postman 
+
+			{'id':12,'data':'testing'}
+
+			#add header 
+
+			Content-type = application/json
+
+
+			#add line in the code in the config folder -> web.php
+
+			add line the components -> request array 
+				
+				paramas => [
+								'application/json'=> \yii\web\JsonPasres::class 
+					]	 
+
+		3. Hit address (from the post man)
+
+				https://localhost/yii/basic/web/site/
+								
+								or 
+
+				https://localhost/yii/basic/web/site/?id=10
+
+		4. To print the user agent 
+
+			$id = Yii::$app->request->userAgent()										//print the user agent
+
+
+		5. To print all the headers  
+
+			$id = Yii::$app->request->readers											//print the headers of the page
+
+		6. To print use IP  
+
+			$id = Yii::$app->request->userIP											//print the user Ip 
+
+=================================================================================================================================================================
+#Format Respnse 
+	
+	1. Using return 
+
+		public function actionResponse(){
+			return 'Hello World'										// we use simple return keyword to print the data in the browser 
+		}
+
+	2. using $app variable 
+
+		public function actionResponse(){
+			return Yii::$app->response->content = 'Hello World';		// return just simple data using yii
+		}
+
+	3. responsein various form
+
+		public function actionResponse()
+		 {
+			return Yii::$app->response->format = Response::FORMAT_JSON		// return the data in the from of json like json_encode
+			return Yii::$app->response->format = Response::FORMAT_RAW		// return the data in the from of raw 
+			return Yii::$app->response->format = Response::FORMAT_HTML		// return the data in the from of html 	
+			return Yii::$app->response->format = Response::FORMAT_JSONP		// return the data in the from of jsonp 
+			return Yii::$app->response->format = Response::FORMAT_XML		// return the data in the from of xml 
+
+
+
+
+			return [														// return the data in above defined form
+				'name'=>'Deepinder',
+				'number'=>'9915099247'
+			];
+		}
+
+	Note : in case we return from some where else then we use 
+		
+		Yii::$app->response->data = [										
+				'name'=>'Deepinder',
+				'number'=>'9915099247'
+			];
+
+
+
+
+
+=================================================================================================================================================================
 #Routes 
 	
 	basics -> config -> web.php
@@ -896,7 +1028,7 @@ b. Creating your own Routes
          	use Yii;
 
          	public function actionInfo(){
-		        $data= Yii::$app->request->get() ;
+		        $data= Yii::$app->request->get() ;											//this method is used to get the data 
 		        echo "yes";
 		        echo "<br/>";
 		        print_r($data);
@@ -1241,6 +1373,18 @@ d. creating Crud
 			l. Normal Query	
 
 				$data = Yii::$app->db->createCommand("SELECT * FROM Atricles")->queryAll();	
+
+			Note 
+
+				1. if ww want to use count or aggregate functions 
+
+					$db->createCommand("SELECT COUNT(*) from user")->queryScalar();
+
+				2. For sql Injections 
+					
+					1. bindparameter
+					2. bindvalues 	
+
 ==============================================================================================================================================
 #Query Builder (means binding a parameter same as like in pdo)
 	 
