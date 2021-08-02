@@ -184,8 +184,28 @@
             }
 
 =========================================================================================================================================
-#Functions and Scopes 
-        
+#Window Object 
+
+       
+    
+    1. window.innerHeight               // return the height of the window 
+    2. window.innerWidth                // return the width of the window 
+    3. window.scrollX                   // if scroll in the x-dircetion it will tell me value 
+    4. window.scrollY                   // if scroll in the y-dircetion it will tell me value
+    5. window.alert()                   // language construct 
+    6. window.histoy()                  // return the history 
+    7. window.history.length            // return the length of the history 
+    8. window.history.go(-1)            // move backword 
+    9. window.history.go(+1)            // move forward
+
+    Note : Window id global object  which plays a major role in the dom 
+
+
+    6. location.reload()                // reload the page 
+    7. location.href                    // return the current url
+    8. location.href="address"          // redirect to the address 
+    9. location.toString()              // return the current address as string
+         
 
     
 
@@ -212,6 +232,24 @@
         4. all text of document is text nodes
         5. all Attribute of elements are attribute nodes.
         6. Comments of page are comment nodes 
+
+        Note : console.log(document)       // object 
+
+        1. document.all                     // return all the elements in the current page 
+        2. document.body                    // return the body element with all child elements
+        3. document.forms                   // return all the forms on the current page 
+        3. document.links                   // return all the links on the current page 
+        3. document.images                   // return all the images on the current page 
+        3. document.script                   // return all the script on the current page 
+
+        Note : when ever we use document.all , console will return the data in the form of array but it is not in the array from so we have to convert that thing into the array first then we can print that values 
+
+            a  = document.all
+            Array.from(a).forEach(function(element){
+                console.log(element);
+            });
+
+    
         
 
 
