@@ -1386,7 +1386,7 @@ d. creating Crud
 					2. bindvalues 	
 
 ==============================================================================================================================================
-#Query Builder (means binding a parameter same as like in pdo)
+#Query Builder (means binding a parameter same as like in pdo and here we donnot create modes we just create model instance)
 	 
 	1. Model 	 
 	 	
@@ -2858,6 +2858,8 @@ d. creating Crud
 		php yii migrate/create create_video_table 
 		--fields="video_id:string(16):notNull,title:string(512):notNull,description:text(),created_by:integer(11):foreignKey(user)"	
 
+			the above command will add all the things into to migration file, and even we can add more columns or extra things by adding the above command
+
 		#then hit enter
 
 		#then advance -> console -> migrations -> m210724_071802_create_video_table.php (create by Above Console Command)
@@ -2867,7 +2869,7 @@ d. creating Crud
 		$this->createTable('{{%video}}', [
             'video_id' => $this->string(16)->notNull(),
             'title' => $this->string(512)->notNull(),
-            'description' => $this->text(),
+            'description' => $this->text(),					or 'LONGTEXT' or 'MEDIUMTEXT'
             'tags'=>$this->string(512),
             'status'=>$this->integer(1),
             'has_thumbnail'=>$this->boolean(),
@@ -2890,7 +2892,17 @@ d. creating Crud
 
    		php yii migrate/down -> yes -> hit Enter
 
-   	Note : always create Table Name Singler like teacher , student , video etc  	
+   	Note : always create Table Name Singler like teacher , student , video etc 
+
+	   	 1. safeUp								:: every thing related to create things 
+		 2. safeDown 							:: every thing realted to drop things (and also write in the reverse order of safeUp funtion)	
+		 3. bydefault it use migrate/up method 	:: to create the tables etc 
+		 4. when we run migrate a migration table will create and it store all the migrate in it 
+		 5. if you execute migration command after modification on a particular table then first you have to drop table using migrate/down command and also delete from the migration table
+		 6. php yii migrate/down 4 				:: it will drop the last four migrates 
+		 7. php yii migrate/down all 			:: it will drop all the migrate 
+
+		 8. php yii migrate/create --migrationPath=@app/migrations/db 		:: create sub folder db under migrations folder 
 
 =======================================================================================================================================================
 #AssetManager Cache 

@@ -333,4 +333,47 @@
         let ul  = document.querySelector('ul.this')                     // select ul which contains this class 
                   ul.appendChild(element)                               // add element to the ul element 
 
+    2. replacing 
 
+        1. element.replaceWtih(newElmentDetails)                              // replace all text and attribute with new details 
+        2. parentId.replaceChild(newElment,document.getelmentById('main'))    // replace all text and attribute with new details 
+
+     3. Remove                   
+            
+        1. element.replaceChild(document.getelmentById('main'))               // to remove the element from the child class
+        4. element.removeAttribute('id')                                      // to remove the attribute from the element 
+
+     4. hasAttribute 
+
+        1. element.hasAttribute('href')                                         // return tru or flase if attribute exist in it         
+
+=========================================================================================================================================
+#Evenets and evenet Objects 
+    
+    1. Click event
+
+        let myclick = document.getElementById('myclick');                       // selecting element 
+            myclick.addEventListener('click', function(e) {                     // creating event 
+                alert('Nik Bakery');
+                console.log(e)                                                  // print all object details
+                console.log(e.target)                                           // print data related to the target property  
+                console.log(e.target.className)                                 // print class Name which is targeted
+                console.log(e.target.id)                                        // print id name which is targeted
+                console.log(e.target.classList)                                 // print all the list of the class name
+                console.log(e.target.offsetX)                                   // print distance in the x-direction from the reference point   
+                console.log(e.target.offsetY)                                   // print distance in the y-direction from the reference point   
+            });
+
+        Note : 1. here 'e' is the argument which is called event object. Most Important one is target property in object  
+               2. e.target which returns the element 
+               2. here function is called callback function    
+
+    2. PreventDefault
+        
+        let btn = document.getElementId('btn');
+        btn.addEventListener('click',fxn1);
+
+        function fxn1(e){
+            console.log('thanks',e);
+            e.preventDefaut();
+        }           
