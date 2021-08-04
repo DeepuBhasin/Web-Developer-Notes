@@ -376,4 +376,43 @@
         function fxn1(e){
             console.log('thanks',e);
             e.preventDefaut();
-        }           
+        }     
+
+=========================================================================================================================================
+#Local Storage (Appication -> localStorage  in the inspect element)
+
+    1. localStorage.setItem('name','Deepu');            // store the value 
+
+        window.localStorage                             // to print the value
+
+    2. localStorage.getItem('name')                      // get value 
+
+    3. localStorage.clear()                             // to delete all the local Storage values 
+
+    4. localStorage.removeItem('name')                  // to remove the particular item
+
+    5. to story array in local Storage you convert your array into json first   
+
+        let array= [1,2,4,5,6];
+        localStorage.setItem('myarray',JSON.stringify(array));
+
+        localStorage.getItem.(array)            // it's output will be string not the array but it looks like array
+
+        so convert into array 
+
+        let name = JSON.parse(localStorage.getItem('array'));         // convert into object  
+
+        console.log(name);                               // print array 
+
+
+        JSON.stringify()     // convert array into string   
+        JSON.parse()         // convert string into object 
+
+
+=========================================================================================================================================
+#Session Storage (Appication -> session  in the inspect element)
+
+    1. same the above just reaplce session with local
+    2. main difference , when ever we close the browser , and reopen the same tab then session will gone but local strorage will exis there.
+
+
