@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Student {
+            constructor(gname, gclass, grollno, gphoneno) {
+                this.name = gname;
+                this.class = gclass;
+                this.rollno = grollno;
+                this.phoneno = gphoneno;
+            }
+            study() {
+                return `this is ${this.name} is study from the last 3 hours`;
+            }
+            static add(a, b) {
+                return a + b;
+            }
+        }
+
+        object1 = new Student('Deepinder', 'Diploma', '198', '9915099247');
+        console.log(object1.study());
+        console.log(Student.add(1, 2));
+
+
+        class teacher extends Student {
+            constructor(gname, gclass, grollno, gphoneno, langugae) {
+                super(gname, gclass, grollno, gphoneno)
+                this.name = gname;
+                this.class = gclass;
+                this.rollno = grollno;
+                this.phoneno = gphoneno;
+            }
+        }
+
+        object1 = new teacher('Deepinder', 'Diploma', '198', '9915099247');
+        console.log(object1.study());
+        console.log(teacher.add(1, 2));
+
+    </script>
+</body>
+
+</html>
