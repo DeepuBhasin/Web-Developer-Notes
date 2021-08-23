@@ -669,7 +669,31 @@
               };
               params = `{"name":"test",'value':'deepinder'}`,                   // sending data
               xhr.send(params);                                                 // to send the request 
-            }     
+            }    
 
-  
+=========================================================================================================================================
+#promises
+    
+      function fun1() {
+            return new Promise(function (resolve, reject) {
+                setTimeout(() => {
+                    const error = true;
+                    if (!error) {
+                        console.log("Function : Your Promiss has been resolved");
+                        resolve();
+                    } else {
+                        console.log('Function : Your Promiss has not been resolved');
+                        reject('Sorry not Fulfilled');
+                    }
+                }, 5000);
+            })
+        };
+        fun1().then(function () {
+            console.log("Deepu: Thanks for Resolving");
+        }).catch(function (error) {
+            console.log("Deepinder: Very bad bro.");
+        });
+
+=========================================================================================================================================
+#Arrow Function  
       
