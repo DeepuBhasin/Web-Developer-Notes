@@ -20,6 +20,153 @@
 
     Note : 1. Document                   :: is a root object which contains all html 
            2. document.write('hello')    :: this function allow to write any thing on the html page
+           
+=========================================================================================================================================
+#Notes for Special Lecture 
+
+    1. Name/Value Pair : A name which maps to a unique value 
+
+        Example : Address = '#51-d Street number 3'                     // address is name , #51-d Street number 3 is value 
+
+        a. The name may be defined more than once, but only can have one value in any given context.
+        
+        b. That value may be more name/value pairs.
+
+            #object : A Collection of name value pairs (The simplest defination when talking about javascript)    
+
+            Example : Address : {                                               // address is name , value is object
+                                    street: 'Main',
+                                    Nunber: 100,
+                                    apartment: {
+                                        floor : 3,
+                                        number : 301,
+                                    }  
+                                }    
+    2. When ever javacsript code runs the engine of the javacsript script wrap every thing in the Execution context (global) and this make two things 
+        a) global Object (which contains all global things & in browser global object is window )  and 
+        b) this variable 
+
+        so when you write this in the script or console it pointing to the current window. in the Case of browser window is global object. On global level this and global object are same there for window = this.
+
+        global means : not inside a function.
+
+    3. Setup Memory space for variable (and set equal to 'undefined') and functions is called Hoisting    
+
+        Example 
+
+            function b() {
+            console.log('Hello function b');
+            }
+            b();
+            console.log(a);
+            var a = "hello Global";
+            console.log(a);    
+
+        OutPut
+        ======
+        
+        Hello function b
+        undefined
+        hello Global 
+
+        there are two phase create while Running code and all the things happens line by line (below phase create line by line)
+            1. Creation Phase   : all variable are created and assign undefined value
+            2. Execution Phase  : all variable are assign original value and executed
+
+                var a = "hello world";
+                console.log(a);
+                console.log(window.a);
+                console.log(this.a);
+
+                OutPut
+                =======    
+                
+                hello world
+                hello world
+                hello world
+
+
+    4. Single Threaded : one command at a time (under the hood of the browser, maybe not) & Synchronous : one at a time (and in order). Note javacsript has a Synchronous behaviour.
+    
+    5. Invocation : Running a function (in javacsript, by passing parenthesis()). When ever a function runs it create their own global Execution.
+
+        Example 
+
+        #Function Invocation amd the Execution stack (this is very Important for the Synchronous calls)
+
+                    function b(){
+
+                    }
+                    function a(){
+                        b();
+                    }  
+                    a();
+
+
+                    
+                            b()
+                        Execution Context
+                (create and code is executed) 
+                            |       
+                            a()
+                        Execution Context
+                (create and code is executed)    
+                            |   
+                    Global Execution Context
+                (create and code is executed)  
+
+        Which ever on the top it will execute first and it will execute their complete block then it will pop-off from the top of the stack and the next block will be execute which ever on the top of the stack.  
+
+     6. Variable Enviro()nment : Where the variable  live (and how they realted tit is also referencing to the Outer Environment but its variable output is 2 instead of 1 beacuse is has declaration and initilization of myArray variable.
+
+            function b(){
+                var myVar;
+
+              }
+            function a(){
+                var myvar=2;
+                    b();
+                }  
+            var myVar =1;
+            a();
+
+
+                    
+                    b()
+                Execution Context                       myvar : undefined;
+        (create and code is executed) 
+                    |       
+                    a()
+                Execution Context                      // myvar : 2 
+        (create and code is executed)                   
+                    |   
+            Global Execution Context                    // myVar : 1
+        (create and code is executed) 
+        
+        
+     7. The Scope chain : when ever programmer is execute in 'creation phase' a lexical Environment is create which setup the stack and set every thing on the global level and it does not depend upon the physical level. then in 'execute phase' execute , value will assign then they total depend upon on the physical level and also pointig to the Outer global execution for the variable. 
+
+            function b() {
+                console.log(myvar);
+            }
+            function a() {
+                var myvar = 2;
+                b();
+            }
+            var myvar = 1
+            a(); 
+
+            OutPut
+            ======
+            1
+
+            a. instead of getting 2 we are getting 1 beacuse of lexical Environment not by physical Environment. function a and function b sit on same level of global level execution.
+            b. when ever function is created it always Reference to the Outer Environment which is Global execution that is why function b getting 1 instead of 2.
+            c. incase function a() it is also referencing to the Outer Environment but its variable output is 2 instead of 1 beacuse is has declaration and initilization of myArray variable.
+
+   
+
+
 
 
 =========================================================================================================================================
@@ -51,7 +198,7 @@
 
         Note :  1. typeOf           :: print the variable Type 
                 2. parseInt         :: convert any Datatype into Integer
-                3. c , c++ are the static languages thats we have to declare every datatype before declarition of varaiable but javascript is flexibal language in which engine automatically understand the datatype of the varaiable         
+                3. c , c++ are the static languages thats we have to declare every datatype before declarition of variable but javascript is flexibal language in which engine automatically understand the datatype of the variable         
 
    
 =========================================================================================================================================
@@ -106,7 +253,7 @@
         b. variableName = VariableName.concat('Enter text Here');
     2. variableName.toLowerCase()                                   :: lower the all the text      
     3. variableName.toUpperCase()                                   :: Captalize the all the text  
-    4. varaiableName[2]                                             :: return the 3rd Character from the string 
+    4. variableName[2]                                             :: return the 3rd Character from the string 
     5. variableName.indexOf('this')                                 :: return the starting index position of 'this' word from the string        
                 -1     :: not found 
     6. variableName.lastIndexOf('this')                             :: return the last word starting position of 'this' word from the string        
@@ -118,7 +265,7 @@
         Note slice function can also return characters from the end while substring cannot
 
     11. variableName.split(' ')                                     :: convert string into array same like expload function;
-    12. varaibleName.replace('old word','new word')                 :: replace the first occurance word in the string 
+    12. variableName.replace('old word','new word')                 :: replace the first occurance word in the string 
 
 
 
@@ -154,7 +301,7 @@
         6. arrayName.pop()                          :: remove the last element from the array 
         7. arrayName.shift()                        :: remove the first element from the array 
         8. variableName.slice(0,3)                  :: remove the 3 elements from the array starting from the 0 index 
-        9. varaiableName.revers()                   :: reverse the original array 
+        9. variableName.revers()                   :: reverse the original array 
         10. newarray=array1.concate(array2)         :: combining two arrays
 
 
@@ -695,5 +842,380 @@
         });
 
 =========================================================================================================================================
-#Arrow Function  
+#Arrow Function
+    
+    1. anonymous function 
+        
+        let test = function () {
+            console.log('This is testing function');
+        }
+
+        test();
+    
+    2. Arrow function 
+
+        let test = () => {
+            console.log('This is testing function');
+        }
+
+        test();
+
+    3. Arrow Function With return Type          
       
+         let test = () => 'This is testing function';
+
+        console.log(test());
+
+    4. Arrow function with return type and one parameter
+
+         let test = name => 'This is testing function ' + name;
+
+        console.log(test('deepu'));
+
+    5. Arrow function with retrun type and two parameter
+
+        let test = (name, job) => 'This is testing function ' + name + job;
+
+        console.log(test('deepu', 'Web Developer'));
+
+    6. Arow Function with return type object           
+
+        let test = () => ({ 'name': 'Deepinder', 'job': 'Web Developer' });
+
+        console.log(test());
+=========================================================================================================================================
+#Fetch Api       
+
+    This function is used insted of XHR 
+
+    #GET Method
+    ===========
+    function getData() {
+            console.log('Started getData');
+             let url = 'https://api.github.com/users';
+            fetch(url).then((response) => {                                     // returning promiss 
+                console.log('Inside the First then');
+                return response.text();                                         // returning data in the text form        
+                    or
+                return response.json();                                         // returning data in the json form    
+
+            }).then((data) => {                                                 // returning promiss
+                console.log("Inside Second Then");
+                console.log(data);
+            });
+        }
+        console.log('Before Running Data');
+        getData();
+        console.log('After Running Datat');
+
+        OutPut
+        ======
+
+            Before Running Data
+            index.html:14 Started getData
+            index.html:26 After Running Datat
+            index.html:17 Inside the First then
+            index.html:20 Inside Second Then
+            index.html:21 hello world 
+            My name is Deepinder Singh 
+            This is api for working file.
+            thank you
+
+
+        #POST Method
+        ============
+        function postData() {
+            url = 'https://dummy.restapiexample.com/create';
+            data = '{"name":"deepinder","salary":"123","age":"23"}';
+            params = {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json',
+
+
+
+                },
+                body: (data)
+            },
+                fetch(url, params).then(response => response.json())
+                    .then(data => console.log(data));
+        }
+        postData();
+=========================================================================================================================================
+#Async and Awaut
+
+    these are Asynchronous concept and this we use less 'then' as compare to fetchapi promiss
+
+     async function test() {                                                        // convert the function into promiss
+            console.log('Inside test function');                                    
+            
+            // tell the test function that you have to wait i am doing some thing  till the time complete your execution 
+
+            const response = await fetch('https://api.github.com/users');           
+            
+            console.log('before respone');
+
+           // tell the test function that you have to wait i am doing some thing  till the time complete your execution 
+
+            const users = await response.json();
+            console.log('user resolved');
+            return users;
+        }
+
+        console.log('Before calling test');
+        let a = test();
+        console.log("After Calling test");
+        console.log(a);  
+
+        OutPut
+        ======
+        This is Tutorial 43
+        index.html:23 Before calling test
+        index.html:15 Inside test function
+        index.html:25 After Calling test
+        index.html:26 Promise {<pending>}                           // showing pending status beacuse it is in pending status
+        index.html:17 before respone
+        index.html:19 user resolved     
+
+=========================================================================================================================================
+#Try, catch, finally
+    
+    throw new Error('This is not defined');
+
+
+
+    try {                                                               // mean try this code and if error occur send to the catch block
+            klsdfsdflksflksflk;
+        } catch (error) {
+            console.log('Error occur in final block');
+            console.log(error);
+            console.log(error.name);
+            console.log(error.message);
+
+        } finally {
+            console.log('this is used in the final block');
+        }
+
+
+        OutPut
+        ======
+        Error occur in final block
+        index.html:22 ReferenceError: klsdfsdflksflksflk is not defined
+            at index.html:19
+        index.html:23 ReferenceError
+        index.html:24 klsdfsdflksflksflk is not defined
+        index.html:27 this is used in the final block
+
+
+
+        Note :  Types of errors:
+                TypeError = occurs when a variable or parameter is not of a valid type.
+                SyntaxError = occurs when there is an error in syntax.
+                ReferenceError = occurs when there is an invalid reference.
+                EvalError= occurs when there is an error in global function.
+                RangeError=  occurs when a numeric variable or parameter is outside of its valid range.
+
+=========================================================================================================================================
+#Regular Expression
+
+    1. regex.exce(string)
+
+        Let reh = /deepinder/i;                         // insensitive
+        reh = /deepinder/g;                             // global
+        let string = "This is Deepinder Singh Computer and deepinder Singh Best programmer";
+        console.log(reh.source);
+        console.log(reh.exec(string));
+
+    2. regex.test(string)   
+
+        return true or false
+
+    3. string.match(regex)
+
+        return an array of result or null
+
+    4. string.search(regex)
+
+        return index of first match else -1 
+
+    5. string.replace(reg,replaceWithWords)                  
+
+    #various Expression 
+
+        1. ^ cap              :: ^ means expressin will match if string start with ,
+
+            Example regex=/^dee/ if trying to match with regex it will return only those words which start with letter 'dee'
+
+        2. $ doller           :: $ means expression will match if string end with    
+
+            Example regex=/dee$/ if trying to match with regex it will return only those words which end with letter 'dee'  
+
+        3. . dot              :: matches with exact one charcter 
+
+            Example regex=/d.ee/ if trying to match with regex it will return only those words which exact with letter 'd_ee'
+
+        4. * star             ::  matches with any charcter        
+
+            Example regex=/d*ee/ if trying to match with regex it will return only those words which match with letter 'd_ee'
+
+        5. ? question         :: optional 
+
+           Example regex=/di?ea?/ if trying to match with regex it will return only where i and a will be optional 
+
+        6. [abc]              :: charcter set 
+
+            Example regex=/[abc]/ if trying to match with regex it will return only those words which match with letter only  a,b,c
+
+        7. [a-z] or [a-zA-Z] or [0-9]     :: charcter set
+
+            Example regex=/[a-z]/ if trying to match with regex it will return only those words which match with a-z charcters only 
+
+
+
+        8. [^a-z] or [^0-9]     :: charcter set
+
+            Example regex=/[^a-z]/ if trying to match with regex it will return only those words which not match with a-z charcters only   
+
+        9.  /^[a-z]/            :: start with a-z only    
+
+        9. {}                   :: Quantifiers
+            
+            a. /har{}y/     r can occur exactly 2 times 
+            b. /har{0,2}/   r can occur exactly 0 to 2 (0 or 1 or 2) times
+
+        10. ()                  :: Grouping 
+
+            a. /(har){2}([1-9]r)3/      har should be 3 times, 1-9,r should be 3 times 
+
+=========================================================================================================================================
+#Iterators 
+
+    function fruitIterator(values) {
+            let nextIndex = 0;
+            return {
+                next: function () {
+                    if (nextIndex < values.length) {
+                        return {
+                            value: values[nextIndex++],
+                            done: false,
+                        }
+                    } else {
+                        return {
+                            done: false
+                        }
+                    }
+                }
+            }
+        }
+
+
+        const myArray = ['apple', 'orange', 'grapes', 'Bhindi'];
+        const fruits = fruitIterator(myArray);                      // this is Important step
+        console.log(fruits.next().value);
+        console.log(fruits.next().value);
+        console.log(fruits.next().value);
+        console.log(fruits.next().value);
+        console.log(fruits.next().value);
+
+        OutPut
+        ======
+        apple
+        orange
+        grapes
+        Bhindi
+        undefined    
+
+=========================================================================================================================================
+#Audio 
+
+  var audio = new Audio('https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3');
+        audio.play();               
+
+=========================================================================================================================================
+#Generator
+
+      function* numbersGen() {                                  // * is used to generator 
+            let i = 0;
+
+            yield 1;                                            // yield keyword is used 
+            yield 2;
+            yield 3;
+            yield 4;
+
+                or 
+
+            while (true) 
+            {
+                yield i++;
+            }
+        }
+
+        const gen = numbersGen();
+        console.log(gen.next());                                  // calling default function       
+        console.log(gen.next());    
+        console.log(gen.next());
+        console.log(gen.next());
+        console.log(gen.next());
+
+        OutPut
+        ======
+        { value: 0, done: false }                                 
+        { value: 1, done: false }
+        { value: 2, done: false }
+        { value: 3, done: false }
+        { value: 4, done: false }
+
+    // return object where value is value , and done means next values exist or if next exit then it will return true otherwise false.
+
+======================================================================================================================================
+#For in and For of Loop
+
+      
+      For-in loop return indexs (use for object) and For-of lopp return values (use for array) 
+
+      Example 1 (for-in object)
+       
+        obj = {
+                name: 'Deepinder',
+                job: 'web developer',
+                phone: '+91-9915099247',
+                mobile: 'apple'
+            }
+            for (let key in obj) {
+                console.log(obj[key]);
+            }
+
+            OutPut
+            ======
+            Deepinder
+            web developer
+            +91-9915099247
+            apple
+
+      #Example 2 (for-in string)
+
+        let mystring = "Hello my name is Deepinder Singh and i am a web developer";
+
+        for (key in mystring) {
+            console.log(mystring[key]);
+        }   
+
+      #Example 3 (for-of string)
+
+        let obj = ['deep', 'sim', 'dev', 'alisha'];
+        for (let name of obj) {
+            console.log(name);
+        }
+
+        
+        OutPut
+        ======
+         deep
+         sim
+         dev
+         alisha     
+
+======================================================================================================================================
+#Maps 
+
+    
