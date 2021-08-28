@@ -12,7 +12,14 @@
             refers to a script being executed on the client's machine by the browser example javacsript 
 
         2. Server-Side Scripting 
-            Refers to a script being executed on a web server to generated exampe php 
+            Refers to a script being executed on a web server to generated example : 
+                
+                var c = 4 + 7;
+                
+                means 
+                    
+                    function +(4,7){
+                    }  php 
 
 
     1. Javascript is a scripting language that allows buiding dynamic web pages by ensuring maximum user interactivity
@@ -144,7 +151,15 @@
         (create and code is executed) 
         
         
-     7. The Scope chain : when ever programmer is execute in 'creation phase' a lexical Environment is create which setup the stack and set every thing on the global level and it does not depend upon the physical level. then in 'execute phase' execute , value will assign then they total depend upon on the physical level and also pointig to the Outer global execution for the variable. 
+     7. The Scope chain : scope means where a variable is available in your code and chain means connection of Outer Environment called lexical level
+
+        There are two level
+            1. lexical level
+            2. physical level
+     
+        when ever programmer is execute in 'creation phase' a lexical Environment is create which setup the stack and set every thing on the global level and it does not depend upon the physical level and all variables also pointig to the Outer global execution for the variable in lexical level.then in 'execute phase' execute , value will assign then they total depend upon on the physical level
+
+          #Example 1
 
             function b() {
                 console.log(myvar);
@@ -164,11 +179,210 @@
             b. when ever function is created it always Reference to the Outer Environment which is Global execution that is why function b getting 1 instead of 2.
             c. incase function a() it is also referencing to the Outer Environment but its variable output is 2 instead of 1 beacuse is has declaration and initilization of myArray variable.
 
+
+
+         #Example 2   
+
+            function a() {
+                function b() {
+                    console.log(myvar);
+                }
+                var myvar = 2;
+                b();
+            }
+            var myvar = 1
+            a();
+            b(); 
+
+            output
+            ======
+            2
+            Uncaught ReferenceError: b is not defined
+
+
+           1. in the above example now only function a() sit on the global level in lexical Environment but function b() sit in the function a() execute context that is why we get the value 2 (now its reference order Environment is block of function a()) and that is why we will not able to call from global level. 
+           2. function b() Execution context will not create untill function a() execution context is create.  
+
+
+      8. Asynchronous : More than one at a time.
+
+            Note : All events are handle Asynchronously.  
+
+                         
+                    b()
+                Execution Context                       
+        (create and code is executed) 
+                    |       
+                    a()
+                Execution Context                      
+        (create and code is executed)                   
+                    |   
+            Global Execution Context                          Click, Http Request
+        (create and code is executed)                           Event Queue 
+
+        There is another execute context in the javascript engine called Event Queue which store all the event handler in the form of stack same like discuss in the above topics. like 
+
+                Http Request()
+             Execution Context   
+            (create and executed) 
+                    |
+               ClickHandler()
+             Execution Context   
+            (create and executed)  
+
+        Note : event queue does not work untill its global execution context stack not empty. Example
+
+            function waitThreeSecond()
+            {
+                var ms = 3000 + new Date().getTime();
+                while (new Date() < ms) { }
+                console.log('finished Function');
+
+            }
+            function clickHandler() { console.log('click event'); }
+            document.addEventListener('click', clickHandler);
+
+            waitThreeSecond();
+            console.log('finished Execution');     
+
+      9. Dynamic Typing: You Don't tell the engine what type of data a variable Holds, if figures it out while your code is running. (variables can hold different types of values beacuse its's all figured out during execution)
+
+            Statis Typing 
+
+                bool isNew  = 'hello'      // an error
+
+            Dynamic Typing
+
+                var isNew = true           // no errors
+                isNew = 'yup!'
+                isNew = 1;  
+
+
+        #Primitive Data type : a type of data that represents a single values (that is, not an object)
+            1. undefined : represents lack of existence (you shouldn't set a variable to this)
+            2. Null      : represents lack of existence (you can set a variable to this)  
+            3. Boolen    : true or false 
+            4. Number    : Floating point number (there's always some decimals). Unlike other programming languages there's only one 'number' type.. and it can make math weird
+            5. string    : a sequence of characters (both '' and "" can be used)
+            6. Symbol    : used in the ES6  
+
+      10. Operator : these are functions with Special Symbol like + , - etc
+
+            example : 
+
+                var c = 4 + 7;
+                means 
+                function +(4,7)
+                {} 
+
+      11. Coercion : Converting a values from one type to another (this happen quite often in javascript beacuse it's dynamically typed)
+
+      12. default value :   
+
+            name = variable1 || 1;      // if variable1 has value then it will pass to variable name;            
+
+
+
+                    
+
+      13. Objects           : contains 3 things                                 0x001
+            |------> Primitive (property)                               0x002      have reference in the object (main object)   
+            |------> Object    (property)                               0x003      have reference in the object (main object)   
+            |------> Function  (method)                                 0x004      have reference in the object (main object)   
+
+
+           Accessing properties/methods
+            a. []       :: Brackets Operator
+            b. .        :: Dot Operator   
+           
+
+           Various creating object Method 
+           ==============================
+            1. new Method 
+
+                var person = new Object();               // object 
+
+                person.address = new Object()           // sub object
+
+                Example 
+                =======
+                    var person = new Object();
+                    person['firstname'] = "Deepinder";                                      // seeting values 
+                    person['lastname'] = "Singh";                                           // seeting values
+                    person['phone'] = "9915099247";
+                    
+                    person.address = new Object();
+
+                    person.address.house = "51-d"
+                    person.address.street = "street No. 3";
+                    person.address.city = "Patiala";
+                    person.address.state = "Punjab";
+
+                output
+                ======
+                    address: { house: "51-d", street: "street No. 3", city: "Patiala", state: "Punjab" }
+                    firstname: "Deepinder"
+                    lastname: "Singh"
+                    phone: "9915099247"   
+
+            2. Object Literals
+
+                var person = {};
+
+                    var person ={firstname : "Deepinder",lastname : "singh"};
+
+            3. Creating object on fly 
+
+                function greet(preson){                                                 // receiving object as parameter                
+                    console.log('Hi ' + preson.firstname);                              // getting value 
+                }
+
+                greet({firstname:"Deepinder",lastname:"Singh"});                        // creating object on fly   
+
+
+        14. Namespace : a container for variables and functions (typically to keep variables and function with the same name separate)  but in javascript there is Namespace so we use objects as Namespace.
+
+            english.greet = 'hello';
+            spanish.greet = 'hola' ;
+
+            so greet is comman in above objects , so object act like a namespace.
+
+            Note ! concept
+
+                var person = new Object();
+                person.test.firstname = "Deepinder singh";
+                console.log(person);
+
+                Uncaught TypeError: Cannot set property 'firstname' of undefined
+
+                we get this error because test object is not defined.
+
+        15. JSON : javacsript Object Notation,it is string which is inspired by javacsript but does not means its a same thing, it has same syntax like object literals. Javascript has inbuilt functionalities which allow to parse the json to javacsript.
+
+            1. JSON.stringify(objectLiteral)                                // it will convert javscript object into json string
+            2. JSON.parse('{"firstname":"Marry","isAProgrammer":true}');    // it will convert json string into javscript object    
+
+
+
+
+
+
+             
+
    
 
 
 
-
+=========================================================================================================================================
+=========================================================================================================================================
+=========================================================================================================================================
+=========================================================================================================================================
+=========================================================================================================================================
+=========================================================================================================================================
+=========================================================================================================================================
+=========================================================================================================================================
+=========================================================================================================================================
+=========================================================================================================================================
 =========================================================================================================================================
 #Javascript Engine 
 
