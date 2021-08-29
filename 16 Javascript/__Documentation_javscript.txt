@@ -360,7 +360,83 @@
         15. JSON : javacsript Object Notation,it is string which is inspired by javacsript but does not means its a same thing, it has same syntax like object literals. Javascript has inbuilt functionalities which allow to parse the json to javacsript.
 
             1. JSON.stringify(objectLiteral)                                // it will convert javscript object into json string
-            2. JSON.parse('{"firstname":"Marry","isAProgrammer":true}');    // it will convert json string into javscript object    
+            2. JSON.parse('{"firstname":"Marry","isAProgrammer":true}');    // it will convert json string into javscript object  
+
+
+        16. Functions and Objects 
+
+            first class functions : everything you can do with other types you can do with functions (assign them to variables, pass them around, create them on the fly)       
+
+
+            Function (a Special type of object which contains 5 things) 
+            |------> Primitive (property)                               
+            |------> Object    (property)                               
+            |------> Function  (method)                                 
+            |------> Name      (optional, can be anonymous, property)           // hidden property
+            |------> code      (property)                                       // hidden property and "Invocable" ()
+
+
+            Example
+            ======== 
+
+                function greet(){
+                    console.log('Hello');
+                }
+
+                greet.language = "Hindi";
+
+                console.log(greet);
+                console.log(greet());
+
+            Output 
+            ======
+
+                ƒ greet() {
+                        console.log('Hello');
+                    }
+                Hello   
+
+
+            Explanation 
+            ===========
+
+                   Function (a Special type of object which contains 5 things) 
+                    |------> Name       // greet
+                    |------> code       // "Invocable"() --- > console.log('Hello');   
+
+        17. function expression and function statements
+            
+            Expression : A unit of code that results in a value (it doesn't have to save to a variable)
+
+               function greet(){                                    // function statement, simple function.
+                   console.log('hello');
+               }
+               
+               greet();
+               
+               var anonymousGreet = function(){                      // here we are creating an object, a function object    
+                        console.log('Hello');                        // function expressin , it retunring some value                    
+                }
+
+                anonymousGreet()                                     // Invocing the anonymous function with "()" 
+
+
+            #function on fly
+            ================
+
+                function log(a){
+                    a();                                            // Invocing function
+                }
+
+                log(function (){
+                    console.log('Hello');                           // creating function on fly and also function Expression
+                })
+
+
+
+
+
+
 
 
 

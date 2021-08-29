@@ -10,9 +10,14 @@
 
 <body>
     <script>
-        var person = new Object();
-        person.test.firstname = "Deepinder singh";
-        console.log(person);
+        function greet() {
+            console.log('Hello');
+        }
+
+        greet.language = "Hindi";
+
+        console.log(greet);
+        console.log(greet());
 
 
     </script>
