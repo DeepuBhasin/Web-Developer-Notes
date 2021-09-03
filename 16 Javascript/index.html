@@ -10,15 +10,22 @@
 
 <body>
     <script>
-        function greet() {
-            console.log('Hello');
+        function makeGreeting(language) {
+            return function (firstname, lastname) {
+                if (language === 'en') {
+                    console.log(' Hello ' + firstname + ' ' + lastname);
+                }
+                if (language === 'es') {
+                    console.log(' Hola ' + firstname + ' ' + lastname);
+                }
+            }
         }
 
-        greet.language = "Hindi";
+        var greetEnglish = makeGreeting('en');
+        var greetSpanish = makeGreeting('es');
 
-        console.log(greet);
-        console.log(greet());
-
+        greetEnglish('Jhon', 'Doe');
+        greetSpanish('Jhon', 'Doe');
 
     </script>
 
