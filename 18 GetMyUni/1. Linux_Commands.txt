@@ -40,6 +40,11 @@
     4. Restart  : sudo systemctl restart apache2    
 
 #create Virtual Host 
+    
+    1. Create Directory /var/www/html
+    2. create file in the /etc/apache2/sites-available
+    3. add address in the /etc/hosts file
+    4. Reload Apache Server
 
     Step 1 a. create folder in /var/www/html/mypractice/basic
     Step 1 b. create folder in /var/www/html/mypractice/mysqlbasic

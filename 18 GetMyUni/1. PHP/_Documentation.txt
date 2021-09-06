@@ -1,0 +1,5 @@
+The 3 Tasks PHP Does :
+	1. We query the database & connect to it.
+	2. We handle data submitted by users.
+	3. We Show DB data to the users. 
+	
