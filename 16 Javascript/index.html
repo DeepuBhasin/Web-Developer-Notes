@@ -10,22 +10,13 @@
 
 <body>
     <script>
-        function makeGreeting(language) {
-            return function (firstname, lastname) {
-                if (language === 'en') {
-                    console.log(' Hello ' + firstname + ' ' + lastname);
-                }
-                if (language === 'es') {
-                    console.log(' Hola ' + firstname + ' ' + lastname);
-                }
-            }
+        function multiply(a, b) {
+            return a * b;
         }
 
-        var greetEnglish = makeGreeting('en');
-        var greetSpanish = makeGreeting('es');
+        var multiplybytwo = multiply.bind(this, 2);
 
-        greetEnglish('Jhon', 'Doe');
-        greetSpanish('Jhon', 'Doe');
+        console.log(multiplybytwo(6));
 
     </script>
 

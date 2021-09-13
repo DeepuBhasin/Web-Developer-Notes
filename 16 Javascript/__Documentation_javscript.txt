@@ -741,6 +741,166 @@
                 tellMeWhenDone(function(){
                     console.log('I done....');
                 });
+         
+         25.    Function (a Special type of object which contains 5 things) 
+                |------> Primitive (property)                               
+                |------> Object    (property)                               
+                |------> Function  (method)                                 
+                |------> Name      (optional, can be anonymous, property)           // hidden property
+                |------> code      (property)                                       // hidden property and "Invocable" ()  
+
+
+                |------>bind()
+                |------>call()
+                |------>apply()
+
+            basically these functions are use to controll 'this', it point to the function of the object which we bind with 'this' on global execution level    
+
+            a. Example Bind    
+            ===============
+
+                 var person = {
+                firstname: 'Deepinder',
+                lastname: 'Singh',
+                getFullName: function () {
+                    var fullname = this.firstname + ' ' + this.lastname;
+                    return fullname;
+                            }
+                        }
+
+                var logName = function (lang1, lang2) {
+                    console.log('Logged : ' + this.getFullName());
+                };
+
+                var logPersonName = logName.bind(person)    // it will bind the person object to the 'this' then make a copy of function
+                logPersonName();
+
+                        or 
+
+
+                var logName = function (lang1, lang2) {
+                    console.log('Logged : ' + this.getFullName());
+                }.bind(person);                            // it will bind the person object to the 'this' then make a copy of function
+
+                logName();   
+
+
+            Output 
+            ======
+            Logged : Deepinder Singh
+
+
+            b. Example Call    
+            ===============
+
+                 var person = {
+                firstname: 'Deepinder',
+                lastname: 'Singh',
+                getFullName: function () {
+                    var fullname = this.firstname + ' ' + this.lastname;
+                    return fullname;
+                            }
+                        }
+
+                    var logName = function (lang1, lang2) {
+                        console.log('Logged : ' + this.getFullName());
+                        console.log('Argument : ' + lang1 + ' ' + lang2);
+                        console.log('-----------------------------------');
+                    };
+
+                 logName.call(person, 'eng' , 'hindi');       // call is special property of function object which can invoke the code of the function and also it can bind the object and also it do not make copy of function.  
+
+
+            Output 
+            ======
+            Logged : Deepinder Singh
+
+            c. Example apply
+            ===============
+
+             var person = {
+                firstname: 'Deepinder',
+                lastname: 'Singh',
+                getFullName: function () {
+                    var fullname = this.firstname + ' ' + this.lastname;
+                    return fullname;
+                            }
+                        }
+
+                    var logName = function (lang1, lang2) {
+                        console.log('Logged : ' + this.getFullName());
+                        console.log('Argument : ' + lang1 + ' ' + lang2);
+                        console.log('-----------------------------------');
+                    };
+
+                 logName.apply(person, ['eng' , 'hindi']);       // call is special property of function object which can invoke the code of the function and also it can bind the object and also it do not make copy of function.  
+
+                 The only difference between apply and call , that in apply method arrangment send in arrangment.
+
+
+            Output 
+            ======
+            Logged : Deepinder Singh
+
+
+            #a. Example (Real life application -> borowing a function)
+            =========================================================
+                var person = {
+                firstname: 'Deepinder',
+                lastname: 'Singh',
+                getFullName: function () {
+                    var fullname = this.firstname + ' ' + this.lastname;
+                    return fullname;
+                    }
+                }
+
+                var person2 = {
+                    firstname: 'Simranjeet',
+                    lastname: 'Kaur'
+                }
+
+                console.log(person.getFullName.apply(person2));
+
+             Output 
+             ======
+            12
+
+             #b Example (Currying)
+             =====================
+
+             Function currying : creating a copy of a function but with some present parameters (very usefull in mathematical situations)
+
+                function multiply(a, b) {
+                    return a * b;
+                }
+
+                var multiplybytwo = multiply.bind(this, 2);     //bind makes a copy of the function 
+
+                console.log(multiplybytwo(6)); 
+
+                var multiplybythree = multiply.bind(this, 3);     //bind makes a copy of the function 
+
+                console.log(multiplybytwo(6)); 
+
+
+                it actually convert into this after bind function , which makes a copy of the function 
+
+                    function multiple(b){               
+                        var a = 2;
+                        return a*b; 
+                    }
+
+                    console.log(multiply(6)); 
+
+
+             Output 
+             ======
+             12
+             18
+
+
+
+
 
 
 
