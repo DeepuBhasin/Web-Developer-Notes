@@ -542,9 +542,20 @@ Download Compress Images 	:: composer require yiisoft/yii2-imagine D
 
 		 php yii serve -> click on the link to open the yii in the browser 
 
+		 this command will create automatically virtualhost in ubuntu for basic yii2 project 
+
+		 hit http://localhost:8080
+
 	2. using Local host 
 		
 		Open browser -> localhost -> basic -> web 
+
+		Note 
+			1. Site in the address bar means id of the controller
+			2. site/login and 'login' in the address bar means id of the action   
+
+
+
 
 ============================================================================================================================================
 #Various Nampsaces 
@@ -1776,15 +1787,25 @@ d. creating Crud
 				}	
 		2. Global 
 
-			Const Event_DEMO = 'Event_DEMO';
+			1. Const Event_DEMO = 'Event_DEMO';
 
-			 public function actionIndex()
-			{
-			\Yii::$app->on(self::Event_DEMO,'upperData','Hello World');  
-			\Yii::$app->trigger(self::Event_DEMO);
-			\Yii::$app->off(self::Event_DEMO);
-				//  return  $this->render('demo');
-			} 		 			
+				 public function actionIndex()
+				{
+				\Yii::$app->on(self::Event_DEMO,'upperData','Hello World');  
+				\Yii::$app->trigger(self::Event_DEMO);
+				\Yii::$app->off(self::Event_DEMO);
+					//  return  $this->render('demo');
+				} 		 		
+
+			2. In the web.php file 
+
+				add below code in the config array 
+
+				 'on beforeRequest'=>function(){
+			        echo "<pre>";
+			        echo "this is calling from the before request Module";
+			        exit;
+			    } 		
 
 		b. 1. Local event 
 
@@ -1896,6 +1917,13 @@ d. creating Crud
 	Before and After call every time its self when ever we call any controller
 
 	Note : there is 'on' method also for before action 
+
+			Yii::$app->controller->on(\yii\web\Controller::EVENT_BEFORE_ACTION,function(){
+				echo "<pre>";
+				echo "Controller before action from on method";
+				exit; 
+
+			})
 
 
 	Controller Life cycle 

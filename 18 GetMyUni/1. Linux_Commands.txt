@@ -42,9 +42,12 @@
 #create Virtual Host 
     
     1. Create Directory /var/www/html
-    2. create file in the /etc/apache2/sites-available
-    3. add address in the /etc/hosts file
-    4. Reload Apache Server
+    2. Provide Permissions 
+        a. sudo chown -R $USER:$USER /var/www/html/basics/
+        b. sudo chmod -R 755 /var/www/html/basics/
+    3. create file in the /etc/apache2/sites-available
+    4. add address in the /etc/hosts file
+    5. Reload Apache Server
 
     Step 1 a. create folder in /var/www/html/mypractice/basic
     Step 1 b. create folder in /var/www/html/mypractice/mysqlbasic

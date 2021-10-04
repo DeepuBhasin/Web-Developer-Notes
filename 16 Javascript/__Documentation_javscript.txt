@@ -898,6 +898,127 @@
              12
              18
 
+        26. Functional Programming 
+
+            1. It's totally depend upon first Class function 
+
+            var arr1 = [1, 2, 3];
+                // console.log(arr1);
+                // var arr2 = [];
+                // for (var i = 0; i < arr1.length; i++) {
+                //     arr2.push(arr1[i] * 2);
+                // }
+                // console.log(arr2);
+
+                function mapForEach(arr, fn) {
+                    var newArry = [];
+                    for (var i = 0; i < arr.length; i++) {
+                        newArry.push(fn(arr[i]))
+                    }
+                    return newArry;
+                };
+
+                var arr2 = mapForEach(arr1, function (item) { return item * 2; });
+
+                console.log(arr2);
+
+                var arr3 = mapForEach(arr1, function (item) { return item > 2; });
+
+                console.log(arr3);
+
+                var checkPastLimit = function (limiter, item) { return item > limiter; }
+
+                var arr4 = mapForEach(arr1, checkPastLimit.bind(this, 1));
+
+                console.log(arr4);   
+
+                Note : functional programming means Using same function for different-different application 
+
+
+        27. Prototype
+
+             object 
+                |------> prop1                  // obj.prop1
+                |------> proto                  // its a property 
+                           |--------> prop2     // obj.prop2
+                           |--------> proto 
+                                        |---------> prop3   // obj.prop3
+
+             1. Javascript Engine Add a hidden property to the object and function called prototype. It is simply an object stands its own. it has properties and function as well.       
+
+             2. if call prop2 by typing obj.prop2 , first it will serch in the object its self , if it does not find in it then it will goes into prototype object. and if it does not find in the prototype then it will move downward to the object of the proto which is called another prototype and this process goes on ........ and this process called prototype Chain
+
+             3. if i have another obj2 , all have the same __proto__ access means its pointing to the same prototype object. Example 
+
+            #Example 
+            ========
+
+              var person = {
+                    firstname: 'Deafult',
+                    lastname: 'Deafult',
+                    getFullname: function () {
+                        return this.firstname + ' ' + this.lastname;
+                    }
+                }
+
+                var deep = {
+                    firstname: 'Deep',
+                    lastname: 'Singh',
+                }
+                var inder = {
+                    firstname: 'inder',
+
+                }
+
+                deep.__proto__ = person;
+
+                console.log(deep.getFullname());
+
+
+                inder.__proto__ = person;
+
+                console.log(inder.getFullname());
+
+            #output 
+            =======
+             Deep Singh
+             inder Deafult   
+
+         28. Every thing is an object (or a primitve)
+
+                var a = {}
+                var b = function (){}
+                var c = []
+
+
+                type in console window
+
+                    a.__proto__.
+                    b.__proto__.
+                    c.__proto__.
+
+                 you will get all the list of all the inbuilt properties and function realted to above Objects.    
+
+                    a.__proto__.__proto__       // return Object which is base   
+                    b.__proto__.__proto__       // return Object which is base 
+                    c.__proto__.__proto__       // return Object which is base 
+
+         29. Reflection and extend  
+
+             Reflection : an Object can look at it self, listing and Changing its properties and method.
+
+
+
+
+
+
+
+
+
+
+
+                 
+
 
 
 
