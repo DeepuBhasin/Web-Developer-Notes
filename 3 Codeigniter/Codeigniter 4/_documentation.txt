@@ -848,6 +848,235 @@ where to load the Libraries
                 $testObject = new TestLibrary();
                 echo $testObject->getData();
             }  
+======================================================================================================================================== 
+#Email Library 
+    
+    1. Configure SMTP preferences in the app/Config/Email.php file.
+    2. After preferences completed, load email Service into your controller.
+
+        $email = \Config\Services::email();
+
+        $email->setFrom('your@example.com','Your Name');
+        $email->setto('to@example.com');
+        $email->setSubject('Email Test'); 
+        $email->setMessge('Testing the email class.');
+        $email->send();   
+
+
+
+        Example : 
+
+        1. Add Below Code in app/Config/Email.php file 
+
+            public $SMTPHost = "smtp.gmail.com";
+            public $SMTPUser = "deepinder999@gmail.com";
+            public $SMTPPass = "setpassword here";
+            public $SMTPCrypto = 'ssl';
+            public $SMTPPort = 465;
+            public $SMTPTimeout = 60;
+
+        2. Set less secure connection in gmail account 
+
+        3. Add below Code in the Controller and placed a file into the public/assests folder
+
+            public function sendMail()
+            {
+                $email = \Config\Services::email();
+
+                $email->setFrom('deepinder999@gmail.com', 'Deepinder singh');
+                $email->setto('deepinder000@gmail.com');
+                // $email->setBCC('deepinder999@gmail.com');
+                // $email->setCC('deepinder999@gmail.com');
+                $email->setSubject('Email Test');
+                $email->setMessage('Testing the email class.');
+                $filepath = 'public/assests/fiverr.jpg';
+                $email->attach($filepath);
+                if ($email->send()) {
+                    echo "sent";
+                } else {
+                    echo "<pre>";
+                    $data = $email->printDebugger(['headers']);
+                    print_r($data);
+                }
+            } 
+
+======================================================================================================================================== 
+#Helper 
+
+    What is Helper?
+        A Helper is a group of function under a specific category. Helper as the name suggests, help you with task while developing web application.
+
+    There are some predefined helpers: 
+        Url Helper      : that assist in creating links.
+        Form Helper     : that help you create form elements 
+        Cookie Helper   : set and read cookies 
+        File Helper     : help you deal with files 
+        and more .... 
+
+    All the Helpers are avaialbe from the following locations app/Helpers (user defined) and system/Helper (pre-defined).
+
+    Extending Helpers : it is also possible to extend the predefined helpers create a file in your app/Helpers/ Folder with an identical name to the existing Helper. For Example, to extend the native Array Helper you'll create a file named app/Helpres/array_helper.php 
+
+    1. Add these codes in the controller
+    
+        public function myhellper()
+        {
+            helper(['form', 'html', 'cookie', 'array']);
+
+            echo form_open();
+            echo form_input('firstname', 'Deepinder singh');
+            echo form_close();
+            echo "<br/>";
+            echo base_url();
+            echo "<br/>";
+            echo current_url();
+            echo "<br/>";
+            echo getRandom([12, 45, 67, 88, 33, 22]);
+        }
+    
+    2. Extending the helper (add some functionalities in existing helper)
+
+        add file into to the app/Helper/ -> Array_helper.php
+
+            <?php
+                function getRandom($arr)
+                {
+                    shuffle($arr);
+                    return end($arr);
+                }
+
+======================================================================================================================================== 
+#Form Validation
+
+    1. CodeIgniter 4 Provides a library to validate the data. This class will help us minimize the amount of code that we will write 
+    2. Load the view into controller
+    3. Once form submitted, validate the form by using validate() method
+    4. validate() : by using this method we can check the validation rules. if all the rules are valid, this method returns true.
+    5. validate() method expects a parameter with set of rules to be applied on the form. 
+
+        $rules=[
+                'username' => 'required',
+                'email'    => 'required|valid_email',
+                'mobile'   => 'required' 
+          ];
+          
+          $this->validate($rules);
+
+
+
+        1. Create a method in controller 
+
+             public function myform()
+            {
+                  $data = [];
+                 $data['validation'] = null;
+                if (isset($_POST['send']) && $this->request->getMethod() == 'post') {
+                    // $rules = [
+                    //     'username' => 'required',
+                    //     'email' => 'required|valid_email',
+                    //     'phone_number' => 'required|numeric|exact_length[10]',
+
+                    // ];
+
+                    $rules = [
+                        'username' =>
+                        [
+                            'rules' => 'required',
+                            'errors' => [
+                                'required' => 'Please Enter Username',
+                            ]
+                        ],
+                        'email' => [
+                            'rules' => 'required|valid_email',
+                            'errors' => [
+                                'required' => 'Please Enter Email id',
+                                'valid_email' => 'Please Enter Valid Email id'
+                            ]
+                        ],
+                        'phone_number' => [
+                            'rules' => 'required|numeric|exact_length[10]',
+                            'errors' => [
+                                'required' => 'Please Enter Phone',
+                                'numeric' => '{value} Should be Numbers',
+                                'exact_length' => '{value} Should be Only 10 Characters ',
+                            ]
+                        ],
+                    ];
+
+
+
+                    if ($this->validate($rules)) {
+                        echo "From submited Successfully";
+                    } else {
+                        $data['validation'] = $this->validator;
+                    }
+                }
+
+                helper(['url', 'form', 'form_helper']);
+                return view('my_form', $data);
+            } 
+
+        2. Create a Helper -> Form_Helper.php
+
+            use phpDocumentor\Reflection\PseudoTypes\False_;
+
+            function display_error($validation, $field)
+            {
+                if (isset($validation)) {
+                    if ($validation->hasError($field)) {
+                        return $validation->getError($field);
+                    } else {
+                        return false;
+                    }
+                }
+            }
+
+        3. Create a View File 
+
+            <h1>hello</h1>
+            <table>
+                <?php if (isset($validation)) : ?>
+                    <?= $validation->listErrors(); ?>
+                <?php endif; ?>
+                <?= form_open('welcome/myform') ?>
+                <tr>
+                    <td>Name</td>
+                    <td>
+                        <?= form_input(['name' => 'username', 'placeholder' => 'Enter Username', 'value' => set_value('username')]); ?>
+                        <?= display_error($validation, 'username') ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>
+                        <?= form_input(['name' => 'email', 'placeholder' => 'Enter Email Id', 'value' => set_value('email')]); ?>
+                        <?= display_error($validation, 'email') ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Phone Number</td>
+                    <td>
+                        <?= form_input(['name' => 'phone_number', 'placeholder' => 'Enter Phone Number', 'value' => set_value('phone_number')]); ?>
+                        <?= display_error($validation, 'phone_number') ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <?= form_submit(['name' => 'send', 'value' => 'Submit']); ?>
+                    </td>
+                </tr>
+            </table>    
+======================================================================================================================================== 
+#Enable Development ENVIRONMENT
+
+    1. open .evn file 
+
+            #CI_ENVIRONMENT = production
+
+    2. Remove # in front of CI_ENVIRONMENT and assign the value as development 
+        
+            CI_ENVIRONMENT = development; 
 
 ======================================================================================================================================== 
 #Spark 
