@@ -10,11 +10,18 @@
 
 <body>
     <script>
-        alert('hello')
-        alert('yes')
-        alert('ok')
-        console.log('okokokokok')
-        alert('final')
+        var person = new Object();
+        person['firstname'] = "Deepinder";                                      // seeting values 
+        person['lastname'] = "Singh";                                           // seeting values
+        person['phone'] = "9915099247";
+
+        person.address = new Object();
+
+        person.address.house = "51-d"
+        person.address.street = "street No. 3";
+        person.address.city = "Patiala";
+        person.address.state = "Punjab";
+        console.log(person);
     </script>
 
 </body>

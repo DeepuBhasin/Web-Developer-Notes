@@ -126,9 +126,9 @@
 
         2. if function exist within the function then it will create a another execution context and it will create and execute code of that function first and also it place on the top the stack 
         
-        2.Which ever on the top it will execute first and it will execute their complete block then it will pop-off from the top of the stack and the next block will be execute which ever on the top of the stack.  
+        3. Which ever on the top it will execute first and it will execute their complete block then it will pop-off from the top of the stack and the next block will be execute which ever on the top of the stack.  
 
-     6. Variable Enviro()nment : Where the variable  live (and how they realted tit is also referencing to the Outer Environment but its variable output is 2 instead of 1 beacuse is has declaration and initilization of myArray variable.
+     6. Variable Environment : Where the variable  live (and how they realted to and it is also referencing to the Outer Environment but its variable output is 2 instead of 1 beacuse is has declaration and initilization of myArray variable.
 
             function b(){
                 var myVar;
@@ -161,7 +161,7 @@
             1. lexical level
             2. physical level
      
-        when ever programmer is execute in 'creation phase' a lexical Environment is create which setup the stack and set every thing on the global level and it does not depend upon the physical level and all variables also pointig to the Outer global execution for the variable in lexical level.then in 'execute phase' execute , value will assign then they total depend upon on the physical level
+        when ever program is execute in 'creation phase' a lexical Environment is create which setup the stack and set every thing on the global level and it does not depend upon the physical level and all variables also pointig to the Outer global execution for the variable in lexical level.then in 'execute phase' execute , value will assign then they total depend upon on the physical level
 
           #Example 1
 
