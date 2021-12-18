@@ -1,0 +1,10 @@
+{
+    "name": "test/testing",
+    "description": "This is my first project",
+    "authors": [
+        {
+            "name": "Deepinder Singh",
+            "email": "Deepinder999@gmail.com"
+        }
+    ]
+}

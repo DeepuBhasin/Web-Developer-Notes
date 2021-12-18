@@ -1,0 +1,167 @@
+#Composer
+1. Composer is a tool for Dependency management in php  
+2. it allows you to declare the libraries your project depends on it and it will manage(install/update) them for you 
+3. Composer is not a package manager in the same sense as Yum or Apt are. Yes, it deals with 'package' and libraries, but it manage them on a pre-project basis, installing them in directory (eg:vendor) inside your project 
+4. By default it does not install anything globally. Thus, it is a dependency manager. It does however support a 'global' project for convenience via the global command. 
+
+5. Composer is Dependency manager and NPM is package manager 
+
+==========================================================================================================================================================
+#Why use Composer 
+
+	Suppose:
+		1. You have a project that depends on a number of libraries 
+		2. Some of those libraries depend on the other libraries 
+
+	Composer:
+		1. Enable you to declare the libraries you depend on.
+		2. Finds out which versions of which packages can and need to be installed, and installs them(meaning it download them into your projects)
+
+==========================================================================================================================================================
+#How to install Composer 
+	
+	Composer requires PHP 5.3.2+ to run
+
+	1. Download composer exe from official website 
+	2. use command line
+
+#How to update 
+	
+	1. composer self-update
+
+#How to rollback Composer Update 
+	
+	1. Composer self-update --rollback
+
+	Note : if path is not set then we use 'php composer.phar <command>' 	 
+
+==========================================================================================================================================================
+#List all Composer Cpmmand 
+	
+	Composer 
+
+#How to get help 
+	
+	Composer Help
+
+#Get help for command 
+	
+	Composer help command_name		 
+
+==========================================================================================================================================================
+#composer.json
+	
+	1. it is the main composer.json that defines your project requirments.
+
+		example : 
+			{
+				"key":"Value",
+				"key":"Value"
+			}
+	2. How to setup a new or existing package
+		
+		You can also say how to create composer.json file in a project to make it package 
+
+			1. Using 'composer init' command 
+			2. Manually creating composer.json file
+
+==========================================================================================================================================
+#Using Composer init Command 
+	
+	1. Composer init - 
+		a. it is used to setup a new or existing package. The init command create a basic composer.json file in the current directory.
+		b. Every project is a package (important line)
+		c. As soon as you have a composer.json in a directory, that directory is a package. (important line)
+
+
+		1. Package Name : in order to make that package installable you need to give it a name. In consists of vendor name and project name, separated by/ . The name can contain any character, Including white spaces, name are case insenstive, the convention is all lowercase and dashes for word seperation. It is required for punlished packages (libraries). 
+		
+		Syntax : vendorname/packagename
+
+
+		2. Description: a short description of the package, Usually this is one line long. it is required for published packages(libraries)
+
+		3. Authors: The authors of the package. This is an array of objects
+
+		4. Minimum Stability: Composer accepts these flags as minimum-stability settings. The default setting for minimum-stability if not provided is assumed to be stable, but you could define any of the flags down the hierarchy. 
+			-stable (most stable)
+			-rc 
+			-beta
+			-alpha 
+			-dev(least stable)
+
+		5. Package type: Package types are used for custom installation logic. if you have a package that needs some special logic, you can define a custom type. it default to library
+			- Library 
+			- Project 
+			- Metapackage 
+			- Composer-plugin
+
+		6. Licence: The licence of the package. This can be either a string or an array of string. Ex : - MIT 	
+
+
+		example
+			$ composer init	 
+			Package name (<vendor>/<name>) [hp/20. composer]: deepu/firstproject
+			Description []: This is my first project in composer
+			Author [Deepinder Singh <Deepinder999@gmail.com>, n to skip]: 
+			Minimum Stability []: 
+			Package Type (e.g. library, project, metapackage, composer-plugin) []: 
+			License []:  
+			Would you like to define your dependencies (require) interactively [yes]? n
+			Would you like to define your dev dependencies (require-dev) interactively [yes]? n
+			Add PSR-4 autoload mapping? Maps namespace "Deepu\Firstproject" to the entered relative path. [src/, n to skip]:   
+
+==========================================================================================================================================
+#Manually creating Composer.json file
+
+	You have to create Composer.json file and write json Code yourself with required properties.
+
+==========================================================================================================================================
+#Various Commands 
+
+	*1. composer config --global (-g) : operate on the global config file located at $COMPOSER_HOME/config.json by default. without this option, this command affects the local composer.json
+
+	*2. composer config --list (-l) : it shows all the current config variables
+
+	3. Composer config setting-key "setting-value" - it sets the config key to the value
+
+	4. Composer config --unset : it removes the configuration element named by setting-key
+
+	5. composer config --editior (-e) : Opens the config file (composer.json) in an editior. Use the --global flag to edit the global config (config.json). 
+
+	various Keys in composer.json files 
+		1. name 
+		2. version 
+		3. type 
+		4. description 
+		5. licence 
+		6. homepage
+		7. keywords 
+
+==========================================================================================================================================
+#How to install/add package
+
+	Composer require vendorName/PackageName - This command installs a package, and any package that it depends on.
+
+	Syntax
+	1. Composer require vendorName/PackageName 			: composer require fzaninotto/faker					(install latest)
+	2. composer require vendorName/PackageName:tag		: composer require fzaninotto/faker:dev-master
+	3. composer require vendorName/PackageName:version	: composer require fzaninotto/faker:1.9.0
+
+	--dev : Add package to require-dev						
+	composer require vendorName/packageName --dev 			(this package use for the development)
+
+==========================================================================================================================================
+#How to uninstall/remove package
+
+	composer remove vendorName/packageName - The remove command removes packages from the composer.json file from the current directory.
+
+	--dev : it remove packages from require-dev
+	Example : composer remove vendorName/packageName --dev 
+==========================================================================================================================================
+#How to Use Package
+
+	step 1 install package
+	step 2 Include autoload.php file 
+	step 3 Now you can use packages 
+	

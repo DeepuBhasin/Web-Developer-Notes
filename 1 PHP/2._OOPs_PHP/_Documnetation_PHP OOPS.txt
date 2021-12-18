@@ -470,7 +470,7 @@ Syntax
 	1. we use abstract classes when we want to commit the programmer to write a certian class method, but we are only sure about the name of the method, and not the details of how is should be write 
 	2. An abstarct class is a class that has at least on abstract method 
 	3. Abstarct methods can only have names and arguments and no other code. thus we cannot create objects out of abstract classes. Insted we need to create child classes that add the code into the bodies of the month and use these child classes to create objects 
-	4. Classes extending an abstract class must implements all of the abstract methods defined in the abstract class.
+	4. Classes "extending" an abstract class must implements all of the abstract methods defined in the abstract class.
 	
 	Note : program written in file 
 

@@ -641,7 +641,7 @@
              function buildFnction() {
                 var arr = [];
                 for (var i = 0; i < 3; i++) {
-                    arr.push(function () {
+                    arr.push(function () {                  // here we are creating a function object, we are not invoking that function 
                         console.log(i);
                     });
                 }

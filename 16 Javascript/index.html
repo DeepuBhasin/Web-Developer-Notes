@@ -10,18 +10,41 @@
 
 <body>
     <script>
-        var person = new Object();
-        person['firstname'] = "Deepinder";                                      // seeting values 
-        person['lastname'] = "Singh";                                           // seeting values
-        person['phone'] = "9915099247";
+        function Person(firstname, lastname) {
+            this.firstname = firstname;
+            this.lastname = lastname;
+            this.getFullName = function () {
+                console.log(this.firstname + ' ' + this.lastname);
+            }
+        }
 
-        person.address = new Object();
+        let deepinder = new Person('Deepinder', 'Singh');
+        let deepu = new Person('Deepu', 'Bhasin');
 
-        person.address.house = "51-d"
-        person.address.street = "street No. 3";
-        person.address.city = "Patiala";
-        person.address.state = "Punjab";
-        console.log(person);
+        // will also print cosntructor of the base class 
+        console.log(deepu);
+
+
+        // this is pointing to the base class;    
+        // deepu.__proto__.getFirstName = function () {
+        //     return this.firstname;
+        // }
+
+
+        // deepu.prototype.getFirstName = function () {
+        //     return this.firstname;
+        // }
+
+        // Person.prototype.getFirstName = function () {
+        //     return this.firstname;
+        // }
+
+
+        // console.log(Deepinder);
+
+
+
+
     </script>
 
 </body>
