@@ -1,10 +1,35 @@
 {
-    "name": "test/testing",
-    "description": "This is my first project",
+    "name": "autoloadfile/autoload",
+    "description": "autoloading functions using autuload file property",
     "authors": [
         {
             "name": "Deepinder Singh",
             "email": "Deepinder999@gmail.com"
         }
-    ]
+    ],
+    "require": {},
+    "autoload":{
+        "files":[
+            "./1.autoload_Exmaple/functions/function1.php",
+            "./1.autoload_Exmaple/functions/function2.php",
+            "./1.autoload_Exmaple/functions/function3.php"
+        ],
+        "classmap":[
+             "./1.autoload_Exmaple/classes/class1.php",
+             "./1.autoload_Exmaple/classes/class2.php",
+             "./1.autoload_Exmaple/otherclasses/"            
+        ],
+        "exclude-from-classmap":[
+            "./1.autoload_Exmaple/otherclasses/class5.php"
+        ],
+        "psr-4":{
+            "Country\\India\\":"2.autoload_psr/countries/india/",
+            "Country\\Usa\\":"2.autoload_psr/countries/usa/",
+            "Food\\Afgan\\":"2.autoload_psr/foods/afgan/",
+            "Food\\China\\":"2.autoload_psr/foods/china/",
+            "Food\\India\\":"2.autoload_psr/foods/india/"
+
+
+        }
+    }
 }

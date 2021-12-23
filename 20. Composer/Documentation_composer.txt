@@ -6,6 +6,10 @@
 
 5. Composer is Dependency manager and NPM is package manager 
 
+6. 	** what is the benifit of composer : when ever we use allot of third parties files in a project, in normal cases we will include so many files then we use require method for all files which create redundancy for require method but in composer we just simply add only single 'autoload.php' it will automatically include those files(class) which we will use (create object) in project. 
+
+7. ** when ever we want to share our project with some one we do not share the vendor folder instead we share composer.json and composer.lock file because when we run composer file it automatically download all vendor folder and vendor folder files.
+
 ==========================================================================================================================================================
 #Why use Composer 
 
@@ -48,7 +52,7 @@
 	
 	Composer help command_name		 
 
-==========================================================================================================================================================
+==========================================================================================================================================
 #composer.json
 	
 	1. it is the main composer.json that defines your project requirments.
@@ -164,4 +168,199 @@
 	step 1 install package
 	step 2 Include autoload.php file 
 	step 3 Now you can use packages 
+
+
+	Example 
+
+		$ composer require fzaninotto/faker					// to create fake data 
+
+
+		<?php
+		require_once './vendor/autoload.php';
+		$faker = Faker\Factory::create();
+		echo $faker->name;
+		echo "<br/>";
+		echo $faker->address;
+		echo "<br/>";
+		echo $faker->state;
+		echo "<br/>";
+		echo $faker->city;
+		echo "<br/>";
+		echo $faker->country;
+
+
+		** what is the benifit of composer : when ever we use allot of third parties files in a project, in normal cases we will include so many files then we use require method for all files which create redundancy for require method but in composer we just simply add only single 'autoload.php' it will automatically include those files(class) which we will use (create object) in project. 
+
+==========================================================================================================================================
+#update 
+
+	Composer update vendorName/PackageName - This command is used to get the latest versions of the dependencies and to update the composer.lock file. if no package name is specified, all packages in the specified location will be updated. 
+
+	Syntax : composer update 
+	Syntax : composer update vendorName/packageName
+	Syntax : composer upgrade vendorName/packageName
+	Syntax : composer u vendorName/packageName
+
+
+	all are same thing 	
+
+==========================================================================================================================================
+#install/i
 	
+	composer install - The install command reads the composer.json file from the current directory, resolves the dependencies and installs them into vendor
+
+	if there is a composer.lock file in the current directory, it will use the exact versions from the there instead of resolving them. this ensures that everyone using the library will get the same versions of the dependencies
+
+	if there is no composer.json file, Composer will create one after dependency resolution.
+
+	Example : composer install
+	
+	note : install (depend on)-> composer.lock
+		   update  (depend on)-> composer.json			(we can downgrade or upgrad any version using update command)
+
+==========================================================================================================================================
+#global 
+
+	The global command allows you to run other commands like install, remove, require or update as if you were running them from the COMPOSER_HOME directory. 
+
+	Example : composer global install
+
+		The COMPOSER_HOME var allows you to change the composer home directory. This is hidden, global (per-user on the machine) directory that is shared between all projects	
+		
+		By default it point to c:\Users\<user>\AppData\Roaming\Composer on windows 
+
+==========================================================================================================================================
+#How to list all packages
+
+	Composer Show : this command is used to list all of the available packages 
+
+	Composer Show vendorName/packageName - this command is used to see the details of certain package 
+
+	Composer Show --name-only 
+	
+	Composer Show --tree 
+
+
+==========================================================================================================================================
+#create project from a package
+
+	composer create-project vendorName/packagename projectName - you can use composer to create new projects from an existing package. 
+
+	to create a new project using composer you can use the create-project command. pass it a package name, and the directory to create the project in. you can also provide a version a third argument, otherwise the latest version is used
+
+	if the directory does not currently exist, it will be created during installation 
+
+	ex - composer create-project laravel/laravel myproject
+	ex - composer create-project laravel/laravel myproject "5.8.*"
+
+==========================================================================================================================================
+#composer json schema 
+
+	1. Name : The name of the package. It consists of vendor name and project name, separated by /. Examples:
+		monolog/monolog
+		igorw/event-source
+
+	2. description : A short description of the package. Usually this is one line long.
+		Required for published packages (libraries)	
+
+	3. version : The version of the package
+		1.0.0
+		1.0.2
+
+	4. type : The type of the package. It defaults to library.
+
+	5. keywords : An array of keywords that the package is related to. These can be used for searching and filtering.
+
+	6. url : A URL to the website of the project.
+
+	7. time : Release date of the version.
+
+	8. require : lists packages required by this package. the package will not be installed unless those requirments can be meet. 
+
+	9. require-dev : lists packages required for developing this package, or running test etc. The dev requirement of the package are installed by default. 
+
+		note : when project is in development mode require-dev will install all the package but when product is in the production mode the require-dev will not install the require-dev packages
+
+	10. autoload - Autoload	mapping for a php autoloader 
+
+			PSR-4
+			Classmap	: to connect files which contain classes
+			Files : 	: to connect only files 
+
+==========================================================================================================================================
+#Autoloading 
+
+	**dump-autoload/dumpautoload 
+		if you need to update the autoloader beacuse of new classes in a Classmap package for example, you can use damp-autoload to do that/ without having to go through an install or update. 
+
+	#Files
+		if you want to require certain files explicitly on every request then you can use the files autoloading mechanism. This is useful if your package includes PHP functions that cannot be autoloaded by PHP. The files references are all combined, into a single key=>value array which may be found in the generated file vendor/composer/auto_files.php
+
+	1. Autoloading Files and class (add directory in class also)
+
+		a. create json File
+			{
+				"name": "autoloadfile/autoload",
+				"description": "autoloading functions using autuload file property",
+				"authors": [
+					{
+						"name": "Deepinder Singh",
+						"email": "Deepinder999@gmail.com"
+					}
+				],
+				"require": {},
+				"autoload":{
+					"files":[
+						"./1.autoload_Exmaple/functions/function1.php",
+						"./1.autoload_Exmaple/functions/function2.php",
+						"./1.autoload_Exmaple/functions/function3.php"
+					],
+					"classmap":[
+						"./1.autoload_Exmaple/classes/class1.php",
+						"./1.autoload_Exmaple/classes/class2.php",
+						"./1.autoload_Exmaple/otherclasses/"            
+					],
+					"exclude-from-classmap":[
+						"./1.autoload_Exmaple/otherclasses/class5.php"
+					]
+				}
+			}
+
+
+
+		2. Then run the command 'composer dumpautoload'
+
+		3. create php file where you will include all these codes 
+
+			<?php
+
+				use myclass\simpleclass\Class1;
+				use myclass\simpleclass\Class2;
+				use myclass\otherclass\Class3;
+				use myclass\otherclass\Class4;
+				use myclass\otherclass\Class5;
+
+				require './vendor/autoload.php';
+
+				function1();
+				function2();
+				function3();
+
+				$obj1 = new Class1();
+				$obj2 = new Class2();
+				$obj3 = new Class3();
+				$obj4 = new Class4();
+				$obj4 = new Class5ac();
+
+	#psr-4
+		Under the psr-4 key you define a mapping from "namespace to paths", relative to the package root. The PSR-4 references are all combined, during install/update, into a single key=>value array which may be found in the generated file vendor/composer/autoload_psr4.php you can use the classmap generation support to define autoloading for all libraries that do not follow PSR-0/4
+
+		These describe a specification for auto loading classes from file paths. PSR-0 and PSR-4 are both standards concerning namespaces, class names and file paths.
+
+	#classmap vs psr-4
+		PSR-4 does not need repeated dumpautoload for every changes or addition of new files, while classmap requires dumpautoload for every change in existing files containing classes or addition of new file in specified directory. 	
+
+
+
+
+	 
