@@ -361,6 +361,30 @@
 		PSR-4 does not need repeated dumpautoload for every changes or addition of new files, while classmap requires dumpautoload for every change in existing files containing classes or addition of new file in specified directory. 	
 
 
+		1. More specific for the path
+
+			"psr-4":{
+					"Country\\India\\":"2.autoload_psr/countries/india/",
+					"Country\\Usa\\":"2.autoload_psr/countries/usa/",
+					"Food\\Afgan\\":"2.autoload_psr/foods/afgan/",
+					"Food\\China\\":"2.autoload_psr/foods/china/",
+					"Food\\India\\":"2.autoload_psr/foods/india/",
+					"Country\\Asia\\":"2.autoload_psr/countries/"			// this will get all the files which exist in this dircetory
+				}
+
+		2. best one (work for subfolder concept , not sure for specific path)
+
+			"psr-4":{
+				"Country\\":"2.autoload_psr/countries/",			
+				"Food\\":"2.autoload_psr/foods/"
+			}
+
+			in the 2, the country namespace will get all the files or class from the countries folder which have country namespace included in the code
+
+================================
+Command 
+	
+	1. composer search codeigniter;				// will serach the package to download
 
 
 	 

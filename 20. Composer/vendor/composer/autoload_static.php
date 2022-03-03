@@ -15,37 +15,22 @@ class ComposerStaticInit07f19351217dc7d21ef20ac5486e599f
     public static $prefixLengthsPsr4 = array (
         'F' => 
         array (
-            'Food\\India\\' => 11,
-            'Food\\China\\' => 11,
-            'Food\\Afgan\\' => 11,
+            'Food\\' => 5,
         ),
         'C' => 
         array (
-            'Country\\Usa\\' => 12,
-            'Country\\India\\' => 14,
+            'Country\\' => 8,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Food\\India\\' => 
+        'Food\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/2.autoload_psr/foods/india',
+            0 => __DIR__ . '/../..' . '/2.autoload_psr/foods',
         ),
-        'Food\\China\\' => 
+        'Country\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/2.autoload_psr/foods/china',
-        ),
-        'Food\\Afgan\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/2.autoload_psr/foods/afgan',
-        ),
-        'Country\\Usa\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/2.autoload_psr/countries/usa',
-        ),
-        'Country\\India\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/2.autoload_psr/countries/india',
+            0 => __DIR__ . '/../..' . '/2.autoload_psr/countries',
         ),
     );
 

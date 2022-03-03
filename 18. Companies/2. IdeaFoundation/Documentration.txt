@@ -1,0 +1,35 @@
+1. set value in the my.ini for max_allowed_packet
+    
+    max_allowed_packet=100M
+
+2. Create two databases
+    
+    1. builderstorm_dev
+    2. builderstorm_mcp
+
+3.  open cmd and type : mysql -u root -h localhost
+        
+        source <databases_files.sql>
+
+4. open user tables 
+    
+    type password : testing and select type md5, click on save button
+
+5. isset($_POST['checkChild']) && !empty($_POST['checkChild']) ? $_POST['checkChild'] : 0;   
+
+6. enable debuger 
+	
+[XDebug]
+xdebug.remote_enable=1
+xdebug.remote_autostart=1
+zend_extension="C:\xampp\php\ext\php_xdebug.dll" 
+
+7. The user specified as a definer ('someuser'@'%') does not exist`
+
+SELECT user FROM  mysql.user;
+create user 'builder_all'@'%';
+grant all on *.* to 'builder_all'@'%' identified by '';
+
+ 
+            
+

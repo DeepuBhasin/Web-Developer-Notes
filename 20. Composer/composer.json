@@ -23,13 +23,8 @@
             "./1.autoload_Exmaple/otherclasses/class5.php"
         ],
         "psr-4":{
-            "Country\\India\\":"2.autoload_psr/countries/india/",
-            "Country\\Usa\\":"2.autoload_psr/countries/usa/",
-            "Food\\Afgan\\":"2.autoload_psr/foods/afgan/",
-            "Food\\China\\":"2.autoload_psr/foods/china/",
-            "Food\\India\\":"2.autoload_psr/foods/india/"
-
-
+            "Country\\":"2.autoload_psr/countries/",
+            "Food\\":"2.autoload_psr/foods/"
         }
     }
 }

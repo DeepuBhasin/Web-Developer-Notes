@@ -6,9 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Food\\India\\' => array($baseDir . '/2.autoload_psr/foods/india'),
-    'Food\\China\\' => array($baseDir . '/2.autoload_psr/foods/china'),
-    'Food\\Afgan\\' => array($baseDir . '/2.autoload_psr/foods/afgan'),
-    'Country\\Usa\\' => array($baseDir . '/2.autoload_psr/countries/usa'),
-    'Country\\India\\' => array($baseDir . '/2.autoload_psr/countries/india'),
+    'Food\\' => array($baseDir . '/2.autoload_psr/foods'),
+    'Country\\' => array($baseDir . '/2.autoload_psr/countries'),
 );

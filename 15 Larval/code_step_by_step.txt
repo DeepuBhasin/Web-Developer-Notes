@@ -1,0 +1,365 @@
+1. Composer : 
+    a. its a dependency manager tool which allow you to download all files automatically which we use in laravel like for http request gazzal client is use. so Composer will automatically download all files realted to gazzal client in laravel, and these dependency track alsways store in Composer.json file like 'package Name : Version'. 
+
+    b. majorly use with big projects like laravel , cake php etc but with not core php or small projects
+
+2. Install laravel 
+    a. Via laravel Installer
+
+        ci. composer global require laravel/installer       : (always run ones)
+        ii. laravel new blog
+    
+    b. Via Composer Create-project 
+
+        composer create-project --prefer-dist laravel/laravel blog  
+
+3. To run the server 
+
+    php artisan serve 
+
+4. Directory Structure 
+
+        app -> Contains main application files 
+
+                a. Console
+                    -> kernal.php : create custom commands
+                b. http 
+                c. Middleware : filtter out the request like authentication, encryption, redirections
+                d. Model 
+                e. Providers : create Services
+        
+        bootstrap : which load our application
+        cache     
+        config : all configuration 
+        database 
+        resource : same like public_html files 
+
+5. Routing 
+
+    routing means : mapping our laravel page with sepcific url 
+
+    Note : '/' -> this means start from the root Example 
+
+        <a href="welcome">Welcome Page</a>                  -> it will open current_route/welcome
+        <a href="/welcome">Welcome Page</a>                 -> it will open welcome route
+
+    1. with Function 
+
+        Route::get('/', function () {
+            return view('hello');
+        });
+
+    2. Direct View 
+
+        Route::view('/user', 'welcome');
+
+    3. Pass data 
+
+        Route::get('/user/{name}', function ($name) {
+            $data['name'] = $name;
+            return view('hello', $data);
+        });        
+
+    4. redirections 
+
+        Route::get('/myuser', function () {
+            return redirect('/welcome');
+        });
+
+6. controller 
+
+    its an central unit of any framework    
+
+    1. Creating Routes 
+
+        1. by Command Line (best one)
+
+        php artisan make:controller Controller_name         
+
+        2. Manually
+
+        Copy paste the Code
+    
+    2. Calling Controller From Routes 
+
+        php artisan make:controller
+
+            <?php
+
+                namespace App\Http\Controllers;
+
+                use Illuminate\Http\Request;
+
+                class Users extends Controller
+                {
+                    public function index($name, $class)
+                    {
+                        echo "Hello this is my user controller $name $class";
+                    }
+                }
+
+        in route file(web.php)
+
+            use App\Http\Controllers\Users;
+            Route::get('/users/{name}/{class}', [Users::class, 'index']);
+
+7. View      
+
+       <?php echo $name ?>      -> {{$name}}    // conecpt of blade engine 
+
+8. Component
+
+    Component is piece of code which we can reuse similar like header function in all pages
+
+    php artisan make:component Header 
+
+        #. It will create two file 
+
+            1. app -> view -> Components -> Header.php (similar like controller)
+            2. views -> Components -> header.blade.php (similar like view)
+
+        #How to use 
+
+            1.in Header Component File (views -> Components -> header.blade.php)
+
+                <div>
+                    <h1>Header Components</h1>
+                </div> 
+
+            2. in Route 
+                
+                Route::get('/user', function () {
+                    return view('user');
+                });
+
+            3. in view file 
+                <x-header />
+                <h1>User Page</h1>
+
+
+7. Blade Templates  
+
+   Simple Words -> its is Templates which convert plain text into php codes
+
+    Blade is templating Engine which is provided by laravel. It provide the functionality that we do not write tags directly it will automatically convert into php tags. loops, if , if else etc 
+
+    laravel is MVC framework 
+
+    1. {{$name}}       --> <?php echo $name?>
+
+    2. @if($name=='deep')
+         <h1>Deep</h>
+       @elseif($name=='sim')
+        <h1>Sim</h1>
+       @else
+       <h1>Chucha</h1>
+       @endif 
+    
+    3. @for($i=0;$i<10;$i++)
+        {{$i}}
+       @endfor    
+
+    4. @foreach($user  as $key=>$value)
+        {{$key:$value}}
+        @endforeach;
+
+    5. @include('filename')                 // not type blade in file name
+
+    6. var data = @json($phpVariableName);
+
+    7. @csrf                                // very use ful for sending the request to the laravel, Cross site request       
+
+8. Html Form 
+
+    in view File
+
+           <form action="/user" method="POST">
+                @csrf
+                <label for="">Enter Username</label>
+                <input type="text" name="username" id="" placeholder="Enter UserName" required /><br>
+                <label for="">Enter Password</label>
+                <input type="password" name="password" id="" placeholder="Enter Password"><br />
+                <button type="submit">Submit</button>
+            </form>
+
+    in Route file 
+
+        Route::get('/user', [Users::class, 'getData']);
+        Route::post('/user', [Users::class, 'postData']);   
+
+    in Controller file 
+
+        class Users extends Controller
+        {
+            public function getData()
+            {
+                return view('user');
+            }
+            public function postData(Request $req)
+            {
+                return $req->input();
+            }
+        }
+        
+9. Form Error and Vlidations 
+
+    in Controller file 
+
+        public function postData(Request $req)
+        {
+             $req->validate([
+                'username' => 'required|max:10',
+                'password' => 'required|min:10'
+            ]);
+            return $req->input();
+        }
+
+    in View File
+
+        1. For all errors
+        
+            a. @if ($errors->any())
+                    @foreach ($errors->all() as $err)
+                        <h2>{{$err}}</h2>
+                    @endforeach
+                @endif
+            
+            b. {{$errors}}    
+
+        2. For Single error 
+
+            @error('username'){{$message}}@enderror   
+
+10. Middleware 
+
+    A piece of code that can filter out the user request for Example login, ip address 
+
+    #command 
+        
+        php artisan make:middleware ageCheck    
+
+        app->http->middleware->ageCheck.php-> handle function           
+
+    Various type of Middlewares 
+
+        1. Global : apply on whole website at Single Time  
+        2. Group  : apply on some sepcific pages like 25 out of 30 pages 
+        3. Route  : apply on single route at a time
+
+
+        Example 1 : (Global)
+
+           a. app->http->middleware->middleware->kernal.php 
+
+                \App\Http\Middleware\ageCheck::class,                   // add this line in the $middleware array
+
+            b. app->http->middleware->ageCheck.php-> handle function   
+
+                if ($request->age && $request->age < 18) {
+                    echo "you are restricted";
+                    exit;
+                }
+                return $next($request);
+
+            c. web.php 
+
+                define routes 
+
+            d.  address
+
+                http://127.0.0.1:8000/user?age=17
+
+        Example 2 : (Group)
+
+            a. app->http->middleware->middleware->kernal.php 
+                
+                'protectPage' => [                                          // add this line in the $middlewareGroups array 
+                    \App\Http\Middleware\TrustProxies::class                    
+                ] 
+       
+            b. app->http->middleware->ageCheck.php-> handle function   
+
+                if ($request->age && $request->age < 18) {
+                    echo "you are restricted";
+                    exit;
+                }
+                return $next($request);  
+            
+            c. web.php 
+
+                Route::group(['middleware' => ['protectPage']], function () {
+                    Route::view('/user', 'user');
+                    Route::view('/hello', 'hello');
+                });
+
+            d. address  
+                http://127.0.0.1:8000/user?age=17
+                http://127.0.0.1:8000/home?age=17 
+
+
+        Example 3 : (Route Middleware) 
+            
+            a. app->http->middleware->middleware->kernal.php 
+                
+                'protectPage' => \App\Http\Middleware\ageCheck::class     // add this line in the $routeMiddleware array 
+       
+            b. app->http->middleware->ageCheck.php-> handle function   
+
+                if ($request->age && $request->age < 18) {
+                    echo "you are restricted";
+                    exit;
+                }
+                return $next($request);  
+            
+            c. web.php 
+
+                Route::view('/user', 'user')->middleware('protectPage');
+
+            d. address  
+                http://127.0.0.1:8000/user?age=17
+
+11. Database
+
+        # connect to database 
+
+            1. DB Classes 
+            2. Model
+                    plural Name    -> Singular Name
+                    
+                    Database Table -> Model Name 
+                    users          -> User 
+                    employees      -> employee
+
+
+         Example 1. (DB Classes)
+
+            use Illuminate\Support\Facades\DB;
+            return DB::select('SELECT * FROM coupon');
+
+         Example 2. Model 
+
+            1. php artisan make:model coupon
+            
+            2. use App\Models\coupon;
+               return coupon::all();
+
+            Note : to Change the table -> public $table = "users";               
+    
+
+
+ 
+
+
+
+
+
+
+All laravel files are store in Vendor Folder
+
+
+
+
+
+
+
+

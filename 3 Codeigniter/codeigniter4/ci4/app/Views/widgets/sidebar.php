@@ -1,0 +1,1 @@
+<h2><i>This is Itallic text and used for widgets</i></h2>

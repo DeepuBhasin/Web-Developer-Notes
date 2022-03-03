@@ -101,7 +101,7 @@ we need 4 thing in this laravel installation
 note : laravel work if php version is greater than 5  	
 
 1. Installing laravel Command using Composer 
-	 Composer global require laravel/insteller -------------> this command is used to install the laravel {this command only run in starting}
+	 Composer global require laravel/installer -------------> this command is used to install the laravel {this command only run in starting}
 
 2. creating new project comman d
 	Laravel new project_name 

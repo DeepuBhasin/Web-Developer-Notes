@@ -1,6 +1,6 @@
 <?php
 
-
+use Country\Asia\Asia;
 use myclass\simpleclass\Class1;
 use myclass\simpleclass\Class2;
 use myclass\otherclass\Class3;
@@ -16,6 +16,7 @@ use Food\China\Noodles;
 use Food\China\Springrole;
 use Food\India\Daal;
 use Food\India\Saag;
+
 
 require './vendor/autoload.php';
 
@@ -42,3 +43,4 @@ $obj11 = new Noodles();
 $obj12 = new Springrole();
 $obj13 = new Daal();
 $obj14 = new Saag();
+$obj15 = new Asia();

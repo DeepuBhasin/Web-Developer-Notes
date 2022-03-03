@@ -4,7 +4,7 @@ include 'database.php';
 $obj = new database();
 
 // Insert Function 
-// $obj->insert('students',['student_name'=>'Inderdeep Singh','age'=>20,'city'=>'Patiala']);
+// $obj->insert('studentghfhfhfhs',['student_name'=>'abcs','age'=>22,'city'=>'okokook']);
 // echo "Insert Id : ";
 // print_r($obj->getResult());
 
