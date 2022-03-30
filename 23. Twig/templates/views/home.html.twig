@@ -1,0 +1,62 @@
+<html>
+
+<head>
+	<title>
+		First Page
+	</title>
+</head>
+
+<body>
+	<h1>{{first}}</h1>
+	<h1>{{last}}</h1>
+	<h1>{{number}}</h1>
+	<hr>
+	<h2>
+		{% for data in skills %}
+		Name : {{data.name}} && Post : {{data.post | raw}}
+		<br />
+		{% endfor %}
+	</h2>
+	<hr>
+	<h3>
+		{% if(age>18)%}
+		mature
+		{% else %}
+		child
+		{% endif %}
+	</h3>
+	<hr>
+	{{ "now"|date(timezone="Europe/Paris") }}
+	<hr>
+
+	{{ '123456' | md5 }}
+	<hr>
+	{{object.echoName()}}
+	<hr>
+	{{skills[0]['name']}}
+
+	<hr>
+	{{_self}}
+
+	<hr>
+	{{ htmlTags|striptags }}
+	<hr>
+	{{ htmlTags|e }}
+
+	<hr>
+	{% apply upper %}
+	This text becomes uppercase
+	{% endapply %}
+	<hr>
+	{% verbatim %}
+	<ul>
+		{% for item in seq %}
+		<li>{{ item }}</li>
+		{% endfor %}
+	</ul>
+	{% endverbatim %}
+
+
+</body>
+
+</html>

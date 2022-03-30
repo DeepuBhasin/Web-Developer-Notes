@@ -1,0 +1,31 @@
+1. There are two kinds of delimiters: {% ... %} and {{ ... }}. The first one is used to execute statements such as for-loops, the latter outputs the result of an expression.
+
+# Variables
+    The application passes variables to the templates for manipulation in the template. Variables may have attributes or elements you can access, too. The visual representation of a variable depends heavily on the application providing it.
+
+    Use a dot (.) to access attributes of a variable (methods or properties of a PHP object, or items of a PHP array):
+
+    {{ foo.bar }}
+
+
+
+    #Implementation
+
+        For convenience's sake foo.bar does the following things on the PHP layer:
+
+        check if foo is an array and bar a valid element;
+        if not, and if foo is an object, check that bar is a valid property;
+        if not, and if foo is an object, check that bar is a valid method (even if bar is the constructor - use __construct() instead);
+        if not, and if foo is an object, check that getBar is a valid method;
+        if not, and if foo is an object, check that isBar is a valid method;
+        if not, and if foo is an object, check that hasBar is a valid method;
+        if not, return a null value.
+        Twig also supports a specific syntax for accessing items on PHP arrays, foo['bar']:
+
+        check if foo is an array and bar a valid element;
+        if not, return a null value.
+
+================================================================================================================================
+#Filters
+
+    Variables can be modified by filters. Filters are separated from the variable by a pipe symbol (|). Multiple filters can be chained. The output of one filter is applied to the next.

@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "email": "Deepu Bhasin ",
+      "password": "vue Developer",
+      "id": 1
+    },
+    {
+      "email": "admin@builderstorm.com",
+      "password": "xyz123",
+      "id": 2
+    },
+    {
+      "email": "Ghoraindu90@gmail.com",
+      "password": "sandbox",
+      "id": 3
+    }
+  ]
+}

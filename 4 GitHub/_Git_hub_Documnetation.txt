@@ -359,7 +359,28 @@ b. Revert back on files after commit
 									Branch 'master' set up to track remote branch 'master' from 'origin'.
 
 
+======================================================================================================================================	
+Directory 
+	
+	1. cd ~
+	2. cd .ssh
+	3. ls 
+	
+	4. various key extention  
+		a. dee 				 // private key
+		b. deee.pub  		 //	public key 
 
+	5. print key 
+		cat deee.pub 	
+
+	6. to open software with config file 
+		a. Notepad config 						// to open notepad and config file 
+		b. code config 							// to open visual code and config file 
+
+	7. ssh-keygen 				// generate key 
+
+	8. git config --global -e   // get the global configuration file 
+	
 
 	
 

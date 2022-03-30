@@ -1,0 +1,9 @@
+#Commands 
+    1. node -v 
+    2. npm -v 
+    3. vue -V
+    4. intall vue CLI : npm install -g @vue/cli 
+    5. make project with Cli : vue create resto-project
+    6. cd resto-project
+    7. Run project : npm run serve
+
