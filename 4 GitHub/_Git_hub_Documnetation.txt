@@ -342,7 +342,7 @@ b. Revert back on files after commit
 
 ======================================================================================================================================	
 
-(Permisssions)		d. go to settings -> SSH & GPG keys -> New SHS key -> enter title -> to add key first go to ssh git hub website (just enter ssh git hub in google) 
+(Permisssions)			go to settings -> SSH & GPG keys -> New SHS key -> enter title -> to add key first go to ssh git hub website (just enter ssh git hub in google) 
 						-> Generating a new SSH key and adding it to the ssh-agent -> enter this in git bash '$ ssh-keygen -t ed25519 -C "your_email@example.com" '			
 						-> press enter -> agian enter -> again ->enter -> eval `ssh-agent -s` (to check agent) -> command ' ssh-add ~/.ssh/id_ed25519 ' is used to private key press enter -> key will added successfullly -> click on this ' Add the SSH key to your GitHub account. ' -> then ' tail ~/.ssh/id_ed25519.pub' to print ssh key in git bash 
 						-> ' ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIITbmVNe877PXIoq7lzbkMvGOvqE/19c6dJTUYDGiIz0 ' this kind of key will generate then copy this key -> paste this key into your account where you are creating key -> click on Add SSH -> '$ git push -u origin master' use this command
@@ -377,9 +377,47 @@ Directory
 		a. Notepad config 						// to open notepad and config file 
 		b. code config 							// to open visual code and config file 
 
-	7. ssh-keygen 				// generate key 
+	7. ssh-keygen -f idea_rsa				// generate key then key name 
+
+	8. eval "$(ssh-agent -s)"
+
+	9. ssh-add ~/.ssh/idea_rsa		// adding key into system and idea_rsa -> is key name	
 
 	8. git config --global -e   // get the global configuration file 
+
+
+
+
+
+	# add two account
+	================= 
+
+		1. create public and private key -> ssh-keygen idea_rsa	
+			a. add in github account 
+			b. add into system as well ssh-add ~/.ssh/idea_rsa using this command
+		
+		2. create config file in .ssh folder 
+		
+		3. Add below code 
+
+			Host idearepos						// random name 
+			HostName github.com 				// host name 
+			IdentityFile ~/.ssh/idea_rsa 		// private key path 
+			IdentitiesOnly yes					
+
+
+		4. now suppose this is directory we want to clone  "git@github.com:idea-repos/dcltr.git"
+
+			command will be : git clone git@idearepos:idea-repos/dcltr.git
+
+			directory will clone automatically into a folder 
+		
+		5. then make code in that dircetory and then push 
+
+			thats it 		
+
+
+
 	
 
 	

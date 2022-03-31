@@ -1,0 +1,16 @@
+{
+  "user": [
+    {
+      "name": "Deepinder singh Bhasin",
+      "email": "deepu@gmail.com",
+      "password": "test",
+      "id": 2
+    },
+    {
+      "name": "Deepinder singh Bhasin",
+      "email": "deepu@gmail.com",
+      "password": "test",
+      "id": 1
+    }
+  ]
+}

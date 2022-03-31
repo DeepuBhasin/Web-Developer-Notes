@@ -7,3 +7,36 @@
     6. cd resto-project
     7. Run project : npm run serve
 
+================================================================================================================================
+#Modules of Project
+
+   Front End 
+    1. Login User
+    2. Register User
+    3. Routing 
+    4. Logout 
+    5. API
+    6. Restaurant list
+    7. Add Restaurant
+    8. Delete Restaurant
+    9. Update Restaurant
+    10. Sorting 
+    11. Etc 
+
+   Backend 
+    1. we use Json-serve for APi
+    2. We use Postman for test API 
+    3. APIs
+        1. Restaurant listing API 
+        2. Add new Restaurant API 
+        3. Delete Restaurant API 
+        4. Update Restaurant API
+        5. User Auth 
+================================================================================================================================
+#Json-server
+
+    1. Create Folder -> DB
+    2. Create file in db folder -> db.json 
+    3. run cmd -> json-server --watch json.db
+    4. open http://localhost:3000/
+            

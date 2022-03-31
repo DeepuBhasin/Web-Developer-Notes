@@ -2360,6 +2360,8 @@ What is Component :
 
     video link https://www.youtube.com/watch?v=u7dPGuGB0Kc
 
+    What is json server : it is used to create API's 
+
     1. install json server : npm install -g json-server                            // it will install globally    
     
     2. create file name : db.json in that folder 
@@ -2488,31 +2490,7 @@ What is Component :
         }
         </script>
 
-================================================================================================================================
-#Modules of Project
 
-   Front End 
-    1. Login User
-    2. Register User
-    3. Routing 
-    4. Logout 
-    5. API
-    6. Restaurant list
-    7. Add Restaurant
-    8. Delete Restaurant
-    9. Update Restaurant
-    10. Sorting 
-    11. Etc 
-
-   Backend 
-    1. we use Json-serve for APi
-    2. We use Postman for test API 
-    3. APIs
-        1. Restaurant listing API 
-        2. Add new Restaurant API 
-        3. Delete Restaurant API 
-        4. Update Restaurant API
-        5. User Auth 
 
 
 
