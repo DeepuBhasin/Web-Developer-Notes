@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+ <script>
+  
+
+  // Simple Example 
+  // let datas = [
+  //   {name : "Deepinder Singh",profession : "Software Engg"},
+  //   {name : "Devinder Singh",profession : "React Developer"},
+  // ];
+
+  // function getData(){
+  //     setTimeout(()=>{
+  //       let output='';
+  //       datas.forEach((data,index)=>{
+  //         output += `<li>${data.name}</li>`;
+  //       });
+  //       document.body.innerHTML = output;
+  //     },1000);
+  // }
+
+  // function createData(newData){
+  //   setTimeout(()=>{
+  //     datas.push(newData);
+  //   },2000);
+  // }
+  // getData();
+  // createData({name:'alisha',profession:'software Engg'}); 
+
+
+  // Callback example 
+  // let datas = [
+  //   {name : "Deepinder Singh",profession : "Software Engg"},
+  //   {name : "Devinder Singh",profession : "React Developer"},
+  // ];
+
+  // function getData(){
+  //     setTimeout(()=>{
+  //       let output='';
+  //       datas.forEach((data,index)=>{
+  //         output += `<li>${data.name}</li>`;
+  //       });
+  //       document.body.innerHTML = output;
+  //     },1000);
+  // }
+
+  // function createData(newData,Callback){
+  //   setTimeout(()=>{
+  //     datas.push(newData);
+  //     Callback();
+  //   },2000);
+  // }
+  //   createData({name:'alisha',profession:'software Engg'},getData);
+
+
+
+
+  // Promiss Function 
+    
+  // let datas = [
+  //   {name : "Deepinder Singh",profession : "Software Engg"},
+  //   {name : "Devinder Singh",profession : "React Developer"},
+  // ];
+
+  // function getData(){
+  //     setTimeout(()=>{
+  //       let output='';
+  //       datas.forEach((data,index)=>{
+  //         output += `<li>${data.name}</li>`;
+  //       });
+  //       document.body.innerHTML = output;
+  //     },1000);
+  // }
+
+  // function createData(newData){
+  //   return new Promise((resolve,reject)=>{
+  //     setTimeout(()=>{
+  //     datas.push(newData);
+  //     let error = false;
+  //     if(!error){
+  //       resolve();
+  //     }else{
+  //       reject("Kuch shi nyi a");
+  //     }
+  //   },2000);
+  //   });
+  // }
+  //   createData({name:'alisha',profession:'software Engg'}).then(getData).catch(err=>console.log(err));
+
+
+
+
+  // Async and await Function 
+  
+  let datas = [
+    {name : "Deepinder Singh",profession : "Software Engg"},
+    {name : "Devinder Singh",profession : "React Developer"},
+  ];
+
+  function getData(){
+      setTimeout(()=>{
+        let output='';
+        datas.forEach((data,index)=>{
+          output += `<li>${data.name}</li>`;
+        });
+        document.body.innerHTML = output;
+      },1000);
+  }
+
+  function createData(newData){
+    return new Promise((resolve,reject)=>{
+      setTimeout(()=>{
+      datas.push(newData);
+      let error = false;
+      if(!error){
+        resolve();
+      }else{
+        reject("Kuch shi nyi a");
+      }
+    },2000);
+    });
+  }
+    
+    async function start(){
+      await createData({name:'alisha',profession:'software Engg'});
+      getData();
+    }
+
+    start();
+</script>   
+</body>
+</html>
