@@ -22,6 +22,8 @@
     node -v 
     npm -v 
 
+    5. To start Vue GUI : vue ui
+
 
  Official website for vue js : https://cli.vuejs.org/guide/installation.html   
 
@@ -2490,6 +2492,35 @@ What is Component :
         }
         </script>
 
+================================
+
+    Extra 
+
+      1. Binding properties
+
+        <h1>{{firstName}}</h1>                      // print firstName property 
+
+        <p v-bind:data-id="firstName"> </p>         // print firstName (same) property
+
+      2. Fetch 
+
+            async addUser(){
+
+                    let result = await axios.post('http://localhost:3000/users',{
+                    email:this.email,
+                    password:this.password
+                    });
+
+                    console.log(result.data);
+                }
+
+        you can use 
+
+            async addUser()
+            {
+                    let result = await fetch('http://localhost:3000/users');
+                    console.log(result.data); 
+            } 
 
 
 
