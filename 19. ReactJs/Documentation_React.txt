@@ -1,0 +1,424 @@
+#Functional Component
+
+    a. export default User;             -> import User from './User'
+    b. export function User(){          -> import {User} from './User' 
+    b. If don't want to use export 
+
+        function User(){
+        return (
+                <div>
+                    <h1>User component</h1>
+                </div>
+            )
+        }
+
+        function App() {
+            return (
+                    <div className="App">
+                    <User/>                     // here we are using User function Component
+                    </div>
+                );
+        }
+=================================================================================================================================
+#Class Component
+
+    1. import React,{Component} from 'react'            -> class User extends Component{
+    2. import React from 'react'                        -> class User extends React.Component{
+
+    3. export class User extends Component{             -> import {User} from './User'
+    4. export default User                              -> import User from './User'   
+
+    5. If don't want to use export      
+
+        import React,{Component} from 'react'
+
+        function App() {
+            return (
+                <div className="App">
+                <User/>
+                </div>
+            );
+        }
+
+        class User extends Component{
+            render(){
+                return (
+                    <h1>Hello From User Class component</h1>
+                )
+            }
+        }
+
+=================================================================================================================================
+#Component within Component (function)
+
+    function App() {
+        function Apple(){
+            return (
+            <h1>Hello Apple</h1>
+            )
+        }
+        return (
+            <div className="App">
+            <Apple/>                                
+            
+                or  
+            
+            {Apple()}                       // paranthesis are use for Calling js Code
+            
+            </div>
+        );
+    }
+
+Note : we cannot use sub function out side (yes we can do that but then we have to use App then Apple its quite Difficult)    
+
+=================================================================================================================================
+#JSX
+
+    it Allow to write HTML Code in the Javascript
+
+    function User(){
+        let name = 'Deepinder singh';
+        return (
+                <div>
+                    <h1>{10 + 30}</h1>
+                        <h2>{name}</h2>
+                </div>
+            )
+    }
+
+
+    Without JSX 
+
+        import React from 'react'
+            function User(){
+                return  React.createElement('h1',null,'Hello World')
+            }
+
+            export default User
+
+=================================================================================================================================
+#Click Event and Function 
+
+    function App() {
+        function Apple(){
+            alert('Hello apple');
+        }
+        return (
+            <div className="App">
+            <button onClick={()=>Apple()}>Click Me</button>         
+            </div>
+        );
+    }
+
+    Note : 
+            a. onClick={alert()}                // it will call this function automatically when page get load
+            b. onClick={()=>Apple()}            // it will call the function on click event (best) 
+            b. onClick={()=>alert()}            // it will call the function on click event (best) 
+
+=================================================================================================================================
+#State in Functional Component
+
+    a. When ever we use variable our component is not update but if useState we can update Component
+    b. State is a part of React but variable is a part of Javascript
+
+================================================================================================================================
+Post Method 
+
+    1. npm install json 
+    2. npx json-server --watch db.json
+
+    import React, { useState,useEffect } from 'react'
+
+
+    function App() {
+
+        let [data,setData] = useState([]);
+        useEffect(() => {
+            fetch('http://localhost:3000/user').then((result)=>{
+            result.json().then((resp)=>{
+            setData(resp);
+            })
+        });
+        
+        });
+        return (
+            <div className='App'>
+            <table border="1" cellPadding="1" cellSpacing="1">
+                <tbody>
+                <tr>
+                <th>id</th>
+                <th>Title</th>
+                <th>Email Id</th>
+                </tr>
+                </tbody>
+                {
+                data.map((items)=>{
+                return  <tr key={items.id}>
+                    <td>{items.id}</td>
+                    <td>{items.name}</td>
+                    <td>{items.email}</td>
+                    </tr>
+                })
+                }
+                
+            </table>
+            </div>
+        );
+        }
+
+
+        export default App;
+
+
+=================================================================================================================================
+Post Method in API 
+
+
+    import React, { useState } from 'react'
+
+    function App() {
+
+    let [name,setname] = useState('');
+    let [email,setemail] = useState('');
+    let [password,setpassword] = useState('');
+    
+    function setValues(e){
+    e.preventDefault();
+
+    if(name.length <=0){
+        alert('Please Enter name');
+        return false;
+    }
+    if(email.length <=0){
+        alert('Please Enter Email');
+        return false;
+    }
+    if(password.length <=0){
+        alert('Please Enter Password');
+        return false;
+    }
+
+    let data = {name,email,password};
+    fetch('http://localhost:3000/user',{
+        method : 'POST',
+        headers : {
+        'Accept' : 'application/json',
+        'Content-type' : 'application/json',  
+        },
+        body:JSON.stringify(data)
+    }).then((results)=>{
+        console.log(results);
+    })
+    }
+    
+    return (
+        <div className='App'>
+        <center>
+        <form onSubmit={setValues} autoComplete="off">
+            <label>Name</label>
+            <input type="text" id='name' onChange={(e)=>setname(e.target.value)} value={name} placeholder='Enter name' />
+            <br/>
+            <br/>
+            <label>Email Id</label>
+            <input type="text" id='emailId' onChange={(e)=>setemail(e.target.value)} value={email} placeholder='Enter Email Id' />
+            <br/>  
+            <br/>
+            <label>Password</label>
+            <input type="password" id='password' onChange={(e)=>setpassword(e.target.value)} value={password} placeholder='Enter Password' />
+            <br/>  
+            <br/>
+            <button type='submit'>Submit</button>
+            <button type='reset'>Clear</button>  
+
+            
+        </form>
+        </center>
+        </div>
+    );
+    }
+
+
+    export default App;
+
+=================================================================================================================================
+Delete Method with API 
+
+    import React, { useState,useEffect } from 'react'
+
+    function App() {
+
+    let [data,setData] = useState([]);
+    
+    function getList(){
+        fetch('http://localhost:3000/user').then((result)=>{
+        result.json().then((resp)=>{
+            console.log(resp);
+            setData(resp);
+        })
+        });
+    }
+    useEffect(() => {
+        getList();
+    },[]);
+
+    function deleteUser(id){
+        fetch(`http://localhost:3000/user/${id}`,{
+        method : 'DELETE'
+        }).then((result)=>{
+        result.json().then((resp)=>{
+        getList();
+        })
+    });
+    }
+    return (
+        <div className='App'>
+        <table border="1" cellPadding="1" cellSpacing="1">
+            <tbody>
+            <tr>
+            <th>id</th>
+            <th>Title</th>
+            <th>Email Id</th>
+            <th>Action </th>
+            </tr>
+            </tbody>
+            {
+            data.map((items)=>{
+            return  <tr key={items.id}>
+                <td>{items.id}</td>
+                <td>{items.name}</td>
+                <td>{items.email}</td>
+                <td><button onClick={()=>deleteUser(items.id)}>Delete</button></td>
+                </tr>
+            })
+            }
+        </table>
+        </div>
+    );
+    }
+
+
+    export default App;
+==================================================================================================================================
+Pre - Filled Form 
+
+    import React, { useState,useEffect } from 'react'
+
+    function App() {
+
+    let [data,setData] = useState([]);
+    let [name,setname] = useState();
+    let [email,setemail] = useState();
+    let [userId,setuserID] = useState();
+    
+    function getList(){
+        fetch('http://localhost:3000/user').then((result)=>{
+        result.json().then((resp)=>{
+            setData(resp);
+        })
+        });
+    }
+    useEffect(() => {
+        getList();
+    },[]);
+
+    function deleteUser(id){
+        fetch(`http://localhost:3000/user/${id}`,{
+        method : 'DELETE'
+        }).then((result)=>{
+        result.json().then((resp)=>{
+        getList();
+        })
+        });
+    }
+    function getUserData(id){
+        fetch(`http://localhost:3000/user/${id}`).then((result)=>{
+        result.json().then((resp)=>{
+            setname(resp.name);
+            setemail(resp.email);
+            setuserID(resp.id);
+        })
+        });
+    }
+
+
+    function setValues(e){
+        e.preventDefault();
+
+        if(name.length <=0){
+            alert('Please Enter name');
+            return false;
+        }
+        if(email.length <=0){
+            alert('Please Enter Email');
+            return false;
+        }
+        
+        let data = {name,email};
+        fetch(`http://localhost:3000/user/${userId}`,{
+            method : 'PUT',
+            headers : {
+            'Accept' : 'application/json',
+            'Content-type' : 'application/json',  
+            },
+            body:JSON.stringify(data)
+        }).then((results)=>{
+            getList();
+        })
+        }
+
+    return (
+        <div className='App'>
+        <table border="1" cellPadding="1" cellSpacing="1">
+            
+            <thead>
+            <tr>
+            <th>id</th>
+            <th>Title</th>
+            <th>Email Id</th>
+            <th>Action </th>
+            </tr>
+            </thead>
+            <tbody>
+            {
+            data.map((items)=>{
+            return  <tr key={items.id}>
+                <td>{items.id}</td>
+                <td>{items.name}</td>
+                <td>{items.email}</td>
+                <td>
+                    <button onClick={()=>deleteUser(items.id)}>Delete</button>
+                    <button onClick={()=>getUserData(items.id)}>Update</button>
+                </td>
+                </tr>
+            })
+            }
+            </tbody>
+        </table>
+            <br/>
+            <br/>
+        <form onSubmit={setValues} autoComplete="off">
+                <label>Name</label>
+                <input type="text" id='name' onChange={(e)=>setname(e.target.value)} value={name} placeholder='Enter name' />
+                <br/>
+                <br/>
+                <label>Email Id</label>
+                <input type="text" id='emailId' onChange={(e)=>setemail(e.target.value)} value={email} placeholder='Enter Email Id' />
+                <br/>  
+                <br/>
+                <button type='submit'>Submit</button>
+                <button type='reset'>Clear</button>  
+
+                
+            </form>
+        </div>
+    );
+    }
+
+
+    export default App;
+
+
+
+
+
+

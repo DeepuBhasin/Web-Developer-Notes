@@ -1,0 +1,15 @@
+{
+  "user": [
+    {
+      "email": "DeepuBhasin999@gmail.com",
+      "name": "Deepu Bhasin",
+      "password": "132456",
+      "id": 2
+    },
+    {
+      "name": "Deepinder singh",
+      "email": "deepindet999@gmail.com",
+      "id": 3
+    }
+  ]
+}
