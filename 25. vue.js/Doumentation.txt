@@ -1409,7 +1409,7 @@ What is Component :
     3. Apply Ref 
     4. operations with ref 
 
-    Ref : is use to get or Set Dom Value  (same like getDocumentElementById)
+    Ref : is use to get or Set Dom Value  (same like getDocumentElementById), we can add class, remove class all the javascript or jquery stuff.
 
     <template>
         <div class="main-component">
@@ -1423,7 +1423,9 @@ What is Component :
             name: "MainComponent",
             methods:{
                 testing(){
-                    let firstName = this.$refs.firstName.value;
+                    let firstName = this.$refs.firstName.value;         // getting the value 
+                    this.$ref.firstName.classList.add('Active')         // adding Class 
+                    this.$ref.firstNaame.focus()                        // get focus , its a normal javascript function     
                     console.log(firstName);
                 }
             }
