@@ -2739,6 +2739,62 @@ What is Component :
         vue support Kabbab case coding in template and camal case in javascript      
 
 
+===============================================================================================================================
+Vuex 
+
+    1. A library / state Managment pattern for use with vue.js 
+    2. Allows us to create a Centralized data store which can be accessed by all component in an app 
+    3. this store is know as a "Single source of truth"
+
+                            store 
+                              |          
+                    --------------------------
+                    |       |       |       |
+                    c1      c2      c3      c4     
+
+                    
+                            
+
+
+
+
+
+    1. Vuex is a state Managment pattern + library for vue.js applications
+    2. used most commanly with the vue framework
+    3. very similar to Redux, Flux, etc (but easier)
+    4. Centralized store for all components
+
+Why use vuex 
+
+    1. Component need to share state in many cases 
+    2. vuex provides a single source o truth for data/ state 
+    3. No need to pass events up and props down through multiple Components
+    4. Global State is "reactive"
+
+Vuex Terms 
+
+    1. State - App Level state/data (todos, posts, token, etc)
+    2. Getters - Get prices of state or computed values from state 
+    3. Actions - Called from component to commit a mutation 
+    4. Mutation - Mutate the state (update data, etc)
+    5. Modules - Each Modules can have its own state, getters, actions and mutations (post, module , auth module etc)
+
+    
+
+
+    vuex act as like a container which create a separate file to store all the values of variables and Methods. We can use that variables and methods directly into the various components like parent, childs, sub childs we don't need to use Params to pass data from one component to another. 
+
+    installation
+    
+    1. npx vue add vuex 
+    2. in source Folder -> store Folder will create
+
+
+    https://jsonplaceholder.typicode.com/
+
+
+
+
 
 
 

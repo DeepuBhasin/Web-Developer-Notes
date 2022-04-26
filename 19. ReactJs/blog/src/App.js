@@ -1,13 +1,39 @@
-import React, { useState,useEffect } from 'react'
+import React from 'react'
+import {CommonContext} from './components/CommonContext.js'
+import Main from './components/Main.js'
+import Button from './components/Button.js'
+import Header from './components/Header.js';
+import Footer from './components/Footer.js';
 
-function App() {
 
 
-  return (
-    <div className='App'>
+class App extends React.Component {
+
+  constructor (){
+    super();
+      this.updateColor = (color)=>{this.setState({
+          color:color})
+      };
       
-    </div>
-  );
+      this.state={
+          color:'black', 
+          updateColor : this.updateColor
+        };
+    
+  }
+
+  render(){
+    return (
+      <CommonContext.Provider value={this.state}>
+        <Header/>
+        <h1>Complete Easy exmaple for context API</h1>
+        <p>Change Background Color</p>
+        <Main/>
+        <Button/>
+        <Footer/>
+      </CommonContext.Provider>
+    )
+  }
 }
 
 

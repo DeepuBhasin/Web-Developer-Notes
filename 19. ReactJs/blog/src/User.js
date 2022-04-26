@@ -1,11 +1,13 @@
-import {useParams} from 'react-router-dom'
-function User(){
-    const params = useParams();
-    const {name,id} = params;
-    
+import { useLocation } from "react-router-dom";
+
+
+function User(props){
+   let location = useLocation();
+
+   console.log(location);
     return (
         <div>
-            <h1>User Component :: id : {id} name :  {name}</h1>
+           
         </div>
     )
 }
