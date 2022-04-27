@@ -1,4 +1,6 @@
-Best Videos : https://www.youtube.com/watch?v=QMVzdIa9KQs&list=PLC3y8-rFHvwgeQIfSDtEGVvvSEPDkL_1f&index=10
+Best Videos : 1. https://www.youtube.com/watch?v=QMVzdIa9KQs&list=PLC3y8-rFHvwgeQIfSDtEGVvvSEPDkL_1f&index=10
+              2. https://www.youtube.com/watch?v=KM1U6DqZf8M&list=PL4cUxeGkcC9hYYGbV60Vq3IXYNfDk8At1&index=5
+                
 ===========================================================================================================================
 
 #What is we learn in this series 
@@ -1215,6 +1217,12 @@ What is Component :
             }
         } 
         </script>
+
+        we want execute our functions which is written in parent and we want to call from child in that case $emit help us. $emit allow to create custome event 
+       
+        in above example 
+            child class -> call ->  updateTitle -> call -> changeTitleEmiterName (wriiten parent) -> call -> updateTitle 
+
     
 =================================================================================================================================
 #Html Binding 
@@ -1464,6 +1472,21 @@ What is Component :
         }
     }
     </script>
+
+    Click event Modifiers
+    ======================
+
+      1. @click.right       : only allow for right click
+      2. @click.shift       : when shift click is down 
+      3. @click.alt         : when alt click is down
+      4. @click.self        : it will click not work on the child divs, only and only work on parent example
+
+        <div class="backdrop" @click.self="closeModel">
+            <div class="model">
+                <h1> Hello </h1>
+                <p> Text </p>
+            </div>    
+        </div>     
 
 ================================================================================================================================
 #Non-Props Data
