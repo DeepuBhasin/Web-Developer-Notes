@@ -1735,7 +1735,7 @@ What is Component :
     1. What are slots 
     2. How use the slots 
 
-    Slots : just like components, In normal components we cannot send data like html data ,images, array, object or any other things at one time.  
+    Slots : just like components, In normal components we cannot send data like html data ,images, array, object or any other things at one time but using Slots we can send complete template to component like html elements, images etc
 
 
     1. Simple Example with normal Slot
@@ -2079,8 +2079,8 @@ What is Component :
 
     These functions are called automatically when ever UI will update or updated
 
-      a. beforeMount : this function will invoke automatically when ever only UI (browser screen or DOM) will get update 
-      b. created     : this function will invoke automatically when ever only UI (browser screen or DOM) get updated. 
+      a. beforeUpdate : this function will invoke automatically when ever only UI (browser screen or DOM) will get update 
+      b. Updated     : this function will invoke automatically when ever only UI (browser screen or DOM) get updated. 
 
        a. Not accurate 
        =============== 
