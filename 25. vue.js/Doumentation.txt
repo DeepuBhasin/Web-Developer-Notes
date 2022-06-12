@@ -27,7 +27,7 @@ Best Videos : 1. https://www.youtube.com/watch?v=QMVzdIa9KQs&list=PLC3y8-rFHvwge
         d. Vite             :  
 
     2. Check installed or not : vue -V                          // it will show the CLI version not the vue
-    3. make project with Cli : vue create blog
+    3. make project with Cli : vue create blog                 // or npx vue create blog     
     4. Run project : npm run serve
 
     node -v 
@@ -377,6 +377,8 @@ Note :
         <div class="main-component">
             <h1 v-bind:style="{color:'red'}">Style Binding</h1>
             <h1 v-bind:style="{color:color}">Style Binding with property object</h1>
+
+            
             <h1 v-bind:class="'arrayClass'">Class Binding with String</h1>
             <h1 v-bind:class="{display:show,displayColor:show}">Class Binding with objects</h1>        
             <h1 v-bind:class="[aClass]">Class Binding with Array</h1>
@@ -2401,9 +2403,11 @@ What is Component :
 
             {
                 name : 'NotFound',
-                path: '/:pathMatch(.*)*',
-                component : PageNotFound
+                path: '/:pathMatch(.*)*',                      or '/:notFound(.*)' redirect: '/home'
+                component : PageNotFound                            
             }   
+
+         Note : it should be your last route out of all    
 
         3. Hit URL 
 
