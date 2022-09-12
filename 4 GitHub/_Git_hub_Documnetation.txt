@@ -370,8 +370,8 @@ Directory
 		a. dee 				 // private key
 		b. deee.pub  		 //	public key 
 
-	5. print key 
-		cat deee.pub 	
+	5. public key 
+		cat deee 	
 
 	6. to open software with config file 
 		a. Notepad config 						// to open notepad and config file 
@@ -392,13 +392,18 @@ Directory
 	# add two account
 	================= 
 
-		1. create public and private key -> ssh-keygen idea_rsa	
-			a. add in github account 
-			b. add into system as well ssh-add ~/.ssh/idea_rsa using this command
+		1. get the invitaion for the repository Admin 
 		
-		2. create config file in .ssh folder 
+		2. create public and private key -> ssh-keygen idea_rsa	
+
+		3. copy public -> cat idea_rsa.pub
+			
+		3. Open github account -> setting -> SSH and GPG keys  
+			a. click on New SSH key 
+			b. Add Title 
+			c. Paste Public key -> in key
 		
-		3. Add below code 
+		4. create config file in .ssh folder -> add below Code 
 
 			Host idearepos						// random name 
 			HostName github.com 				// host name 
