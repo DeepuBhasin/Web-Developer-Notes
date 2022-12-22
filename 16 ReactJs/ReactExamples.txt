@@ -1,0 +1,233 @@
+import React, { useState } from 'react';
+const style = {
+  table: {
+    borderCollapse: 'collapse'
+  },
+  tableCell: {
+    border: '1px solid gray',
+    margin: 0,
+    padding: '5px 10px',
+    width: 'max-content',
+    minWidth: '150px'
+  },
+  form: {
+    container: {
+      padding: '20px',
+      border: '1px solid #F0F8FF',
+      borderRadius: '15px',
+      width: 'max-content',
+      marginBottom: '40px'
+    },
+    inputs: {
+      marginBottom: '5px'
+    },
+    submitBtn: {
+      marginTop: '10px',
+      padding: '10px 15px',
+      border:'none',
+      backgroundColor: 'lightseagreen',
+      fontSize: '14px',
+      borderRadius: '5px'
+    }
+  }
+}
+
+
+
+function PhoneBookForm({addEntryToPhoneBook}) {
+let [userFirstname,setUserFirstname] = useState('');
+let [userLastname,setUserLastname] = useState('');
+let [userPhone,setUserPhone] = useState('');
+  
+function submitFunction(e){
+    e.preventDefault();
+    let phoneBook = {
+      userFirstname,
+      userLastname,
+      userPhone
+    } ;
+    addEntryToPhoneBook(phoneBook);
+  }
+  return (
+    <form onSubmit={submitFunction} style={style.form.container}>
+      <label>First name:</label>
+      <br />
+      <input 
+        style={style.form.inputs}
+        className='userFirstname'
+        name='userFirstname' 
+        type='text'
+        value={userFirstname}
+        onChange={(e)=>setUserFirstname(e.target.value)}
+
+      />
+      <br/>
+      <label>Last name:</label>
+      <br />
+      <input 
+        style={style.form.inputs}
+        className='userLastname'
+        name='userLastname' 
+        type='text' 
+        value={userLastname}
+        onChange={(e)=>{setUserLastname(e.target.value)}}
+      />
+      <br />
+      <label>Phone:</label>
+      <br />
+      <input
+        style={style.form.inputs}
+        className='userPhone' 
+        name='userPhone' 
+        type='text'
+        value={userPhone}
+        onChange={(e)=>setUserPhone(e.target.value)}
+      />
+      <br/>
+      <input 
+        style={style.form.submitBtn} 
+        className='submitButton'
+        type='submit' 
+        value='Add User' 
+      />
+    </form>
+  )
+}
+
+function InformationTable(props) {
+  return (
+    <table style={style.table} className='informationTable'>
+      <thead> 
+        <tr>
+          <th style={style.tableCell}>First name</th>
+          <th style={style.tableCell}>Last name</th>
+          <th style={style.tableCell}>Phone</th>
+        </tr>
+      </thead>
+      <tbody>
+       {
+          props.sendData.length ? props.sendData.map((obj,key)=>{
+            return (
+              <tr key={key}>
+              <td>{obj.userFirstname}</td>
+              <td>{obj.userLastname}</td>
+              <td>{obj.userPhone}</td>
+              </tr>
+            )
+          }) : null
+       }
+      </tbody> 
+    </table>
+  );
+}
+
+function App (props) {
+  let [newData,setNewData] = useState([]);
+  
+  function setDataddd(propsData){
+    // setNewData([...newData,propsData]);
+  }
+  console.log('hello');
+return (
+  
+    <section>
+      <PhoneBookForm  addEntryToPhoneBook={setDataddd}/>
+      <InformationTable sendData={newData} />
+    </section>
+  );
+}
+export default App;
+
+
+
+
+
+
+
+
+
+
+###############################################################33
+Progress Bar 
+
+import { useEffect, useState } from "react";
+
+function App() {
+  let [data, setData] = useState(0);
+  let cssObject = { 
+    width:`${data}%`, 
+    height:'40px', 
+    backgroundColor:'lightGreen',
+    color:'black',
+    textAlign : 'center',
+    fontSize : '27px',
+    fontStyle : 'Bold',
+    transition: 'width 1s',
+  }
+  useEffect(() => {
+    let timer = setTimeout(() => {
+        
+      setNewWidth();
+    }, 100);
+    return ()=>{
+      clearTimeout(timer);
+    }
+  }, [data,setNewWidth]);
+
+  function setNewWidth() {
+    if (data < 100) {
+      setData(data + 1);
+    }
+  }
+  
+  return (
+    <div className="App">
+        <div style={cssObject}>{data}%</div>
+       <h2 style={{textAlign:'center'}}>{data === 100 ? "Process Completed Successfully" : null}</h2>
+      </div>
+  );
+}
+
+export default App;
+
+
+
+#######################################################3
+clock 
+
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {date: new Date()};
+  }
+
+  componentDidMount() {
+    this.timerID = setInterval(
+      () => this.tick(),
+      1000
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  tick() {
+    this.setState({
+      date: new Date()
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Hello, world!</h1>
+        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+      </div>
+    );
+  }
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<Clock />);
+
