@@ -1,0 +1,952 @@
+What is React ?
+-Javascript library used to create websites 
+-Allows to easily create Single Page Apps - SPA's for short
+-in intial request server send only index.html file and the react perform whole functionality like user interctivity, fetching data, routing, click events etc
+-with the help of routing react inject that code which belongs to that route
+
+=========================================================================================================================
+@Installation
+
+-npx create-react-app folder-name
+-cd folder-name
+-npm run start
+
+- default server Address : http://localhost:3000/
+
+=========================================================================================================================
+@Components
+
+-Components let you split the UI into independent, reusable pieces, and think about each piece in isolation. This page provides an introduction to the idea of components.
+-React is Component based architecture
+-Component means perform single task
+
+=========================================================================================================================
+@JSX
+
+-JSX stands for JavaScript XML. JSX allows us to write HTML in React. JSX makes it easier to write and add HTML in React.
+-bable will convert this jsx file into plan javascript code
+-Reserve key words
+	className	: class 
+	forHtml		: for
+
+React V17 > no need to import 'react'
+
+=========================================================================================================================
+@Variables and Interpolation
+
+- you can write any javascript code with in the functional component 
+- you can write javascript code in the curly brackets 
+	
+	{(function () { alert('Hello') })()}					// writing IIFE code directly in Interpolation 
+
+- '{}' curly brackets are use to print any variable in JSX
+		
+	function App() {
+		const name = "Deepinder Singh";						// writing javascript code here
+		const count = 50
+		return (
+			<h1>{name} {50}</h1>
+		)
+	}
+
+	export deafult App
+
+- JSX convert output into string
+- cannot print objects and booleans value
+- print expresion, numbers directly, array directly
+	
+		{10 + 10 }				// 20			: write numbers 
+		{'hello'}   			//	hello 		: write string
+		{[1, 2, 3, 4, 5, 6]}	// 123456		: write array
+		{'hello'.toUpperCase()}	// HELLO 		: write functions
+
+-dynamic data
+	
+	const link = 'https://www.google.com';
+	<a href={link}>Google</a>		
+
+=========================================================================================================================
+@Multiple Component
+	
+	App.js 						 				// Root component
+	 |
+	 |------- Navbar.js     					// Sub Component of root component
+	 |------- BlogDetails.js 					// Sub component of root component
+	 |------- SideBar.js 						// Sub component of root component
+	 			|
+	 			|-------- Categories.js 		// Sub component of SideBar component
+	 			|-------- Tags.js 				// Sub component of SideBar component
+
+-while importing component don't need to write .js/.jsx at the end, react managing by its own.
+	
+	import Navbar from './component/nav-bar/nav-bar.component'
+
+	<Navbar />	 			
+
+=========================================================================================================================
+@Style in JSX 
+	
+- object are use create properties and values
+- camelCasing is use instead of kabba-case 
+	
+	style={{									// creating object
+        color: 'white',
+        backgroundColor: '#1356d'				// camalCasing for background-color
+    }}
+
+=========================================================================================================================
+@Classes in JSX
+
+- create class and import that file name
+	
+	index.css 									// creating file
+		.navbar {
+		    padding: 20px;
+		    display: flex;
+		    align-items: center;
+		    max-width: 600px;
+		    margin: 0 auto;
+		    border-bottom: 1px solid #f2f2f2;
+		}
+ 
+ 	import './App.css';							// importing file into component
+
+- always try to place file in same folder of particular component
+
+=========================================================================================================================
+@Events
+	
+- always create different fuction instead writing directly
+	
+	function App() {
+		function handleClick() {
+			alert('Hello world');
+		}
+		
+		return(
+				<button onClick={handleClick}> Click Me </button>							// passing function object reference
+		)
+	}
+
+- passing argumenats : wrap that function using arrow function
+	
+	function App() {
+		function handleClick(name) {
+			alert(name);
+		}
+		
+		return(
+				<button onClick={()=> handleClick('Deepinder Singh')}> Click Me </button>	// passing function object reference
+		)
+	}
+
+- Event object : you will get always event object when ever you call any function
+	
+a. in Regular functions
+
+	function App() {
+		function handleClick(e) {
+			console.log(e)											// getting event object
+		}
+		
+		return(
+				<button onClick={handleClick}> Click Me </button>				
+		)
+	}
+
+a. in Arrow functions
+
+	function App(e) {
+		function handleClick(eventObject, name) {
+			console.log('Object', e);								// getting event object
+			console.log('name', name);								// getting name parameter
+		}
+		
+		return(
+				<button onClick={(e)=> handleClick(e,'Deepinder Singh')}> Click Me </button>	
+		)
+	}	
+
+=========================================================================================================================
+@Hooks
+
+- special functions
+- Allow us to do additional things inside functional components eg 
+	a. useState 	: use state within a functional component
+	b. useEffect 	: run code when a component renders (or re-renders)
+	c. useContext	: consume context in a functional component
+
+=========================================================================================================================
+@State
+
+- State is used to store property values that belongs to the component, that have to be rendered to the view
+- State holds the data and can change over time
+- State can only be used with in components
+- Event handlers generally update state
+
+
+#useState() : Hook
+
+- The React useState Hook allows us to track state in a function component.
+	State generally refers to data or properties that need to be tracking in an application.
+
+- useState is a React Hook that lets you add a state variable to your component.
+
+- useState returns an array with exactly two values:
+	The current state. During the first render, it will match the initialState you have passed.
+	The set function that lets you update the state to a different value and trigger a re-render.
+
+
+	Problem 
+	-------
+
+	function Home = () => {
+		let name = 'mario'; 			// this variable is not reactive means react does not watching if it changes
+
+		const handleClick = () => {
+			name = 'Deepu';				// and even if it change values it will not re-render the DOM with new value
+			console.log(name);
+		}
+
+		return (
+			<div>
+				{name}
+				<button onClick={handleClick}> Change Name </button>
+			</div>
+		)
+	}
+
+
+	Solution 
+	--------
+
+	import {useState} from 'react';
+
+	function Home = () => {
+		let [name, setName] = useState(''); 		// now our variable become reactive and react will watch this variable all the time	
+
+		const handleClick = () => {
+			setName('Deepu');			// and here if it change get value then react will automatically update state and re-render component 
+		}
+
+		return (
+			<div>
+				{name}
+				<button onClick={handleClick}> Change Name </button>
+			</div>
+		)
+	}
+
+=========================================================================================================================
+@React Developer Tools -extention
+
+	-component : will tell each and every component
+	
+=========================================================================================================================
+@Props
+
+- React Props are like function arguments in JavaScript and attributes in HTML.
+- To send props into a component, use the same syntax as HTML attributes:
+	
+	<Car brand="Ford" />
+
+- destructring is one the best way to use props
+- when ever you change props component get re-render
+
+=========================================================================================================================
+@Lifting UpState
+
+- Passing callback function from parent to child and calling that function from child : it help to send data from child to parent
+
+	function App() {
+		const handleAlertEvent = (name) => {						// creating function 
+			alert(name);
+		}
+
+		return (
+			<Child handleEvent={handleAlertEvent}/>					// passing that function Object to child
+		)
+	}
+
+
+	function Child(props) {
+		const handleEvent = props.handleEvent;						// getting that function in props and passing into variable
+
+		return (
+			<div>
+				<button onClick={()=> handleEvent('Deepu')}>Alert Message </button>		// calling parent function 
+			</div>
+		)
+	}
+
+=========================================================================================================================
+@useEffect Hook
+
+- The useEffect Hook allows you to perform side effects in your components.
+- this hook run during initilization of component / means rendering initill
+- this hook run also when ever state get changes
+- useEffect accepts two arguments. The second argument is optional.
+	useEffect(<function>, <dependency>)
+
+
+	function Timer() {
+	  const [count, setCount] = useState(0);
+
+	  useEffect(() => {
+	    setTimeout(() => {
+	      setCount((count) => count + 1);
+	    }, 1000);
+	  });
+
+	  return <h1>I've rendered {count} times!</h1>;
+	}
+
+	Note : But wait!! It keeps counting even though it should only count once!. useEffect runs on every render. That means that when the count changes, a render happens, which then triggers another effect.
+
+#No dependency passed:
+----------------------
+
+	useEffect(() => {
+	  //Runs on every render
+	});	
+
+#An empty array:
+----------------
+
+	useEffect(() => {
+	  //Runs only on the first render
+	}, []);
+
+#Props or state values:
+-----------------------
+
+	useEffect(() => {
+	  //Runs on the first render
+	  //And any time any dependency value changes
+	}, [prop, state]);
+
+
+	example 
+
+	const [name,setName] = useState('dp')
+	const [age,setAge] = useState(10)
+
+	useEffect(() => {
+	  //Runs on the first render
+	  //And any time any dependency value changes
+	}, [age]);											// it means useEffect will run on age state get change not for the name state
+
+	
+
+#Effect Cleanup
+---------------
+
+- Some effects require cleanup to reduce memory leaks.
+- Timeouts, subscriptions, event listeners, and other effects that are no longer needed should be disposed.
+- We do this by including a return function at the end of the useEffect Hook.
+		
+		function Timer() {
+		  const [count, setCount] = useState(0);
+
+		  useEffect(() => {
+		    let timer = setTimeout(() => {
+		    setCount((count) => count + 1);
+		  }, 1000);
+
+		  return () => clearTimeout(timer)
+		  }, []);
+
+		  return <h1>I've rendered {count} times!</h1>;
+		}
+
+#Fetch method in UseEffect
+--------------------------
+	
+- fetch must use with then methods
+- async-await method can be use but outside the useEffect function by creating async-await function	
+- useEffect is synchronouse function, so it will not allowed to use async-await there
+
+#async-await in useEffect
+-------------------------
+		useEffect(() => {
+			const getUserData = async() => {
+				let userData = await fetch('any_url');
+				let userData = await userData.json();
+				cosnole.log(userData);
+			}	
+
+			getUserData();
+		})
+
+
+=========================================================================================================================
+@Json PlaceHolder
+
+1. npm install -g json-server
+2. create file : data (folder)/db.json (file)
+3. Add Data 
+	
+	{
+	    "posts": [
+	        {
+	            "userId": 1,
+	            "id": 1,
+	            "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+	            "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+	        },
+	        {
+	            "userId": 1,
+	            "id": 2,
+	            "title": "qui est esse",
+	            "body": "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla"
+	        },
+	    ]
+    }
+
+4. npx json-server --watch data/db.json --port 8000
+5. http://localhost:8000/blogs 
+
+- when ever you insert data we should not send id, json server create automatically for us 
+
+
+=========================================================================================================================
+@Custom Hook
+
+- Hooks are reusable functions
+- When you have component logic that needs to be used by multiple components, we can extract that logic to a custom Hook.
+- Custom Hooks start with "use". Example: useFetch.
+- destructuring 
+	- with array 	: order Matters
+	- with object 	: order does not matter
+
+#Example of Custom Hook
+-----------------------
+	
+	import { useState, useEffect } from 'react';
+	const useFetch = (url) => {
+	    const [data, setData] = useState(null);
+	    const [isPending, setIsPending] = useState(true);
+	    const [error, setError] = useState(null);
+
+	    useEffect(() => {												// creating useEffect Method
+		    let counter = setTimeout(() => {
+		        fetch(url)
+		            .then(result => {
+		                if (!result.ok) {
+		                    throw new Error('could not fetch the data for that resource');
+		                }
+		                return result.json();
+		            })
+		            .then(result => {
+		                setData(result);
+		                setIsPending(false);
+		                setError(null);
+		            })
+		            .catch(err => {
+		                setIsPending(false)
+		                setError(err.message);
+
+		            });	
+		        }, 1000);
+			return () => { clearTimeout(counter); }    					// cleaning up useEffect (componentWillUnmount)
+	    }, [url]);														// passing dependency values to the useEffect
+
+	    return { data, isPending, error };								// exporting the values in objects
+	}
+
+	export default useFetch;
+
+
+	using Custom Hook
+	-----------------
+
+	function Home() {
+	    const { data, isPending, error } = useFetch('http://localhost:8000/blogs')		// passing the address to that custom hook
+	    return (
+	        <div className='home'>
+	            {error}
+	            {isPending}
+	            {data}
+	        </div>
+	    )
+	}
+	
+=========================================================================================================================
+@React-Router
+
+- npm install react-router-dom
+- Example
+	
+	import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+	function App() {
+	  return (
+	    <BrowserRouter>													// in this component your all routes will handle
+	      <div className="App">
+	        <Navbar />											
+	        <div className='content'>
+	          <Routes>													// this component will help to print route	
+	            <Route path='/' element={<Home />}></Route>				// this will help to print particuler component according to path
+	          	<Route path='/create' element={<Create />}></Route>
+            	<Route path='/blog/:id' element={<BlogDetails />}></Route>
+            	<Route path='*' element={<NotFound />}></Route>			// use astrick to if data not route not found	
+	          </Routes>
+	        </div>
+	      </div>
+	    </BrowserRouter>
+	  );
+	}
+
+	export default App;	
+
+- react match routes from top to bottom in routes component and it will search particular path untill it get match 	
+
+
+#link
+-----
+
+	import { Link } from "react-router-dom";					// importing link module
+	const Navbar = () => {
+	    return (
+	        <nav className="navbar">
+	            <h1>The Dojo Blog</h1>
+	            <div className="links">
+	                <Link to="/"> Home</Link>					// creating root "/" link
+	                <Link to="/create" style={{					// creating create "/create" link
+	                    color: 'white',
+	                    backgroundColor: '#f1356d'
+	                }}>New Blog</Link>
+	            </div>
+	        </nav>
+	    )
+	}
+
+	export default Navbar;
+
+#params
+-------
+
+	import { useParams } from "react-router-dom";
+	const BlogDetails = () => {
+	    const { id } = useParams();						// using parameter hook
+	    return (
+	        <div className="blog-details">
+	            <h2>Blog Details : {id}</h2>			// printing value to id
+	        </div>
+	    )
+	}
+
+	export default BlogDetails;
+
+#Programmatically-Navigation
+----------------------------
+	
+	import { useNavigate } from 'react-router-dom' 		
+
+	let navigation = useNavigate();						// getting function Object using useNavigation hook
+
+	navigation('/create');								// pushing to route
+
+=========================================================================================================================
+@Reuse of useEffect
+	
+	const BlogDetails = () => {
+    const { id } = useParams();																	// getting the values from Param
+    const { data, error, isPending } = useFetch(`http://localhost:8000/blogs/${id}`);			// getting the values using ID
+
+    return (
+	        <div className="blog-details">
+	            {isPending&& <div>Loading....</div>}
+	            {error && <div>{error}</div>}
+	            {data && (
+	                <article>
+	                    <h2>{data.title}</h2>
+	                    <p>Written By {data.author}</p>
+	                    <div>{data.body}</div>
+	                </article>
+	            )}
+	        </div>
+	    )
+	}	
+
+=========================================================================================================================
+@Controlled Inputs
+
+- input field get sync with state
+- input value should be onChange with using key:pair value
+- submit the data using onsSubmit data
+
+#best Example
+	
+	import { useState } from 'react';
+const Create = () => {
+
+    const formDefaultValues = {
+        title: '',
+        body: '',
+        author: ''
+    };
+
+    const [userData, setUserData] = useState(formDefaultValues);
+    const { title, body, author } = userData;
+    const handleEvent = (e) => {
+        const { name, value } = e.target;
+        setUserData({ ...userData, [name]: value });
+        console.log(userData);
+    }
+
+    const onSubmitEvent = (e) => {
+        e.preventDefault();
+		console.log(userData);
+    }
+
+    return (
+        <div className="create">
+            <h2>Add New Blog</h2>
+            <form onSubmit={onSubmitEvent} method="POST">
+                <label>Blog Title</label>
+                <input
+                    name='title'
+                    type="text"
+                    required
+                    placeholder="Enter Title"
+                    value={title}
+                    onChange={handleEvent}
+                />
+
+                <label>Blog Body</label>
+                <textarea
+                    name='body'
+                    required
+                    placeholder="Enter Blog Body"
+                    value={body}
+                    onChange={handleEvent}
+                >
+                </textarea>
+
+                <label>Blog Author</label>
+                <select
+                    name='author'
+                    required
+                    value={author}
+                    onChange={handleEvent}
+                >
+                    <option value="">Select Author</option>
+                    <option value="Dp">Dp</option>
+                    <option value="Deepu">Deepu</option>
+                    <option value="Deepinder">Deepinder</option>
+                </select>
+
+                <button type="submit">Add Blog</button>
+
+            </form>
+        </div>
+    )
+}
+export default Create;
+	
+
+=========================================================================================================================
+@React Context-Api
+	
+	Context-Api :  
+		- Context provides a way to pass data through the component tree without having to pass props down manually at every level.
+		- practical application use is configuration of theme
+		- Clear & easy way to share state within a components tree, it same like Redux but it is easy then redux and light weight
+		- hooks with functional components are easy as compair to with class context
+	
+	Hooks : Tap into the inner working of react in functional components
+
+	Redux : contextApi + useReducer() hook  
+
+
+- class based context api
+- functional based context api
+
+
+#Example
+--------
+	
+	#creating context 
+	-----------------
+
+	import { createContext, useState } from 'react';
+	
+	let stateDefaultValue = {									// creating default values
+	    isLightTheme: false,
+	    light: { syntax: '#555', ui: '#ddd', bg: '#eee' },
+	    dark: { syntax: '#ddd', ui: '#333', bg: '#555' },
+	}
+
+	export const ThemeContext = createContext({					// creating default values for the context
+	    color: stateDefaultValue,
+	    setColor: () => null
+	});
+
+
+	const ThemeContextProvider = (props) => {					// creating Provider  for varous components
+	    const [color, setColor] = useState(stateDefaultValue);	
+	    const value = { color, setColor };						// creating prop value to use in sub-component	
+	    return (
+	        <ThemeContext.Provider value={value}>				// creating wrapper for child components
+	            {props.children}								// printing components what ever we are passing 
+	        </ThemeContext.Provider>							
+	    )
+	}
+
+	export default ThemeContextProvider;
+
+
+	#Wrapping components
+	--------------------
+
+	import Navbar from './component/navbar.component';
+	import BookList from './component/booklist.component';
+	import ThemeContextProvider from './context/theme.context';
+	import ThemeToggleButtom from './component/theme-toggle-button.component'
+
+	function App() {
+	  return (
+	    <div className="App">
+	      <ThemeContextProvider>					// wrapping components
+	        <Navbar />								// child component where you want to pass props values
+	        <BookList />							// child component where you want to pass props values	
+	        <ThemeToggleButtom />
+	      </ThemeContextProvider>
+	    </div>
+	  );
+	}
+
+	export default App;
+
+
+	#calling function 
+	-----------------
+
+	import { useContext } from "react"
+	import { ThemeContext } from "../context/theme.context"
+	const ThemeToggleButtom = () => {
+	    const { color, setColor } = useContext(ThemeContext);				// getting the value and function from context using hook
+	    const { isLightTheme } = color;										
+
+	    const handleEvent = () => {
+	        setColor({ ...color, isLightTheme: !isLightTheme });			// here we are creating new object and Changing pervious values
+	    }
+
+	    return (
+	        <>
+	            <button onClick={handleEvent}>Change Color</button>			// calling that event to change values of context
+	        </>
+	    )
+	}
+
+	export default ThemeToggleButtom;
+
+	#using Context Values
+	---------------------
+
+	import { ThemeContext } from './../context/theme.context'
+	import { useContext } from 'react'
+	const BookList = () => {
+	const { color } = useContext(ThemeContext);										// getting value from the context api 
+	console.log('yes', color);
+	const { isLightTheme, light, dark } = color;									// destructuring context api values
+	const theme = isLightTheme ? light : dark;
+	console.log('theme', color);
+	return (
+	    <div className="book-list" style={{ backgroundColor: theme.ui, color: theme.syntax, }} >
+	        <ul>
+	            <li style={{ backgroundColor: theme.ui }}>the way of kings</li>
+	            <li style={{ backgroundColor: theme.ui }}>the name of the wind</li>
+	            <li style={{ backgroundColor: theme.ui }}>the final empire</li>
+	        </ul>
+	    </div>
+	);
+	}
+
+	export default BookList;
+
+=========================================================================================================================
+@Multiple-context-api
+	
+	const { color1 } = useContext(ThemeContext1);	
+	const { color2 } = useContext(ThemeContext2);	
+	const { color3 } = useContext(ThemeContext3);	
+
+=========================================================================================================================
+@uuid-package
+	
+- npm i react-uuid
+- import uuid from 'react-uuid';
+- console.log(uuid());	//			47b928d8-8b13-8944-8326-f923ae113c98
+
+=========================================================================================================================
+@Reducers
+	
+		
+				Action 															  Reducer Function
+
+	dispatch({type : 'LIGHT_COLOR', payload})------------------------>			reducer(action, state)
+																       		interacts with the state/data	
+																       					 |
+																       					 |
+																       					 |
+
+																       			- check the action.type
+																       			- update the state object
+																       			- return the state	
+																       					 |
+																       					 |
+																       					 -> Provider value			
+
+
+#useReducer()
+
+- The useReducer Hook is similar to the useState Hook.
+- It allows for custom state logic.
+- If you find yourself keeping track of multiple pieces of state that rely on complex logic, useReducer may be useful.
+
+useReducer(<reducer>, <initialState>);
+
+
+
+The reducer function contains your custom state logic and the initialStatecan be a simple value but generally will contain an object.
+
+The useReducer Hook returns the current stateand a dispatchmethod.
+
+
+
+#complete Example (Constants + Reduce + ContextApi + Reducer)
+-------------------------------------------------------------
+
+#constants.js 
+-------------
+	
+	export const INECRMENT_ACTION = 'INECRMENT_ACTION';
+	export const DECREMENT_ACTION = 'DECREMENT_ACTION';
+	export const INECRMENT_BY_VALUE_ACTION = 'INECRMENT_BY_VALUE_ACTION';
+	export const DECREMENT_BY_VALUE_ACTION = 'DECREMENT_BY_VALUE_ACTION'; 
+
+#reducer.js
+-----------
+	
+	import {
+	    INECRMENT_ACTION,
+	    DECREMENT_ACTION,
+	    INECRMENT_BY_VALUE_ACTION,
+	    DECREMENT_BY_VALUE_ACTION
+	} from './../constants/index'
+
+	export const initialValue = 0;
+
+	export const reducer = (state, action) => {
+	    switch (action.type) {
+	        case INECRMENT_ACTION:
+	            return state = state + 1;
+	        case DECREMENT_ACTION:
+	            return state = state - 1;
+	        case INECRMENT_BY_VALUE_ACTION:
+	            return state = state + action.num;
+	        case DECREMENT_BY_VALUE_ACTION:
+	            return state = state - action.num;
+	        default:
+	            return state;
+	    }
+	}
+
+#context.js
+-----------
+	
+	import { createContext, useReducer } from "react";
+	import { initialValue, reducer } from './../reducer/reducer'
+
+	export const CountContext = createContext();
+
+	const Count = (props) => {
+	    const [count, dispatch] = useReducer(reducer, initialValue)
+	    return (
+	        <CountContext.Provider value={{ count, dispatch }}>
+	            {props.children}
+	        </CountContext.Provider >
+	    )
+	}
+
+	export default Count;
+
+#show-count.component.js
+------------------------
+	
+	import { useContext } from 'react'
+	import { CountContext } from './../context/index'
+	const ShowCount = () => {
+	    const { count } = useContext(CountContext)
+	    return (
+	        <h1>Count Value : {count}</h1>
+	    )
+	}
+
+	export default ShowCount;	
+
+#buttons.component.js
+---------------------
+	
+	import { useContext } from 'react'
+	import { CountContext } from './../context/index'
+	import {
+	    INECRMENT_ACTION,
+	    DECREMENT_ACTION,
+	    INECRMENT_BY_VALUE_ACTION,
+	    DECREMENT_BY_VALUE_ACTION
+	} from './../constants/index'
+	const Button = () => {
+	    const { dispatch } = useContext(CountContext);
+	    return (
+	        <>
+	            <h3>Increment Values</h3>
+	            <div>
+	                <button onClick={() => dispatch({ type: INECRMENT_ACTION })} >Incerment</button>
+	            </div>
+	            <div>
+	                <button onClick={() => dispatch({ type: DECREMENT_ACTION })} >Decerment</button>
+	            </div>
+	            <div>
+	                <button onClick={() => dispatch({ type: INECRMENT_BY_VALUE_ACTION, num: 5 })} >Incerment By 5</button>
+	            </div>
+	            <div>
+	                <button onClick={() => dispatch({ type: DECREMENT_BY_VALUE_ACTION, num: 5 })} >Decerment By 5</button>
+	            </div>
+
+	        </>
+	    )
+	}
+
+	export default Button;
+
+#App.js
+-------
+	
+	import ShowCount from './component/show-count.component';
+	import Button from './component/buttons.component'
+	import Count from './context/index'
+	function App() {
+	  return (
+	    <div className="App">
+	      <Count>
+	        <ShowCount />
+	        <Button />
+	      </Count>
+	    </div>
+	  );
+	}
+
+	export default App;
+	
+=========================================================================================================================
+@Redux
+	
+- a layer on-top of react 
+- Helps with state management of our app 
+	- data in the app 
+	- UI state of the app 
+
+	Redux - stores, actions & reducers
