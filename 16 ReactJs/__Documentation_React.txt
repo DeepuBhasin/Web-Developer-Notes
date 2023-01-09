@@ -950,3 +950,201 @@ The useReducer Hook returns the current stateand a dispatchmethod.
 	- UI state of the app 
 
 	Redux - stores, actions & reducers
+
+
+#command
+--------
+	npm install redux react-redux
+
+	redux 		: its a library for creating store
+	react-redux : its create a bridge which allow you to connect redux with react 
+
+#structures
+-----------
+	
+	1. store
+	2. constants
+	3. actions
+	4. reducers
+	5. index.js 		// wrap up store
+
+
+- Example of redux synchrounous
+  -----------------------------		
+
+#store.js 
+---------
+	
+	import { createStore } from "redux";
+	import { Provider } from "react-redux";
+	import rootReducer from "../reducers/index";
+
+	export const store = createStore(rootReducer);
+	export default Provider;
+
+#index.js
+---------
+	
+	import Provider, { store } from './redux/store/index'
+
+	const root = ReactDOM.createRoot(document.getElementById('root'));
+	root.render(
+	  <Provider store={store}>
+	    <App />
+	  </Provider>
+	);
+	reportWebVitals();
+
+#constnats.js
+-------------
+
+	export const DELETE_POST = 'DELETE_POST';
+
+#action.js
+----------	
+	
+	import { DELETE_POST } from "../constants"
+
+	export const deletePost = (id) => {
+	    return {
+	        type: DELETE_POST,
+	        id: id
+	    }
+	}
+
+
+#reducers.js
+------------
+	
+	import { DELETE_POST } from "../constants/index";
+
+	const initialState = {
+	    posts: [
+	        {
+	            "userId": 1,
+	            "id": 1,
+	            "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+	            "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+	        },
+	        {
+	            "userId": 1,
+	            "id": 2,
+	            "title": "qui est esse",
+	            "body": "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla"
+	        },
+	        {
+	            "userId": 1,
+	            "id": 3,
+	            "title": "ea molestias quasi exercitationem repellat qui ipsa sit aut",
+	            "body": "et iusto sed quo iure\nvoluptatem occaecati omnis eligendi aut ad\nvoluptatem doloribus vel accusantium quis pariatur\nmolestiae porro eius odio et labore et velit aut"
+	        }
+	    ]
+	}
+	const rootReducer = (state = initialState, action) => {
+	    switch (action.type) {
+	        case DELETE_POST:
+	            {
+	                let newPost = state.posts.filter(item => item.id !== action.id);
+	                return {
+	                    ...state,               // if we add new states in future
+	                    posts: newPost
+	                }
+	            }
+	        default:
+	            return state;
+	    }
+	}
+
+	export default rootReducer;
+
+	#Note : actully we did not modify the original state,  instead we just create new object/array then insert new values in that object	
+
+#App.js
+-------
+	
+	import './App.css';
+	import { connect } from 'react-redux'
+	import { deletePost } from './redux/actions/actions';
+
+
+	function App(props) {
+	  const { posts, deletePost } = props;
+	  return (
+	    <div className="App">
+	      {posts.map(item => {
+	        return (
+	          <div key={item.id}>
+	            <h1 >{item.title}</h1>
+	            < p ><button onClick={() => { deletePost(item.id) }}>Delete</button></p>
+	          </div>
+	        )
+	      })
+	      }
+	    </div>
+	  )
+	}
+
+	const mapStateToProps = (state, componentProps) => {					// connecting state to current component props
+	  return {
+	    posts: state.posts
+	  }
+	}
+
+	const mapDispatchToProps = (dispatch) => {								// connecting state to current methods to props
+	  return {
+	    deletePost: (id) => dispatch(deletePost(id))
+	  }
+	}
+
+	export default connect(mapStateToProps, mapDispatchToProps)(App);		// connecting current component with redux using connect method
+
+
+=========================================================================================================================
+@Condition Ouput
+
+- you can write condition directly in JSX
+	
+	{ condition ? <h1>Hello yes</h1> : <h1>Hello No</h1> }
+
+- best way to put all data into variable	
+	
+	const  outPut = condition ? <h1>Hello yes</h1> : <h1>Hello No</h1>;
+
+	{outPut}
+
+
+
+
+
+
+
+
+
+=========================================================================================================================
+Class Component
+
+	
+=========================================================================================================================
+@concept of 'this'
+	
+	handleEvent() {
+		this.state 			// this will not work here beacuse this behavous differently so it should be bind in constructor method
+	}
+
+solution -> 
+	
+	constructor() {
+		this.handleEvent = this.handleEvent.bind(this)			
+	}	
+
+	or 
+
+	with arrow function in function calling
+
+	<button onClick={() => this.handleEvent}>Click </button>
+
+	or 
+
+	handleEvent = () =>  {
+		this.state 			
+	}
