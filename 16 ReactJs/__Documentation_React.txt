@@ -621,6 +621,44 @@ to parent
 		)
 	}
 
+=========================================================================================================================	
+@Condition Ouput
+
+	1. if/else 
+	----------
+		
+		if(true) {
+			return ()
+		} else {
+			return ()
+		}
+
+		if-else is not work in jsx 	
+
+	2. Element variables
+	--------------------	
+		
+		let outPut;
+
+		if(condition){
+			output = <h1>Hello yes</h1> 
+		} else {
+			output =  <h1>Hello No</h1>;
+		}
+
+		{outPut}
+
+	3. Ternary conditional operator
+	-------------------------------
+		
+		{ condition ? <h1>Hello yes</h1> : <h1>Hello No</h1> }
+
+
+	4. short circuit operator
+	-------------------------
+		
+		retuurn { condition1 && <div><h1> Welcome Message </h1></div> } 
+		
 =========================================================================================================================
 @Hooks
 
@@ -1863,58 +1901,4 @@ The useReducer Hook returns the current stateand a dispatchmethod.
 	}
 
 	export default App;
-
-=========================================================================================================================
-@Condition Ouput
-
-- you can write condition directly in JSX
-	
-	{ condition ? <h1>Hello yes</h1> : <h1>Hello No</h1> }
-
-- best way to put all data into variable	
-	
-	const  outPut = condition ? <h1>Hello yes</h1> : <h1>Hello No</h1>;
-
-	{outPut}
-
-
-
-
-
-
-
-
-
-
-=========================================================================================================================
-Class Component
-
-	
-=========================================================================================================================
-@concept of 'this'
-	
-	handleEvent() {
-		this.state 			// this will not work here beacuse this behavous differently so it should be bind in constructor method
-	}
-
-solution -> 
-	
-	constructor() {
-		this.handleEvent = this.handleEvent.bind(this)			
-	}	
-
-	or 
-
-	with arrow function in function calling
-
-	<button onClick={() => this.handleEvent}>Click </button>
-
-	or 
-
-	handleEvent = () =>  {
-		this.state 			
-	}
-
-=========================================================================================================================
-
 	
