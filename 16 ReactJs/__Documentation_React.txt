@@ -172,9 +172,14 @@ a. in Arrow functions
 
 - special functions
 - Allow us to do additional things inside functional components eg 
-	a. useState 	: use state within a functional component
-	b. useEffect 	: run code when a component renders (or re-renders)
-	c. useContext	: consume context in a functional component
+	1. useState 	: use state within a functional component
+	2. useEffect 	: run code when a component renders (or re-renders)
+	3. useContext	: consume context in a functional component
+	4. useSelector	: get the values from the store
+	5. useDispatch	: dispatch the action from component to store
+	6. useMemo		: useMemo returns a memoized value 
+	7. useCallback	: useCallback returns a memoized function.
+	8. useRef
 
 =========================================================================================================================
 @State
@@ -1098,6 +1103,413 @@ The useReducer Hook returns the current stateand a dispatchmethod.
 
 	export default connect(mapStateToProps, mapDispatchToProps)(App);		// connecting current component with redux using connect method
 
+=========================================================================================================================
+@Redux + middleware(thunk) + devtools
+
+#Three principle of Redux 
+-------------------------
+	
+	First Principle : 
+	-----------------
+		"The state of your whole application is stored in an object tree within a single store" means maintain our application state in a single object which would be managed by the redux store
+
+		example: 	
+			{
+				post: [],
+				loading : true, 
+				error  : null
+			}
+
+	Second principle : 
+	------------------
+
+		"The only way to change the state is to emit an action, an object describing what happened" means to update the state of your app, you need to let redux know about that with an action. 
+
+		example : 
+			const fetch_data = () => {
+				return { 
+					type : 'FETCH_DATA',
+					payload : [1,2,3]
+				} 
+			} 
+
+	Third Principle :
+	-----------------
+		"To specify how the state tree is transformed by actions, you write pure reducers" means 
+
+		example : 
+
+			let initialValue = {
+				post : []
+			};
+
+			const reducer = (state = initialValue, action) => {
+				switch(action.type) {
+					case 'FETCH_DATA' : {
+						return 	 {
+							...state,
+							post : action.payload 
+						}
+					}
+				}
+			}
+
+	#Redux Store
+	------------
+
+		1. Holds application state				
+		2. Allows access to state via getState();
+		3. Allows state to updated via dispatch(action)
+
+
+#Three principle Overview
+
+
+		dispatch 															new State
+	UI ----------> Action Object --------> Middleware ---------> Reducer --------------> Store-----------
+	^																^									|
+	|	current state 												|		current State				|
+	-----------------------------------------------------------------------------------------------------		
+
+
+	Middleware : its just a function which returns a function	
+
+		const myLogger1 = (store) => {
+		    return next => {
+		        return (action) => {
+		            console.log('second middle');
+		            return next(action);
+		        }
+		    }
+		}	
+
+	Why is fetchposts not working 
+	1. Action creators can only return plain javascript objects with a type property
+	2. The action will get sent to the reducer before the data is fetched from the Api		
+
+	solution : thunk 
+
+	#command 
+		npm install redux react-redux
+		npm install redux-thunk	 
+		npm install axios
+		npm install redux-devtools-extension
+		npm i --save redux-logger
+
+	#Loading & Error Handling
+		1. Make use of the Request/success/failure pattern to handle loading and error state
+		2. Separate action for Request, Success and Failure	
+
+
+#Example
+	
+#constants.js 
+-------------
+	
+	export const FETCH_DATA = 'FETCH_DATA';
+	export const DELETE_DATA = 'DELETE_DATA';
+
+	export const FETCH_POSTS_REQUEST = 'FETCH_POSTS_REQUEST';
+	export const FETCH_POSTS_SUCCESS = 'FETCH_POSTS_SUCCESS';
+	export const FETCH_POSTS_FAILUER = 'FETCH_POSTS_FAILUER';
+
+#actions.js 
+-----------
+	
+	import axios from "axios"
+	import { DELETE_DATA, FETCH_POSTS_FAILUER, FETCH_POSTS_REQUEST, FETCH_POSTS_SUCCESS, } from './contanst.js'
+
+	export const FETCH_DATA_ACTION = () => {
+	    return async (dispatch, getState) => {
+	        dispatch({ type: FETCH_POSTS_REQUEST, payload: [] })
+
+	        try {
+	            const responseData = await axios.get('https://jsonplaceholder.typicode.com/posts');
+	            dispatch({ type: FETCH_POSTS_SUCCESS, payload: responseData.data });
+	        }
+	        catch (error) {
+	            dispatch({ type: FETCH_POSTS_FAILUER, error: error });
+	        }
+
+	    }
+	}
+
+	export const DELETE_DATA_ACTION = () => {
+	    return {
+	        type: DELETE_DATA,
+	        payload: []
+	    }
+	}	
+
+#reducers.js 
+------------
+	
+	import { DELETE_DATA, FETCH_DATA, FETCH_POSTS_REQUEST, FETCH_POSTS_SUCCESS, FETCH_POSTS_FAILUER } from "./contanst"
+
+	const initialState = {
+	    post: [],
+	    loading: false,
+	    error: null
+	}
+
+	const reducer = (state = initialState, action) => {
+	    switch (action.type) {
+	        case FETCH_POSTS_REQUEST: {
+	            return { ...state, loading: true, error: null }
+	        }
+	        case FETCH_POSTS_SUCCESS: {
+	            return { ...state, loading: false, post: action.payload, error: null }
+	        }
+	        case FETCH_POSTS_FAILUER: {
+	            return { ...state, loading: false, error: action.error }
+	        }
+	        case FETCH_DATA: {
+	            return { ...state, loading: false, post: action.payload, error: null }
+	        }
+	        case DELETE_DATA: {
+	            return { ...state, loading: false, post: action.payload, error: null }
+	        }
+	        default: {
+	            return state;
+	        }
+	    }
+	}
+
+	export default reducer;
+
+#store.js
+---------
+	
+	import { applyMiddleware, createStore } from "redux";
+	import { composeWithDevTools } from 'redux-devtools-extension'
+	import reducers from './reducers.js'
+	import thunk from "redux-thunk";
+	import logger from "redux-logger";
+	const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk, logger)));
+	export default store;		
+
+#index.js
+---------
+	
+	import store from './redux/store';
+	import { Provider } from 'react-redux';
+
+	const root = ReactDOM.createRoot(document.getElementById('root'));
+	root.render(
+	  <Provider store={store}>
+	    <App />
+	  </Provider>
+	);
+	
+
+#app.js
+-------
+	
+	import "./App.css"
+	import { useDispatch, useSelector } from "react-redux";
+	import { DELETE_DATA_ACTION, FETCH_DATA_ACTION } from "./redux/actions.js";
+	const App = () => {
+	  const state = useSelector(state => state);
+	  const dispatch = useDispatch();
+	  let data = state.post.map(item => {
+	    return <tr key={item.id}>
+	      <td>{item.id}</td>
+	      <td>{item.title}</td>
+	    </tr>
+	  })
+
+
+	  return (
+	    <div className="App">
+	      <button onClick={() => dispatch(FETCH_DATA_ACTION())}>Fetch Data</button>
+	      <button onClick={() => dispatch(DELETE_DATA_ACTION())}>Delete Data</button>
+	      <table border="2" cellPadding="2" cellSpacing="3" style={{ textAlign: 'center' }}>
+	        <thead>
+	          <tr>
+	            <th>Id</th>
+	            <th>title</th>
+	          </tr>
+	        </thead>
+	        <tbody>
+	          {data}
+	        </tbody>
+	      </table>
+	    </div>
+	  )
+	}
+
+	export default App;
+=========================================================================================================================
+@useRef
+	
+	1. use to acces node directly like document.querySelectory()
+	2. try to aviod as mush you can beacuse its update real dom directly not the virtual dom which is quite expensive
+
+	import './App.css'
+	import { useEffect, useRef } from "react";
+
+	const App = () => {
+	  let inputRef = useRef(null);
+	  useEffect(() => {
+	    inputRef.current.focus();
+	  })
+	  return (
+	    <div className="App">
+	      <input type="" name='firstName' placeholder='EnterName' ref={inputRef} />
+	    </div>
+	  )
+	}
+
+	export default App;
+
+=========================================================================================================================
+@useCallback + React.memo
+	
+	1. The React useCallback Hook returns a memoized callback function.
+	2. Think of memoization as caching a value so that it does not need to be recalculated.
+	3. This allows us to isolate resource intensive functions so that they will not automatically run on every render.
+	4. The useCallback Hook only runs when one of its dependencies update.
+	5. This can improve performance.
+	6. The useCallback and useMemo Hooks are similar. The main difference is that useMemo returns a memoized value and 
+	useCallback returns a memoized function
+
+	
+	#React.memo help to prevent from re-rendering of component if state does not get change its not a hook its a feature
+
+	Synatx
+	------
+		
+		export default React.memo(componentName);
+
+	problem : when we passing function object 
+	-------
+
+		suppose we create button component and we use it 2 times with passing two different functions eg : function1 and function2 
+		from parent to child & then we click on one button the second button will re-render automatically beacuse every time 
+		function create new reference when ever parent comonent re-render due to state change, so when ever we are dealing with 
+		function we always have to concider reference equality even though two functions have the exact same behaviour it does not 
+		means they are equal to each other so the function before re-render is different to the function after the rerender and 
+		so the function is props "react.memo" sees that the props has changed and will not prevent the re-render so when click
+		on first button new reference is created for other button and vice-versa sooo we can tell to react that don't create new 
+		function for second button when we click on first button
+
+	solution
+	--------
+		 useCallback hook 
+
+		 #What?
+
+		 	useCallback is a hook that will return a memoized(cache) version of the callback function that only changes if one of the
+		 	dependencies has changed
+
+		 #why?
+
+		 	It is usefull when passing callbacks to optimized child components that rely on reference equality to prevent unneccessary 
+		 	renders	
+
+		 #how
+
+		 	const handleEvent = () => useCallback(() => {
+		 		setState(count => count + 1);
+		 	},[count])	
+
+		
+#button.js 
+----------
+	
+	import React from "react";
+	const Button = (props) => {
+	    console.log(props.children + 'Button Component');
+	    let handleEvent = props.handleEvent;
+	    let children = props.children
+	    return (
+	        <button onClick={handleEvent}>{children}</button>
+	    )
+	}
+
+	export default React.memo(Button);
+
+#count.js
+---------
+	
+	import React from "react";
+	const Count = ({ text, age }) => {
+	    console.log(text + ' component');
+	    return (
+	        <div> {text} : {age}</div>
+	    )
+	}
+	export default React.memo(Count);
+
+#app.js
+	
+	import './App.css'
+	import Button from './component/button';
+	import Count from './component/count';
+	import Title from './component/title';
+	import { useCallback, useState } from 'react'
+
+
+	const App = () => {
+	  const [age, setage] = useState(0);
+	  const [salary, setSalary] = useState(100);
+
+	  const incerementAge = useCallback(() => {
+	    setage((age) => age + 1);
+	  }, [age])
+
+	  const incerementSalary = useCallback(() => {
+	    setSalary((salary) => salary + 1000);
+	  }, [salary]);
+	  console.log('----------------x-----------------------');
+	  return (
+	    <div className='App'>
+	      <Title />
+	      <Count text='Age' age={age} />
+	      <Button handleEvent={incerementAge}> Increment Age </Button>
+	      <Count text='Salary' age={salary} />
+	      <Button handleEvent={incerementSalary}> Increment Salary </Button>
+		</div>
+	  )
+	}
+
+	export default App;				 	
+
+=========================================================================================================================
+@useMemo
+	
+	1. The React useMemo Hook returns a memoized value.
+	2. Think of memoization as caching a value so that it does not need to be recalculated.
+	3. The useMemo Hook only runs when one of its dependencies update.
+	4. This can improve performance.
+	5. The useMemo and useCallback Hooks are similar. The main difference is that useMemo returns a memoized value and useCallback returns a memoized function. 	
+
+#example: 
+---------
+
+	import './App.css'
+	import { useMemo, useState } from 'react'
+	const App = () => {
+	  const [count, setCount] = useState(0);
+	  const [item, setItem] = useState(10);
+
+	  const isEven = useMemo(() => {
+	    console.log('called is even function');
+	    let i = 0;
+	    while (i < 2000000000) i++;
+	    return count % 2 === 0;
+	  }, [count])
+
+	return (
+	    <div className='App'>
+	      <div><button onClick={() => setCount((count) => count + 1)}>Count - {count}</button></div>
+	      <span>{isEven ? 'Even' : 'Odd'}</span>
+	      <div><button onClick={() => setItem((item) => item + 1)}>Item - {item}</button></div>
+	    </div>
+	  )
+	}
+
+	export default App;
 
 =========================================================================================================================
 @Condition Ouput
@@ -1111,6 +1523,7 @@ The useReducer Hook returns the current stateand a dispatchmethod.
 	const  outPut = condition ? <h1>Hello yes</h1> : <h1>Hello No</h1>;
 
 	{outPut}
+
 
 
 
@@ -1148,3 +1561,7 @@ solution ->
 	handleEvent = () =>  {
 		this.state 			
 	}
+
+=========================================================================================================================
+
+	
