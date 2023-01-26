@@ -735,7 +735,31 @@ to parent
 =========================================================================================================================
 @Lifecycle methods
 	
+	Phases
+		1. Mounting
+		2. Updating
+		3. Unmounting
+		4. ErrorHandling
 
+	Various Methods in Class Component
+	----------------------------------
+
+		1. Constructor 			: initialize state & binding the event handlers
+		2. Render				: return only ui with state and props
+		3. componentDidMount	: method call when update state or props
+		4. componentDidUpdate	: called after the render is finished in the re-render cycles
+		5. componentWillUnmount	: method is called immedaitly before a component is unmounted and destroyed, you can perform clean up task like removing event handlers, cancelling network request, cancelling any subscriptions and invalidatin timers (setintervals or settimeout)
+
+
+
+		shouldComponentUpdate : dictates if component re-render or not, Performance optimization
+=========================================================================================================================
+@Fregments
+	
+	- it allow to prevent extra nodes being added to the dom
+	- <React.Fragment> </React.Fragment>
+	- <> </>
+	- most sutable exmaple adding in root and adding in table instead of <div> tag
 
 =========================================================================================================================
 @Hooks
