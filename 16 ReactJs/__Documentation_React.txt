@@ -72,128 +72,32 @@ React V17 > no need to import 'react'
 	<a href={link}>Google</a>		
 
 =========================================================================================================================
-@Multiple Component
-	
-	App.js 						 				// Root component
-	 |
-	 |------- Navbar.js     					// Sub Component of root component
-	 |------- BlogDetails.js 					// Sub component of root component
-	 |------- SideBar.js 						// Sub component of root component
-	 			|
-	 			|-------- Categories.js 		// Sub component of SideBar component
-	 			|-------- Tags.js 				// Sub component of SideBar component
-
-- while importing component don't need to write .js/.jsx at the end, react managing by its own.
-	
-	import Navbar from './component/nav-bar/nav-bar.component'
-
-	<Navbar />	 			
-
-=========================================================================================================================
-@Style in JSX 
-	
-- object are use create properties and values
-- camelCasing is use instead of kabba-case 
-	
-	style={{									// creating object
-        color: 'white',
-        backgroundColor: '#1356d'				// camalCasing for background-color
-    }}
-
-=========================================================================================================================
-@Classes in JSX
-
-- create class and import that file name
-	
-	index.css 									// creating file
-		.navbar {
-		    padding: 20px;
-		    display: flex;
-		    align-items: center;
-		    max-width: 600px;
-		    margin: 0 auto;
-		    border-bottom: 1px solid #f2f2f2;
-		}
- 
- 	import './App.css';							// importing file into component
-
-- always try to place file in same folder of particular component
-
-=========================================================================================================================
-@Events
-	
-- always create different fuction instead writing directly
-	
-	function App() {
-		function handleClick() {
-			alert('Hello world');
-		}
-		
-		return(
-				<button onClick={handleClick}> Click Me </button>							// passing function object reference
-		)
-	}
-
-- passing argumenats : wrap that function using arrow function
-	
-	function App() {
-		function handleClick(name) {
-			alert(name);
-		}
-		
-		return(
-				<button onClick={()=> handleClick('Deepinder Singh')}> Click Me </button>	// passing function object reference
-		)
-	}
-
-- Event object : you will get always event object when ever you call any function
-	
-a. in Regular functions
-
-	function App() {
-		function handleClick(e) {
-			console.log(e)											// getting event object
-		}
-		
-		return(
-				<button onClick={handleClick}> Click Me </button>				
-		)
-	}
-
-a. in Arrow functions
-
-	function App(e) {
-		function handleClick(eventObject, name) {
-			console.log('Object', e);								// getting event object
-			console.log('name', name);								// getting name parameter
-		}
-		
-		return(
-				<button onClick={(e)=> handleClick(e,'Deepinder Singh')}> Click Me </button>	
-		)
-	}	
-
-=========================================================================================================================
-@Hooks
-
-- special functions
-- Allow us to do additional things inside functional components eg 
-	1. useState 	: use state within a functional component
-	2. useEffect 	: run code when a component renders (or re-renders)
-	3. useContext	: consume context in a functional component
-	4. useSelector	: get the values from the store
-	5. useDispatch	: dispatch the action from component to store
-	6. useMemo		: useMemo returns a memoized value 
-	7. useCallback	: useCallback returns a memoized function.
-	8. useRef		: 
-
-=========================================================================================================================
 @State
 
 - State is used to store property values that belongs to the component, that have to be rendered to the view
 - State holds the data and can change over time
 - State can only be used with in components
 - Event handlers generally update state
+	
+	Functional component : 
+	----------------------	
+		
+		const [name,setName] = useState('Deepu');		// declaring 
+		
+		{name}											// printing value
+
+		setName('Deepinder')							// mutating state
+
+	class component : 
+	---------------
+
+		this.state = {									// declaring state 
+			name : 'Deepu'
+		}
+
+		{this.name}										// print value
+
+		this.setState({name : 'Deepinder'})				// mutating state
 
 
 #useState() : Hook
@@ -248,6 +152,155 @@ a. in Arrow functions
 		)
 	}
 
+#Class Component
+----------------
+	
+	State Updates May Be Asynchronous : React may batch multiple setState() calls into a single update for performance.	
+
+	#With Simple Count
+	------------------
+	
+		import React from 'react';
+		import './App.css'
+		class App extends React.Component {
+		  constructor() {
+		    super();
+		    this.state = {
+		      count: 1
+		    }
+		  }
+
+		  incrementHandler = () => {
+		    this.setState({													// work asynchronously, update in DOM later
+		      count: this.state.count + 1
+		    },
+		      () => {
+		        console.log('callback function', this.state.count);			// callback function for after asynchronous 
+		      }
+		    )
+
+		    console.log('sychronous', this.state.count);					// sychronous task
+		  }
+
+		  render() {
+		    return (
+		      <div className='App'>
+		        <div>Count : {this.state.count}</div>
+		        <div><button onClick={this.incrementHandler}>Update</button></div>
+		      </div>
+
+		    )
+		  }
+
+		}
+		export default App;
+
+	#With previous Count
+	--------------------
+		React may batch multiple setState() calls into a single update for performance.	
+
+	#problem -> 
+	-----------
+		
+		import React from 'react';
+		import './App.css'
+		class App extends React.Component {
+		  constructor() {
+		    super();
+		    this.state = {
+		      count: 0
+		    }
+		  }
+		  incrementHandler = () => {
+		    this.setState({
+		      count: this.state.count + 1
+		    },
+		      () => {
+		        console.log('callback function', this.state.count);
+		      }
+		    )
+
+		    console.log('sychronous', this.state.count);
+		  }
+
+		  incrementHandlerFive = () => {
+		    this.incrementHandler();
+		    this.incrementHandler();
+		    this.incrementHandler();
+		    this.incrementHandler();
+		    this.incrementHandler();
+
+		  }
+
+		  render() {
+		    return (
+		      <div className='App'>
+		        <div>Count : {this.state.count}</div>
+		        <div><button onClick={this.incrementHandlerFive}>Update</button></div>
+		      </div>
+
+		    )
+		  }
+
+		}
+		export default App;
+
+	#solution
+	---------
+		
+		import React from 'react';
+		import './App.css'
+		class App extends React.Component {
+		  constructor() {
+		    super();
+		    this.state = {
+		      count: 0
+		    }
+		  }
+		  incrementHandler = () => {
+		    this.setState((state, props) => ({
+		      count: state.count + 1
+		    }),
+		      () => {
+		        console.log('callback function', this.state.count);
+		      }
+		    )
+
+		    console.log('sychronous', this.state.count);
+		  }
+
+		  incrementHandlerFive = () => {
+		    this.incrementHandler();
+		    this.incrementHandler();
+		    this.incrementHandler();
+		    this.incrementHandler();
+		    this.incrementHandler();
+
+		  }
+
+		  render() {
+		    return (
+		      <div className='App'>
+		        <div>Count : {this.state.count}</div>
+		        <div><button onClick={this.incrementHandlerFive}>Update</button></div>
+		      </div>
+
+		    )
+		  }
+
+		}
+		export default App;
+
+#Note : for setState
+	
+	1. Always make use of setState and never modify the state directly.
+	2. Code has to be executed after the state has been updated ? Place that code in the callback function which is the 
+	second argument to the setState method
+	3. When you have to update state based on the previous state value, pass in a function as an argument instead of the
+	regular object
+	
+
+
 =========================================================================================================================
 @React Developer Tools -extention
 
@@ -263,6 +316,16 @@ a. in Arrow functions
 - Props is Object type
 - destructring is one the best way to use props
 - when ever you change props component get re-render
+	
+	Functional component : {props.name}
+
+	class component 	 : {this.props.name}
+
+- props are immutable example (read only property)
+	
+	this.props.name = name 			// will cause error because these are immutable
+
+	{this.props.name}
 
 =========================================================================================================================
 @Props.children
@@ -290,10 +353,252 @@ a. in Arrow functions
 
 	export default Child;	
 
+
+=========================================================================================================================
+@Multiple Component
+	
+	App.js 						 				// Root component
+	 |
+	 |------- Navbar.js     					// Sub Component of root component
+	 |------- BlogDetails.js 					// Sub component of root component
+	 |------- SideBar.js 						// Sub component of root component
+	 			|
+	 			|-------- Categories.js 		// Sub component of SideBar component
+	 			|-------- Tags.js 				// Sub component of SideBar component
+
+- while importing component don't need to write .js/.jsx at the end, react managing by its own.
+	
+	import Navbar from './component/nav-bar/nav-bar.component'
+
+	<Navbar />	 			
+
+=========================================================================================================================
+@Style in JSX 
+	
+- object are use create properties and values
+- camelCasing is use instead of kabba-case 
+	
+	style={{									// creating object
+        color: 'white',
+        backgroundColor: '#1356d'				// camalCasing for background-color
+    }}
+
+=========================================================================================================================
+@Classes in JSX
+
+- create class and import that file name
+	
+	index.css 									// creating file
+		.navbar {
+		    padding: 20px;
+		    display: flex;
+		    align-items: center;
+		    max-width: 600px;
+		    margin: 0 auto;
+		    border-bottom: 1px solid #f2f2f2;
+		}
+ 
+ 	import './App.css';							// importing file into component
+
+- always try to place file in same folder of particular component
+
+=========================================================================================================================
+@Events
+
+- always pass function object (best approch)
+	
+	Example
+	-------
+		<button onClick={handleClick}> Click Me </button>
+
+- calling function nested function
+	
+	Example
+	--------
+		<button onClick={() => handleClick()}> Click Me </button>	
+
+- Never call function directly in events
+	
+	Example
+	--------
+		<button onClick={handleClick()}> Click Me </button>				// it excecute in the beigning
+
+- always create different fuction instead writing directly
+	
+	function App() {
+		function handleClick() {
+			alert('Hello world');
+		}
+		
+		return(
+				<button onClick={handleClick}> Click Me </button>		// passing function object reference
+		)
+	}
+
+- passing argumenats : wrap that function using arrow function
+	
+	function App() {
+		function handleClick(name) {
+			alert(name);
+		}
+		
+		return(
+				<button onClick={()=> handleClick('Deepinder Singh')}> Click Me </button>	// passing function object reference
+		)
+	}
+
+- Event object : you will get always event object when ever you call any function
+
+
+#Function component	
+	
+	a. in Regular functions
+
+		function App() {
+			function handleClick(e) {
+				console.log(e)											// getting event object
+			}
+			
+			return(
+					<button onClick={handleClick}> Click Me </button>				
+			)
+		}
+
+	b. in Arrow functions
+
+		function App(e) {
+			function handleClick(eventObject, name) {
+				console.log('Object', e);								// getting event object
+				console.log('name', name);								// getting name parameter
+			}
+			
+			return(
+					<button onClick={(e)=> handleClick(e,'Deepinder Singh')}> Click Me </button>	
+			)
+		}
+
+#Class Component
+----------------
+	
+	#problem
+	--------
+
+		import React from 'react';
+		import './App.css'
+		class App extends React.Component {
+		 	incrementHandler() {
+		    console.log(this);				// undefined beacuse it not bind to react app			
+		  }
+		  render() {
+		    return (
+		      <div className='App' >
+		        <div><button onClick={this.incrementHandler}>Update</button></div>
+		      </div>
+			)
+		  }
+		}
+		export default App;
+
+	#solution
+	---------
+
+		1. bind method in render
+		------------------------
+
+			import React from 'react';
+			import './App.css'
+			class App extends React.Component {
+			  constructor() {
+			    super();
+			    this.state = {
+			      count: 0
+			    }
+			  }
+			  incrementHandler() {
+			    this.setState(state => ({
+			      count: state.count + 1
+			    }))
+			  }
+			  render() {
+			    return (
+			      <div className='App' >
+			        <div>Count : {this.state.count}</div>
+			        <div><button onClick={this.incrementHandler.bind(this)}>Update</button></div>		// binding event
+			      </div>
+
+			    )
+			  }
+
+			}
+			export default App;
+
+		2. bind in constructor (best option right now)
+		----------------------------------------------
+
+			import React from 'react';
+			import './App.css'
+			class App extends React.Component {
+			  constructor() {
+			    super();
+			    this.state = {
+			      count: 0
+			    }
+			    this.incrementHandler = this.incrementHandler.bind(this)				// binding evevnt
+			  }
+			  incrementHandler() {
+			    this.setState(state => ({
+			      count: state.count + 1
+			    }))
+			  }
+			  render() {
+			    return (
+			      <div className='App' >
+			        <div>Count : {this.state.count}</div>
+			        <div><button onClick={this.incrementHandler}>Update</button></div>
+			      </div>
+
+			    )
+			  }
+
+			}
+			export default App;
+
+		3. With arrow function 
+		----------------------	
+
+			import React from 'react';
+			import './App.css'
+			class App extends React.Component {
+			  constructor() {
+			    super();
+			    this.state = {
+			      count: 0
+			    }
+
+			  }
+			  incrementHandler = () => {						// binding with arrow function
+			    this.setState(state => ({
+			      count: state.count + 1
+			    }))
+			  }
+			  render() {
+			    return (
+			      <div className='App' >
+			        <div>Count : {this.state.count}</div>
+			        <div><button onClick={this.incrementHandler}>Update</button></div>
+			      </div>
+
+			    )
+			  }
+
+			}
+			export default App;
+
 =========================================================================================================================
 @Lifting UpState
 
-- Passing callback function from parent to child and calling that function from child : it help to send data from child to parent
+- Passing callback function from parent to child and calling that function from child : it help to send data from child 
+to parent
 
 	function App() {
 		const handleAlertEvent = (name) => {						// creating function 
@@ -315,6 +620,21 @@ a. in Arrow functions
 			</div>
 		)
 	}
+
+=========================================================================================================================
+@Hooks
+
+- special functions
+- Allow us to do additional things inside functional components eg 
+	1. useState 	: use state within a functional component
+	2. useEffect 	: run code when a component renders (or re-renders)
+	3. useContext	: consume context in a functional component
+	4. useSelector	: get the values from the store
+	5. useDispatch	: dispatch the action from component to store
+	6. useMemo		: useMemo returns a memoized value 
+	7. useCallback	: useCallback returns a memoized function.
+	8. useRef		: 
+
 
 =========================================================================================================================
 @useEffect Hook
