@@ -622,7 +622,7 @@ to parent
 	}
 
 =========================================================================================================================	
-@Condition Ouput
+@Condition Rendering
 
 	1. if/else 
 	----------
@@ -658,6 +658,18 @@ to parent
 	-------------------------
 		
 		retuurn { condition1 && <div><h1> Welcome Message </h1></div> } 
+
+=========================================================================================================================
+@List and key 
+	
+	- map method is used 
+	- always add keys to elements while using maps
+	- always make separate component for rendering lists
+
+	- A "key" is a special string attribute you need to include when creating lists of elements.
+	- keys give the elements a stable identity
+	- keys help React identify which items have changed, are added, or are removed
+	- help in efficient udpdate of the user interface.
 		
 =========================================================================================================================
 @Hooks
