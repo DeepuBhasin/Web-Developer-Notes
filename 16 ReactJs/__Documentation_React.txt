@@ -24,6 +24,10 @@ What is React ?
 @JSX
 
 -JSX stands for JavaScript XML. JSX allows us to write HTML in React. JSX makes it easier to write and add HTML in React.
+-Write XML-Like code for elements and components.
+-JSX tags have a tag name, attributes and children.
+-JSX is not a necessity to write React applications.
+-JSX makes your code simpler and elegant.
 -bable will convert this jsx file into plan javascript code
 -Reserve key words
 	className	: class 
@@ -179,7 +183,7 @@ a. in Arrow functions
 	5. useDispatch	: dispatch the action from component to store
 	6. useMemo		: useMemo returns a memoized value 
 	7. useCallback	: useCallback returns a memoized function.
-	8. useRef
+	8. useRef		: 
 
 =========================================================================================================================
 @State
@@ -257,6 +261,32 @@ a. in Arrow functions
 
 - destructring is one the best way to use props
 - when ever you change props component get re-render
+
+=========================================================================================================================
+@Props.children
+	
+	is use to send content from parent to child component
+
+#App.js
+-------
+		const App = () => {
+			return (
+				<Child>Hello World </Child>
+			)
+		}
+		
+		export default App;
+
+#Child.js
+---------
+	
+	const Child = (props) => {
+		return (
+			<div><h1>{props.children}</h1></div>
+		)
+	}
+
+	export default Child;	
 
 =========================================================================================================================
 @Lifting UpState
