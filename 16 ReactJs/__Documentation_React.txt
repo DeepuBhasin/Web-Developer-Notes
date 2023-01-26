@@ -400,7 +400,47 @@ React V17 > no need to import 'react'
  
  	import './App.css';							// importing file into component
 
-- always try to place file in same folder of particular component
+#note : always try to place file in same folder of particular component
+
+- can use conditions
+- can use template literals
+- can use variables with conditions
+
+=========================================================================================================================
+@CSS modules 
+
+- by modules classes get locally scope and it will not effect child component  
+
+- file name : fileName.module.css
+	
+	appStyle.module.css
+	-------------------	
+
+		.App {
+		    text-align: center;
+		    background-color: yellow;
+		}
+		.helloworld {
+		    font-style: italic;
+		    text-decoration: underline;
+		    color: green;
+		}
+
+	App.js
+	------
+
+		import styles from './appStyle.module.css'
+		const App = () => {
+
+		  return (
+		    <div className={styles.App} >
+		      <h1 className={styles.helloworld}>Hello World</h1>
+		    </div>
+
+		  )
+
+		}
+		export default App;
 
 =========================================================================================================================
 @Events
