@@ -1,35 +1,37 @@
 What is React ?
--Javascript library used to create websites 
--Allows to easily create Single Page Apps - SPA's for short
--in intial request server send only index.html file and the react perform whole functionality like user interctivity, fetching data, routing, click events etc
--with the help of routing react inject that code which belongs to that route
+- Javascript library used to create websites 
+- Allows to easily create Single Page Apps - SPA's for short
+- in intial request server send only index.html file and the react perform whole functionality like user interctivity, 
+fetching data, routing, click events etc
+- with the help of routing react inject that code which belongs to that route
 
 =========================================================================================================================
 @Installation
 
--npx create-react-app folder-name
--cd folder-name
--npm run start
+- npx create-react-app folder-name
+- cd folder-name
+- npm run start
 
 - default server Address : http://localhost:3000/
 
 =========================================================================================================================
 @Components
 
--Components let you split the UI into independent, reusable pieces, and think about each piece in isolation. This page provides an introduction to the idea of components.
--React is Component based architecture
--Component means perform single task
+- Components let you split the UI into independent, reusable pieces, and think about each piece in isolation. This page 
+provides an introduction to the idea of components.
+- React is Component based architecture
+- Component means perform single task
 
 =========================================================================================================================
 @JSX
 
--JSX stands for JavaScript XML. JSX allows us to write HTML in React. JSX makes it easier to write and add HTML in React.
--Write XML-Like code for elements and components.
--JSX tags have a tag name, attributes and children.
--JSX is not a necessity to write React applications.
--JSX makes your code simpler and elegant.
--bable will convert this jsx file into plan javascript code
--Reserve key words
+- JSX stands for JavaScript XML. JSX allows us to write HTML in React. JSX makes it easier to write and add HTML in React.
+- Write XML-Like code for elements and components.
+- JSX tags have a tag name, attributes and children.
+- JSX is not a necessity to write React applications.
+- JSX makes your code simpler and elegant.
+- bable will convert this jsx file into plan javascript code
+- Reserve key words
 	className	: class 
 	forHtml		: for
 
@@ -64,7 +66,7 @@ React V17 > no need to import 'react'
 		{[1, 2, 3, 4, 5, 6]}	// 123456		: write array
 		{'hello'.toUpperCase()}	// HELLO 		: write functions
 
--dynamic data
+- dynamic data
 	
 	const link = 'https://www.google.com';
 	<a href={link}>Google</a>		
@@ -81,7 +83,7 @@ React V17 > no need to import 'react'
 	 			|-------- Categories.js 		// Sub component of SideBar component
 	 			|-------- Tags.js 				// Sub component of SideBar component
 
--while importing component don't need to write .js/.jsx at the end, react managing by its own.
+- while importing component don't need to write .js/.jsx at the end, react managing by its own.
 	
 	import Navbar from './component/nav-bar/nav-bar.component'
 
@@ -258,7 +260,7 @@ a. in Arrow functions
 - To send props into a component, use the same syntax as HTML attributes:
 	
 	<Car brand="Ford" />
-
+- Props is Object type
 - destructring is one the best way to use props
 - when ever you change props component get re-render
 
@@ -336,7 +338,8 @@ a. in Arrow functions
 	  return <h1>I've rendered {count} times!</h1>;
 	}
 
-	Note : But wait!! It keeps counting even though it should only count once!. useEffect runs on every render. That means that when the count changes, a render happens, which then triggers another effect.
+	Note : But wait!! It keeps counting even though it should only count once!. useEffect runs on every render. That means that 
+	when the count changes, a render happens, which then triggers another effect.
 
 #No dependency passed:
 ----------------------
