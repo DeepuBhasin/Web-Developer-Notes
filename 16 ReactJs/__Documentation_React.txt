@@ -710,7 +710,33 @@ to parent
 	- keys give the elements a stable identity
 	- keys help React identify which items have changed, are added, or are removed
 	- help in efficient udpdate of the user interface.
-		
+
+=========================================================================================================================
+@Controlled components
+	
+	- the forms elements like input, textarea, there value is controlled by react that is called controlled element
+
+	#Example: 
+
+		this.state = {email : ''};
+
+		<input type="text" name="email" value={this.state.email} onChange={(e) => this.setState({email : e.target.value })}
+
+#note : in most of the cases onChange={handlevent} eventhandle is used example : inputs, textarea, select
+	
+
+	handleEvent = (e) => {
+		this.setState({
+			...this.state,
+			[e.target.name] : e.target.value
+		})
+	}		
+
+=========================================================================================================================
+@Lifecycle methods
+	
+
+
 =========================================================================================================================
 @Hooks
 
