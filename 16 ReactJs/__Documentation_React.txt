@@ -2062,7 +2062,9 @@ The useReducer Hook returns the current stateand a dispatchmethod.
 @Higher Order Function + HOF with Paramter + HOF with props
 
 	- to share common functionality between components
-	- HOC is a pattern where a function takes a component as an argument and returns a new component. 
+	- HOC is a pattern where a function takes a component as an argument and returns a new component.
+	- HOC use in Router, Connect on Redux, Material ui
+	- Main concept of HOC is closuer
 
 	const NewComponent = HigherOrderComponent(originalComponent)
 
