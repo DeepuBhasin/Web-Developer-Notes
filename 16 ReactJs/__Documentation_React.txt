@@ -2179,6 +2179,90 @@ The useReducer Hook returns the current stateand a dispatchmethod.
 		export default App;
 
 =========================================================================================================================
+@Render Props
+	
+- The term "render prop" refers to a technique for "sharing code" between React component using a "prop whose value is a function"
+- Main concept is using state lift concept
+	
+	#renderProps.js
+	---------------
+
+		import React from "react"
+
+		class NewComponent extends React.Component {
+		    constructor() {
+		        super();
+		        this.state = {
+		            count: 0
+		        }
+		    }
+
+		    increment = () => {
+		        this.setState(state => (
+		            { count: state.count + 1 }
+		        ))
+		    }
+
+		    render() {
+		        return (
+		            <div>{this.props.render(this.state.count, this.increment)}</div>
+		        )
+		    }
+		}
+
+		export default NewComponent;
+
+	#ButtonOne.js
+	-------------
+		
+		const ButtonOne = (props) => {
+		    const { count, handleEvent, name } = props;
+		    return (
+		        <div>
+		            <p>{name}</p>
+		            <p>count : {count}</p>
+		            <button onClick={handleEvent}>increment From Button 1</button>
+		        </div>
+		    )
+		}
+
+		export default ButtonOne;
+
+	#ButtonTwo.js
+	-------------
+
+		const ButtonTwo = (props) => {
+	    const { count, handleEvent, name } = props;
+	    return (
+		        <div>
+		            <p>{name}</p>
+		            <p>count : {count}</p>
+		            <button onClick={handleEvent}>increment From Button 2</button>
+		        </div>
+		    )
+		}
+
+		export default ButtonTwo;	
+
+	#App.js
+	-------
+
+		import "./App.css"
+		import ButtonOne from "./ButtonOne";
+		import ButtonTwo from "./ButtonTwo";
+		import RenderProps from './renderProps.js'
+		const App = () => {
+		  return (
+		    <div className="App">
+		      <RenderProps render={(count, Incerment) => <ButtonOne count={count} handleEvent={Incerment} name="Deepinder Singh" />} />
+		      <RenderProps render={(count, Incerment) => <ButtonOne count={count} handleEvent={Incerment} name="Deepu Bhasin" />} />
+		    </div>
+		  )
+		}
+
+		export default App;		
+
+=========================================================================================================================
 @useCallback + React.memo (same as pure component)
 	
 	1. The React useCallback Hook returns a memoized callback function.
