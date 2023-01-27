@@ -757,10 +757,111 @@ to parent
 @Fregments
 	
 	- it allow to prevent extra nodes being added to the dom
-	- <React.Fragment> </React.Fragment>
-	- <> </>
+	- <React.Fragment> </React.Fragment> also can add keys
+	- <> </> but cannot pass keys
 	- most sutable exmaple adding in root and adding in table instead of <div> tag
 
+=========================================================================================================================
+@Re-rendering
+	
+	- it only occur if state get change or props get change
+
+	#example
+
+		import { useState } from "react";
+		import Child from "./child.js";
+
+		const App = () => {
+		  const [count, setCount] = useState(0);
+		  console.log('App component');
+		  return (
+		    <div className="App">
+		      <p> count : {count}</p>
+		      <Child />																// also get re-render on state change 
+		      <button onClick={() => setCount(0)}>Set to Zero</button>					
+		      <button onClick={() => setCount(count + 1)}>Incerment</button>
+		    </div>
+
+		  )
+
+		}
+		export default App;
+
+	- if count is zero and then we click on "set zero button" our component will not re-render but if click on increment button
+	our component will re-render beacuse state get change and then we click on "set zero" then again it wlill re-render once but
+	after that it will not. 
+
+	- even Child component also get re-render even though they are stateless component when ever state or props get change 
+	in Parent	
+
+=========================================================================================================================
+@Pure component
+	
+	- only belongs to class components
+	- pure components by preventing unnecessary renders can give you a performance boost certain scenarios for example lets say you're
+	rendering a list of 50 items by not re-rendering them when its is not required they're going to have a good performance boost
+	- one key point is that you should not mutate object and arrays in props or state for 
+	-in regular component 'shouldComponentUpdate' method it always 'returns true' by default, but in pure its 'return false'
+	
+	PureComponent.js
+	----------------
+
+		import React, { PureComponent } from "react";
+		class Pure extends PureComponent {
+		    constructor() {
+		        super();
+		    }
+		    render() {
+		        console.log('pure');
+		        return (
+		            <div>
+
+		                <h1>Pure Component</h1>
+		            </div>
+		        )
+		    }
+		}
+
+		export default Pure;
+
+	in pure component if the data is static it will not re-render again and again in parent component. but if props get change then it will re-render. 		
+
+	App.js
+	------
+
+		import "./App.css";
+		import { useState } from "react";
+		import Pure from "./PureComponent.js"
+		const App = () => {
+		  const [count, setCount] = useState(0);
+		  console.log('------------x--------------');
+		  console.log('App component');
+		  return (
+		    <div className="App">
+		      <Pure />														// pure component with static content
+		      <p> count : {count}</p>
+		      <button onClick={() => setCount(0)}>Set to Zero</button>
+		      <button onClick={() => setCount(count + 1)}>Incerment</button>
+		    </div>
+
+		  )
+
+		}
+		export default App;
+
+
+#note : A Pure component implements shouldComponentUpdate with a shallow prop and state comparison
+	
+											Difference?
+		shallow Change with currentState -------------------> re-render
+		shallow change with currentProps -------------------> re-render		
+
+#memo
+	
+	- pure component work same as .memo()			// its basically higher order function
+		
+
+	
 =========================================================================================================================
 @Hooks
 
@@ -1832,11 +1933,80 @@ The useReducer Hook returns the current stateand a dispatchmethod.
 	}
 
 	export default App;
+
+=========================================================================================================================
+@forwardRef
+	
+	- passing reference to child 
+		
+	App.js
+	------
+
+		import './App.css';
+		import React from "react";
+		import InputComponent from './InputComponent';
+
+		class App extends React.Component {
+		  constructor() {
+		    super();
+		    this.inputRef = React.createRef(null);
+		  }
+
+		  getFocus = () => {
+		    this.inputRef.current.focus();
+		  }
+
+		  setValue = () => {
+		    this.inputRef.current.value = "1000";
+		  }
+
+		  render() {
+		    return (
+		      <div className='App'>
+		        <InputComponent ref={this.inputRef} />
+		        <br />
+		        <button onClick={this.getFocus}>Get Focus</button>
+		        <button onClick={this.setValue}>Set Value</button>
+		      </div>
+		    )
+		  }
+		}
+
+		export default App;
+
+	InputComponent.js
+	-----------------
+
+		import { forwardRef } from "react";
+
+		const InputComponent = (props, refs) => {
+		    return (
+		        <input type="text" name="firstName" id="firstName" placeholder="Enter First Name" ref={refs} />
+		    )
+		}
+
+		export default forwardRef(InputComponent);	
+	
 =========================================================================================================================
 @useRef
 	
-	1. use to acces node directly like document.querySelectory()
+	1. use to acces DOM node directly in React like document.querySelectory()
 	2. try to aviod as mush you can beacuse its update real dom directly not the virtual dom which is quite expensive
+
+	#Application use
+	----------------
+
+		1. focus 						// current.focus()
+		2. fetch value from input 		// current.value	
+
+	#Step
+	-----
+
+		1. Create element
+		2. attach that variable to element
+
+	#functional component
+	---------------------	
 
 	import './App.css'
 	import { useEffect, useRef } from "react";
@@ -1855,8 +2025,38 @@ The useReducer Hook returns the current stateand a dispatchmethod.
 
 	export default App;
 
+
+	#Class component
+	----------------
+
+		import './App.css';
+		import React from "react";
+
+		class App extends React.Component {
+		  constructor() {
+		    super();
+		    this.inputRef = React.createRef();
+		  }
+
+		  componentDidMount() {
+		    this.inputRef.current.focus();
+		  }
+
+		  render() {
+		    return (
+		      <div className='App'>
+		        <input type="text" ref={this.inputRef} />
+		      </div>
+		    )
+		  }
+		}
+
+		export default App;
+
+
+
 =========================================================================================================================
-@useCallback + React.memo
+@useCallback + React.memo (same as pure component)
 	
 	1. The React useCallback Hook returns a memoized callback function.
 	2. Think of memoization as caching a value so that it does not need to be recalculated.
