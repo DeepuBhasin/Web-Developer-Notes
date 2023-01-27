@@ -2059,7 +2059,7 @@ The useReducer Hook returns the current stateand a dispatchmethod.
 	- use for model
 	
 =========================================================================================================================
-@Higher Order Function
+@Higher Order Function + HOF with Paramter + HOF with props
 
 	- to share common functionality between components
 	- HOC is a pattern where a function takes a component as an argument and returns a new component. 
@@ -2070,7 +2070,7 @@ The useReducer Hook returns the current stateand a dispatchmethod.
 	--------------
 
 		import React from "react"
-		const HigherOrder = (OrginalComponent) => {
+		const HigherOrder = (OrginalComponent, incrementParamter) => {
 		    class NewComponent extends React.Component {
 		        constructor() {
 		            super();
@@ -2081,7 +2081,7 @@ The useReducer Hook returns the current stateand a dispatchmethod.
 
 		        increment = () => {
 		            this.setState(state => (
-		                { count: state.count + 1 }
+		                { count: state.count + incrementParamter }
 		            ))
 		        }
 
@@ -2140,7 +2140,7 @@ The useReducer Hook returns the current stateand a dispatchmethod.
 		    )
 		}
 
-		export default HigherOrder(ButtonOne);
+		export default HigherOrder(ButtonOne, 5);
 
 	ButtonTwo.js
 	------------
@@ -2157,7 +2157,7 @@ The useReducer Hook returns the current stateand a dispatchmethod.
 		    )
 		}
 
-		export default HigherOrder(ButtonTwo);	
+		export default HigherOrder(ButtonTwo, 10);
 
 	App.js
 	------
@@ -2168,8 +2168,8 @@ The useReducer Hook returns the current stateand a dispatchmethod.
 		const App = () => {
 		  return (
 		    <div className="App">
-		      <ButtonOne name="Deepinder" />				// passing props down to children
-		      <ButtonTwo name="Deepu" />					// passing props down to children
+		      <ButtonOne name="Incerment by 5" />				// passing props down to children
+		      <ButtonTwo name="Incerment by 10" />					// passing props down to children
 		    </div>
 		  )
 		}
