@@ -1253,6 +1253,12 @@ export default Create;
 		- practical application use is configuration of theme
 		- Clear & easy way to share state within a components tree, it same like Redux but it is easy then redux and light weight
 		- hooks with functional components are easy as compair to with class context
+
+	#steps
+		
+		- Create the context
+		- Provide a context value
+		- Consume the context value	
 	
 	Hooks : Tap into the inner working of react in functional components
 
