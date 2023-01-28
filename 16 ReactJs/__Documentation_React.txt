@@ -2780,3 +2780,154 @@ $$example : useReducer (single and Multiple reducer)
 	}
 
 	export default App;
+
+=========================================================================================================================
+$$example : useReducer + useContext
+
+
+	import { createContext, useContext, useReducer } from "react";
+	import "./App.css"
+
+	// constants
+	const INCREMENT_COUNT = 'INCREMENT_COUNT';
+	const DECREMENT_COUNT = 'DECREMENT_COUNT';
+	const INCREMENT_ITEM = 'INCREMENT_ITEM';
+	const DECREMENT_ITEM = 'DECREMENT_ITEM';
+	const RESET = 'RESET';
+
+
+	// Actions Objects
+	const increment_count_action = () => {
+	  return { type: INCREMENT_COUNT, payload: 1 }
+	}
+	const decrement_count_action = () => {
+	  return { type: DECREMENT_COUNT, payload: 1 }
+	}
+	const increment_item_action = () => {
+	  return { type: INCREMENT_ITEM, payload: 1 }
+	}
+	const decrement_item_action = () => {
+	  return { type: DECREMENT_ITEM, payload: 1 }
+	}
+	const reset_action = () => {
+	  return { type: RESET }
+	}
+
+
+	// initial State
+	let initialValue = {
+	  count: 0,
+	  item: 0
+	}
+
+	// Reducers
+	const reducer = (state = initialValue, action) => {
+	  switch (action.type) {
+	    case INCREMENT_COUNT: {
+	      return { ...state, count: state.count + action.payload }
+	    }
+	    case DECREMENT_COUNT: {
+	      return { ...state, count: state.count - action.payload }
+	    }
+	    case INCREMENT_ITEM: {
+	      return { ...state, item: state.item + action.payload }
+	    }
+	    case DECREMENT_ITEM: {
+	      return { ...state, item: state.item - action.payload }
+	    }
+	    case RESET: {
+	      return { ...initialValue }
+	    }
+	    default: {
+	      return state;
+	    }
+	  }
+	}
+	let AppContext = createContext({
+	  count: initialValue,
+	  setCount: null
+	});
+
+	let ContextComponent = (props) => {
+	  const [state, dispatch] = useReducer(reducer, initialValue);
+
+	  let AppProvider = AppContext.Provider;
+
+	  return (
+	    <AppProvider value={{ state, dispatch }}>
+	      {props.children}
+	    </AppProvider>
+	  )
+
+	}
+
+	const ShowCount = () => {
+	  const { state } = useContext(AppContext);
+	  return (
+	    <>
+	      <p>Count : {state.count}</p>
+	      <p>Item : {state.item}</p>
+	    </>
+	  )
+	}
+
+	const Button = () => {
+	  const { dispatch } = useContext(AppContext);
+
+	  return (
+	    <div>
+	      <div>
+	        <button onClick={() => dispatch(increment_count_action())}>INCREMENT COUNT</button>
+	        <button onClick={() => dispatch(decrement_count_action())}>DECREMENT COUNT</button>
+	      </div>
+	      <div>
+	        <button onClick={() => dispatch(increment_item_action())}>INCREMENT ITEM</button>
+	        <button onClick={() => dispatch(decrement_item_action())}>DECREMENT ITEM</button>
+	      </div>
+	      <div>
+	        <button onClick={() => dispatch(reset_action())}>RESET</button>
+	      </div>
+	    </div>
+	  )
+	}
+
+	const App = () => {
+	  return (
+	    <div className="App">
+	      <ContextComponent>
+	        <ShowCount />
+	        <Button />
+	      </ContextComponent>
+	    </div>
+	  )
+	}
+
+	export default App;	
+=========================================================================================================================
+$$example : useRef
+
+	import { useState, useEffect, useRef } from "react";
+	import "./App.css"
+
+	const App = () => {
+	  const [timer, setTimer] = useState(0);
+	  const intervalRef = useRef();		
+	  useEffect(() => {
+	    intervalRef.current = setInterval(() => {
+	      setTimer(prev => prev + 1);
+	    }, 1000)
+	    return () => {
+	      clearInterval(intervalRef.current);
+	    };
+	  }, []);
+	  return (
+	    <div className="App">
+	      <p>Hook Timer : {timer}</p>
+	      <button onClick={() => clearInterval(intervalRef.current)}>Stop</button>
+	    </div >
+	  )
+	}
+
+	export default App;	
+
+ answer -> useRef() working as conatiner which storing immutable value and it do not cause any re-render if the data store get changes & it also remember the store data even after other state variable caused a re-render on this comonent 	
