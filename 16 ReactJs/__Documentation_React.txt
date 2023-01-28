@@ -5,6 +5,18 @@ What is React ?
 fetching data, routing, click events etc
 - with the help of routing react inject that code which belongs to that route
 
+- main differenev between Vue and React 
+	
+	a. State Management 
+
+		vue : re-activity
+		react : manually event (like on change or effects)
+
+	b. Approach 
+
+		vue 	: template approach
+		react 	: jsx approach	
+
 =========================================================================================================================
 @Installation
 
@@ -908,8 +920,26 @@ to parent
 
 =========================================================================================================================
 @useEffect Hook
+	
+	benifit of useEffect insted of Class lifecycles: example 
+
+	componentDidMount() {
+		document.title = `You clicked ${this.state.count} times`;		---> duplicate code
+		this.interval = setInterval(this.tick, 1000);					---> written in different block
+	}
+
+	componentDidUpdate(){
+		document.title = `you clicked ${this.state.count} times`;		---> duplicate code
+	}
+
+	componentWillUnmount() {
+		clearInterval(this.interval);									---> written in different block
+	}
+
+
 
 - The useEffect Hook allows you to perform side effects in your components.
+- it is close replacement for componentDidMount, componentDidUpdate and componentWillUnmount;
 - this hook run during initilization of component / means rendering initill
 - this hook run also when ever state get changes
 - useEffect accepts two arguments. The second argument is optional.
@@ -931,22 +961,30 @@ to parent
 	Note : But wait!! It keeps counting even though it should only count once!. useEffect runs on every render. That means that 
 	when the count changes, a render happens, which then triggers another effect.
 
-#No dependency passed:
-----------------------
+#Run on every render (No dependency passed):
+--------------------------------------------
 
 	useEffect(() => {
 	  //Runs on every render
 	});	
 
-#An empty array:
-----------------
+#Run once only (An empty array):
+--------------------------------
 
 	useEffect(() => {
 	  //Runs only on the first render
 	}, []);
 
-#Props or state values:
------------------------
+#Run on conditional Rendering (Props or state values):
+-----------------------------------------------------
+
+	
+	componentDidUpdate(prevProps , prevState) {				// this functions run every time
+		if(prevState.count !== this.state.count) {			// here we are checking condition current state with previous statet
+			console.log('component re-render again')	
+		}
+	}
+
 
 	useEffect(() => {
 	  //Runs on the first render
@@ -986,6 +1024,8 @@ to parent
 
 		  return <h1>I've rendered {count} times!</h1>;
 		}
+
+- $$exmaple written below in example section		
 
 #Fetch method in UseEffect
 --------------------------
@@ -2456,7 +2496,7 @@ The useReducer Hook returns the current stateand a dispatchmethod.
 
 
 =========================================================================================================================
-@example : state vs useState
+$$example : state vs useState
 
 import { useState } from "react";
 import "./App.css"
@@ -2513,3 +2553,124 @@ import React from "react";
 	}
 
 	export default App;	
+
+=========================================================================================================================
+$$example : useState with clean effect
+
+
+	import { useState, useEffect } from "react";
+	import "./App.css"
+	import React from "react";
+
+	const MouseEvent = () => {
+	  const [countX, setCountX] = useState(0);
+	  const [countY, setCountY] = useState(0);
+
+	  const handleEvent = (e) => {
+	    console.log('Mouse event');
+	    setCountX(e.clientX);
+	    setCountY(e.clientY);
+	  }
+
+	  useEffect(() => {
+	    console.log('Mouse event Bind');
+	    window.addEventListener('mousemove', handleEvent);
+	    return () => {
+	      console.log('Mouse event removed successfully');
+	      window.removeEventListener('mousemove', handleEvent);
+	    }
+	  }, []);
+
+	  return (
+	    <div>
+	      <h2>X - {countX} : Y - {countY}</h2>
+	    </div>
+	  )
+	}
+
+	const ToggleButton = () => {
+	  const [state, setState] = useState(true);
+
+	  const handleEvent = () => {
+	    setState(!state);
+	  }
+
+	  return (
+	    <>
+	      <button onClick={handleEvent}>Toogle</button>
+	      {state && <MouseEvent />}
+	    </>
+	  )
+	}
+
+	const App = () => {
+	  return (
+	    <div className="App">
+	      <ToggleButton />
+	    </div>
+	  )
+	}
+
+	export default App;	
+
+=========================================================================================================================
+$$example : useContext
+	
+	import { useState, useEffect, createContext, useContext } from "react";
+	import "./App.css"
+	let initialValue = 0
+
+	let AppContext = createContext({
+	  count: initialValue,
+	  setCount: null
+	});
+
+	let ContextComponent = (props) => {
+	  let [count, setCount] = useState(initialValue);
+
+	  let handleEvent = () => {
+	    setCount(count + 1)
+	  }
+
+	  let AppProvider = AppContext.Provider;
+
+	  return (
+	    <AppProvider value={{ count, handleEvent }}>
+	      {props.children}
+	    </AppProvider>
+	  )
+
+	}
+
+	const ShowCount = () => {
+	  const { count } = useContext(AppContext);
+	  return (
+	    <p>
+	      count : {count}
+	    </p>
+	  )
+	}
+
+	const Button = () => {
+	  const { handleEvent } = useContext(AppContext);
+
+	  return (
+	    <p>
+	      <button onClick={handleEvent}>incerment</button>
+	    </p>
+	  )
+	}
+
+	const App = () => {
+	  return (
+	    <div className="App">
+	      <ContextComponent>
+	        <ShowCount />
+	        <Button />
+	      </ContextComponent>
+	    </div>
+	  )
+	}
+
+	export default App;
+
