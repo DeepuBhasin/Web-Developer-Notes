@@ -1476,11 +1476,15 @@ export default Create;
 
 #useReducer()
 
-- The useReducer Hook is similar to the useState Hook.
+- useReducer is a Hook that is used for state management
+- its is an alternative to useState (in useReducer you can maintain states more than 1 state)
+- its also allow you to maintain state at global level which is very easy as compair to normal state eg useState
 - It allows for custom state logic.
 - If you find yourself keeping track of multiple pieces of state that rely on complex logic, useReducer may be useful.
 
 useReducer(<reducer>, <initialState>);
+
+<reducer> means : functions
 
 
 
@@ -2674,3 +2678,105 @@ $$example : useContext
 
 	export default App;
 
+=========================================================================================================================
+$$example : useReducer (single and Multiple reducer)
+
+	import { useReducer } from "react";
+	import "./App.css"
+
+	// constants
+	const INCREMENT_COUNT = 'INCREMENT_COUNT';
+	const DECREMENT_COUNT = 'DECREMENT_COUNT';
+	const INCREMENT_ITEM = 'INCREMENT_ITEM';
+	const DECREMENT_ITEM = 'DECREMENT_ITEM';
+	const RESET = 'RESET';
+
+
+	// Actions Objects
+	const increment_count_action = () => {
+	  return { type: INCREMENT_COUNT, payload: 1 }
+	}
+	const decrement_count_action = () => {
+	  return { type: DECREMENT_COUNT, payload: 1 }
+	}
+	const increment_item_action = () => {
+	  return { type: INCREMENT_ITEM, payload: 1 }
+	}
+	const decrement_item_action = () => {
+	  return { type: DECREMENT_ITEM, payload: 1 }
+	}
+	const reset_action = () => {
+	  return { type: RESET }
+	}
+
+
+	// initial State
+	let initialValue = {
+	  count: 0,
+	  item: 0
+	}
+
+	// Reducers
+	const reducer = (state = initialValue, action) => {
+	  switch (action.type) {
+	    case INCREMENT_COUNT: {
+	      return { ...state, count: state.count + action.payload }
+	    }
+	    case DECREMENT_COUNT: {
+	      return { ...state, count: state.count - action.payload }
+	    }
+	    case INCREMENT_ITEM: {
+	      return { ...state, item: state.item + action.payload }
+	    }
+	    case DECREMENT_ITEM: {
+	      return { ...state, item: state.item - action.payload }
+	    }
+	    case RESET: {
+	      return { ...initialValue }
+	    }
+	    default: {
+	      return state;
+	    }
+	  }
+	}
+
+	const App = () => {
+	  const [{ count, item }, dispatchOne] = useReducer(reducer, initialValue);				// first reducer
+	  const [state, dispatchTwo] = useReducer(reducer, initialValue);						// second reducer
+	  return (
+	    <div className="App">
+	      <div>
+	        <p>Count : {count}</p>
+	        <p>Item : {item}</p>
+	        <div>
+	          <button onClick={() => dispatchOne(increment_count_action())}>INCREMENT COUNT</button>
+	          <button onClick={() => dispatchOne(decrement_count_action())}>DECREMENT COUNT</button>
+	        </div>
+	        <div>
+	          <button onClick={() => dispatchOne(increment_item_action())}>INCREMENT ITEM</button>
+	          <button onClick={() => dispatchOne(decrement_item_action())}>DECREMENT ITEM</button>
+	        </div>
+	        <div>
+	          <button onClick={() => dispatchOne(reset_action())}>RESET</button>
+	        </div>
+	      </div>
+	      <div>
+	        <p>Count : {state.count}</p>
+	        <p>Item : {state.item}</p>
+	        <div>
+	          <button onClick={() => dispatchTwo(increment_count_action())}>INCREMENT COUNT</button>
+	          <button onClick={() => dispatchTwo(decrement_count_action())}>DECREMENT COUNT</button>
+	        </div>
+	        <div>
+	          <button onClick={() => dispatchTwo(increment_item_action())}>INCREMENT ITEM</button>
+	          <button onClick={() => dispatchTwo(decrement_item_action())}>DECREMENT ITEM</button>
+	        </div>
+	        <div>
+	          <button onClick={() => dispatchTwo(reset_action())}>RESET</button>
+	        </div>
+	      </div>
+	    </div>
+	  )
+	}
+
+	export default App;
