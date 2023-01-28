@@ -102,6 +102,12 @@ React V17 > no need to import 'react'
 
 #useState() : Hook
 
+- the first element is the current value of the state and the second element is a state setter function.
+
+- new state value depends on the previous state value ? you can pass function to the setter function. 
+
+- when deailing with objects or arrays, always make sure to spread your state variable and then call the setter function
+
 - The React useState Hook allows us to track state in a function component.
 	State generally refers to data or properties that need to be tracking in an application.
 
@@ -151,6 +157,10 @@ React V17 > no need to import 'react'
 			</div>
 		)
 	}
+
+	#note : with previous state
+			
+			setCount( prev => prev + 1);		
 
 #Class Component
 ----------------
@@ -299,6 +309,19 @@ React V17 > no need to import 'react'
 	3. When you have to update state based on the previous state value, pass in a function as an argument instead of the
 	regular object
 	
+
+#note : object in States 
+
+		in class, the state is always an object.
+		
+		with the useState Hook, the state doesn't have to be an object	
+
+		example : in class Component Object get merage with old values while in functional component object get replace with new values
+	  
+	  : array in states 
+
+	  	same as in array 			
+
 
 
 =========================================================================================================================
@@ -876,6 +899,12 @@ to parent
 	7. useCallback	: useCallback returns a memoized function.
 	8. useRef		: 
 
+#rules for Hooks 
+		
+		1. Only call hooks at the top level 
+		2. Don't call hooks inside loops, conditions or nested functions
+		3. Only call hooks from react functions
+		4. call them from within react functional components and not just any regular Javascript function
 
 =========================================================================================================================
 @useEffect Hook
@@ -2416,4 +2445,71 @@ The useReducer Hook returns the current stateand a dispatchmethod.
 	}
 
 	export default App;
-	
+
+
+
+
+
+
+
+
+
+
+=========================================================================================================================
+@example : state vs useState
+
+import { useState } from "react";
+import "./App.css"
+import React from "react";
+
+	const Input = (props) => {
+	  const { state, handleEvent } = props;
+	  return (
+	    <>
+	      <div>
+	        <label>First Name</label>
+	        <input name="firstName" id="firstName" placeholder="Enter First Name" onChange={(e) => handleEvent(e.target)} />
+	      </div>
+	      <div>
+	        <label>Last Name</label>
+	        <input name="lastName" id="lastName" placeholder="Enter Last Name" onChange={(e) => handleEvent(e.target)} />
+	      </div>
+	    </>
+	  )
+	}
+
+	// class Component
+	class App extends React.Component {
+	  constructor() {
+	    super();
+	    this.state = { firstName: '', lastName: '' }
+	  }
+	  handleEvent = (e) => {
+	    this.setState({ [e.name]: e.value })										// it will merage with old value
+	  }
+
+	  render() {
+	    return (
+	      <div className="App">
+	        <Input state={this.state} handleEvent={this.handleEvent} />
+	      </div>
+	    )
+	  }
+	}
+
+	// function component
+		
+	const App = () => {
+	  const [state, setstate] = useState({ firstName: '', lastName: '' });
+	  const handleEvent = (e) => {
+	    setstate({ [e.name]: e.value })												// it will replace old value
+	  }
+
+	  return (
+	    <div className="App">
+	      <Input state={state} handleEvent={handleEvent} />
+	    </div>
+	  )
+	}
+
+	export default App;	
