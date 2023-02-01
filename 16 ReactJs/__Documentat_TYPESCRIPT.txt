@@ -1,0 +1,130 @@
+command:
+
+							folder Name			additional command 
+	npx create-react-app react-typescript-demo --template typescript
+
+extension : 
+		
+		.tsx
+
+==================================================================================================================================
+@Typing Props
+	
+	type GreetProps = {
+		name : string
+		messageCount : number
+		isLoogedIn : boolean
+	}
+
+==================================================================================================================================
+@Basic Props
+
+	
+	1. Number + string + boolean + Array + Object
+	---------------------------------------------
+
+	#App.tsx
+	--------
+	
+		import './App.css';
+		import Greet from './components/Greet';
+		import { Person } from './components/Person';
+		import { PersonList } from './components/PersonList';
+
+		function App() {
+
+		  const personName = {
+		    first : 'Bruce',
+		    last : 'Wayan'
+		  }
+
+		  const nameList = [
+		    {
+		      first: 'Bruce',
+		      last : 'Wayan'
+		    },
+		    {
+		      first: 'clark',
+		      last : 'Kent'
+		    },
+		    {
+		      first: 'Princess',
+		      last : 'Diana'
+		    },
+
+		  ]
+		  
+		  return (
+		    <div className="App">
+		        <Greet name="Deepu" isLoggedIn={true} messageCount={2}/>  		// sending string + boolean + number
+		        <Person name={personName}/>    									// sending object
+		        <PersonList name={nameList}/>									// sending Array
+		    </div>
+		  );
+		}
+
+		export default App;
+
+	#Greet.tsx (string + boolean + number)
+	--------------------------------------
+
+		type Greetprops = {
+		    name : String 										// receiving string
+		    isLoggedIn : boolean								// receiving boolean		
+		    messageCount : Number 								// receiving number	
+		}
+
+		const Greet = (props: Greetprops) => {
+		    return (
+		        <div>
+		            {props.isLoggedIn ? `Welcome ${props.name} ! you have ${props.messageCount} unread messages` : `Hello Guest`}
+		        </div>
+		    )
+		}
+
+		export default Greet;	
+
+			
+
+
+	#Person.tsx (object)
+	--------------------
+
+		type PersonProps = {													// receiving  Object
+		    name : {
+		        first : string
+		        last : string
+		    }
+		}
+
+		export const Person = (props: PersonProps) => {
+		    return <div>{props.name.first} {props.name.last}</div>
+		}	
+
+	
+
+	#PersonList.tsx (Array)
+	-----------------------
+
+		type PersonListProps = {												// receving Array
+		  name: {
+		    first: string,
+		    last: string,
+		  }[],
+		};
+
+		export const PersonList = (props: PersonListProps) => {
+		  return (
+		    <div>
+		      {props.name.map((item) => {
+		        return (
+		          <h1 key={item.first}>
+		            {item.first} {item.last}
+		          </h1>
+		        );
+		      })}
+		    </div>
+		  );
+		};
+	
+		

@@ -801,6 +801,12 @@ to parent
 	
 	- it only occur if state get change or props get change
 
+	#Cause for Re-render
+	--------------------
+		
+		1. A component can re-render if it calls a setter function or a dispatch function.
+		2. A component can render if its parent component rendered
+
 	#example
 
 		import { useState } from "react";
@@ -2931,3 +2937,105 @@ $$example : useRef
 	export default App;	
 
  answer -> useRef() working as conatiner which storing immutable value and it do not cause any re-render if the data store get changes & it also remember the store data even after other state variable caused a re-render on this comonent 	
+
+=========================================================================================================================
+$$example : custome Hook
+
+ 	import { useState, useEffect, useRef } from "react";
+	import "./App.css"
+
+	const useCount = (number) => {
+	  const [count, setCount] = useState(number);
+
+	  const handleEvent = () => {
+	    setCount(count => count + 1);
+	  }
+	  return [count, handleEvent];
+	}
+
+	const CountOne = () => {
+	  const [count, handleEvent] = useCount(0);
+	  return (
+	    <>
+	      <p>count : {count}</p>
+	      <button onClick={handleEvent}>Count One</button>
+	    </>
+	  )
+	}
+	const CountTwo = () => {
+	  const [count, handleEvent] = useCount(0);
+	  return (
+	    <>
+	      <p>count : {count}</p>
+	      <button onClick={handleEvent}>Count One</button>
+	    </>
+	  )
+	}
+
+	const App = () => {
+	  return (
+	    <div className="App">
+	      <CountOne />
+	      <CountTwo />
+	    </div>
+	  )
+	}
+
+	export default App;
+
+=========================================================================================================================
+$$example : Parent Child Re-rendering + with obects in useState
+
+import { useState, useEffect, useRef } from "react";
+import "./App.css"
+
+let intialValue = { count: 0 };
+
+const useCount = () => {
+  const [count, setCount] = useState(intialValue);
+
+  const handleEvent = () => {
+    setCount(state => ({ count: state.count + 1 }));
+  }
+  const reset = () => {
+    setCount(intialValue);
+  }
+  return [count, handleEvent, reset];
+}
+
+const CountOne = () => {
+  console.log('Child 1');
+  const [{ count }, handleEvent, reset] = useCount();
+  return (
+    <>
+      <p>count : {count}</p>
+      <button onClick={handleEvent}>Count One</button>
+      <button onClick={reset}>Reset One</button>
+    </>
+  )
+}
+const CountTwo = () => {
+  console.log('Child 2');
+  const [{ count }, handleEvent] = useCount();
+  return (
+    <>
+      <p>count : {count}</p>
+      <button onClick={handleEvent}>Count One</button>
+    </>
+  )
+}
+
+const App = () => {
+  console.log('parent');								// will print only on initialization not on re-render
+  return (
+    <div className="App">
+      <CountOne />
+      <CountTwo />
+    </div>
+  )
+}
+
+export default App;	
+
+the component which contain states and it it also include child components, and if state get change then child components also get re-render. Now if state is in a particular child only if state get update then that particular child will re-render but not the parent and the other childs as well.
+
