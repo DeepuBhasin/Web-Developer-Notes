@@ -1633,7 +1633,15 @@ The useReducer Hook returns the current stateand a dispatchmethod.
 	- data in the app 
 	- UI state of the app 
 
-	Redux - stores, actions & reducers
+	#Redux Building Blocks
+	----------------------
+
+		1. Store : Object that holds the entire state of our application.
+		2. Reducer : Plain javascript function that handles all the logic when it comes to manipulating the state
+		3. Action : javascript object that describes the type of changes we want to make to the state
+		4. Action Creator : Function that returns an Action
+		5. Dispatch : responsible for sending an action to the reducer to update state.
+		6. Provider : component that makes the redux store available to all other components. 
 
 
 #command

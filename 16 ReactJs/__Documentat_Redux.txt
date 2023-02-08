@@ -1,0 +1,293 @@
+@video Link 
+
+https://www.youtube.com/watch?v=jZTxPlUpe3o
+
+===========================================================================================================================================
+@Redux Store
+		
+	1. Contain the state of our application
+	2. Think of it as nothing more than a plain javascript object named "store".
+	3. Each property on the object represents a different aspect of our state.
+	4. Store is immutable. This means we can not modifiy it.
+	5. Instead we create a completely new version of the store everytime state is updated.
+
+===========================================================================================================================================
+@Store is Immutable
+		
+	1. Store is immutable. This means we can not modify it.
+	2. Instead we create a completely new version of the store every time state is updated.
+	3. By creating a new version of state, redux can track the exact state of an app throughout its lifetime.
+	4. This is how we can perform time travelling.
+
+===========================================================================================================================================
+@Redux Action
+		
+	1. Object that describes the type of changes we want to make to the state.
+	2. Needs to have at least one property "type".
+	3. Can also have an optional payload property.	
+
+===========================================================================================================================================
+@Redux Action Creator
+		
+	1. A function that returns an action.
+	2. Redux does not require the use of action creators, they are strictly optional.	
+
+===========================================================================================================================================
+@Redux Reducer
+		
+	1. javascript function that handles all the logic when it comes to manipulating the state.
+	2. Requires to arguments
+		a. The current state
+		b. Action
+	3. Value returned by the reducer will be the new state.		
+
+===========================================================================================================================================
+@Redux Dispatch
+		
+	1. is a function that when called, will send an action to the reducer.
+	2. will be called by a react component to trigger a state change. 	
+
+===========================================================================================================================================
+@Redux Provider
+		
+	1. A React component that wraps the entire application.
+	2. Makes the redux store available to any component.
+	3. Operactes very similar to the provider component in the context Api.		
+
+
+===========================================================================================================================================
+@Redux with combine reducer
+	
+	#redux.js
+	---------
+
+		// creating store
+		import { createStore, combineReducers } from "redux";
+
+		// initial Value
+		const initialValue = {
+		    bank: {
+		        balance: 0,
+		        isSavingAccount: true
+		    },
+		    isLogin: false
+		};
+
+
+		//Constants
+		const DEPOSIT = 'DEPOSIT';
+		const WITHDRAW = 'WITHDRAW';
+		const COLLECT_INTEREST = 'COLLECT_INTEREST';
+		const DELECT_ACCOUNT = 'DELECT_ACCOUNT';
+		const CHANGE_ACCOUNT = 'CHANGE_ACCOUNT';
+		const TOGGLE_AUTH = 'TOGGLE_AUTH';
+
+		//Action  creator
+		export const depositAction = (amount) => {
+		    return {
+		        type: DEPOSIT,
+		        payload: parseInt(amount)
+		    }
+		}
+
+		export const withdrawAction = (amount) => {
+		    return {
+		        type: WITHDRAW,
+		        payload: parseInt(amount)
+		    }
+		}
+
+		export const collectInterestAction = () => {
+		    return {
+		        type: COLLECT_INTEREST,
+		        payload: 1.03
+		    }
+		}
+
+		export const deleteAccountAction = () => {
+		    return {
+		        type: DELECT_ACCOUNT,
+		        payload: 0
+		    }
+		}
+
+		export const changeAccountAction = (isSavingAccount) => {
+		    return {
+		        type: CHANGE_ACCOUNT,
+		        payload: !isSavingAccount
+		    }
+		}
+
+		export const toggleAuthAction = (isLogin) => {
+		    return {
+		        type: TOGGLE_AUTH,
+		        payload: !isLogin
+		    }
+		}
+
+		//reducer
+		const bankingReducer = (state = initialValue, action) => {
+		    switch (action.type) {
+		        case DEPOSIT: {
+		            state.bank.balance = state.bank.balance + action.payload;
+		            return { ...state };
+		        }
+		        case WITHDRAW: {
+		            state.bank.balance = state.bank.balance - action.payload;
+		            return { ...state };
+		        }
+		        case COLLECT_INTEREST: {
+		            state.bank.balance = state.bank.balance * action.payload;
+		            return { ...state };
+		        }
+		        case DELECT_ACCOUNT: {
+		            state.bank.balance = action.payload;
+		            return { ...state };
+		        }
+		        case CHANGE_ACCOUNT: {
+		            state.bank.isSavingAccount = action.payload;
+		            return { ...state };
+		        }
+		        case TOGGLE_AUTH: {
+		            state.isLogin = action.payload;
+		            return { ...state };
+		        }
+		        default: {
+		            return state;
+		        }
+		    }
+		}
+
+		// initial Value for another reducer
+
+		const authInitial = {
+		    isBankOpen: true
+		}
+
+		const TOGGLE_BANK = 'TOGGLE_BANK';
+
+		export const toggleBankAction = (isBankOpen) => {
+		    return {
+		        type: TOGGLE_BANK,
+		        payload: !isBankOpen
+		    }
+		}
+
+		export const authReducer = (state = authInitial, action) => {
+		    switch (action.type) {
+		        case TOGGLE_BANK: {
+		            state.isBankOpen = action.payload;
+		            return { ...state };
+		        }
+		        default: {
+		            return state;
+		        }
+		    }
+		}
+
+		const rootReducer = combineReducers({							// combine Reducer
+		    banking: bankingReducer,
+		    auth: authReducer
+		});
+
+
+
+		// using store
+		export const store = createStore(rootReducer);
+
+	App.js
+	------
+
+		import { useState } from "react";
+		import { useDispatch, useSelector } from "react-redux";
+		import {
+		  collectInterestAction,
+		  deleteAccountAction,
+		  depositAction,
+		  withdrawAction,
+		  changeAccountAction,
+		  toggleAuthAction,
+		  toggleBankAction
+		} from "./redux/redux";
+
+		const App = () => {
+		  const [balance, setBalance] = useState(0);
+
+		  const dispatch = useDispatch();
+
+		  // banking reducer
+		  const bankingReducer = useSelector((state) => state.banking);
+		  const isSavingAccount = bankingReducer.bank.isSavingAccount;
+		  const isLogin = bankingReducer.isLogin;
+
+		  // auth reducer  
+		  const authReducer = useSelector((state) => state.auth);
+		  const isBankOpen = authReducer.isBankOpen;
+
+		  const handleBalanceEvent = (e) => {
+		    setBalance(e.target.value);
+		  };
+
+		  return (
+		    <div className="form-group p-4">
+		      <h3>Current Balance : ${bankingReducer.bank.balance}</h3>
+		      <input
+		        type="number"
+		        min="1"
+		        className="form-control my-3"
+		        id="balance"
+		        name="balance"
+		        value={balance}
+		        onChange={handleBalanceEvent}
+		        style={{ width: '20%' }}
+		      />
+		      <button
+		        className="btn btn-success btn-sm"
+		        onClick={() => dispatch(depositAction(balance))}
+		      >
+		        Deposit
+		      </button>
+		      <button
+		        className="btn btn-primary mx-1 btn-sm"
+		        onClick={() => dispatch(withdrawAction(balance))}
+		      >
+		        Withdraw
+		      </button>
+		      <button
+		        className="btn btn-warning mx-1 btn-sm"
+		        onClick={() => dispatch(collectInterestAction())}
+		      >
+		        Collect Interest
+		      </button>
+		      <button
+		        className="btn btn-danger mx-1 btn-sm"
+		        onClick={() => dispatch(deleteAccountAction())}
+		      >
+		        Delete Account
+		      </button>
+		      <button className="btn btn-dark mx-1 btn-sm"
+		        onClick={() => dispatch(changeAccountAction(isSavingAccount))}
+		      >
+		        Change Account
+		      </button>
+
+		      <button className="btn btn-info mx-1 btn-sm"
+		        onClick={() => dispatch(toggleAuthAction(isLogin))}
+		      >
+		        {isLogin ? 'Logout' : 'Login'}
+		      </button>
+
+		      <button className={`btn mx-1 btn-sm ${isBankOpen ? 'btn-success' : 'btn-danger'}`}
+
+		        onClick={() => dispatch(toggleBankAction(isBankOpen))}
+		      >
+		        {isBankOpen ? 'Open' : 'Closed'}
+		      </button>
+
+		      <p className="my-3">Account Type : <strong>{isSavingAccount ? 'Saving Account' : 'Normal Account'}</strong></p>
+		      <p className="my-3">Bank  : <strong>{isBankOpen ? 'Closed' : 'Open'}</strong></p>
+		    </div >
+		  );
+		};
+
+		export default App;	
