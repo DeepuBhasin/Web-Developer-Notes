@@ -27,14 +27,6 @@ fetching data, routing, click events etc
 - default server Address : http://localhost:3000/
 
 =========================================================================================================================
-@Components
-
-- Components let you split the UI into independent, reusable pieces, and think about each piece in isolation. This page 
-provides an introduction to the idea of components.
-- React is Component based architecture
-- Component means perform single task
-
-=========================================================================================================================
 @JSX
 
 - JSX stands for JavaScript XML. JSX allows us to write HTML in React. JSX makes it easier to write and add HTML in React.
@@ -48,6 +40,20 @@ provides an introduction to the idea of components.
 	forHtml		: for
 
 React V17 > no need to import 'react'
+
+=========================================================================================================================
+@Virtual Dom
+	
+	Remember the example of the leela webDev eg Timer + input + setInterval. When it get refresh it also refresh the input which don't
+	allowed to write any thing in input box, but in virtul dom it will update only that time <div> not the input <div>
+
+=========================================================================================================================
+@Components
+
+- Components let you split the UI into independent, reusable pieces, and think about each piece in isolation. This page 
+provides an introduction to the idea of components.
+- React is Component based architecture
+- Component means perform single task
 
 =========================================================================================================================
 @Variables and Interpolation
