@@ -7,14 +7,14 @@
 	const sumUpToV1 = n => {
 	    let total = 0;
 	    for (let i = 1; i <= n; i++) {
-	        total += i;								// here is 1 * N operations => O(n) : Big O Notation					
+	        total += i;					// here is 1 * N operations => O(n) : Big O Notation
 	    };
 
 	    return total;
 	}
 
 	const sumUpToV2 = n => {
-	    return (n * (n + 1) / 2);					// here is 3 operations = O(3)  : Big O Notation		
+	    return (n * (n + 1) / 2);		// here is 3 operations = O(3)  : Big O Notation
 	}
 
 	console.time('v1');
