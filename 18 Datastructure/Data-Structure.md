@@ -245,7 +245,6 @@ Link : [Youtube-Alg-DS-Course-Starter-Code](https://github.com/KevinRSDNguyen/Yo
 	#### Forward Loop
 				
 	```javascript
-
 	function reverse(str) {
 		let count = str.length;
 		let strRev = '';
@@ -276,32 +275,30 @@ Link : [Youtube-Alg-DS-Course-Starter-Code](https://github.com/KevinRSDNguyen/Yo
 	#### Split + reverse + join
 	
 	```javascript
-		function reverse(str) {
-			return str.split('').reverse().join('');
-		}
+	function reverse(str) {
+		return str.split('').reverse().join('');
+	}
 	```	
 	#### Reduce
 	
 	```javascript	
-		function reverse(str) {
-			let reverseString = str.split('').reduce((acc, cum) => {
-				acc = cum + acc;
-				return acc;
-			}, '');
+	function reverse(str) {
+		let reverseString = str.split('').reduce((acc, cum) => {
+			acc = cum + acc;
+			return acc;
+		}, '');
 
-			return reverseString;
-		}
+		return reverseString;
+	}
 	```	
 
-	#ReverseString Complexity Analysis
-	----------------------------------
+	##### ReverseString Complexity Analysis
+	
+	Time Complexity : O(N) we go over every charcter in input String
+	Space Complexity : O(N) 
 
-		Time Complexity : O(N) we go over every charcter in input String
-
-		Space Complexity : O(N) 
-
-=====================================================================================================================================
-@palindrome Algorithm
+---
+## Palindrome Algorithm
 	
 	Madam === madaM
 	TEsT  === TsET	 
