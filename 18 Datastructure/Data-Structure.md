@@ -75,43 +75,43 @@ console.timeEnd('v2');
 
 	
 	> Examples 
-```javascript		
-function Owith1(n) {				//O(1) Space Complexity
-	for (let i = 0; i < n; i++) {
-		console.log("whats up DP ?");
-	}
-}
-
-function Owith1withNumber(arr) {    //O(1) Space Complexity
-	let total = 0;
-	arr.map(item => total += item);
-	return total;
-}
-
-function OwithN(str) {	//O(n) Space Complexity
-	let reveresedStr = '';
- 	for (let i = 0; i < str.length; i++) {
-  		reveresedStr = str[i] + reveresedStr;
- 	}
- 	return reveresedStr;
-}
-
-function OwithNDivideBy2(arr) {  
-	let resArr = [];
-	arr.map(item => {
-		if (Math.random() < 0.5) {
-			resArr.push(item)
+	```javascript		
+	function Owith1(n) {				//O(1) Space Complexity
+		for (let i = 0; i < n; i++) {
+			console.log("whats up DP ?");
 		}
-	})
-	return resArr;
-};
+	}
 
-//O(n/2) -> O(n) Space Complexity    (because removing of constants rule)
-```
-> Why is Time Complexity Prioritized Over space Complexity
-* Costs to produce and run processors are much higher compared to RAM. 
-* Better use of time writing code that is easier on the processor...
-* Consumers / users in general care more about speed than Ram usage. example : Google Chrome...    		 		
+	function Owith1withNumber(arr) {    //O(1) Space Complexity
+		let total = 0;
+		arr.map(item => total += item);
+		return total;
+	}
+
+	function OwithN(str) {	//O(n) Space Complexity
+		let reveresedStr = '';
+		for (let i = 0; i < str.length; i++) {
+			reveresedStr = str[i] + reveresedStr;
+		}
+		return reveresedStr;
+	}
+
+	function OwithNDivideBy2(arr) {  
+		let resArr = [];
+		arr.map(item => {
+			if (Math.random() < 0.5) {
+				resArr.push(item)
+			}
+		})
+		return resArr;
+	};
+
+	//O(n/2) -> O(n) Space Complexity    (because removing of constants rule)
+	```
+	> Why is Time Complexity Prioritized Over space Complexity
+	* Costs to produce and run processors are much higher compared to RAM. 
+	* Better use of time writing code that is easier on the processor...
+	* Consumers / users in general care more about speed than Ram usage. example : Google Chrome...    		 		
 ---
 ## Logarithms
 	
