@@ -20,7 +20,6 @@ console.time('v1');
 console.log(sumUpToV1(100000000));
 console.timeEnd('v1');
 
-
 console.time('v2');
 console.log(sumUpToV2(100000000));
 console.timeEnd('v2');	
@@ -41,7 +40,7 @@ console.timeEnd('v2');
 	* O(702)  	-> O(1)
 	* O(2n)   	-> O(n)
 	* O(n/2)  	-> O(n)
-	* O(13n^2)  	-> O(n^2)
+	* O(13n^2) -> O(n^2)
 
 1. Smaller Terms do Not Matter
 
@@ -51,10 +50,11 @@ console.timeEnd('v2');
 
 #### Other terms for Big O Notation/ Time Complexity
 
-	* O(1) 	-> Constant Time 	: good
-	* O(n) 	-> Linera Time 		: fair		
-	* O(n^2) -> Quaratic Time	: bad
-	* O(1) > O(n) > O(n^2)		: performance 
+* O(1) 	-> Constant Time 	: good
+* O(n) 	-> Linera Time 		: fair		
+* O(n^2) -> Quaratic Time	: bad
+> O(1) > O(n) > O(n^2)		: performance 
+
 ---
 ## Space Complexity versus Time Complexity
 	
