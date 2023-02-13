@@ -242,21 +242,21 @@ Link : [Youtube-Alg-DS-Course-Starter-Code](https://github.com/KevinRSDNguyen/Yo
 
 	> Without inbuilt Methods
 
-#### forward Loop
-			
-```javascript
+	#### forward Loop
+				
+	```javascript
 
-	function reverse(str) {
-		let count = str.length;
-		let strRev = '';
-		for (let i = 0; i < count; i++) {
-			strRev = str[i] + strRev;
+		function reverse(str) {
+			let count = str.length;
+			let strRev = '';
+			for (let i = 0; i < count; i++) {
+				strRev = str[i] + strRev;
+			}
+
+			return strRev;
 		}
 
-		return strRev;
-	}
-
-```	
+	```	
 
 			
 
@@ -264,7 +264,6 @@ Link : [Youtube-Alg-DS-Course-Starter-Code](https://github.com/KevinRSDNguyen/Yo
 		
 
 ```javascript
-
 	function reverse(str) {
 		let count = str.length;
 		let strRev = '';
