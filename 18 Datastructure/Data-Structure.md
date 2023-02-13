@@ -4,39 +4,36 @@
 
 
 ```javascript
-	const sumUpToV1 = n => {
-	    let total = 0;
-	    for (let i = 1; i <= n; i++) {
-	        total += i;					// here is 1 * N operations => O(n) : Big O Notation
-	    };
+const sumUpToV1 = n => {
+ let total = 0;
+ for (let i = 1; i <= n; i++) {
+  total += i;                        // here is 1 * N operations => O(n) : Big O Notation
+ };
+ return total;
+}
 
-	    return total;
-	}
+const sumUpToV2 = n => {
+    return (n * (n + 1) / 2);        // here is 3 operations = O(3)  : Big O Notation
+}
 
-	const sumUpToV2 = n => {
-	    return (n * (n + 1) / 2);				// here is 3 operations = O(3)  : Big O Notation
-	}
-
-	console.time('v1');
-	console.log(sumUpToV1(100000000));
-	console.timeEnd('v1');
+console.time('v1');
+console.log(sumUpToV1(100000000));
+console.timeEnd('v1');
 
 
-	console.time('v2');
-	console.log(sumUpToV2(100000000));
-	console.timeEnd('v2');	
+console.time('v2');
+console.log(sumUpToV2(100000000));
+console.timeEnd('v2');	
 ```
 
 ---
-
 ## Identifying Runtime Complexity (Rules of Thumb)
 
-1. Iterating over a collection OR using N as a pointer with a for loop 		: O(n)
-1. Iterating over the same collection with nested for loops 					: O(n^2)
-1. Iterating over different collection with nested for loops 					: O(n*m)
+1. Iterating over a collection OR using N as a pointer with a for loop  : O(n)
+2. Iterating over the same collection with nested for loops  : O(n^2)
+3. Iterating over different collection with nested for loops : O(n*m)
 
 ---
-
 ## Rules for big O Notation
 1. Constants do Not Matter 
 		
