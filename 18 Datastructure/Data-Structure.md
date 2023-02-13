@@ -130,9 +130,8 @@
 	- Costs to produce and run processors are much higher compared to RAM. 
 	- Better use of time writing code that is easier on the processor...
 	- Consumers / users in general care more about speed than Ram usage. example : Google Chrome...    		 		
-
-=====================================================================================================================================
-@Logarithms
+---
+## Logarithms
 	
 	Log2 8 = 3						Log2 16 = 4 
 
@@ -226,15 +225,15 @@
 
 			EveryTime we do an "operation" like Guessing, we can elminate Half the remaining operations.							
 
-=====================================================================================================================================
-@Algorithms 
+---
+## Algorithms 
 	
 	Algorithms require consistent pratice to remain after the initial leaning period
 
 	Link : https://github.com/KevinRSDNguyen/Youtube-Alg-DS-Course-Starter-Code
 
-=====================================================================================================================================
-@Reverse Algorithm
+---
+## Reverse Algorithm
 	
 	1. Turn the string into an array
 	2. Use array method of reverse() to reverse contents of array
