@@ -235,13 +235,12 @@ Link : [Youtube-Alg-DS-Course-Starter-Code](https://github.com/KevinRSDNguyen/Yo
 ---
 ## Reverse Algorithm
 	
-	1. Turn the string into an array
-	2. Use array method of reverse() to reverse contents of array
-	3. Turn the reversed array back into string
+1. Turn the string into an array
+1. Use array method of reverse() to reverse contents of array
+2. Turn the reversed array back into string
 
 
-	#Without inbuilt Methods
-	------------------------
+	// Without inbuilt Methods
 
 		1. forward Loop
 		---------------
