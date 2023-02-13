@@ -227,8 +227,9 @@
 
 ---
 ## Algorithms 
-	
-`<p>Algorithms require consistent pratice to remain after the initial leaning period </p>`
+ 
+> Algorithms require consistent pratice to remain after the initial leaning period
+
 Link : [Youtube-Alg-DS-Course-Starter-Code](https://github.com/KevinRSDNguyen/Youtube-Alg-DS-Course-Starter-Code "Youtube-Alg-DS-Course-Starter-Code")
 
 ---
