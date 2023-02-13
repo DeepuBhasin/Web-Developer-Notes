@@ -1,4 +1,4 @@
-## What does **Better** implementation means ?
+## What does *Better* implementation means ?
 
 > "Better" means faster time to finish and to use less memory (RAM), although there is much stronger emphasis on the former
 
