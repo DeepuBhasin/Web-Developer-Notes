@@ -38,29 +38,28 @@
 ---
 
 ## Rules for big O Notation
+1. Constants do Not Matter 
 	
-	1. Constants do Not Matter 
-	
-		O(12)  		-> O(1)
-		O(702)  	-> O(1)
-		O(2n)   	-> O(n)
-		O(n/2)  	-> O(n)
-		O(13n^2)  	-> O(n^2)
+*O(12)  	-> O(1)
+*O(702)  	-> O(1)
+*O(2n)   	-> O(n)
+*O(n/2)  	-> O(n)
+*O(13n^2)  	-> O(n^2)
 
-	2. Smaller Terms do Not Matter
+1. Smaller Terms do Not Matter
 
-		O(n+10) 			-> O(n)
-		O(1337n + 50)		-> O(n)
-		O(n^2 + 13n + 8)	-> O(n^2)
+*O(n+10) 			-> O(n)
+*O(1337n + 50)		-> O(n)
+*O(n^2 + 13n + 8)	-> O(n^2)
 
-	#Other terms for Big O Notation/ Time Complexity
+> Other terms for Big O Notation/ Time Complexity
 
-		O(1) 	-> Constant Time 									: good
-		O(n) 	-> Linera Time 										: fair		
-		O(n^2)	-> Quaratic Time									: bad
+*O(1) 	-> Constant Time 	: good
+*O(n) 	-> Linera Time 		: fair		
+*O(n^2)	-> Quaratic Time	: bad
 
 
-		O(1) > O(n) > O(n^2)	: performance 
+>O(1) > O(n) > O(n^2)	: performance 
 
 =====================================================================================================================================
 @Space Complexity versus Time Complexity
