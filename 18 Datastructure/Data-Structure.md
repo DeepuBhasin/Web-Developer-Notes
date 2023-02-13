@@ -246,24 +246,20 @@ Link : [Youtube-Alg-DS-Course-Starter-Code](https://github.com/KevinRSDNguyen/Yo
 				
 	```javascript
 
-		function reverse(str) {
-			let count = str.length;
-			let strRev = '';
-			for (let i = 0; i < count; i++) {
-				strRev = str[i] + strRev;
-			}
-
-			return strRev;
+	function reverse(str) {
+		let count = str.length;
+		let strRev = '';
+		for (let i = 0; i < count; i++) {
+			strRev = str[i] + strRev;
 		}
+		return strRev;
+	}
 
 	```	
-
-			
-
-#### backword loop
+	#### backword loop
 		
 
-```javascript
+	```javascript
 	function reverse(str) {
 		let count = str.length;
 		let strRev = '';
@@ -273,7 +269,7 @@ Link : [Youtube-Alg-DS-Course-Starter-Code](https://github.com/KevinRSDNguyen/Yo
 		}
 		return strRev;
 	}
-```	
+	```	
 
 	> With inbuilt methods
 	
