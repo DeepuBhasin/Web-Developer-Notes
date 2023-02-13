@@ -326,8 +326,8 @@ Link : [Youtube-Alg-DS-Course-Starter-Code](https://github.com/KevinRSDNguyen/Yo
 		  if (reverse === str) return true;
 		  else return false;
 		}	
-=====================================================================================================================================
-@reverseInt Algorithm
+---
+## ReverseInt Algorithm
 
 	Example 
 	-------
@@ -360,8 +360,8 @@ Link : [Youtube-Alg-DS-Course-Starter-Code](https://github.com/KevinRSDNguyen/Yo
 
 	Time complexity : O(Log N) if the input increse by factor of 10, we do one more operation	
 
-=====================================================================================================================================
-@reverseInt Algorithm
+---
+## MaxChar Algorithm
 
 	// maxChar("I loveeeeeee noodles") === "e"
 	// maxChar("1337") === "3"
