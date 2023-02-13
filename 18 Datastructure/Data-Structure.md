@@ -242,39 +242,39 @@ Link : [Youtube-Alg-DS-Course-Starter-Code](https://github.com/KevinRSDNguyen/Yo
 
 	> Without inbuilt Methods
 
-		##### forward Loop
+#### forward Loop
 			
-			```javascript
+```javascript
 
-				function reverse(str) {
-					let count = str.length;
-					let strRev = '';
-					for (let i = 0; i < count; i++) {
-						strRev = str[i] + strRev;
-					}
+	function reverse(str) {
+		let count = str.length;
+		let strRev = '';
+		for (let i = 0; i < count; i++) {
+			strRev = str[i] + strRev;
+		}
 
-					return strRev;
-				}
+		return strRev;
+	}
 
-			```	
+```	
 
 			
 
-		##### backword loop
+#### backword loop
 		
 
-			```javascript
+```javascript
 
-				function reverse(str) {
-					let count = str.length;
-					let strRev = '';
-					for (let i = count - 1; i >= 0; i--) {
+	function reverse(str) {
+		let count = str.length;
+		let strRev = '';
+		for (let i = count - 1; i >= 0; i--) {
 
-						strRev += str[i];
-					}
-					return strRev;
-				}
-			```	
+			strRev += str[i];
+		}
+		return strRev;
+	}
+```	
 
 	> With inbuilt methods
 	
