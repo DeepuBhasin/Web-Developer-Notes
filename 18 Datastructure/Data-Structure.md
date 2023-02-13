@@ -240,7 +240,7 @@ Link : [Youtube-Alg-DS-Course-Starter-Code](https://github.com/KevinRSDNguyen/Yo
 2. Turn the reversed array back into string
 
 
-	// Without inbuilt Methods
+	> Without inbuilt Methods
 
 		1. forward Loop
 		---------------
