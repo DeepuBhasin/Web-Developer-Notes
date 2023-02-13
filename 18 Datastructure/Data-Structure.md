@@ -1,32 +1,31 @@
 # What does "better" implementation means ?
 
-	###### "Better" means faster time to finish and to use less memory (RAM), although there is much stronger emphasis on the former
+> "Better" means faster time to finish and to use less memory (RAM), although there is much stronger emphasis on the former
 
 
-	```javascript
+```javascript
 	const sumUpToV1 = n => {
-        let total = 0;
-        for (let i = 1; i <= n; i++) {
-            total += i;									
-        };
+	    let total = 0;
+	    for (let i = 1; i <= n; i++) {
+	        total += i;									
+	    };
 
-        return total;
-    }
+	    return total;
+	}
 
-    const sumUpToV2 = n => {
-        return (n * (n + 1) / 2);						
-    }
+	const sumUpToV2 = n => {
+	    return (n * (n + 1) / 2);						
+	}
 
-    console.time('v1');
-    console.log(sumUpToV1(100000000));
-    console.timeEnd('v1');
+	console.time('v1');
+	console.log(sumUpToV1(100000000));
+	console.timeEnd('v1');
 
 
-    console.time('v2');
-    console.log(sumUpToV2(100000000));
-    console.timeEnd('v2');	
-
-   ``` 
+	console.time('v2');
+	console.log(sumUpToV2(100000000));
+	console.timeEnd('v2');	
+```
 
 ---
 
