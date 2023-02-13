@@ -29,14 +29,15 @@
 
 ---
 
-@Identifying Runtime Complexity (Rules of Thumb)
+## Identifying Runtime Complexity (Rules of Thumb)
 
-	1. Iterating over a collection OR using N as a pointer with a for loop 			: O(n)
-	2. Iterating over the same collection with nested for loops 					: O(n^2)
-	3. Iterating over different collection with nested for loops 					: O(n*m)
+1. Iterating over a collection OR using N as a pointer with a for loop 		: O(n)
+1. Iterating over the same collection with nested for loops 					: O(n^2)
+1. Iterating over different collection with nested for loops 					: O(n*m)
 
-=====================================================================================================================================
-@Rules for big O Notation
+---
+
+## Rules for big O Notation
 	
 	1. Constants do Not Matter 
 	
