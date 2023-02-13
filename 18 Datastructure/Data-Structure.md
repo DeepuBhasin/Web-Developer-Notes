@@ -236,24 +236,27 @@ Link : [Youtube-Alg-DS-Course-Starter-Code](https://github.com/KevinRSDNguyen/Yo
 ## Reverse Algorithm
 	
 1. Turn the string into an array
-1. Use array method of reverse() to reverse contents of array
-2. Turn the reversed array back into string
+2. Use array method of reverse() to reverse contents of array
+3. Turn the reversed array back into string
 
 
 	> Without inbuilt Methods
 
-		1. forward Loop
-		---------------
+		* forward Loop
+			
+			```javascript
+				function reverse(str) {
+					let count = str.length;
+					let strRev = '';
+					for (let i = 0; i < count; i++) {
+						strRev = str[i] + strRev;
+					}
 
-			function reverse(str) {
-				let count = str.length;
-				let strRev = '';
-				for (let i = 0; i < count; i++) {
-					strRev = str[i] + strRev;
+					return strRev;
 				}
+			```	
 
-				return strRev;
-			}
+			
 
 		2. backword loop
 		----------------
