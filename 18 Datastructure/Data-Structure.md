@@ -1,4 +1,4 @@
-What does "better" implementation means ?
+#What does "better" implementation means ?
 
 	- "Better" means faster time to finish and to use less memory (RAM), although there is much stronger emphasis on the former
 
@@ -25,7 +25,8 @@ What does "better" implementation means ?
     console.log(sumUpToV2(100000000));
     console.timeEnd('v2');	
 
-=====================================================================================================================================
+---
+
 @Identifying Runtime Complexity (Rules of Thumb)
 
 	1. Iterating over a collection OR using N as a pointer with a for loop 			: O(n)

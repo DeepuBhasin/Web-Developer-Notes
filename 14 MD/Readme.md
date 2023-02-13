@@ -82,7 +82,7 @@ ___
  | Sri No | Name |
  |--------|------|
  |1.      |Deepinder Singh|
- |2.      |Simranjeet Kaur |
+ |2.      |deepu Bhasin   |
  |3.      |Devinder       |
  |4.      |Alisha         |
 
