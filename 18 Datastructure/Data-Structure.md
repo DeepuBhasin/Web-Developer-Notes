@@ -59,7 +59,7 @@
 	* O(n^2) -> Quaratic Time	: bad
 	* O(1) > O(n) > O(n^2)		: performance 
 ---
-# Space Complexity versus Time Complexity
+## Space Complexity versus Time Complexity
 	
 	-Space Complexity : How much more memory use (RAM) do we need as the inputs provided to the code gets larger ?
 	-Time Complexity : How much more runtime do we need as the inputs provided to the code gets larger ? 
