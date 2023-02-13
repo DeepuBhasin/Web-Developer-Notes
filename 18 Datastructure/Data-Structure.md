@@ -242,9 +242,10 @@ Link : [Youtube-Alg-DS-Course-Starter-Code](https://github.com/KevinRSDNguyen/Yo
 
 	> Without inbuilt Methods
 
-		* forward Loop
+		##### forward Loop
 			
 			```javascript
+
 				function reverse(str) {
 					let count = str.length;
 					let strRev = '';
@@ -254,25 +255,29 @@ Link : [Youtube-Alg-DS-Course-Starter-Code](https://github.com/KevinRSDNguyen/Yo
 
 					return strRev;
 				}
+
 			```	
 
 			
 
-		2. backword loop
-		----------------
+		##### backword loop
+		
 
-			function reverse(str) {
-				let count = str.length;
-				let strRev = '';
-				for (let i = count - 1; i >= 0; i--) {
+			```javascript
 
-					strRev += str[i];
+				function reverse(str) {
+					let count = str.length;
+					let strRev = '';
+					for (let i = count - 1; i >= 0; i--) {
+
+						strRev += str[i];
+					}
+					return strRev;
 				}
-				return strRev;
-			}	
+			```	
 
-	#With inbuilt methods
-	---------------------
+	> With inbuilt methods
+	
 
 		1. Split + reverse + join
 		-------------------------
