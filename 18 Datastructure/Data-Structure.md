@@ -420,21 +420,19 @@ Link : [Youtube-Alg-DS-Course-Starter-Code](https://github.com/KevinRSDNguyen/Yo
 	    console.log(str)
 	  }
 	}
+---
+## Capitalize Algorithm
 
-=====================================================================================================================================
-@capitalize Algorithm
-
-	function capitalize(str) {
-	  str = str.toLowerCase();
-
-	  str = str.split(" ");
-	  for (let i = 0; i < str.length; i++) {
-	    str[i] = str[i][0].toUpperCase() + str[i].slice(1);
-	  }
-	  str = str.join(" ");
-
-	  return str;
-	}
-
-	
-	Time complexity : O(N)
+```javascript
+function capitalize(str) {
+ str = str.toLowerCase();
+ str = str.split(" ");
+ for (let i = 0; i < str.length; i++) {
+  str[i] = str[i][0].toUpperCase() + str[i].slice(1);
+ }
+ str = str.join(" ");
+ return str;
+}
+```	
+##### Capitalize Complexity Analysis
+Time complexity : O(N)
