@@ -57,7 +57,7 @@
 	* O(1) 	-> Constant Time 	: good
 	* O(n) 	-> Linera Time 		: fair		
 	* O(n^2) -> Quaratic Time	: bad
-	* #### O(1) > O(n) > O(n^2)	: performance 
+	* O(1) > O(n) > O(n^2)	: performance 
 
 =====================================================================================================================================
 @Space Complexity versus Time Complexity
