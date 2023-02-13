@@ -922,6 +922,7 @@ to parent
 	6. useMemo		: useMemo returns a memoized value 
 	7. useCallback	: useCallback returns a memoized function.
 	8. useRef		: 
+	9. useNavigate	: for navigation or route
 
 #rules for Hooks 
 		
@@ -2510,8 +2511,53 @@ The useReducer Hook returns the current stateand a dispatchmethod.
 
 	export default App;
 
+=============================================================================================================================
+@debug App
 
+1. Console
+2. source
+3. React Developer Tool (check states + components)
 
+=============================================================================================================================
+@prop Type
+
+	#command
+	--------
+
+		npm install prop-types
+
+	
+	#App.js
+	-------
+		
+		import Dashboard from './page-layout/dashboard';
+		const App = () => {
+		  return (
+			<Dashboard gender={true} />							// not passing name property 
+		  )
+		}
+
+		export default App;	
+
+	#Dashboard.js
+	-------------
+
+		import PropTypes from 'prop-types';
+		const Dashboard = ({ name, gender }) => {
+		    return (
+		        <h1>Hello World {name} {gender ? 'Male' : 'Female'}</h1>
+		    )
+		}
+		Dashboard.propTypes = {
+		    name: PropTypes.string,											
+		    gender: PropTypes.bool.isRequired								// define type with required condition
+		};
+
+		Dashboard.defaultProps = {
+		    name: 'Deepu',													// settinf default value		
+		};
+
+		export default Dashboard;	
 
 
 

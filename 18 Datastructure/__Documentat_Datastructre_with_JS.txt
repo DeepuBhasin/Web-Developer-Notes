@@ -1,0 +1,132 @@
+What does "better" implementation means ?
+
+	- "Better" means faster time to finish and to use less memory (RAM), although there is much stronger emphasis on the former
+
+
+	const sumUpToV1 = n => {
+        let total = 0;
+        for (let i = 1; i <= n; i++) {
+            total += i;									// here is 1 * N operations => O(n) : Big O Notation
+        };
+
+        return total;
+    }
+
+    const sumUpToV2 = n => {
+        return (n * (n + 1) / 2);						// here is 3 operations = O(3)  : Big O Notation
+    }
+
+    console.time('v1');
+    console.log(sumUpToV1(100000000));
+    console.timeEnd('v1');
+
+
+    console.time('v2');
+    console.log(sumUpToV2(100000000));
+    console.timeEnd('v2');	
+
+=====================================================================================================================================
+@Identifying Runtime Complexity (Rules of Thumb)
+
+	1. Iterating over a collection OR using N as a pointer with a for loop 			: O(n)
+	2. Iterating over the same collection with nested for loops 					: O(n^2)
+	3. Iterating over different collection with nested for loops 					: O(n*m)
+
+=====================================================================================================================================
+@Rules for big O Notation
+	
+	1. Constants do Not Matter 
+	
+		O(12)  		-> O(1)
+		O(702)  	-> O(1)
+		O(2n)   	-> O(n)
+		O(n/2)  	-> O(n)
+		O(13n^2)  	-> O(n^2)
+
+	2. Smaller Terms do Not Matter
+
+		O(n+10) 			-> O(n)
+		O(1337n + 50)		-> O(n)
+		O(n^2 + 13n + 8)	-> O(n^2)
+
+	#Other terms for Big O Notation/ Time Complexity
+
+		O(1) 	-> Constant Time 									: good
+		O(n) 	-> Linera Time 										: fair		
+		O(n^2)	-> Quaratic Time									: bad
+
+
+		O(1) > O(n) > O(n^2)	: performance 
+
+=====================================================================================================================================
+@Space Complexity versus Time Complexity
+	
+	-Space Complexity : How much more memory use (RAM) do we need as the inputs provided to the code gets larger ?
+	-Time Complexity : How much more runtime do we need as the inputs provided to the code gets larger ? 
+
+		Both of the above still use Big O notation
+
+	#space Complexity Rules of thumb
+	--------------------------------
+
+		Storing values in variables always takes up memory
+
+
+		- Most Primitive (Boolean and Numbers) takes up O(1) / Constant Space
+
+			var x=100 and var x = 200 take up same amount of memory
+
+		- String, Arrays and Objects take up O(n) / Linear Space
+
+			An Array with 4 elements takes up twice the memory of Array with 2 elements 
+
+	
+	#Examples 
+	---------
+
+		function Owith1(n) {
+	        for (let i = 0; i < n; i++) {
+	            console.log("whats up DP ?");
+	        }
+	    }
+
+	    //O(1) Space Complexity
+
+	    function Owith1withNumber(arr) {
+	        let total = 0;
+	        arr.map(item => total += item);
+	        return total;
+	    }
+
+	    //O(1) Space Complexity
+
+	    function OwithN(str) {
+	        let reveresedStr = '';
+	        for (let i = 0; i < str.length; i++) {
+	            reveresedStr = str[i] + reveresedStr;
+	        }
+
+	        return reveresedStr;
+	    }
+
+	    //O(n) Space Complexity
+
+	    function OwithNDivideBy2(arr) {
+	        let resArr = [];
+	        arr.map(item => {
+	            if (Math.random() < 0.5) {
+	                resArr.push(item)
+	            }
+	        })
+	        return resArr;
+	    };
+
+	    //O(n/2) -> O(n) Space Complexity    (because removing of constants rule)
+
+	
+
+	Why is Time Complexity Prioritized Over space Complexity
+
+	- Costs to produce and run processors are much higher compared to RAM. 
+	- Better use of time writing code that is easier on the processor...
+	- Consumers / users in general care more about speed than Ram usage. example : Google Chrome...    		 		
