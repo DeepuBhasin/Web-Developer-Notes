@@ -48,85 +48,70 @@ console.timeEnd('v2');
 	* O(1337n + 50)		-> O(n)
 	* O(n^2 + 13n + 8)	-> O(n^2)
 
-	#### Other terms for Big O Notation/ Time Complexity
+> Other terms for Big O Notation/ Time Complexity
 
-	* O(1) 	-> Constant Time 	: good
-	* O(n) 	-> Linera Time 		: fair		
-	* O(n^2) -> Quaratic Time	: bad
-	> O(1) > O(n) > O(n^2)		: performance 
+   * O(1) 	-> Constant Time 	: good_
+   * O(n) 	-> Linera Time 		: fair		
+   * O(n^2) -> Quaratic Time	: bad
+	 
+	 _O(1) > O(n) > O(n^2)		: performance_ 
 
 ---
 ## Space Complexity versus Time Complexity
-	
-	-Space Complexity : How much more memory use (RAM) do we need as the inputs provided to the code gets larger ?
-	-Time Complexity : How much more runtime do we need as the inputs provided to the code gets larger ? 
 
-		Both of the above still use Big O notation
-
-	#space Complexity Rules of thumb
-	--------------------------------
-
+* Space Complexity : How much more memory use (RAM) do we need as the inputs provided to the code gets larger ?
+* Time Complexity : How much more runtime do we need as the inputs provided to the code gets larger ? 
+ 
+	> *Both of the above still use Big O notation*
+	#### Space Complexity Rules of thumb
+		
 		Storing values in variables always takes up memory
-
-
-		- Most Primitive (Boolean and Numbers) takes up O(1) / Constant Space
+	* Most Primitive (Boolean and Numbers) takes up O(1) / Constant Space
 
 			var x=100 and var x = 200 take up same amount of memory
-
-		- String, Arrays and Objects take up O(n) / Linear Space
+	* String, Arrays and Objects take up O(n) / Linear Space
 
 			An Array with 4 elements takes up twice the memory of Array with 2 elements 
 
 	
-	#Examples 
-	---------
+	> Examples 
+```javascript		
+function Owith1(n) {				//O(1) Space Complexity
+	for (let i = 0; i < n; i++) {
+		console.log("whats up DP ?");
+	}
+}
 
-		function Owith1(n) {
-	        for (let i = 0; i < n; i++) {
-	            console.log("whats up DP ?");
-	        }
-	    }
+function Owith1withNumber(arr) {    //O(1) Space Complexity
+	let total = 0;
+	arr.map(item => total += item);
+	return total;
+}
 
-	    //O(1) Space Complexity
+function OwithN(str) {	//O(n) Space Complexity
+	let reveresedStr = '';
+ 	for (let i = 0; i < str.length; i++) {
+  		reveresedStr = str[i] + reveresedStr;
+ 	}
+ 	return reveresedStr;
+}
 
-	    function Owith1withNumber(arr) {
-	        let total = 0;
-	        arr.map(item => total += item);
-	        return total;
-	    }
+function OwithNDivideBy2(arr) {  
+	let resArr = [];
+	arr.map(item => {
+		if (Math.random() < 0.5) {
+			resArr.push(item)
+		}
+	})
+	return resArr;
+};
 
-	    //O(1) Space Complexity
-
-	    function OwithN(str) {
-	        let reveresedStr = '';
-	        for (let i = 0; i < str.length; i++) {
-	            reveresedStr = str[i] + reveresedStr;
-	        }
-
-	        return reveresedStr;
-	    }
-
-	    //O(n) Space Complexity
-
-	    function OwithNDivideBy2(arr) {
-	        let resArr = [];
-	        arr.map(item => {
-	            if (Math.random() < 0.5) {
-	                resArr.push(item)
-	            }
-	        })
-	        return resArr;
-	    };
-
-	    //O(n/2) -> O(n) Space Complexity    (because removing of constants rule)
-
-	
-
-	Why is Time Complexity Prioritized Over space Complexity
-
-	- Costs to produce and run processors are much higher compared to RAM. 
-	- Better use of time writing code that is easier on the processor...
-	- Consumers / users in general care more about speed than Ram usage. example : Google Chrome...    		 		
+//O(n/2) -> O(n) Space Complexity    (because removing of constants rule)
+```
+> Why is Time Complexity Prioritized Over space Complexity
+* Costs to produce and run processors are much higher compared to RAM. 
+* Better use of time writing code that is easier on the processor...
+* Consumers / users in general care more about speed than Ram usage. example : Google Chrome...    		 		
 ---
 ## Logarithms
 	
