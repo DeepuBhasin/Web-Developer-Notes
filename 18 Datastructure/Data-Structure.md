@@ -242,56 +242,56 @@ Link : [Youtube-Alg-DS-Course-Starter-Code](https://github.com/KevinRSDNguyen/Yo
 
 	> Without inbuilt Methods
 
-		#### Forward Loop
-					
-		```javascript
+	#### Forward Loop
+				
+	```javascript
 
-		function reverse(str) {
-			let count = str.length;
-			let strRev = '';
-			for (let i = 0; i < count; i++) {
-				strRev = str[i] + strRev;
-			}
-			return strRev;
+	function reverse(str) {
+		let count = str.length;
+		let strRev = '';
+		for (let i = 0; i < count; i++) {
+			strRev = str[i] + strRev;
 		}
+		return strRev;
+	}
 
-		```	
-		#### Backword loop
-			
+	```	
+	#### Backword loop
+		
 
-		```javascript
-		function reverse(str) {
-			let count = str.length;
-			let strRev = '';
-			for (let i = count - 1; i >= 0; i--) {
+	```javascript
+	function reverse(str) {
+		let count = str.length;
+		let strRev = '';
+		for (let i = count - 1; i >= 0; i--) {
 
-				strRev += str[i];
-			}
-			return strRev;
+			strRev += str[i];
 		}
-		```
+		return strRev;
+	}
+	```
 
 	> With inbuilt methods
 	
+	#### Split + reverse + join
+	
+	```javascript
+		function reverse(str) {
+			return str.split('').reverse().join('');
+		}
+	```	
+	#### Reduce
+	
+	```javascript	
+		function reverse(str) {
+			let reverseString = str.split('').reduce((acc, cum) => {
+				acc = cum + acc;
+				return acc;
+			}, '');
 
-		1. Split + reverse + join
-		-------------------------
-
-			function reverse(str) {
-				return str.split('').reverse().join('');
-			}
-
-		2. Reduce
-		---------
-
-			function reverse(str) {
-				let reverseString = str.split('').reduce((acc, cum) => {
-					acc = cum + acc;
-					return acc;
-				}, '');
-
-				return reverseString;
-			}	
+			return reverseString;
+		}
+	```	
 
 	#ReverseString Complexity Analysis
 	----------------------------------
