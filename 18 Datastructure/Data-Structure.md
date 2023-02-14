@@ -502,5 +502,74 @@ function anagrams(stringA, stringB) {
 return true;
 }
 ```
-* *Time complexity and Space Complexity : chunk Complexity Analysis : O(N)*
+* *Time complexity : O(N * Log N) we made use of a Sort algorithm beacuse of sort() it is implementing nested for loop*
+* *Space complexity : O(N) Sorted Strings as long as input string*
+---
+
+## Steps Algorithm
+Examples
+* steps(2)
+	* '# '
+	* '##'
+* steps(3)
+	* '#  '
+	* '## '
+	* '###'
+* steps(4)
+    * '#   '
+    * '##  '
+    * '### '
+    * '####'
+
+```javascript
+function steps(n) {
+  str = '';
+  for (let i = 1; i <= n; i++) {
+    for (let j = 1; j <= i; j++) {
+      str += '#';
+    }
+    for (let j = n; j > i; j--) {
+      str += '*';
+    }
+    str += '\n';
+  }
+  console.log(str);
+  return str
+}
+```
+* *Time Complexity : O(N^2) Both Inner and Outer For loops run N Times*
+---
+## Pyramid Algorithm
+
+Examples
+* pyramid(1)
+  * '#'
+* pyramid(2)
+ 	* ' # '
+ 	* '###'
+* pyramid(3)
+ 	* '  #  '
+ 	* ' ### '
+ 	* '#####'
+```javascript
+function pyramid(n) {
+  let str = ''
+  for (let i = 1; i <= n; i++) {
+    for (let j = n; j > i; j--) {
+      str += ' '
+    }
+    for (let j = 0; j < i; j++) {
+      str += '#'
+    }
+
+    for (let j = 1; j < i; j++) {
+      str += '#'
+    }
+    str += '\n';
+  }
+  console.log(str);
+  return str;
+}	
+```
+* *Time Complexity : O(N^2) Outer loop runs N times, Inner Loop run roughly N Times*
 ---
