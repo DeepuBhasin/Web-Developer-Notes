@@ -573,3 +573,68 @@ function pyramid(n) {
 ```
 * *Time Complexity : O(N^2) Outer loop runs N times, Inner Loop run roughly N Times*
 ---
+
+## Vovles Count Algorithm
+Examples
+* vowels('What') --> 1
+* vowels('Why?') --> 0
+* vowels('aEiOu') --> 5
+* vowels('I am a world-class developer using iterations') --> 16
+
+> With indexOf  
+```javascipt
+function vowels(str) {
+  let count = 0;
+  let vovles = 'aeiou'.split('');
+  for (let i of str.toLowerCase()) {
+    if (vovles.indexOf(i) !== -1) {
+      count++
+    }
+ return count;
+}
+```
+
+> With includes  
+```javascipt
+function vowels(str) {
+  let count = 0;
+  let vovles = 'aeiou'.split('');
+  for (let i of str.toLowerCase()) {
+    if (vovles.indexOf(i) !== -1) {
+      count++
+    }
+    if (i.includes('a')
+      || i.includes('e')
+      || i.includes('i')
+      || i.includes('o')
+      || i.includes('u')
+    ) {
+      count++;
+    }
+  }
+  return count;
+}
+```
+* *Time Complexity : O(N) All Characters of input string must be checked to see if it is a vowel*
+* *Space Complexity : O(1)*
+
+---
+## Searching Algorithm
+Various Methods
+* inclues()
+* indexOf()
+* find()
+* findIndex()
+* filter()
+
+```javascript
+const inventory = ["bikes", "backpackes", "laptops", "eggs"];
+
+inventory.includes("backpackes")  					// true
+inventory.indexOf("backpackes")   					// 1
+inventory.find(item => item == "backpackes") 		// backpackes
+inventory.findIndex(item => item == "backpackes") 	// 1
+inventory.filter(item => item == "backpackes"); 	// ["backpackes"]
+
+``` 
+
