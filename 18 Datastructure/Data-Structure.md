@@ -262,7 +262,7 @@ function reverse(str) {
 	return reverseString;
 }
 ```	
-> ReverseString Complexity Analysis *Time Complexity : O(N) we go over every charcter in input String Space Complexity : O(N )* 
+* *Time Complexity : O(N) we go over every charcter in input String Space Complexity : O(N )* 
 
 ---
 ## Palindrome Algorithm
@@ -317,8 +317,8 @@ function reverseInt(n) {
 	}
 	return reverse;
 }	
-```	
-> *Time complexity : O(Log N)* if the input increse by factor of 10, we do one more operation	
+```
+* *Time complexity : O(Log N) if the input increse by factor of 10, we do one more operation*
 
 ---
 ## MaxChar Algorithm
@@ -342,9 +342,8 @@ function maxChar(str) {
 	return maxChar;
 }	
 ```	
-> *Time Complexity : O(N)* we visit every charcter in input string
-> 
-> *Space Complexity : O(1)* charcter count Obj will have at most 26 key-val pairs (beacuse 26 charcter in our Letters)	
+* *Time Complexity : O(N)* we visit every charcter in input string
+* *Space Complexity : O(1)* charcter count Obj will have at most 26 key-val pairs (beacuse 26 charcter in our Letters)	
 
 ## Fizzbuzz Algorithm
 Write a program that console logs the numbers
@@ -380,7 +379,7 @@ function fizzBuzz(n) {
 	}
 }
 ```
-> Time complexity for *fizzBuzz Complexity Analysis : O(N)*
+* Time complexity for *fizzBuzz Complexity Analysis : O(N)*
 ---
 ## Capitalize Algorithm
 
@@ -395,7 +394,7 @@ function capitalize(str) {
  return str;
 }
 ```	
-> Time complexity for *Capitalize Complexity Analysis : O(N)*
+* Time complexity for *Capitalize Complexity Analysis : O(N)*
 
 ## Chunk Algorithm
 Examples
@@ -451,7 +450,7 @@ function chunk(array, size) {
 ```
 >Time complexity and Space Complexity : *chunk Complexity Analysis : O(N)*
 ---
-## Anagrams A
+## Anagrams Algorithm
 Examples
 * anagrams('heart', 'earth') --> True
 * anagrams('heart', '  earth') --> True
