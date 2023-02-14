@@ -66,55 +66,58 @@ console.timeEnd('v2');
 * Time Complexity : How much more runtime do we need as the inputs provided to the code gets larger ? 
  
 	> *Both of the above still use Big O notation*
-	#### Space Complexity Rules of thumb
-		
-		Storing values in variables always takes up memory
-	* Most Primitive (Boolean and Numbers) takes up O(1) / Constant Space
 
-			var x=100 and var x = 200 take up same amount of memory
-	* String, Arrays and Objects take up O(n) / Linear Space
+Space Complexity Rules of thumb
+* Storing values in variables always takes up memory
+1. Most Primitive (Boolean and Numbers) takes up O(1) / Constant Space
+	* var x=100 and var x = 200 take up same amount of memory
+1. String, Arrays and Objects take up O(n) / Linear Space
+	* An Array with 4 elements takes up twice the memory of Array with 2 elements 
 
-			An Array with 4 elements takes up twice the memory of Array with 2 elements 
+Examples 
 
+```javascript		
+function Owith1(n) {			
+	for (let i = 0; i < n; i++) {
+		console.log("whats up DP ?");
+	}
+}
+
+//O(1) Space Complexity
+
+function Owith1withNumber(arr) {    
+	let total = 0;
+	arr.map(item => total += item);
+	return total;
+}
+//O(1) Space Complexity
+
+function OwithN(str) {	
+	let reveresedStr = '';
+	for (let i = 0; i < str.length; i++) {
+		reveresedStr = str[i] + reveresedStr;
+	}
+	return reveresedStr;
+}
+//O(n) Space Complexity
+
+function OwithNDivideBy2(arr) {  
+	let resArr = [];
+	arr.map(item => {
+		if (Math.random() < 0.5) {
+			resArr.push(item)
+		}
+	})
+	return resArr;
+};
+
+//O(n/2) -> O(n) Space Complexity    (because removing of constants rule)
+```
+> Why is Time Complexity Prioritized Over space Complexity
 	
-	Examples 
-	```javascript		
-	function Owith1(n) {				//O(1) Space Complexity
-		for (let i = 0; i < n; i++) {
-			console.log("whats up DP ?");
-		}
-	}
-
-	function Owith1withNumber(arr) {    //O(1) Space Complexity
-		let total = 0;
-		arr.map(item => total += item);
-		return total;
-	}
-
-	function OwithN(str) {	//O(n) Space Complexity
-		let reveresedStr = '';
-		for (let i = 0; i < str.length; i++) {
-			reveresedStr = str[i] + reveresedStr;
-		}
-		return reveresedStr;
-	}
-
-	function OwithNDivideBy2(arr) {  
-		let resArr = [];
-		arr.map(item => {
-			if (Math.random() < 0.5) {
-				resArr.push(item)
-			}
-		})
-		return resArr;
-	};
-
-	//O(n/2) -> O(n) Space Complexity    (because removing of constants rule)
-	```
-	> Why is Time Complexity Prioritized Over space Complexity
-	* Costs to produce and run processors are much higher compared to RAM. 
-	* Better use of time writing code that is easier on the processor...
-	* Consumers / users in general care more about speed than Ram usage. example : Google Chrome...    		 		
+* Costs to produce and run processors are much higher compared to RAM. 
+* Better use of time writing code that is easier on the processor...
+* Consumers / users in general care more about speed than Ram usage. example : Google Chrome...    		 		
 ---
 ## Logarithms
 	
@@ -172,7 +175,7 @@ The Guessing Numbers Game : Log N
 		
 		50 "Operations" / Guesses (Worst Case)
 
-2. Question : 2
+2. Question
 		
 	I am thinking of a #from 1 to 100 (Answers is 1)
 
@@ -183,22 +186,18 @@ The Guessing Numbers Game : Log N
 		is the number 3 ? -> "No it is less than that"
 		is the number 2 ? -> "No it is less than that"	
 		is the number 1 ? -> "Yes"
-
-	100 "Operations" / Guesses (Worst Case)
-
-	Big notiation only considered worst case
+		
+		100 "Operations" / Guesses (Worst Case)
+		
+		Big notiation only considered worst case
 
 		
-
-		O(log N) - Logarithmic Time Complexity
-
-			you can think of it as either ....
-
-			If the input is doubled then we only have to do one more Operation. 
-
-									OR
-
-			EveryTime we do an "operation" like Guessing, we can elminate Half the remaining operations.							
+* *O(log N) - Logarithmic Time Complexity*
+	* you can think of it as either ....
+	* If the input is doubled then we only have to do one more Operation. 
+		
+		OR
+	* EveryTime we do an "operation" like Guessing, we can elminate Half the remaining operations.							
 
 ---
 ## Algorithms 
