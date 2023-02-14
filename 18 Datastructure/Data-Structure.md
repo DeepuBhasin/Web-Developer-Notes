@@ -77,38 +77,38 @@ Space Complexity Rules of thumb
 Examples 
 
 ```javascript		
-function Owith1(n) {			
-	for (let i = 0; i < n; i++) {
-		console.log("whats up DP ?");
-	}
+function Owith1(n) {
+  for (let i = 0; i < n; i++) {
+    console.log("whats up DP ?");
+  }
 }
 
 //O(1) Space Complexity
 
-function Owith1withNumber(arr) {    
-	let total = 0;
-	arr.map(item => total += item);
-	return total;
+function Owith1withNumber(arr) {
+  let total = 0;
+  arr.map(item => total += item);
+  return total;
 }
 //O(1) Space Complexity
 
-function OwithN(str) {	
-	let reveresedStr = '';
-	for (let i = 0; i < str.length; i++) {
-		reveresedStr = str[i] + reveresedStr;
-	}
-	return reveresedStr;
+function OwithN(str) {
+  let reveresedStr = '';
+  for (let i = 0; i < str.length; i++) {
+    reveresedStr = str[i] + reveresedStr;
+  }
+  return reveresedStr;
 }
 //O(n) Space Complexity
 
-function OwithNDivideBy2(arr) {  
-	let resArr = [];
-	arr.map(item => {
-		if (Math.random() < 0.5) {
-			resArr.push(item)
-		}
-	})
-	return resArr;
+function OwithNDivideBy2(arr) {
+  let resArr = [];
+  arr.map(item => {
+    if (Math.random() < 0.5) {
+      resArr.push(item)
+    }
+  })
+  return resArr;
 };
 
 //O(n/2) -> O(n) Space Complexity    (because removing of constants rule)
@@ -219,12 +219,12 @@ Link : [Youtube-Alg-DS-Course-Starter-Code](https://github.com/KevinRSDNguyen/Yo
 				
 ```javascript
 function reverse(str) {
-	let count = str.length;
-	let strRev = '';
-	for (let i = 0; i < count; i++) {
-		strRev = str[i] + strRev;
-	}
-	return strRev;
+  let count = str.length;
+  let strRev = '';
+  for (let i = 0; i < count; i++) {
+    strRev = str[i] + strRev;
+  }
+  return strRev;
 }
 
 ```	
@@ -232,13 +232,12 @@ function reverse(str) {
 		
 ```javascript
 function reverse(str) {
-	let count = str.length;
-	let strRev = '';
-	for (let i = count - 1; i >= 0; i--) {
-
-		strRev += str[i];
-	}
-	return strRev;
+  let count = str.length;
+  let strRev = '';
+  for (let i = count - 1; i >= 0; i--) {
+    strRev += str[i];
+  }
+  return strRev;
 }
 ```
 > With inbuilt methods
@@ -246,19 +245,19 @@ function reverse(str) {
 	
 ```javascript
 function reverse(str) {
-	return str.split('').reverse().join('');
+  return str.split('').reverse().join('');
 }
 ```	
 2. Reduce
 	
 ```javascript	
 function reverse(str) {
-	let reverseString = str.split('').reduce((acc, cum) => {
-		acc = cum + acc;
-		return acc;
-	}, '');
+  let reverseString = str.split('').reduce((acc, cum) => {
+    acc = cum + acc;
+    return acc;
+  }, '');
 
-	return reverseString;
+  return reverseString;
 }
 ```	
 * *Time Complexity : O(N) we go over every charcter in input String Space Complexity : O(N )* 
@@ -274,23 +273,23 @@ Without inbuilt method
 
 ```javascript	
 function palindrome(str) {
-	str = str.toLowerCase();
-	let revrseString = str.split('').reverse().join('');
-	if (str == revrseString) return true;
-	else return false;
+  str = str.toLowerCase();
+  let revrseString = str.split('').reverse().join('');
+  if (str == revrseString) return true;
+  else return false;
 }
 ```	
 With inbuilt method
 ```javascript
 function palindrome(str) {
-	str = str.toLowerCase();
-	let reverse = '';
+  str = str.toLowerCase();
+  let reverse = '';
 
-	for (let i = 0; i < str.length; i++) {
-	reverse = str[i] + reverse;
-	}
-	if (reverse === str) return true;
-	else return false;
+  for (let i = 0; i < str.length; i++) {
+    reverse = str[i] + reverse;
+  }
+  if (reverse === str) return true;
+  else return false;
 }
 ```	
 ---
@@ -309,12 +308,12 @@ Steps
 1. Turn the string into a number
 ```javascript
 function reverseInt(n) {
-	let reverse = n.toString().split('').reverse().join('');
-	reverse = parseInt(reverse);
-	if (n < 0) {
-	reverse = reverse * -1;
-	}
-	return reverse;
+  let reverse = n.toString().split('').reverse().join('');
+  reverse = parseInt(reverse);
+  if (n < 0) {
+    reverse = reverse * -1;
+  }
+  return reverse;
 }	
 ```
 * *Time complexity : O(Log N) if the input increse by factor of 10, we do one more operation*
@@ -325,21 +324,21 @@ function reverseInt(n) {
 * maxChar("1337") === "3"
 ```javascript
 function maxChar(str) {
-	let charCountObj = {};
-	let maxChar = '';
-	let maxCount = 0;
+  let charCountObj = {};
+  let maxChar = '';
+  let maxCount = 0;
 
-	if (typeof (str) !== 'string') return 'Please provide valid String';
+  if (typeof (str) !== 'string') return 'Please provide valid String';
 
-	for (let i of str) {
-	charCountObj[i] = charCountObj[i] + 1 || 1;
-	if (charCountObj[i] > maxCount) {
-		maxChar = i;
-		maxCount = charCountObj[i];
-	}
-	}
-	return maxChar;
-}	
+  for (let i of str) {
+    charCountObj[i] = charCountObj[i] + 1 || 1;
+    if (charCountObj[i] > maxCount) {
+      maxChar = i;
+      maxCount = charCountObj[i];
+    }
+  }
+  return maxChar;
+}
 ```	
 * *Time Complexity : O(N)* we visit every charcter in input string
 * *Space Complexity : O(1)* charcter count Obj will have at most 26 key-val pairs (beacuse 26 charcter in our Letters)	
@@ -361,21 +360,21 @@ Example
 
 ```javascript
 function fizzBuzz(n) {
-	for (let i = 1; i <= n; i++) {
-	let str = '';
-	if (i % 3 === 0) {
-		str += 'fizz';
-	}
+  for (let i = 1; i <= n; i++) {
+    let str = '';
+    if (i % 3 === 0) {
+      str += 'fizz';
+    }
 
-	if (i % 5 === 0) {
-		str += 'buzz';
-	}
+    if (i % 5 === 0) {
+      str += 'buzz';
+    }
 
-	if (str == '') {
-		str = i;
-	}
-	console.log(str)
-	}
+    if (str == '') {
+      str = i;
+    }
+    console.log(str)
+  }
 }
 ```
 * *Time complexity for fizzBuzz Complexity Analysis : O(N)*
@@ -384,13 +383,13 @@ function fizzBuzz(n) {
 
 ```javascript
 function capitalize(str) {
- str = str.toLowerCase();
- str = str.split(" ");
- for (let i = 0; i < str.length; i++) {
-  str[i] = str[i][0].toUpperCase() + str[i].slice(1);
- }
- str = str.join(" ");
- return str;
+  str = str.toLowerCase();
+  str = str.split(" ");
+  for (let i = 0; i < str.length; i++) {
+    str[i] = str[i][0].toUpperCase() + str[i].slice(1);
+  }
+  str = str.join(" ");
+  return str;
 }
 ```	
 * *Time complexity for Capitalize Complexity Analysis : O(N)*
@@ -404,7 +403,6 @@ Examples
  
  ```javascript
 function chunk(array, size) {
-
   let count = array.length;
   let newArray = [];
   let temp = [];
@@ -425,7 +423,6 @@ function chunk(array, size) {
       }
     }
   }
-  console.log(newArray);
   return newArray;
 }
 ```	
@@ -444,7 +441,7 @@ function chunk(array, size) {
       last.push(item)
     }
   }
- return res;
+  return res;
 }
 ```
 * *Time complexity and Space Complexity : chunk Complexity Analysis : O(N)*
@@ -459,7 +456,6 @@ Examples
 > Without inBuilt Method
  ```javascript
 function anagrams(stringA, stringB) {
-
   stringA = stringA.toLowerCase().replace(/[\W_]+/g, '').trim();
   stringB = stringB.toLowerCase().replace(/[\W_]+/g, '').trim();
 
@@ -488,7 +484,6 @@ function anagrams(stringA, stringB) {
 
 ```javascript
 function anagrams(stringA, stringB) {
-
   stringA = stringA.toLowerCase().replace(/[\W_]+/g, '').trim();
   stringB = stringB.toLowerCase().replace(/[\W_]+/g, '').trim();
 
@@ -498,7 +493,7 @@ function anagrams(stringA, stringB) {
   if (stringA !== stringB) {
     return false;
   }
-return true;
+  return true;
 }
 ```
 * *Time complexity : O(N * Log N) we made use of a Sort algorithm beacuse of sort() it is implementing nested for loop*
@@ -560,13 +555,11 @@ function pyramid(n) {
     for (let j = 0; j < i; j++) {
       str += '#'
     }
-
     for (let j = 1; j < i; j++) {
       str += '#'
     }
     str += '\n';
   }
-  console.log(str);
   return str;
 }	
 ```
@@ -581,7 +574,8 @@ Examples
 * vowels('I am a world-class developer using iterations') --> 16
 
 > With indexOf  
-```javascipt
+
+```javascript
 function vowels(str) {
   let count = 0;
   let vovles = 'aeiou'.split('');
@@ -589,12 +583,13 @@ function vowels(str) {
     if (vovles.indexOf(i) !== -1) {
       count++
     }
- return count;
+    return count;
+  }
 }
 ```
 
 > With includes  
-```javascipt
+```javascript
 function vowels(str) {
   let count = 0;
   let vovles = 'aeiou'.split('');
