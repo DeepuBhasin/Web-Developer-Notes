@@ -1,6 +1,6 @@
 ## Big O Notation Bar Graph
 ![Image](big_O_NotationGraph.png)
-
+---
 ## What does _Better_ implementation means ?
 
 > "Better" means faster time to finish and to use less memory (RAM), although there is much stronger emphasis on the former
@@ -344,7 +344,7 @@ function maxChar(str) {
 ```	
 * *Time Complexity : O(N)* we visit every charcter in input string
 * *Space Complexity : O(1)* charcter count Obj will have at most 26 key-val pairs (beacuse 26 charcter in our Letters)	
-
+---
 ## Fizzbuzz Algorithm
 Write a program that console logs the numbers
 	 from 1 to n. But for multiples of three print
@@ -379,7 +379,7 @@ function fizzBuzz(n) {
 	}
 }
 ```
-* Time complexity for *fizzBuzz Complexity Analysis : O(N)*
+* *Time complexity for fizzBuzz Complexity Analysis : O(N)*
 ---
 ## Capitalize Algorithm
 
@@ -394,8 +394,8 @@ function capitalize(str) {
  return str;
 }
 ```	
-* Time complexity for *Capitalize Complexity Analysis : O(N)*
-
+* *Time complexity for Capitalize Complexity Analysis : O(N)*
+---
 ## Chunk Algorithm
 Examples
 * chunk(["a", "b", "c", "d"], 2) --> [[ "a", "b"], ["c", "d"]]
@@ -448,7 +448,7 @@ function chunk(array, size) {
  return res;
 }
 ```
->Time complexity and Space Complexity : *chunk Complexity Analysis : O(N)*
+* *Time complexity and Space Complexity : chunk Complexity Analysis : O(N)*
 ---
 ## Anagrams Algorithm
 Examples
@@ -502,4 +502,5 @@ function anagrams(stringA, stringB) {
 return true;
 }
 ```
->Time complexity and Space Complexity : *chunk Complexity Analysis : O(N)*
+* *Time complexity and Space Complexity : chunk Complexity Analysis : O(N)*
+---
