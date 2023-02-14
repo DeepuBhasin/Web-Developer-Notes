@@ -1,3 +1,6 @@
+## Big O Notation Bar Graph
+![Image](big_O_NotationGraph.png)
+
 ## What does _Better_ implementation means ?
 
 > "Better" means faster time to finish and to use less memory (RAM), although there is much stronger emphasis on the former
@@ -394,17 +397,110 @@ function capitalize(str) {
 ```	
 > Time complexity for *Capitalize Complexity Analysis : O(N)*
 
-## Chunk
+## Chunk Algorithm
+Examples
+* chunk(["a", "b", "c", "d"], 2) --> [[ "a", "b"], ["c", "d"]]
+* chunk([0, 1, 2, 3, 4, 5], 4) -->  [[0, 1, 2, 3], [4, 5]]
 
+>My soluction 
+ 
  ```javascript
-function capitalize(str) {
- str = str.toLowerCase();
- str = str.split(" ");
- for (let i = 0; i < str.length; i++) {
-  str[i] = str[i][0].toUpperCase() + str[i].slice(1);
- }
- str = str.join(" ");
- return str;
+function chunk(array, size) {
+
+  let count = array.length;
+  let newArray = [];
+  let temp = [];
+  for (let i = 0; i < count; i++) {
+    let tempNumber = i + 1;
+
+    temp.push(array[i]);
+
+    if (tempNumber % size == 0) {
+      newArray.push(temp)
+      temp = [];
+    }
+
+    if (count === tempNumber) {
+      if (temp.length > 0) {
+        newArray.push(temp)
+        temp = [];
+      }
+    }
+  }
+  console.log(newArray);
+  return newArray;
 }
 ```	
-> Time complexity for *Capitalize Complexity Analysis : O(N)*
+> Provide Solution
+ ```javascript
+function chunk(array, size) {
+  let res = [];
+  for (let i = 0; i < array.length; i++) {
+    const item = array[i];
+    const last = res[res.length - 1];
+    console.log(last);
+
+    if (!last || last.length === size) {
+      res.push([item]);
+    } else {
+      last.push(item)
+    }
+  }
+ return res;
+}
+```
+>Time complexity and Space Complexity : *chunk Complexity Analysis : O(N)*
+---
+## Anagrams A
+Examples
+* anagrams('heart', 'earth') --> True
+* anagrams('heart', '  earth') --> True
+* anagrams('Heart!', 'EARTH') --> True
+* anagrams('lol', 'lolc') --> False
+
+> Without inBuilt Method
+ ```javascript
+function anagrams(stringA, stringB) {
+
+  stringA = stringA.toLowerCase().replace(/[\W_]+/g, '').trim();
+  stringB = stringB.toLowerCase().replace(/[\W_]+/g, '').trim();
+
+  if (stringA.length !== stringB.length) return false;
+
+  let stringACharCount = {};
+
+  for (let i of stringA) {
+    stringACharCount[i] = stringA[i] + 1 || 1;
+  }
+
+  for (let i of stringB) {
+    if (!stringACharCount[i]) {
+      return false;
+    } else {
+      stringACharCount[i]--;		// setting character to zero or undefined
+    }
+  }
+  return true;
+}
+```
+* *Time complexity : O(N + M) we go over character in both input string*
+* *Space Complexity : O(1) Character Count object has at most 26 key-val pairs*
+
+>With in Built Method
+
+```javascript
+function anagrams(stringA, stringB) {
+
+  stringA = stringA.toLowerCase().replace(/[\W_]+/g, '').trim();
+  stringB = stringB.toLowerCase().replace(/[\W_]+/g, '').trim();
+
+  stringA = stringA.split('').sort().join('');
+  stringB = stringB.split('').sort().join('');
+
+  if (stringA !== stringB) {
+    return false;
+  }
+return true;
+}
+```
+>Time complexity and Space Complexity : *chunk Complexity Analysis : O(N)*
