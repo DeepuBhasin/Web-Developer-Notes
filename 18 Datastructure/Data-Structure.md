@@ -630,8 +630,8 @@ Various Methods
 ```javascript
 const inventory = ["bikes", "backpackes", "laptops", "eggs"];
 
-inventory.includes("backpackes")		// true
-inventory.indexOf("backpackes")   		// 1
+inventory.includes("backpackes")				// true
+inventory.indexOf("backpackes")   				// 1
 inventory.find(item => item == "backpackes") 		// backpackes
 inventory.findIndex(item => item == "backpackes") 	// 1
 inventory.filter(item => item == "backpackes"); 	// ["backpackes"]
