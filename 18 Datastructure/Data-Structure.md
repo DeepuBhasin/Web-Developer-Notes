@@ -74,7 +74,7 @@ console.timeEnd('v2');
 			An Array with 4 elements takes up twice the memory of Array with 2 elements 
 
 	
-	### Examples 
+	Examples 
 	```javascript		
 	function Owith1(n) {				//O(1) Space Complexity
 		for (let i = 0; i < n; i++) {
@@ -117,83 +117,73 @@ console.timeEnd('v2');
 	
 	 Log2 8 = 3						Log2 16 = 4 
 
-	if the input / N is doubled then we only have to do one more operation.
+> if the input / N is doubled then we only have to do one more operation.
+
+Example : 
+1. Question : 
 	
-	Example : 
+	I am thinking of a #from 1 to 50 (Answers is 1)
+		
+		is the number 25 ? -> "No it is less than that"
+		is the number 12 ? -> "No it is less than that"
+		is the number 6 ? -> "No it is less than that"
+		is the number 3 ? -> "No it is less than that"
+		is the number 2 ? -> "No it is less than that"	
+		is the number 1 ? -> "Yes"
 
-		Question : 1 
-		------------
+		6 "Operations" / Guesses (Worst Case)
 
-			I am thinking of a #from 1 to 50 (Answers is 1)
+2. Question : 
 
-				is the number 25 ? -> "No it is less than that"
-				is the number 12 ? -> "No it is less than that"
-				is the number 6 ? -> "No it is less than that"
-				is the number 3 ? -> "No it is less than that"
-				is the number 2 ? -> "No it is less than that"	
-				is the number 1 ? -> "Yes"
+	I am thinking of a #from 1 to 100 (Answers is 1)
 
-			6 "Operations" / Guesses (Worst Case)
+		is the number 50 ? -> "No it is less than that"
+		is the number 25 ? -> "No it is less than that"
+		is the number 12 ? -> "No it is less than that"
+		is the number 6 ? -> "No it is less than that"
+		is the number 3 ? -> "No it is less than that"
+		is the number 2 ? -> "No it is less than that"	
+		is the number 1 ? -> "Yes"
+		
+		7 "Operations" / Guesses (Worst Case)
 
-		Question : 2
-		------------	
+		Big notiation only considered worst case	
 
-			I am thinking of a #from 1 to 100 (Answers is 1)
+The Guessing Numbers Game : Log N
 
-				is the number 50 ? -> "No it is less than that"
-				is the number 25 ? -> "No it is less than that"
-				is the number 12 ? -> "No it is less than that"
-				is the number 6 ? -> "No it is less than that"
-				is the number 3 ? -> "No it is less than that"
-				is the number 2 ? -> "No it is less than that"	
-				is the number 1 ? -> "Yes"
-
-			7 "Operations" / Guesses (Worst Case)
-
-
-			Big notiation only considered worst case	
-
-
-	The Guessing Numbers Game : Log N
-
-		- Our Guessing Numbers game has log N implementation, because we can elminate Half the remaining gusesse with each guess.
-		- We are able to elminate Half the gusesse with each guess, since the game rules allow us to know if our guess is SMALLER or 
+* Our Guessing Numbers game has log N implementation, because we can elminate Half the remaining gusesse with each guess.
+* We are able to elminate Half the gusesse with each guess, since the game rules allow us to know if our guess is SMALLER or 
 		GREATER on each guess
+* what would a more "inefficent" and less "fun" Guessing Numbers Game look like ?
 
+1. Question  
+	
+	I am thinking of a #from 1 to 50 (Answers is 1)
 
-		- what would a more "inefficent" and less "fun" Guessing Numbers Game look like ?
+		is the number 25 ? -> "No it is less than that"
+		is the number 12 ? -> "No it is less than that"
+		is the number 6 ? -> "No it is less than that"
+		is the number 3 ? -> "No it is less than that"
+		is the number 2 ? -> "No it is less than that"	
+		is the number 1 ? -> "Yes"
+		
+		50 "Operations" / Guesses (Worst Case)
 
-		Question : 1 
-		------------
+2. Question : 2
+		
+	I am thinking of a #from 1 to 100 (Answers is 1)
 
-			I am thinking of a #from 1 to 50 (Answers is 1)
+		is the number 50 ? -> "No it is less than that"
+		is the number 25 ? -> "No it is less than that"
+		is the number 12 ? -> "No it is less than that"
+		is the number 6 ? -> "No it is less than that"
+		is the number 3 ? -> "No it is less than that"
+		is the number 2 ? -> "No it is less than that"	
+		is the number 1 ? -> "Yes"
 
-				is the number 25 ? -> "No it is less than that"
-				is the number 12 ? -> "No it is less than that"
-				is the number 6 ? -> "No it is less than that"
-				is the number 3 ? -> "No it is less than that"
-				is the number 2 ? -> "No it is less than that"	
-				is the number 1 ? -> "Yes"
+	100 "Operations" / Guesses (Worst Case)
 
-			50 "Operations" / Guesses (Worst Case)
-
-		Question : 2
-		------------	
-
-			I am thinking of a #from 1 to 100 (Answers is 1)
-
-				is the number 50 ? -> "No it is less than that"
-				is the number 25 ? -> "No it is less than that"
-				is the number 12 ? -> "No it is less than that"
-				is the number 6 ? -> "No it is less than that"
-				is the number 3 ? -> "No it is less than that"
-				is the number 2 ? -> "No it is less than that"	
-				is the number 1 ? -> "Yes"
-
-			100 "Operations" / Guesses (Worst Case)
-
-
-			Big notiation only considered worst case
+	Big notiation only considered worst case
 
 		
 
@@ -221,93 +211,86 @@ Link : [Youtube-Alg-DS-Course-Starter-Code](https://github.com/KevinRSDNguyen/Yo
 2. Use array method of reverse() to reverse contents of array
 3. Turn the reversed array back into string
 
+> Without inbuilt Methods
 
-	> Without inbuilt Methods
-
-	#### Forward Loop
+1. Forward Loop
 				
-	```javascript
-	function reverse(str) {
-		let count = str.length;
-		let strRev = '';
-		for (let i = 0; i < count; i++) {
-			strRev = str[i] + strRev;
-		}
-		return strRev;
+```javascript
+function reverse(str) {
+	let count = str.length;
+	let strRev = '';
+	for (let i = 0; i < count; i++) {
+		strRev = str[i] + strRev;
 	}
+	return strRev;
+}
 
-	```	
-	#### Backword loop
+```	
+2. Backword loop
 		
+```javascript
+function reverse(str) {
+	let count = str.length;
+	let strRev = '';
+	for (let i = count - 1; i >= 0; i--) {
 
-	```javascript
-	function reverse(str) {
-		let count = str.length;
-		let strRev = '';
-		for (let i = count - 1; i >= 0; i--) {
-
-			strRev += str[i];
-		}
-		return strRev;
+		strRev += str[i];
 	}
-	```
+	return strRev;
+}
+```
+> With inbuilt methods
+1. Split + reverse + join
+	
+```javascript
+function reverse(str) {
+	return str.split('').reverse().join('');
+}
+```	
+2. Reduce
+	
+```javascript	
+function reverse(str) {
+	let reverseString = str.split('').reduce((acc, cum) => {
+		acc = cum + acc;
+		return acc;
+	}, '');
 
-	> With inbuilt methods
-	
-	#### Split + reverse + join
-	
-	```javascript
-	function reverse(str) {
-		return str.split('').reverse().join('');
-	}
-	```	
-	#### Reduce
-	
-	```javascript	
-	function reverse(str) {
-		let reverseString = str.split('').reduce((acc, cum) => {
-			acc = cum + acc;
-			return acc;
-		}, '');
-
-		return reverseString;
-	}
-	```	
-
-	##### ReverseString Complexity Analysis
-	
-	Time Complexity : O(N) we go over every charcter in input String
-	Space Complexity : O(N) 
+	return reverseString;
+}
+```	
+> ReverseString Complexity Analysis *Time Complexity : O(N) we go over every charcter in input String Space Complexity : O(N )* 
 
 ---
 ## Palindrome Algorithm
-	
-	Madam === madaM
-	TEsT  === TsET	 
 
+Example
+* Madam === madaM
+* TEsT  === TsET	 
 
-	#Without inbuilt method
-	-----------------------
-		function palindrome(str) {
-		  str = str.toLowerCase();
-		  let revrseString = str.split('').reverse().join('');
-		  if (str == revrseString) return true;
-		  else return false;
-		}
+Without inbuilt method
 
-	#with inbuilt method
-	--------------------
+```javascript	
+function palindrome(str) {
+	str = str.toLowerCase();
+	let revrseString = str.split('').reverse().join('');
+	if (str == revrseString) return true;
+	else return false;
+}
+```	
+With inbuilt method
+```javascript
+function palindrome(str) {
+	str = str.toLowerCase();
+	let reverse = '';
 
-		function palindrome(str) {
-		  str = str.toLowerCase();
-		  let reverse = '';
-
-		  for (let i = 0; i < str.length; i++) {
-		    reverse = str[i] + reverse;
-		  }
-		  if (reverse === str) return true;
-		  else return false;
-		}	
+	for (let i = 0; i < str.length; i++) {
+	reverse = str[i] + reverse;
+	}
+	if (reverse === str) return true;
+	else return false;
+}
+```	
 ---
 ## ReverseInt Algorithm
 
