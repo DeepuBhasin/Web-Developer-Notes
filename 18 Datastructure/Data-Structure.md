@@ -74,7 +74,7 @@ console.timeEnd('v2');
 			An Array with 4 elements takes up twice the memory of Array with 2 elements 
 
 	
-	> Examples 
+	### Examples 
 	```javascript		
 	function Owith1(n) {				//O(1) Space Complexity
 		for (let i = 0; i < n; i++) {
@@ -115,7 +115,7 @@ console.timeEnd('v2');
 ---
 ## Logarithms
 	
-	Log2 8 = 3						Log2 16 = 4 
+	 Log2 8 = 3						Log2 16 = 4 
 
 	if the input / N is doubled then we only have to do one more operation.
 	
@@ -311,97 +311,90 @@ Link : [Youtube-Alg-DS-Course-Starter-Code](https://github.com/KevinRSDNguyen/Yo
 ---
 ## ReverseInt Algorithm
 
-	Example 
-	-------
+Example 
+* reverseInt(13) === 31
+* reverseInt(404) === 404
+* reverseInt(100) === 1
+* reverseInt(-13) === -31
+* reverseInt(-100) === -1
 
-		//   reverseInt(13) === 31
-		//   reverseInt(404) === 404
-		//   reverseInt(100) === 1
-		//   reverseInt(-13) === -31
-		//   reverseInt(-100) === -1
-	
-	Steps
-	-----
-		
-		1. Turn numbers into string
-		2. Reverse the String
-		3. Turn the string into a number
-
-
-	Solution
-	--------
-
-		function reverseInt(n) {
-		  let reverse = n.toString().split('').reverse().join('');
-		  reverse = parseInt(reverse);
-		  if (n < 0) {
-		    reverse = reverse * -1;
-		  }
-		  return reverse;
-		}	
-
-	Time complexity : O(Log N) if the input increse by factor of 10, we do one more operation	
+Steps
+1. Turn numbers into string
+1. Reverse the String1
+1. Turn the string into a number
+```javascript
+function reverseInt(n) {
+	let reverse = n.toString().split('').reverse().join('');
+	reverse = parseInt(reverse);
+	if (n < 0) {
+	reverse = reverse * -1;
+	}
+	return reverse;
+}	
+```	
+> *Time complexity : O(Log N)* if the input increse by factor of 10, we do one more operation	
 
 ---
 ## MaxChar Algorithm
+* maxChar("I loveeeeeee noodles") === "e"
+* maxChar("1337") === "3"
+```javascript
+function maxChar(str) {
+	let charCountObj = {};
+	let maxChar = '';
+	let maxCount = 0;
 
-	// maxChar("I loveeeeeee noodles") === "e"
-	// maxChar("1337") === "3"
+	if (typeof (str) !== 'string') return 'Please provide valid String';
 
-	function maxChar(str) {
-	  let charCountObj = {};
-	  let maxChar = '';
-	  let maxCount = 0;
-
-	  if (typeof (str) !== 'string') return 'Please provide valid String';
-
-	  for (let i of str) {
-	    charCountObj[i] = charCountObj[i] + 1 || 1;
-	    if (charCountObj[i] > maxCount) {
-	      maxChar = i;
-	      maxCount = charCountObj[i];
-	    }
-	  }
-	  return maxChar;
-	}	
-	
-	Time Complexity : O(N) we visit every charcter in input string;
-
-	Space Complexity : O(1) charcter count Obj will have at most 26 key-val pairs (beacuse 26 charcter in our Letters)	
-
-=====================================================================================================================================
-@fizzbuzz Algorithm
-	
-	// Write a program that console logs the numbers
-	// from 1 to n. But for multiples of three print
-	// “fizz” instead of the number and for the multiples
-	// of five print “buzz”. For numbers which are multiples
-	// of both three and five print “fizzbuzz”.
-	// --- Example
-	//   fizzBuzz(5);
-	//   1
-	//   2
-	//   fizz
-	//   4
-	//   buzz
-
-	function fizzBuzz(n) {
-	  for (let i = 1; i <= n; i++) {
-	    let str = '';
-	    if (i % 3 === 0) {
-	      str += 'fizz';
-	    }
-
-	    if (i % 5 === 0) {
-	      str += 'buzz';
-	    }
-
-	    if (str == '') {
-	      str = i;
-	    }
-	    console.log(str)
-	  }
+	for (let i of str) {
+	charCountObj[i] = charCountObj[i] + 1 || 1;
+	if (charCountObj[i] > maxCount) {
+		maxChar = i;
+		maxCount = charCountObj[i];
 	}
+	}
+	return maxChar;
+}	
+```	
+> *Time Complexity : O(N)* we visit every charcter in input string
+> 
+> *Space Complexity : O(1)* charcter count Obj will have at most 26 key-val pairs (beacuse 26 charcter in our Letters)	
+
+## Fizzbuzz Algorithm
+Write a program that console logs the numbers
+	 from 1 to n. But for multiples of three print
+	 “fizz” instead of the number and for the multiples
+	 of five print “buzz”. For numbers which are multiples
+	 of both three and five print “fizzbuzz”.
+
+Example	 
+* fizzBuzz(5);
+* 1
+* 2
+* fizz
+* 4
+* buzz
+
+```javascript
+function fizzBuzz(n) {
+	for (let i = 1; i <= n; i++) {
+	let str = '';
+	if (i % 3 === 0) {
+		str += 'fizz';
+	}
+
+	if (i % 5 === 0) {
+		str += 'buzz';
+	}
+
+	if (str == '') {
+		str = i;
+	}
+	console.log(str)
+	}
+}
+```
+> Time complexity for *fizzBuzz Complexity Analysis : O(N)*
 ---
 ## Capitalize Algorithm
 
@@ -416,5 +409,19 @@ function capitalize(str) {
  return str;
 }
 ```	
-##### Capitalize Complexity Analysis
-Time complexity : O(N)
+> Time complexity for *Capitalize Complexity Analysis : O(N)*
+
+## Chunk
+
+ ```javascript
+function capitalize(str) {
+ str = str.toLowerCase();
+ str = str.split(" ");
+ for (let i = 0; i < str.length; i++) {
+  str[i] = str[i][0].toUpperCase() + str[i].slice(1);
+ }
+ str = str.join(" ");
+ return str;
+}
+```	
+> Time complexity for *Capitalize Complexity Analysis : O(N)*
