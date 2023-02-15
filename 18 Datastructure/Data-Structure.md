@@ -624,11 +624,79 @@ Various Methods
 ```javascript
 const inventory = ["bikes", "backpackes", "laptops", "eggs"];
 
-inventory.includes("backpackes")			// true
-inventory.indexOf("backpackes")   			// 1
-inventory.find(item => item == "backpackes") 		// backpackes
+ 
 inventory.findIndex(item => item == "backpackes") 	// 1
 inventory.filter(item => item == "backpackes"); 	// ["backpackes"]
 
-``` 
+```
+## Linear Search
+A Searching Algorithm that searches by manually checking everything in the data set to see if is the value we are searching for. 
 
+Example 
+* const foods = ["pizza", "orange", "yogurt"];
+* linearSearchIndexOf(foods, "pizza") --> 0
+* linearSearchIncludes(foods, "pizza") --> true
+* linearSearchFind(foods, food => food === "pizza") --> "pizza"
+*  linearSearchFind(people, person => person.name === "Kevin"),
+
+```javascript
+// kind of creating Prototypes for all functions
+
+function linearSearchIndexOf(arr, val) {
+
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === val) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+function linearSearchIncludes(arr, val) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === val) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function linearSearchFind(arr, cb) {
+  for (let i = 0; i < arr.length; i++) {
+    if (cb(arr[i])) {
+      return arr[i]
+    }
+  }
+  return undefined;
+}
+``` 
+* *Time Compexity for Linear Search : O(N) /  Linear Time Complexity*
+* Our Search Algorithm in the worst case needs to iterate over every item in Array to check if it is the value we are looking for.
+* *O(N) / Linear Time Compexity* is the best we can do for searching an __unsorted array__. On a __sorted array__ we can get a much better time compexity with *Binary Search*.
+---
+## Binary Search
+* It is a Searching Algorithm that can search in O(log n) time for a __sorted__ array, compared to Linear Search's O(N) time for an unsorted array.
+* Binary Search can achive O(Log N) Time Compexity by eliminating __HALF__ of remaining things to search for with each search 
+* const sortedNumsArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+```javascript
+const binarySearch = (sortedArr, value) => {
+  let left = 0;
+  let right = sortedArr.length - 1;
+  while (left <= right) {
+    const mid = Math.floor((left + right) / 2);
+    const midVal = sortedArr[mid];
+    if (midVal === value) {
+      return mid;
+    } else if (midVal < value) {
+      left = mid + 1;
+    } else {
+      right = mid + 1;
+    }
+  }
+  return -1;
+};
+```
+* *Time Complexity for Binary Search: O(Log n)*
+* if N is doubled, we only have to do one more operation. This is beacuse with each operation, we can eliminate half of remaining array.
+* __Binary search only works on sorted arrays__   
