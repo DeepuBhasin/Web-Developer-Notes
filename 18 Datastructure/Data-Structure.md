@@ -700,3 +700,47 @@ const binarySearch = (sortedArr, value) => {
 * *Time Complexity for Binary Search: O(Log n)*
 * if N is doubled, we only have to do one more operation. This is beacuse with each operation, we can eliminate half of remaining array.
 * __Binary search only works on sorted arrays__   
+
+## String Pattern Search Algorithm
+Example
+* how many times the pattern occurs in the text.
+* stringPatternSearch("lollipop", "lol") --> 1
+* stringPatternSearch("lolol", "lol") --> 2
+
+```javascript
+function stringPatternSearch(text, pattern) {
+  let count = 0;
+  for (let i = 0; i < text.length; i++) {
+    for (let j = 0; j < pattern.length; j++) {
+      const patternChar = pattern[j];
+      if (patternChar !== text[j + i]) {
+        break;
+      }
+      if (j === pattern.length - 1) {
+        count++;
+      }
+    }
+
+  }
+  return count;
+}
+```
+* *Time Complexity for Binary Search: O(N * M)* for each character in text, go over every  character in Pattern
+
+* *Space Complexity : O(1)* 
+
+## What is Sorting
+* Sorting is the process of rearranging the items in a collection, to be in a certian order.
+* Sorting is so commonly needed and used
+
+> Different Sorting Algorightms
+* Bubble Sort
+* Insertion Sort
+* Selection Sort
+* Quick Sort
+* Merge Sort
+* Radix Sort
+* Bucket Sort
+* Tim Sort
+
+All these different sorts have different time complexities and vary in their difficulty to conceptualize and implement.

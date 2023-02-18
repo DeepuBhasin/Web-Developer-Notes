@@ -291,3 +291,90 @@ https://www.youtube.com/watch?v=jZTxPlUpe3o
 		};
 
 		export default App;	
+
+===========================================================================================================================================
+@Redux with Connect + mapStateToProps + mapDispatchToProps (without middleware)
+
+	import { createStore } from "redux";
+	import { connect, useDispatch } from "react-redux";
+	import "./App.css"
+
+	//Constants
+	const INCREMENT = 'INCREMENT';
+	const DECREMENT = 'DECREMENT';
+	const RESET = 'RESET';
+
+
+	// Action Creator
+	const incrementAction = value => {
+	  return {
+	    type: INCREMENT,
+	    payload: value
+	  }
+	}
+
+	const decrementAction = value => {
+	  return {
+	    type: DECREMENT,
+	    payload: value
+	  }
+	}
+
+	const resetAction = () => {
+	  return {
+	    type: RESET,
+	    payload: 0
+	  }
+	}
+
+	// initial Value
+	const initialValue = 0;
+
+	// Reducer
+	const reducer = (state = initialValue, action) => {
+	  switch (action.type) {
+	    case INCREMENT: {
+	      return state = state + action.payload;
+	    }
+	    case DECREMENT: {
+	      return state = state - action.payload;
+	    }
+	    case RESET: {
+	      return state = action.payload
+	    }
+	    default: {
+	      return state;
+	    }
+	  }
+	}
+
+	//App Component
+	const App = ({ count, dispatch }, props) => {
+	  return (
+	    <div className="App">
+	      <p>Counter : {count}</p>
+	      <div>
+	        <button onClick={() => dispatch(incrementAction(1))}>Increment</button>
+	        <button onClick={() => dispatch(decrementAction(1))}> Decrement</button>
+	        <button onClick={() => dispatch(resetAction())}>Reset</button>
+	      </div>
+	    </div>
+	  )
+	}
+
+	// Connecting  state and dispatch
+	const mapToStateToProps = (state) => {
+	  return {
+	    count: state
+	  }
+	}
+
+	const mapToDispatchProps = (dispatch) => {
+	  return {
+	    dispatch: (methodName) => dispatch(methodName)
+	  }
+	}
+
+	// connect store
+	export const store = createStore(reducer);
+	export default connect(mapToStateToProps, mapToDispatchProps)(App);

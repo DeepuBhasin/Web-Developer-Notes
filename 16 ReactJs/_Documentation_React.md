@@ -1167,7 +1167,7 @@ to parent
 	        <Navbar />											
 	        <div className='content'>
 	          <Routes>													// this component will help to print route	
-	            <Route path='/' element={<Home />}></Route>				// this will help to print particuler component according to path
+	            <Route path='/' exact element={<Home />}></Route>		// this will help to print particuler component according to path
 	          	<Route path='/create' element={<Create />}></Route>
             	<Route path='/blog/:id' element={<BlogDetails />}></Route>
             	<Route path='*' element={<NotFound />}></Route>			// use astrick to if data not route not found	
@@ -1181,6 +1181,11 @@ to parent
 	export default App;	
 
 - react match routes from top to bottom in routes component and it will search particular path untill it get match 	
+
+Other parameter 
+	
+	- exact
+	- send extra data in to Object with state property
 
 
 #link
