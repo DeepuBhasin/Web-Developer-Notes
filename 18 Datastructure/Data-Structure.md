@@ -744,3 +744,111 @@ function stringPatternSearch(text, pattern) {
 * Tim Sort
 
 All these different sorts have different time complexities and vary in their difficulty to conceptualize and implement.
+
+## Bubble Sort Pseudocode
+* Create a for-loop that checks if the current iterated number and the next iterated number are generated or less than each other
+* if current number greater than next number, swap using helper function (using temp variable or Snap shot)
+* Nest above loop in an for-loop that runs Array Length times.
+* Return the now sorted Array
+
+```javascript
+
+// Swapping Code
+function swap(arr, i, j) {
+  let temp = arr[i];
+  arr[i] = arr[j];
+  arr[j] = temp;
+}
+
+// Bubble Sort
+let array = [5, 4, 3, 2, 1];
+function bubbleSort(array) {
+  for (let i = 0; i < array.length; i++) {
+    for (let j = 0; j < array.length - i; j++) {
+      if (array[j] > array[j + 1]) {
+        let temp = array[j];
+        array[j] = array[j + 1];
+        array[j + 1] = temp;
+      }
+    }
+  }
+  return array;
+}
+```
+* *Time Complexity for Bubble Sort : O(N^2) / Quadratic Time Complexity* with the minor optimization, the true time complexity is 0.5(N^2 + N). But with Big O Simplicfication, this is still O(N^2)
+
+* Optimization Example
+  * For unoptimized solution, let's assume we pass in Array of length 5 to sort
+    * 5^2 : 5 * 5 -> 5 + 5 + 5 + 5 + 5
+  * For optimization solution, let's assume we pass in Array of length 5 to sort
+    * 5 + 4 + 3 + 2 + 1
+    * We are really doing : N + (N - 1) + (N - 2) + ...... + 1 -> n(n+1)/2 -> 0.5(N^2 + N) 
+
+## What is Seletion sort
+* It is another Sorting Algorithm
+* For sorting an array of numbers from least to greatest, Selection Sort sorts by moving smaller values to the start as iterates thru array
+* Bubble Sort moved larger values to the end as it iterated thru away.
+
+```javascript
+function selectionSort(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i; j < arr.length; j++) {
+      if (arr[i] > arr[j]) {
+        let temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+      }
+    }
+  }
+  return arr;
+}
+```
+* *Time Complexity for Bubble Sort : O(N^2) / Quadratic Time Complexity* with the minor optimization, the true time complexity is 0.5(N^2 + N). But with Big O Simplicfication, this is still O(N^2)
+
+## Merge Complexity Analysis
+
+```javascript
+let array1 = [1, 4, 6];
+let array2 = [2, 3, 5, 7];
+
+function merge(sortedArr1, sortedArr2) {
+  let p1 = 0;
+  let p2 = 0;
+  let newArray = [];
+  
+  while (p1 < sortedArr1.length && p2 < sortedArr2.length) {
+    if (sortedArr1[p1] < sortedArr2[p2]) {
+      newArray.push(sortedArr1[p1]);
+      p1++;
+    } else {
+      newArray.push(sortedArr2[p2]);
+      p2++;
+    }
+  }
+
+  while (p1 < sortedArr1.length) {
+    newArray.push(sortedArr1[p1]);
+    p1++;
+  }
+
+  while (p2 < sortedArr2.length) {
+    newArray.push(sortedArr2[p2]);
+    p2++;
+  }
+ return newArray;
+}
+```
+* *Time Complexity : O(N + M)* where N and M are length of sorted input Arrays
+* *Space Complexity : O(N + M)* Result arrays as long as input Arrays Combined
+
+|Sri No| Operation | Examples Algorithm | Time Complexity|
+|------|-----------|--------------------|----------------|
+|1.|Iterating over Half a collection with a for loop|reverseString|O(n)
+|2.|Iteration over Half a collection with a loop ||O(n)
+|3.|Iterating over two different collections with separate for-loops| Anagrams, merge | O(n + m)
+|4.|Iterating over some collection with Nested for-loops|Bubble/Secltion Sort| O(n^2)
+|5.|Iterating over a collection with a for loop that has Nested for-loop iterating over a Different collection|stringPatternSearch|O(n * m)
+|6.|Sorting (Bubble and Selection Sort)|Bubble/Selection Sort|O(n^2)
+|7.|Sorting|Anagrams(Solution 2) | O(n * log n)
+|8.|Search(on unsorted Array)|Linear Search|O(n)
+|9.|Searching (on sorted Array)|Binary Search| O(log n) 
