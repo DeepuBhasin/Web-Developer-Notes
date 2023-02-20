@@ -1,11 +1,11 @@
 ## Understanding Solid Principles in Javascript
 |Letter|Function|
 |-|-|
-|S:|Single Responsibility|
-|O:|Open/Close|
-|L:|Liskov Substitution|
-|I:|Interface Segregation|
-|D:|Dependency Inversion|
+|S :|Single Responsibility|
+|O :|Open/Close|
+|L :|Liskov Substitution|
+|I :|Interface Segregation|
+|D :|Dependency Inversion|
 
 > These Principles help us to understand 
 * How to structure the code so the code will be robust
@@ -44,7 +44,7 @@ validateRequest = (req) => {
 // only create user in the database
 createUser = (req) => User.Create(req.name, req.password, req.email);
 ```
-## Open/Close
+## O : Open/Close Principle
 * *Open for extention, but closed to modification*
 * *The idea of this priinciple is our system, it should provide a way to add the new functionalities by adding the new code in instead rather than modifying the existing code and not to break the existing functionalities*
 
@@ -86,7 +86,7 @@ checkRole('SUPERUSER') // true;
 
 ```
 
-## L : Liskov Substitution
+## L : Liskov Substitution Principle
 * Simply put, the Liskov Substitution Principle (LSP) states that objects of a superclass should be replaceable with objects of its subclasses without breaking the application. 
 * In other words, what we want is to have the objects of our subclasses behaving the same way as the objects of our superclass.
 
@@ -144,3 +144,89 @@ const pengiun = new Penguine();
 pengiun.swim();
 pengiun.layEgg();
 ```  
+## I : Interface Segregation Principle
+* Clients should not be forced to depend on methods they do not use.
+* Like pure vegetarian peron does not need for non-vegetarian menu and vice versa.
+
+```javascript
+// wrong 
+// validation in class
+class User {
+    constructor(username, password) {
+        this.username = username;
+        this.password = password
+        this.initiateUser();
+    }
+    initiateUser() {
+        this.username = this.username;
+        this.validateUser();
+    }
+    validateUser = (user, pass) => {
+        console.log('validating.....')
+    }
+}
+
+const user = new User("Deepinder", "123456");
+//correct 
+//ISP : validate only if it is necessary
+class UserISP {
+    constructor(username, password, validate) {
+        this.username = username;
+        this.password = password;
+        this.validate = validate;
+        // on the basis of true/false this function will work
+        if (validate) {
+            this.initiateUser(username, password);
+        } else {
+            console.log("no validation required");
+        }
+    }
+    initiateUser() {
+        this.validateUser(this.username, this.password);
+    }
+    validateUser = (username, password) => {
+        console.log("validating ....");
+    }
+}
+console.log(new UserISP("Deepu", "12345", true));
+```
+## D: Dependency Inversion Principle
+* The general idea of this principle is as simple as it is important: High-level modules, which provide complex logic, should be easily reusable and unaffected by changes in low-level modules, which provide utility features. To achieve that, you need to introduce an abstraction that decouples the high-level and low-level modules from each other.
+
+* Based on this idea, Robert C. Martin’s definition of the Dependency Inversion Principle consists of two parts:
+  * High-level modules should not depend on low-level modules. Both should depend on abstractions.
+  * Abstractions should not depend on details. Details should depend on abstractions.
+
+```javascript
+// wrong
+http.get("http://address/api/examples", (res) => {
+    this.setState({
+        key1: res.value1,
+        key2: res.value2,
+        key3: res.value3
+    });
+});
+
+// correct
+
+//Abstract
+const httpRequest = (url, setState) => {
+    http.get(url, (res) => setState.setValues(res));
+};
+
+//State set in another function
+
+// low level module
+const setState = {
+    setValues: (res) => {
+        this.setState({
+            key1: res.value1,
+            key2: this.value2,
+            key3: this.value3
+        })
+    }
+}
+
+// high level module
+httpRequest("http://address/api/examples", setState);
+```
