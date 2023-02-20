@@ -851,4 +851,142 @@ function merge(sortedArr1, sortedArr2) {
 |6.|Sorting (Bubble and Selection Sort)|Bubble/Selection Sort|O(n^2)
 |7.|Sorting|Anagrams(Solution 2) | O(n * log n)
 |8.|Search(on unsorted Array)|Linear Search|O(n)
-|9.|Searching (on sorted Array)|Binary Search| O(log n) 
+|9.|Searching (on sorted Array)|Binary Search| O(log n)
+
+## What are Data Structures?
+* Data Structures are structures that hold data and define how we both access and modify that data.
+* Array and JS Objects are examples of two different Data structures
+
+|Sri No|Name|
+|-|-|
+|1.|__Hash Tables (JS Objects)__|
+|2.|__Arrays__|
+|3.|Stacks|
+|4.|Queues|
+|5.|Trees|
+|6.|Binary Search Trees|
+|7.|Binary Heaps|
+|8.|Graphs|
+|9.|Linked List|
+|10.| Double Linked List|
+
+
+## Big O of Objects
+* Javascript Objects : __unordered, key value paris__
+  
+|Sri No|Operation|Time Complexity|
+|-|-|-|
+|1.|Insert|O(1) / Constant Time|
+|2.|Removal|O(1) / Constant Time|
+|3.|Object.keys()|O(N) / Liner Time|
+|4.|Object.values()|O(N) / Liner Time|
+|5.|Searching|O(N) / Liner Time|
+|6.|Accessing (key)|O(1) / Constant Time|
+
+> When to use JS Objects to store your Data
+* when you do not need order
+* when you need fast access by __key value__, and fast insertion and removal
+
+## Big O of Arrays
+* Arrays : __Ordered list of data__
+  
+|Sri No|Operation|Time Complexity|
+|-|-|-|
+|1.|Searching|O(N) / Liner Time|
+|2.|Accessing (index) |O(1) / Constant Time|
+|3.|Insert|O(N) / O(1) for end|
+|4.|Removal|O(N) / O(1) for end|
+
+
+> Big O of Arrays Methods
+
+|Sri No|Operation|Time Complexity|
+|-|-|-|
+|1.|push|O(1)|
+|2.|pop|O(1)|
+|3.|shift|O(N)|
+|4.|unshift|O(N)|
+|5.|concate|O(N)|
+|6.|Slice|O(N)|
+|7.|splice|O(N)|
+|8.|sort|O(N * log N)
+|9.|forEach/map/filter/reduce/etc|O(N)
+
+> When to use JS Objects to store your Data
+* when you do not need order
+* when you need fast access by __key value__, and fast insertion and removal
+
+> Array vs Object
+> 
+|Sri No|Operation|Array Time Complexity|Object Time Comlexity|
+|-|-|-|-|
+|1.|Insertion|O(1) / O(1) for end| O(1)|
+|2.|Removal|O(N) / O(1) for end| O (1)|
+|3.|Searching|O(N)|O(N)|
+|4.|Accessing| (index) O(1)|(Key) O(1)|
+
+## What's the best Data Structure
+* There is none
+* Since Data structure store data in different ways, each have strengths and weaknesses in different things
+* You use different Data structure depending on your needs.
+* Asking what is the best data structure is like asking "what is the best vehicle ?"
+
+## Optimixing Time Complexity with Hash Maps
+
+```javascript
+const data = Array.apply(null, { length: 100000 }).map(
+ Function.call,
+ Math.random
+);
+
+const naiveRemoveDupes = arr => {
+ const unique = [];
+
+ for (let i = 0; i < arr.length; i++) {
+   const inputNum = arr[i];
+   if (!unique.includes(inputNum)) {
+     unique.push(inputNum);
+   }
+ }
+
+ return unique;
+};
+
+const optimizedRemoveDupes = arr => {
+ const unique = [];
+ const hashMap = {}; // {0.34752843846832215: true, 0.6305316867816426: true}
+
+ for (let i = 0; i < arr.length; i++) {
+   const inputNum = arr[i];
+
+   if (!hashMap[inputNum]) {
+     unique.push(inputNum);
+   }
+
+   hashMap[inputNum] = true;
+ }
+
+ return unique;
+};
+
+let t1, t2;
+
+console.log(data.slice(0, 10));
+t1 = Date.now();
+naiveRemoveDupes(data);
+t2 = Date.now();
+
+console.log(`${(t2 - t1) / 1000} seconds`);
+
+t1 = Date.now();
+optimizedRemoveDupes(data);
+t2 = Date.now();
+
+console.log(`${(t2 - t1) / 1000} seconds`);
+
+```
+
+## Comman ways to improve Time Compexity
+* use a hashMap (Js Object) to look up data rather than an Array (nm/n^2 ->n)
+* Avoiding nested for loop (nm/n^2 -> n)
+* if working with __sorted__ data, have your code take advantages of it (n -> log n)
