@@ -500,6 +500,30 @@ function anagrams(stringA, stringB) {
 * *Space complexity : O(N) Sorted Strings as long as input string*
 ---
 
+## caesarCipher Algorithm
+Examples
+* caeserCipher("abcd", 1) === "bcde";
+* caeserCipher("yz", 1) === "za";
+* caeserCipher("abcd", 100) === "wxyz";
+* caeserCipher("gurer ner 9 qbtf!", 13) === "there are 9 dogs!"
+
+```javascript
+function caesarCipher(str, shift) {
+  const alphabetArr = 'abcdefghijklmnopqrstuvwxyz'.split("");
+  let res = '';
+  for (let i = 0; i < str.length; i++) {
+    const char = str[i];
+    const idx = alphabetArr.indexOf(char);
+    if (idx === -1) {
+      res += char;
+      continue;
+    }
+    const encodeIdx = (idx + shift) % 26;
+    res += alphabetArr[encodeIdx];
+  }
+  return res;
+}
+```
 ## Steps Algorithm
 Examples
 * steps(2)
