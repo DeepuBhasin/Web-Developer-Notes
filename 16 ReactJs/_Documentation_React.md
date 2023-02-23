@@ -1919,7 +1919,7 @@ The useReducer Hook returns the current stateand a dispatchmethod.
 	import { DELETE_DATA, FETCH_POSTS_FAILUER, FETCH_POSTS_REQUEST, FETCH_POSTS_SUCCESS, } from './contanst.js'
 
 	export const FETCH_DATA_ACTION = () => {
-	    return async (dispatch, getState) => {
+	    return async (dispatch, getState) => {				// here you will getting dispatch method and getState object form thunk
 	        dispatch({ type: FETCH_POSTS_REQUEST, payload: [] })
 
 	        try {
