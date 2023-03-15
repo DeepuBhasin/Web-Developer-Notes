@@ -26,3 +26,14 @@ so if we go to the next section boom we have google.com and everything's working
 Now that sounded like a whole bunch of stuff that happened in between and when we're on the internet every thing is quite fast but yet underneath the hood all of that us happening and it's crazy to think how fast everything works __like if we know the address of google can we just you know go into "172.217.7.23" directly and just instead of putting Google.com, just put in this in our search bar and it automatically goes to the google servers__
 ![Image](./images/1.5-browsing-the-web.png)
 
+---
+## HTML
+> What is HTML 
+* Hyper Text Markp Language
+* HTML is a markup language that web developers use to __structure and descibe the content of a webpage (not a programming language)__ 
+* HTML consists of __elements__ that describe different types of content : paragraphs, links, headings, images, video etc.
+* Web Browsers understand HTML and __render HTML code as websites__
+
+```html
+    <h1>Headding h1</h1>
+```
