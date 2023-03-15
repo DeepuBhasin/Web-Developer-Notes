@@ -34,6 +34,58 @@ Now that sounded like a whole bunch of stuff that happened in between and when w
 * HTML consists of __elements__ that describe different types of content : paragraphs, links, headings, images, video etc.
 * Web Browsers understand HTML and __render HTML code as websites__
 
+### Heading tags
 ```html
     <h1>Headding h1</h1>
+    <h2>Headding h2</h2>
+    <h3>Headding h3</h3>
+    <h4>Headding h4</h4>
+    <h5>Headding h5</h5>
+    <h6>Headding h6</h6>
+```
+
+### Paragraph 
+```html
+    <p>This is Paragraph tag </p>
+```
+
+### Comment
+
+```html
+    <!--This is Comment -->
+```
+### Bold
+
+```html
+    <b>This is used in HTML4</b>
+    <strong>This is used in HTML5</strong>
+```
+* we should always use the __strong__ elemnt instead of __b__ beacuse the __b__ doesn't have any so-called __semantic meaning__
+* __Strong__ represent the meaning that its has more _important text_. That is essentially the idea of semantic HTML.   
+
+### Itallic
+```html
+    <i>This is used in HTML4</i>
+    <em>This is used in HTML5</em>
+```
+* we should always use the __em__ elemnt instead of __i__ beacuse the __i__ doesn't have any so-called __semantic meaning__ 
+*  __em__ represent the meaning that its _Emphasize text_. That is essentially the idea of semantic HTML. 
+
+### List
+> Order List
+```html
+    <ol>
+        <li> Item 1 </li>
+        <li> Item 2 </li>
+        <li> Item 3 </li>
+    </ol>    
+```
+> Unorder List
+
+```html
+    <ul>
+        <li> Item 1 </li>
+        <li> Item 2 </li>
+        <li> Item 3 </li>
+    </ul>    
 ```
