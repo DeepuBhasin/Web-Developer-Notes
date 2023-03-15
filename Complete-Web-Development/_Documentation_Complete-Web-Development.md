@@ -120,3 +120,53 @@ Now that sounded like a whole bunch of stuff that happened in between and when w
 <a href="hyperlink" title="Click me">Click Me </a>
 <a href="hyperlink" title="Click me" target="_blank">Click Me </a>
 ```
+### Semantics Tags
+* Semantics means is that we have certain elements that have actually a meaning or a purpose attached to them. So when we think about a certain HTML element, we should actually not think about what that element looks like as it's rendered on the page. but instead we should think about what the element actually means and what it stands for. 
+* Main big advantage of Semantics tags is __Search Engine Optimization (SEO)__
+1. strong
+2. em
+3. nav
+4. header
+5. article
+
+### Structuring (Grouping)
+* we can structures using semantic tags
+
+> Link
+```html
+<nav>
+    <a href="#">Click Me </a>
+    <a href="#">Click Me </a>
+    <a href="#">Click Me </a>
+    <a href="#">Click Me </a>
+</nav>
+```
+> Header
+```html
+<header>
+    <h1>Welcome To Page</h1>
+    <nav>
+        <a href="#">Click Me </a>
+        <a href="#">Click Me </a>
+        <a href="#">Click Me </a>
+        <a href="#">Click Me </a>
+    </nav>
+</header>
+```
+> Article
+```html
+<article>
+    <p>All modern websites and web applications are built using three <em>fundamental</em> technologies: HTML, CSS
+        and
+        JavaScript. These
+        are the languages of the web.</p>
+    <p>In this post, let's focus on HTML. We will learn what HTML is all about, and why you too should learn it.</p>
+    <h3>What is HTML?</h3>
+</article>    
+```
+> Footer
+```html
+<footer>
+    Copyright &copy; Reserved
+</footer>
+```
