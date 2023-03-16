@@ -128,6 +128,7 @@ Now that sounded like a whole bunch of stuff that happened in between and when w
 3. nav
 4. header
 5. article
+6. aside
 
 ### Structuring (Grouping)
 * we can structures using semantic tags
@@ -169,4 +170,115 @@ Now that sounded like a whole bunch of stuff that happened in between and when w
 <footer>
     Copyright &copy; Reserved
 </footer>
+```
+---
+## CSS
+> What is CSS
+* Cascading Style Sheets
+* CSS describes the __visual style and presentation__ of the __content written in HTML__
+* CSS consists of countless __properties__ that developers use to format the content: properties about font, text, spacing, layout, etc.
+
+### CSS Rules
+![Image](./images/3.1-css-rules.png)
+### Types of CSS
+> Inline CSS
+```html
+<h1 style="color:blue; font-style: italic;">📘 The Code Magazine</h1>
+```
+> Internal CSS 
+```html
+<style>
+    h1 {
+        color: blue;
+        font-style: italic;
+    }
+</style>
+```   
+> External CSS
+
+```html
+<link rel="stylesheet" href="./style.css">
+```
+### Comments
+```css
+/*h1 {
+    color: red;   
+}*/ 
+```
+### Specity of CSS Selectors
+
+> __Id > Class > Tag__
+
+```html
+<style>
+#text {
+    color: green;
+}    
+.text {
+    color: green;
+}
+h1 {
+    color: green;
+}        
+</style>
+
+<h1 id="text" color="text">Hello World</h1>
+```
+* __color__ for __h1__ will be __green__ beacuse of _Specity_
+
+### Selector
+> Combine Selector
+```css
+h1, h2, h3, h4,  p, li {
+    font-family: sans-serif;
+}
+```
+> Descendent Selector
+```css
+footer p {
+    font-family : 20px
+}    
+```
+* it will select all __p__ tags with in __footer__ tag
+
+> Id Selectore
+```html
+<style>
+#heading {
+    color:blue;
+    font-size : 20px;
+}
+</style>    
+
+<h1 id="heading">Hello World</h1>
+```
+> Class Selector
+```html
+<style>
+.heading-text {
+    color:blue;
+    font-size : 20px;
+}
+</style>    
+
+<h1 class="heading-text">Hello World</h1>
+```
+* In real applications we mostly use __classes__ as compair to __id__ because of future use.
+### Styling-Text
+```css
+h1 {
+    font-family:sans-serif;
+    font-style: italic;
+    font-size: 26px;
+    font-weight : bold; /* to bold */
+    text-transform: uppercase;
+    text-align: center;
+}
+```
+
+### Line-Style
+```css
+p {
+    line-height: 1.5;   /* font-size x 1.5*/
+}
 ```

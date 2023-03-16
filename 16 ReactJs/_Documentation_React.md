@@ -1,69 +1,61 @@
-What is React ?
-- Javascript library used to create websites 
-- Allows to easily create Single Page Apps - SPA's for short
-- in intial request server send only index.html file and the react perform whole functionality like user interctivity, 
+## What is React ?
+* Javascript library used to create websites 
+* Allows to easily create Single Page Apps - SPA's for short
+* in intial request server send only index.html file and the react perform whole functionality like user interctivity, 
 fetching data, routing, click events etc
-- with the help of routing react inject that code which belongs to that route
+* with the help of routing react inject that code which belongs to that route
 
-- main differenev between Vue and React 
-	
-	a. State Management 
+* main differenev between __Vue__ and __React__ 
+1. State Management 
+	* vue : re-activity
+	* react : manually event (like on change or effects)
 
-		vue : re-activity
-		react : manually event (like on change or effects)
+2. Approach 
+	* vue 	: template approach
+	* react 	: jsx approach	
+---
+## Installation
+* npx create-react-app folder-name
+* cd folder-name
+* npm run start
+* default server Address : http://localhost:3000/
+---
 
-	b. Approach 
-
-		vue 	: template approach
-		react 	: jsx approach	
-
-=========================================================================================================================
-@Installation
-
-- npx create-react-app folder-name
-- cd folder-name
-- npm run start
-
-- default server Address : http://localhost:3000/
-
-=========================================================================================================================
-@JSX
-
-- JSX stands for JavaScript XML. JSX allows us to write HTML in React. JSX makes it easier to write and add HTML in React.
-- Write XML-Like code for elements and components.
-- JSX tags have a tag name, attributes and children.
-- JSX is not a necessity to write React applications.
-- JSX makes your code simpler and elegant.
-- bable will convert this jsx file into plan javascript code
-- Reserve key words
+## JSX
+* JSX stands for JavaScript XML. JSX allows us to write HTML in React. JSX makes it easier to write and add HTML in React.
+* Write XML-Like code for elements and components.
+* JSX tags have a tag name, attributes and children.
+* JSX is not a necessity to write React applications.
+* JSX makes your code simpler and elegant.
+* bable will convert this jsx file into plan javascript code
+* Reserve key words
 	className	: class 
 	forHtml		: for
 
-React V17 > no need to import 'react'
+> Note : React V17 > no need to import 'react'
+---
+## Virtual Dom
 
-=========================================================================================================================
-@Virtual Dom
-	
-	Remember the example of the leela webDev eg Timer + input + setInterval. When it get refresh it also refresh the input which don't
+Remember the example of the leela webDev eg Timer + input + setInterval. When it get refresh it also refresh the input which don't
 	allowed to write any thing in input box, but in virtul dom it will update only that time <div> not the input <div>
 
-=========================================================================================================================
-@Components
+---
+## Components
 
-- Components let you split the UI into independent, reusable pieces, and think about each piece in isolation. This page 
+* Components let you split the UI into independent, reusable pieces, and think about each piece in isolation. This page 
 provides an introduction to the idea of components.
-- React is Component based architecture
-- Component means perform single task
+* React is Component based architecture
+* Component means perform single task
 
-=========================================================================================================================
-@Variables and Interpolation
+---
+## Variables and Interpolation
 
-- you can write any javascript code with in the functional component 
-- you can write javascript code in the curly brackets 
+* you can write any javascript code with in the functional component 
+* you can write javascript code in the curly brackets 
 	
 	{(function () { alert('Hello') })()}					// writing IIFE code directly in Interpolation 
 
-- '{}' curly brackets are use to print any variable in JSX
+* '{}' curly brackets are use to print any variable in JSX
 		
 	function App() {
 		const name = "Deepinder Singh";						// writing javascript code here
@@ -75,22 +67,22 @@ provides an introduction to the idea of components.
 
 	export deafult App
 
-- JSX convert output into string
-- cannot print objects and booleans value
-- print expresion, numbers directly, array directly
+* JSX convert output into string
+* cannot print objects and booleans value
+* print expresion, numbers directly, array directly
 	
 		{10 + 10 }				// 20			: write numbers 
 		{'hello'}   			//	hello 		: write string
 		{[1, 2, 3, 4, 5, 6]}	// 123456		: write array
 		{'hello'.toUpperCase()}	// HELLO 		: write functions
 
-- dynamic data
+* dynamic data
 	
 	const link = 'https://www.google.com';
 	<a href={link}>Google</a>		
 
-=========================================================================================================================
-@State
+---
+## State
 
 - State is used to store property values that belongs to the component, that have to be rendered to the view
 - State holds the data and can change over time
