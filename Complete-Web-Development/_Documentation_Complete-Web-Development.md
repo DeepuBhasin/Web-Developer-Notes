@@ -264,13 +264,21 @@ footer p {
 <h1 class="heading-text">Hello World</h1>
 ```
 * In real applications we mostly use __classes__ as compair to __id__ because of future use.
-### Styling-Text
+
+### Styling Font
+
 ```css
 h1 {
     font-family:sans-serif;
     font-style: italic;
     font-size: 26px;
     font-weight : bold; /* to bold */
+}
+```
+### Styling-Text
+```css
+h1 {
+   text-decoration: underline dotted red;
     text-transform: uppercase;
     text-align: center;
 }
@@ -323,7 +331,8 @@ h2 {
 ```
 
 ### Pseudo Class (:)
-* These __classes__ are use where __multiple elements__ exist like __li__ in ol,__tr__ in table, __p__ element _(but it should be direct elements to parent element)_ in Semantics elements etc
+#### Pseudo Class for multiple elements 
+* These __classes__ are use where __multiple elements__ exist like __li__ in ol,__tr__ in table, __p__ element _(but it should be direct elements to parent element and only __p__ elements should in parent element)_ in Semantics elements etc
 
 ```html
 <ul>
@@ -398,4 +407,48 @@ li:nth-child(even) {           /* select all even element*/
 article p:nth-child(even) {    /* select all even element*/
     font-weight : bold;
 }
+```
+
+> Using Formula
+
+```css
+li:nth-child(2n) {            /* select all even element*/
+    font-weight: bold;
+}
+
+article p:nth-child(even) {   /* select all even element*/
+    font-weight : bold;
+}
+
+li:nth-child(2n+1) {          /* select all odd element*/
+    font-weight: bold;
+} 
+
+article p:nth-child(2n+1) {   /* select all odd element*/
+    font-weight : bold;
+}
+
+```
+#### Pseudo Class for Links
+
+```css
+a:link {         /* which have href attribute*/
+    color : red;
+}
+
+a:visited {     /* when we visited already*/
+    color : grey;
+}
+
+a:hover {
+    text-decoration : yellow;
+    color : red;
+    font-weight : bold;
+}    
+
+a:active {      /* when we clicking*/
+    color : green;
+}
+
+/* LVHA Order */
 ```
