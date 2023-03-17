@@ -282,3 +282,42 @@ p {
     line-height: 1.5;   /* font-size x 1.5*/
 }
 ```
+### Colors
+![Image](./images/3.2-css-color.png)
+
+![Image](./images/3.3-css-shades-of-grey.png)
+
+> Color
+```css
+h1 {
+    color : #1098ad;    
+}
+
+h2 {
+    color : rgb(126,189,68,0.5);
+}
+
+h3 {
+    color : blue;
+}
+```
+> Background Color
+
+```css
+h1 {
+    background-color : #1098ad;    
+}
+```
+
+### Border
+
+```css
+h1 {
+    border : 2px solid red;
+}
+
+h2 {
+    border-top: 5px solid #1098ad;
+    border-bottom: 5px solid #1098ad;
+}
+```
