@@ -254,7 +254,7 @@ footer p {
 ```
 > Class Selector
 ```html
-<style>
+<styl>
 .heading-text {
     color:blue;
     font-size : 20px;
@@ -319,5 +319,83 @@ h1 {
 h2 {
     border-top: 5px solid #1098ad;
     border-bottom: 5px solid #1098ad;
+}
+```
+
+### Pseudo Class (:)
+* These __classes__ are use where __multiple elements__ exist like __li__ in ol,__tr__ in table, __p__ element _(but it should be direct elements to parent element)_ in Semantics elements etc
+
+```html
+<ul>
+    <li>1 Item</li>
+    <li>2 Item</li>
+    <li>3 Item</li>
+    <li>4 Item</li>
+</ul>
+
+<article>
+    <p>paragraph 1</p>
+    <p>paragraph 2</p>
+    <p>paragraph 3</p>
+    <p>paragraph 4</p>
+</article>
+```
+
+
+> First Child of selected element
+
+```css
+li:first-child {
+    font-weight : bold;
+}
+
+article p:first-child {
+    font-weight : bold;
+}
+```
+
+> Last Child of selected element
+```css
+li:last-child {
+    font-weight : bold;
+}
+
+article p:last-child {
+    font-weight : bold;
+}
+```
+> Nth Child of selected element
+
+```css
+li:nth-child(2) {           /* select only 2nd element*/
+    font-weight : bold;
+}
+
+article p:nth-child(2) {    /* select only 2nd element*/
+    font-weight : bold;
+}
+```
+
+> All Odd Childs of selected element
+
+```css
+li:nth-child(odd) {           /* select all odd element*/
+    font-weight : bold;
+}
+
+article p:nth-child(odd) {    /* select all odd element*/
+    font-weight : bold;
+}
+```
+
+> All Even Childs of selected element
+
+```css
+li:nth-child(even) {           /* select all even element*/
+    font-weight : bold;
+}
+
+article p:nth-child(even) {    /* select all even element*/
+    font-weight : bold;
 }
 ```
