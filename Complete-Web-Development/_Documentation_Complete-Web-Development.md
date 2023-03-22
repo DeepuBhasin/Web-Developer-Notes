@@ -207,8 +207,19 @@ Now that sounded like a whole bunch of stuff that happened in between and when w
 ```
 ### Specity of CSS Selectors
 
-> __Id > Class > Tag__
+![Image](./images/3.5-specity.png)
 
+> Pseudo Class Example
+
+![Image](./images/3.6-pseudo-class-example.png)
+
+* __a__ is not getting red color beacuse __a tag__ has less priority then __Pseudo properity__.
+
+> !important Example
+
+![Image](./images/3.7-important-example.png)
+
+* __p__ is getting _green_ color beacuse __!important__ has high priority then others properties. 
 ```html
 <style>
 #text {
@@ -452,4 +463,5 @@ a:active {      /* when we clicking*/
 
 /* LVHA Order */
 ```
-
+#### DevTools
+![Image](./images/3.4-dev-tools.png)
