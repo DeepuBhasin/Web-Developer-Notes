@@ -463,5 +463,12 @@ a:active {      /* when we clicking*/
 
 /* LVHA Order */
 ```
+#### Inheritence
+![Image](./images/3.8-inheritence.png)
+
+> Body Vs Universal(*)  
+* Universal Selector simply applies to all the elements and there is no inheritance involved and therefore, this is perfect if you want to apply a certain property that does not automatically get inherited to all the elements.
+* Body selector, any style that we put here in the body gets inherited  
 #### DevTools
+
 ![Image](./images/3.4-dev-tools.png)
