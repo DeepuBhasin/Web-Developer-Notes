@@ -466,9 +466,14 @@ a:active {      /* when we clicking*/
 #### Inheritence
 ![Image](./images/3.8-inheritence.png)
 
-> Body Vs Universal(*)  
+> Body Vs Universal(*) selector  
 * Universal Selector simply applies to all the elements and there is no inheritance involved and therefore, this is perfect if you want to apply a certain property that does not automatically get inherited to all the elements.
 * Body selector, any style that we put here in the body gets inherited  
+* _Example :_ __Border__ Property is not get inherite in case of __body selector__ it will only apply to __body of html__. __Universal(*) selector__ will apply __Border property__ to all elements.
+  
+![Image](./images/3.9-body-vs-universe.png)
+
+
 #### DevTools
 
 ![Image](./images/3.4-dev-tools.png)
