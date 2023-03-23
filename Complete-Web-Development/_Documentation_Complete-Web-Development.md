@@ -524,3 +524,25 @@ h1 {
 #### Collapsing margins
 
 ![Image](./images/3.13-collapsing-of-margin.png)
+
+#### Height and Width
+
+```css
+div {
+    width : 100%;
+    height : auto; 
+}
+```
+
+#### Center Div
+
+```html
+<style>
+.container {
+    width : 700px;
+    margin : 0 auto;
+}
+</style>
+
+<div class="container">Hello World</div>
+```
