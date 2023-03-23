@@ -213,7 +213,7 @@ Now that sounded like a whole bunch of stuff that happened in between and when w
 
 ![Image](./images/3.6-pseudo-class-example.png)
 
-* __a__ is not getting red color beacuse __a tag__ has less priority then __Pseudo properity__.
+* __a__ is not getting _red_ color beacuse __a__ element has less priority then __Pseudo selector__.
 
 > !important Example
 
@@ -265,7 +265,7 @@ footer p {
 ```
 > Class Selector
 ```html
-<styl>
+<style>
 .heading-text {
     color:blue;
     font-size : 20px;
@@ -289,7 +289,7 @@ h1 {
 ### Styling-Text
 ```css
 h1 {
-   text-decoration: underline dotted red;
+    text-decoration: underline dotted red;
     text-transform: uppercase;
     text-align: center;
 }
@@ -477,3 +477,50 @@ a:active {      /* when we clicking*/
 #### DevTools
 
 ![Image](./images/3.4-dev-tools.png)
+
+#### CSS Box Model
+> Css Box Model
+
+![Image](./images/3.10-css-box-model.png)
+
+> Real world example
+
+![Image](./images/3.11-analogy-for-css-box-model.png)
+
+> Element Height and Width Calculation
+
+![Image](./images/3.12-element-height-and-width.png)
+
+#### Reseting Margin-Padding
+> This reseting values must always be used before doing any Design 
+```css
+* {
+    margin: 0;
+    padding: 0;
+}
+```
+#### Padding
+
+```css
+h1 {
+    padding-left : 20px;
+    padding-right : 20px;
+    padding : 20px 40px;   /* left-right Top-Bottom */
+    padding : 10px 20px 30px 40px; /*Top Right Bottom Left */ 
+}
+```
+
+#### Margin
+
+```css
+h1 {
+    margin-left : 20px;
+    margin-right : 20px;
+    margin : 20px 40px;   /* left-right Top-Bottom */
+    margin : 10px 20px 30px 40px; /*Top Right Bottom Left */ 
+}
+```
+
+#### Collapsing margins
+
+![Image](./images/3.13-collapsing-of-margin.png)
