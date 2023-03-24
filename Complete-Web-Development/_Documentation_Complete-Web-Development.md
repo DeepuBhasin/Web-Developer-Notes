@@ -79,7 +79,7 @@ Now that sounded like a whole bunch of stuff that happened in between and when w
 <b>This is used in HTML4</b>
 <strong>This is used in HTML5</strong>
 ```
-* we should always use the __strong__ elemnt instead of __b__ beacuse the __b__ doesn't have any so-called __semantic meaning__
+* we should always use the __strong__ element instead of __b__ beacuse the __b__ doesn't have any so-called __semantic meaning__
 * __Strong__ represent the meaning that its has more _important text_. That is essentially the idea of semantic HTML.   
 
 ### Itallic
@@ -87,7 +87,7 @@ Now that sounded like a whole bunch of stuff that happened in between and when w
 <i>This is used in HTML4</i>
 <em>This is used in HTML5</em>
 ```
-* we should always use the __em__ elemnt instead of __i__ beacuse the __i__ doesn't have any so-called __semantic meaning__ 
+* we should always use the __em__ element instead of __i__ beacuse the __i__ doesn't have any so-called __semantic meaning__ 
 *  __em__ represent the meaning that its _Emphasize text_. That is essentially the idea of semantic HTML. 
 
 ### List
@@ -328,10 +328,11 @@ h1 {
 }
 ```
 
-### Line-Style
+### Spacing
 ```css
 p {
-    line-height: 1.5;   /* font-size x 1.5*/
+    line-height: 1.5;       /* font-size x 1.5 */
+    letter-spacing: 2px;    /* horizontal Spacing */
 }
 ```
 ### Colors
@@ -590,7 +591,7 @@ Example
 ![Image](./images/3.16-block-element-example.png)
 
 * __Block__ elements take whole width
-* __margin-top & margin-bottom__ can apply on _Block_ elemnts
+* __margin-top & margin-bottom__ can apply on _Block_ elements
 
 > Inline Element
 
@@ -623,6 +624,8 @@ Example
 
 ![Image](./images/3.21-absolute-positioning.png)
 
+* Element with __position : absolute__ will take position according to parent position with __position : relative__
+
 ### Pseudo Elements (::)
 
 * All Pseudo elements are __inline-elements__
@@ -640,6 +643,7 @@ h2::after {
 Example
 
 ![Image](./images/3.33-pseudo-after.png)
+
 
 > Before
 
