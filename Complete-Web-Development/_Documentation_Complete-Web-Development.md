@@ -624,3 +624,44 @@ Example
 ![Image](./images/3.21-absolute-positioning.png)
 
 ### Pseudo Elements (::)
+
+* All Pseudo elements are __inline-elements__
+  
+> After
+
+```css
+h2::after {
+    content: "TOP";             /* Mandatory Property */
+    background-color: #ffe70e;
+}
+```  
+* we can create element same as html element using __after or before__ properties
+
+Example
+
+![Image](./images/3.33-pseudo-after.png)
+
+> Before
+
+```css
+h2::before {
+    content: "TOP";  /* Mandatory Property */
+}
+```
+
+> First-letter
+
+```css
+h1::first-letter{
+    font-size: 50px;
+    font-style: normal;
+
+}
+```
+> First-line
+
+```css
+p::first-line {
+    color :red;
+}
+```
