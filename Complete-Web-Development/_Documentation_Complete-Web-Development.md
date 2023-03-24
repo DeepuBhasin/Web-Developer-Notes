@@ -546,3 +546,35 @@ div {
 
 <div class="container">Hello World</div>
 ```
+#### Display Property
+
+> Block Level Element
+
+![Image](./images/3.14-block-level-element.png)
+
+Example
+
+![Image](./images/3.16-block-element-example.png)
+
+* __Block__ elements take whole width
+* __margin-top & margin-bottom__ can apply on _Block_ elemnts
+
+> Inline Element
+
+![Image](./images/3.15-inline-elements.png)
+
+Example
+
+![Image](./images/3.17-display-inline-example.png)
+
+* __inline__ elements take content width only
+* __margin-top & margin-bottom__ cannot apply on _Block_ elements
+* __top-left-right-bottom__ positions dont not work on inline elements
+
+> Inline-Block Element
+
+![Image](./images/3.18-inline-block-element.png)
+
+Example
+
+![Image](./images/3.19-inline-block-example.png)
