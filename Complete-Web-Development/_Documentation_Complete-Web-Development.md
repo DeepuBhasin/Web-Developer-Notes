@@ -238,19 +238,15 @@ h1 {
 * __color__ for __h1__ will be __green__ beacuse of _Specity_
 
 ### Selector
-> Combine Selector
+
+> Element Selector
 ```css
-h1, h2, h3, h4,  p, li {
-    font-family: sans-serif;
+p {
+    text-align: center;
+    color: red;
 }
 ```
-> Descendent Selector
-```css
-footer p {
-    font-family : 20px
-}    
-```
-* it will select all __p__ tags with in __footer__ tag
+
 
 > Id Selectore
 ```html
@@ -275,6 +271,43 @@ footer p {
 <h1 class="heading-text">Hello World</h1>
 ```
 * In real applications we mostly use __classes__ as compair to __id__ because of future use.
+
+> Grouping selectors
+```css
+h1, h2, h3, h4,  p, li {
+    font-family: sans-serif;
+}
+```
+> Descendent Selector
+```css
+footer p {
+    font-family : 20px
+}    
+```
+* it will select all __p__ tags with in __footer__ tag
+
+> Adjacent Sibling
+
+```html
+ <style>
+    .main h1+p {
+        color: red;
+        font-size: 30px;
+
+    }
+</style>
+
+<div class="main">
+    <h1>Hello h1</h1>
+    <p>hello p</p>
+    <p>hello p</p>
+    <h1>hello h1</h1>
+    <h1>hello h1</h1>
+    <p>hello p</p>
+</div>
+```
+![Image](./images/3.22-adjacent-selector.png)
+
 
 ### Styling Font
 
@@ -463,7 +496,7 @@ a:active {      /* when we clicking*/
 
 /* LVHA Order */
 ```
-#### Inheritence
+### Inheritence
 ![Image](./images/3.8-inheritence.png)
 
 > Body Vs Universal(*) selector  
@@ -474,11 +507,11 @@ a:active {      /* when we clicking*/
 ![Image](./images/3.9-body-vs-universe.png)
 
 
-#### DevTools
+### DevTools
 
 ![Image](./images/3.4-dev-tools.png)
 
-#### CSS Box Model
+### CSS Box Model
 > Css Box Model
 
 ![Image](./images/3.10-css-box-model.png)
@@ -491,7 +524,7 @@ a:active {      /* when we clicking*/
 
 ![Image](./images/3.12-element-height-and-width.png)
 
-#### Reseting Margin-Padding
+### Reseting Margin-Padding
 > This reseting values must always be used before doing any Design 
 ```css
 * {
@@ -499,7 +532,7 @@ a:active {      /* when we clicking*/
     padding: 0;
 }
 ```
-#### Padding
+### Padding
 
 ```css
 h1 {
@@ -510,7 +543,7 @@ h1 {
 }
 ```
 
-#### Margin
+### Margin
 
 ```css
 h1 {
@@ -525,7 +558,7 @@ h1 {
 
 ![Image](./images/3.13-collapsing-of-margin.png)
 
-#### Height and Width
+### Height and Width
 
 ```css
 div {
@@ -534,7 +567,7 @@ div {
 }
 ```
 
-#### Center Div
+### Center Div
 
 ```html
 <style>
@@ -546,7 +579,7 @@ div {
 
 <div class="container">Hello World</div>
 ```
-#### Display Property
+### Display Property
 
 > Block Level Element
 
@@ -578,3 +611,16 @@ Example
 Example
 
 ![Image](./images/3.19-inline-block-example.png)
+
+* __images__ are _inline-block_ elements
+
+### Positions Property
+
+> Relative Vs Absoulte
+![Image](./images/3.20-position.png)
+
+> Absolute Position with relative Example
+
+![Image](./images/3.21-absolute-positioning.png)
+
+### Pseudo Elements (::)
