@@ -639,7 +639,7 @@ Example
 
 > Relative Vs Absoulte
 
-~`![Image](./images/3.20-position.png)
+![Image](./images/3.20-position.png)
 
 > Absolute Position with relative Example
 
