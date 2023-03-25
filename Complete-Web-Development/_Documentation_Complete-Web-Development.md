@@ -529,12 +529,13 @@ a:active {      /* when we clicking*/
 
 ![Image](./images/3.12-element-height-and-width.png)
 
-### Reseting Margin-Padding
+### Reseting Layout
 > This reseting values must always be used before doing any Design 
 ```css
 * {
     margin: 0;
     padding: 0;
+    box-sizing : border-box;
 }
 ```
 ### Padding
