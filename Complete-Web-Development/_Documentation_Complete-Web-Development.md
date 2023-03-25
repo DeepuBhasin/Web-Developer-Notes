@@ -178,6 +178,10 @@ Now that sounded like a whole bunch of stuff that happened in between and when w
 * CSS describes the __visual style and presentation__ of the __content written in HTML__
 * CSS consists of countless __properties__ that developers use to format the content: properties about font, text, spacing, layout, etc.
 
+### CSS Tricks  
+
+* Always use __background-color : property__ for testing any elements
+
 ### CSS Rules
 ![Image](./images/3.1-css-rules.png)
 ### Types of CSS
@@ -669,3 +673,44 @@ p::first-line {
     color :red;
 }
 ```
+### Page Layout
+![Image](./images/3.34-page-layout.png)
+
+![Image](./images/3.35-page-layot-component-layout.png)
+
+![Image](./images/3.36-various-layouts.png)
+
+### Float
+```css
+h1 {
+    float : left; 
+}
+h2 {
+    float : right;
+}
+```
+
+> Collapsing Height
+
+![Image](./images/3.37-colpapsing-height.png)
+
+* in above example height of navbar get collapse beacuse __h1__ using _float : left_ property and __nav__ using _float : right_ property. Now its showing little bit height (in red color) beacuse  of _padding_ property.
+
+> Clear Float
+![Image](./images/3.38-clear-both.png)
+* We have to add one more element after all floated elements. 
+```css
+  .clear {
+    clear : both;
+  }
+``` 
+* __Clearfix Hack__ just add this class in _Parent element_ to aviod _extra div_ 
+
+```css
+  .clearfix::after {
+    content : "";
+    clear : both;
+    display : block;
+
+  }
+  ``` 
