@@ -572,6 +572,21 @@ div {
 }
 ```
 
+### Border-box
+
+* __box-sizing__ values are  _content-box_ (default value) & _border-box_
+
+![Image](./images/3.39-border-box.png)
+
+Example
+
+* Without box-sizing
+
+![Image](./images/3.40-without-border-box-example.png)
+
+* With box-sizing
+
+![Image](./images/3.41-with-border-box-example.png)
 ### Center Div
 
 ```html
