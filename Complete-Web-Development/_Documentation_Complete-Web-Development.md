@@ -697,6 +697,7 @@ h2 {
 * in above example height of navbar get collapse beacuse __h1__ using _float : left_ property and __nav__ using _float : right_ property. Now its showing little bit height (in red color) beacuse  of _padding_ property.
 
 > Clear Float
+
 ![Image](./images/3.38-clear-both.png)
 * We have to add one more element after all floated elements. 
 ```css
