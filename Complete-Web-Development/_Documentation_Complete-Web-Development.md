@@ -744,3 +744,7 @@ Link : [Froggy Website](https://flexboxfroggy.com/)
 ![Image](./images/3.43-flexbox-terminology.png)
 
 ![Image](./images/3.44-flexbox-properties.png)
+
+> Cheat Sheet of Flex-Box
+
+![Image](./images/3.45-flex-box-cheat-sheet.jpg)
