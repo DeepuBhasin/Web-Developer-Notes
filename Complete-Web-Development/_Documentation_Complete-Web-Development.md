@@ -739,6 +739,8 @@ h2 {
 
 Link : [Froggy Website](https://flexboxfroggy.com/)
 
+> What is Flex box
+
 ![Image](./images/3.42-whats-is-flex-box.png)
 
 ![Image](./images/3.43-flexbox-terminology.png)
@@ -746,11 +748,17 @@ Link : [Froggy Website](https://flexboxfroggy.com/)
 ![Image](./images/3.46-flex-direction-.png)
 
 * __justify-content__ property always depend upon __Main Axis__
-* if __flex-direction : row__ then __Main Axis__ will along to the __row__
-* if __flex-direction : column__ then __Main Axis__ will along to the __column__
 * __align-items__ property depend upon __Cross Axis__ 
+* Default value of __flow-direction : row__ therefore __Main axis__ is along to __row__
+* Most __application use__ of _flex-box_ is center the _div_ 
+
+
+
+> All Properties of Flex Box
 
 ![Image](./images/3.44-flexbox-properties.png)
+
+* if we provide _height_ to any __item__ other items will take same height by default, but if we provide __align-items: flex-start__ _(stretch is default value for align-items)_ then it will not allowed to take same height to other elements.
 
 > Cheat Sheet of Flex-Box
 
