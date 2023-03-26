@@ -743,8 +743,18 @@ Link : [Froggy Website](https://flexboxfroggy.com/)
 
 ![Image](./images/3.43-flexbox-terminology.png)
 
+![Image](./images/3.46-flex-direction-.png)
+
+* __justify-content__ property always depend upon __Main Axis__
+* if __flex-direction : row__ then __Main Axis__ will along to the __row__
+* if __flex-direction : column__ then __Main Axis__ will along to the __column__
+* __align-items__ property depend upon __Cross Axis__ 
+
 ![Image](./images/3.44-flexbox-properties.png)
 
 > Cheat Sheet of Flex-Box
 
 ![Image](./images/3.45-flex-box-cheat-sheet.jpg)
+
+* we add manually spacing by using __margin__ property to each _items_
+* We can use __gap__ property
