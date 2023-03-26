@@ -734,3 +734,9 @@ h2 {
   ``` 
 
 ### Flex-box
+
+![Image](./images/3.42-whats-is-flex-box.png)
+
+![Image](./images/3.43-flexbox-terminology.png)
+
+![Image](./images/3.44-flexbox-properties.png)
