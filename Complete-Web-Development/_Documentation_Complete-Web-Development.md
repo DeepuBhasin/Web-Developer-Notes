@@ -759,6 +759,7 @@ Link : [Froggy Website](https://flexboxfroggy.com/)
 ![Image](./images/3.44-flexbox-properties.png)
 
 * if we provide _height_ to any __item__ other items will take same height by default, but if we provide __align-items: flex-start__ _(stretch is default value for align-items)_ then it will not allowed to take same height to other elements.
+* __flex-basics__ calculate optimal width automatically even we provide much more width then content of element. 
 
 > Cheat Sheet of Flex-Box
 
