@@ -622,3 +622,8 @@ Link : [Froggy Website](https://flexboxfroggy.com/)
 * __grid-gap : row-value column-value__
 * __space-between, space-around__ will work same as in _flex_ for __justify-content, align-items__.
 * _Reponsive_ __repeat(auto, minmax(100px, 1fr))__ _auto_ property is used for make responsive.
+
+
+> Grid Cheat Sheet
+
+![Image](./images/3.51-grid-cheat-sheet.jpg)
