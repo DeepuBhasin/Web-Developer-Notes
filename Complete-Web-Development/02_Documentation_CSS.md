@@ -589,9 +589,26 @@ Link : [Froggy Website](https://flexboxfroggy.com/)
 * __flex-basics__ calculate optimal width automatically even we provide much more width then content of element.
 * You can add __margin, padding__ properties also. 
 * we add manually spacing by using __margin__ property to each _items_
-* We can use __gap__ property with _px_ value
-* __flex : 0 0 200px__ short-hand of _flex-grow flwx-shrink flex-basics (width)_.
+* We can use __gap__ property with _px_ value insetead of _margin_ for best use.
+* __flex : 0 0 200px__ short-hand of _flex-grow flwx-shrink flex-basics (width)_. when we define __flex : 1__ in multiple _flex-items_ then width is equally divided
 
 > Cheat Sheet of Flex-Box
 
 ![Image](./images/3.45-flex-box-cheat-sheet.jpg)
+
+### Grid
+> What is CSS Grid
+
+![Image](./images/3.47-css-grid.png)
+
+> Basic Terminology
+
+![Image](./images/3.48-basic-terminology.png)
+
+> More CSS Grid Terminology
+
+![Image](./images/3.49-more-css-grid-treminology.png)
+
+> All Proerties of CSS-Grid
+
+![Image](./images/3.50-all-properties-of-grid.png)
