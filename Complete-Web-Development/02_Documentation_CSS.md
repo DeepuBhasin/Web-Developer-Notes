@@ -612,3 +612,13 @@ Link : [Froggy Website](https://flexboxfroggy.com/)
 > All Proerties of CSS-Grid
 
 ![Image](./images/3.50-all-properties-of-grid.png)
+
+* units for rows ands column
+  1. 1fr
+  2. px
+  3. repeat(2, 100px)
+  4. minmax(100px, 300px)
+* __grid-area : _grid-row-start / grid-column-start /  grid-row-end / grid-row-end_ __ short hand property.  
+* __grid-gap : row-value column-value__
+* __space-between, space-around__ will work same as in _flex_ for __justify-content, align-items__.
+* _Reponsive_ __repeat(auto, minmax(100px, 1fr))__ _auto_ property is used for make responsive.
