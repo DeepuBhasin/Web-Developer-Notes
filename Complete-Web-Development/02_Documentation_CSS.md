@@ -585,7 +585,7 @@ Link : [Froggy Website](https://flexboxfroggy.com/)
 
 ![Image](./images/3.44-flexbox-properties.png)
 
-* if we provide _height_ to any __item__ other items will take same height by default, but if we provide __align-items: flex-start__ _(stretch is default value for align-items)_ then it will not allowed to take same height to other elements.
+* if we provide _height_ to any __item__ other items will take same height by default, but if we provide __align-items: flex-start__ _(stretch is default value for align-items)_ then it will not allowed to take same height to other elements, and it will make flexible width as compair to rigid width.
 * __flex-basics__ calculate optimal width automatically even we provide much more width then content of element.
 * You can add __margin, padding__ properties also. 
 * we add manually spacing by using __margin__ property to each _items_
@@ -604,6 +604,7 @@ Link : [Froggy Website](https://flexboxfroggy.com/)
 > Basic Terminology
 
 ![Image](./images/3.48-basic-terminology.png)
+ * with help of __dev tools__ you can create __grid lines__
 
 > More CSS Grid Terminology
 
@@ -614,10 +615,12 @@ Link : [Froggy Website](https://flexboxfroggy.com/)
 ![Image](./images/3.50-all-properties-of-grid.png)
 
 * units for rows ands column
-  1. 1fr
-  2. px
+  1. 1fr (make flexible)
+  2. px (make rigid)
   3. repeat(2, 100px)
   4. minmax(100px, 300px)
+  5. auto (will take remaining width automatically)
+    * you can add __height__ and __width__ to the container
 * __grid-area : _grid-row-start / grid-column-start /  grid-row-end / grid-row-end_ __ short hand property.  
 * __grid-gap : row-value column-value__
 * __space-between, space-around__ will work same as in _flex_ for __justify-content, align-items__.
