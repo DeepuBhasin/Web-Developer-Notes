@@ -95,7 +95,7 @@ function App() {
 export default App;
 ```
 
-### PropType with UseState
+### UseState
 
 ```javascript
 // string type
@@ -110,3 +110,66 @@ const [user,setUser] = useState<{name : string, age : number} | undefined>();
 // checking curcit condition
 {user && user.name}
 ```
+
+### 📘 Event Handlers Events
+
+```javascript
+const EventComponent : React.FC= () => {
+    
+  const onChange = (event:React.ChangeEvent<HTMLInputElement>)  => {
+          console.log(event.target.value);
+  };
+
+  const onClick = (event:React.MouseEvent<HTMLButtonElement>) => {
+      console.log('Mouse Click')
+  }
+
+  const onDrag = (event : React.DragEvent<HTMLDivElement>) => {
+      console.log('Drag Element');
+      
+  }
+
+  return <div>
+      <input onChange={onChange}/>
+      <button onClick={onClick}>Click Me </button>
+      <div draggable onDragStart={onDrag}>Drag Me !!!</div>
+  </div>
+}
+
+export default EventComponent;
+```
+
+⚠️ Note : 
+* You can get type of event by __Hovering__ on __Event Handler__ but its only work in __inline events__. 
+
+![Image](./images/6-event-handling-types.png)
+
+* You can get list of __Various Events__ by clicking on the __Event Interface__  and then click on __Go to Defination__
+  
+ ![Image](./images/7-event-interface.png)
+
+![Image](./images/8-event-interface-go-to-defination.png)
+
+### useRef
+
+```javascript
+import { useEffect, useRef } from "react";
+  const UseRefComponent : React.FC= ()=> {
+  const inputRef = useRef<HTMLInputElement | null>(null);
+    
+  useEffect(()=>{
+    if(!inputRef.current){
+        return;
+    }
+    inputRef.current.focus();
+  },[])
+  
+  return <div>
+      <input ref={inputRef}/>
+  </div>
+}
+
+export default UseRefComponent;
+```
+* __HTMLInputElement | null(null)__ this is line second parameter is used for checking null value beacuse we are providing __null__ value to it.
+* in __useEffect__ we are checking the __inputRef__ is not ready do not render and wait untill it not created.
