@@ -1,9 +1,52 @@
-## Hoisting
+## 📘Hoisting
+
+In javascript __variables and functions__ are all hoisted to the top of the scope in which they are declared. The scope is usually either global scope or a function scope.
+ 
+ * varibles are always __partially hoisted__ and set to __undefined__.
+ * functions are always __fully hoisted__.
+
+Javascript Execution Context has two phase<br/>
+1. Creation Phase
+2. Execution Phase
+
+so during the creation phase javascript engine moves your variables and function decelarations of the top their respective scope 
+```javascript
+console.log(number1);
+var number1 = 10;
+
+// javascript is doing this process in background
+var number1;
+
+console.log(number1);
+
+number1 = 10;
+```
+⚠️ Note <br/>
+* __let, const, function Expression and classes__ are not hosited.
+* __Temporal Dead Zone__ : 
+  * is the time between the __decelaration__ and __the initialization__ of _let_ and _const_ variables.
+  * Temporal Dead Zone is the term to describe the state where variables are in the scope but they are not yet declared.
+  
 
 
+![Image](./images/1-hositing-scope.png)
 
+```javascript
+function test() {
+    let total = 0;
+    if (true) {
+        var numberOne = 10;
+        let numberTwo = 20;
+        total = numberOne + numberTwo;
+    }
+    numberOne; // 10 beacuse of function scope
+    numberTwo; // error beacuse of block scope
+    total; // 30 beacuse of test function block scope
+}
+test();
+```
 
-## This
+## 📘 This
 The __this__ keyword is actually pretty straightforward to understand __what is does is it refers to whatever object it is directly inside (property) of.__
 
 * On Global Level : __this === window object__
