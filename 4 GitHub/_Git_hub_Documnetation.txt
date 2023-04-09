@@ -343,8 +343,12 @@ b. Revert back on files after commit
 ======================================================================================================================================	
 
 (Permisssions)			go to settings -> SSH & GPG keys -> New SHS key -> enter title -> to add key first go to ssh git hub website (just enter ssh git hub in google) 
-						-> Generating a new SSH key and adding it to the ssh-agent -> enter this in git bash '$ ssh-keygen -t ed25519 -C "your_email@example.com" '			
-						-> press enter -> agian enter -> again ->enter -> eval `ssh-agent -s` (to check agent) -> command ' ssh-add ~/.ssh/id_ed25519 ' is used to private key press enter -> key will added successfullly -> click on this ' Add the SSH key to your GitHub account. ' -> then ' tail ~/.ssh/id_ed25519.pub' to print ssh key in git bash 
+						-> Generating a new SSH key and adding it to the ssh-agent -> 
+						enter this in git bash '$ ssh-keygen -t ed25519 -C "your_email@example.com" '			
+						-> press enter 
+						-> agian enter 
+						-> again 
+						->enter -> eval `ssh-agent -s` (to check agent) -> command ' ssh-add ~/.ssh/id_ed25519 ' is used to private key press enter -> key will added successfullly -> click on this ' Add the SSH key to your GitHub account. ' -> then ' tail ~/.ssh/id_ed25519.pub' to print ssh key in git bash 
 						-> ' ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIITbmVNe877PXIoq7lzbkMvGOvqE/19c6dJTUYDGiIz0 ' this kind of key will generate then copy this key -> paste this key into your account where you are creating key -> click on Add SSH -> '$ git push -u origin master' use this command
 									
 									Enumerating objects: 13, done.
