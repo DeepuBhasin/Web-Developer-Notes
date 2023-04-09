@@ -1,14 +1,14 @@
-### Command
+### 📘Command
 ```
 npx create-react-app <appname> --template typescript
 ```
-### Rules for TypeScript in React
+### 📘Rules for TypeScript in React
 ![Image](./images/1-typescript-rules.png)
 
-### Types in Props
+### 📘Types in Props
 ![Image](./images/2-typesofprops.png)
 
-### Basic Example of PropType (String)
+### 📘Basic Example of PropType (String)
 
 ```javascript
 import './App.css';
@@ -95,7 +95,7 @@ function App() {
 export default App;
 ```
 
-### UseState
+### 📘UseState
 
 ```javascript
 // string type
@@ -111,7 +111,7 @@ const [user,setUser] = useState<{name : string, age : number} | undefined>();
 {user && user.name}
 ```
 
-### 📘 Event Handlers Events
+### 📘Event Handlers Events
 
 ```javascript
 const EventComponent : React.FC= () => {
@@ -150,7 +150,7 @@ export default EventComponent;
 
 ![Image](./images/8-event-interface-go-to-defination.png)
 
-### useRef
+### 📘useRef
 
 ```javascript
 import { useEffect, useRef } from "react";
