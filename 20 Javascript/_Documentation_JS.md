@@ -1,3 +1,30 @@
+## 📘 Pass by Value and Pass by Reference
+
+1. __Pass by value__ : Simply means we copy the value and we create that value some where else in memory
+```javascript
+var a = 10;
+var b = a;
+var a = 11;
+
+console.log(a) // 11
+console.log(b) // 10
+```
+
+2. __Pass by Reference__ : Objects in javacsript are stored in memory and are passed by reference. This means that we don't copy the value are did with primitive types
+
+```javascript
+let obj1 = { name: "Deepu", password: "123" };
+let obj2 = obj1;
+obj2.password = '456';
+
+// { name: "Deepu", password: "456" };
+console.log(obj1);
+
+// { name: "Deepu", password: "456" };
+console.log(obj2);
+```
+
+
 ## 📘use strict
 
 __Main Purpose :__ Enforce stricter parsing and error handling in your code.
