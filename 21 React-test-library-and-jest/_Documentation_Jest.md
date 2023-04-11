@@ -90,7 +90,7 @@ import Greet from "./Greet"
 
 test('Greet Render Correctly',()=> {
     render(<Greet/>);
-    const textElement = screen.getByText('Hello');
+    const textElement = screen.getByText(/Hello/i); // making case in-senstive
     expect(textElement).toBeInTheDocument();
 }) 
 ```
