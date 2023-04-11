@@ -52,11 +52,16 @@ __E2E tests__
 __E2E tests__
 
 ![Images](./images/1-testing-pyramid.png)
-
 ---
+
+### Test Drive Development
+![Images](./images/1-tdd-approach.png)
+---
+
 ### Testing Libraries
 ![Images](./images/1-various-pacakages.png)
 ---
+
 ### Extention of Test Files
 ![Images](./images/2-extention-of-test-files.png)
 ---
@@ -73,9 +78,12 @@ test(name, fn, timeout);
 Example
 ```javascript
 // Greet.tsx
-const Greet = () => {
+type GreetProps  = {
+    name? : string
+}
+const Greet = (props : GreetProps) => {
     return (
-        <div>Hello</div>
+        <div>Hello {props.name}</div>
     )
 }
 
@@ -90,7 +98,13 @@ import Greet from "./Greet"
 
 test('Greet Render Correctly',()=> {
     render(<Greet/>);
-    const textElement = screen.getByText(/Hello/i); // making case in-senstive
+    const textElement = screen.getByText(/Hello/i);
+    expect(textElement).toBeInTheDocument();
+}) 
+
+test('Greet Render Correctly',()=> {
+    render(<Greet name="Deepu"/>);
+    const textElement = screen.getByText(/Hello Deepu/i);
     expect(textElement).toBeInTheDocument();
 }) 
 ```
