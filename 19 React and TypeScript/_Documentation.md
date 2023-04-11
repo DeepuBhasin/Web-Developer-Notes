@@ -173,3 +173,12 @@ export default UseRefComponent;
 ```
 * __HTMLInputElement | null(null)__ this is line second parameter is used for checking null value beacuse we are providing __null__ value to it.
 * in __useEffect__ we are checking the __inputRef__ is not ready do not render and wait untill it not created.
+
+### 📘Redux
+```
+npm install @types/react-redux
+npm install axios
+npm install redux
+npm install react-redux
+npm install redux-thunk
+```
