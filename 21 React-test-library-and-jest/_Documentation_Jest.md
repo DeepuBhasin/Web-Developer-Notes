@@ -131,6 +131,7 @@ __Expect Methods__
 |Sri|Query|Combine with|Detail|
 |---|-----|------|------------|
 |1.|toBeInTheDocument|getByText|Find the text with in the document|
+
 ![Images](./images/4-4-expect.png)
 
 These are the various expect (matchers) use while testing
