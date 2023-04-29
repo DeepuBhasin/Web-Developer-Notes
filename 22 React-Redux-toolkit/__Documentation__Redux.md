@@ -55,6 +55,7 @@
 * __getState()__ : Returns the current State tree of your application.
 * __dispatch()__ : This is the only way to trigger a state change.
 * __subsribe()__ : Listening to any change.
+
 ---
 ### Acion Vs Action Creator
 * __Action__ : An Action is simply a __javascript object__ that contains information about an event that has occured in your app.
@@ -64,6 +65,11 @@
 * It has a __type__ field as a property which is required.
 * It can accept additional properties __(payload)__. This is optional
 ---
+
+#### Action Types OR Action Contants
+
+* const __CONSTANTNAME__ = __"constant_value"__;
+
 ### Reducer
 A Reducer is a function that receives the __current state__ and __an action object__, _decides how to update the state base on the action and returns the new state._
 ---
@@ -97,7 +103,7 @@ const initialState = {
     count: 0
 };
 
-// constanst
+// Action constanst
 const INCREMENT = "increment";
 const DECREMENT = "decrement";
 const RESET = "reset";
@@ -173,3 +179,120 @@ store.dispatch(decrementAction(10));
 node counter.js
 ```
 ---
+
+### Combine Reducer
+* it's a function that combine individual reducers to pass to redux store.
+
+Example 
+
+```javascript
+const { createStore, combineReducers } = require('redux');
+
+// initial Post State
+const initialState = {
+    posts: []
+};
+
+// initial User State
+const usersInitialState = {
+    users: []
+}
+
+// Action constanst
+const ADDPOST = "add_post";
+const DELETEPOST = "delete_post";
+const ADDUSER = "add_user";
+const DELETEUSER = "delete_user";
+
+//Action + Action creator
+const addPostAction = (payload) => {
+    return {
+        type: ADDPOST,
+        payload: payload
+    }
+}
+
+const addUserAction = (payload) => {
+    return {
+        type: ADDUSER,
+        payload: payload
+    }
+}
+
+const deletePostAction = (payload) => {
+    return {
+        type: DELETEPOST,
+        payload: payload
+    }
+}
+
+const deleteUserAction = (payload) => {
+    return {
+        type: DELETEUSER,
+        payload: payload
+    }
+}
+
+// Reducer
+const postReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case ADDPOST: {
+            return { ...state, posts: [...state.posts, action.payload] };
+        }
+        case DELETEPOST: {
+            let tempPostArray = [...state.posts];
+            let newPosts = tempPostArray.filter(item => item.id != action.payload.id);
+            return { ...state, posts: newPosts }
+        }
+        default: {
+            return { ...state };
+        }
+    }
+};
+
+const userReducer = (state = usersInitialState, action) => {
+    switch (action.type) {
+        case ADDUSER: {
+            return { ...state, users: [...state.users, action.payload] };
+        }
+        case DELETEUSER: {
+            let tempPostArray = [...state.users];
+            let newusers = tempPostArray.filter(item => item.id != action.payload.id);
+            return { ...state, users: newusers }
+        }
+        default: {
+            return { ...state };
+        }
+    }
+};
+
+// rootReducer
+const rootReducer = combineReducers({
+    posts: postReducer,
+    users: userReducer
+})
+
+// store
+const store = createStore(rootReducer);
+
+// subscribe 
+store.subscribe(() => {
+    const data = store.getState()
+
+    console.log("--------------------Output ------------------------------");
+    console.log('users', data.users);
+    console.log('posts', data.posts);
+
+});
+
+// dispatch
+store.dispatch(addPostAction({ id: 1, title: 'Computer' }));
+store.dispatch(addUserAction({ id: 1, name: 'Deepu Bhasin' }));
+store.dispatch(addPostAction({ id: 2, name: 'Mobile' }));
+store.dispatch(addPostAction({ id: 3, name: 'Keyboard' }));
+store.dispatch(addUserAction({ id: 2, name: 'Dp' }));
+
+store.dispatch(deletePostAction({ id: 1 }));
+store.dispatch(deleteUserAction({ id: 1 }));
+
+```
