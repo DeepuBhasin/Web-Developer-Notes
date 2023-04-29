@@ -383,7 +383,7 @@ Directory
 
 	7. ssh-keygen -f idea_rsa				// generate key then key name 
 
-	8. eval "$(ssh-agent -s)"
+	8. eval `ssh-agent -s`
 
 	9. ssh-add ~/.ssh/idea_rsa		// adding key into system and idea_rsa -> is key name	
 
