@@ -528,7 +528,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 
 // Url Address
-export const apiURL = 'https://jsonplaceholder.typicode.com/postsss';
+export const apiURL = 'https://jsonplaceholder.typicode.com/posts';
 
 // initial State
 const initialState = {
@@ -628,22 +628,15 @@ const postsReducer = (state = initialState, action) => {
         case FETCH_POSTS_FAILURE: {
             return { ...state, posts: [], loading: false, error: action.payload }
         }
-        default: {
-            return state;
-        }
-    }
-}
-
-const postReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case FETCH_POSTS_REQUEST: {
+        case SEARCH_POST_REQUEST: {
             return { ...state, loading: true, error: "" }
         }
-        case FETCH_POSTS_SUCCESS: {
-            return { ...state, post: action.payload, loading: false, error: "" }
+        case SEARCH_POST_SUCCESS: {
+            console.log(action.payload);
+            return { ...state, posts: [action.payload], loading: false, error: "" }
         }
-        case FETCH_POSTS_FAILURE: {
-            return { ...state, post: {}, loading: true, error: action.payload }
+        case SEARCH_POST_FAILURE: {
+            return { ...state, posts: {}, loading: false, error: action.payload }
         }
         default: {
             return state;
@@ -653,8 +646,7 @@ const postReducer = (state = initialState, action) => {
 
 
 const rootReducer = combineReducers({
-    postsData: postsReducer,
-    postData: postReducer
+    postsData: postsReducer
 })
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
