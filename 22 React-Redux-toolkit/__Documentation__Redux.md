@@ -508,6 +508,5 @@ store.subscribe(() => {
 
 // dispatch
 store.dispatch(fetchPosts());
-
 ```
 ---
