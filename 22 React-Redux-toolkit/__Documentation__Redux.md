@@ -75,7 +75,7 @@ A Reducer is a function that receives the __current state__ and __an action obje
 ---
 #### Rules of Reducers
 * The new state value should only be calculated based on the state and action arguments.
-* Reducers are not allowed to modify the existing state.
+* Reducers are not allowed to modify the **existing state.**
 ---
 ### Store 
 * __It store the application data__.
@@ -110,7 +110,7 @@ const RESET = "reset";
 const INCREASE_BY_AMT = "incerase_by_amt";
 
 
-//Action + Action creator
+//Action creator + Action Type
 const incermentAction = () => {
     return {
         type: INCREMENT
@@ -651,4 +651,44 @@ const rootReducer = combineReducers({
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
 export { fetchPostsAction, fetchPostAction, store };
+```
+---
+### What is Redux Toolkit ?
+* Redux toolkit is complete rewrite of the standard Redux Library.
+* It is designed to make it easier to write redux applications by providing a set of helper functions.
+* The Redux toolkit library is divided into 2 parts: the core library and the react bindings.
+
+Importance of RTK <br/>
+
+* To make Redux development easier.
+* Easy Store Configuration.
+* To Reduc the size of redux bundles.
+
+---
+### Redux Toolkit common API's
+
+1. **CreateAction** : *Action Creator + Action Types*
+2. **CreateReducer** : *it's the easiest way of creating Redux red*ucer functions* 
+3. **creatSlice** : *CreateAction + CreateReducer to generate act*ions and reducer*
+4. **CreateAsyncThunk** : *Handle Async Actions (redux-thunk)*
+5. **ConfigureStore** : *Easiest way to create Redux Store*
+
+#### CreateAction
+* It combines action type **constants** and the **action together** to create action creator.
+* The action creator can be called with or without a **payload**
+* By default it accept one **parameter(action type)** but can customized.
+* Action type is a required as a parameter.
+
+---
+
+### createReducer
+* It's the easiest way of creating Redux reducer functions.
+* we can directly mutate the data beacuse it uses immer internally. 
+* It doesn't use switch or case statment.
+* There are two types of creating reducers (builder callback or map object notation).
+
+#### Example 
+
+```
+npm install @reduxjs/toolkit
 ```
