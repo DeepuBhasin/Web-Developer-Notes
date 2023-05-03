@@ -691,4 +691,98 @@ Importance of RTK <br/>
 
 ```
 npm install @reduxjs/toolkit
+npm install redux-logger
 ```
+
+
+```javascript
+
+const { createAction, nanoid, createReducer, configureStore } = require("@reduxjs/toolkit");
+const logger = require("redux-logger").createLogger();
+// initial state
+const initialState = {
+    counter: 0
+}
+
+//Action constants
+const INCREMENT = "INCREMENT";
+const DECREMENT = "DECREMENT";
+const RESET = "RESET";
+const INCREMENT_BY = "INCREMENT_BY";
+
+//Action Creator
+const incrementAction = createAction(INCREMENT);
+const decrementAction = createAction(DECREMENT);
+const resetAction = createAction(RESET);
+const incrementByAction = createAction(INCREMENT_BY, (payload) => {
+    return {
+        payload
+    }
+});
+
+// console.log(incrementAction({ id: nanoid(), title: 'Deepu' }));
+
+// Reducer
+// 1. Builder callback notation
+const counterSlice = createReducer(initialState, builde => {
+    builde.addCase(INCREMENT, (state) => {
+        state.counter += 1
+    })
+    builde.addCase(DECREMENT, (state) => {
+        state.counter -= 1
+    })
+    builde.addCase(RESET, (state) => {
+        state.counter = 0
+    })
+    builde.addCase(INCREMENT_BY, (state, action) => {
+        state.counter += action.payload
+    })
+})
+
+// 2. map object notation (not recommended)
+// const counterSlice2 = createAction(initialState,, {
+//     [INCREMENT]: state => state.counter += 1,
+//     [DECREMENT]: state => state.counter -= 1,
+//     [RESET]: state => state.counter = 0,
+//     [INCREMENT_BY]: (state, action) => state.counter += action.payload
+// })
+
+
+
+const store = configureStore({
+    reducer: counterSlice,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat((logger))
+});
+
+
+// dispatch action
+
+store.dispatch(incrementAction());
+console.log('------------output------------------');
+console.log(store.getState());
+
+store.dispatch(incrementAction());
+console.log('------------output------------------');
+console.log(store.getState());
+
+store.dispatch(decrementAction());
+console.log('------------output------------------');
+console.log(store.getState());
+
+
+store.dispatch(resetAction());
+console.log('------------output------------------');
+console.log(store.getState());
+
+
+store.dispatch(incrementByAction(40));
+console.log('------------output------------------');
+console.log(store.getState());
+
+```
+
+#### createSlice
+* It Simplifies the creation of action creators and reducers.
+* createSlice = createAction + createReducer.
+* It doesn't use switch or case statement.
+* Each Slice reducer "owns" it state indpendently. 
