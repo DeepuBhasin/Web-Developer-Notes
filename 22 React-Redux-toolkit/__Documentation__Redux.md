@@ -653,6 +653,11 @@ const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk
 export { fetchPostsAction, fetchPostAction, store };
 ```
 ---
+### Redux Problems
+* Configuring a Redux store is too complicated
+* I have to add a lot of packages to get Redux to do anything usefull
+* Redux requires too much bolierplates code
+
 ### What is Redux Toolkit ?
 * Redux toolkit is complete rewrite of the standard Redux Library.
 * It is designed to make it easier to write redux applications by providing a set of helper functions.
@@ -673,7 +678,8 @@ Importance of RTK <br/>
 4. **CreateAsyncThunk** : *Handle Async Actions (redux-thunk)*
 5. **ConfigureStore** : *Easiest way to create Redux Store*
 
-#### CreateAction
+---
+### CreateAction
 * It combines action type **constants** and the **action together** to create action creator.
 * The action creator can be called with or without a **payload**
 * By default it accept one **parameter(action type)** but can customized.
@@ -686,14 +692,13 @@ Importance of RTK <br/>
 * we can directly mutate the data beacuse it uses immer internally. 
 * It doesn't use switch or case statment.
 * There are two types of creating reducers (builder callback or map object notation).
-
-#### Example 
+---
+#### Example (createAction && createReducer)
 
 ```
 npm install @reduxjs/toolkit
 npm install redux-logger
 ```
-
 
 ```javascript
 
@@ -778,17 +783,14 @@ console.log(store.getState());
 store.dispatch(incrementByAction(40));
 console.log('------------output------------------');
 console.log(store.getState());
-
 ```
-
+---
 ### createSlice
-* It simplifies the creation of action creators and reducers.
-* createSlice = createAction + createReducer.
+* **It simplifies the creation of action creators and reducers.**
+* **createSlice = createAction + createReducer.**
 * It doesn't use switch or case statement.
 * Each Slice reducer "owns" it state indpendently. 
-
-
-
+---
 #### createSlice Arguments 
   * name
   * initialState
@@ -796,6 +798,8 @@ console.log(store.getState());
 
 * name : is used in action type, and it must be unique, it represent a particular reducer in the state.
 * reducer : it handle specific action type/ implement business logic.
+
+#### Example (createSlice (action constants + actionCreator))  
 
 ```javascript
 const { configureStore, createSlice } = require("@reduxjs/toolkit");
@@ -854,6 +858,7 @@ console.log('------------output------------------');
 console.log(store.getState());
 
 ```
+---
 ### createAsync Thunk
 * it's the recommended approach the handling **async request lifecycls**
 * This API has eliminated the tradintional of installing redux thunk for async actions.
