@@ -781,8 +781,247 @@ console.log(store.getState());
 
 ```
 
-#### createSlice
-* It Simplifies the creation of action creators and reducers.
+### createSlice
+* It simplifies the creation of action creators and reducers.
 * createSlice = createAction + createReducer.
 * It doesn't use switch or case statement.
 * Each Slice reducer "owns" it state indpendently. 
+
+
+
+#### createSlice Arguments 
+  * name
+  * initialState
+  * reducer/extraReducer
+
+* name : is used in action type, and it must be unique, it represent a particular reducer in the state.
+* reducer : it handle specific action type/ implement business logic.
+
+```javascript
+const { configureStore, createSlice } = require("@reduxjs/toolkit");
+const logger = require("redux-logger").createLogger();
+
+// initial state
+const initialState = {
+    counter: 0
+}
+
+// CreateSlice
+counterSlice = createSlice({
+    name: "COUNTER_APPLICATION",
+    initialState,
+    reducers: {
+        incrementAction: (state) => { state.counter += 1 },
+        decrementAction: (state) => { state.counter -= 1 },
+        resetAction: (state) => { state.counter = 0 },
+        incrementByAction: (state, action) => { state.counter += action.payload }
+    }
+});
+
+// Generate actions
+const { incrementAction, decrementAction, resetAction, incrementByAction } = counterSlice.actions;
+
+//Generate reducer
+const counterReducer = counterSlice.reducer;
+
+const store = configureStore({
+    reducer: counterReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat((logger))
+});
+
+
+//dispatch action
+store.dispatch(incrementAction());
+console.log('------------output------------------');
+console.log(store.getState());
+
+store.dispatch(incrementAction());
+console.log('------------output------------------');
+console.log(store.getState());
+
+store.dispatch(decrementAction());
+console.log('------------output------------------');
+console.log(store.getState());
+
+
+store.dispatch(resetAction());
+console.log('------------output------------------');
+console.log(store.getState());
+
+
+store.dispatch(incrementByAction(40));
+console.log('------------output------------------');
+console.log(store.getState());
+
+```
+### createAsync Thunk
+* it's the recommended approach the handling **async request lifecycls**
+* This API has eliminated the tradintional of installing redux thunk for async actions.
+* This returns a promise
+
+#### lifeCycles of createAsyncThunk
+* Pending
+* Fulfilled
+* rejected
+
+Example 
+
+```
+npm install axios
+npm install @reduxjs/toolkit
+```
+
+```javascript
+const { createAsyncThunk, createSlice, configureStore, createAction } = require("@reduxjs/toolkit");
+const axios = require("axios");
+const API = "https://jsonplaceholder.typicode.com/posts";
+
+const initialState = {
+    posts: [],
+    loading: false,
+    error: null
+}
+
+//Action Constant 
+const POST_CONST = "post/fetchPosts";
+
+// Action Type
+const posts = createAction(POST_CONST);
+
+//create Async Thunk 
+const fetchPosts = createAsyncThunk(posts.type, async () => {
+    const data = await axios.get(API);
+    return data.data;
+});
+
+const postsSlice = createSlice({
+    name: 'postSliceName',
+    initialState,
+    // for handle promise based calls
+    extraReducers: (builder) => {
+        // pending
+        builder.addCase(fetchPosts.pending, (state, action) => {
+            state.loading = true;
+        });
+
+        // fullfilled
+        builder.addCase(fetchPosts.fulfilled, (state, action) => {
+            state.posts = action.payload;
+            state.loading = false;
+        });
+
+        // rejected 
+        builder.addCase(fetchPosts.rejected, (state, action) => {
+            state.posts = [];
+            state.loading = false;
+            state.error = action.payload;
+        })
+    }
+});
+
+// generate reducer 
+const postsReducer = postsSlice.reducer;
+
+const store = configureStore({
+    reducer: postsReducer
+});
+
+store.subscribe(() => {
+    const data = store.getState();
+    console.log(data);
+})
+
+// dispatch 
+store.dispatch(fetchPosts())
+```
+#### Example React-Redux-toolkit-Async
+
+```javascript
+
+import { configureStore, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+
+// Url Address
+export const apiURL = 'https://jsonplaceholder.typicode.com/posts';
+
+// initial State
+const initialState = {
+    loading: false,
+    error: undefined,
+    posts: [],
+}
+
+// action
+const fetchPosts = createAsyncThunk('posts/fetch', async (payload, { rejectWithValue, getState, dispatch }) => {
+    const res = await axios.get(apiURL);
+    return res.data;
+
+
+
+    // try {
+    //     const res = await axios.get(apiURL);
+    //     return res.data;
+    // } catch (error) {
+    //     // console.log(error);
+    //     // console.log(rejectWithValue(error.response));
+    //     // return rejectWithValue(error.response.message);
+    //     // return rejectWithValue(error.response.status);
+    //     return
+    // }
+
+});
+
+
+const searchPost = createAsyncThunk('post/fetch', async (payload, { rejectWithValue, getState, dispatch }) => {
+    const res = await axios.get(`${apiURL}/${payload}`);
+    return [res.data];
+});
+
+// slice 
+const postsSlice = createSlice({
+    name: 'posts',
+    initialState,
+    extraReducers: (builder) => {
+        builder.addCase(fetchPosts.pending, (state, action) => {
+            state.loading = true;
+            state.error = undefined;
+        })
+        builder.addCase(fetchPosts.fulfilled, (state, action) => {
+            state.loading = false;
+            state.posts = action.payload;
+            state.error = undefined;
+        });
+        builder.addCase(fetchPosts.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message;
+            state.posts = [];
+        });
+        builder.addCase(searchPost.pending, (state, action) => {
+            state.loading = true;
+            state.error = undefined;
+        })
+        builder.addCase(searchPost.fulfilled, (state, action) => {
+            state.loading = false;
+            state.posts = action.payload;
+            state.error = undefined;
+        });
+        builder.addCase(searchPost.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message;
+            state.posts = [];
+        });
+    }
+});
+
+
+// Generate reducer 
+const postsReducer = postsSlice.reducer;
+
+const store = configureStore({
+    reducer: {
+        posts: postsReducer
+    }
+})
+
+export { store, fetchPosts, searchPost };
+```
