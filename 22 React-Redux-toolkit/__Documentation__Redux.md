@@ -70,6 +70,8 @@
 
 * const __CONSTANTNAME__ = __"constant_value"__;
 
+---
+
 ### Reducer
 A Reducer is a function that receives the __current state__ and __an action object__, _decides how to update the state base on the action and returns the new state._
 ---
@@ -402,6 +404,7 @@ store.subscribe(() => {
 store.dispatch(fetchPostRequestAction('ok'));
 ```
 ### Redux Thunk 
+* **Thunk** : the word thunk is a programming trem that means *"a piece of code that some delayed work"*. 
 * Redux Thunk is a **middleware** that allows you to write **asynchronous** actions
 
 ![Image](./images/without-redux-thunk.png)
@@ -1029,4 +1032,89 @@ const store = configureStore({
 })
 
 export { store, fetchPosts, searchPost };
+```
+### Example Redux-toolKit-RTK
+
+```javascript
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+export const apiSlice = createApi({
+    reducerPath: 'api',
+    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3004/' }),
+    tagTypes: ['Todos'],
+    endpoints: builder => ({
+        getToDos: builder.query({
+            query: () => 'todos',
+            transformResponse: res => res.sort((a, b) => b.id - a.id),
+            providesTags: ['Todos']
+
+        }),
+        addToDo: builder.mutation({
+            query: (payload) => ({
+                url: 'todos',
+                method: 'POST',
+                body: payload
+            }),
+            invalidatesTags: ['Todos']
+        }),
+        updateToDo: builder.mutation({
+            query: (payload) => ({
+                url: `todos/${payload.id}`,
+                method: 'PATCH',
+                body: payload
+            }),
+            invalidatesTags: ['Todos']
+        }),
+        deleteToDo: builder.mutation({
+            query: (payload) => ({
+                url: `todos/${payload}`,
+                method: 'DELETE',
+                body: payload
+            }),
+            invalidatesTags: ['Todos']
+        }),
+
+    })
+});
+
+export const { useGetToDosQuery, useAddToDoMutation, useUpdateToDoMutation, useDeleteToDoMutation } = apiSlice;
+```
+
+### JSON-placeHolder
+```
+npm install -g json-server
+npx json-server --watch db.json --port 3004
+```
+```javascript
+//db.json
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "todos": [
+    {
+      "title": "Javascript",
+      "completed": true,
+      "id": 2
+    },
+    {
+      "title": "chqh",
+      "completed": false,
+      "id": 4
+    },
+    {
+      "title": "dhdh",
+      "completed": false,
+      "id": 5
+    },
+    {
+      "title": "djdj",
+      "completed": false,
+      "id": 6
+    }
+  ]
+}
 ```
