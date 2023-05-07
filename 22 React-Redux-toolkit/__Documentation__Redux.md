@@ -1079,6 +1079,70 @@ export const apiSlice = createApi({
 export const { useGetToDosQuery, useAddToDoMutation, useUpdateToDoMutation, useDeleteToDoMutation } = apiSlice;
 ```
 
+```javascript
+import React, { useState } from 'react'
+import { ApiProvider } from '@reduxjs/toolkit/dist/query/react';
+import { apiSlice, useGetToDosQuery, useUpdateToDoMutation, useAddToDoMutation, useDeleteToDoMutation } from './store';
+
+const ToDoComponent = () => {
+    const [newTodo, setNewTodo] = useState('');
+    const { data: todos, isLoading, isSuccess, isError, error } = useGetToDosQuery();
+    const [addToDo] = useAddToDoMutation();
+    const [updateToDo] = useUpdateToDoMutation();
+    const [deleteToDo] = useDeleteToDoMutation();
+
+    const handleSubmit = (e) => {
+        if (newTodo === '') {
+            alert('Enter Todo');
+            return
+        }
+        addToDo({ title: newTodo, completed: false })
+        setNewTodo('');
+    }
+
+    let content;
+    if (isLoading) {
+        content = <p>Loadiing ....</p>
+    } else if (isSuccess) {
+        content = todos.map(item => {
+            return <div key={item.id} style={{ border: '2px solid red', margin: '10px' }}>
+                <h3>id : {item.id}</h3>
+                <p>title : {item.title}</p>
+                <p>Status : {item.completed ? 'Completed' : 'Pending'}</p>
+                <button onClick={() => updateToDo({ ...item, completed: !item.completed })}>Update</button>
+                <button onClick={() => deleteToDo(item.id)}>Delete</button>
+            </div>
+        });
+
+    } else if (isError) {
+        content = <p>{error}</p>
+    }
+
+    return (
+        <div>
+            <form>
+                <label>Enter Task</label> <br />
+                <input type='text' name='' value={newTodo} onChange={e => setNewTodo(e.target.value)} placeholder='Enter To' required />
+                <button type='button' onClick={handleSubmit}>Submit</button>
+            </form>
+            <br />
+            <h1>Todo List</h1>
+            {content}
+        </div>
+    );
+}
+
+const Todo = () => {
+    return (
+        <ApiProvider api={apiSlice}>
+            <ToDoComponent />
+        </ApiProvider>
+    )
+}
+
+export default Todo;
+```
+
 ### JSON-placeHolder
 ```
 npm install -g json-server
