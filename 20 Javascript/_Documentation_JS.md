@@ -1,3 +1,27 @@
+## 📘 Conceptual Aside
+1. **Syntax Parsers** : A program that reads your code and determines what it does and if its grammer is valid. eg interprator or compiler
+2. **Execution Contexts** : *A Wrapper to help manage the code that is running*. There are lots of lexical environments. which one is currently running is managed via execution context. it can contain things beyond what you've written in your code.
+3. **Lexical Environments** : *where something sits physically in the code you write*. 'Lexical' means 'having' to do with words or grammer. A lexical environment exists in programming languages in which **where** you write something is important. 
+
+---
+## 📘 Name/Value Pairs and Objects
+* A Name which **maps** to a **unique value**. eg *Address = '100 Main St.'*. 
+* The name may be defined more than once, but only can have one value in any given **context**. 
+* That value may be more name/value pairs.
+* **Object** : *A Collection of name values pairs*. The simplest defination when talking about javascript.
+
+![Image](./images/name-value.png)
+
+![Image](./images/example-name-value.png)
+
+---
+
+## 📘 The Global Environment and The Global Object
+When ever javascript engine runs it do following things
+
+![Image](./images/gloabl-environment.png)
+
+---
 ## 📘 Pass by Value and Pass by Reference
 
 1. __Pass by value__ : Simply means we copy the value and we create that value some where else in memory
