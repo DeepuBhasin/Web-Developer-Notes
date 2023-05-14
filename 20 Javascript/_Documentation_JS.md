@@ -15,84 +15,17 @@
 ![Image](./images/example-name-value.png)
 
 ---
+## 📘Creation & Hoisting
 
-## 📘 The Global Environment and The Global Object
-When ever javascript engine runs it do following things
-
-![Image](./images/gloabl-environment.png)
-
----
-## 📘 Pass by Value and Pass by Reference
-
-1. __Pass by value__ : Simply means we copy the value and we create that value some where else in memory
-```javascript
-var a = 10;
-var b = a;
-var a = 11;
-
-console.log(a) // 11
-console.log(b) // 10
-```
-
-2. __Pass by Reference__ : Objects in javacsript are stored in memory and are passed by reference. This means that we don't copy the value are did with primitive types
-
-```javascript
-let obj1 = { name: "Deepu", password: "123" };
-let obj2 = obj1;
-obj2.password = '456';
-
-// { name: "Deepu", password: "456" };
-console.log(obj1);
-
-// { name: "Deepu", password: "456" };
-console.log(obj2);
-```
-
-
-## 📘use strict
-
-__Main Purpose :__ Enforce stricter parsing and error handling in your code.
-1. Prevents the use of global variables 
-
-```javascript
-city = 'London';    // become global variable
-
-console.log(city);
-
-// after using 'use strict'
-
-'use strict'
-
-city = 'London';    // cause error
-
-console.log(city);
-
-
-// another example 
-'use strict'
-
-function test(){
-    var a = b = 10;
-}
-
-console.log(a); // error
-console.log(b); // error
-
-test();
-
-```
-
-
-## 📘Hoisting
+Javascript Execution Context has two phase<br/>
+1. **Creation Phase** : Set up memory for variables and functions, also set placeholder for variables called **undefined**.
+2. **Execution Phase** : means assigne values to variables but not for functions.
 
 In javascript __variables and functions__ are all hoisted to the top of the scope in which they are declared. The scope is usually either global scope or a function scope.
  
  * varibles are always __partially hoisted__ and set to __undefined__.
  * functions are always __fully hoisted__.
 
-Javascript Execution Context has two phase<br/>
-1. Creation Phase
-2. Execution Phase
 
 so during the creation phase javascript engine moves your variables and function decelarations of the top their respective scope 
 ```javascript
@@ -154,7 +87,109 @@ function test() {
 }
 test();
 ```
+---
+## 📘Undefined vs Not Defined
+* **undefined** : is special value in javascript, it will take memory space.
 
+```javascript
+// undefined : means value is not set
+var number1;
+console.log(number1);
+number1 = 10;
+```
+```javascript
+// Not defined : means does not exist
+console.log(number1);
+```
+---
+## 📘 The Execution Context : Code Execution
+
+
+---
+
+## 📘 The Global Environment and The Global Object
+* when ever code is run in javascript it's run inside an execution context. Meaning a wrapper that the javascript engine wrap that up, that code that you've written in **global execution**.
+
+![Image](./images/gloabl-environment.png)
+
+* There will be always a **Gloabl Object**. in *Browser* it is **window**, each new tab have there own Global Execution context hence has its own window object 
+* in **Browser** : *window==this*
+
+```javascript
+var a = 10;
+function b() {
+    console.log('hello world');
+}
+a         // 10
+window.a  // 10
+this.a    // 10   
+
+b();        // hello wolrd
+window.b(); 
+this.window.b();
+```
+
+---
+## 📘 Pass by Value and Pass by Reference
+
+1. __Pass by value__ : Simply means we copy the value and we create that value some where else in memory
+```javascript
+var a = 10;
+var b = a;
+var a = 11;
+
+console.log(a) // 11
+console.log(b) // 10
+```
+
+2. __Pass by Reference__ : Objects in javacsript are stored in memory and are passed by reference. This means that we don't copy the value are did with primitive types
+
+```javascript
+let obj1 = { name: "Deepu", password: "123" };
+let obj2 = obj1;
+obj2.password = '456';
+
+// { name: "Deepu", password: "456" };
+console.log(obj1);
+
+// { name: "Deepu", password: "456" };
+console.log(obj2);
+```
+
+
+## 📘use strict
+
+__Main Purpose :__ Enforce stricter parsing and error handling in your code.
+1. Prevents the use of global variables 
+
+```javascript
+city = 'London';    // become global variable
+
+console.log(city);
+
+// after using 'use strict'
+
+'use strict'
+
+city = 'London';    // cause error
+
+console.log(city);
+
+
+// another example 
+'use strict'
+
+function test(){
+    var a = b = 10;
+}
+
+console.log(a); // error
+console.log(b); // error
+
+test();
+
+```
+---
 ## 📘 This
 The __this__ keyword is actually pretty straightforward to understand __what is does is it refers to whatever object it is directly inside (property) of.__
 
