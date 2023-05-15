@@ -102,11 +102,6 @@ number1 = 10;
 console.log(number1);
 ```
 ---
-## 📘 The Execution Context : Code Execution
-
-
----
-
 ## 📘 The Global Environment and The Global Object
 * when ever code is run in javascript it's run inside an execution context. Meaning a wrapper that the javascript engine wrap that up, that code that you've written in **global execution**.
 
@@ -128,8 +123,57 @@ b();        // hello wolrd
 window.b(); 
 this.window.b();
 ```
-
 ---
+## 📘 The Execution Context : Code Execution (Your Code)
+Code Execute line by line
+
+```javascript
+test();
+
+console.log(a);             // undefined
+
+var a = 'Hello world';
+
+console.log(a);
+
+function test() {
+    console.log('Hello world');
+}
+```
+---
+## 📘Single Threaded, Synchronouse Execution
+ * **Single Threaded :** one command at a time. Under the hood of the browser, maybe not.
+ * **Synchronouse :** one at a time.
+---
+
+## Function Invocation and The Execution Stack
+* **Invocation** : Running a function. in javascript, by using **parenthesis()**
+* when ever a function get invoke it will create new **Execuion Context** for it for example **a() && b()** creating its own execution context.
+
+![Image](./images/function-invocation-and-the-execution-stack.png)
+
+## 📘 Functions, Context and Variable Environments
+* **Variable Environments :** Where the variables live. and how they related to each other in memory.
+
+![Image](./images/function-invocation-and-the-execution-stack.png)
+
+```javascript
+function b(){
+    var myVar;
+    console.log(myvar);
+}
+function a() {
+    var myVar = 2;
+    console.log(myVar);
+    b();
+}
+
+var myVar = 1;
+console.log(myVar);
+a();
+console.log(myVar);
+```
+
 ## 📘 Pass by Value and Pass by Reference
 
 1. __Pass by value__ : Simply means we copy the value and we create that value some where else in memory
