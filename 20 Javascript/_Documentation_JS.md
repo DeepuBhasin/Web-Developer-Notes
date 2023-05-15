@@ -152,6 +152,7 @@ function test() {
 
 ![Image](./images/function-invocation-and-the-execution-stack.png)
 
+---
 ## 📘 Functions, Context and Variable Environments
 * **Variable Environments :** Where the variables live. and how they related to each other in memory.
 
@@ -173,7 +174,7 @@ console.log(myVar);
 a();
 console.log(myVar);
 ```
-
+---
 ## 📘 Pass by Value and Pass by Reference
 
 1. __Pass by value__ : Simply means we copy the value and we create that value some where else in memory
@@ -199,8 +200,7 @@ console.log(obj1);
 // { name: "Deepu", password: "456" };
 console.log(obj2);
 ```
-
-
+---
 ## 📘use strict
 
 __Main Purpose :__ Enforce stricter parsing and error handling in your code.
