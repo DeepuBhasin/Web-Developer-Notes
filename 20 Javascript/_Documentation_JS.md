@@ -158,6 +158,7 @@ function test() {
 
 ![Image](./images/function-invocation-and-the-execution-stack.png)
 
+* Value of variables also depend upon **scope**. in below example the value of **myVar** depends upon scope.
 ```javascript
 function b(){
     var myVar;
@@ -175,6 +176,75 @@ a();
 console.log(myVar);
 ```
 ---
+## The Scope Chain
+
+* **Scope :** where a varaiable is available in your code. and if it's truly the same variable or a new copy
+
+```javascript
+// function 'b' is sit lexically sits on top of global environment, in the other words it's not inside function 'a', it is sitting at the global level
+
+function b() {
+    console.log(myVar);
+}
+
+function a() {
+    var myVar = 2;
+    b(); 
+}
+
+var myVar = 1;
+a();
+
+```
+![Image](./images/scope-chain.png)
+
+
+```javascript
+// function 'b' is sit lexically inside the function 'a'
+
+function a() {
+    function b() {
+        console.log(myVar);
+    }
+
+    var myVar = 2;
+    b(); 
+}
+
+var myVar = 1;
+a();
+
+```
+![Image](./images/scope-chain-another-example.png)
+
+---
+
+## 📘 What about Asynchronouse Callbacks
+* **Asynchronouse :** more than one at a time.
+
+```javascript
+// long running function
+
+function waitThreeSeconds() {
+    var ms = 3000 + new Date().getTime();
+    while(new Date() < ms){}
+    console.log('finished function');
+}
+
+function clickHandler() {
+    console.log('click event!');
+}
+
+// listen for the click event
+docuemnt.addEventListener('click', clickHandler)
+
+waitThreeSeconds();
+console.log('finished execution');
+```
+---
+
+* Long running code also effect event loops events for example while executing this code if you click immidately click it will not print beacuse while loop is executing that time. 
+
 ## 📘 Pass by Value and Pass by Reference
 
 1. __Pass by value__ : Simply means we copy the value and we create that value some where else in memory
