@@ -245,6 +245,50 @@ console.log('finished execution');
 
 * Long running code also effect event loops events for example while executing this code if you click immidately click it will not print beacuse while loop is executing that time. 
 
+---
+## 📘 Types and Javascript
+* **Dynamic Typing :** : you don't tell the engine what type of data a variable holds, it figures it out while your coding is running. Variables can hold different types of values beacuse it's all figured out during execution.
+
+``` javascript
+// Static  Typing
+
+bool isNew = 'hello'; // an error
+
+// Dynamic Typing 
+var isNew = true;   // no error
+isNew = 'yup!';
+isNew = 1;
+```
+---
+## 📘 Primitive types
+* **Primitive type :** A type of data that represents a single value. That is, not an object.
+
+1. **undefined :** undefined represents lack of existance (you should'nt set a varaible to this)
+2. **Null :** null represents lack of existance (you can set a variable to this)
+3. **Boolean** : true or false
+4. **Number :** Floating point number (there's always some decimals). Unlike other programming languages, there's only one 'number' type ... and it can make math weird. 
+5. **String :** a sequence of character (both '' and "" can be used)
+6. **Symbol :** used in ES6   
+
+---
+
+## 📘 Operator Precedence and Associativity
+* **Operator Precedence :** which operator function gets called first. Functions are called in order of precedence (HIGHER precendence wins). Example : BDMAS
+```javascript
+var a = 3 + 4 * 5;
+console.log(a); //23 
+```
+* **Associativity :** What order operator functions get called in: LEFT-TO-RIGHT or RIGHT-TO-LEFT. when functions have the *same* precedence. Example : 1+2+3/3/4
+---
+## 📘 Coercion
+* **Coercion :** Converting a value from one type to another. This happens quite in javascript beacuse it's dynamically typed. This happens quite often in javascript beacuse it's dynamically typed. 
+
+```javascript
+var a = 1 + '2';
+console.log(a);     // 12
+```
+
+
 ## 📘 Pass by Value and Pass by Reference
 
 1. __Pass by value__ : Simply means we copy the value and we create that value some where else in memory
