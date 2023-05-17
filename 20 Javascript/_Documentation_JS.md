@@ -285,7 +285,24 @@ console.log(a); //23
 
 ```javascript
 var a = 1 + '2';
-console.log(a);     // 12
+console.log(a);     //
+```
+## 📘 Comparsion
+
+```javascript
+var a = 3 < 2 < 1 ;
+console.log(a);
+
+var a = 1 < 2 < 3
+console.log(a);
+
+Number(undefined) // NaN
+Number(null)    // 0
+Number(false)   // 0
+Number(true)    // 1
+
+1 == '1'    // true
+1 === '1'   // false
 ```
 
 
