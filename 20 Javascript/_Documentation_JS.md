@@ -353,6 +353,34 @@ window.libraryName = window.libraryName || 'lib 2';
 console.log(libraryName);
 ```
 ---
+## 📘 Objects and Dot
+
+![Image](./images/object-dot.png)
+
+```javascript
+var person = new Object();
+
+// [] is a operator
+
+person['firstname'] = "Tony";
+person['lastname'] = "Alicea";
+
+var firstNameProprty = "firstname";
+console.log(person);
+console.log(person[firstNameProprty]);
+
+// . is a operator
+console.log(person.firstname);
+
+person.address = new Object();
+
+// . has left-to-right associativity
+person.address.street = "51 d street no 3 ranjit nagar near seona chowk patiala punjab";
+
+console.log(person.address.street);
+console.log(person['address']['street']);
+```
+---
 ## 📘 Pass by Value and Pass by Reference
 
 1. __Pass by value__ : Simply means we copy the value and we create that value some where else in memory
