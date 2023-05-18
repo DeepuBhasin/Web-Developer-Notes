@@ -304,8 +304,55 @@ Number(true)    // 1
 1 == '1'    // true
 1 === '1'   // false
 ```
+---
+## 📘 Existence and Booleans
+
+```javascript
+Boolean(undefined)      // false
+Boolean(null)           // false
+Boolean("")             // false
+Boolean(0)              // false
+
+// Example 1
+var a;
+if(a) {                 // will not execute
+    console.log('Something is there');
+}
+
+// Example 2
+var a;
+a = 0;
+
+if(a || a === 0) {      // will execute 
+//  because === has higher order precedence than or operator    
+ console.log('Something is there');
+}
+```
+---
 
 
+## 📘 Default Value
+* operators are functions example || (OR Operator is a function)
+```javascript
+undefined || 'hi'       // hi
+'hi' || 'hello'         // hello
+null || 'hi'            // hi
+0 || 'hi'               // hi
+
+// Example 1
+function greet(name) {
+    // '||' operator has high precendece then '='
+    name = name || '<Your name here>';
+    console.log('Hello' + name);
+}
+greet();
+
+// Example 2
+var librarName = "Lib 1";
+window.libraryName = window.libraryName || 'lib 2';
+console.log(libraryName);
+```
+---
 ## 📘 Pass by Value and Pass by Reference
 
 1. __Pass by value__ : Simply means we copy the value and we create that value some where else in memory
