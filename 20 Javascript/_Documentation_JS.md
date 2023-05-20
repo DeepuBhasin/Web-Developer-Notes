@@ -381,6 +381,117 @@ console.log(person.address.street);
 console.log(person['address']['street']);
 ```
 ---
+## 📘Objects and Object Literals
+
+```javascript
+// comparing current example with abov example the object literials are easy to write and easy to read
+var person = { 
+    firstname : 'Tony',
+    lastname : 'Alicea',
+    addres : {
+        street : "51 d street no 3 ranjit nagar near seona chowk patiala punjab"
+    } 
+};
+console.log(person);
+
+
+// Example of creating Object on Fly
+
+function greet(person) {
+    console.log('Hi' + person.firstname);
+}
+
+var Tony = { 
+    firstname : 'Tony',
+    lastname : 'Alicea',
+    addres : {
+        street : "51 d street no 3 ranjit nagar near seona chowk patiala punjab"
+    } 
+};
+
+greet(Tony);
+
+// creating object on fly
+greet({
+    firstname : 'Mary',
+    lastname : 'Doe'
+});
+
+```
+
+## 📘 Namespace : 
+* **Namespace :** a container for variables and functions. Typically to keep variables functions with the same name separate.
+
+```javascript
+var greet = 'Hello!';
+var greet = 'Hola!';
+console.log(greet);
+
+// namespacing helping to resolve the issue of namespace collisions (means same name variables)
+var english = {};
+var spanish = {};
+
+english.greet = 'Hello!';
+spanish.greet = 'Hola!';
+
+console.log(english.greet);
+console.log(spanish.greet);
+```
+## 📘 JSON and Object Literals
+
+* **JSON :** javascript object notation.
+
+```javascript
+
+var objectLiteral = {
+    firstname : 'Mary',
+    isAprogrammer : true
+}
+
+console.log(objectLiteral)
+
+// json format
+{
+    "firstname" : 'Mary',
+    "isAprogrammer" : true
+}
+```
+1. **JSON,stringify(ObjectLiteral) :** it will convert JS Object into JSON String.
+2. **JSON.parse(string) :** it will convert JSON string into JS Object.
+
+## 📘 Functions are Object
+* **First Class Functions :** Everything you can do with other types you can do with functions. Assign them to variables, pass them around, create them on the fly.
+
+![Image](./images/funtions-are-object.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
 ## 📘 Pass by Value and Pass by Reference
 
 1. __Pass by value__ : Simply means we copy the value and we create that value some where else in memory
