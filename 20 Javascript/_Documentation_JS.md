@@ -464,6 +464,23 @@ console.log(objectLiteral)
 
 ![Image](./images/funtions-are-object.png)
 
+```javascript
+
+function greet() {
+    console.log('hi');
+}
+
+// adding property to function
+greet.language = 'english';
+
+// print name property of function
+console.log(greet)
+
+// printing property which we are attaching to it
+console.log(greet.language)
+```
+![Image](./images/example-functions-are-object.png)
+
 
 
 
