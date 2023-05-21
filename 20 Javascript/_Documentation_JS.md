@@ -574,6 +574,9 @@ Functions can pass as parameter in which you can pass function as paremeter use 
 ---
 ## 📘 Pass By Value Vs By Reference
 
+* **Mutate :** To change something.
+* **Immutable :** means it can't be changed.
+
 1. __Pass by value__ : Simply means we copy the value and we create that value some where else in memory all **primitves types** are *Pass by refernce* examples. number, boolean, string etc
 ```javascript
 var a = 10;
