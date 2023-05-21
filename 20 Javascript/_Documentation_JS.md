@@ -757,7 +757,122 @@ let obj = {
 
 obj.getFullName();
 ```
+## 📘 Arrays (Collections of Anything) 
 
+* Arrays are dyanmically type in javascript
+
+```javascript
+var arr = new Array();
+
+// Array Literals 
+var arr = [1, 2, 3];
+
+var array = [
+    1,                  // number
+    false,              // boolean
+    {                   // object
+        name : 'Tony',
+        address : '51 -d street no 3 ranjit nagar'
+    },
+    function (name) {   // function expression
+        var gretting = 'Hello', 
+        console.log(greeting + ' ' + name)
+    },
+    "hello"             // string
+];
+
+arr[3](arra[2].name)   // Hello Tony
+```
+## 📘 arguments and Spread
+* **Arguments :** The parameters you pass to a function. javascript gives you keyword of the same name which contains them all.
+* 'arguments' : is something special that the javascript engine sets up for you.
+
+![Image](./images/arguments-and-spread.png)
+
+```javascript
+
+function greet(firstname, lastname, language, ...other){
+    
+    language = language || 'en';
+
+    if(arguments.length ===0){
+        console.log('Missing Parameters !');
+        console.log('--------------------');
+        return;
+    }
+    
+    console.log(firstname);
+    console.log(lastname);
+    console.log(language);
+    console.log(arguments);    ["john", "Doe", "en"]
+    console.log('arg 0 ' + arguments[0]);      // john
+    console.log('-------------------');
+    console.log(others);
+}
+
+greet();                    // undefined , undefined, undefined
+greet('john');              // john , undefined, undefined
+greet('john','Doe');        // john , Doe, undefined
+greet('john','Doe', 'es');  // john , Doe, es
+greet('john','Doe', 'es', 'patiala', 'punjab');  // john , Doe, es
+```
+⚠️ **Note** : In javascript *Function OverLoading Does not exist*. 
+
+---
+## 📘Framework Aside
+* *Dangerous Aside :* Automatic Semicolon Insertion, means its not compulsory to add Semicoln at the end of line because javascript do automatically.
+* It only occurs in the case of **returns** 
+
+![Image](./images/syntax-parser.png)
+
+```javascript
+// Problem
+function getPerson() {
+    return 
+    {
+        firstname : 'Tony'
+    }
+}
+
+// beacuse of automatic semicolon
+console.log(getPerson());       // undefined
+
+
+// Solution
+function getPerson() {
+    return {
+        firstname : 'Tony'
+    }
+}
+
+console.log(getPerson());       // {firstname : 'Tony'} 
+```
+* **WhiteSpace :** invisible character that create literal 'space' in your written code. Carriage returns, tabs, spaces.
+
+* javascript remove automatically white space if we provided. 
+* White spaces allowed to add comments which make easy to read code. 
+
+```javascript
+var 
+    // firstname
+    firstname,
+
+    //lastname
+    lastname,
+
+    // language
+    language
+
+var person = {
+    // firstname
+    firstname : 'john',
+    
+    // lastname
+    lastname : 'Doe'
+}
+```
+
+---
 
 ## 📘use strict
 
