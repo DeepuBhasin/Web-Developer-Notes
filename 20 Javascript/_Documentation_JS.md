@@ -577,7 +577,9 @@ Functions can pass as parameter in which you can pass function as paremeter use 
 * **Mutate :** To change something.
 * **Immutable :** means it can't be changed.
 
-1. __Pass by value__ : Simply means we copy the value and we create that value some where else in memory all **primitves types** are *Pass by refernce* examples. number, boolean, string etc
+![image](./images/pass-by-value.png)
+
+* **Pass by value :** Simply means we copy the value and we create that value some where else in memory all **primitves types** are *Pass by refernce* examples. number, boolean, string etc
 ```javascript
 var a = 10;
 var b = a;
@@ -586,9 +588,9 @@ var a = 11;
 console.log(a) // 11
 console.log(b) // 10
 ```
-![image](./images/pass-by-value.png)
+![image](./images/pass-by-refrence.png)
 
-2. __Pass by Reference__ : Objects in javacsript are stored in memory and are passed by reference. This means that we don't copy the value are did with primitive types. All **Objects types** are *Pass by reference* examples. array, funtions and objects
+*  __Pass by Reference__ : Objects in javacsript are stored in memory and are passed by reference. This means that we don't copy the value are did with primitive types. All **Objects types** are *Pass by reference* examples. array, funtions and objects
 
 ```javascript
 let obj1 = { name: "Deepu", password: "123" };
@@ -601,7 +603,33 @@ console.log(obj1);
 // { name: "Deepu", password: "456" };
 console.log(obj2);
 ```
-![image](./images/pass-by-refrence.png)
+
+* **By Reference (even as Parameter)**
+
+```javascript
+function changeGreeting(obj) {
+    obj.name = 'dp'; // mutate
+}
+
+changeGreeting(obj2);
+
+// { name: "dp", password: "456" };
+console.log(obj1);
+
+// { name: "dp", password: "456" };
+console.log(obj2);
+
+// equals operators sets up a new memrory space (new Address)
+obj1 = {name : 'Noni', password : '123'};
+
+console.log(obj1)
+// {name : 'Noni', password : '123'}
+
+console.log(obj2)
+// { name: "dp", password: "456" };
+
+
+```
 ---
 ## 📘use strict
 
