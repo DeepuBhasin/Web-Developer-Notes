@@ -1,3 +1,23 @@
+## 📘 Developer Resposibilty
+
+Write a Good code so every one can read and understand easily
+ 
+---
+## 📘 Operators are functions
+
+* in Example 1 : **=** is an *operator (function)*  which takes **2** parameters **a** and **3** and then assign value.
+* in Example 2 : **+** is an *operator (function)*  which takes **2** parameters **3** and **2** and then return and expression.
+
+```javascript
+// Example 1
+var a = 3;
+
+// Example 2
+var b = 3 + 2;
+
+```
+---
+
 ## 📘 Conceptual Aside
 1. **Syntax Parsers** : A program that reads your code and determines what it does and if its grammer is valid. eg interprator or compiler
 2. **Execution Contexts** : *A Wrapper to help manage the code that is running*. There are lots of lexical environments. which one is currently running is managed via execution context. it can contain things beyond what you've written in your code.
@@ -418,7 +438,7 @@ greet({
 });
 
 ```
-
+---
 ## 📘 Namespace : 
 * **Namespace :** a container for variables and functions. Typically to keep variables functions with the same name separate.
 
@@ -437,6 +457,7 @@ spanish.greet = 'Hola!';
 console.log(english.greet);
 console.log(spanish.greet);
 ```
+---
 ## 📘 JSON and Object Literals
 
 * **JSON :** javascript object notation.
@@ -481,37 +502,79 @@ console.log(greet.language)
 ```
 ![Image](./images/example-functions-are-object.png)
 
+---
+
+## 📘 Function Statements and Function Expressions
+* **Epression :** A unit of code that results in a value. It does n't have to save to a variable.
+
+```javascript
+// mean concept is that what ever the variable returnning a value is called expression like number, object etc 
+var a = 3
+var b = 1 + 2;
+var c = {greeting : 'hi'}
+
+// here (a === 3) is expression beacuse it return some value && if is just simply statement it not returnning any value.
+
+// so statment just does work and an expression results in a value
+if (a == 3) {
+
+}
+```
+* **Function Statement :** the statement which does not return any thing, it just statement.
+
+```javascript
+function greet() {
+    console.log('hi');
+}
+```
+* **Function Expression :** the statement which retun any thing.
+  
+```javascript
+// beacuse here function is considered as object and creating on fly && it returns an object heance its a value 
+var anonymousGreet = function () {
+    console.log('hi');
+}
+anonymousGreet();
 
 
+```
+![Image](./images/function-epressions-invoke.png)
 
+⚠️ **Note** : Function Expresions are not hoisted
 
+```javascript
+// Functions expressions considered as variable and According to Hoisting variables are set to undefined
 
+anonymousGreet();   // error : undfined is not a function
 
+var anonymousGreet = function () {
+    console.log('hi');
+}
 
+```
 
+📚 **Conceptual Example :**
 
+```javascript
 
+function log(a) {
+    console.log(a);     // for not function
 
+    a();                // for function
+}
 
+log(1);             // create number on fly
 
+log('Hello');       // create string on fly
 
-
-
-
-
-
-
-
-
-
-
-
-
+log(function(){ console.log('Hi')}) // create function as  object on fly && it is considered as function expression
+```
+Functions can pass as parameter in which you can pass function as paremeter use them like you do varaiables to other functions as well *introduces an entirely new class of programming called **Functional Programming*** 
 
 ---
-## 📘 Pass by Value and Pass by Reference
+## 📘 Pass By Value Vs By Reference
 
-1. __Pass by value__ : Simply means we copy the value and we create that value some where else in memory
+1. __Pass by value__ : Simply means we copy the value and we create that value some where else in memory all **primitves types** are *Pass by refernce* examples. number, boolean, string etc
 ```javascript
 var a = 10;
 var b = a;
@@ -520,8 +583,9 @@ var a = 11;
 console.log(a) // 11
 console.log(b) // 10
 ```
+![image](./images/pass-by-value.png)
 
-2. __Pass by Reference__ : Objects in javacsript are stored in memory and are passed by reference. This means that we don't copy the value are did with primitive types
+2. __Pass by Reference__ : Objects in javacsript are stored in memory and are passed by reference. This means that we don't copy the value are did with primitive types. All **Objects types** are *Pass by reference* examples. array, funtions and objects
 
 ```javascript
 let obj1 = { name: "Deepu", password: "123" };
@@ -534,6 +598,7 @@ console.log(obj1);
 // { name: "Deepu", password: "456" };
 console.log(obj2);
 ```
+![image](./images/pass-by-refrence.png)
 ---
 ## 📘use strict
 
