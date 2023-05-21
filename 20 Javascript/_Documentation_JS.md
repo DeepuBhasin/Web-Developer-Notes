@@ -627,53 +627,43 @@ console.log(obj1)
 
 console.log(obj2)
 // { name: "dp", password: "456" };
-
-
 ```
 ---
-## 📘use strict
-
-__Main Purpose :__ Enforce stricter parsing and error handling in your code.
-1. Prevents the use of global variables 
-
-```javascript
-city = 'London';    // become global variable
-
-console.log(city);
-
-// after using 'use strict'
-
-'use strict'
-
-city = 'London';    // cause error
-
-console.log(city);
-
-
-// another example 
-'use strict'
-
-function test(){
-    var a = b = 10;
-}
-
-console.log(a); // error
-console.log(b); // error
-
-test();
-
-```
----
-## 📘 This
+## 📘 Objects, Functions and This
 The __this__ keyword is actually pretty straightforward to understand __what is does is it refers to whatever object it is directly inside (property) of.__
 
 * On Global Level : __this === window object__
 * On Object Level : __this === current Object__ 
 
 ```javascript
+// globale execution context
+console.log(this);       // window object
+
+// Function A Execution context and getting own this kwyword but it pointing to window object (same memory location)
+function a() {
+    console.log(this);   // window object  
+    this.newVariable = 'hello';
+}
+a();
+
+// Function B Execution context and getting own this kwyword but it pointing to window object (same memory location)
+var b = function () {
+    console.log(this);   // window object
+}
+
+console.log(newVariable);   // hello
+
+b();
+```
+```javascript
 let obj = {
     firstName: 'Deepu',
     lastName: 'Singh',
+    // here this is attached to the current object by javascript engine
+    log: function(){
+        this.name = 'Deepinder',
+        console.log(this);
+    }, 
     getFullName: function () {
         return this.firstName + ' ' + this.lastName;
     }
@@ -765,8 +755,44 @@ let obj = {
     }
 }
 
-obj.getFullName();    
+obj.getFullName();
 ```
+
+
+## 📘use strict
+
+__Main Purpose :__ Enforce stricter parsing and error handling in your code.
+1. Prevents the use of global variables 
+
+```javascript
+city = 'London';    // become global variable
+
+console.log(city);
+
+// after using 'use strict'
+
+'use strict'
+
+city = 'London';    // cause error
+
+console.log(city);
+
+
+// another example 
+'use strict'
+
+function test(){
+    var a = b = 10;
+}
+
+console.log(a); // error
+console.log(b); // error
+
+test();
+
+```
+---
+
 ## 📘 Call, Apply and Bind Methods
 
 These methods are used to __manipulate__ the __this__ keyword.
