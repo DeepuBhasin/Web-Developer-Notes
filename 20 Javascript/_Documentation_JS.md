@@ -871,8 +871,99 @@ var person = {
     lastname : 'Doe'
 }
 ```
-
 ---
+## 📘 IIFEs
+* **Immediately Invoked Function Expressions** - A function that is executed right after it is created.
+
+```javascript
+
+3;                  // valid
+"Hello World";      // valid
+{
+    name : "Deepu"  // valid
+};
+
+function(name) {    // invalid
+    return name
+}
+
+// () is a operator which help to execute expresions like (3+4) 
+(3 + 5) * 5;        // valid
+
+// we are creating function and running it all the same time
+(function (name){   // valid    
+    return name
+}('Deepu'))
+
+// you never put statements in expressions
+(if () {})          // invalid
+
+// function are special objects, here we are creating function object and function has sepcial property that '() invoking a function' hence called IIFE
+(function doubleNumber(num){
+    return num * 2;
+}(5));  // 10
+
+
+// Function object get called
+var greeting = function(name) {
+    return 'Hello' + name;
+}('Tony');
+
+console.log(greeting)       // Hello Tony
+```
+
+
+Why are they used ? <br/>
+
+The main reason to use and IIFE that, its __preserve a private scope with in your function__ which help to not overridding any global variables. 
+
+```javascript
+let firstName = 'Deepinder';
+let lastName = 'Singh';
+
+const student = (function(firstName,lastName){
+    
+    // You can write function also
+    const getFullName = () => {
+        return firstName + ' ' + lastName; 
+    }
+    
+    return {
+        firstName,
+        lastName,
+        getFullName
+    }
+})('Deepu','Bhasin');
+
+firstName   // Deepinder  
+student.firstName   // Deepu 
+```
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## 📘use strict
 
@@ -961,41 +1052,6 @@ let multiplyByTen = multiply.bind(this, 10);
 multiplyByTwo(5)    // 50
 ```
 
-## 📘Functions
-### 📑IIFE
-__Immediately Invoked Function Expression__ - A function that is executed right after it is created.
-
-```javascript
-(function doubleNumber(num){
-    return num * 2;
-}(5));  // 10
-```
-
-Why are they used ? <br/>
-
-The main reason to use and IIFE that, its __preserve a private scope with in your function__ which help to not overridding any global variables. 
-
-```javascript
-let firstName = 'Deepinder';
-let lastName = 'Singh';
-
-const student = (function(firstName,lastName){
-    
-    // You can write function also
-    const getFullName = () => {
-        return firstName + ' ' + lastName; 
-    }
-    
-    return {
-        firstName,
-        lastName,
-        getFullName
-    }
-})('Deepu','Bhasin');
-
-firstName   // Deepinder  
-student.firstName   // Deepu 
-```
 
 ### 📑Closure
 A __closure__ is an inner function that has access to the scope of an enclosing function.<br/>
