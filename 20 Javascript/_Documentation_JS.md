@@ -1175,7 +1175,73 @@ multiplyByTwo(4)    // 8
 let multiplyByTen = multiply.bind(this, 10);
 multiplyByTwo(5)    // 50
 ```
+--- 
 
+## 📘 Functional Programming
+
+```javascript
+// Example 1
+function mapForEach(arr, fn) {
+    var newArr = [];
+    for (var i =0; i < arr.length; i++) {
+        newArr.push(fn(arr[i]));
+    }
+}
+
+var arr1= [1, 2, 3];
+console.log(arr1);
+
+var arr2 = mapForEach(arr1, function(item) {
+    return item * 2;
+});
+console.log(arr2);
+
+var arr3 = mapForEach(arr1, function(item) {
+    return item > 2;
+});
+console.log(arr3);
+
+var checkPastLimit = function (limiter, item) {
+    return item > limiter
+}
+var arr4 = mapForEach(arr1, checkPastLimit(this, 1));
+console.log(arr4);
+
+// this is good one for conceptual thing
+var checkPastLimitSimplified = function (limiter) {
+    return function (limiter, item) {
+        return item > limiter;
+    }.bind(this, limiter);
+}
+var arr5 = mapForEach(arr1, checkPastLimitSimplified(1));
+console.log(arr5);
+
+// Example 2
+function sum(a , b) {
+    return a + b;
+}
+
+function sub(a , b) {
+    return a - b;
+}
+
+function mulitply(a , b) {
+    return a * b;
+}
+
+function divide(a , b) {
+    return a / b;
+}
+
+function mathProgram(num1, num2, fn) {
+    fn(num1,num2);
+}
+
+var output1 = mathProgram(1,2, sum);
+var output2 = mathProgram(2,1, sub);
+
+
+```
 
 
 
