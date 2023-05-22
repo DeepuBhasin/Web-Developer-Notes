@@ -1179,6 +1179,8 @@ multiplyByTwo(5)    // 50
 
 ## 📘 Functional Programming
 
+* Libraries : underscore , lodash
+
 ```javascript
 // Example 1
 function mapForEach(arr, fn) {
@@ -1239,8 +1241,6 @@ function mathProgram(num1, num2, fn) {
 
 var output1 = mathProgram(1,2, sum);
 var output2 = mathProgram(2,1, sub);
-
-
 ```
 
 
