@@ -913,35 +913,113 @@ console.log(greeting)       // Hello Tony
 ```
 
 
-Why are they used ? <br/>
+```javascript
+// Execution Context
+
+(function (name){
+    var greeting = 'Hello';
+    console.log(greeting +' '+ name);
+}('john'));
+```
+![Image](./images/iife.png)
+
+⚠️ Why are they used ? <br/>
 
 The main reason to use and IIFE that, its __preserve a private scope with in your function__ which help to not overridding any global variables. 
 
 ```javascript
-let firstName = 'Deepinder';
-let lastName = 'Singh';
+var greeting = 'Hola';
 
-const student = (function(firstName,lastName){
-    
-    // You can write function also
-    const getFullName = () => {
-        return firstName + ' ' + lastName; 
-    }
-    
-    return {
-        firstName,
-        lastName,
-        getFullName
-    }
-})('Deepu','Bhasin');
-
-firstName   // Deepinder  
-student.firstName   // Deepu 
+(function (name){
+    var greeting = 'Hello';
+    console.log(greeting + ' ' + name);
+}('John'));
 ```
+![Image](./images/iffe-module-pattern.png)
+
 ---
 
+## 📘Closure
 
+A **closure** is an inner function that has access to the scope of an enclosing function.<br/>
 
+A Closure has access to **variables** in 3 separate Scopes : 
+1. Variables in its own scope.
+2. Variables in the scope of the outer function.
+3. Variables in the global scope.
+
+The closure also has access to __parameters__ :
+1. Its own Parameters.
+2. Parameters of outer function(s).
+
+```javascript
+const globalVariable = 'global var';
+
+function outterFunc(param1) {
+    
+    const variable1 = 'var one';
+
+    function innerFunc(param2) {
+        const variable2 = 'var two';
+        console.log('globalVariable: ', globalVariable);
+        console.log('variable1: ', variable1);
+        console.log('variable2: ', variable2);
+        console.log('param1: ', param1);
+        console.log('param2: ', param2);
+    }
+    
+    innerFunc('param one');
+}
+
+outterFunc('param two');
+```
+
+```javascript
+function greet(whattosay){
+    // it return function object which is created on fly
+    return function (name) {
+        console.log(whattosay + ' ' + name)
+    }
+}
+
+var sayHi = greet('Hi');
+
+// then we are invoking a function
+sayHi('Tony');
+```
+![Image](./images/closures-1.png)
+![Image](./images/closures-2.png)
+
+```javascript
+// Comman Example
+function buildFunctions () {
+    var arr = [];
+    for(var i = 0; i < 3; i++) {
+        arr.push(function(){console.log(i)});
+    }
+    return arr;
+}
+
+var fs = buildFunctions();
+// all are getting same 3 value because there environment is same means they all are referering to same 'i' variable
+fs[0]();    //3
+fs[1]();    //3
+fs[2]();    //3
+
+// solutions
+// 1. Let : by block scope
+// 2. IIFE : if execute the function same time (on fly) not after some time then IIFE can help us
+
+arr.push(
+    (
+        function(j){
+            return function () {
+            // it create new execution context for j variable
+                console.log(j)      
+            }
+        }(i))
+    );
+```
 
 
 
@@ -1053,39 +1131,6 @@ multiplyByTwo(5)    // 50
 ```
 
 
-### 📑Closure
-A __closure__ is an inner function that has access to the scope of an enclosing function.<br/>
-
-A Closure has access to __variables__ in 3 separate Scopes : 
-1. Variables in its own scope.
-2. Variables in the scope of the outer function.
-3. Variables in the global scope.
-
-The closure also has access to __parameters__ :
-1. Its own Parameters.
-2. Parameters of outer function(s).
-
-```javascript
-const globalVariable = 'global var';
-
-function outterFunc(param1) {
-    
-    const variable1 = 'var one';
-
-    function innerFunc(param2) {
-        const variable2 = 'var two';
-        console.log('globalVariable: ', globalVariable);
-        console.log('variable1: ', variable1);
-        console.log('variable2: ', variable2);
-        console.log('param1: ', param1);
-        console.log('param2: ', param2);
-    }
-    
-    innerFunc('param one');
-}
-
-outterFunc('param two');
-```
 
 
 ### 📑Currying
