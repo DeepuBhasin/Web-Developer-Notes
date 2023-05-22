@@ -1048,63 +1048,84 @@ greetSpanish('john', 'Doe');
 ![Image](./images/function-factories-3.png)
 ![Image](./images/function-factories-4.png)
 
+---
 
+## 📘Closures and Callbacks 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## 📘use strict
-
-__Main Purpose :__ Enforce stricter parsing and error handling in your code.
-1. Prevents the use of global variables 
+* **Callback Function :** A function you give to another function, to be run when the other function is finished. so the function you call (i.e invoke), 'calls back' by calling the function you gave it when it finishes.
 
 ```javascript
-city = 'London';    // become global variable
+function tellMeWhenDone(callback) {
+    var a = 1000;
+    var b = 2000;
 
-console.log(city);
-
-// after using 'use strict'
-
-'use strict'
-
-city = 'London';    // cause error
-
-console.log(city);
-
-
-// another example 
-'use strict'
-
-function test(){
-    var a = b = 10;
+    callback();
 }
 
-console.log(a); // error
-console.log(b); // error
+// send function expression
+tellMeWhenDone(function() {
+    console.log('I am Done !');
+})
 
-test();
+// send function expression
+tellMeWhenDone(function() {
+   alert('I am Done !');
+})
+```
+---
+## 📘Currying
+* This is technique in which, __function can take multiple parameters and__ instead using __currying , modify it into a function that takes one parameter at a time__
+* **Function Currying :** Creating a copy of a function but with some preset parameters. Very useful in mathematical situations.
 
+```javascript
+function tripleAdd(num1, num2, num3) {
+    return num1 + num2 + num3;
+}
+
+// converted into currying function
+
+const tripleAdd = num1 => num2 => num3 => num1 + num2 + num3;
+
+tripleAdd(10)(20)(30); // 60
+```
+Why is this usefull ? <br/>
+
+Beacuse now i can create __mulitple utility functions__ out of this For example:
+
+```javascript
+const carriedMultiple = (number1) => number2 => number1 * number2;
+
+const carriedMutipleBy5 = carriedMultiple(5);
+
+carriedMutipleBy5(4); // 20
+```
+
+```javascript
+// Write a function that keep track of how many times it was called and return that number
+function myfunction() {
+    let count = 0;
+    return function () {
+        count++;
+        return count;
+    }
+}
+
+let output = myfunction();
+
+console.log(output());  // 1
+console.log(output());  // 2
+console.log(output());  // 3
+console.log(output());  // 4
+console.log(output());  // 5
 ```
 ---
 
 ## 📘 Call, Apply and Bind Methods
 
 These methods are used to __manipulate__ the __this__ keyword.
+
+![Image](./images/call-bind-apply.png)
+
 
 ```javascript
 
@@ -1158,50 +1179,56 @@ multiplyByTwo(5)    // 50
 
 
 
-### 📑Currying
-This is technique in which, __function can take multiple parameters and__ instead using __currying , modify it into a function that takes one parameter at a time__
+
+
+
+
+
+
+
+
+
+
+
+
+## 📘use strict
+
+__Main Purpose :__ Enforce stricter parsing and error handling in your code.
+1. Prevents the use of global variables 
 
 ```javascript
-function tripleAdd(num1, num2, num3) {
-    return num1 + num2 + num3;
+city = 'London';    // become global variable
+
+console.log(city);
+
+// after using 'use strict'
+
+'use strict'
+
+city = 'London';    // cause error
+
+console.log(city);
+
+
+// another example 
+'use strict'
+
+function test(){
+    var a = b = 10;
 }
 
-// converted into currying function
+console.log(a); // error
+console.log(b); // error
 
-const tripleAdd = num1 => num2 => num3 => num1 + num2 + num3;
+test();
 
-tripleAdd(10)(20)(30); // 60
 ```
-Why is this usefull ? <br/>
+---
 
-Beacuse now i can create __mulitple utility functions__ out of this For example:
 
-```javascript
-const carriedMultiple = (number1) => number2 => number1 * number2;
 
-const carriedMutipleBy5 = carriedMultiple(5);
 
-carriedMutipleBy5(4); // 20
-```
 
-```javascript
-// Write a function that keep track of how many times it was called and return that number
-function myfunction() {
-    let count = 0;
-    return function () {
-        count++;
-        return count;
-    }
-}
-
-let output = myfunction();
-
-console.log(output());  // 1
-console.log(output());  // 2
-console.log(output());  // 3
-console.log(output());  // 4
-console.log(output());  // 5
-```
 
 ## 📘Array Methods
 1. .push
