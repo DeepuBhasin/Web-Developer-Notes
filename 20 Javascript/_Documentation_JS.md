@@ -1020,8 +1020,33 @@ arr.push(
         }(i))
     );
 ```
+📚 **Conceptual Example :** Function Factories Pattern
 
+```javascript
+function makeGreeting (langauge) {
+    return function (firstname, lastname){
+        if(language === 'en') {
+            console.log('Hello '+ firstname + ' ' + lastname)
+        }
 
+        if(language === 'es') {
+            console.log('Hola '+ firstname + ' ' + lastname)
+        }
+    }
+}
+// it will create its own execution context even though it have same lexical environment
+var greetEnglish = makeGreeting('en');
+
+// it will create its own execution context even though it have same lexical environment
+var greetSpanish = makeGreeting('es');
+
+greetEnglish('john', 'Doe');
+greetSpanish('john', 'Doe');
+```
+![Image](./images/function-factories-1.png)
+![Image](./images/function-factories-2.png)
+![Image](./images/function-factories-3.png)
+![Image](./images/function-factories-4.png)
 
 
 
