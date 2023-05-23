@@ -1242,15 +1242,80 @@ function mathProgram(num1, num2, fn) {
 var output1 = mathProgram(1,2, sum);
 var output2 = mathProgram(2,1, sub);
 ```
+---
 
+## 📘 Object-Oriented Javascript and Prototypal Inheritence (Classical Vs Prototypal Inheritance)
+* **Inheritance :** One object gets access to the properties and methods of another object.
+* Classical Inheritance :  Verbose.
+* Prototypal Inheritance : Simple.
 
+--- 
+## 📘 Understanding the Prototype
+* **Prototype Chain :** is a chain which allow you to access properties of methods of another object.
 
+![Image](./images/prototype-chain.png)
 
+```javascript
+var person = {
+    firstName: 'Deepinder',
+    lastName: 'Singh',
+    age: 29,
+    getfullName() {
+        return this.firstName + ' ' + this.lastName;
+    }
+}
+var john = {
+    firstName: 'john',
+    lastName: 'Doe'
+}
 
+// don't do this EVER! for demo purposes only
+john.__proto__ = person;
+console.log(john);
+console.log(john.age);
 
+```
+![Image](./images/__proto__.png)
 
+```javascript
+var a = [];
+var b = '';
+var c = 1;
+var d = () => { };
+var e = true;
+var f = {};
 
+a.__proto__ = Array.prototype   // true
+```
+![Image](./images/__proto__of_all.png)
 
+## 📘 Reflection and Extend
+* **Reflection :** An Object can look at itself, listing and changing its properties and methods.
+
+```javascript
+
+// 1. by Key Value
+if (objectName.key !== undefined) {
+    // value Exist
+}
+
+// 2. in Operator
+if ('keyName' in ObjectName) {
+    // value Exist
+}
+
+// 3. For loop (it will also print prototype chaine values)
+for (var key in ObjectName) {
+    console.log(key)
+}
+
+// 4. Check Property in Base Object
+if (ObjectName.hasOwnProperty('keyName')) {
+    // value exist in its base object not in prottotype property
+}
+
+```
+---
 
 
 
