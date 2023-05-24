@@ -1316,11 +1316,105 @@ if (ObjectName.hasOwnProperty('keyName')) {
 
 ```
 ---
+## 📘 Building Objects
+1. Object Literals
+```javascript
+var object = {};
+```
 
+2. **Function Constructors :** A Normal function that is used to *construct objects*. The 'this' variables points a new empty object, and that object is returned from the function automatically. 
 
+   1. **new** keyword will create an empty object first, if we do not use **return** keyword it will return empty object other wise normal return value
+   2. then **Person('john','Deo')** function will called with values, which help to add new **properties** and **methods** to *newly created object*
+   3. then **this** keyword will bind according to the current object by new keyword.
 
+```javascript
+function Person(firstname, lastname) {
+    this.firstname = firstname;
+    this.lastname = lastname;
+}
 
+var john = new Person('john','Deo');
+var dp = new Person('Deepinder', 'Singh');
+```
+---
 
+## 📘 Function Constructors and '.prototype'
+* **'.prototype' :** property always created automatically  with function constructor only.
+* Function Constructors has **first letter** always **capital**
+
+![Image](./images/function-constructor-prototype.png)
+
+```javascript
+function Person(firstname, lastname) {
+    this.firstname = firstname;
+    this.lastname = lastname;
+}
+
+Person.prototype.getFullName = function () {
+    return this.firstname + ' ' + this.lastname;
+}
+
+var john = new Person('John', 'Doe');
+var jane = new Person('Jane', 'Doe');
+
+console.log(john.getFullName());
+console.log(john.getFullName == Person.prototype.getFullName)   // true
+
+console.log(john.__proto__ == Person.prototype);    // true
+```
+⚠️ Why we are adding function into prototype ? 
+* beacuse **it save our memory**. When ever we create an object it use memory to store properties and methods, if we storing same method in every object then every object consume very large amount of memory, while creating method using prototype then all objects will refers to that method.
+* so for better optimization always add methods to prototype
+---
+## 📘 Built-in function Constructors
+
+```javascript
+var a = new String('Hello');    // here a will become object 
+var b = new Array([1,2,3,4]);   // here b will become object 
+var c = new Boolean(0);         // here c will become object 
+var d = new Number(3);          // here d will become object 
+
+var date = new Date('31/1/2023')// here date will become object
+
+'Hello'.lenght      // String class will create wrapper and produce object.
+
+// Prototype Inheritance Example
+String.prototype.isLengthGreaterThan = function (limit) {
+    return this.length > limit;
+}
+
+// isLengthGreaterThan method will access by all string beacuse of prototype inheritence
+console.log("John".isLengthGreaterThan(3))
+```
+
+📚 **Conceptual Example :**
+
+```javascript
+Number.prototype.isPostive = function () {
+    return this > 0;
+} 
+
+3.isPostive()   // error  : Unexpected token Illegal
+
+'Hello'.lenght  // no error
+
+// beacuse javascript is not to much smart beacuse javascript convert string into object automatically but not to number
+
+var a = new Number(3).isPostive();  // true
+```
+
+**Dangerous Aside :** 
+
+```javascript
+var a = 3;             // primitve value 
+var b = new Number(3); // b is not number here its a object
+var c = Number("3")    // its converting into number 
+a == b                 // true 
+a === b                // false (number === object) 
+```
+
+---
 
 ## 📘use strict
 

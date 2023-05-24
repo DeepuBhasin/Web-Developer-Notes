@@ -10,12 +10,21 @@
 
 <body>
     <script>
-        var a = [];
-        var b = '';
-        var c = 1;
-        var d = () => { };
-        var e = true;
-        var f = {};
+        function Person(firstname, lastname) {
+            this.firstname = firstname;
+            this.lastname = lastname;
+        }
+
+        Person.prototype.getFullName = function () {
+            return this.firstname + ' ' + this.lastname;
+        }
+
+        var john = new Person('John', 'Doe');
+        var jane = new Person('Jane', 'Doe');
+
+        console.log(john.getFullName());
+
+        console.log(john.__proto__ == Person.prototype);
     </script>
 </body>
 
