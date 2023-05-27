@@ -1,7 +1,6 @@
 ## 📘 Developer Resposibilty
 
-Write a Good code so every one can read and understand easily
- 
+Write good code so everyone can read and understand easily
 ---
 ## 📘 Operators are functions
 
@@ -19,7 +18,7 @@ var b = 3 + 2;
 ---
 
 ## 📘 Conceptual Aside
-1. **Syntax Parsers** : A program that reads your code and determines what it does and if its grammer is valid. eg interprator or compiler
+1. **Syntax Parsers** : A program that reads your code and determines what it does and if its grammar is valid, e.g., an interpreter or a compiler.
 2. **Execution Contexts** : *A Wrapper to help manage the code that is running*. There are lots of lexical environments. which one is currently running is managed via execution context. it can contain things beyond what you've written in your code.
 3. **Lexical Environments** : *where something sits physically in the code you write*. 'Lexical' means 'having' to do with words or grammer. A lexical environment exists in programming languages in which **where** you write something is important. 
 
@@ -1414,6 +1413,123 @@ a == b                 // true
 a === b                // false (number === object) 
 ```
 
+⚠️ Note : **Moment.js** (is best library for related to dates)
+
+---
+
+## 📘Dangerous Side Arrays and for in
+In javascript Arrays are objects that is the reason we access property like this 
+```javascript
+var a = ['aa','bb','cc'];
+
+a[0] // a 
+
+// 0 : Key name & aa : is Value name
+```
+* For Array always use **simple for loop**
+* For Objects always use **for in Loop**
+
+```javascript
+Array.prototype.myCustomeFeatures = 'cool!';
+
+var arr = ['john', 'jane', 'jim'];
+
+for(var prop in arr) {
+    console.log(prop + ' : ' + arr[prop]);
+}
+
+// john
+// jane
+// jim
+// 'cool!'      // it will occur because Array are objects
+
+```
+## 📘 Object.create and Pure Prototypal Inheritance
+
+```javascript
+
+const personPrototype = {
+  greet: function() {
+    console.log("Hello!");
+  }
+};
+
+// it will create new empty object and then pointing out this prototype object
+
+const person = Object.create(personPrototype);
+console.log(person);     // empty object
+
+// Add Proprerties to the empty object
+person.name = "John";
+person.age = 30;
+
+console.log(person); // { name :"John", person.age : 30}
+```
+* **PolyFill :** code that adds a features which the engine may lack.
+
+```javascript
+// PolyFill of Object.create
+
+if (!Object.create) {
+    Object.create = function (o) {
+        if (arguments.length > 1) {
+            throw new Error('Object.create implementation only accept the first parameter');
+        }
+        function F() { }
+        F.prototype = o;
+        return new F();
+    }
+}
+```
+## 📘ES6 and Classes
+* Classes are another way to create Object
+* **Syntactic Sugar :** A Different way to type something that doesn't change how it works under the hood.
+
+```javascript
+/*
+//just like 
+
+function Person (firstName, lastName) {
+    this.firstname = firstname;
+    this.lastname = lastname
+}
+
+Person.prototype.greet = function () {
+    return 'Hi ' + this.firstname
+}
+
+var john = new Person('john', 'Doe');
+*/
+
+class Person {
+    constructor(firstname, lastname) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
+
+    greet() {
+        return 'Hi ' + this.firstname;
+    }
+}
+
+var john = new Person('john', 'Doe');
+
+/*
+//just like
+
+var InformalPerson.__proto__ = Person;
+*/
+
+class InformalPerson extends Person {
+    constructor(firstname, lastname) {
+        super(firstname, lastname)
+    }
+    greet() {
+        return 'Yo ' + this.firstname;
+    }
+}
+
+```
 ---
 
 ## 📘use strict
