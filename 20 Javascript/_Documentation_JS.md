@@ -1484,7 +1484,7 @@ if (!Object.create) {
 ## 📘ES6 and Classes
 * Classes are another way to create Object
 * **Syntactic Sugar :** A Different way to type something that doesn't change how it works under the hood.
-
+* at the end, its all Prototypol Inheritance 
 ```javascript
 /*
 //just like 
@@ -1531,46 +1531,164 @@ class InformalPerson extends Person {
 
 ```
 ---
+## 📘 Odds and Ends
+### 1. typeOf , instanceOf and FiguringOut what Something is
 
-## 📘use strict
+```javascript
+var a = 3;
+console.log(typeof a);              // number
+
+var b = "Hello";
+console.log(typeof b);              // string
+
+var c = {};
+console.log(typeof c);              // Object
+
+var d = [];
+console.log(typeof d);  // weird
+console.log(Object.prototype.toString.call(d)); // [object Array]
+console.log(Array.isArray(d));      // true
+
+function Person(name) {
+    this.name = name;
+}
+
+console.log(typeof Person);         // function
+
+var e = new Person('Jane');
+console.log(typeof e);              // object 
+console.log(e instanceof Person);   // true
+
+console.log(typeof undefined);      // undefined
+console.log(typeof null);           // object
+
+var z = function () { };
+console.log(typeof z)               // function 
+console.log(typeof Array);          // function 
+console.log(typeof Object)          // function
+```
+
+### 2. Strict Mode
 
 __Main Purpose :__ Enforce stricter parsing and error handling in your code.
+
 1. Prevents the use of global variables 
 
 ```javascript
+// Example 1
 city = 'London';    // become global variable
 
 console.log(city);
 
-// after using 'use strict'
+// Example 2
+var city;
 
-'use strict'
-
-city = 'London';    // cause error
-
-console.log(city);
-
+cityy = 'London';    // cityy is undefined
+console.log(cityy);
 
 // another example 
-'use strict'
-
 function test(){
+   'use strict'
     var a = b = 10;
+    console.log(a); // error
+    console.log(b); // error
 }
-
-console.log(a); // error
-console.log(b); // error
-
 test();
-
 ```
+⚠️ Note : it is very usefull but every browser do not work according "use strict mode"
+
 ---
 
+## 📘Method Chaining 
 
+Calling one method after another, and each method. Affects the parent object. So obj.method1().method2() where both methods end up with a 'this' variable poiting at 'obj'  
 
+---
 
+## 📘Transpile
+Convert the syntax of one programming language, to another. In this case language that don't really ever run anywhere, but instead are processed by 'transpilers' that generate javascript.
 
+---
+## 📘 Promises, Async and Await
 
-## 📘Array Methods
-1. .push
-2. .pop
+* **Promise :** A Standarized approach to dealing with asynchronouse events and callbacks.
+
+```javascript
+
+const PENDING = 0;
+const FULFILLED = 1;
+const REJECTED = 2;
+
+function CustomPromise(executor) {
+    let state = PENDING;
+    let value = null;
+    let handlers = [];
+    let catches = [];
+
+    function resolve(result) {
+        if (state !== PENDING) {
+            return;
+        }
+        state = FULFILLED;
+        value = result;
+        handlers.forEach((h) => h(value));
+    }
+
+    function reject(err) {
+        if (state !== PENDING) {
+            return;
+        }
+
+        state = REJECTED;
+        value = err;
+        catches.forEach((c) => c(value));
+    }
+
+    this.then = function (callback) {
+        if (state === FULFILLED) {
+            callback(value);
+        } else {
+            handlers.push(callback);
+        }
+    }
+
+    executor(resolve, reject);
+}
+
+const doWork = (res, rej) => {
+    setTimeout(() => { res("hello World") }, 1000)
+}
+
+let someText = new CustomPromise(doWork);
+
+someText.then((val) => {
+    console.log('1st log : ' + val);
+});
+
+someText.then((val) => {
+    console.log('2st log : ' + val);
+});
+
+setTimeout(() => {
+    someText.then(val => {
+        console.log('3rd log : ' + val);
+    })
+}, 3000);
+```
+---
+## 📘 Programming Patterns
+
+```javascript
+function createObject(firstname, lastname) {
+    function Person(firstname, lastname) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
+
+    return new Person(firstname, lastname);
+}
+
+var john = createObject('Deep', 'Singh');
+
+console.log(john);
+```

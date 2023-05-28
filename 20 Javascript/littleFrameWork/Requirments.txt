@@ -1,0 +1,15 @@
+Greeter
+
+When given a firstname, lastname and optional language, it generates formal and informal greetings.
+
+Support English and Spanish Languages.
+
+Easy to type 'G$()';
+
+support Jquery
+
+// Structure
+index.html
+app.js
+Jquery
+Greeter
