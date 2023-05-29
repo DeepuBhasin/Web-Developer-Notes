@@ -1678,7 +1678,6 @@ setTimeout(() => {
 ```
 
 ---
-
 # 📔ES6
 
 ## 📘Block Scoping
@@ -1705,6 +1704,28 @@ setTimeout(() => {
 
 ![Image](./images/let-reference.jpeg)
 
+![Image](./images/block-lexical-scope.jpeg)
+
+* Creating 2 lexical environment
+```javascript
+// First one lexical environment
+let firstname = 'Tony';
+
+// second one lexical environment
+{
+    let firstname = 'Anthony';
+    console.log(firstname);     // 'Anthony'
+}
+
+console.log(firstname)      // 'Tony'
+```
+* Let Variable get hoisted
+
+```javascript
+let firstname;
+console.log(firstname)  // undefined
+```
+
 * *let or const* variable do not attached with **window object** 
 
 ```javascript
@@ -1714,19 +1735,7 @@ console.log(firstname)          // Tony
 
 // beacuse firstname sit in lexical environment not in variable Environment
 console.log(window.firstname)   // undefined 
-```
-* 
-```javascript
-let firstname = 'Tony';
-
-{
-    let firstname = 'Anthony';
-    console.log(firstname);     // 'Anthony'
-}
-
-console.log(firstname)      // 'Tony'
-```
-![Image](./images/block-lexical-scope.jpeg)
+``` 
 
 📚 **Conceptual Example :**
 
@@ -1739,7 +1748,7 @@ switch (firstname) {
         let lastname = 'Bhasin' //  'lastname' has already been declared (at index.html:18:21)
 }
 
-// because here both lastname are on same block (same lexical scope) example : curly braces for switch block
+// because here both lastname are on same lexical environment example : curly braces for switch block
 
 // solution 
 let firstname = 'Tony';
@@ -1752,13 +1761,19 @@ switch (firstname) {
 ```
 ---
 
-### 📘 Binding
+## 📘Binding
 
 * The connection (pointer) bewteen a variable name and a specific location in the computer's memory that holds a value;
 
-![Image](./images/binding.jpeg)
+![Image](./images/binding-1.jpeg)
 
-### 📘 Const
+![Image](./images/binding-2.jpeg)
+
+![Image](./images/binding-3.jpeg)
+
+---
+
+## 📘Const
 
 * **const :** with const, what cannot be changed is the binding, not the value.
 
