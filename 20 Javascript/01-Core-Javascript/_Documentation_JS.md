@@ -1,3 +1,4 @@
+# 📔 ES5
 ## 📘 Developer Resposibilty
 
 Write good code so everyone can read and understand easily
@@ -1675,6 +1676,101 @@ setTimeout(() => {
     })
 }, 3000);
 ```
+
+---
+
+# 📔ES6
+
+## 📘Block Scoping
+* **Block Scoping :2** variable scope is defined lexically by a block. in Javascript's case, curly braces.
+---
+## 📘Block Statements and Lexical Environments
+
+* In the Execution Context there are two types of Environment
+  
+  1. **Lexical Environment :** when ever we use *curly braces {}* like with *if-statement, function statments etc* a new **lexical environment is cerated with in same execution context**
+
+  2. **Variable Environment** so when ever we create variable with **var** example *myVar* it will automatically created in **Variable Environment**
+
+![Images](./images/block-scope.jpeg)
+
+---
+## 📘Let
+
+* Variable defined by **let or const** are moved to lexical Envrionment because both have block scope.
+
+![Image](./images/let.jpeg)
+
+* *Lexical enviroment* has also has reference to the outer variables like as *Variable Environment* 
+
+![Image](./images/let-reference.jpeg)
+
+* *let or const* variable do not attached with **window object** 
+
+```javascript
+let firstname = 'Tony';
+
+console.log(firstname)          // Tony
+
+// beacuse firstname sit in lexical environment not in variable Environment
+console.log(window.firstname)   // undefined 
+```
+* 
+```javascript
+let firstname = 'Tony';
+
+{
+    let firstname = 'Anthony';
+    console.log(firstname);     // 'Anthony'
+}
+
+console.log(firstname)      // 'Tony'
+```
+![Image](./images/block-lexical-scope.jpeg)
+
+📚 **Conceptual Example :**
+
+```javascript
+let firstname = 'Tony';
+switch (firstname) {
+    case 'Tony':
+        let lastname = 'Singh'
+    case 'Deepu':
+        let lastname = 'Bhasin' //  'lastname' has already been declared (at index.html:18:21)
+}
+
+// because here both lastname are on same block (same lexical scope) example : curly braces for switch block
+
+// solution 
+let firstname = 'Tony';
+switch (firstname) {
+    case 'Tony':
+        { let lastname = 'Singh' }
+    case 'Deepu':
+        { let lastname = 'Bhasin' }
+}
+```
+---
+
+### 📘 Binding
+
+* The connection (pointer) bewteen a variable name and a specific location in the computer's memory that holds a value;
+
+![Image](./images/binding.jpeg)
+
+### 📘 Const
+
+* **const :** with const, what cannot be changed is the binding, not the value.
+
+```javascript
+
+const firstname = 'Tony';
+firstname = 'Anthony';      // cause error
+console.log(firstname);
+
+// because '=' create a new memory location eg binding new address which cause error in case of const.
+```
+
 ---
 ## 📘 Programming Patterns
 
