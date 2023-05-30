@@ -1785,6 +1785,47 @@ console.log(firstname);
 
 // because '=' create a new memory location eg binding new address which cause error in case of const.
 ```
+## 📘Templates 
+
+**Why ?** : To remove the concationation Problem.
+
+**Featurs :**
+1. Can add white space
+2. can add Multi-line strings
+
+```javascript
+var fullname = `Deepinder 
+Singh bhasin from 
+patiala punjab
+`;
+```
+---
+
+## 📘Interpolation
+
+* Replacing portions of string with other strings. you 'insert' or 'inject' strings into another string.
+* Can print variables
+* Can print expressions 
+* Can print functions
+```javascript
+// Simple Example
+const firstname = 'Tony';
+const lastname = 'Alicea';
+const fullname = `Hello, 
+` + firstname + `
+` + lastname ;
+
+console.log(fullname);
+
+
+// in better way
+const firstname = 'Tony';
+const lastname = 'Alicea';
+const fullname = `Hello, ${firstname}'s ${lastname} ${1 + 1}`;
+
+console.log(fullname);
+```
+
 
 ---
 ## 📘 Programming Patterns
