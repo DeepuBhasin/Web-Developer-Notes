@@ -1825,6 +1825,87 @@ const fullname = `Hello, ${firstname}'s ${lastname} ${1 + 1}`;
 
 console.log(fullname);
 ```
+## 📘Class 
+* A structure in a programing language that provides a way to create objects.
+* Classes in other languages like C# or Java are fundamental structures for creating new types.
+* In javascript they are just a way of creating objects and the prototype chain.
+* **Syntactic Sugar :** A Different way to accomplish something in a prohgramming language, that doesn't actually introduce anything new under-the-hood.
+
+## 📘Declarations and Expressions
+```javascript
+// Declarations 
+
+class Person {
+
+}
+
+// Expression
+
+let P = class {
+
+}
+
+typeof(p)   // function
+
+// Hence in the javascript there is no Classes Object in javascript, they are Syntactic Sugar , they are functions
+```
+```javascript
+// class === function 
+
+// isClassConstructor = true;
+class Person {
+
+}
+
+function person {
+
+}
+
+// both are same thing, at the backend javascript engine convert that class into function.
+
+// Class object has special property called isClassConstructor = true which help to make differenciate
+```
+
+```javascript
+class Person {
+
+}
+
+class p = class {
+
+}
+
+function logClass(c) {
+    console.log(c);
+}
+
+logClass(p);
+
+// creating class on fly 
+logClass(class {});
+```
+⚠️ Note : Main Concept is **classes are objects**
+
+---
+## 📘 Instance :
+
+* The actual Object created from an object feature (like a class).
+* **Public :** Directly accessible to both code written inside the object (methods), and code written outside the object.
+
+```javascript
+
+class Person {
+    firstname = 'Tony';         // creating variable
+}
+
+let me = new Person();
+
+console.log(me) // {firstname : 'Tony'}
+
+// trying to invoke function but it will give me error
+
+Person();   // Class Constructor Person cannot be invoked without 'new' 
+```
 
 
 ---
