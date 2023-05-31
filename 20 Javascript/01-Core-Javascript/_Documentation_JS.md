@@ -2012,9 +2012,106 @@ console.log(num.addOne());
 ---
 ## 📘Super
 
+```javascript
 
+class Person {
+    firstname;
+    constructor(name) {
+        this.firstname = name;
+    }
 
+    greet() {
+        return `Hello, ${this.firstname}`;
+    }
+}
 
+class Tony extends Person {
+    constructor() {
+        super('Tony');
+    }
+
+    greet() {
+        let greeting = super.greet();
+        return `${greeting}. I'm Tony.`;
+    }
+    meet() {
+        return `Nice to meet you`;
+    }
+}
+
+let me = new Tony();
+console.log(me.greet());
+```
+---
+
+## 📘Public Static Fields
+
+```javascript
+class Person {
+    firstname;
+
+    constructor(name) {
+        this.firstname = name;
+    }
+    greet() {
+        return `Hello, ${this.firstname}`;
+    }
+
+    // this will attach to Person Property
+    static residence = 'Earth';
+
+    // this will attach to Person Property
+    static goodMorning() {
+        return 'Good Morning';
+    }
+}
+
+let me = new Person();
+
+me.residence        // error
+me.goodMorning()    // error
+
+console.log(Person.goodMorning());      // Earth
+console.log(Person.residence);          // Good Morning
+console.log(me.__proto__);
+```
+---
+
+## 📘Private Fields with Getters and Setters 
+
+```javascript
+class Person {
+    #firstName;
+    #lastName;
+
+    constructor(fname,lname) {
+        this.#firstName = fname;
+        this.#lastName = lname;
+    }
+    get fname() {
+        return this.#firstName;
+    }
+
+    set fname(fn) {
+        this.#firstName = fn;
+    }
+
+    greet() {
+        return `Hello , ${this.#firstName}`;
+    }
+}
+
+let me = new Person('Tony', 'Alicea');
+console.log(me.greet());
+me.#firstName = 'Anthony';      // Cause Error
+
+console.log(me.greet());
+me.fname = 'Anthony';
+console.log(me.greet());
+console.log(me.fname);
+```
+
+---
 
 ## 📘 Programming Patterns
 
