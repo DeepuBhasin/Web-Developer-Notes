@@ -1034,33 +1034,63 @@ const store = configureStore({
 export { store, fetchPosts, searchPost };
 ```
 ### Example Redux-toolKit-RTK
+```
+// Main Dependencies
+npm install @reduxjs/toolkit
+npm install react-redux
+```
+
+```
+// for Js
+npm create-react-app --template redux 
+
+// for Typescript
+npm create-react-app --template redux-typescript 
+```
+
 
 ```javascript
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-export const apiSlice = createApi({
-    reducerPath: 'api',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3004/' }),
-    tagTypes: ['Todos'],
-    endpoints: builder => ({
-        getToDos: builder.query({
-            query: () => 'todos',
-            transformResponse: res => res.sort((a, b) => b.id - a.id),
-            providesTags: ['Todos']
+//store.js
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { createApi, fetchBaseQuery, setupListeners } from "@reduxjs/toolkit/query/react";
 
+
+export const todoApi = createApi({
+    reducerPath: 'api', // key name for caching 
+    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3004/' }),   // its like axios 
+    tagTypes: ['Todos'],  // slice name 
+    endpoints: builder => ({
+        getToDos: builder.query({           // for get method
+            query: () => ({
+                url: 'todos',
+                method: 'GET',          // this is address
+                transformResponse: res => res.sort((a, b) => b.id - a.id),
+            }),
+            providesTags: ['Todos']
+        }),
+        getSinglePost: builder.query({
+            query: (id) => ({
+                url: `todos/${id}`,
+                method: 'GET',
+            }),
+            providesTags: ['Todos']
         }),
         addToDo: builder.mutation({
             query: (payload) => ({
                 url: 'todos',
                 method: 'POST',
-                body: payload
+                body: payload,
+                headers: {
+                    'Content-type': 'application/json;charset=UTF-8'
+                }
             }),
             invalidatesTags: ['Todos']
         }),
         updateToDo: builder.mutation({
             query: (payload) => ({
                 url: `todos/${payload.id}`,
-                method: 'PATCH',
-                body: payload
+                method: 'PUT',
+                body: payload               // containing all data 
             }),
             invalidatesTags: ['Todos']
         }),
@@ -1068,7 +1098,6 @@ export const apiSlice = createApi({
             query: (payload) => ({
                 url: `todos/${payload}`,
                 method: 'DELETE',
-                body: payload
             }),
             invalidatesTags: ['Todos']
         }),
@@ -1076,17 +1105,29 @@ export const apiSlice = createApi({
     })
 });
 
-export const { useGetToDosQuery, useAddToDoMutation, useUpdateToDoMutation, useDeleteToDoMutation } = apiSlice;
+
+export const store = configureStore({
+    reducer: {
+        [todoApi.reducerPath]: todoApi.reducer
+    },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(todoApi.middleware)
+})
+
+setupListeners(store.dispatch);
+
+export const { useGetToDosQuery, useGetSinglePostQuery, useAddToDoMutation, useUpdateToDoMutation, useDeleteToDoMutation } = todoApi;
 ```
 
 ```javascript
+// Todo.js
 import React, { useState } from 'react'
-import { ApiProvider } from '@reduxjs/toolkit/dist/query/react';
-import { apiSlice, useGetToDosQuery, useUpdateToDoMutation, useAddToDoMutation, useDeleteToDoMutation } from './store';
+import { Provider } from 'react-redux';
+import { useGetToDosQuery, useGetSinglePostQuery, useUpdateToDoMutation, useAddToDoMutation, useDeleteToDoMutation, store } from './store';
+import { BrowserRouter as Router, Routes, Route, Link, useParams } from "react-router-dom"
 
 const ToDoComponent = () => {
     const [newTodo, setNewTodo] = useState('');
-    const { data: todos, isLoading, isSuccess, isError, error } = useGetToDosQuery();
+    const { data, isLoading, isSuccess, isError, error } = useGetToDosQuery();
     const [addToDo] = useAddToDoMutation();
     const [updateToDo] = useUpdateToDoMutation();
     const [deleteToDo] = useDeleteToDoMutation();
@@ -1104,22 +1145,24 @@ const ToDoComponent = () => {
     if (isLoading) {
         content = <p>Loadiing ....</p>
     } else if (isSuccess) {
-        content = todos.map(item => {
-            return <div key={item.id} style={{ border: '2px solid red', margin: '10px' }}>
+        content = data.map(item => {
+            return <div key={item.id} style={{ border: '2px solid red', margin: '10px', padding: '10px' }}>
                 <h3>id : {item.id}</h3>
                 <p>title : {item.title}</p>
                 <p>Status : {item.completed ? 'Completed' : 'Pending'}</p>
+                <Link to={`showTodo/${item.id}`}>View</Link><br />
                 <button onClick={() => updateToDo({ ...item, completed: !item.completed })}>Update</button>
                 <button onClick={() => deleteToDo(item.id)}>Delete</button>
             </div>
         });
 
     } else if (isError) {
-        content = <p>{error}</p>
+        content = <p>{error.message}</p>
     }
 
     return (
-        <div>
+        <div style={{ padding: '10px' }}>
+            <br />
             <form>
                 <label>Enter Task</label> <br />
                 <input type='text' name='' value={newTodo} onChange={e => setNewTodo(e.target.value)} placeholder='Enter To' required />
@@ -1132,11 +1175,39 @@ const ToDoComponent = () => {
     );
 }
 
+const ShowSinglePost = () => {
+    const { id } = useParams();
+    const { data, isLoading, isSuccess, isError, error } = useGetSinglePostQuery(id);
+
+    let content;
+    if (isLoading) {
+        content = <p>Loadiing ....</p>
+    } else if (isSuccess) {
+        content = <div style={{ margin: '10px', border: '2px solid red', padding: '5px' }}>
+            <h3>id : {data.id}</h3>
+            <p>title : {data.title}</p>
+            <p>Status : {data.completed ? 'Completed' : 'Pending'}</p>
+        </div>
+    } else if (isError) {
+        content = <p>{error.message}</p>
+    }
+    return (<>
+        {content}
+    </>)
+}
+
+
 const Todo = () => {
     return (
-        <ApiProvider api={apiSlice}>
-            <ToDoComponent />
-        </ApiProvider>
+        <Provider store={store}>
+            <Router>
+                <Link to="/">Home</Link>
+                <Routes>
+                    <Route path='/' element={<ToDoComponent />} />
+                    <Route path='/showTodo/:id' element={<ShowSinglePost />} />
+                </Routes>
+            </Router>
+        </Provider >
     )
 }
 

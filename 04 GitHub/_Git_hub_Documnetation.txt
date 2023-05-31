@@ -94,7 +94,26 @@ Downlaod : type git install ( web site name : git-scm)
 	3. to read all the aliases to currently opened terminal : source ~/.bashrc 
 	4. to quit : esc -> : -> q   -> enter
 	5. to show all Commands : type : alias -> enter
-
+	
+	alias gst="git status"
+	alias gpl="git pull origin"
+	alias gcm="git commit -m "
+	alias gaa="git add ."
+	alias ga="git add"
+	alias virc="vi ~/.bashrc"
+	alias sorc="source ~/.bashrc" 
+	alias gpu="git push origin"
+	alias gcb="git checkout -b"
+	alias gc="git checkout" 
+	alias gb="git branch" 
+	alias gbd="git branch -D"
+	alias gl="git log"
+	alias glpo="git log --pretty=oneline" 
+	alias glo="git log --oneline"  
+	alias gs="git stash"
+	alias gr="git reset"
+	alias grv="git revert"
+	alias gsk="git commit -am "
 
 ======================================================================================================================================
 #Various Shortcut for GITBASH code editior
@@ -430,6 +449,5 @@ Directory
 	
 
 	
-
 
 

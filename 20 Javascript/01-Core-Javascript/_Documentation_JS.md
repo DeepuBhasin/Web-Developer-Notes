@@ -1785,6 +1785,7 @@ console.log(firstname);
 
 // because '=' create a new memory location eg binding new address which cause error in case of const.
 ```
+---
 ## 📘Templates 
 
 **Why ?** : To remove the concationation Problem.
@@ -1825,11 +1826,14 @@ const fullname = `Hello, ${firstname}'s ${lastname} ${1 + 1}`;
 
 console.log(fullname);
 ```
+---
 ## 📘Class 
 * A structure in a programing language that provides a way to create objects.
 * Classes in other languages like C# or Java are fundamental structures for creating new types.
 * In javascript they are just a way of creating objects and the prototype chain.
 * **Syntactic Sugar :** A Different way to accomplish something in a prohgramming language, that doesn't actually introduce anything new under-the-hood.
+
+---
 
 ## 📘Declarations and Expressions
 ```javascript
