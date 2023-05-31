@@ -2077,10 +2077,12 @@ console.log(me.__proto__);
 ```
 ---
 
-## 📘Private Fields with Getters and Setters 
+## 📘Private Fields with Getters and Setters, Private Methods
 
 ```javascript
 class Person {
+
+    // Private Variable
     #firstName;
     #lastName;
 
@@ -2088,16 +2090,29 @@ class Person {
         this.#firstName = fname;
         this.#lastName = lname;
     }
+    // getter
     get fname() {
         return this.#firstName;
     }
 
+    // setter
     set fname(fn) {
         this.#firstName = fn;
     }
 
+    // Public method
     greet() {
         return `Hello , ${this.#firstName}`;
+    }
+
+    // Private Method
+    #fullName() {
+        return {id : 1};
+    } 
+
+    // Public Method
+    getFullName() {
+        return this.#fullName();
     }
 }
 
@@ -2109,8 +2124,8 @@ console.log(me.greet());
 me.fname = 'Anthony';
 console.log(me.greet());
 console.log(me.fname);
+console.log(me.getFullName())
 ```
-
 ---
 
 ## 📘 Programming Patterns
