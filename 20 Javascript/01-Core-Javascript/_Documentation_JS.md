@@ -1910,9 +1910,112 @@ console.log(me) // {firstname : 'Tony'}
 
 Person();   // Class Constructor Person cannot be invoked without 'new' 
 ```
+---
+## 📘 Constructor
+* Constructor methods always exist wheather you defined or not defined.
+```javascript
+class Person {
+    firstname;
 
+    constructor(name) {
+        this.firstname = name;
+    }
+}
+
+let me = new Person('Tony');
+let me2 = new Person('Dp');
+
+console.log(me);
+console.log(me2);
+
+// Prototype chain
+me.__proto // {constructor: ƒ}
+me.__proto__ === Person.prototype   // true
+```
+![Image](./images/me-proto.png)
 
 ---
+## 📘 Methods
+
+```javascript
+
+class Person {
+    firstname;
+
+    constructor(name) {
+        this.firstname = name;
+    }
+
+    greet() {
+        return `Hello, ${this.firstname}`
+    }
+}
+
+let me = new Person('Tony');
+console.log(me.greet());
+
+console.log(me.__proto__);
+console.log(me);
+```
+![Image](./images/method-class.png)
+ 
+---
+## 📘 Extends and Prototypal Inheritance
+
+```javascript
+
+class Person {
+    firstname;
+
+    constructor(name) {
+        this.firstname = name;
+    }
+    greet() {
+        return `hello ${this.firstname}`;
+    }
+}
+
+class Tony extends Person {
+    meet() {
+        return `Nice to meet you`;
+    }
+}
+
+let me = new Tony('Tony');
+
+console.log(me.greet());
+console.log(me.meet());
+
+console.log(me.__proto__);
+console.log(me.__proto__ === Tony.prototype);
+console.log(me.__proto__.__proto__);
+console.log(Tony.prototype.__proto__ === Person.prototype);
+console.log(Tony.__proto__);
+```
+![Image](./images/extends-prototypal.png)
+
+
+📚 **Conceptual Example :** Extending Existing Class
+
+```javascript
+
+class myNumber extends Number{
+    addOne() {
+        return this + 1;
+    }
+} 
+
+let num = new myNumber(3.053);
+console.log(num.toFixed(1));
+console.log(num.addOne());
+```
+---
+## 📘Super
+
+
+
+
+
 ## 📘 Programming Patterns
 
 ```javascript
