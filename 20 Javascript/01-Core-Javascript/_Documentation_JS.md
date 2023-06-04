@@ -2223,14 +2223,195 @@ me.greet();
 me.greet2();
 ```
 ----
-## 📘Symbols
-Why ? 
+## 📘Symbols & Using Symbols 
+* **Hash Code :** A value generated from another value. The same value is always generated from the same input.
+* Symbols use **Memory Address** as value and return that value beacuse its always unique. The value which we are providing is called **label** for reference Example
+
+```javascript
+// symbol returning a unique value which will be memory address and 'firstname' is label for that address
+const firstname = Symbol('firstname');  
+```
+* Name is Really not important in **Symbol** Example
+
+```javascript
+const grt1 = Symbol('greet');
+const grt2 = Symbol('greet');
+
+grt1 === grt2   // false
+```
+* Symbol Majorly use in **Object Properties** as *Property Name (string)*
+
+```javascript
+const firstname = Symbol('firstname');
+
+let obj = {};
+// its like obj[464847xvdgd646474] = 'Deepinder';
+obj[firstname] = 'Deepinder';
 
 
+obj.firstname = 'Dp';
+
+console.log(obj); // {firstname: 'Dp', Symbol(firstname): 'Deepinder'}
+
+console.log(obj.firstname)  // Dp
+
+// accessing Symbol Value 
+console.log(obj[firstname]) // 'Deepinder'
+```
+* **Magic Strings :** Strings that have a special meaning or usage in your program. This makes your program fragile, easily susceptible to bugs.
+* For Global use, we create **Global variables** with **Symbol.for** to avoid *collision* and *stop retendency* 
+
+```javascript
+const HAIR_STRAIGHT = Symbol.for('Stright');
+const HAIR_CURLY = Symbol.for('Curly');
+const HAIR_WAVY = Symbol.for('Wavy');
+
+let curly = Symbol.for('Curly');
+console.log(curly === HAIR_CURLY); // true
+console.log(Symbol.keyFor(HAIR_CURLY));
+```
+
+**Well-Known Symbols :** Symboles already built into the javascript engine, used by the engine for certain tasks.
+
+---
+## 📘ITeration 
+* **Repeating a block of code, often by moving through a list or sequence of values.**
+* **Enumerable :** A Property which will appear when looping over the properties of an object (it's 'enumerable' flag is set to true). The term comes from mathematics, where it means 'countable'. 
+
+## 📘For.of and For.in
+
+```javascript
+let names = ['Tony', 'Anthony', 'Alicea'];
+
+// For values
+for( const name of names) {
+    console.log(name)
+}
+// Tony
+// Anthony
+// Alicea
+
+// For keys
+for(const name in names) {
+    console.log(name)
+}
+
+// 0
+// 1
+// 2
+```
+## 📘 Iterators
+* **Protocol :** Rules for how to exchange information
+* **Iteration Protocol :** The information that must be provided by an object to let itself be iterated over.
+* **Iterate Over :** To move from value to value across a set or list of values.
+
+```javascript
+// concept of iterator in javascript
+let numbers = {
+    getIterator : function (start, end) {
+        let nextValue = start;
+        return {
+            next: () => {
+                if(nextValue < end) {
+                    let nextObj = { value : nextValue, done : false};
+                    nextValue++;
+                }
+                return { value : nextValue, done: true}
+            }
+        }
+
+    }
+}
+
+let iterator = numbers.getIterator(2, 5);
+console.log(iterator.next());
+console.log(iterator.next());
+console.log(iterator.next());
+console.log(iterator.next());
+console.log(iterator.next());
+```
+---
+## 📘Iterable and Symbol.Iterable
+
+* **iterable :** An object that has the expected function which returns an iterator.
+
+```javascript
+// concept of iterator in javascript
+let numbers = {
+    [Symbol.iterator] : function () {
+        const start = 0;
+        const end = 5;
+        let nextValue = start;
+        return {
+            next: () => {
+                if(nextValue < end) {
+                    let nextObj = { value : nextValue, done : false};
+                    nextValue++;
+                }
+                return { value : nextValue, done: true}
+            }
+        }
+
+    }
+}
+
+for (const num of numbers) {
+    console.log(num);
+}
+
+let iterator = numbers[Symbol.iterator]();
+let next = iterator.next();
+
+while(!next.done) {
+    console.log(next.value);
+    next = iterator.next();
+}
+```
+
+## 📘 Default Parameters
+
+```javascript
+function greet(fname = 'Tony', lname = 'Alicea') {
+    return `Hi ${fname} ${lname}`;
+}
+
+let greeting1 = greet();
+console.log(greeting1); //Hi Tony Alicea
+
+let greeting2 = greet('Anthony');
+console.log(greeting2); // Hi Anthony Alicea
+
+// Good Example
+let greeting3 = greet(null, 'p. Alicea');
+console.log(greeting3); // Hi null p.Alicea
+
+// Good Example
+let greeting4 = greet(undefined, 'P. Alicea');
+console.log(greeting4); // Hi Tony P.Alicea```
+```
+
+```javascript
+function greet(fname = 'Tony', lname = 'Alicea', phrase = () => {return `Hi ${fname} ${lname}`}) {
+    return phrase();
+}
+
+let greeting1 = greet();
+console.log(greeting1);     // Hi Tony Alicea
+
+
+// Good example
+function greet(fname = 'Tony', phrase = () => {return `Hi ${fname} ${lname}`}, lname = 'Alicea') {
+    return phrase();
+}
+
+let greeting1 = greet();
+console.log(greeting1);     // Hi Tony Alicea
+
+```
 
 ---
 
-## 📘Programming Patterns
+ ## 📘Programming Patterns
 
 ```javascript
 function createObject(firstname, lastname) {
