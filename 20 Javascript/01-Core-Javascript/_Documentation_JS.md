@@ -2127,8 +2127,110 @@ console.log(me.fname);
 console.log(me.getFullName())
 ```
 ---
+## 📘 Arrow Functions
 
-## 📘 Programming Patterns
+Why ?
+
+* F(x) = x<sup>2</sup> (is Mathematic Expression)
+* F:x |-> x<sup>2 </sup> (isn Mathematic Expression)
+* by default **arrow functions** are *anonymous*
+```javascript
+// Normal Syntax
+let add = (a, b) => {
+    return a + b;
+}
+
+// Arrow Function Expression
+(()=>{console.log('Hello World')}()); 
+
+// Arrow Function on Fly
+function logThis(fn) {
+    console.log(fn(1,2));
+}
+
+logThis((a, b) => { return a + b});
+```
+
+---
+## 📘 Arrow with 'this'
+
+* **Arrow Function** doen't have **this** keyword byDefault as other function.
+
+![Image](./images/arrow-this.jpeg)
+
+```javascript
+let me = {
+    firstname : 'Tony',
+    greet: function() {
+        console.log(this);
+
+        let logMe = () => {
+            console.log(this);
+        }
+        logMe();
+    }
+}
+
+me.greet();
+```
+---
+## 📘 Returning Value
+
+```javascript
+let add = (a, b) => a + b;
+
+let sqr = x => x * x;
+```
+## 📘 Readability & Limitation 
+
+```javascript
+// good for if you are from mathematic background
+let longExpression = x => y => z => z ? y : x;
+
+// 1. Count '=>' , hence 3 functions
+// 2. check parameters
+
+// good for if you are not from mathematic background
+let longExpression = function(x) {
+    return function(y) {
+        return function (z) {
+            return z ? y : x;
+        }
+    }
+}
+let result1 = longExpression('Tony')('Anthony')(true);
+let result2 = longExpression('Tony')('Anthony')(false);
+```
+
+```javascript
+// limitation 
+let me = {
+    firstname : 'Tony',
+    greet: function() {
+        console.log(this);
+
+        let logMe = () => {
+            console.log(this);
+        }
+        logMe();
+    },
+    greet2 : () => {
+        console.log(this.firstname);    // undefined
+    }
+}
+
+me.greet();
+me.greet2();
+```
+----
+## 📘Symbols
+Why ? 
+
+
+
+---
+
+## 📘Programming Patterns
 
 ```javascript
 function createObject(firstname, lastname) {
