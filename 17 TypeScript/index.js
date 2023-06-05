@@ -1,6 +1,9 @@
-var btn = document.querySelector('#button');
-var num1 = document.querySelector('#num1');
-function add(num1, num2) {
-    return +num1 + +num2;
+function add(n1, n2) {
+    if (typeof n1 !== 'number' || typeof n2 !== 'number') {
+        throw new Error('Invalid Input');
+    }
+    return n1 + n2;
 }
-console.log(add(1, 2));
+
+console.log(add(2, 3.5));
+console.log(add('2', 3));
