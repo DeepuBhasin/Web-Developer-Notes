@@ -72,3 +72,67 @@ console.log(add('2', 3));   // Error
 ```
 ⚠️ **Note :** The key difference is: **Javascript use "dynamic types"** (resolved at runtime), **TypeScript uses "static types"** (set during development)
 
+```javascript
+// Number Type
+let age : number = 1;
+
+function add (n1:number, n2:number) {
+    return n1 + n2;
+}
+
+// Boolean Type
+let isLogin : boolean = true;
+
+// String Type
+let fullName : string = 'Deepinder Singh';
+
+// Object Type
+type Person{
+    name : String;
+    age : Number
+}
+
+let person : Person={
+    name : 'Deepu',
+    age : 30
+}
+console.log(person.name);
+
+// Array Strimg & Nested Array
+type Product {
+  id: String;
+  price: Number;
+  tags: String[];
+  randomData : any[];
+  isAccess : Boolean[];
+  details: {
+    title: String;
+    description: String;
+  }
+}
+const product : Product = {
+  id: 'abc1',
+  price: 12.99,
+  tags: ['great-offer', 'hot-and-new'],
+  randomData : ['test', 1, true]
+  isAccess : [true, false, true]
+  details: {
+    title: 'Red Carpet',
+    description: 'A great carpet - almost brand-new!'
+  }
+}
+```
+
+⚠️ **Note :** 
+* Where to use or not
+```javascript
+// its not a good practice
+let age : number = 1; 
+
+
+// Good practice
+let age : number;
+age = 10;
+```
+* Avoid **any** type as much you can
+
