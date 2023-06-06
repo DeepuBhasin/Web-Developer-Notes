@@ -186,12 +186,50 @@ test('ok'); // cause error because value not in option
 ```
 
 * Types Aliases Custom Types
+
 ```javascript
 type Role = number | string;
 type ValidUser = boolean | number;
 
 let role: Role; 
 let isLogin  : ValidUser;
+```
+* Function Return Type
+
+```javascript
+// returning number
+function add(n1 : number, n2 : number) : number {
+    return n1 + n2;
+}
+
+// returning void
+function printValue () : void {
+    console.log('Hello World')
+} 
+
+add(1,2);
+```
+* Function Type Callback
+
+```javascript
+function cal(n1 : number, n2 : number, cb : (res : number) => void) : void{
+    let result  = n1 + n2;
+     cb(result);
+}
+
+cal(1, 2, (result) => console.log(result));
+```
+* The never Type
+
+```javascript
+function generateError(message : string, code : number) : never {
+    // through types error are never type
+    throw {message: message, errorCode : code}
+}
+
+const result = generateError('An error occured !', 500);
+
+console.log(result) // not print undefined
 ```
 
 ⚠️ **Note :** 
