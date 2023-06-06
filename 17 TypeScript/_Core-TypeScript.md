@@ -71,28 +71,25 @@ console.log(add(2, 3.5));   // 5.5
 console.log(add('2', 3));   // Error
 ```
 ⚠️ **Note :** The key difference is: **Javascript use "dynamic types"** (resolved at runtime), **TypeScript uses "static types"** (set during development)
-
+* Number Type
 ```javascript
-// Number Type
 let age : number = 1;
 
 function add (n1:number, n2:number) {
     return n1 + n2;
 }
 ```
-
+* Boolean Type 
 ```javascript
-// Boolean Type
 let isLogin : boolean = true;
 ```
+* String Type
 
 ```javascript
-// String Type
 let fullName : string = 'Deepinder Singh';
 ```
-
+* Object Type
 ```javascript
-// Object Type
 type Person{
     name : String;
     age : Number
@@ -104,9 +101,9 @@ let person : Person={
 }
 console.log(person.name);
 ```
+* Array String & Nested Array
 
 ```javascript
-// Array Strimg & Nested Array
 type Product {
   id: String;
   price: Number;
@@ -130,9 +127,8 @@ const product : Product = {
   }
 }
 ```
-
+* Tuple
 ```javascript
-// Tuple
 type Person {
     name : String;
     age : Number;
@@ -147,6 +143,55 @@ let person : Person = {
 
 // Because in tupal we cannot add more than two element
 person.role.push('operator')    // Error
+```
+* Enum Type
+  
+```javascript
+enum Role {ADMIN = 1, READ_ONLY = 2, AUTHOR = 3};
+let person = {
+    name : 'Deepinder',
+    age : 19,
+    role : Role.ADMIN
+}
+
+if(person.role === Role.ADMIN) {
+    console.log('Admin')
+}
+```
+* Any
+  
+```javascript
+type Person {
+    role : any[];
+}
+
+let person : Person = {
+    role : [2, 'Admin', true]
+}
+```
+* Union Type
+  
+```javascript
+let age : number | string;
+
+```
+* Literal Type
+```javascript
+function test (name : 'Deepu' | 'Dp') {
+    return name
+}
+
+test('Dp');
+test('ok'); // cause error because value not in option
+```
+
+* Types Aliases Custom Types
+```javascript
+type Role = number | string;
+type ValidUser = boolean | number;
+
+let role: Role; 
+let isLogin  : ValidUser;
 ```
 
 ⚠️ **Note :** 
