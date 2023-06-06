@@ -1,5 +1,5 @@
 ## 📘What is TypeScript
-![Image](./imags/what-typescript.jpeg)
+![Image](./images/what-typescript.jpeg)
 
 * **TypeScript :** type system only helps you during development (i.e before the code gets **compiled**) which force you to write Filter, cleaner and better code.
 
@@ -79,13 +79,19 @@ let age : number = 1;
 function add (n1:number, n2:number) {
     return n1 + n2;
 }
+```
 
+```javascript
 // Boolean Type
 let isLogin : boolean = true;
+```
 
+```javascript
 // String Type
 let fullName : string = 'Deepinder Singh';
+```
 
+```javascript
 // Object Type
 type Person{
     name : String;
@@ -97,7 +103,9 @@ let person : Person={
     age : 30
 }
 console.log(person.name);
+```
 
+```javascript
 // Array Strimg & Nested Array
 type Product {
   id: String;
@@ -121,6 +129,24 @@ const product : Product = {
     description: 'A great carpet - almost brand-new!'
   }
 }
+```
+
+```javascript
+// Tuple
+type Person {
+    name : String;
+    age : Number;
+    role : [Number, String];    // only can add two types
+}
+
+let person : Person = {
+    name : 'Deepinder',
+    age : 19,
+    role : [2, 'Admin']
+}
+
+// Because in tupal we cannot add more than two element
+person.role.push('operator')    // Error
 ```
 
 ⚠️ **Note :** 
