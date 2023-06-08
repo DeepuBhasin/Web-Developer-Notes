@@ -55,3 +55,58 @@ this like will load all files from mfe
 3. Combining All things
 
 ![Image](./images/final-call.png)
+
+## 📘Configuration
+1. For Container (Host)
+
+![Image](./images/configuration.png)
+
+```javascript
+import {useStore} from "products/StoreModule";
+```
+* in this case if webpack do not able to find **products** dependency in **node module**, then it will look into **ModuleFeedrationPlugin** *remotes* object for that module.
+
+```javascript
+remotes : {
+    products : 'products@http://localhost:8081/remoteEntry.js'
+}
+```
+* it will match with that **products** key
+
+```javascript
+// Making Another Example
+
+// Naming Key
+remotes : {
+    productsApp : 'products@http://localhost:8081/remoteEntry.js'
+}
+
+// import
+import {useStore} from "productsApp/StoreModule";
+```
+
+2. For Products (remote)
+
+![Image](./images/remote-config.png)
+
+## 📘Share Dependencies
+
+![Image](./images/share-dependency.png)
+
+```javascript
+// synchronouse
+import {} from "node_module";
+
+// asynchronous
+import('file.js');
+```
+
+* Share Dependency with **singleton**
+
+![Image](./images/share-dependency-singletone.png)
+
+```javascript
+if(process.env.NODE_ENV === 'development') {
+    
+}
+```
