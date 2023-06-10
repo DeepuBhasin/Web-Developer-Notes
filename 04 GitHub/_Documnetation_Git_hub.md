@@ -224,6 +224,18 @@ git log --amend
 ```
 ---
 
+## 📘 GitIgnore
+
+**.gitignore** this file ignore all files or directory which are written in this file  
+1. ***.log :** will ignore any files with **.log** extension
+2. **folderName/ :** will ignore an entire directory
+3. **.DS_Store :** will ignore files named **.DS_Store**
+4. **/folderName/ :** this will ignore only outer folder(main Directory) not the inner folders (other than main directory)
+5. **folderName/folderName/ :** this will ignore only particalur folder 
+
+⚠️**Note :** Gitignore ignore all the blank folder by default 
+
+---
 
 
 
@@ -243,7 +255,8 @@ git log --amend
 
 
 
-1. Git - Three Stages Acrhitecture 
+
+5. Git - Three Stages Acrhitecture 
 
 								Local Operations 
 	1. Working Directory 		2. Staging Area 		3. git directory(repository)
@@ -254,7 +267,7 @@ git log --amend
 			|							|---------------------->|	
 												(commit)
 
-2. File Status Life Cycle :
+6. File Status Life Cycle :
 		how will u understand this : 
 			1. First enter git status : you will notice that files are not staged here
 			2. second enter git add --a : you will stage all the files it means unmodified files 
@@ -274,7 +287,7 @@ git log --amend
 			|     (remove the file)     |<----------------------|--------------------|
 			|                           |                    (commit)                |
 
-3. Branch By default branch is master (main directoty or main branch)
+7. Branch By default branch is master (main directoty or main branch)
 =========================================================================================================================================
 #Extra 
 	1. Best Website : https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud
@@ -365,15 +378,6 @@ git log --amend
 		Updating files: 100% (24448/24448), done.
 
 =========================================================================================================================================
-#Ignore
-	
-	1. .gitignore							:: this file ignore all files or  directory which are written in this file  
-		a. *.log							:: ignore all the files with .log extention which are written in the gitignore file
-		b. folderName/						:: ignore folder which are wriiten in the gitignore file for example "dir/" gitignore file will ignore this 													directory in all the folders  
-		c. /folderName/						:: this will ignore only outer folder(main Directory) not the inner folders (other than main directory)
-		d. folderName/folderName/   		:: this will ignore only particalur folder 
-		
-	Note : 	Gitignore ignore all the blank folder by default 
 
 ===========================================================================================================================================
 #difference
