@@ -39,7 +39,6 @@ gitbash (called terminal or powershell)   :  it is command line Tool
 
 ```
 git config --global user.name "Deepinder Singh" 
-
 ```	
 2. To set the email address
 ```
@@ -62,8 +61,71 @@ git config --global --list
 git version
 ```
 ---
+## 📘Linux Commnds 
+1. Return Present Directory path 
+```
+pwd
+```
+2. Return the list of all the files and directory in current Directory
+```
+ls
+```
+3. Change Directory example cd shortName/ (move to shortName Directory)
+```
+cd
+```
+4. Create blank file in directory example touch error.log
+```
+touch fileName
+```
+5. This is used to rename the files and also add into stage area 
+```
+git mv first.txt first_rename.txt
+```
+6. To delete the file
+```
+rm fileName
+```
+7. To delete the directory 	
+```
+rmdir folderName
+```
+8. To delete the directory or file
+``` 
+rm -rf folderName/fileName
+```
+9. Open Folder or Current Directory (in window)
+ 
+```
+start .
+```
+---
+## 📘Initialisation
 
-3. Git - Three Stages Acrhitecture 
+1. will create git Directory
+
+```
+git init
+```
+2. to delete git Repository 
+```
+rm -rf .git
+```	
+3. to delete file and also add file into stage area
+
+```
+git -rm fileName
+```
+---
+## 📘Status	
+1. Return the current directory status like staging , branch details 
+
+```
+git status
+```
+---
+
+2. Git - Three Stages Acrhitecture 
 
 								Local Operations 
 	1. Working Directory 		2. Staging Area 		3. git directory(repository)
@@ -74,7 +136,7 @@ git version
 			|							|---------------------->|	
 												(commit)
 
-4. File Status Life Cycle :
+3. File Status Life Cycle :
 		how will u understand this : 
 			1. First enter git status : you will notice that files are not staged here
 			2. second enter git add --a : you will stage all the files it means unmodified files 
@@ -94,7 +156,7 @@ git version
 			|     (remove the file)     |<----------------------|--------------------|
 			|                           |                    (commit)                |
 
-5. Branch By default branch is master (main directoty or main branch)
+4. Branch By default branch is master (main directoty or main branch)
 =========================================================================================================================================
 #Extra 
 	1. Best Website : https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud
@@ -103,18 +165,6 @@ git version
 	4. Git Bash command line environment is used for interacting with Git .	
 	5. best you tube tutorials : https://www.youtube.com/watch?v=8JJ101D3knE
 
-
-=========================================================================================================================================
-#Linux Commnds 
-
-		1. pwd 										:: return Present Directory 
-		2. ls 										:: return the list of all the files and directory in current repositroy	
-		3. cd										:: change Directory example cd shortName/ (move to shortName Directory)
-		4. touch fileName 							:: create blank file in directory example touch error.log
-		5. git mv first.txt first_rename.txt		:: this is used to rename the files and also add into stage area 
-		6. rm fileName								:: to delete the file
-		7. rmdir folderName							:: to delete the directory 	
-(best)	8. rm -rf folderName/fileName				:: to delete the directory or file
 
 ==========================================================================================================================================
 #alias and Vi Editior
@@ -162,15 +212,6 @@ git version
 
 
 
-#Initialisation
-	
-	1. git init 				:: will create git Directory
-	2. rm -rf .git 				:: to delete git Repository 
-	3. git -rm fileName			:: to delete file and also add file into stage area
-========================================================================================================================================
-#Status	
-	
-	1. git status				:: return the current directory status like staging , branch details 
 
 ==========================================================================================================================================
 #Staging
