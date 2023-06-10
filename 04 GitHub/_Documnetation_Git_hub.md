@@ -237,6 +237,28 @@ git log --amend
 
 ---
 
+## 📘Branch
+1. to create new branch 
+```
+git checkout -b branchName
+```
+2. Switch to another branch
+```
+git checkout branchName
+```	
+3. Return all the names of branches 
+```
+git branch
+```	
+4. use to delete the branch no matter its merge or not 
+```
+git checkout -D branchName
+```
+5. wiil delete merge branch (if branch is not merge it will show error message)
+```
+git branch -d branchName
+```
+---
 
 
 
@@ -247,16 +269,7 @@ git log --amend
 
 
 
-
-
-
-
-
-
-
-
-
-5. Git - Three Stages Acrhitecture 
+1. Git - Three Stages Acrhitecture 
 
 								Local Operations 
 	1. Working Directory 		2. Staging Area 		3. git directory(repository)
@@ -267,7 +280,7 @@ git log --amend
 			|							|---------------------->|	
 												(commit)
 
-6. File Status Life Cycle :
+2. File Status Life Cycle :
 		how will u understand this : 
 			1. First enter git status : you will notice that files are not staged here
 			2. second enter git add --a : you will stage all the files it means unmodified files 
@@ -287,7 +300,7 @@ git log --amend
 			|     (remove the file)     |<----------------------|--------------------|
 			|                           |                    (commit)                |
 
-7. Branch By default branch is master (main directoty or main branch)
+3. Branch By default branch is master (main directoty or main branch)
 =========================================================================================================================================
 #Extra 
 	1. Best Website : https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud
@@ -378,8 +391,6 @@ git log --amend
 		Updating files: 100% (24448/24448), done.
 
 =========================================================================================================================================
-
-===========================================================================================================================================
 #difference
 	
 	1. git diff 								:: return the difference between the stage area and working directory (modified area (changes done after staging)) and also command compares two specified branches		
@@ -425,15 +436,7 @@ b. Revert back on files after commit
 			3. Reset Commit	   : Complete Danger
 
 ======================================================================================================================================
-#Branching
-	1. git checkout -b branchName	:: to create new branch 
-	2. git checkout branchName 		:: Switch to another branch
-	3. git branch 					:: return all the names of branches 
-	4. git checkout -D branchName	:: use to delete the branch no matter its merge or not 
-	5. git branch -d branchName 	:: wiil delete merge branch (if branch is not merge it will show error message)	
-		
-		Note : 1. with green color and star on it will reflect current branch		
-			   2. when ever you want to switch the branch you should always commit before changing
+
 ======================================================================================================================================
 #Merging
 
