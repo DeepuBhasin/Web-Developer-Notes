@@ -117,6 +117,9 @@ rm -rf .git
 git -rm fileName
 ```
 ---
+
+⚠️ **Note :** Never create **git repo** inside another **git repo**
+
 ## 📘Status	
 1. Return the current directory status like staging , branch details 
 
@@ -124,8 +127,73 @@ git -rm fileName
 git status
 ```
 ---
+## 📘Staging
+1. Put all the files into staging area
+```
+git add --a / git add .
+```
+2. put particular file (name is first.txt) into staging area
 
-2. Git - Three Stages Acrhitecture 
+```
+git add first.txt
+```	
+3. unstage or even discard uncommitted local changes. (work when your file)
+```
+git restore filename
+```
+4. it will remove particalur file from stagging area (work when your file is in stagging area)
+```
+git restore --staged fileName
+```
+5. it will remove all the file from stagging area (work when your file is in stagging area)
+```
+git restore --staged .
+```
+6. remove the file from the stagging area
+```
+git rm --cached fileName
+```
+7. git clean removes untracked files from your working directory.
+```
+git clean -f
+```
+---
+
+## 📘Commit
+1. use to commit the staging area with commit Message
+```
+git commit -m "Initial Commit" 
+```
+2. use to commit the by skipping the stagging the files 
+
+```
+git commit -am "Initial commit"
+```
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1. Git - Three Stages Acrhitecture 
 
 								Local Operations 
 	1. Working Directory 		2. Staging Area 		3. git directory(repository)
@@ -136,7 +204,7 @@ git status
 			|							|---------------------->|	
 												(commit)
 
-3. File Status Life Cycle :
+2. File Status Life Cycle :
 		how will u understand this : 
 			1. First enter git status : you will notice that files are not staged here
 			2. second enter git add --a : you will stage all the files it means unmodified files 
@@ -156,7 +224,7 @@ git status
 			|     (remove the file)     |<----------------------|--------------------|
 			|                           |                    (commit)                |
 
-4. Branch By default branch is master (main directoty or main branch)
+3. Branch By default branch is master (main directoty or main branch)
 =========================================================================================================================================
 #Extra 
 	1. Best Website : https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud
@@ -213,23 +281,6 @@ git status
 
 
 
-==========================================================================================================================================
-#Staging
-	
-	1. git add --a / git add .			:: put all the files into staging area 
-	2. git add first.txt				:: put particular file (name is first.txt) into staging area 	
-	4. git restore filename 			:: unstage or even discard uncommitted local changes. (work when your file)
-	5. git restore --staged fileName	:: it will remove particalur file from stagging area (work when your file is in stagging area)
-	6. git restore --staged .			:: it will remove all the file from stagging area (work when your file is in stagging area)
-	7. git rm --cached fileName			:: remove the file from the stagging area
-	8. git clean -f 					:: git clean removes untracked files from your working directory.
-
-
-=========================================================================================================================================
-#commit
-	
-	1. git commit -m "Initial Commit" 		:: use to commit the staging area with commit Message
-	2. git commit -am "Initial commit" 		:: use to commit the by skipping the stagging the files 
 
 ========================================================================================================================================
 #Squash : Combining commits into a single Commit
