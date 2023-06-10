@@ -238,23 +238,29 @@ git log --amend
 ---
 
 ## 📘Branch
-1. to create new branch 
+![Image](./images/git-branch.png)
+
+1. Create new branch
+```
+git branch branchName
+```
+2. to create new branch and checkout to new branch
 ```
 git checkout -b branchName
 ```
-2. Switch to another branch
+3. Switch to another branch
 ```
 git checkout branchName
 ```	
-3. Return all the names of branches 
+4. Return all the names of branches 
 ```
 git branch
 ```	
-4. use to delete the branch no matter its merge or not 
+5. use to delete the branch no matter its merge or not 
 ```
 git checkout -D branchName
 ```
-5. wiil delete merge branch (if branch is not merge it will show error message)
+6. wiil delete merge branch (if branch is not merge it will show error message)
 ```
 git branch -d branchName
 ```
