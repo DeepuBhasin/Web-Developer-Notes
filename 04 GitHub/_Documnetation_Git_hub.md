@@ -128,6 +128,7 @@ git status
 ```
 ---
 ## 📘Staging
+![Image](./images/workflow.png)
 
 ![Image](./images/staging-commit.png)
 
@@ -135,7 +136,7 @@ git status
 ```
 git add --a / git add .
 ```
-2. put particular file (name is first.txt) into staging area
+1. put particular file (name is first.txt) into staging area
 
 ```
 git add first.txt
