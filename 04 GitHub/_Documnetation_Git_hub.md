@@ -174,9 +174,49 @@ git commit -m "Initial Commit"
 git commit -am "Initial commit"
 ```
 ---
+## 📘Log
 
-
-
+1. Return all the commits in the 
+```
+git log
+```
+2. Return the difference between the commits (git log -p command displays the patch representing each commit.)
+```
+git log -p
+```
+3. Return the difference between the 2 commits
+```
+git log -p -2
+```
+4. Return the difference between the commits very small information
+```
+git log --stat
+```
+5. Return all the commits with message and hash (very shot description)
+```
+git log --oneline
+```
+6. Return all the commits with message and hash (shot description)
+```
+git log --pretty=oneline
+```
+7. Return all the commits with message and hash (full description)
+```
+git log --pretty=full
+```
+8. Return the 2 days work 
+```
+git log --since=2.days
+```
+9. Return the 2 months work
+```
+git log --since=2.months
+```
+10. use to change the commit data ->after this command window will open called wim editior -> Change any thing that you want to do -> esc (key) -> ':wq' + enter
+```
+git log --amend
+```
+---
 
 
 
@@ -340,23 +380,7 @@ git commit -am "Initial commit"
 	Note : you can use MELD Software to see difference its like VI editior
 
 ===========================================================================================================================================
-#log
-	1. git log				:: return all the commits in the directory 
 
-		example commit 8d234b6501d4569dc2fdf4350fca334f97d18b78 (HEAD -> master)	:: hash with directory name 			
-		Author: Deepinder Singh <Deepinder999@gmail.com>							:: Done by the person 		
-		Date:   Mon Feb 15 00:01:21 2021 +0530										:: Time stamp	
-		 Initial Commit 															:: Commit Message 
-					
-	2. git log -p 					:: return the difference between the commits (git log -p command displays the patch representing each commit.) 
-	3. git log -p -2				:: return the difference between the 2 commits 	
-	4. git log --stat 				:: return the difference between the commits very small information 
-	6. git log --oneline			:: return all the commits with message and hash (very shot description)
-	7. git log --pretty=oneline		:: return all the commits with message and hash (shot description)
-	8. git log --pretty=full 		:: return all the commits with message and hash (full description)
-	9. git log --since=2.days		:: return the 2 days work 
-	10. git log --since=2.months	:: return the 2 months work 
-	11. git log --amend 			:: use to change the commit data ->after this command window will open called wim editior -> Change any thing that you want to do -> esc (key) -> ':wq' + enter
 =====================================================================================================================================
 #HEAD
 
