@@ -128,6 +128,9 @@ git status
 ```
 ---
 ## 📘Staging
+
+![Image](./images/staging-commit.png)
+
 1. Put all the files into staging area
 ```
 git add --a / git add .
