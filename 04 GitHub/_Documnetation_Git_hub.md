@@ -173,6 +173,12 @@ git commit -m "Initial Commit"
 ```
 git commit -am "Initial commit"
 ```
+
+1. To fix last commit message 
+
+```
+git commit -amend
+```
 ---
 ## 📘Log
 
