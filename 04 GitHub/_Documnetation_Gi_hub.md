@@ -1,32 +1,67 @@
-#Documentation 
+## 📘What is Git ?	
+1. it is Distribution version Control System (to keep tracks of files) 
+2. it's system that records changes to our files over time 
+3. we can recally specfic versions of those files at any given time
+4. Many people can easily collaborate on a project and have their own version project files on their computer 
+5. Full form of GIT **Global Information Tracker**
 
-1. What is Git ?	
-	
-	1. it is Distribution version Control System (to keep tracks of files) 
-	2. it's system that records changes to our files over time 
-	3. we can recally specfic versions of those files at any given time
-	4. Many people can easily collaborate on a project and have their own version project files on their computer 
+> and main advantages of this
 
-	and main advantages of this
-	a. Easily recovers files 
-	b. Who intrduce issue and when
-	c. RollBack to previous working state
-	d. it is based on Distribution System 
-	e. It capture sanpshot not the difference
-	d. Almost every operation is local 
-	f. Git has integrity (Check sum (is used to check the origniality (kind of public and private key))) 
-	g. Git Generaly only adds data (increasing Reposirtoy)
+* Easily recovers files 
+* Who intrduce issue and when
+* RollBack to previous working state
+* it is based on Distribution System 
+* It capture sanpshot not the difference
+* Almost every operation is local 
+* Git has integrity (Check sum (is used to check the origniality (kind of public and private key))) 
+* Git Generaly only adds data (increasing Reposirtoy)
 
-2. What is GitHub 
-	a. it is git is website which store the git hub repository
-	b. it is not just a cloud storage but a full version control System powered by git.
-	c. Central online repository which mutiple team-members could access 
-	d. github alternatives are gitlab, bitbucket 
+---
 
+## 📘What is GitHub 
 
-Downlaod : type git install ( web site name : git-scm)
-	gitbash (called terminal or powershell)   :  it is command line Tool
+* it is git is website which store the git hub repository
+* it is not just a cloud storage but a full version control System powered by git.
+* Central online repository which mutiple team-members could access 
+* github alternatives are gitlab, bitbucket 
 
+---
+
+## 📘Download Git
+
+Downlaod : type git install ( web site name : git-scm) <br/>
+gitbash (called terminal or powershell)   :  it is command line Tool
+
+---
+
+## 📘Configuration of Username and Email  
+1. To set the username 
+
+```
+git config --global user.name "Deepinder Singh" 
+
+```	
+2. To set the email address
+```
+git config --global user.email "Deepinder999@gmail.com"  
+```
+3. return the usernane 
+```
+git config user.name
+```
+4. return the email 
+```
+git config user.email
+```
+5. return Username and Email address + other infromations
+```
+git config --global --list
+```
+6. return the current version of git 
+```
+git version
+```
+---
 
 3. Git - Three Stages Acrhitecture 
 
@@ -124,17 +159,9 @@ Downlaod : type git install ( web site name : git-scm)
 	4. paste 							: shift + ins (key)
 	5. close terminal 					: ctrl + d
 
-=======================================================================================================================================
-#Configuration of Username and Email  
 
-	1. git config --global user.name "Deepinder Singh"   		:: To set the username 
-	2. git config --global user.email "Deepinder999@gmail.com"  :: To set the email address
-	3. git config user.name 									:: return the usernane 
-	4. git config user.email 									:: return the email 
-	5. git config --global --list 								:: return Username and Email address + other infromations
-	6. git version												:: return the current version of git 
 
-========================================================================================================================================
+
 #Initialisation
 	
 	1. git init 				:: will create git Directory
