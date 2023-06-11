@@ -457,6 +457,7 @@ git revert 5637353
 ---
 
 ## 📘Clone
+![Image](./images/clone.png)
 
 we can clone a remote respository hosted on Github or similar websites. All we need is a URL that we can tell git to clone for use.
 
