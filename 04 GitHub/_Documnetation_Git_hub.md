@@ -454,42 +454,6 @@ git revert 5637353
 
 ---
 
-
-
-
-
-1. Git - Three Stages Acrhitecture 
-
-								Local Operations 
-	1. Working Directory 		2. Staging Area 		3. git directory(repository)
-			|<--------------------------|-----------------------|
-			|	(Checkout the project)	|						|
-			|-------------------------->|						|
-			|	 (Stage files)			|						|
-			|							|---------------------->|	
-												(commit)
-
-2. File Status Life Cycle :
-		how will u understand this : 
-			1. First enter git status : you will notice that files are not staged here
-			2. second enter git add --a : you will stage all the files it means unmodified files 
-			3. if we edit files after staging then enter status : change file will reflect in modifed as well in stage area     (here if you use commit command then only staging area will 	run and modified area will ignore )
-			4. after that again git add -a : then all files will reflect into stage area (unmodifed)
-
-			hence we can commit only those files which are in Staging area (green Color files) and can not commit those files which is in modified area/untracked area (red color files)
-
-											 Local Operations 
-
-							   (also stage area)			 
-	1. Untarcked 				2. unmodified 			3. modified				4. Staged
-			|                           |---------------------->|               	 |
-			|-------------------------->|    (Edit the file)  	|					 |
-			|     (add the file)        |                       |------------------->|
-			|<--------------------------|                       |	(stage the file) |			
-			|     (remove the file)     |<----------------------|--------------------|
-			|                           |                    (commit)                |
-
-3.  Branch By default branch is master (main directoty or main branch)
 =========================================================================================================================================
 #Extra 
 	1. Best Website : https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud
@@ -579,37 +543,6 @@ git revert 5637353
 		Resolving deltas: 100% (889372/889372), done.
 		Updating files: 100% (24448/24448), done.
 
-
-=====================================================================================================================================
-#undoing/Reverting/Reset Codes/RollBack
-
-a. Revert back on files	
-======================	
-	
-		1. git checkout -- fileName 			:: this will roll back all the changes upto lastest commit in the particular file 
-		2. git checkout -- . /git checkout -f 	:: this will roll back all the changes upto lastest commit in all the the files/directories 
-	
-(best) 3. git checkout gitCommitId				:: you will move to the particular commitid (best use to get back in time to see what was there actually) and also if you want to go back to the current commitid then use -> Git checkout branchName (this comand should run after 'git checkout gitCommitId' command )
-
-	Note : 
-		1. if you have to perform this action then your file should already in stagging area before these commands  
-		2. This is ver usefull when have to do so many undo, its same alot of time
-		3. Above changes cannot rollback after commit
-		
-b. Revert back on files after commit
-===================================
-
-		1. git revert gitCommitId										:: it will revert all the data upto a particular commit-id but it will maintain History as well
-(best)	2. git reset --hard gitCommitId									:: it will revert all the data upto a particular commit-id 
-		3. git reset gitCommitId /	git reset --soft gitCommitId		:: it will revert all the data upto a particular commit-id but also the changes will stay there which we have done after this selected commitid will remain there and it will reflect in modifed stagging area (use full when you want to save every commit into single commit)
-
-	Note : 	1. Checkout Commit : is save 
-			2. Revert commit   : between save and Danger
-			3. Reset Commit	   : Complete Danger
-
-======================================================================================================================================
-
-======================================================================================================================================
 
 =====================================================================================================================================
 #Push and Pull
