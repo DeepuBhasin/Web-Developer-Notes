@@ -290,7 +290,7 @@ git branch -m new-test
 6. git merge branchName
 
 ![Image](./images/fast-forward.png)
-
+* in **fast forward** merge we did not commit any thing on master branch just only commit in **child branch** and then merge that barnch
 ---
 
 
