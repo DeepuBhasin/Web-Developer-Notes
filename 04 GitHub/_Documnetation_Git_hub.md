@@ -246,9 +246,15 @@ git branch branchName
 ```
 2. to create new branch and checkout to new branch
 ```
+git switch -c branchName
+```
+```
 git checkout -b branchName
 ```
 3. Switch to another branch
+```
+git switch branchName
+```
 ```
 git checkout branchName
 ```	
@@ -399,9 +405,18 @@ git stash clear
 ```
 git checkout d8973d79
 ```
+```
+git switch master
+```
 ![Image](./images/head.png)
 
 ![Image](./images/checkout-head.png)
+
+```
+git checkout HEAD~1
+```
+![Image](./images/checkout-head~1.png)
+
 
 ---
 
