@@ -511,6 +511,8 @@ cat test_rsa.pub
 ```
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC1rp765Vk6e6KICDaHMJCySMohSzfFKNPzR/lS7kB0A4l1ebpXB3Zdt61PkxYk7QhS7hV1rRQT3WNkDytZZYF6EuFD4fm3n3Gg17yaAi8BaUTuUkqUBkwthEbBUhYNaux.......
 ```
+![Image](./images/ssh-key.png)
+
 ---
 
 ### alias and Vi Editior
