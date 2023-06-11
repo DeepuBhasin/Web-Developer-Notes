@@ -360,13 +360,22 @@ git difftool HEAD gitCommitId
 
 ## 📘Stash
 
-**git stash** is super useful command that helps you save changes that you are not ready to commit. you can stash changes and then come back to them later. 
+1. **git stash** is super useful command that helps you save changes that you are not ready to commit. you can stash changes and then come back to them later. 
 *Running git stash* will take all uncommitted changes (staged and unstaged) and stash them, reverting the changes in your working copy. 
 
 ```
 git stash
 ```
 
+1. This command is use to remove the most recently stashed change in your stash and **re-apply** them to your working copy.
+
+```
+git stash pop
+```
+2. this command is use to **apply** whatever is stashed away, without removing it from the stash.*This can be useful if you want to apply stashed changes to multiple branches*
+```
+git stash apply
+```
 
 
 
