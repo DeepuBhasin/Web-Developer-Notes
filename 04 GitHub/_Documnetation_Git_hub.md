@@ -428,17 +428,21 @@ git checkout HEAD~1
 
 Suppose you've just made a couple of commits on the master branch, but you actually meant to make them on a seperate branch instead. To undo those commits, you can use **git reset**
 
-1. This command will reset the repo back to a sepecific commit. The commit are gone.
+1. This command will reset the repo back to a sepecific commit. The commit are gone. *(we don't lose the changes we lose the commits)*
 ```
 git reset <commit-hash>
 ```
+2. if you want to undo both the commits AND the actual changes in your files, you can use the **--hard** option
+
+```
+git reset --hard HEAD~1
+```
+```
+git reset --hard <commit-id>
+```
 ---
 
-
-
-
-
-1. Git - Three Stages Acrhitecture 
+3. Git - Three Stages Acrhitecture 
 
 								Local Operations 
 	1. Working Directory 		2. Staging Area 		3. git directory(repository)
@@ -449,7 +453,7 @@ git reset <commit-hash>
 			|							|---------------------->|	
 												(commit)
 
-2. File Status Life Cycle :
+4. File Status Life Cycle :
 		how will u understand this : 
 			1. First enter git status : you will notice that files are not staged here
 			2. second enter git add --a : you will stage all the files it means unmodified files 
@@ -469,7 +473,7 @@ git reset <commit-hash>
 			|     (remove the file)     |<----------------------|--------------------|
 			|                           |                    (commit)                |
 
-3.  Branch By default branch is master (main directoty or main branch)
+5.  Branch By default branch is master (main directoty or main branch)
 =========================================================================================================================================
 #Extra 
 	1. Best Website : https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud
