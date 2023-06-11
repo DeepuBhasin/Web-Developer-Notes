@@ -456,17 +456,17 @@ git revert 5637353
 
 ---
 
-=========================================================================================================================================
-#Extra 
-	1. Best Website : https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud
-	2. Command Line Interface : https://cmder.net/
-	3. For Merging Interface  : MELD Software
-	4. Git Bash command line environment is used for interacting with Git .	
-	5. best you tube tutorials : https://www.youtube.com/watch?v=8JJ101D3knE
+## 📘Clone
+
+we can clone a remote respository hosted on Github or similar websites. All we need is a URL that we can tell git to clone for use.
+
+```
+git clone <repository-Address>
+```
+---
 
 
-==========================================================================================================================================
-#alias and Vi Editior
+### alias and Vi Editior
 
 	1. vi ~/.bashrc  			: 			to open source Editior Files 
 			
@@ -529,21 +529,6 @@ git revert 5637353
 
 	after that vi editior will open to create commit message 	   
 
-
-========================================================================================================================================
-#clone		
-	
-	1. git clone https://github.com/tensorflow/tensorflow.git 
-
-	example :  	
-		Cloning into 'tensorflow'...
-		remote: Enumerating objects: 12, done.
-		remote: Counting objects: 100% (12/12), done.
-		remote: Compressing objects: 100% (10/10), done.
-		remote: Total 1090924 (delta 2), reused 6 (delta 2), pack-reused 1090912
-		Receiving objects: 100% (1090924/1090924), 649.18 MiB | 18.16 MiB/s, done.
-		Resolving deltas: 100% (889372/889372), done.
-		Updating files: 100% (24448/24448), done.
 
 
 =====================================================================================================================================
