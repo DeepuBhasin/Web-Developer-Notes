@@ -290,7 +290,12 @@ git branch -m new-test
 6. git merge branchName
 
 ![Image](./images/fast-forward.png)
-* in **fast forward** merge we did not commit any thing on master branch just only commit in **child branch** and then merge that barnch
+* in **fast forward** merge we did not commit any thing on **master** branch just only commit in **child branch** and then merge that barnch
+
+![Image](./images/generating-merge-commit.png)
+* In **Merge Commit** we did commits in **master** branch as well and commit in **child branch** as well, then **git** automatically merge both commits when ever we do **merge**
+
+![Image](./images/conflict-marker.png)
 ---
 
 
