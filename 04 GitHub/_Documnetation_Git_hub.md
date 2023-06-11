@@ -320,10 +320,34 @@ git show gitCommitId
 ```
 git diff
 ```	
+
+![Image](./images/git-diff.png)
+
+![Image](./images/marker.png)
+
+![Iamage](./images/chunk.png)
+
+![Image](./images/lines-diff.png)
+
 1. Return the difference between the two stages
 ```
 git diff --staged
 ```
+```
+git diff --cached
+```
+   
+2. To see particular stagged files difference
+
+```
+git diff --staged fileName
+```
+
+3. List all changes in the working tree since your last commit
+```
+git diff HEAD
+```
+
 1. Return the difference between two commits with two windows 
 ```
 git difftool gitCommitId gitCommitId
