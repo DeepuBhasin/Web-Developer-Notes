@@ -392,8 +392,22 @@ git stash drop
 ```
 git stash clear
 ```
+---
+
+## 📘Checkout
+
+```
+git checkout d8973d79
+```
+![Image](./images/head.png)
+
+![Image](./images/checkout-head.png)
 
 ---
+
+
+
+
 
 
 1. Git - Three Stages Acrhitecture 
