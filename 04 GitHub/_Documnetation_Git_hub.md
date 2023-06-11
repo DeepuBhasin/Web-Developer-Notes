@@ -266,6 +266,12 @@ git branch -d branchName
 ```
 ---
 
+7. Rename the branch (switch to branch first) 
+
+```
+git checkout test
+git branch -m new-test
+```
 
 
 
@@ -275,7 +281,7 @@ git branch -d branchName
 
 
 
-1. Git - Three Stages Acrhitecture 
+8. Git - Three Stages Acrhitecture 
 
 								Local Operations 
 	1. Working Directory 		2. Staging Area 		3. git directory(repository)
@@ -286,7 +292,7 @@ git branch -d branchName
 			|							|---------------------->|	
 												(commit)
 
-2. File Status Life Cycle :
+9. File Status Life Cycle :
 		how will u understand this : 
 			1. First enter git status : you will notice that files are not staged here
 			2. second enter git add --a : you will stage all the files it means unmodified files 
@@ -306,7 +312,7 @@ git branch -d branchName
 			|     (remove the file)     |<----------------------|--------------------|
 			|                           |                    (commit)                |
 
-3. Branch By default branch is master (main directoty or main branch)
+10. Branch By default branch is master (main directoty or main branch)
 =========================================================================================================================================
 #Extra 
 	1. Best Website : https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud
