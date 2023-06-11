@@ -1,3 +1,5 @@
+![Image](./images/git-github.png)
+
 ## 📘What is Git ?	
 1. it is Distribution version Control System (to keep tracks of files) 
 2. it's system that records changes to our files over time 
