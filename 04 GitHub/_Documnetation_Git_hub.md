@@ -466,6 +466,52 @@ git clone <repository-Address>
 ```
 ---
 
+## 📘SSH-Keys
+* You need to be authenticated on github to do certian operations, like pushing up code from your local machine. your terminal will prompt you every single time for your github email and password, unless
+* You generate and configure an SSH key! Once configured, you can connect to github without having to supply your **username/password**
+
+
+1. Go to base directory first
+
+```
+cd ~
+```
+2. Change Directory 
+
+```
+cd .ssh
+```
+3. List all the keys
+* test_rsa : **private key**
+* test_rsa.pub : **public key**
+ 
+```
+ls
+```
+4. Generate Key
+
+```
+ssh-keygen -f test_rsa
+```
+* then hit enters again and again
+
+5. Add private key into your system
+
+```
+ssh-add ~/.ssh/test_rsa
+```
+
+6. Copy Public key and Paste into Git Key section
+
+```
+cat test_rsa.pub
+```
+* Example like this then copy this command and paste into git ssh key section
+
+```
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC1rp765Vk6e6KICDaHMJCySMohSzfFKNPzR/lS7kB0A4l1ebpXB3Zdt61PkxYk7QhS7hV1rRQT3WNkDytZZYF6EuFD4fm3n3Gg17yaAi8BaUTuUkqUBkwthEbBUhYNaux.......
+```
+---
 
 ### alias and Vi Editior
 
@@ -532,13 +578,7 @@ git clone <repository-Address>
 
 
 
-=====================================================================================================================================
-#Push and Pull
 
-	1. git push origin branchName	:: is use to push data in the repository (branchName)
-	2. git pull origin branchName	:: is use to pull data from the repository (branchName)
-
-	Note : here origin is the http address of your git hub repository
 ====================================================================================================================================
 #cherry-pick		
 		
@@ -565,45 +605,7 @@ git clone <repository-Address>
 
 	Note : best explanation on this : https://www.youtube.com/watch?v=f1wnYdLEpgI	
 
-
-=====================================================================================================================================
-#working with Remote Repositores
-
-	1. Add Repository :: login to git hub -> Click on '+'' sign(right hand at top) -> select 'New Repository' -> enter Repository Name -> Enter Discription -> 
-
-	2. git remote add origin https://github.com/DeepuBhasin/gitTituorial_demo.git		:: to add remote 
-			
-			-> remote 		:: remote repository
-			-> add 	  		:: adding address of repository
-			-> origin 		:: means alias the name of http address example https://github.com/DeepuBhasin/gitTituorial_demo.git is now become origin
-	
-	3. git remote 			:: to get remote name
-	4. git remote -v 		:: to get push and pull remote address 
-
-======================================================================================================================================	
-
-(Permisssions)			go to settings -> SSH & GPG keys -> New SHS key -> enter title -> to add key first go to ssh git hub website (just enter ssh git hub in google) 
-						-> Generating a new SSH key and adding it to the ssh-agent -> 
-						enter this in git bash '$ ssh-keygen -t ed25519 -C "your_email@example.com" '			
-						-> press enter 
-						-> agian enter 
-						-> again 
-						->enter -> eval `ssh-agent -s` (to check agent) -> command ' ssh-add ~/.ssh/id_ed25519 ' is used to private key press enter -> key will added successfullly -> click on this ' Add the SSH key to your GitHub account. ' -> then ' tail ~/.ssh/id_ed25519.pub' to print ssh key in git bash 
-						-> ' ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIITbmVNe877PXIoq7lzbkMvGOvqE/19c6dJTUYDGiIz0 ' this kind of key will generate then copy this key -> paste this key into your account where you are creating key -> click on Add SSH -> '$ git push -u origin master' use this command
-									
-									Enumerating objects: 13, done.
-									Counting objects: 100% (13/13), done.
-									Delta compression using up to 8 threads
-									Compressing objects: 100% (7/7), done.
-									Writing objects: 100% (13/13), 971 bytes | 485.00 KiB/s, done.
-									Total 13 (delta 2), reused 0 (delta 0), pack-reused 0
-									remote: Resolving deltas: 100% (2/2), done.
-									To https://github.com/DeepuBhasin/gitTituorial_demo.git
-									 * [new branch]      master -> master
-									Branch 'master' set up to track remote branch 'master' from 'origin'.
-
-
-======================================================================================================================================	
+---
 Directory 
 	
 	1. cd ~
@@ -627,7 +629,7 @@ Directory
 
 	9. ssh-add ~/.ssh/idea_rsa		// adding key into system and idea_rsa -> is key name	
 
-	8. git config --global -e   // get the global configuration file 
+	10. git config --global -e   // get the global configuration file 
 
 
 
