@@ -141,11 +141,15 @@ git add --a / git add .
 ```
 git add first.txt
 ```	
-3. unstage or even discard uncommitted local changes. (work when your file)
+3. **Unstage or even discard** uncommitted local changes. (work when your file)
 ```
 git restore filename
 ```
-4. it will remove particalur file from stagging area (work when your file is in stagging area)
+```
+git checkout HEAD fileName
+```
+
+4. it will **remove** particalur file from **stagging area** (work when your file is in stagging area)
 ```
 git restore --staged fileName
 ```
@@ -420,6 +424,15 @@ git checkout HEAD~1
 ![Image](./images/checkout-head~mater.png)
 ---
 
+## 📘Git Reset
+
+Suppose you've just made a couple of commits on the master branch, but you actually meant to make them on a seperate branch instead. To undo those commits, you can use **git reset**
+
+1. This command will reset the repo back to a sepecific commit. The commit are gone.
+```
+git reset <commit-hash>
+```
+---
 
 
 
