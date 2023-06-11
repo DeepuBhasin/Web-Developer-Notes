@@ -424,7 +424,7 @@ git checkout HEAD~1
 ![Image](./images/checkout-head~mater.png)
 ---
 
-## 📘Git Reset
+## 📘Undo Change (Reset & Revert)
 
 Suppose you've just made a couple of commits on the master branch, but you actually meant to make them on a seperate branch instead. To undo those commits, you can use **git reset**
 
@@ -440,9 +440,25 @@ git reset --hard HEAD~1
 ```
 git reset --hard <commit-id>
 ```
+
+![Image](./images/revert.png)
+
+3. **git revert** instead creates a brand new commit which reverses/undos the changes from a commit. Because it results in a new commit, you will be prompted to enter a commit message.
+
+```
+git revert 5637353
+```
+⚠️ **Note :** 
+* *if  you want to reverse some commites that other people already have on their machines, you should use revert.*
+* if you want to reverse commits that you haven't shared with others, use reset and no one will ever know!  
+
 ---
 
-3. Git - Three Stages Acrhitecture 
+
+
+
+
+1. Git - Three Stages Acrhitecture 
 
 								Local Operations 
 	1. Working Directory 		2. Staging Area 		3. git directory(repository)
@@ -453,7 +469,7 @@ git reset --hard <commit-id>
 			|							|---------------------->|	
 												(commit)
 
-4. File Status Life Cycle :
+2. File Status Life Cycle :
 		how will u understand this : 
 			1. First enter git status : you will notice that files are not staged here
 			2. second enter git add --a : you will stage all the files it means unmodified files 
@@ -473,7 +489,7 @@ git reset --hard <commit-id>
 			|     (remove the file)     |<----------------------|--------------------|
 			|                           |                    (commit)                |
 
-5.  Branch By default branch is master (main directoty or main branch)
+3.  Branch By default branch is master (main directoty or main branch)
 =========================================================================================================================================
 #Extra 
 	1. Best Website : https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud
