@@ -272,16 +272,30 @@ git branch -d branchName
 git checkout test
 git branch -m new-test
 ```
+---
+
+## 📘Merging
+⚠️**Note :** when ever you want to merge branch in a particalur branch you have to go in that branch first for example you want to merge 'test-mail' branch into 'master' branch so you have to go first in master branch then make a requst to merge like -> git merge test-mail
+
+1. it will merge the branch to master branch (if conflict occur it will ask you to accept incoming changes and current changes )
+```
+ git merge branchName
+```
+**Steps :** 
+1. Git checkout master
+2. git Pull
+3. git checkout branchName
+4. doing codes all the things etc 
+5. git checkout master 
+6. git merge branchName
+
+---
 
 
 
 
 
-
-
-
-
-8. Git - Three Stages Acrhitecture 
+1. Git - Three Stages Acrhitecture 
 
 								Local Operations 
 	1. Working Directory 		2. Staging Area 		3. git directory(repository)
@@ -292,7 +306,7 @@ git branch -m new-test
 			|							|---------------------->|	
 												(commit)
 
-9. File Status Life Cycle :
+2. File Status Life Cycle :
 		how will u understand this : 
 			1. First enter git status : you will notice that files are not staged here
 			2. second enter git add --a : you will stage all the files it means unmodified files 
@@ -312,7 +326,7 @@ git branch -m new-test
 			|     (remove the file)     |<----------------------|--------------------|
 			|                           |                    (commit)                |
 
-10. Branch By default branch is master (main directoty or main branch)
+3.  Branch By default branch is master (main directoty or main branch)
 =========================================================================================================================================
 #Extra 
 	1. Best Website : https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud
@@ -450,38 +464,6 @@ b. Revert back on files after commit
 ======================================================================================================================================
 
 ======================================================================================================================================
-#Merging
-
-	Note a. which ever you want to merge branch in a particalur branch you have to go in that branch first for example you want to merge 'test-mail' branch into 'master' branch so you have to go first in master branch then make a requst to merge like -> git merge test-mail
-
-		b. When you changes in same file in  master as well in branche  and when you merge after changing then conflict always generate		
-
-	1. git merge branchName 			:: it will merge the branch to master branch (if conflict occur it will ask you to accept incoming changes and current changes )
-	
-	303a192 (HEAD -> master, testing1) commit 4 in testing branch	//representing  two branches has merged example (master and testing1) and listed below commits are no get merge into a single sheet
-	dd1f5bb commit 3 in testing branch
-	87586c4 commit 2 in testing branch
-	81384a9 commit 1 in testing branch
-	f5a56c6 commit 4
-	f9b6f8c commit 3
-	39c9586 commit 2
-	9699a44 commit 1
-
-
-	Steps : 1. Git checkout master
-			2. git Pull
-			3. git checkout branchName
-			4. doing codes all the things etc 
-			5. git checkout master 
-			6. git merge branchName
-		
-
-	2. git branch -v  				:: will return all the last commit message [branches , hash numbers , last commit message ] 
-	3. git branch --merged 			:: will return all the merge branches
-	4. git branch --no-merged		:: will return all the non merge branches 
-	 
-
-(note) when ever you want to merge you should be in the master branch and and every thing should be commit before merging every thing 
 
 =====================================================================================================================================
 #Push and Pull
