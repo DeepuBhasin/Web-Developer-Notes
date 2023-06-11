@@ -295,7 +295,13 @@ git branch -m new-test
 ![Image](./images/generating-merge-commit.png)
 * In **Merge Commit** we did commits in **master** branch as well and commit in **child branch** as well, then **git** automatically merge both commits when ever we do **merge**
 
-![Image](./images/conflict-marker.png)
+## 📘Merging Conflicts & Resolves
+
+![/Image](./images/conflict-marker.png)
+
+![/Image](./images/conflict-marker-2.png)
+
+![/Image](./images/resolve-conflicts.png)
 ---
 
 
