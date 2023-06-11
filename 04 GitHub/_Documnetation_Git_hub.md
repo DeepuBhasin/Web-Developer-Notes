@@ -528,6 +528,7 @@ origin  https://github.com/DeepuBhasin/Web-Developer-Notes.git (fetch)
 origin  https://github.com/DeepuBhasin/Web-Developer-Notes.git (push)
 ```
 2. Adding a New Remote (origin is a conventional git remote name, but it is not at all special)
+
 ```
 git remote add <name> <url>
 ```
@@ -538,6 +539,18 @@ git remote add origin https://...........
 
 ⚠ **️Note :** most of the commands you will get after creating *new repository*.
 
+---
+
+## 📘 Push or Pull
+
+1. Push Command
+```
+git push origin <branch-name>
+```
+2. Pull command
+```
+git pull origin <branch-name>
+```
 ---
 
 ### alias and Vi Editior
