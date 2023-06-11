@@ -515,6 +515,31 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC1rp765Vk6e6KICDaHMJCySMohSzfFKNPzR/lS7kB0
 
 ---
 
+## 📘Remote
+
+1. it a label name
+```
+git remote -v
+```
+* Example
+
+```
+origin  https://github.com/DeepuBhasin/Web-Developer-Notes.git (fetch)
+origin  https://github.com/DeepuBhasin/Web-Developer-Notes.git (push)
+```
+2. Adding a New Remote (origin is a conventional git remote name, but it is not at all special)
+```
+git remote add <name> <url>
+```
+
+```
+git remote add origin https://...........
+```
+
+⚠ **️Note :** most of the commands you will get after creating *new repository*.
+
+---
+
 ### alias and Vi Editior
 
 	1. vi ~/.bashrc  			: 			to open source Editior Files 
