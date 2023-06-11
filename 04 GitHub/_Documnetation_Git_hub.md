@@ -377,6 +377,14 @@ git stash pop
 git stash apply
 ```
 
+3. To view all stash
+
+```
+git stash list
+```
+
+
+---
 
 
 1. Git - Three Stages Acrhitecture 
