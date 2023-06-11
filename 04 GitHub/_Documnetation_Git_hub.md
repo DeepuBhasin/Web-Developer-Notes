@@ -302,11 +302,37 @@ git branch -m new-test
 ![/Image](./images/conflict-marker-2.png)
 
 ![/Image](./images/resolve-conflicts.png)
+
 ---
 
-
-
-
+## 📘HEAD
+1. Show the last commit detail with commit id
+```
+git show Head
+```
+2. Show the last commit detail with commit id
+```
+git show gitCommitId
+```
+---
+## 📘Difference
+1. Return the difference between the stage area and working directory (modified area (changes done after staging)) and also command compares two specified branches		
+```
+git diff
+```	
+1. Return the difference between the two stages
+```
+git diff --staged
+```
+1. Return the difference between two commits with two windows 
+```
+git difftool gitCommitId gitCommitId
+```
+1. Return the difference between two commits with two windows  	
+```
+git difftool HEAD gitCommitId
+```
+---
 
 1. Git - Three Stages Acrhitecture 
 
@@ -429,23 +455,6 @@ git branch -m new-test
 		Resolving deltas: 100% (889372/889372), done.
 		Updating files: 100% (24448/24448), done.
 
-=========================================================================================================================================
-#difference
-	
-	1. git diff 								:: return the difference between the stage area and working directory (modified area (changes done after staging)) and also command compares two specified branches		
-	2. git diff --staged 						:: return the difference between the two stages 
-	3. git difftool gitCommitId gitCommitId		:: return the difference between two commits with two windows 
-	4. git difftool HEAD gitCommitId			:: return the difference between two commits with two windows  
-
-	Note : you can use MELD Software to see difference its like VI editior
-
-===========================================================================================================================================
-
-=====================================================================================================================================
-#HEAD
-
-	1. git show Head 			:: show the last commit detail with commit id
-	2. git show gitCommitId 	:: show the last commit detail with commit id
 
 =====================================================================================================================================
 #undoing/Reverting/Reset Codes/RollBack
