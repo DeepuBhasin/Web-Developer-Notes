@@ -551,6 +551,13 @@ git push origin <branch-name>
 ```
 git pull origin <branch-name>
 ```
+3. The -u option, Running **git push -u origin master** sets the upstream of the local master branch so that it tracks the master branch on the origin repo.
+
+```
+git push -u origin master
+```
+![Image](./images/upstream.png)
+
 ---
 
 ### alias and Vi Editior
