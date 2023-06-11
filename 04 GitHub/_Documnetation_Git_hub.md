@@ -289,6 +289,8 @@ git branch -m new-test
 5. git checkout master 
 6. git merge branchName
 
+![Image](./images/fast-forward.png)
+
 ---
 
 
