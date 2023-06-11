@@ -417,7 +417,7 @@ git checkout HEAD~1
 ```
 ![Image](./images/checkout-head~1.png)
 
-
+![Image](./images/checkout-head~mater.png)
 ---
 
 
