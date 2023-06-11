@@ -382,7 +382,16 @@ git stash apply
 ```
 git stash list
 ```
+4. To Delete **recent** stash
 
+```
+git stash drop
+```
+5. To delete **all** Stash
+
+```
+git stash clear
+```
 
 ---
 
