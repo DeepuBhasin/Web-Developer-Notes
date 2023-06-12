@@ -557,8 +557,24 @@ git pull origin <branch-name>
 git push -u origin master
 ```
 ![Image](./images/upstream.png)
-
 ---
+## 📘Tracking Branches
+![Image](./images/tracking-brach.png)
+
+1. Return all server branches
+```
+git branch -r
+```
+2. Will help to switch into another branch, basically **git switch puppies** makes me a local puppies branch AND set it up to track the remote branch **origin/puppies** . *This command is very easy*
+```
+git switch puppies
+```
+![Image](./images/switch.png)
+
+```
+git checkout origin/puppies
+```
+
 
 ### alias and Vi Editior
 
