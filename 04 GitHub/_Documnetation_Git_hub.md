@@ -29,6 +29,12 @@
 
 ---
 
+## 📘Git-Architecture
+![Image](./images/archoitecture.png)
+
+---
+
+
 ## 📘Download Git
 
 Downlaod : type git install ( web site name : git-scm) <br/>
@@ -574,7 +580,33 @@ git switch puppies
 ```
 git checkout origin/puppies
 ```
+---
 
+## 📘Fetching Vs Pulling
+
+![Image](./images/archoitecture.png)
+
+![Image](./images/get-fetch-pull.png)
+
+
+1. **Fetching :** Fetching allow us to download changes from a remote repository, but those **changes will not be automatically intergrated** into our working file. *git fetch origin* OR *get fetch remote* & then you have to use **git merge** command to merge all changes
+
+```
+git fetch origin master
+```
+```
+git merge <localbranch>
+```
+---
+
+2. **Pulling :** git pull is another command we can use to retrieve changes from a remote repository. Unlike fetch, pull actually updates our HEAD branch with whatever changes are retrieved from the remote. *"go and download data from Github And immiediately update my local repo with those changes"*. **git pull = git fetch + git merge**
+
+* it matters where we run this command from. whatever branch we run it from is where the changes will be merged into. Example **git pull origin master** *would fetch the latest information from the origin's master branch and merge those changes into current branch*.
+```
+git pull origin branch
+```
+
+---
 
 ### alias and Vi Editior
 
