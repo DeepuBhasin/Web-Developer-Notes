@@ -607,15 +607,19 @@ git pull origin branch
 ```
 
 ---
-## Other Topics
+## 📘Other Topics
 * Public and Private Repository
+  * **Settings** > **Change visibility** (under Danger Zone) 
 * **README.md**	: is **text to Html** convertion tool for web writers.
 * **Git hub Gists :** are a simple way to share code snippets and uesful fragments with others. Gists are much easier to create, but offer far fewer features than a typical github respository.
 * **Github Pages :** are public webpages that are **hosted** and **published via Github**. They allow you to create a website simply bypushing your code to Github.
   * Github Pages is a hosting services for static webpages, so it does not support server-side code like Paython, Ruby or Node. Just HTML/CSS/JS!
   * Very use full for Portfolio
-
 ---
+
+## 📘Workflow
+* **Centralized workflow** : The Simplest collaborative workflow to have everyone work on the master branch (or main, or any other Single branch)
+*  **Feature Branches :** Rather than working directly on master/main, all new development should be done on **separate branches!**. 
 
 ### alias and Vi Editior
 
