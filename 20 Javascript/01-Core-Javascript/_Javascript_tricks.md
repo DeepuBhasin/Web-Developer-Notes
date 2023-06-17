@@ -1,6 +1,6 @@
 
- ## 📔Javascript Tricks
-1. Destructring
+ # 📔Javascript Tricks
+## 📘Destructring
 
 * Converting Array into object
 ```js
@@ -26,8 +26,16 @@ const student = {
 
 console.log(student);
 ```
+* Swaping numbers
 
-2. Console
+```js
+var a = 10;
+var b = 20;
+[a, b] = [b, a];
+
+console.log(a, b);  
+```
+## 📘Console
 
 * console.time
 ```js
@@ -88,7 +96,7 @@ console.log('Hello world 3');
 console.log('Hello world 4');
 console.groupEnd();
 ```
-3. Operators
+## 📘Operators
 
 * use the **!!** operator to convert the result of an **expression into Boolean value**
 ```js
@@ -118,8 +126,19 @@ function isAdult(age) {
     return age >= 18;       // true or false
 }
 ```
+* This **+** operator is use for 
+  * concatinate the strings
+  * Converting into Number
+  * Adding the Numbers
 
-4. Strings
+```js
+console.log("a" + "b");     // ab
+console.log("a" + +"b");    // aNaN
+console.log(+"a" + +"b");   // NaN
+console.log(+"a" + "b");    //NaNb
+```
+---
+## 📘Strings
 
 ```js
 var str = 'Hello My name is Deepinder singh and I am working as React Engineer. I am working in various componies. I workimg very hard to learn new things. I am also woring in backend some time';
@@ -140,8 +159,7 @@ var result = str.split(sub).length - 1;
 console.log(result);
 ```
 ---
-
-5. Arrays
+## 📘Arrays
 
 * Flatten Array
 ```js
@@ -159,7 +177,7 @@ var arr = [1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 
 console.log(...new Set(arr));
 ```
 ---
-6. Objects
+## 📘Objects
 
 * Getting Both key and values
 
@@ -176,7 +194,7 @@ for (const [key, value] of Object.entries(obj)) {
 }
 ```
 ---
-1. Loops
+## 📘Loops
 * Use **For in** always on **Objects**
 * Use **For of** always on **Array**
 
@@ -219,4 +237,28 @@ function test() {
     seeAdminPanel();
 }
 ```
----
+
+## 📘International
+
+* Currency
+
+```js
+// Simple Representation
+const number = 1111122223333444.1;
+const f = new Intl.NumberFormat("en-us", {
+    currency: 'USD',
+    style: "currency"
+})
+
+console.log(f.format(number));  // $1,111,122,223,333,444.10
+
+
+// Compact Representation
+
+const number = 11133444.1;
+const f = new Intl.NumberFormat("en-us", {
+    notation: "compact"
+})
+
+console.log(f.format(number));          // 11M  (Million)
+```
