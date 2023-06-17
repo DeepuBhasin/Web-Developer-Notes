@@ -2408,22 +2408,3 @@ let greeting1 = greet();
 console.log(greeting1);     // Hi Tony Alicea
 
 ```
-
----
-
- ## 📘Programming Patterns
-
-```javascript
-function createObject(firstname, lastname) {
-    function Person(firstname, lastname) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-    }
-
-    return new Person(firstname, lastname);
-}
-
-var john = createObject('Deep', 'Singh');
-
-console.log(john);
-```
