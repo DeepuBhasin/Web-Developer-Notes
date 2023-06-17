@@ -621,6 +621,13 @@ git pull origin branch
 * **Centralized workflow** : The Simplest collaborative workflow to have everyone work on the master branch (or main, or any other Single branch)
 *  **Feature Branches :** Rather than working directly on master/main, all new development should be done on **separate branches!**. 
 
+* **Fork & Clone :** The "fork & clone" workflow is different from anything we've seen so far. Instead of just one centeralized  Github respository, every developer has their own Github repository in addition to the "main" repo. Developers make changes and push to their own forks before making pull request.
+  * It's very commonly used on large open-source projects where there may be thousands of contributors with only a couple maintainers.
+  * **Forking :** Github (and similar tools) allow us to create personal copies of other peoples repositories. We call those copies a "fork" of the original.
+
+![Fork](./images/fork.png)
+
+---
 ### alias and Vi Editior
 
 	1. vi ~/.bashrc  			: 			to open source Editior Files 
