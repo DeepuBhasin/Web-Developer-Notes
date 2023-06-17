@@ -607,6 +607,15 @@ git pull origin branch
 ```
 
 ---
+## Other Topics
+* Public and Private Repository
+* **README.md**	: is **text to Html** convertion tool for web writers.
+* **Git hub Gists :** are a simple way to share code snippets and uesful fragments with others. Gists are much easier to create, but offer far fewer features than a typical github respository.
+* **Github Pages :** are public webpages that are **hosted** and **published via Github**. They allow you to create a website simply bypushing your code to Github.
+  * Github Pages is a hosting services for static webpages, so it does not support server-side code like Paython, Ruby or Node. Just HTML/CSS/JS!
+  * Very use full for Portfolio
+
+---
 
 ### alias and Vi Editior
 
