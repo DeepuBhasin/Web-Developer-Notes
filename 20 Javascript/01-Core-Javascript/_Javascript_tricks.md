@@ -84,7 +84,7 @@ console.table(response)
 * Color in Console
 
 ```js
-console.log("%c Hello World", "color:yellow")
+console.log("%c Hello %cWorld", "color:yellow;", "background-color: red;")
 ```
 * console.group
 
@@ -137,6 +137,12 @@ console.log("a" + +"b");    // aNaN
 console.log(+"a" + +"b");   // NaN
 console.log(+"a" + "b");    //NaNb
 ```
+* Short circuit **|| or &&**
+```js
+var number = 10 || '';          // 10
+var name = true && 'Deepinder'  // 'Deepinder'
+```
+
 ---
 ## 📘Strings
 
@@ -176,6 +182,17 @@ console.log(result);
 var arr = [1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 8, 8, 8];
 console.log(...new Set(arr));
 ```
+* Index Value
+
+```js
+var test = ['Deepinder', 'Deepu', 'Deepi', 'Dp'];
+
+console.log(test[0]);
+console.log(test.at(0));
+
+console.log(test[test.length - 1]);
+console.log(test.at(3));
+```
 ---
 ## 📘Objects
 
@@ -193,12 +210,29 @@ for (const [key, value] of Object.entries(obj)) {
     console.log(`${key} : ${value}`);
 }
 ```
+* 3 best features of Object
+
+```js
+const firstName = "Deepinder";
+const key = 'lastname';
+let obj = {
+    firstName,           // key and value name same
+    [key]: 'Singh',      // create dynamic key
+    getFullName() {      // do not write to function keyword
+        return this.firstName + ' ' + this[key]
+    }
+}
+console.log(obj.getFullName());
+```
+
+
 ---
 ## 📘Loops
 * Use **For in** always on **Objects**
 * Use **For of** always on **Array**
+---
 
-1. If-else
+## 📘If-else
 
 * Avoid nested simple if-else and use **ternary Operator**
 * Avoid if-else ledder and use **Guard Clauses Technique**
@@ -237,6 +271,7 @@ function test() {
     seeAdminPanel();
 }
 ```
+* if you have **very large if-else** statments then use **switch-case** code
 
 ## 📘International
 
@@ -261,4 +296,71 @@ const f = new Intl.NumberFormat("en-us", {
 })
 
 console.log(f.format(number));          // 11M  (Million)
+```
+* Date Format
+
+```js
+// Simple 
+const f = new Intl.DateTimeFormat('en-us', {
+})
+console.log(f.format());        //  6/17/2023
+
+// Simple 
+const f = new Intl.DateTimeFormat('en-us', {
+    dateStyle: "full",
+    timeStyle: "full"
+})
+console.log(f.format());        // Saturday, June 17, 2023 at 7:30:41 PM India Standard Time
+
+// Complex One
+const today = new Date();
+console.log(today.toLocaleString());    // 17/6/2023, 7:21:53 pm
+
+const f = new Intl.DateTimeFormat('en-us', {
+    dateStyle: "full",
+    timeStyle: "full"
+    // dayPeriod: "long"
+})
+
+console.log(f.format(today));   // Saturday, June 17, 2023 at 7:22:03 PM India Standard Time
+```
+* Relative Time
+```js
+const f = new Intl.RelativeTimeFormat('en-us', {
+    style: "long"
+})
+console.log(f.format(-4, "days"))
+```
+
+
+---
+
+## 📘Extra Features
+
+* **Generate Random Numbers** in javascritp
+
+```js
+console.log(crypto.randomUUID());   // 1d35cbb8-e3ff-47b0-a9dc-8d0c499b9a56
+```
+* use of **use strick** mode
+  * Not allowed to make unwanted variables (like created after spelling mistake) 
+```js
+const superLongVariable = "hi";
+superLongVariables = "bye";        
+console.log(superLongVariables);    // bye
+
+// Correct one 
+"use strict"
+const superLongVariable = "hi";
+superLongVariables = "bye";        
+console.log(superLongVariables);    // bye
+```
+
+```html
+<!-- using by Module -->
+<script type="module">
+    const superLongVariable = "hi";
+    superLongVariables = "bye";         // error
+    console.log(superLongVariables);    // bye
+</script>
 ```
