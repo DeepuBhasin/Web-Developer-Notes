@@ -709,7 +709,9 @@ alias gr="git reset"
 alias grv="git revert"
 alias gsk="git commit -am "
 alias grh="git reset --hard "
-alias gr="git reset "
+alias grs="git reset "
+alias gra="git restore ."
+alias gr="git restore "
 ```
 ---
 
