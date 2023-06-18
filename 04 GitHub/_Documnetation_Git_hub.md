@@ -633,6 +633,11 @@ git pull origin branch
   * as a **alternative** to merging
   * as **cleanup tool**
 
+* Rebase is also a way of combining the work between different branches. Rebasing takes a set of commits, copies them and stores them outside your repository. The advantage of rebasing is that it can be used to make linear sequence of commits. The commit log or History of the repository stays clean if rebasing is done 
+* first go into the branch where you want to start the base of master exmaple checkout into testing branch then exceute the rebase command 
+* **difference between merge and rebase is** : in merge command only last commit is merge into parent branch but in rebase command all commit are marge into parent branch
+
+
 ![Rebase](./images/rebasing-1.png)
 ![Rebase](./images/rebasing-2.png)
 
@@ -673,50 +678,40 @@ git rebase --continue
 
 ### alias and Vi Editior
 
-	1. vi ~/.bashrc  			: 			to open source Editior Files 
-			
-			example : 
-				1. alias gl="git pull orign dev"
-				2. alias gcm="git commit -m "
+	1. vi ~/.bashrc : to open source 2. to save: esc -> : ->wq -> enter
+	2. to read all the aliases to currently opened terminal : source ~/.bashrc 
+	3. to quit : esc -> : -> q   -> enter
+	4. to show all Commands : type : alias -> enter
 
-	2. to save: esc -> : ->wq -> enter
-	3. to read all the aliases to currently opened terminal : source ~/.bashrc 
-	4. to quit : esc -> : -> q   -> enter
-	5. to show all Commands : type : alias -> enter
-	
-	alias gst="git status"
-	alias gpl="git pull origin"
-	alias gcm="git commit -m "
-	alias gaa="git add ."
-	alias ga="git add"
-	alias virc="vi ~/.bashrc"
-	alias sorc="source ~/.bashrc" 
-	alias gpu="git push origin"
-	alias gcb="git checkout -b"
-	alias gc="git checkout" 
-	alias gb="git branch" 
-	alias gbd="git branch -D"
-	alias gl="git log"
-	alias glpo="git log --pretty=oneline" 
-	alias glo="git log --oneline"  
-	alias gs="git stash"
-	alias gr="git reset"
-	alias grv="git revert"
-	alias gsk="git commit -am "
-
-======================================================================================================================================
-#Various Shortcut for GITBASH code editior
-
-	1. Zoom in or Zoom out 				: ctrl + or Ctrl -
-	2. List of commands  				: git (press enter)       {commands also run in power shell}
-	3. q (key) 							: to quit
-	4. paste 							: shift + ins (key)
-	5. close terminal 					: ctrl + d
-
-
-
-
-
+```	
+alias gst="git status"
+alias gpl="git pull origin"
+alias gst="git status"
+alias gpl="git pull origin"
+alias gcm="git commit -m "
+alias gaa="git add ."
+alias ga="git add"
+alias virc="vi ~/.bashrc"
+alias sorc="source ~/.bashrc"
+alias gpu="git push origin"
+alias gcb="git checkout -b"
+alias gc="git checkout"
+alias gb="git branch"
+alias gbd="git branch -D"
+alias gl="git log"
+alias glpo="git log --pretty=oneline"
+alias glo="git log --oneline"
+alias gs="git stash"
+alias gsa="git stash apply"
+alias gsl="git stash list"
+alias gsc="git stash clear"
+alias gr="git reset"
+alias grv="git revert"
+alias gsk="git commit -am "
+alias grh="git reset --hard "
+alias gr="git reset "
+```
+---
 
 ========================================================================================================================================
 #Squash : Combining commits into a single Commit
@@ -735,35 +730,8 @@ git rebase --continue
 	after that vi editior will open to create commit message 	   
 
 
-
-
-====================================================================================================================================
-#cherry-pick		
-		
-		a. Bring in changes from a a specfic commitid
-		b. choose one or more commits
-		c. cherry picking in git means to choose a commit from one branch and apply it into another
-		d. This is contrast with other way such as merge and rebase which normally applies many commits into another branch
-	
-	1. git cherry-pick gitCommitId
-====================================================================================================================================
-#Rebase
-
-	a. Rebase is also a way of combining the work between different branches. Rebasing takes a set of commits, copies them and stores them outside your repository. The advantage of rebasing is that it can be used to make linear sequence of commits. The commit log or History of the repository stays clean if rebasing is done 
-	b. first go into the branch where you want to start the base of master exmaple checkout into testing branch then exceute the rebase command 
-	c. difference between merge and rebase is : in merge command only last commit is merge into parent branch but in rebase command all commit are marge into parent branch
-
-		1. git rebase master 	:: to start the base from master branch of the branch 
-
-
-		steps -> 	1. git checkout testing			// now in testing 
-					2. git rebase master			// now in testing 
-					3. git checkout master			// now in master
-					4. git merge testing			// now in master
-
-	Note : best explanation on this : https://www.youtube.com/watch?v=f1wnYdLEpgI	
-
 ---
+
 Directory 
 	
 	1. cd ~
