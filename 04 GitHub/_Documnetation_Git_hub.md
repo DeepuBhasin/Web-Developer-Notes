@@ -628,6 +628,20 @@ git pull origin branch
 ![Fork](./images/fork.png)
 
 ---
+## 📘Rebasing 
+* There are two main ways to use the git rebase command : 
+  * as a **alternative** to merging
+  * as **cleanup tool**
+
+![Rebase](./images/rebasing-1.png)
+![Rebase](./images/rebasing-2.png)
+
+* **master** branch commit history remain same while **feature** branch commit change
+
+![Rebase](./images/rebase-commit.png)
+
+* Suppose we performed a rebase on the **feature branch**. Later, we made additional new commits in the **master branch**. Even in this scenario, we can perform another rebase, and the new commits will be merged afterward.
+---
 ### alias and Vi Editior
 
 	1. vi ~/.bashrc  			: 			to open source Editior Files 
