@@ -636,12 +636,41 @@ git pull origin branch
 ![Rebase](./images/rebasing-1.png)
 ![Rebase](./images/rebasing-2.png)
 
+```
+git switch feature
+git rebase master
+```
+
 * **master** branch commit history remain same while **feature** branch commit change
 
 ![Rebase](./images/rebase-commit.png)
 
 * Suppose we performed a rebase on the **feature branch**. Later, we made additional new commits in the **master branch**. Even in this scenario, we can perform another rebase, and the new commits will be merged afterward.
+
+⚠ **️Note :**
+* never **rebase master** branch it will re-write the whole history. 
+* Never rebase commits that have been shared with others. If you have already pushed commits up to Github. DO NOT rebase them unless you are positive no one on the team is using those commits.
+
+* This command is use to **undo** rebase
+```
+git rebase --abort
+```
+* If conflic occurse while **during Rebase**
+1. Resolve the Conflicts
+
+2. Add Files
+
+```
+git add fileName
+
+```
+3. Continue rebase
+
+```
+git rebase --continue
+```
 ---
+
 ### alias and Vi Editior
 
 	1. vi ~/.bashrc  			: 			to open source Editior Files 
