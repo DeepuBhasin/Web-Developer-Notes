@@ -676,6 +676,18 @@ git rebase --continue
 ```
 ---
 
+## 📘 Rewriting History
+
+* Sometimes we want to write, delete, rename, or even reorder commits (before sharing them) we can do this using **git rebase !**
+
+```
+git rebase -i HEAD~4
+```
+* Running git rebase with the *-i* option will enter the interactive mode, which allows us to edit commits, add files drop commits etc. Note that we need to specify how far back we want to rewrite commits.
+* Also, Notice that we are not rebasing onto another branch instead, we are rebasing a series of commits onto the HEAD they currently are based on.
+
+---
+
 ### alias and Vi Editior
 
 	1. vi ~/.bashrc : to open source 2. to save: esc -> : ->wq -> enter
@@ -715,8 +727,7 @@ alias gr="git restore "
 ```
 ---
 
-========================================================================================================================================
-#Squash : Combining commits into a single Commit
+## Squash : Combining commits into a single Commit
 
 	1. git rebase -i Head~3		:: add 3 commit from the starting combining into single commit
 
@@ -724,7 +735,7 @@ alias gr="git restore "
 
 	Note : 1. # -> means ignore 
 		   2. pick 	 -> use the commit
-		   3. reward -> use the commit, but edit the commit message 
+		   3. reword -> use the commit, but edit the commit message 
 		   4. edit 	 -> use commit, but stop for amending 
 		   5. Squash -> meld into previous commit
 		   4. drop 	 -> remove commit	
