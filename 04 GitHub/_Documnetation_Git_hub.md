@@ -735,7 +735,7 @@ alias gr="git restore "
 
 	Note : 1. # -> means ignore 
 		   2. pick 	 -> use the commit
-		   3. reword -> use the commit, but edit the commit message 
+		   3. reword -> use the commit, but edit the commit message (renaming)
 		   4. edit 	 -> use commit, but stop for amending 
 		   5. Squash -> meld into previous commit
 		   4. drop 	 -> remove commit	
