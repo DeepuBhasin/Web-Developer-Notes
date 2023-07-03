@@ -42,11 +42,14 @@ helleWorld();
 
 1. Run Commands
 ```
-npm inti
+npm inti -y
 ```
+
 ```
 npm install webpack webpack-cli --save-dev
 ```
+* webpack-cli : its a tool which allow you to run webpack from terminal
+
 2. Create **src Folder** and Place all js files over there
 * hello-world.js
 

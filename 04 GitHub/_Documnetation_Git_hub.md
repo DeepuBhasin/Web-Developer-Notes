@@ -683,8 +683,12 @@ git rebase --continue
 ```
 git rebase -i HEAD~4
 ```
-* Running git rebase with the *-i* option will enter the interactive mode, which allows us to edit commits, add files drop commits etc. Note that we need to specify how far back we want to rewrite commits.
+* Running git rebase with the *-i* option will enter the interactive mode, which allows us to edit commits, add files drop commits etc. Not e that we need to specify how far back we want to rewrite commits.
 * Also, Notice that we are not rebasing onto another branch instead, we are rebasing a series of commits onto the HEAD they currently are based on.
+
+---
+
+## tags 
 
 ---
 
@@ -727,55 +731,26 @@ alias gr="git restore "
 ```
 ---
 
-## Squash : Combining commits into a single Commit
+## 📘Squash 
+* Combining commits into a single Commit
 
-	1. git rebase -i Head~3		:: add 3 commit from the starting combining into single commit
+* Example 3 commit from the starting combining into single commit
+```
+git rebase -i Head~3		
+```
+* after this command vi editior will open to edit the commit with below commands 
 
-	after this command vi editior will open to edit the commit with below commands 
-
-	Note : 1. # -> means ignore 
-		   2. pick 	 -> use the commit
-		   3. reword -> use the commit, but edit the commit message (renaming)
-		   4. edit 	 -> use commit, but stop for amending 
-		   5. Squash -> meld into previous commit
-		   4. drop 	 -> remove commit	
-
-	after that vi editior will open to create commit message 	   
-
-
+1. '#' -> means ignore 
+2. pick 	 -> use the commit
+3. reword -> use the commit, but edit the commit message (renaming)
+4. edit 	 -> use commit, but stop for amending 
+5. Squash -> meld into previous commit
+6. drop 	 -> remove commit	
+* after that vi editior will open to create commit message 	   
 ---
 
-Directory 
-	
-	1. cd ~
-	2. cd .ssh
-	3. ls 
-	
-	4. various key extention  
-		a. dee 				 // private key
-		b. deee.pub  		 //	public key 
+## 📘add two account
 
-	5. public key 
-		cat deee 	
-
-	6. to open software with config file 
-		a. Notepad config 						// to open notepad and config file 
-		b. code config 							// to open visual code and config file 
-
-	7. ssh-keygen -f idea_rsa				// generate key then key name 
-
-	8. eval `ssh-agent -s`
-
-	9. ssh-add ~/.ssh/idea_rsa		// adding key into system and idea_rsa -> is key name	
-
-	10. git config --global -e   // get the global configuration file 
-
-
-
-
-
-	# add two account
-	================= 
 
 		1. get the invitaion for the repository Admin 
 		
@@ -783,12 +758,12 @@ Directory
 
 		3. copy public -> cat idea_rsa.pub
 			
-		3. Open github account -> setting -> SSH and GPG keys  
+		4. Open github account -> setting -> SSH and GPG keys  
 			a. click on New SSH key 
 			b. Add Title 
 			c. Paste Public key -> in key
 		
-		4. create config file in .ssh folder -> add below Code 
+		5. create config file in .ssh folder -> add below Code 
 
 			Host idearepos						// random name 
 			HostName github.com 				// host name 
