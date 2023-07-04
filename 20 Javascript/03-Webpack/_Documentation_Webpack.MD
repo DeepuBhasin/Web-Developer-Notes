@@ -85,3 +85,30 @@ helloWorld();
 npx webpack
 ```
 * this command will create **dist** folder and create **main.js** file in it
+
+## 📘 Custom Configuration (Basic)
+* create **webpack.config.js** 
+```js
+// to get the absolute path, it is available in node automatically
+const path = require('path');
+
+module.exports = {
+    entry: './src/index.js',
+    output: {
+
+        // file name
+        filename: 'bundle.js',
+
+        // it will create bundler file in dist folder 
+        path: path.resolve(__dirname, './dist')
+    },
+    mode: 'none'
+}
+```
+
+* Then run this command
+
+```
+npx webpack
+```
+![Basic-Custom-Configuration](./images/custom-configuration-basic.png)
