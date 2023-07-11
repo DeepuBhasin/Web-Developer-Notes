@@ -122,7 +122,7 @@ npx webpack
 3. asset : webpack decide automatically select one from above conditions ( condition : asset/resource > 8 kilobytes > asset/inline )
 4. asset/source : Read the string and injects that string directly into javascript bundles 
 
-## 📘Importing Image through webpacks (Asset/Resource)
+## 📘1. Importing Image through webpacks (Asset/Resource)
 
 1. Write rules in webpack (because webpack cannot understand the image files)
 
@@ -232,7 +232,7 @@ publicPath: 'https://some-random-url.com/'
 ```
 ![CDN-publicPath](./images/publicPath-cdn.png)
 
-## 📘Importing Image through webpacks (Asset/Inline)
+## 📘2. Importing Image through webpacks (Asset/Inline)
 * Like Importing File like **base64**
 * Main disadvantage is that it will **increase** js file size
 * Main Advantage is that if the sizes if Normal images are very large our web page will make a **http request** to load images which is very expensive so converting into **base64** will save our **http request**
@@ -260,7 +260,7 @@ module.exports = {
 ```
 ![base64-Image](./images/asset-inline-base64.png)
 
-## 📘Importing Image through webpacks (Asset)
+## 📘3. Importing Image through webpacks (Asset)
 * webpack decide automatically and select one option from above conditions 
 * ( condition : asset/resource > 8 kilobytes > asset/inline )
 
@@ -315,7 +315,7 @@ module.exports = {
     }
 }
 ```
-## 📘Importing Image through webpacks (Asset)
+## 📘4. Importing Image through webpacks (Asset Source)
 * Asset source reads the contents of the file into a Javascript String and injects that string directly into the javascript bundle as is without any modfications similarly to asset in line
 * This type of asset module doesn't generate any file in the output directory
 * **Below we are reading text file**
@@ -358,12 +358,13 @@ npx webpack
 ```
 
 ![Image](./images/text-file.png)
-
-## 📘Loaders (CSS/Style)
+---
+## 📘1. Loaders (CSS/Style)
 
 * It help to load that files which we cannot import using modules
 * Import **CSS** Files like *SASS, LESS, Handlebars, XML* and so much
 * Loaders are javascript libraries which allowed you to load all stuffs
+* These loader always inject our CSS code into **style tags**
 
 1. Webpack Coding
 
@@ -402,7 +403,7 @@ module.exports = {
    2. Styles Loaders
 
 ```
-npm install css-loader style-loader --save--dev
+npm install css-loader style-loader --save-dev
 ```
 
 2. hello-world-button.css
@@ -461,12 +462,12 @@ npx webpack
 ```
 ![Loader](./images/loader-js.png)
 
-## 📘Loaders (SCSS)
+## 📘2. Loaders (SCSS)
 
 * Command to install package
 
 ```
-npm install sass-loader sass --save--dev
+npm install sass-loader sass --save-dev
 ```
 
 * only this code is change rest of the above code is same
@@ -520,7 +521,7 @@ module.exports = {
 }
 ```
 
-## 📘Loader (JS)
+## 📘3. Loader (JS)
 * by default **we don't** need any loader to load JS files
 * But If we to add latest feature of javascript on not fully advanced browsers in that case we use JS loader called **babel**.
 * It is compiler which convert Latest javascrit code into browser compatible.
@@ -586,4 +587,120 @@ class HelloWorldButton {
 }
 
 export default HelloWorldButton
+```
+
+---
+
+## 📘Plugins
+
+* Plugins are additionl javascript libraries that do everything that loaders cannot do.
+* Plugins can also modify how the bundles themselves are created. For Example, **uglifyJSplugin** takes the bundle.js and minimize the contents to decrease the bundle size.
+
+## 📘1. Minfication Plugin
+* if the javascript files size is less hence your websites will load fast.
+* if you have mobile uses then your website is crucial for them
+* Less size website consume less internet traffic
+
+* **TerserPlugin :** this plugin is use to reduce the size of **bundle.js**
+
+1. webpack.config.js
+```js
+const path = require('path');
+
+// Loading terser-webpack-plugin plugin, this is inbuilt in webpack 5 otherwise we have to install separately
+const TerserPlugin = require('terser-webpack-plugin');
+
+module.exports = {
+    entry: './src/index.js',
+    output: {
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, './dist'),
+    },
+    mode: 'none',
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            },
+            {
+                test: /\.scss$/,
+                use: ['style-loader', 'css-loader', 'sass-loader']
+            }
+            ]
+    },
+    plugins: [
+        new TerserPlugin()
+    ]
+} 
+```
+
+2. Run Command
+
+```
+npx webpack
+```
+
+## 2. MiniCssExtractPlugin
+* Use to Extract our CSS into a separate File
+
+1. Command for install package
+
+```
+npm install mini-css-extract-plugin --save-dev
+```
+
+2. webpack.config.js
+
+```js
+const path = require('path');
+// installing package
+const TerserPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+module.exports = {
+    entry: './src/index.js',
+    output: {
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, './dist'),
+    },
+    mode: 'none',
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                
+                // loading MiniCssExtractPlugin style loader instead of normal Loader
+                use: [MiniCssExtractPlugin.loader, 'css-loader']
+            },
+            {
+                test: /\.scss$/,
+
+                // loading MiniCssExtractPlugin style loader instead of normal Loader
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+            },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/env'], // convert ES1-N => ES5 , support all latest features of ES6
+                        plugins: ['@babel/plugin-proposal-class-properties']
+
+                    }
+                }
+            }
+        ]
+    },
+    plugins: [
+        new TerserPlugin(),
+        // loading MiniCssExtractPlugin Class
+        new MiniCssExtractPlugin({
+
+            // Making output file name
+            filename: 'styles.css',
+        })
+    ]
+} 
 ```
