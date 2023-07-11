@@ -10,6 +10,8 @@
 
 ## 📘Why do we need
 1. Eliminate the sequence of including javascript
+2. **Load all stuff from webpack rather than loading from different-different files in a single html file example Images, CSS files, Js Files, Json Files etc**
+3. When we are loading every thing from **webpack** we have to load webpage after run **npx webpack** command
 
 ```html
 <!DOCTYPE html>
@@ -356,3 +358,232 @@ npx webpack
 ```
 
 ![Image](./images/text-file.png)
+
+## 📘Loaders (CSS/Style)
+
+* It help to load that files which we cannot import using modules
+* Import **CSS** Files like *SASS, LESS, Handlebars, XML* and so much
+* Loaders are javascript libraries which allowed you to load all stuffs
+
+1. Webpack Coding
+
+```js
+const path = require('path');
+
+module.exports = {
+    entry: './src/index.js',
+    output: {
+        // by the way, using style loader bundles your CSS together with your javascript into a single resulting file called bundle
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, './dist'),
+    },
+    mode: 'none',
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: [
+                    //Then second the style loader takes the CSS and inject it into the page using style tags 
+                    'style-loader',
+
+                    //first  the css loader reads the contents of the css file and return this contents, but it doesn't do anything  else with this css 
+                    'css-loader'
+                ]
+            }
+        ]
+    }
+}
+```
+⚠️ **Note:**
+* Loader always load from **right to left**
+* When we were using asset modules **'asset/source'**, we didn't have to install any additional NPM packages because Webpack include asset modules out of the box
+* On the other hand, when using **loaders** we need to install them **explicitly**, Every Webpack loader comes as NPM package that you can add as a dependency to your application, so in this case we have to add loaders
+   1. CSS Loaders
+   2. Styles Loaders
+
+```
+npm install css-loader style-loader --save--dev
+```
+
+2. hello-world-button.css
+
+```css
+.hello-world-button{
+    font-size: 20px;
+    padding :7px 15px;
+    background: green;
+    color: white;
+    outline: none;
+}
+
+.hello-world-text {
+    color : green;
+    font-weight: bold;
+}
+```
+
+3. hello-world-button.js
+
+```js
+import "./hello-world-button.css"
+
+class HelloWorldButton {
+    render() {
+        const button = document.createElement('button');
+        button.innerHTML = 'Hello World';
+        button.classList.add('hello-world-button')
+        button.onclick = function () {
+            const p = document.createElement('p');
+            p.innerHTML = 'Hello World';
+            p.classList.add('hello-world-text');
+            body.appendChild(p);
+        }
+        const body = document.querySelector('body');
+        body.appendChild(button);
+    }
+}
+
+export default HelloWorldButton
+```
+4. index.js
+
+```js
+import HelloWorldButton from './components/hello-world-button'
+
+const helloWorldButton = new HelloWorldButton();
+helloWorldButton.render();
+``` 
+
+5. Command 
+
+```
+npx webpack
+```
+![Loader](./images/loader-js.png)
+
+## 📘Loaders (SCSS)
+
+* Command to install package
+
+```
+npm install sass-loader sass --save--dev
+```
+
+* only this code is change rest of the above code is same
+```scss
+// hello-world-button.scss
+$font-size : 20px;
+$background-color : green;
+$button-font-color: white;
+$text-font-color :red;
+
+.hello-world-button {
+    font-size: $font-size;
+    padding: 7px 15px;
+    background: $background-color ;
+    color: $button-font-color;
+    outline: none;
+}
+
+.hello-world-text {
+    color: $text-font-color;
+    font-weight: bold;
+}
+```
+
+* Webpack File
+
+```js
+const path = require('path');
+
+module.exports = {
+    entry: './src/index.js',
+    output: {
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, './dist'),
+    },
+    mode: 'none',
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            },
+            {   
+                // load scss file
+                test: /\.scss$/,
+                // loader will load from right to left
+                use: ['style-loader', 'css-loader', 'sass-loader']
+            }
+        ]
+    }
+}
+```
+
+## 📘Loader (JS)
+* by default **we don't** need any loader to load JS files
+* But If we to add latest feature of javascript on not fully advanced browsers in that case we use JS loader called **babel**.
+* It is compiler which convert Latest javascrit code into browser compatible.
+
+* Command to install packages
+
+```
+npm install @babel/core babel-loader @babel/preset-env @babel/plugin-proposal-class-properties --save-dev
+```
+
+* Webpack.config.js File
+```js
+const path = require('path');
+
+module.exports = {
+    entry: './src/index.js',
+    output: {
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, './dist'),
+    },
+    mode: 'none',
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        // convert ES1-N => ES5 , support all latest features of ES6
+                        presets: ['@babel/env'], 
+
+                        // Laod all Latest JS Class features
+                        plugins: ['@babel/plugin-proposal-class-properties']
+
+                    }
+                }
+            }
+        ]
+    }
+} 
+```
+* hello-world-button.js
+
+```js
+import "./hello-world-button.scss"
+
+class HelloWorldButton {
+    render() {
+        this.buttonCssClass = 'hello-world-text';
+        const button = document.createElement('button');
+        button.innerHTML = 'Hello World';
+        button.classList.add('hello-world-button')
+        button.onclick = function () {
+            const p = document.createElement('p');
+            p.innerHTML = 'Hello World';
+            p.classList.add(this.buttonCssClass);
+            body.appendChild(p);
+        }
+        const body = document.querySelector('body');
+        body.appendChild(button);
+    }
+}
+
+export default HelloWorldButton
+```
