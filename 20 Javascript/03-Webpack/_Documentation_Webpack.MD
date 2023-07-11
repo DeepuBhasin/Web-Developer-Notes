@@ -641,8 +641,9 @@ module.exports = {
 npx webpack
 ```
 
-## 2. MiniCssExtractPlugin
+## 📘1. MiniCssExtractPlugin (with single File)
 * Use to Extract our CSS into a separate File
+* This will create a single file where it will put all css code into single file, but in **css-loader & style-loader** it will inject css code into style according to files.
 
 1. Command for install package
 
@@ -695,7 +696,7 @@ module.exports = {
     },
     plugins: [
         new TerserPlugin(),
-        // loading MiniCssExtractPlugin Class
+        // loading MiniCssExtractPlugin Class 
         new MiniCssExtractPlugin({
 
             // Making output file name
@@ -704,3 +705,39 @@ module.exports = {
     ]
 } 
 ```
+
+## 📘2. MiniCssExtractPlugin (with double Files)
+* created Two separate files for **js and css**
+* When we **build**, all **CSS** code goes into **style.css** and all **js** code goes into **bundle.js**
+
+1. webpack.config.js (same code above one)
+2. hello-world-button.js & hello-world-button.css (same code above one)
+3. heading.js
+
+```js
+import './heading.css';
+
+class Heading {
+    render() {
+        const h1 = document.createElement('h1');
+        const body = document.querySelector('body');
+        h1.innerHTML = 'Webpack is awesome';
+        body.appendChild(h1);
+    }
+}
+export default Heading;
+```
+
+4. heading.css
+
+```css
+h1 {
+    color:  grey;
+} 
+```
+5. Run build Command
+
+```
+npx webpack
+```
+![Minfiy](./images/minifiplugin.png)
