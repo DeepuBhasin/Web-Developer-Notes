@@ -741,3 +741,92 @@ h1 {
 npx webpack
 ```
 ![Minfiy](./images/minifiplugin.png)
+
+## 📘Browser Caching
+
+* just add this line, it will create a some random file name
+* If the content is not change then filename will be same, if the content get change it will create new file and file name will change
+
+1. For Javascript Files
+```js
+filename: 'bundle.[contenthash].js',
+``` 
+2. For CSS Files
+```js
+filename: 'styles[contenthash].css',
+```
+
+## 📘Cleaning Dist Folder Before Generating New Bundle
+
+1. Command to install Package
+```
+npm install clean-webpack-plugin
+``` 
+
+2. webpack.config.js
+
+* by using **mini-css-extract-plugin** Plugin
+* This is best option then other
+```js
+const path = require('path');
+const TerserPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+// package  
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+module.exports = {
+    entry: './src/index.js',
+    output: {
+        filename: 'bundle.[contenthash].js',
+
+        // this is our default folder which will delete while cleaning files
+        path: path.resolve(__dirname, './dist'),
+    },
+    mode: 'none',
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader']
+            },
+            {
+                test: /\.scss$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+            },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/env'], // convert ES1-N => ES5 , support all latest features of ES6
+                        plugins: ['@babel/plugin-proposal-class-properties']
+
+                    }
+                }
+            }
+        ]
+    },
+    plugins: [
+        new TerserPlugin(),
+        new MiniCssExtractPlugin({
+            filename: 'styles[contenthash].css',
+        }),
+
+        // creating instance for cleaning webpack
+        new CleanWebpackPlugin()
+    ]
+}
+```
+* By using **clean:true** parameter in **output** Object, but will work in greater than **5.20** version of webpack
+
+```js
+output: {
+    filename: 'bundle.[contenthash].js',
+    path: path.resolve(__dirname, './dist'),
+
+    //just add this line 
+    clean: true
+}
+```
+
