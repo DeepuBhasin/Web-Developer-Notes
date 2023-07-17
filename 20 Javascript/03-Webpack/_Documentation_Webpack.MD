@@ -596,7 +596,7 @@ export default HelloWorldButton
 * Plugins are additionl javascript libraries that do everything that loaders cannot do.
 * Plugins can also modify how the bundles themselves are created. For Example, **uglifyJSplugin** takes the bundle.js and minimize the contents to decrease the bundle size.
 
-## 📘1. Minfication Plugin
+## 📘1. Minification Plugin (for javascript)
 * if the javascript files size is less hence your websites will load fast.
 * if you have mobile uses then your website is crucial for them
 * Less size website consume less internet traffic
@@ -641,7 +641,7 @@ module.exports = {
 npx webpack
 ```
 
-## 📘1. MiniCssExtractPlugin (with single File)
+## 📘2. MiniCssExtractPlugin (with single File for css)
 * Use to Extract our CSS into a separate File
 * This will create a single file where it will put all css code into single file, but in **css-loader & style-loader** it will inject css code into style according to files.
 
@@ -706,7 +706,7 @@ module.exports = {
 } 
 ```
 
-## 📘2. MiniCssExtractPlugin (with double Files)
+## 📘3. MiniCssExtractPlugin (with double Files for css)
 * created Two separate files for **js and css**
 * When we **build**, all **CSS** code goes into **style.css** and all **js** code goes into **bundle.js**
 
@@ -830,3 +830,62 @@ output: {
 }
 ```
 
+## 📘Generating HTML Files Automatically During Webpack Build Process
+
+* This **html-webpack-plugin** plugin is use to create html file with adding newly generated files (with random names) of **js** or **css** automatically.
+* It will create a new **index.html** file in **dist folder** (beacuse we have mention about dist folder) 
+
+
+1. webpack.config.js
+
+```js
+const path = require('path');
+const TerserPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
+// Plugin to create html file
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+    entry: './src/index.js',
+    output: {
+        filename: 'bundle.[contenthash].js',
+
+        // Output file folder
+        path: path.resolve(__dirname, './dist/'),
+        
+        // Adding directory in file
+        publicPath: './'
+    },
+    mode: 'none',
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader']
+            },
+            {
+                test: /\.scss$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+            },
+        ]
+    },
+    plugins: [
+        new TerserPlugin(),
+        new MiniCssExtractPlugin({
+            filename: 'styles[contenthash].css',
+        }),
+        new CleanWebpackPlugin(),
+
+        // instance of creating html file
+        new HtmlWebpackPlugin()
+    ]
+} 
+```
+2. Command 
+
+```
+npx webpack
+```
+![htmlWebpackPlugin](./images/htmlwebpack.png)
