@@ -889,3 +889,21 @@ module.exports = {
 npx webpack
 ```
 ![htmlWebpackPlugin](./images/htmlwebpack.png)
+
+
+* For Various Options to create HTML File
+
+1. Setting Filename and Title
+```js
+ new HtmlWebpackPlugin({
+    title : 'Hello World',
+    filename :'custom_filename.html',
+    meta : {
+        description: 'Some Description'
+    }
+ })
+
+```
+⚠️ Note : you can check various other options on internet
+
+---
