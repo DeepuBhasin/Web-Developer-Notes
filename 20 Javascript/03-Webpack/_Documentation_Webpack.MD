@@ -595,6 +595,7 @@ export default HelloWorldButton
 
 * Plugins are additionl javascript libraries that do everything that loaders cannot do.
 * Plugins can also modify how the bundles themselves are created. For Example, **uglifyJSplugin** takes the bundle.js and minimize the contents to decrease the bundle size.
+* You can add other various **plugins from webpack official website**
 
 ## 📘1. Minification Plugin (for javascript)
 * if the javascript files size is less hence your websites will load fast.
@@ -907,3 +908,263 @@ npx webpack
 ⚠️ Note : you can check various other options on internet
 
 ---
+## 📘Integration with Handlebars
+
+* Handlebars is a template engine for javascript that allows you to separate the business login from presentation.
+* If you find yourself generating HTML inside your javascript then probably need some kind of a template engine
+
+1. Create HandleBar file **index.hbs** (file saved in src folder in our example)
+
+```html
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>{{htmlWebpackPlugin.options.title}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <h1>{{htmlWebpackPlugin.options.heading}}</h1>
+</body>
+
+</html>
+```
+
+2. webpack.config.js
+
+```js
+const path = require('path');
+const TerserPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+    entry: './src/index.js',
+    output: {
+        filename: 'bundle.[contenthash].js',
+        path: path.resolve(__dirname, './dist/'),
+        publicPath: './'
+    },
+    mode: 'none',
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader']
+            },
+            {
+                test: /\.scss$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+            },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/env'], // convert ES1-N => ES5 , support all latest features of ES6
+                        plugins: ['@babel/plugin-proposal-class-properties']
+
+                    }
+                }
+            },
+            {
+                //Adding handling handle for a Handlerbar File
+                test: /\.hbs$/,
+                use: ['handlebars-loader']
+            }
+        ]
+    },
+    plugins: [
+        new TerserPlugin(),
+        new MiniCssExtractPlugin({
+            filename: 'styles[contenthash].css',
+        }),
+        new CleanWebpackPlugin(),
+
+        new HtmlWebpackPlugin({
+            // take template file from this folder
+            template: './src/index.hbs',
+
+            // variable name
+            title: 'Hello World',
+
+            // variable name
+            heading: 'Hello Deepinder Singh'
+        })
+    ]
+} 
+```
+3. Command
+
+```
+npx webpack
+```
+![Template](./images/template.png)
+
+---
+
+## 📘Production Vs Development Builds
+
+* Usually producation builds require a different setup than development builds in production
+* In Production, we want our website to be fast as possible and our bundles should be as small as possible
+* On the other hand, during development we often want to see an additional information inside our javascript code like for example source maps and other stuff
+
+1. webpack.config.js
+```js
+// to set mode
+module.exports = {
+    mode: 'production',
+} 
+
+
+// OR 
+
+"scripts": {
+    "build": "webpack --mode=development",
+    "dev": "webpack --mode=production"
+  },
+
+
+```
+* You us need to add **mode** option, and various options are
+  * none
+  * development
+  * production
+
+⚠️ **Note :
+* ** when we use **producation mode** our bundle get automatically minified  and in **Development mode** our files get remain same as written. 
+* In **Production mode** by default **TerserPlugin** is already installed
+
+2. Js file
+
+```js
+// to Print variable
+if (process.env.NODE_ENV === 'production') {
+    console.log('Production Mode');
+} else if (process.env.NODE_ENV === 'development') {
+    console.log('Development Mode');
+} else if (process.env.NODE_ENV === 'none') {
+    console.log('None Mode');
+} else {
+    console.log('No mode');
+}
+```
+
+Example 
+
+* for Development file : **webpack.dev.config**
+
+```js
+const path = require('path');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+    mode: 'development',
+    entry: './src/index.js',
+    output: {
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, './dist/'),
+        publicPath: './'
+    },
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            },
+            {
+                test: /\.scss$/,
+                use: ['style-loader', 'css-loader', 'sass-loader']
+            },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/env'], // convert ES1-N => ES5 , support all latest features of ES6
+                        plugins: ['@babel/plugin-proposal-class-properties']
+
+                    }
+                }
+            }
+        ]
+    },
+    plugins: [
+        new CleanWebpackPlugin(),
+        new HtmlWebpackPlugin()
+    ]
+} 
+```
+* For Production : **webpack.production.config.js**
+
+```js
+const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+    mode: 'production',
+    entry: './src/index.js',
+    output: {
+        filename: 'bundle.[contenthash].js',
+        path: path.resolve(__dirname, './dist/'),
+        publicPath: './'
+    },
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader']
+            },
+            {
+                test: /\.scss$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+            },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/env'], // convert ES1-N => ES5 , support all latest features of ES6
+                        plugins: ['@babel/plugin-proposal-class-properties']
+
+                    }
+                }
+            }
+        ]
+    },
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: 'styles[contenthash].css',
+        }),
+        new CleanWebpackPlugin(),
+        new HtmlWebpackPlugin()
+    ]
+} 
+```
+
+* Package.json File 
+
+```js
+"scripts": {
+    "build": "webpack --config=webpack.production.config.js",
+    "dev": "webpack --config=webpack.dev.config.js"
+  }
+
+// OR 
+
+"scripts": {
+    "build": "webpack --mode=production --config=webpack.production.config.js",
+    "dev": "webpack --mode=development --config=webpack.dev.config.js"
+},
+```
+----
+![prod-dev](./images/prod-dev.png)
