@@ -1166,5 +1166,45 @@ module.exports = {
     "dev": "webpack --mode=development --config=webpack.dev.config.js"
 },
 ```
-----
 ![prod-dev](./images/prod-dev.png)
+---
+
+## 📘Live Server
+* it will run our application as **live server**
+* When ever we change any thing in the file and then save the file, it will reload automatically.
+
+
+1. webpack.config.js : Add this Object in **module.exports** 
+```js
+devServer: {
+    port: 9000,
+    static: {
+        // point to which directory to be run 
+        directory: path.resolve(__dirname, './dist')
+    },
+    devMiddleware: {
+        // pointing file name which will use as index file
+        index: 'index.html',
+        // application will write in disk means in ram 
+        writeToDisk: true
+    }
+}
+```
+1. Package need to install
+```
+npm install webpack-dev-server --save-dev
+```
+
+
+3. Package.json
+
+```
+"dev": "webpack serve --mode=development --config=webpack.dev.config.js --hot"
+```
+
+3. Command
+
+```
+npm run dev
+```
+![Liveserver]('./images/live-server.png')
