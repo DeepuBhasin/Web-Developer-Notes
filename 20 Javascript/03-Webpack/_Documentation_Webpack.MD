@@ -1371,7 +1371,11 @@ devServer: {
         index: 'index.html',
         // application will write in disk means in ram 
         writeToDisk: true
-    }
+    },
+    open: true,
+    historyApiFallback: true,
+    hot: true,
+    compress: true
 }
 ```
 1. Package need to install
