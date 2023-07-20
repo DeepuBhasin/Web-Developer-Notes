@@ -7,12 +7,23 @@
 6. Module Federation
 
 ---
-
+* Webpack version 5 is best one
+* Written in **Javascript**
+* It is by default in React, Angular etc for builds etc
+* by default is will create **production** build.
+* you can write any name of **webpack.config.js**, just need to add that file in the command in the package.json file
+---
 ## 📘Why do we need
 1. Eliminate the sequence of including javascript
-2. **Load all stuff from webpack rather than loading from different-different files in a single html file example Images, CSS files, Js Files, Json Files etc**
-3. When we are loading every thing from **webpack** we have to load webpage after run **npx webpack** command
+2. Make Build, Js & CSS Minify & entry File
+3. **Load all stuff from webpack rather than loading from different-different files in a single html file example Images, CSS files, Js Files, Json Files etc**
 
+![load-image](./images/use-of-webpack.png)
+
+
+4. When we are loading every thing from **webpack** we have to load webpage after run **npx webpack** command
+
+Example
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +51,13 @@ helleWorld();
 ```
 ![Image](./images/order-issues.png)
 
+---
 ## 📘 Install Package
+
+* It require 3 things to create Structure
+  * dist folder & create *index.html* file for **Entry Point**
+  * src folder & create *index.js* file for **Entry Point**
+  * package.json file
 
 1. Run Commands
 ```
@@ -87,21 +104,25 @@ helloWorld();
 npx webpack
 ```
 * this command will create **dist** folder and create **main.js** file in it
-
-## 📘 Custom Configuration (Basic)
+---
+## 📘Custom Configuration (Basic)
 * create **webpack.config.js** 
+* Entry Point and Output Point
+
+
 ```js
 // to get the absolute path, it is available in node automatically
 const path = require('path');
 
 module.exports = {
+    // entry point for webpack
     entry: './src/index.js',
+    
     output: {
-
-        // file name
+         // output file name
         filename: 'bundle.js',
 
-        // it will create bundler file in dist folder 
+        // it will create bundler.js file in dist folder 
         path: path.resolve(__dirname, './dist')
     },
     mode: 'none'
@@ -109,12 +130,12 @@ module.exports = {
 ```
 
 * Then run this command
-
 ```
 npx webpack
 ```
 ![Basic-Custom-Configuration](./images/custom-configuration-basic.png)
 
+---
 ## 📘Assets
 * There are four types of assets
 1. asset/resource : use when importing large files
@@ -359,6 +380,13 @@ npx webpack
 
 ![Image](./images/text-file.png)
 ---
+## 📘Loaders 
+1. CSS Loader
+2. SCSS Loader
+3. JS Loader
+4. File Loader (png, svg, jpg, gif files etc)
+
+
 ## 📘1. Loaders (CSS/Style)
 
 * It help to load that files which we cannot import using modules
@@ -588,6 +616,94 @@ class HelloWorldButton {
 
 export default HelloWorldButton
 ```
+
+## 📘4. Loader (File Loader (png, svg, jpg, gif files etc))
+
+1. Command 
+```
+npm install file-loader
+```
+
+2. webpack.config.js
+
+```js
+const path = require('path');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+    mode: 'none',
+    entry: './src/work.js',
+    output: {
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, './dist/'),
+        publicPath: './',
+    },
+    module: {
+        rules: [
+            {
+                test: /\.(png|svg|jpg|gif|tiff)$/,
+                use: ['file-loader']
+            }
+        ]
+    },
+    plugins: [
+        new CleanWebpackPlugin(),
+        new HtmlWebpackPlugin({
+            title: 'Hello World',
+            filename: 'index.html',
+            user: 'Admin',
+            template: './index.html'
+        })
+    ]
+}
+```
+
+3. Work.js
+
+```js
+// any random file
+import wok from "./download.png"
+
+class WorkImage {
+    render() {
+        const img = document.createElement('img');
+        img.src = wok;
+        img.alt = "Work Image";
+        const bodyDomElement = document.querySelector('body');
+        bodyDomElement.appendChild(img);
+    }
+}
+export default WorkImage;
+```
+
+4. index.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+</head>
+
+<body>
+    <h1>Hello <%= htmlWebpackPlugin.options.user %>
+    </h1>
+</body>
+
+</html>
+```
+5. Command 
+
+```
+npx webpack
+```
+![File-loader](./images/file-loader.png)
 
 ---
 
@@ -897,7 +1013,9 @@ npx webpack
 1. Setting Filename and Title
 ```js
  new HtmlWebpackPlugin({
+    // to add titles
     title : 'Hello World',
+    // output file name
     filename :'custom_filename.html',
     meta : {
         description: 'Some Description'
@@ -908,7 +1026,73 @@ npx webpack
 ⚠️ Note : you can check various other options on internet
 
 ---
-## 📘Integration with Handlebars
+## 📘Integration with Template 
+
+* With **webpack** (best one)
+1. webpack.config.js
+
+```js
+const path = require('path');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+    mode: 'none',
+    // it just empty file
+    entry: './src/index.js',
+    output: {
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, './dist/'),
+        publicPath: './'
+    },
+    plugins: [
+        new CleanWebpackPlugin(),
+        new HtmlWebpackPlugin({
+            title: 'Hello World',
+            filename: 'index.html',
+            user: 'Admin',
+            template: './index.html'
+        })
+    ]
+}
+```
+2. index.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <!-- Adding Dynamic Content to html using webpack -->
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+</head>
+
+<body>
+    <!-- Adding Dynamic Content to html using webpack -->
+    <h1>Hello <%= htmlWebpackPlugin.options.user %>
+    </h1>
+</body>
+
+</html>
+```
+
+3. command
+
+```
+npx webpack
+```
+![webpack-template](./images/webpack-template.png)
+
+
+
+* With **Handlebars**
+
+
+Handlebars
 
 * Handlebars is a template engine for javascript that allows you to separate the business login from presentation.
 * If you find yourself generating HTML inside your javascript then probably need some kind of a template engine
