@@ -384,7 +384,7 @@ npx webpack
 1. CSS Loader
 2. SCSS Loader
 3. JS Loader
-4. File Loader (png, svg, jpg, gif files etc)
+4. File Loader (png, svg, jpg, jpeg, gif files etc)
 
 
 ## 📘1. Loaders (CSS/Style)
@@ -653,7 +653,9 @@ module.exports = {
             title: 'Hello World',
             filename: 'index.html',
             user: 'Admin',
-            template: './index.html'
+            template: './index.html',
+            // to minfiy the output of file
+            minify : false
         })
     ]
 }
@@ -1396,3 +1398,91 @@ npm install webpack-dev-server --save-dev
 npm run dev
 ```
 ![Liveserver](./images/live-server.png)
+
+## 📘Analysing Bundle
+1. Package
+
+```
+npm install webpack-bundle-analyzer
+```
+2. webpack.config.js
+
+```js
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
+ plugins: [
+        new BundleAnalyzerPlugin()
+    ]
+```
+
+ ## 📘Module-Federation
+* It allow one application to dynamically load modules from another application at runtime
+* no need to install separate plaugin it is by default with in webpack 
+* There is an Example in **ModuleFedrationPlugin(Simple-Example) folder**
+```js
+const { ModuleFederationPlugin } = require('webpack').container;
+plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+        title: 'Hello World',
+        filename: 'index.html',
+        user: 'Admin'
+    }),
+    new ModuleFederationPlugin({
+    // Name of application
+    name: 'HelloWorldApp'
+    filename: 'remoteEntry.js'
+    
+    })
+]
+```
+* creating name for the application, During the build process , webpack will generate a file that contains everything, this application export to the outer world so that other application can use that. 
+
+```js
+name : 'HelloworldApp'
+```
+
+* People use remoteEntry as the file name
+
+```js
+filename: 'remoteEntry.js'
+```
+* To expose File 
+
+```js
+exposes: {
+    './HelloWorldButton': './src/components/hello-world-button/hello-world-button.js'
+}
+```
+* Expose Remote Entry file as **CDN**
+
+```js
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, './dist/'),
+    
+    // this paramter is use for creating CDN Link for accessing remoteEntry.js File
+    publicPath: 'http://localhost:9001/'
+},
+```
+
+* **Remotes** : Asscess files of other Applications
+```js
+new ModuleFederationPlugin({
+    name: 'KiwiApp',
+    remotes: {
+        HelloWorldApp: "HelloWorldApp@http://localhost:9001/remoteEntry.js"
+    }
+})
+```
+* Load Component of Other Application
+
+```js
+// use dynamicimport because remote bundle are loaded asynchronously
+import('HelloWorldApp/HelloWorldButton').then(HelloWorldModule => {
+    const HelloWorldButton = HelloWorldModule.default;
+    const helloWorldButton = new HelloWorldButton();
+    helloWorldButton.render();
+});
+```
+![RemoteEntry.js](./images/moduleFedrationPlugin-RemoteEntry.png)
