@@ -84,4 +84,4 @@ npm init @eslint/config
 
 13. You will get this message : **Successfully created .eslintrc.json**
 
-![EsLint-Configuration](eslint-configuration-file.png)
+![EsLint-Configuration](./images/eslint-configuration-file.png)
