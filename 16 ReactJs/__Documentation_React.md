@@ -44,3 +44,15 @@
 * Pure React means **writing react with react Objects and React Elements**
 
 ![7](./images/react-librar-react-dom.png)
+
+* Getting useState and useEffect from React Object
+
+![8](./images/pure-rect-code-cnd.png)
+
+## 📘Create-React-App
+
+![9](./images/react-app-vs-vite.png)
+
+```
+npx create-react-app project-name
+```
