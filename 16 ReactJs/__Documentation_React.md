@@ -39,3 +39,8 @@
 * React Summary
 
 ![6](./images/summary.png)
+
+## 📘Pure React (CDN Links)
+* Pure React means **writing react with react Objects and React Elements**
+
+![7](./images/react-librar-react-dom.png)
