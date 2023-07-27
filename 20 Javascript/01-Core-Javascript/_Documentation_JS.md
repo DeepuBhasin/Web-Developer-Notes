@@ -1,5 +1,5 @@
 # 📔 ES5
-## 📘 Developer Resposibilty
+## 📘 Developer Responsibility
 
 Write good code so everyone can read and understand easily
 ---
@@ -21,12 +21,12 @@ var b = 3 + 2;
 ## 📘 Conceptual Aside
 1. **Syntax Parsers** : A program that reads your code and determines what it does and if its grammar is valid, e.g., an interpreter or a compiler.
 2. **Execution Contexts** : *A Wrapper to help manage the code that is running*. There are lots of lexical environments. which one is currently running is managed via execution context. it can contain things beyond what you've written in your code.
-3. **Lexical Environments** : *where something sits physically in the code you write*. 'Lexical' means 'having' to do with words or grammer. A lexical environment exists in programming languages in which **where** you write something is important. 
+3. **Lexical Environments** : *where something sits physically in the code you write*. 'Lexical' means 'having' to do with words or grammer. A lexical environment exists in programming languages in which **where** you write something is important.
 
 ---
 ## 📘 Name/Value Pairs and Objects
-* A Name which **maps** to a **unique value**. eg *Address = '100 Main St.'*. 
-* The name may be defined more than once, but only can have one value in any given **context**. 
+* A Name which **maps** to a **unique value**. eg *Address = '100 Main St.'*.
+* The name may be defined more than once, but only can have one value in any given **context**.
 * That value may be more name/value pairs.
 * **Object** : *A Collection of name values pairs*. The simplest defination when talking about javascript.
 
@@ -39,15 +39,15 @@ var b = 3 + 2;
 
 Javascript Execution Context has two phase<br/>
 1. **Creation Phase** : Set up memory for variables and functions, also set placeholder for variables called **undefined**.
-2. **Execution Phase** : means assigne values to variables but not for functions.
+2. **Execution Phase** : means assigns values to variables but not for functions.
 
 In javascript __variables and functions__ are all hoisted to the top of the scope in which they are declared. The scope is usually either global scope or a function scope.
- 
- * varibles are always __partially hoisted__ and set to __undefined__.
+
+ * variables are always __partially hoisted__ and set to __undefined__.
  * functions are always __fully hoisted__.
 
 
-so during the creation phase javascript engine moves your variables and function decelarations of the top their respective scope 
+so during the creation phase javascript engine moves your variables and function declarations of the top their respective scope
 ```javascript
 console.log(number1);
 var number1 = 10;
@@ -73,10 +73,10 @@ logNumber();
 
 ⚠️ Note <br/>
 * __let, const, function Expression and classes__ are not hosited.
-* __Temporal Dead Zone__ : 
-  * is the time between the __decelaration__ and __the initialization__ of _let_ and _const_ variables.
+* __Temporal Dead Zone__ :
+  * is the time between the __declaration__ and __the initialization__ of _let_ and _const_ variables.
   * Temporal Dead Zone is the term to describe the state where variables are in the scope but they are not yet declared.
-  
+
 
 
 ![Image](./images/1-hositing-scope.png)
@@ -86,8 +86,8 @@ function logNumber() {
     var num1 = num2 = 10;
 }
 
-console.log(num1)   // error    
-console.log(num2)   // 20 beacuse it become global variable
+console.log(num1)   // error
+console.log(num2)   // 20 because it become global variable
 
 logNumber();
 ```
@@ -101,9 +101,9 @@ function test() {
         let numberTwo = 20;
         total = numberOne + numberTwo;
     }
-    numberOne; // 10 beacuse of function scope
-    numberTwo; // error beacuse of block scope
-    total; // 30 beacuse of test function block scope
+    numberOne; // 10 because of function scope
+    numberTwo; // error because of block scope
+    total; // 30 because of test function block scope
 }
 test();
 ```
@@ -127,7 +127,7 @@ console.log(number1);
 
 ![Image](./images/gloabl-environment.png)
 
-* There will be always a **Gloabl Object**. in *Browser* it is **window**, each new tab have there own Global Execution context hence has its own window object 
+* There will be always a **Gloabl Object**. in *Browser* it is **window**, each new tab have there own Global Execution context hence has its own window object
 * in **Browser** : *window==this*
 
 ```javascript
@@ -137,10 +137,10 @@ function b() {
 }
 a         // 10
 window.a  // 10
-this.a    // 10   
+this.a    // 10
 
-b();        // hello wolrd
-window.b(); 
+b();        // hello world
+window.b();
 this.window.b();
 ```
 ---
@@ -161,14 +161,14 @@ function test() {
 }
 ```
 ---
-## 📘Single Threaded, Synchronouse Execution
+## 📘Single Threaded, Synchronous Execution
  * **Single Threaded :** one command at a time. Under the hood of the browser, maybe not.
- * **Synchronouse :** one at a time.
+ * **Synchronous :** one at a time.
 ---
 
 ## Function Invocation and The Execution Stack
 * **Invocation** : Running a function. in javascript, by using **parenthesis()**
-* when ever a function get invoke it will create new **Execuion Context** for it for example **a() && b()** creating its own execution context.
+* when ever a function get invoke it will create new **Execution Context** for it for example **a() && b()** creating its own execution context.
 
 ![Image](./images/function-invocation-and-the-execution-stack.png)
 
@@ -198,7 +198,7 @@ console.log(myVar);
 ---
 ## The Scope Chain
 
-* **Scope :** where a varaiable is available in your code. and if it's truly the same variable or a new copy
+* **Scope :** where a variable is available in your code. and if it's truly the same variable or a new copy
 
 ```javascript
 // function 'b' is sit lexically sits on top of global environment, in the other words it's not inside function 'a', it is sitting at the global level
@@ -209,7 +209,7 @@ function b() {
 
 function a() {
     var myVar = 2;
-    b(); 
+    b();
 }
 
 var myVar = 1;
@@ -228,7 +228,7 @@ function a() {
     }
 
     var myVar = 2;
-    b(); 
+    b();
 }
 
 var myVar = 1;
@@ -239,8 +239,8 @@ a();
 
 ---
 
-## 📘 What about Asynchronouse Callbacks
-* **Asynchronouse :** more than one at a time.
+## 📘 What about Asynchronous Callbacks
+* **Asynchronous :** more than one at a time.
 
 ```javascript
 // long running function
@@ -256,25 +256,25 @@ function clickHandler() {
 }
 
 // listen for the click event
-docuemnt.addEventListener('click', clickHandler)
+document.addEventListener('click', clickHandler)
 
 waitThreeSeconds();
 console.log('finished execution');
 ```
 ---
 
-* Long running code also effect event loops events for example while executing this code if you click immidately click it will not print beacuse while loop is executing that time. 
+* Long running code also effect event loops events for example while executing this code if you click immidately click it will not print because while loop is executing that time.
 
 ---
 ## 📘 Types and Javascript
-* **Dynamic Typing :** : you don't tell the engine what type of data a variable holds, it figures it out while your coding is running. Variables can hold different types of values beacuse it's all figured out during execution.
+* **Dynamic Typing :** : you don't tell the engine what type of data a variable holds, it figures it out while your coding is running. Variables can hold different types of values because it's all figured out during execution.
 
 ``` javascript
 // Static  Typing
 
 bool isNew = 'hello'; // an error
 
-// Dynamic Typing 
+// Dynamic Typing
 var isNew = true;   // no error
 isNew = 'yup!';
 isNew = 1;
@@ -283,12 +283,12 @@ isNew = 1;
 ## 📘 Primitive types
 * **Primitive type :** A type of data that represents a single value. That is, not an object.
 
-1. **undefined :** undefined represents lack of existance (you should'nt set a varaible to this)
-2. **Null :** null represents lack of existance (you can set a variable to this)
+1. **undefined :** undefined represents lack of existence (you should'nt set a variable to this)
+2. **Null :** null represents lack of existence (you can set a variable to this)
 3. **Boolean** : true or false
-4. **Number :** Floating point number (there's always some decimals). Unlike other programming languages, there's only one 'number' type ... and it can make math weird. 
+4. **Number :** Floating point number (there's always some decimals). Unlike other programming languages, there's only one 'number' type ... and it can make math weird.
 5. **String :** a sequence of character (both '' and "" can be used)
-6. **Symbol :** used in ES6   
+6. **Symbol :** used in ES6
 
 ---
 
@@ -296,18 +296,18 @@ isNew = 1;
 * **Operator Precedence :** which operator function gets called first. Functions are called in order of precedence (HIGHER precendence wins). Example : BDMAS
 ```javascript
 var a = 3 + 4 * 5;
-console.log(a); //23 
+console.log(a); //23
 ```
 * **Associativity :** What order operator functions get called in: LEFT-TO-RIGHT or RIGHT-TO-LEFT. when functions have the *same* precedence. Example : 1+2+3/3/4
 ---
 ## 📘 Coercion
-* **Coercion :** Converting a value from one type to another. This happens quite in javascript beacuse it's dynamically typed. This happens quite often in javascript beacuse it's dynamically typed. 
+* **Coercion :** Converting a value from one type to another. This happens quite in javascript because it's dynamically typed. This happens quite often in javascript because it's dynamically typed.
 
 ```javascript
 var a = 1 + '2';
 console.log(a);     //
 ```
-## 📘 Comparsion
+## 📘 Comparison
 
 ```javascript
 var a = 3 < 2 < 1 ;
@@ -343,8 +343,8 @@ if(a) {                 // will not execute
 var a;
 a = 0;
 
-if(a || a === 0) {      // will execute 
-//  because === has higher order precedence than or operator    
+if(a || a === 0) {      // will execute
+//  because === has higher order precedence than or operator
  console.log('Something is there');
 }
 ```
@@ -361,14 +361,14 @@ null || 'hi'            // hi
 
 // Example 1
 function greet(name) {
-    // '||' operator has high precendece then '='
+    // '||' operator has high precedence then '='
     name = name || '<Your name here>';
     console.log('Hello' + name);
 }
 greet();
 
 // Example 2
-var librarName = "Lib 1";
+var libraryName = "Lib 1";
 window.libraryName = window.libraryName || 'lib 2';
 console.log(libraryName);
 ```
@@ -385,9 +385,9 @@ var person = new Object();
 person['firstname'] = "Tony";
 person['lastname'] = "Alicea";
 
-var firstNameProprty = "firstname";
+var firstNameProperty = "firstname";
 console.log(person);
-console.log(person[firstNameProprty]);
+console.log(person[firstNameProperty]);
 
 // . is a operator
 console.log(person.firstname);
@@ -404,13 +404,13 @@ console.log(person['address']['street']);
 ## 📘Objects and Object Literals
 
 ```javascript
-// comparing current example with abov example the object literials are easy to write and easy to read
-var person = { 
+// comparing current example with above example the object literals are easy to write and easy to read
+var person = {
     firstname : 'Tony',
     lastname : 'Alicea',
     addres : {
         street : "51 d street no 3 ranjit nagar near seona chowk patiala punjab"
-    } 
+    }
 };
 console.log(person);
 
@@ -421,12 +421,12 @@ function greet(person) {
     console.log('Hi' + person.firstname);
 }
 
-var Tony = { 
+var Tony = {
     firstname : 'Tony',
     lastname : 'Alicea',
     addres : {
         street : "51 d street no 3 ranjit nagar near seona chowk patiala punjab"
-    } 
+    }
 };
 
 greet(Tony);
@@ -439,7 +439,7 @@ greet({
 
 ```
 ---
-## 📘 Namespace : 
+## 📘 Namespace :
 * **Namespace :** a container for variables and functions. Typically to keep variables functions with the same name separate.
 
 ```javascript
@@ -508,12 +508,12 @@ console.log(greet.language)
 * **Epression :** A unit of code that results in a value. It does n't have to save to a variable.
 
 ```javascript
-// mean concept is that what ever the variable returnning a value is called expression like number, object etc 
+// mean concept is that what ever the variable returnning a value is called expression like number, object etc
 var a = 3
 var b = 1 + 2;
 var c = {greeting : 'hi'}
 
-// here (a === 3) is expression beacuse it return some value && if is just simply statement it not returnning any value.
+// here (a === 3) is expression because it return some value && if is just simply statement it not returnning any value.
 
 // so statment just does work and an expression results in a value
 if (a == 3) {
@@ -528,9 +528,9 @@ function greet() {
 }
 ```
 * **Function Expression :** the statement which retun any thing.
-  
+
 ```javascript
-// beacuse here function is considered as object and creating on fly && it returns an object heance its a value 
+// because here function is considered as object and creating on fly && it returns an object heance its a value
 var anonymousGreet = function () {
     console.log('hi');
 }
@@ -569,7 +569,7 @@ log('Hello');       // create string on fly
 
 log(function(){ console.log('Hi')}) // create function as  object on fly && it is considered as function expression
 ```
-Functions can pass as parameter in which you can pass function as paremeter use them like you do varaiables to other functions as well *introduces an entirely new class of programming called **Functional Programming*** 
+Functions can pass as parameter in which you can pass function as paremeter use them like you do varaiables to other functions as well *introduces an entirely new class of programming called **Functional Programming***
 
 ---
 ## 📘 Pass By Value Vs By Reference
@@ -633,7 +633,7 @@ console.log(obj2)
 The __this__ keyword is actually pretty straightforward to understand __what is does is it refers to whatever object it is directly inside (property) of.__
 
 * On Global Level : __this === window object__
-* On Object Level : __this === current Object__ 
+* On Object Level : __this === current Object__
 
 ```javascript
 // globale execution context
@@ -641,7 +641,7 @@ console.log(this);       // window object
 
 // Function A Execution context and getting own this kwyword but it pointing to window object (same memory location)
 function a() {
-    console.log(this);   // window object  
+    console.log(this);   // window object
     this.newVariable = 'hello';
 }
 a();
@@ -663,7 +663,7 @@ let obj = {
     log: function(){
         this.name = 'Deepinder',
         console.log(this);
-    }, 
+    },
     getFullName: function () {
         return this.firstName + ' ' + this.lastName;
     }
@@ -673,7 +673,7 @@ obj.firstName // Deepu
 obj.getFullName() // Deepu Bhasin
 ```
 ### 📑Self and Scope (with This)
-Problem 
+Problem
 
 ```javascript
 var firstName = "Deepinder";
@@ -682,7 +682,7 @@ let obj = {
     firstName: "Deepu",
     getFullName: function () {
         console.log('First Name', this.firstName);
-        
+
         function test() {
         // here it 'this' will refere to the window object
             console.log('First Name', this.firstName);
@@ -691,10 +691,10 @@ let obj = {
     }
 }
 
-obj.getFullName();    
+obj.getFullName();
 ```
 
-Solution 
+Solution
 
 1. By Passing reference of current object
 
@@ -705,10 +705,10 @@ let obj = {
     firstName: "Deepu",
     getFullName: function () {
         console.log('First Name', this.firstName);
-        
-        // passing reference 
+
+        // passing reference
         var self = this;
-        
+
         function test() {
             console.log('First Name', self.firstName);
         }
@@ -716,7 +716,7 @@ let obj = {
     }
 }
 
-obj.getFullName();    
+obj.getFullName();
 ```
 2. By binding 'this' with bind function
 
@@ -727,7 +727,7 @@ let obj = {
     firstName: "Deepu",
     getFullName: function () {
         console.log('First Name', this.firstName);
-        
+
         function test() {
             console.log('First Name', this.firstName);
         }
@@ -735,7 +735,7 @@ let obj = {
     }
 }
 
-obj.getFullName();    
+obj.getFullName();
 ```
 
 1. By using Arrow function
@@ -747,7 +747,7 @@ let obj = {
     firstName: "Deepu",
     getFullName : () => {
         console.log('First Name', this.firstName);
-        
+
         function test() {
             console.log('First Name', this.firstName);
         }
@@ -757,14 +757,14 @@ let obj = {
 
 obj.getFullName();
 ```
-## 📘 Arrays (Collections of Anything) 
+## 📘 Arrays (Collections of Anything)
 
 * Arrays are dyanmically type in javascript
 
 ```javascript
 var arr = new Array();
 
-// Array Literals 
+// Array Literals
 var arr = [1, 2, 3];
 
 var array = [
@@ -775,7 +775,7 @@ var array = [
         address : '51 -d street no 3 ranjit nagar'
     },
     function (name) {   // function expression
-        var gretting = 'Hello', 
+        var gretting = 'Hello',
         console.log(greeting + ' ' + name)
     },
     "hello"             // string
@@ -792,7 +792,7 @@ arr[3](arra[2].name)   // Hello Tony
 ```javascript
 
 function greet(firstname, lastname, language, ...other){
-    
+
     language = language || 'en';
 
     if(arguments.length ===0){
@@ -800,7 +800,7 @@ function greet(firstname, lastname, language, ...other){
         console.log('--------------------');
         return;
     }
-    
+
     console.log(firstname);
     console.log(lastname);
     console.log(language);
@@ -816,25 +816,25 @@ greet('john','Doe');        // john , Doe, undefined
 greet('john','Doe', 'es');  // john , Doe, es
 greet('john','Doe', 'es', 'patiala', 'punjab');  // john , Doe, es
 ```
-⚠️ **Note** : In javascript *Function OverLoading Does not exist*. 
+⚠️ **Note** : In javascript *Function OverLoading Does not exist*.
 
 ---
 ## 📘Framework Aside
 * *Dangerous Aside :* Automatic Semicolon Insertion, means its not compulsory to add Semicoln at the end of line because javascript do automatically.
-* It only occurs in the case of **returns** 
+* It only occurs in the case of **returns**
 
 ![Image](./images/syntax-parser.png)
 
 ```javascript
 // Problem
 function getPerson() {
-    return 
+    return
     {
         firstname : 'Tony'
     }
 }
 
-// beacuse of automatic semicolon
+// because of automatic semicolon
 console.log(getPerson());       // undefined
 
 
@@ -845,15 +845,15 @@ function getPerson() {
     }
 }
 
-console.log(getPerson());       // {firstname : 'Tony'} 
+console.log(getPerson());       // {firstname : 'Tony'}
 ```
 * **WhiteSpace :** invisible character that create literal 'space' in your written code. Carriage returns, tabs, spaces.
 
-* javascript remove automatically white space if we provided. 
-* White spaces allowed to add comments which make easy to read code. 
+* javascript remove automatically white space if we provided.
+* White spaces allowed to add comments which make easy to read code.
 
 ```javascript
-var 
+var
     // firstname
     firstname,
 
@@ -866,7 +866,7 @@ var
 var person = {
     // firstname
     firstname : 'john',
-    
+
     // lastname
     lastname : 'Doe'
 }
@@ -887,11 +887,11 @@ function(name) {    // invalid
     return name
 }
 
-// () is a operator which help to execute expresions like (3+4) 
+// () is a operator which help to execute expresions like (3+4)
 (3 + 5) * 5;        // valid
 
 // we are creating function and running it all the same time
-(function (name){   // valid    
+(function (name){   // valid
     return name
 }('Deepu'))
 
@@ -925,7 +925,7 @@ console.log(greeting)       // Hello Tony
 
 ⚠️ Why are they used ? <br/>
 
-The main reason to use and IIFE that, its __preserve a private scope with in your function__ which help to not overridding any global variables. 
+The main reason to use and IIFE that, its __preserve a private scope with in your function__ which help to not overridding any global variables.
 
 ```javascript
 var greeting = 'Hola';
@@ -943,7 +943,7 @@ var greeting = 'Hola';
 
 A **closure** is an inner function that has access to the scope of an enclosing function.<br/>
 
-A Closure has access to **variables** in 3 separate Scopes : 
+A Closure has access to **variables** in 3 separate Scopes :
 1. Variables in its own scope.
 2. Variables in the scope of the outer function.
 3. Variables in the global scope.
@@ -956,7 +956,7 @@ The closure also has access to __parameters__ :
 const globalVariable = 'global var';
 
 function outterFunc(param1) {
-    
+
     const variable1 = 'var one';
 
     function innerFunc(param2) {
@@ -967,7 +967,7 @@ function outterFunc(param1) {
         console.log('param1: ', param1);
         console.log('param2: ', param2);
     }
-    
+
     innerFunc('param one');
 }
 
@@ -1015,7 +1015,7 @@ arr.push(
         function(j){
             return function () {
             // it create new execution context for j variable
-                console.log(j)      
+                console.log(j)
             }
         }(i))
     );
@@ -1050,7 +1050,7 @@ greetSpanish('john', 'Doe');
 
 ---
 
-## 📘Closures and Callbacks 
+## 📘Closures and Callbacks
 
 * **Callback Function :** A function you give to another function, to be run when the other function is finished. so the function you call (i.e invoke), 'calls back' by calling the function you gave it when it finishes.
 
@@ -1090,7 +1090,7 @@ tripleAdd(10)(20)(30); // 60
 ```
 Why is this usefull ? <br/>
 
-Beacuse now i can create __mulitple utility functions__ out of this For example:
+Because now i can create __mulitple utility functions__ out of this For example:
 
 ```javascript
 const carriedMultiple = (number1) => number2 => number1 * number2;
@@ -1134,7 +1134,7 @@ functionObject.call(object, argument1,agrgument2, argument3, ...argumentn);
 functionObject.apply(object,[argument1,agrgument2, argument3, ...argumentn]);
 
 // it will return new copy of function
-functionObject.bind(object, argument1,agrgument2, argument3, ...argumentn); 
+functionObject.bind(object, argument1,agrgument2, argument3, ...argumentn);
 
 ```
 
@@ -1175,7 +1175,7 @@ multiplyByTwo(4)    // 8
 let multiplyByTen = multiply.bind(this, 10);
 multiplyByTwo(5)    // 50
 ```
---- 
+---
 
 ## 📘 Functional Programming
 
@@ -1249,7 +1249,7 @@ var output2 = mathProgram(2,1, sub);
 * Classical Inheritance :  Verbose.
 * Prototypal Inheritance : Simple.
 
---- 
+---
 ## 📘 Understanding the Prototype
 * **Prototype Chain :** is a chain which allow you to access properties of methods of another object.
 
@@ -1322,7 +1322,7 @@ if (ObjectName.hasOwnProperty('keyName')) {
 var object = {};
 ```
 
-2. **Function Constructors :** A Normal function that is used to *construct objects*. The 'this' variables points a new empty object, and that object is returned from the function automatically. 
+2. **Function Constructors :** A Normal function that is used to *construct objects*. The 'this' variables points a new empty object, and that object is returned from the function automatically.
 
    1. **new** keyword will create an empty object first, if we do not use **return** keyword it will return empty object other wise normal return value
    2. then **Person('john','Deo')** function will called with values, which help to add new **properties** and **methods** to *newly created object*
@@ -1363,17 +1363,17 @@ console.log(john.getFullName == Person.prototype.getFullName)   // true
 
 console.log(john.__proto__ == Person.prototype);    // true
 ```
-⚠️ Why we are adding function into prototype ? 
-* beacuse **it save our memory**. When ever we create an object it use memory to store properties and methods, if we storing same method in every object then every object consume very large amount of memory, while creating method using prototype then all objects will refers to that method.
+⚠️ Why we are adding function into prototype ?
+* because **it save our memory**. When ever we create an object it use memory to store properties and methods, if we storing same method in every object then every object consume very large amount of memory, while creating method using prototype then all objects will refers to that method.
 * so for better optimization always add methods to prototype
 ---
 ## 📘 Built-in function Constructors
 
 ```javascript
-var a = new String('Hello');    // here a will become object 
-var b = new Array([1,2,3,4]);   // here b will become object 
-var c = new Boolean(0);         // here c will become object 
-var d = new Number(3);          // here d will become object 
+var a = new String('Hello');    // here a will become object
+var b = new Array([1,2,3,4]);   // here b will become object
+var c = new Boolean(0);         // here c will become object
+var d = new Number(3);          // here d will become object
 
 var date = new Date('31/1/2023')// here date will become object
 
@@ -1384,7 +1384,7 @@ String.prototype.isLengthGreaterThan = function (limit) {
     return this.length > limit;
 }
 
-// isLengthGreaterThan method will access by all string beacuse of prototype inheritence
+// isLengthGreaterThan method will access by all string because of prototype inheritence
 console.log("John".isLengthGreaterThan(3))
 ```
 
@@ -1393,25 +1393,25 @@ console.log("John".isLengthGreaterThan(3))
 ```javascript
 Number.prototype.isPostive = function () {
     return this > 0;
-} 
+}
 
 3.isPostive()   // error  : Unexpected token Illegal
 
 'Hello'.lenght  // no error
 
-// beacuse javascript is not to much smart beacuse javascript convert string into object automatically but not to number
+// because javascript is not to much smart because javascript convert string into object automatically but not to number
 
 var a = new Number(3).isPostive();  // true
 ```
 
-**Dangerous Aside :** 
+**Dangerous Aside :**
 
 ```javascript
-var a = 3;             // primitve value 
+var a = 3;             // primitve value
 var b = new Number(3); // b is not number here its a object
-var c = Number("3")    // its converting into number 
-a == b                 // true 
-a === b                // false (number === object) 
+var c = Number("3")    // its converting into number
+a == b                 // true
+a === b                // false (number === object)
 ```
 
 ⚠️ Note : **Moment.js** (is best library for related to dates)
@@ -1419,11 +1419,11 @@ a === b                // false (number === object)
 ---
 
 ## 📘Dangerous Side Arrays and for in
-In javascript Arrays are objects that is the reason we access property like this 
+In javascript Arrays are objects that is the reason we access property like this
 ```javascript
 var a = ['aa','bb','cc'];
 
-a[0] // a 
+a[0] // a
 
 // 0 : Key name & aa : is Value name
 ```
@@ -1485,10 +1485,10 @@ if (!Object.create) {
 ## 📘ES6 and Classes
 * Classes are another way to create Object
 * **Syntactic Sugar :** A Different way to type something that doesn't change how it works under the hood.
-* at the end, its all Prototypol Inheritance 
+* at the end, its all Prototypol Inheritance
 ```javascript
 /*
-//just like 
+//just like
 
 function Person (firstName, lastName) {
     this.firstname = firstname;
@@ -1557,15 +1557,15 @@ function Person(name) {
 console.log(typeof Person);         // function
 
 var e = new Person('Jane');
-console.log(typeof e);              // object 
+console.log(typeof e);              // object
 console.log(e instanceof Person);   // true
 
 console.log(typeof undefined);      // undefined
 console.log(typeof null);           // object
 
 var z = function () { };
-console.log(typeof z)               // function 
-console.log(typeof Array);          // function 
+console.log(typeof z)               // function
+console.log(typeof Array);          // function
 console.log(typeof Object)          // function
 ```
 
@@ -1573,7 +1573,7 @@ console.log(typeof Object)          // function
 
 __Main Purpose :__ Enforce stricter parsing and error handling in your code.
 
-1. Prevents the use of global variables 
+1. Prevents the use of global variables
 
 ```javascript
 // Example 1
@@ -1587,7 +1587,7 @@ var city;
 cityy = 'London';    // cityy is undefined
 console.log(cityy);
 
-// another example 
+// another example
 function test(){
    'use strict'
     var a = b = 10;
@@ -1600,9 +1600,9 @@ test();
 
 ---
 
-## 📘Method Chaining 
+## 📘Method Chaining
 
-Calling one method after another, and each method. Affects the parent object. So obj.method1().method2() where both methods end up with a 'this' variable poiting at 'obj'  
+Calling one method after another, and each method. Affects the parent object. So obj.method1().method2() where both methods end up with a 'this' variable poiting at 'obj'
 
 ---
 
@@ -1686,7 +1686,7 @@ setTimeout(() => {
 ## 📘Block Statements and Lexical Environments
 
 * In the Execution Context there are two types of Environment
-  
+
   1. **Lexical Environment :** when ever we use *curly braces {}* like with *if-statement, function statments etc* a new **lexical environment is cerated with in same execution context**
 
   2. **Variable Environment** so when ever we create variable with **var** example *myVar* it will automatically created in **Variable Environment**
@@ -1700,7 +1700,7 @@ setTimeout(() => {
 
 ![Image](./images/let.jpeg)
 
-* *Lexical enviroment* has also has reference to the outer variables like as *Variable Environment* 
+* *Lexical enviroment* has also has reference to the outer variables like as *Variable Environment*
 
 ![Image](./images/let-reference.jpeg)
 
@@ -1726,16 +1726,16 @@ let firstname;
 console.log(firstname)  // undefined
 ```
 
-* *let or const* variable do not attached with **window object** 
+* *let or const* variable do not attached with **window object**
 
 ```javascript
 let firstname = 'Tony';
 
 console.log(firstname)          // Tony
 
-// beacuse firstname sit in lexical environment not in variable Environment
-console.log(window.firstname)   // undefined 
-``` 
+// because firstname sit in lexical environment not in variable Environment
+console.log(window.firstname)   // undefined
+```
 
 📚 **Conceptual Example :**
 
@@ -1750,7 +1750,7 @@ switch (firstname) {
 
 // because here both lastname are on same lexical environment example : curly braces for switch block
 
-// solution 
+// solution
 let firstname = 'Tony';
 switch (firstname) {
     case 'Tony':
@@ -1786,7 +1786,7 @@ console.log(firstname);
 // because '=' create a new memory location eg binding new address which cause error in case of const.
 ```
 ---
-## 📘Templates 
+## 📘Templates
 
 **Why ?** : To remove the concationation Problem.
 
@@ -1795,8 +1795,8 @@ console.log(firstname);
 2. can add Multi-line strings
 
 ```javascript
-var fullname = `Deepinder 
-Singh bhasin from 
+var fullname = `Deepinder
+Singh bhasin from
 patiala punjab
 `;
 ```
@@ -1806,13 +1806,13 @@ patiala punjab
 
 * Replacing portions of string with other strings. you 'insert' or 'inject' strings into another string.
 * Can print variables
-* Can print expressions 
+* Can print expressions
 * Can print functions
 ```javascript
 // Simple Example
 const firstname = 'Tony';
 const lastname = 'Alicea';
-const fullname = `Hello, 
+const fullname = `Hello,
 ` + firstname + `
 ` + lastname ;
 
@@ -1827,7 +1827,7 @@ const fullname = `Hello, ${firstname}'s ${lastname} ${1 + 1}`;
 console.log(fullname);
 ```
 ---
-## 📘Class 
+## 📘Class
 * A structure in a programing language that provides a way to create objects.
 * Classes in other languages like C# or Java are fundamental structures for creating new types.
 * In javascript they are just a way of creating objects and the prototype chain.
@@ -1837,7 +1837,7 @@ console.log(fullname);
 
 ## 📘Declarations and Expressions
 ```javascript
-// Declarations 
+// Declarations
 
 class Person {
 
@@ -1854,7 +1854,7 @@ typeof(p)   // function
 // Hence in the javascript there is no Classes Object in javascript, they are Syntactic Sugar , they are functions
 ```
 ```javascript
-// class === function 
+// class === function
 
 // isClassConstructor = true;
 class Person {
@@ -1885,7 +1885,7 @@ function logClass(c) {
 
 logClass(p);
 
-// creating class on fly 
+// creating class on fly
 logClass(class {});
 ```
 ⚠️ Note : Main Concept is **classes are objects**
@@ -1908,7 +1908,7 @@ console.log(me) // {firstname : 'Tony'}
 
 // trying to invoke function but it will give me error
 
-Person();   // Class Constructor Person cannot be invoked without 'new' 
+Person();   // Class Constructor Person cannot be invoked without 'new'
 ```
 ---
 ## 📘 Constructor
@@ -1958,7 +1958,7 @@ console.log(me.__proto__);
 console.log(me);
 ```
 ![Image](./images/method-class.png)
- 
+
 ---
 ## 📘 Extends and Prototypal Inheritance
 
@@ -2003,7 +2003,7 @@ class myNumber extends Number{
     addOne() {
         return this + 1;
     }
-} 
+}
 
 let num = new myNumber(3.053);
 console.log(num.toFixed(1));
@@ -2108,7 +2108,7 @@ class Person {
     // Private Method
     #fullName() {
         return {id : 1};
-    } 
+    }
 
     // Public Method
     getFullName() {
@@ -2141,7 +2141,7 @@ let add = (a, b) => {
 }
 
 // Arrow Function Expression
-(()=>{console.log('Hello World')}()); 
+(()=>{console.log('Hello World')}());
 
 // Arrow Function on Fly
 function logThis(fn) {
@@ -2181,7 +2181,7 @@ let add = (a, b) => a + b;
 
 let sqr = x => x * x;
 ```
-## 📘 Readability & Limitation 
+## 📘 Readability & Limitation
 
 ```javascript
 // good for if you are from mathematic background
@@ -2203,7 +2203,7 @@ let result2 = longExpression('Tony')('Anthony')(false);
 ```
 
 ```javascript
-// limitation 
+// limitation
 let me = {
     firstname : 'Tony',
     greet: function() {
@@ -2223,13 +2223,13 @@ me.greet();
 me.greet2();
 ```
 ----
-## 📘Symbols & Using Symbols 
+## 📘Symbols & Using Symbols
 * **Hash Code :** A value generated from another value. The same value is always generated from the same input.
-* Symbols use **Memory Address** as value and return that value beacuse its always unique. The value which we are providing is called **label** for reference Example
+* Symbols use **Memory Address** as value and return that value because its always unique. The value which we are providing is called **label** for reference Example
 
 ```javascript
 // symbol returning a unique value which will be memory address and 'firstname' is label for that address
-const firstname = Symbol('firstname');  
+const firstname = Symbol('firstname');
 ```
 * Name is Really not important in **Symbol** Example
 
@@ -2255,11 +2255,11 @@ console.log(obj); // {firstname: 'Dp', Symbol(firstname): 'Deepinder'}
 
 console.log(obj.firstname)  // Dp
 
-// accessing Symbol Value 
+// accessing Symbol Value
 console.log(obj[firstname]) // 'Deepinder'
 ```
 * **Magic Strings :** Strings that have a special meaning or usage in your program. This makes your program fragile, easily susceptible to bugs.
-* For Global use, we create **Global variables** with **Symbol.for** to avoid *collision* and *stop retendency* 
+* For Global use, we create **Global variables** with **Symbol.for** to avoid *collision* and *stop retendency*
 
 ```javascript
 const HAIR_STRAIGHT = Symbol.for('Stright');
@@ -2274,9 +2274,9 @@ console.log(Symbol.keyFor(HAIR_CURLY));
 **Well-Known Symbols :** Symboles already built into the javascript engine, used by the engine for certain tasks.
 
 ---
-## 📘ITeration 
+## 📘ITeration
 * **Repeating a block of code, often by moving through a list or sequence of values.**
-* **Enumerable :** A Property which will appear when looping over the properties of an object (it's 'enumerable' flag is set to true). The term comes from mathematics, where it means 'countable'. 
+* **Enumerable :** A Property which will appear when looping over the properties of an object (it's 'enumerable' flag is set to true). The term comes from mathematics, where it means 'countable'.
 
 ## 📘For.of and For.in
 
@@ -2406,5 +2406,79 @@ function greet(fname = 'Tony', phrase = () => {return `Hi ${fname} ${lname}`}, l
 
 let greeting1 = greet();
 console.log(greeting1);     // Hi Tony Alicea
+```
+
+## 📘Destructuring , Rest Operator & Spread (on Array and Objects)
+* Destructuring is used to Destructure the values
+* Rest Operator is used for get all values and always use at the end
+```js
+const data = {
+    "employees": [
+        {
+            "id": 1,
+            "name": "John Doe",
+            "age": 30,
+            "department": "IT",
+            "email": "john.doe@example.com"
+        },
+        {
+            "id": 2,
+            "name": "Jane Smith",
+            "age": 28,
+            "department": "Marketing",
+            "email": "jane.smith@example.com"
+        }
+    ],
+    "products": [
+        {
+            "id": "p1",
+            "name": "Widget A",
+            "price": 19.99,
+            "stock": 50
+        },
+        {
+            "id": "p2",
+            "name": "Widget B",
+            "price": 24.99,
+            "stock": 30
+        }
+    ],
+    "customers": [
+        {
+            "id": "c1",
+            "name": "Alice Johnson",
+            "email": "alice.johnson@example.com",
+            "address": "123 Main Street"
+        },
+        {
+            "id": "c2",
+            "name": "David Brown",
+            "email": "david.brown@example.com",
+            "address": "456 Oak Avenue"
+        }
+    ],
+    "developer": {
+        firstName: "Deepinder",
+        lastName: "Singh",
+        mobile: "9915099247",
+        job: "React Developer"
+    }
+}
+
+// Destructuring & Rest Operator
+const { products, developer: frontEnd, ...others } = data
+
+products    // print all products object
+others      // print all other values which are not destructures
+frontEnd    // print only developer object
+
+
+// Spread Oparator
+const company = [...products, {     // creating new Object
+    firstName: "Deepinder",
+    lastName: "Singh",
+    mobile: "9915099247",
+    job: "React Developer"
+}]
 
 ```
