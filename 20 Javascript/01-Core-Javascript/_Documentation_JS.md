@@ -2482,3 +2482,16 @@ const company = [...products, {     // creating new Object
 }]
 
 ```
+## 📘Arrays Methods
+1. Map
+2. Filter
+3. Reduce
+4. Sort
+```js
+const arr = [3, 7, 1, 9, 6];
+const sorted = arr.sort((a, b) => a - b);
+sorted  // [ 1, 3, 6, 7, 9 ]
+
+const desc = arr.sort((a, b) => b - a)
+desc    // [ 9, 7, 6, 3, 1 ]
+```

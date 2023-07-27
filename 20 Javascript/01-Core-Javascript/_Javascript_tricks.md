@@ -1,6 +1,6 @@
 
  # 📔Javascript Tricks
-## 📘Destructring
+## 📘Destructuring
 
 * Converting Array into object
 ```js
