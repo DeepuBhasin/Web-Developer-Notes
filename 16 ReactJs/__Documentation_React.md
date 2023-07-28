@@ -8,7 +8,7 @@
 ![Image](./images/ui-in-sync-data.png)
 
 * Problem with Vanilla Javascript
-  
+
 ![Image](./images/problem-with-vanilla-js.png)
 
 * Why Do Front-End Frame-Works Exist ?
@@ -56,26 +56,28 @@
 ```
 npx create-react-app project-name
 ```
+---
+
 ## 📘Review of Essential javascript for React
 * Destructuring, spread Operator, Template Literals, ternaries
 * Short-Circuiting and Logical Operators (||, &&, ??)
-  * falsy Values : **0, null, undefined, ''**   
+  * falsy Values : **0, null, undefined, ''**
 ```js
 // && Operator
-true && "some things"   //some things 
+true && "some things"   //some things
 false && "some things"  // false
 
 // || Operator
 true || "Some thing" // true
-false|| "Some thing" // Some thing 
+false|| "Some thing" // Some thing
 
 // ?? Nullish coalescing Operator
-CheckDataExist ?? "no Data exist" 
+CheckDataExist ?? "no Data exist"
 
 CheckDataExist == null      //  no data exist
 CheckDataExist == undefined //  no data exist
 CheckDataExist == 0         //  CheckDataExist means 0
-CheckDataExist == false     //  CheckDataExist means false   
+CheckDataExist == false     //  CheckDataExist means false
 ```
 * Optional Chaining
 ```js
@@ -129,7 +131,7 @@ const newBook = {
 
 const booksAfterAdded = [...books, newBook];
 
-booksAfterAdded 
+booksAfterAdded
 /*
 [ { id: 1, title: 'book 1', author: 'book 1' },
   { id: 2, title: 'book 2', author: 'book 2' },
@@ -152,14 +154,39 @@ booksAfterDelete
 */
 
 // 3) Update book object in the array
-const booksAfterUpdate = booksAfterDelete.map(book => book.id == 2 ? {} : book);
+const booksAfterUpdate = booksAfterDelete.map(book => book.id == 2 ? {...book, nickName : 'Deepu Bhasin'} : book);
 
 booksAfterUpdate
 /*
-[ {},
+[ {id: 2, title: 'book 2', author: 'book 2', nickName : 'Deepu Bhasin'},
   { id: 3, title: 'book 3', author: 'book 3' },
   { id: 6,
     title: 'Harry Potter and the Chamber of Secrets',
     author: 'J.k Rowling' } ]
 */
 ```
+----
+## 📘Component as Building Blocks
+* Component
+* **Component has main three features :**
+  1. Data
+  2. Logic
+  3. Appearance
+
+![Image](./images/component-as-building-block.png)
+
+* Component Tree
+
+![image](./images/component-tree.png)
+---
+## 📘JSX
+![Image](./images/jsx-1.png)
+
+![Image](./images/jsx-2.png)
+
+![Image](./images/jsx-3.png)
+
+* For example if we want to update a simple text in DOM by using **javascript or jquery** we first select element by **getElementByQuery** etc then **append or replace** data, but in **React** we use **states** which automatically update our data after **re-rendering**
+
+
+![Image](./images/jsx-4.png)
