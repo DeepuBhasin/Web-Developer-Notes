@@ -205,3 +205,27 @@ booksAfterUpdate
 * Separation Summary
 
 ![Image](./images/serparation-summary.png)
+
+## 📘Style in JSX
+
+```
+<h1 style={{color : 'Red', height : '20px'}}> 
+    Hello World 
+</h1>
+```
+
+## 📘Props
+* Definition about Props
+
+![Image](./images/props-1.png)
+
+* Props are Read Only
+
+![Image](./images/props-2.png)
+
+⚠️ **Note :** **Side Effect** means changing some data that's located outside of the current function. React How ever is all about pure functions, sp functions without side effects, at least when it's about a component's data. 
+
+![Image](./images/props-3.png)
+
+* One way data Flow
+![Image](./images/props-4.png)
