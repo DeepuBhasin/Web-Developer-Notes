@@ -190,3 +190,18 @@ booksAfterUpdate
 
 
 ![Image](./images/jsx-4.png)
+
+⚠️ **Note :** in Strict mode every thing print twice
+
+## 📘 Separation of concern
+* One Technology per File
+
+![Image](./images/one-technolgy-perf-file.png)
+
+* One Component per file
+
+![Image](./images/one-component-perf-file.png)
+
+* Separation Summary
+
+![Image](./images/serparation-summary.png)
