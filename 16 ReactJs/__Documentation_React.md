@@ -209,8 +209,8 @@ booksAfterUpdate
 ## 📘Style in JSX
 
 ```
-<h1 style={{color : 'Red', height : '20px'}}> 
-    Hello World 
+<h1 style={{color : 'Red', height : '20px'}}>
+    Hello World
 </h1>
 ```
 
@@ -223,9 +223,58 @@ booksAfterUpdate
 
 ![Image](./images/props-2.png)
 
-⚠️ **Note :** **Side Effect** means changing some data that's located outside of the current function. React How ever is all about pure functions, sp functions without side effects, at least when it's about a component's data. 
+⚠️ **Note :** **Side Effect** means changing some data that's located outside of the current function. React How ever is all about pure functions, sp functions without side effects, at least when it's about a component's data.
 
 ![Image](./images/props-3.png)
 
 * One way data Flow
 ![Image](./images/props-4.png)
+
+## 📘Rules in JSX
+![Image](./images/rule-of-jsx.png)
+
+## 📘Conditional Rendering
+1. && (Short circuit)
+
+```js
+// Good practice
+{true && <Loading/> }
+
+// Bad Practice
+{propertyArray.length && <Loading/>}
+```
+2. ternary Operator ( true ? 'yes' : 'no')
+
+```js
+{ condition ? <h1>Hello yes</h1> : <h1>Hello No</h1> }
+```
+
+3. Element Variables
+
+```js
+let outPut;
+
+if(condition){
+    output = <h1>Hello yes</h1>
+} else {
+    output =  <h1>Hello No</h1>;
+}
+
+{outPut}
+```
+4. Multiple Rendering
+
+```js
+if(true) {
+    return ()
+} else {
+    return ()
+}
+
+// if-else is not work in jsx
+```
+---
+## Section-Summary-1
+
+![Image](./images/section-summary-one.png)
+---
