@@ -274,7 +274,34 @@ if(true) {
 // if-else is not work in jsx
 ```
 ---
-## Section-Summary-1
+## 📗Section-Summary-1
 
 ![Image](./images/section-summary-one.png)
 ---
+
+## 📘Event Handling
+
+```js
+
+<button onClick="()=>{alert('Hello World')}">Click Me</button>
+```
+
+## 📘What is state
+
+* What is State
+
+![Image](./images/state-in-rect.png)
+
+* It give us Two Major things
+
+![Image](./images/state-in-rect-2.png)
+
+```js
+const [total, setTotal] = useState(0);
+```
+* First parameter is **value**
+* Second Parameter is **Setter Function** for updating value
+
+⚠️**Note :** 
+1. The value of **state** always preserve until it gets **unmount**
+2. we can only call hooks like use state on the top level of the function, not inside an if statement or inside another function or inside of loop.
