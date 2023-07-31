@@ -331,7 +331,19 @@ const f = new Intl.RelativeTimeFormat('en-us', {
 })
 console.log(f.format(-4, "days"))
 ```
+* Adding Or Subtracting Days from Current date
 
+```js
+const date = new Date("june 21 2017");
+
+// Adding One Day in given Date
+date.setDate(date.getDate() + 1)
+
+// Subtracting One Day in given Date
+date.setDate(date.getDate() - 1)
+
+date.toDateString()
+```
 
 ---
 
