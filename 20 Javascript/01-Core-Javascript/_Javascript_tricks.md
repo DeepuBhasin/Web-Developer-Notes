@@ -193,6 +193,12 @@ console.log(test.at(0));
 console.log(test[test.length - 1]);
 console.log(test.at(3));
 ```
+* Create New array with in react (for dummy)
+
+```js
+Array.from({length : 20}, (_,i) => i +1).map(item => `value : ${item}`)
+```
+
 ---
 ## 📘Objects
 

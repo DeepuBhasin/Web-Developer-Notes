@@ -305,3 +305,21 @@ const [total, setTotal] = useState(0);
 ⚠️**Note :** 
 1. The value of **state** always preserve until it gets **unmount**
 2. we can only call hooks like use state on the top level of the function, not inside an if statement or inside another function or inside of loop.
+
+* Update the current state
+
+```js
+const [count, setCount] = useState(0);
+
+const eventHandlerCount() => {
+
+    // passing here callback function for update value with asynchronously
+    setCount(old => old  + 1)
+}
+```
+
+![Image](./images/use-state-rule.png)
+
+![Image](./images/use-state-rule.-1png.png)
+
+![Image](./images/use-state-rule-practicle-use.png)
