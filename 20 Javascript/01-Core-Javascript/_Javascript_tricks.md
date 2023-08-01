@@ -33,7 +33,7 @@ var a = 10;
 var b = 20;
 [a, b] = [b, a];
 
-console.log(a, b);  
+console.log(a, b);
 ```
 ## 📘Console
 
@@ -126,7 +126,7 @@ function isAdult(age) {
     return age >= 18;       // true or false
 }
 ```
-* This **+** operator is use for 
+* This **+** operator is use for
   * concatinate the strings
   * Converting into Number
   * Adding the Numbers
@@ -154,7 +154,7 @@ var sub = 'name';
 var result = str.includes(sub)
 console.log(result);            // true
 
-//exist where 
+//exist where
 var sub = 'name';
 var result = str.indexOf(sub);
 console.log(result);
@@ -197,6 +197,57 @@ console.log(test.at(3));
 
 ```js
 Array.from({length : 20}, (_,i) => i +1).map(item => `value : ${item}`)
+```
+* Sort Method
+
+```js
+const array = [
+{
+    id: 5,
+    description: 'Hello ij'
+},
+{
+    id: 4,
+    description: 'Hello ef'
+},
+{
+    id: 1,
+    description: 'Hello cd'
+},
+{
+    id: 3,
+    description: 'Hello gh'
+},
+{
+    id: 2,
+    description: 'Hello ab'
+}
+];
+
+let sortedArray = array.slice().sort((a, b) => a.description.localeCompare(b.description))
+
+// Comparing String
+/*output
+Hello ab
+Hello cd
+Hello ef
+Hello gh
+Hello ij
+*/
+
+
+
+
+let sortedArray = array.slice().sort((a, b) => a.id - (b.id))
+// comparing Numbers
+/*
+1. Hello cd
+2. Hello ab
+3. Hello gh
+4. Hello ef
+5. Hello ij
+*/
+
 ```
 
 ---
@@ -306,12 +357,12 @@ console.log(f.format(number));          // 11M  (Million)
 * Date Format
 
 ```js
-// Simple 
+// Simple
 const f = new Intl.DateTimeFormat('en-us', {
 })
 console.log(f.format());        //  6/17/2023
 
-// Simple 
+// Simple
 const f = new Intl.DateTimeFormat('en-us', {
     dateStyle: "full",
     timeStyle: "full"
@@ -361,16 +412,16 @@ date.toDateString()
 console.log(crypto.randomUUID());   // 1d35cbb8-e3ff-47b0-a9dc-8d0c499b9a56
 ```
 * use of **use strick** mode
-  * Not allowed to make unwanted variables (like created after spelling mistake) 
+  * Not allowed to make unwanted variables (like created after spelling mistake)
 ```js
 const superLongVariable = "hi";
-superLongVariables = "bye";        
+superLongVariables = "bye";
 console.log(superLongVariables);    // bye
 
-// Correct one 
+// Correct one
 "use strict"
 const superLongVariable = "hi";
-superLongVariables = "bye";        
+superLongVariables = "bye";
 console.log(superLongVariables);    // bye
 ```
 
