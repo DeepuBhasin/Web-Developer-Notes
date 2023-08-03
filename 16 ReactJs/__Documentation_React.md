@@ -285,7 +285,7 @@ if(true) {
 
 <button onClick="()=>{alert('Hello World')}">Click Me</button>
 ```
-
+---
 ## 📘What is state
 
 * What is State
@@ -324,21 +324,91 @@ const eventHandlerCount() => {
 
 ![Image](./images/use-state-rule-practicle-use.png)
 
+---
 ## 📘Controlled Elements
 
 * In Normal cases Every inputs maintain their own states like **values** in **DOM**
 * *In **Controlled Elements** react can controls and owns the states of input fields no longer by the DOM,* So since we want to keep to now keep **input field** data inside the application so we **create states**. because that form data of course changes over time and we also want to maintain out application in sync with it.
 
+---
 ## 📘State Vs Props
 ![Image](./images/state-vs-props.png)
 
-
+---
 ## 📘Lift-Up-State
 
 ![Image](./images/lift-up-state.png)
+
+---
 
 ## 📘Derived State
 
 * More you have **states** more you have **re-rendering**
 ![image](./images/driver-state.png)
 
+---
+## 📘How to Split a UI into component
+
+![Image](./images/component-size-matter.png)
+
+![Image](./images/how-to-split.png)
+
+![Image](./images/new-component.png)
+
+![Image](./images/some-more-guidlines-1.png)
+
+![Image](./images/app-component.png)
+
+---
+## 📘Key
+
+```js
+import React from 'react'
+import './App.css';
+
+
+function ChildComponent({ userList, name }) {
+  console.log(userList);
+  console.log(name);
+
+  return (
+    <ol>
+      {userList.map(item => {
+        return (<User key={item.id} id={item.id} name={item.name} />)
+      })}
+    </ol>)
+}
+
+function User({ id, name }) {
+  return (<li> id : {id} & name : {name}</li>)
+}
+
+function App() {
+  const array = [
+    {
+      id: 1,
+      name: 'Deepinder'
+    },
+    {
+      id: 2,
+      name: 'Prerana Mam'
+    },
+    {
+      id: 3,
+      name: 'Pramlila Mam'
+    }
+  ];
+  return <div>
+    <ChildComponent userList={array} name="Hello World" />
+  </div>
+}
+
+export default App
+```
+![Image](./images/key.png)
+
+---
+
+## 📘Component Categories
+
+![Image](./images/component-category.png)
