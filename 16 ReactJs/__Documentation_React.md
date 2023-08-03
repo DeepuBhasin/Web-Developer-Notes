@@ -412,3 +412,65 @@ export default App
 ## 📘Component Categories
 
 ![Image](./images/component-category.png)
+
+## 📘Composition Component
+
+![Image](./images/composition-component-1.png)
+
+![Image](./images/composition-component-2.png)
+
+![Image](./images/composition-component-3.png)
+
+* Simple Example of Composition (Removing Prop-Drilling)
+
+```js
+import React from 'react'
+import './App.css';
+
+
+function Main({ children }) {
+  return (
+    <div>
+      <h1>Main Component</h1>
+      {children}
+    </div>
+  )
+}
+
+function ChildComponent({ userList }) {
+  return (
+    <ol>
+      {userList.map(item => {
+        return (<User key={item.id} id={item.id} name={item.name} />)
+      })}
+    </ol>)
+}
+
+function User({ id, name }) {
+  return (<li> id : {id} & name : {name}</li>)
+}
+
+function App() {
+  const array = [
+    {
+      id: 1,
+      name: 'Deepinder'
+    },
+    {
+      id: 2,
+      name: 'Prerana Mam'
+    },
+    {
+      id: 3,
+      name: 'Pramlila Mam'
+    }
+  ];
+  return (
+    // using composition 
+    <Main>
+      <ChildComponent userList={array} />
+    </Main>
+  )
+}
+export default App
+```
