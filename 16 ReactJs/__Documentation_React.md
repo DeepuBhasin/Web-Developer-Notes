@@ -474,3 +474,62 @@ function App() {
 }
 export default App
 ```
+
+## 📘Components Vs Instances Vs Elements
+
+![Image](./images/component-instance-element.png)
+![Image](./images/component-instance-element-2.png)
+![Image](./images/component-instance-element-3.png)
+![Image](./images/component-instance-element-4.png)
+
+## 📘Re-Rendering
+![Image](./images/re-rendering.png)
+![Image](./images/re-rendering-2.png)
+![Image](./images/re-rendering-3.png)
+![Image](./images/re-rendering-3-virtual-dom.png)
+
+
+* **Reconciliation :** 
+* deciding exactly which DOM elements needs to be inserted, deleted or updated in order to reflect the latest state changes so the result of the reconciliation process is going to be a list of DOM operation that are necessary to update the current DOM with new state. 
+* Reconciliation is processed by a **reconciler** and we can say that the reconciler really is the **engine of react**. Its like **heart** of react. So its this reconciler that allows us to never touch the DOM directly and instead simply tell react what the next snapshot of the UI should look like based on state 
+* and the current reconciler in React is called Fiber
+* *The Fiber tree represents the virtual DOM that allows React to keep track of the work that needs to be done in a more fine-grained way. Each Fiber in the tree represents a unit of work that needs to be performed, such as updating a component or rendering a new element.*
+
+![Image](./images/re-rendering-5-reconciliation.png)
+
+![Image](./images/re-rendering-6-reconciliation-fiber.png)
+
+![Image](./images/re-rendering-7-reconciliation-fiber.png)
+
+![Image](./images/re-rendering-8.png)
+
+![Image](./images/re-rendering-9-painting.png)
+
+![Image](./images/re-rendering-9-painting-2.png)
+
+## 📘How Diffing Works
+
+![Image](./images/diffing-1.png)
+
+![Image](./images/diffing-2.png)
+
+![Image](./images/diffing-3.png)
+
+## 📘Keys 
+
+* Key help to re-render the component (reset values or state) Example : **When we are using Tabs**
+![Image](./images/key-1.png)
+
+![Image](./images/key-2.png)
+
+![Image](./images/key-3.png)
+
+![Image](./images/key-4.png)
+
+## 📘Render Logics
+
+![Image](./images/types-of-render-logic.png)
+
+![Image](./images/rules-for-render-logic.png)
+
+![Image](./images/functional-programming.png)
