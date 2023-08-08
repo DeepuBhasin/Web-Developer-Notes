@@ -533,3 +533,61 @@ export default App
 ![Image](./images/rules-for-render-logic.png)
 
 ![Image](./images/functional-programming.png)
+
+## 📘React Third Party Library
+![Image](./images/react-3rd-party-library.png)
+
+## 📘useEffect
+
+![image](./images/create-side-effect.png)
+
+![image](./images/event-handler-vs-useeffect.png)
+
+
+## Handling Error 
+
+* Go to the network tab
+* Select **Slow 3g** option first
+* while calling the option select **offline** option
+
+```js
+import React, { useState } from 'react'
+import './App.css';
+
+const App = () => {
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [message, setMessage] = useState('Loading...');
+
+  const getData = async () => {
+    try {
+      let newData = await fetch('https://jsonplaceholder.typicode.com/posts');
+
+      if (!newData.ok) {
+        throw new Error("Failed to fetch data")
+      }
+
+      newData = await newData.json();
+      setData(newData)
+      setIsLoading(false);
+    } catch (err) {
+      console.log('Api response failed')
+      setMessage(err.message)
+    }
+  }
+
+  useState(() => {
+    getData();
+  }, [])
+
+  return (isLoading ? <h1> {message}</h1 > :
+    <div>
+      {data.map(item => {
+        return (<li key={item.id}>id : {item.id} &  body : {item.body}</li>)
+      })}
+    </div>
+  )
+}
+
+export default App
+```
