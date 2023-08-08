@@ -591,3 +591,5 @@ const App = () => {
 
 export default App
 ```
+
+![Image](./images/effects-are-called.png)
