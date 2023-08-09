@@ -599,3 +599,33 @@ export default App
 ## 📘Hooks
 
 ![Image](./images/react-hooks-1.png)
+
+![Image](./images/react-hooks-2.png)
+![Image](./images/react-hooks-3.png)
+![Image](./images/react-hooks-4.png)
+
+* we can initialize the values in useState Hooks by **callback function** as well
+* It only works on **initial render**
+* we cannot send parameters in **callback function**
+* best use when we are getting values from local storage and try to initialize in first render.
+
+```js
+import React, { useState } from 'react'
+import './App.css';
+
+const App = () => {
+  const [data, setData] = useState(() => {
+    const data = [{ id: 1, body: 'ok' }, { id: 2, body: '22' }, { id: 3, body: '33' }];
+    return data;
+  });
+
+  return (<div>
+    {data.map(item => {
+      return (<li key={item.id}>id : {item.id} &  body : {item.body}</li>)
+    })}
+  </div>
+  )
+}
+
+export default App
+```
