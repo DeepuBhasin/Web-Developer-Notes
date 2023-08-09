@@ -593,3 +593,9 @@ export default App
 ```
 
 ![Image](./images/effects-are-called.png)
+
+![Image](./images/cleanup-function.png)
+
+## 📘Hooks
+
+![Image](./images/react-hooks-1.png)
