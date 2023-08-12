@@ -1,3 +1,20 @@
+## 📘Informatics Things
+
+* Type **React.new** in Address bar for open react code panel
+* Values Persist
+```js
+// useState
+const [total,setTotal] = useState(0)
+
+//useRef
+const inputRef = useRef(0)
+
+// Normal Variable
+let total = 0;
+
+// On every render normal total variable value get reset to zero but in useState and useRef value will not reset on every render it will persist the value
+```
+
 ## 📘Why we require React
 * Server-Side-Rendering vs Client-Side-Rendering
 
@@ -629,3 +646,79 @@ const App = () => {
 
 export default App
 ```
+![Image](./images/sumarry-usestate-hook.png)
+
+## 📘UseRef
+![Image](./images/useRef-1.png)
+
+![Image](./images/useRef-2.png)
+
+```js
+import React, { useEffect, useRef } from 'react'
+import './App.css';
+
+const App = () => {
+  //1. creating reference like creating element or class in vanilla javascript
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+
+    // printing the selected element which is in current property
+    console.log(inputRef.current);
+    
+    // make focus on selected element
+    inputRef.current.focus();
+  }, [])
+
+  return (<div>
+    <input
+      type='text'
+      name=''
+      //2. attaching that reference which is provided by useRef by react, because react is declarative in nature
+      ref={inputRef}
+    />
+  </div>
+  )
+}
+
+export default App
+```
+
+![Image](./images/useRef-3.png)
+
+```js
+import React, { useRef } from 'react'
+import './App.css';
+
+const App = () => {
+  const inputValue = useRef('test');
+  const inputHandler = (e) => {
+    inputValue.current = e.target.value
+
+    // it will print 
+    console.log(inputValue.current);
+  }
+
+  // it will print only in install render after that it will not work
+  console.log(inputValue.current);
+
+  return (<div>
+    {inputValue.current}
+    <br />
+    <input
+      type='text'
+      name=''
+      onChange={inputHandler}
+    />
+  </div>
+  )
+}
+
+export default App
+```
+
+## 📘Custom Hooks
+![Image](./images/custome-hook.png)
+
+## 📘Functional Vs Class Component
+![Image](./images/functional-vs-class.png)
