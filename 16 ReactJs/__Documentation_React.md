@@ -722,3 +722,9 @@ export default App
 
 ## 📘Functional Vs Class Component
 ![Image](./images/functional-vs-class.png)
+
+## 📘useReducer
+![Image](./images/user-reducer-1.png)
+![Image](./images/user-reducer-2.png)
+![Image](./images/user-reducer-3.png)
+![Image](./images/user-reducer-4.png)
