@@ -225,6 +225,8 @@ booksAfterUpdate
 
 ## 📘Style in JSX
 
+![Image](./images/style.png)
+
 ```
 <h1 style={{color : 'Red', height : '20px'}}>
     Hello World
@@ -729,3 +731,8 @@ export default App
 ![Image](./images/user-reducer-3.png)
 ![Image](./images/user-reducer-4.png)
 ![Image](./images/user-reducer-5.png)
+
+## 📘Router
+![Image](./images/router-1.png)
+![Image](./images/router-2.png)
+![Image](./images/router-3.png)
