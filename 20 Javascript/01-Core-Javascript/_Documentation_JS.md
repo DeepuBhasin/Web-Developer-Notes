@@ -21,14 +21,14 @@ var b = 3 + 2;
 ## 📘 Conceptual Aside
 1. **Syntax Parsers** : A program that reads your code and determines what it does and if its grammar is valid, e.g., an interpreter or a compiler.
 2. **Execution Contexts** : *A Wrapper to help manage the code that is running*. There are lots of lexical environments. which one is currently running is managed via execution context. it can contain things beyond what you've written in your code.
-3. **Lexical Environments** : *where something sits physically in the code you write*. 'Lexical' means 'having' to do with words or grammer. A lexical environment exists in programming languages in which **where** you write something is important.
+3. **Lexical Environments** : *where something sits physically in the code you write*. 'Lexical' means 'having' to do with words or grammar. A lexical environment exists in programming languages in which **where** you write something is important.
 
 ---
 ## 📘 Name/Value Pairs and Objects
 * A Name which **maps** to a **unique value**. eg *Address = '100 Main St.'*.
 * The name may be defined more than once, but only can have one value in any given **context**.
 * That value may be more name/value pairs.
-* **Object** : *A Collection of name values pairs*. The simplest defination when talking about javascript.
+* **Object** : *A Collection of name values pairs*. The simplest definition when talking about javascript.
 
 ![Image](./images/name-value.png)
 
@@ -72,7 +72,7 @@ logNumber();
 ```
 
 ⚠️ Note <br/>
-* __let, const, function Expression and classes__ are not hosited.
+* __let, const, function Expression and classes__ are not hoisted.
 * __Temporal Dead Zone__ :
   * is the time between the __declaration__ and __the initialization__ of _let_ and _const_ variables.
   * Temporal Dead Zone is the term to describe the state where variables are in the scope but they are not yet declared.
@@ -505,17 +505,17 @@ console.log(greet.language)
 ---
 
 ## 📘 Function Statements and Function Expressions
-* **Epression :** A unit of code that results in a value. It does n't have to save to a variable.
+* **Expression :** A unit of code that results in a value. It does n't have to save to a variable.
 
 ```javascript
-// mean concept is that what ever the variable returnning a value is called expression like number, object etc
+// mean concept is that what ever the variable returning a value is called expression like number, object etc
 var a = 3
 var b = 1 + 2;
 var c = {greeting : 'hi'}
 
-// here (a === 3) is expression because it return some value && if is just simply statement it not returnning any value.
+// here (a === 3) is expression because it return some value && if is just simply statement it not returning any value.
 
-// so statment just does work and an expression results in a value
+// so statement just does work and an expression results in a value
 if (a == 3) {
 
 }
@@ -538,19 +538,18 @@ anonymousGreet();
 
 
 ```
-![Image](./images/function-epressions-invoke.png)
+![Image](./images/function-expressions-invoke.png)
 
-⚠️ **Note** : Function Expresions are not hoisted
+⚠️ **Note** : Function Expressions are not hoisted this is the only main difference between **Function Declaration** and **Function Expressions**
 
 ```javascript
 // Functions expressions considered as variable and According to Hoisting variables are set to undefined
 
-anonymousGreet();   // error : undfined is not a function
+anonymousGreet();   // error : undefined is not a function
 
 var anonymousGreet = function () {
     console.log('hi');
 }
-
 ```
 
 📚 **Conceptual Example :**
@@ -1687,7 +1686,7 @@ setTimeout(() => {
 
 * In the Execution Context there are two types of Environment
 
-  1. **Lexical Environment :** when ever we use *curly braces {}* like with *if-statement, function statments etc* a new **lexical environment is cerated with in same execution context**
+  1. **Lexical Environment :** when ever we use *curly braces {}* like with *if-statement, function statements etc* a new **lexical environment is cerated with in same execution context**
 
   2. **Variable Environment** so when ever we create variable with **var** example *myVar* it will automatically created in **Variable Environment**
 
