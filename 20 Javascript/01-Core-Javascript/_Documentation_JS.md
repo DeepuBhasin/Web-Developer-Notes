@@ -14,7 +14,6 @@ var a = 3;
 
 // Example 2
 var b = 3 + 2;
-
 ```
 ---
 
@@ -73,6 +72,7 @@ logNumber();
 
 ⚠️ Note <br/>
 * __let, const, function Expression and classes__ are not hoisted.
+* In **const** : Only **Primitive Values** are **immutable** but *Array and Objects* are **non-primitive** types values
 * __Temporal Dead Zone__ :
   * is the time between the __declaration__ and __the initialization__ of _let_ and _const_ variables.
   * Temporal Dead Zone is the term to describe the state where variables are in the scope but they are not yet declared.
@@ -122,7 +122,7 @@ number1 = 10;
 console.log(number1);
 ```
 ---
-## 📘 The Global Environment and The Global Object
+## 📘The Global Environment and The Global Object
 * when ever code is run in javascript it's run inside an execution context. Meaning a wrapper that the javascript engine wrap that up, that code that you've written in **global execution**.
 
 ![Image](./images/gloabl-environment.png)
@@ -400,6 +400,20 @@ person.address.street = "51 d street no 3 ranjit nagar near seona chowk patiala 
 console.log(person.address.street);
 console.log(person['address']['street']);
 ```
+⚠️ **Note** :
+1. Major difference between **Dot** and **Brackets** by using *brackets* we can *access or create* any dynamic value for example
+
+```js
+const nameKey = "name";
+var obj = {
+    firstname : "Deepinder",
+    lastname : "Singh"
+}
+
+obj['first' + nameKey];
+obj['last' + nameKey];
+```
+2. If we try to **access** value which does not exist in Object then we will get **undefined**
 ---
 ## 📘Objects and Object Literals
 
@@ -414,9 +428,7 @@ var person = {
 };
 console.log(person);
 
-
 // Example of creating Object on Fly
-
 function greet(person) {
     console.log('Hi' + person.firstname);
 }
