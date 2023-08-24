@@ -127,7 +127,7 @@ function isAdult(age) {
 }
 ```
 * This **+** operator is use for
-  * concatinate the strings
+  * concatenate the strings
   * Converting into Number
   * Adding the Numbers
 
@@ -147,7 +147,7 @@ var name = true && 'Deepinder'  // 'Deepinder'
 ## 📘Strings
 
 ```js
-var str = 'Hello My name is Deepinder singh and I am working as React Engineer. I am working in various componies. I workimg very hard to learn new things. I am also woring in backend some time';
+var str = 'Hello My name is Deepinder singh and I am working as React Engineer. I am working in various companies. I working very hard to learn new things. I am also working in backend some time';
 
 // exist
 var sub = 'name';
@@ -292,7 +292,7 @@ console.log(obj.getFullName());
 ## 📘If-else
 
 * Avoid nested simple if-else and use **ternary Operator**
-* Avoid if-else ledder and use **Guard Clauses Technique**
+* Avoid if-else leader and use **Guard Clauses Technique**
 ```js
 // wrong
 function test() {
@@ -301,7 +301,7 @@ function test() {
             if(admin) {
                 seeAdminPanel();
             }else {
-                console.log('Must be Authorised')
+                console.log('Must be Authorized')
             }
         }else {
             console.log('Must be Login')
@@ -318,7 +318,7 @@ function test() {
         return;
     }
     if(!login){
-        console.log('Must be Authorised')
+        console.log('Must be Authorized')
         return;
     }
     if(!admin) {
@@ -328,7 +328,7 @@ function test() {
     seeAdminPanel();
 }
 ```
-* if you have **very large if-else** statments then use **switch-case** code
+* if you have **very large if-else** statements then use **switch-case** code
 
 ## 📘International
 
@@ -419,14 +419,14 @@ console.log(t)
 
 ```js
 let dice = Math.trunc(Math.random() * 6) + 1;
-console.log(dice) 
+console.log(dice)
 ```
 
 ---
 
 ## 📘Extra Features
 
-* **Generate Random Numbers** in javascritp
+* **Generate Random Numbers** in javascript
 
 ```js
 console.log(crypto.randomUUID());   // 1d35cbb8-e3ff-47b0-a9dc-8d0c499b9a56
