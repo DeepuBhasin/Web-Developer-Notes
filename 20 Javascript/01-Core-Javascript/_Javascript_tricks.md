@@ -401,6 +401,26 @@ date.setDate(date.getDate() - 1)
 
 date.toDateString()
 ```
+* Get **TimeStamp**
+```js
+console.log(new Date().getTime());  // 1692881806768
+```
+* Set Time
+
+```js
+const c = new Date();
+c.setMinutes(c.getMinutes() + 2);
+let t = c.getTime();
+console.log(t)
+```
+
+## 📘Math
+* creating Random Number
+
+```js
+let dice = Math.trunc(Math.random() * 6) + 1;
+console.log(dice) 
+```
 
 ---
 
