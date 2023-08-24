@@ -19,7 +19,7 @@
 
 ## 📘Selectors
 
-1. **querySelector**
+* **querySelector**
 * use to select particular element
 * for **class** use **'.'** and for **id** use **#**
 ```html
@@ -33,16 +33,20 @@
 ---
 ## 📘Assigner
 
-2. **textContent**
+* **textContent**
 * use to **get** the text content in the element
 * use to **set** the text content for the element
 ```js
-const msg = document.querySelector('#message');
+const msg = document.querySelector('#message');1
 // Hello World ...
 console.log(msg.textContent);
 
 // setting new test 
 msg.textContent = 'testing ....';
+
+// to select Body element
+const bodyElement = document.querySelector('body');
+
 ```
 ---
 
@@ -59,3 +63,23 @@ msg.textContent = 'testing ....';
 </script>
 ```
 ⚠️ **Note :** when ever you get *any value* from DOM  the *type* of that value is always **string**
+
+## 📘Style
+
+```html
+<button id="btn">Change</button>
+<div id="message">Hello World</div>
+<script>
+    let btn = document.querySelector("#btn");
+    btn.addEventListener("click", function () {
+        const msg = document.querySelector('#message');
+        msg.style.color = 'red';
+        msg.style.fontStyle = 'italic';
+        msg.style.fontSize = '50px';
+        msg.style.backgroundColor = 'yellow';
+        msg.style.marginTop = '20px'
+        msg.style.marginLeft = '20px';
+    })
+</script>
+```
+![Image](./images/dom-style.png)
