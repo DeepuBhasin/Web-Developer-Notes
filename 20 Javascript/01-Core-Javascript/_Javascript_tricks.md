@@ -418,7 +418,18 @@ console.log(t)
 * creating Random Number
 
 ```js
+// this will give number between 0 and 1
+Math.random()
+
+// this will give number between 0 and 6
+Math.random() * 6
+
+// this will convert 19.9999999 into 19
+Math.trunc(Math.random() * 6)
+
+// this will add 1 so we cannot get 0 
 let dice = Math.trunc(Math.random() * 6) + 1;
+
 console.log(dice)
 ```
 

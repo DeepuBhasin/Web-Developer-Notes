@@ -15,7 +15,9 @@
 ![Image](./images/dom-not-part-of-javascript.png)
 
 ---
-## 📘DOM Manipulation Api's
+# 📔DOM Manipulation Api's
+
+## 📘Selectors
 
 1. **querySelector**
 * use to select particular element
@@ -28,11 +30,32 @@
 ```
 ![Image](images/dom-query-selector.png)
 
-2. **textContent**
-* use to print the text content in the element
+---
+## 📘Assigner
 
+2. **textContent**
+* use to **get** the text content in the element
+* use to **set** the text content for the element
 ```js
 const msg = document.querySelector('#message');
 // Hello World ...
 console.log(msg.textContent);
-``
+
+// setting new test 
+msg.textContent = 'testing ....';
+```
+---
+
+## 📘Event Listeners
+* An Event is something that happens on the page for example a mouse click, or a mouse moving or a key press or many other events Then with an event listener we can wait for a certain event to happen and then react to it.
+
+```html 
+<button id="btn"> Click Me</button>
+<script>
+    let btn = document.querySelector("#btn");
+    btn.addEventListener("click", function () {
+        alert("Hello World")
+    })
+</script>
+```
+⚠️ **Note :** when ever you get *any value* from DOM  the *type* of that value is always **string**
