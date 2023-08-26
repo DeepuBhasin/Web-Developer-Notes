@@ -800,9 +800,9 @@ var array = [
 arr[3](arra[2].name)   // Hello Tony
 ```
 ## 📘 arguments and Spread
-* **Arguments :** The parameters you pass to a function. javascript gives you keyword of the same name which contains them all.
-* 'arguments' : is something special that the javascript engine sets up for you.
-
+* **Arguments :** The parameters you pass to a function. javascript gives you keyword of the same name which contains them all. These are useful when you want to **send more parameter then defined**.
+* 'arguments' : is something special that the javascript engine sets up for you. 
+* **Arrow Functions** do not have this **arguments** keyword. means it will not work in arrow functions 
 ![Image](./images/arguments-and-spread.png)
 
 ```javascript
@@ -820,7 +820,7 @@ function greet(firstname, lastname, language, ...other){
     console.log(firstname);
     console.log(lastname);
     console.log(language);
-    console.log(arguments);    ["john", "Doe", "en"]
+    console.log(arguments);    //["john", "Doe", "en"]
     console.log('arg 0 ' + arguments[0]);      // john
     console.log('-------------------');
     console.log(others);
