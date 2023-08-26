@@ -36,6 +36,10 @@ var b = 3 + 2;
 ---
 ## 📘Creation & Hoisting
 
+⚠️ **Why Hoisting?**
+* Using function before actual declaration.
+* var hoisting is just a byproduct.
+
 Javascript Execution Context has two phase<br/>
 1. **Creation Phase** : Set up memory for variables and functions, also set placeholder for variables called **undefined**.
 2. **Execution Phase** : means assigns values to variables but not for functions.
@@ -76,6 +80,7 @@ logNumber();
 * __Temporal Dead Zone__ :
   * is the time between the __declaration__ and __the initialization__ of _let_ and _const_ variables.
   * Temporal Dead Zone is the term to describe the state where variables are in the scope but they are not yet declared.
+  * why TDZ : **Make it easier to avoid and catch errors**, accessing variables before declaration is a bad practice and should be avoided.
 
 
 
