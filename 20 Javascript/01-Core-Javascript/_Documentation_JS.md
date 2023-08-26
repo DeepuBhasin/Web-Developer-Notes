@@ -667,8 +667,9 @@ obj2.lastName = "Bhasin";
 console.log('obj1', obj1);  // {firstName: 'Deepinder', lastName: 'Singh', age: 29}
 console.log('obj2', obj2)   // {firstName: 'Deepu', lastName: 'Bhasin', age: 29}
 ```
-2. **Deep Cloning :** Copy all properties up to *all level*. it is done by **JSON.parse(JSON.stringify(alreadyDeclaredObject))**
-
+2. **Deep Cloning :** Copy all properties up to *all level*. it is done by
+* **JSON.parse(JSON.stringify(alreadyDeclaredObject))**
+* Lodash library
 ```js
 const obj1 = {
     firstName: "Deepinder",
