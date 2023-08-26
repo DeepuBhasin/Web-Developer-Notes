@@ -688,6 +688,9 @@ let obj = {
 obj.firstName // Deepu
 obj.getFullName() // Deepu Bhasin
 ```
+
+![Image](./images/this-key-word.png)
+
 ### 📑Self and Scope (with This)
 Problem
 
@@ -754,23 +757,20 @@ let obj = {
 obj.getFullName();
 ```
 
-1. By using Arrow function
+3. By using Arrow function
 
 ```javascript
 var firstName = "Deepinder";
-
 let obj = {
     firstName: "Deepu",
-    getFullName : () => {
+    getFullName: function () {
         console.log('First Name', this.firstName);
-
-        function test() {
+        const test = () => {
             console.log('First Name', this.firstName);
         }
         test();
     }
 }
-
 obj.getFullName();
 ```
 ## 📘 Arrays (Collections of Anything)
