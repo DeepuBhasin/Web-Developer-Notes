@@ -595,6 +595,10 @@ Functions can pass as parameter in which you can pass function as paremeter use 
 
 ![image](./images/pass-by-value.png)
 
+![Image](./images/pass-by-refrence-1.png)
+
+![Image](./images/pass-by-refrence-2.png)
+
 * **Pass by value :** Simply means we copy the value and we create that value some where else in memory all **primitves types** are *Pass by refernce* examples. number, boolean, string etc
 ```javascript
 var a = 10;
@@ -644,6 +648,42 @@ console.log(obj1)
 console.log(obj2)
 // { name: "dp", password: "456" };
 ```
+
+## 📘Cloning of Object
+
+1. **Shallow Cloning :** Copy all properties up to only for *first level*, it is done by **Object.assign({}, alreadyDeclaredObject)**
+
+```js
+ const obj1 = {
+    firstName: "Deepinder",
+    lastName: "Singh",
+    age: 29
+}
+
+const obj2 = Object.assign({}, obj1);
+obj2.firstName = "Deepu";
+obj2.lastName = "Bhasin";
+
+console.log('obj1', obj1);  // {firstName: 'Deepinder', lastName: 'Singh', age: 29}
+console.log('obj2', obj2)   // {firstName: 'Deepu', lastName: 'Bhasin', age: 29}
+```
+2. **Deep Cloning :** Copy all properties up to *all level*. it is done by **JSON.parse(JSON.stringify(alreadyDeclaredObject))**
+
+```js
+const obj1 = {
+    firstName: "Deepinder",
+    lastName: "Singh",
+    age: 29
+}
+
+const obj2 = JSON.parse(JSON.stringify(obj1));
+obj2.firstName = "Deepu";
+obj2.lastName = "Bhasin";
+
+console.log('obj1', obj1);  // {firstName: 'Deepinder', lastName: 'Singh', age: 29}
+console.log('obj2', obj2)   // {firstName: 'Deepu', lastName: 'Bhasin', age: 29}
+```
+
 ---
 ## 📘 Objects, Functions and This
 The __this__ keyword is actually pretty straightforward to understand __what is does is it refers to whatever object it is directly inside (property) of.__
@@ -801,8 +841,8 @@ arr[3](arra[2].name)   // Hello Tony
 ```
 ## 📘 arguments and Spread
 * **Arguments :** The parameters you pass to a function. javascript gives you keyword of the same name which contains them all. These are useful when you want to **send more parameter then defined**.
-* 'arguments' : is something special that the javascript engine sets up for you. 
-* **Arrow Functions** do not have this **arguments** keyword. means it will not work in arrow functions 
+* 'arguments' : is something special that the javascript engine sets up for you.
+* **Arrow Functions** do not have this **arguments** keyword. means it will not work in arrow functions
 ![Image](./images/arguments-and-spread.png)
 
 ```javascript
@@ -2524,7 +2564,7 @@ desc    // [ 9, 7, 6, 3, 1 ]
 * **DOM** and **DOM Methods** are actually part of something called the **web APIs**. so the web API are like **libraries** that browsers implement and that we can access from our javascript.
 * Web Api are basically libraries that are also written in javascript and that are automatically available for us to use.
 * And there is actually an official DOM specification that browser implement, which is the reason why DOM manipulation works the same in all browsers.
-* There are various API like timer, fetch 
+* There are various API like timer, fetch
 
 ![Image](./images/dom-not-part-of-javascript.png)
 
@@ -2555,7 +2595,7 @@ const msg = document.querySelector('#message');1
 // Hello World ...
 console.log(msg.textContent);
 
-// setting new test 
+// setting new test
 msg.textContent = 'testing ....';
 
 // to select Body element
@@ -2567,7 +2607,7 @@ const bodyElement = document.querySelector('body');
 ## 📘Event Listeners
 * An Event is something that happens on the page for example a mouse click, or a mouse moving or a key press or many other events Then with an event listener we can wait for a certain event to happen and then react to it.
 
-```html 
+```html
 <button id="btn"> Click Me</button>
 <script>
     let btn = document.querySelector("#btn");
