@@ -2468,6 +2468,41 @@ console.log(greeting1);     // Hi Tony Alicea
 ## 📘Destructuring , Rest Operator & Spread (on Array and Objects)
 * Destructuring is used to Destructure the values
 * Rest Operator is used for get all values and always use at the end
+
+
+```js
+// Main Problem with out destructuring
+const array = [1, 2, 3];
+const first = array[0];
+const second = array[1];
+const third = array[2];
+
+// Solution
+const array = [1, 2, 3];
+const [first, second, third] = array;
+```
+* Swaping Two Numbers
+```js
+let a = 10;
+let b = 20;
+[b, a] = [a, b];
+```
+
+* Nested Array
+```js
+const array = [1, 2, [3, 4]];
+const [first, second, [three, four]] = array;
+console.log(three);
+```
+
+* Default Values
+
+```js
+const array = [1, 2];
+const [first = 1, second = 2, three = 3] = array;
+console.log(three);
+```
+
 ```js
 const data = {
     "employees": [
