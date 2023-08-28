@@ -2466,10 +2466,13 @@ console.log(greeting1);     // Hi Tony Alicea
 ```
 
 ## 📘Destructuring , Rest Operator & Spread (on Array and Objects)
-* Destructuring is used to Destructure the values
+* Destructuring is used to Destructure the values 
+* Major Differnec beteen Object And Array Destructuring is **Order matter in array Destructuring but in Object only name**
 * Rest Operator is used for get all values and always use at the end
 
+1. Array Destructuring
 
+* Simple Example
 ```js
 // Main Problem with out destructuring
 const array = [1, 2, 3];
@@ -2488,7 +2491,7 @@ let b = 20;
 [b, a] = [a, b];
 ```
 
-* Nested Array
+* Destructuring Nested Array
 ```js
 const array = [1, 2, [3, 4]];
 const [first, second, [three, four]] = array;
@@ -2503,6 +2506,57 @@ const [first = 1, second = 2, three = 3] = array;
 console.log(three);
 ```
 
+2. Object Destructuring
+
+* Aliase Name
+```js
+const obj = {
+    firstname: "Deepinder",
+    lastname: "singh",
+    phone: "9915099247",
+    address: {
+        street: 3,
+        houseNo: "51D"
+    }
+}
+
+const { firstname: first, lastname: last } = obj;
+console.log(first);
+console.log(last);
+```
+* Nested Object
+
+```js
+const obj = {
+    firstname: "Deepinder",
+    lastname: "singh",
+    phone: "9915099247",
+    address: {
+        street: 3,
+        houseNo: "51D"
+    }
+}
+
+const { firstname, lastname, address: { street } } = obj;
+console.log(street);
+```
+
+
+* Providing Default Value (even values does not exist we can provide default value)
+```js
+const obj = {
+    firstname: "Deepinder",
+    lastname: "singh",
+    phone: "9915099247",
+    address: {
+        street: 3,
+        houseNo: "51D"
+    }
+}
+const { job = "Frontend Engineer" } = obj;
+console.log(job);
+```
+* Using Rest Operator for getting other values
 ```js
 const data = {
     "employees": [
@@ -2574,11 +2628,32 @@ const company = [...products, {     // creating new Object
 }]
 
 ```
+* **Conceptual Example :** for destructring of object in which order does not matter
+```js
+function test({ first = 'default', last = 'default', job = 'default', dob = 'default' }) {
+    console.log(dob, job, last, first);
+}
+
+test({
+    job: "Web Developer",
+    dob: "24-11-1993",
+    last: - "Singh",
+    first: "Deepu"
+});
+```
+
+---
+
 ## 📘Arrays Methods
 1. Map
 2. Filter
 3. Reduce
 4. Sort
+5. include
+6. some
+7. every
+8. indexOf
+
 ```js
 const arr = [3, 7, 1, 9, 6];
 const sorted = arr.sort((a, b) => a - b);
