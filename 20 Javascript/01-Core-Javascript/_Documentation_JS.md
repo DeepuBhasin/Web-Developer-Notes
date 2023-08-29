@@ -360,7 +360,7 @@ if(a || a === 0) {      // will execute
 * operators are functions example || (OR Operator is a function)
 ```javascript
 undefined || 'hi'       // hi
-'hi' || 'hello'         // hello
+'hi' || 'hello'         // hi
 null || 'hi'            // hi
 0 || 'hi'               // hi
 
@@ -2465,7 +2465,7 @@ let greeting1 = greet();
 console.log(greeting1);     // Hi Tony Alicea
 ```
 
-## 📘Destructuring , Rest Operator & Spread (on Array and Objects)
+## 📘Destructuring  (on Array and Objects)
 * Destructuring is used to Destructure the values 
 * Major Differnec beteen Object And Array Destructuring is **Order matter in array Destructuring but in Object only name**
 * Rest Operator is used for get all values and always use at the end
@@ -2641,9 +2641,95 @@ test({
     first: "Deepu"
 });
 ```
+---
+## 📘 Spread Operator
+* basically use to expand an array into all its elements, so basically unpacking all the array element at one.
+* All the **data structures** in Javascript are **iterables** eg arrays, strings, maps, sets but **Objects** are not.
+* Sperad Operators work with both **iterables** and Objects
 
+* Spread Opertor do this
+
+```js
+const arr = [1, 2, 3];
+console.log(..arr)  // (1, 2, 3)
+console.log(1, 2, 3)
+```
+
+```js
+// Problem
+const arr = [7, 8, 6];
+const badNewArr = [1, 2, arr[0], arr[1], arr[2]];
+console.log(badNewArr); //[1, 2, 7, 8, 6]
+
+// Solution (creating new array)
+const arr = [7, 8, 6];
+const badNewArr = [1, 2, arr[0], arr[1], arr[2]];
+console.log(badNewArr); //[1, 2, 7, 8, 6]
+
+// Solution (creating new object)
+const obj = {first : 'Deepu'}
+const obj1 = {...obj, last : 'Singh'}
+console.log(obj1);
+```
+---
+## 📘Rest Operator
+* The **spread operator** is to unpack an array while **rest operator** is to pack elements into an array
+
+* For Arrays
+```js
+// spread because on right side of =
+const arr = [1, 2, ...[3, 4]];
+
+// Rest because on the left side of =
+const [a, b, ...others] = [1, 2, 3, 4, 5];
+console.log(a, b, others);
+```
+* For Objects
+```js
+let obj = { first: 'Deepu', last: 'Singh', phone: '9915099247' };
+const { first, ...others } = obj
+console.log(first);
+console.log(others);
+```
+
+* For Functions
+```js
+function sum(...numbers) {
+     // its now array
+    console.log(numbers);      
+}
+sum(1, 2, 3, 4, 5, 6, 7, 8, 9);
+```
 ---
 
+## 📘Short Circuit
+* OR Operator (||)  : it will return **true** value always
+
+```js
+undefined || null || '' || false || 0 || 'Hello' || 23  // 'Hello'
+'test' || 'ok'  // test 
+'' || 'ok'  // ok
+```
+* AND Operator (&&) : it will return **false** value if the first value is false, it works opposite to **OR Operator**
+
+```js
+0 && 'jonas'    // 0
+1 && 'Deepu'    // Deepu
+'hello' && 23 && null && 'jonas'    // null
+```
+---
+
+## 📘Nullish
+* only check **null** or **undefined** value
+
+```js
+const test = 0;
+console.log(test || 'Hello');   // hello
+
+// Nullish : null and undefined
+console.log(test ?? 'Hello');   // 0
+```
+---
 ## 📘Arrays Methods
 1. Map
 2. Filter
