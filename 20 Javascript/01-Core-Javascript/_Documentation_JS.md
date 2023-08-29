@@ -2720,13 +2720,13 @@ undefined || null || '' || false || 0 || 'Hello' || 23  // 'Hello'
 ---
 
 ## 📘Nullish
-* only check **null** or **undefined** value
-
+* Only check **null** or **undefined** value
+* Not include **0 (zero)** or **"" (empty string)**
 ```js
 const test = 0;
 console.log(test || 'Hello');   // hello
 
-// Nullish : null and undefined
+// Nullish : null and undefined (Not 0 or '')
 console.log(test ?? 'Hello');   // 0
 ```
 ---
