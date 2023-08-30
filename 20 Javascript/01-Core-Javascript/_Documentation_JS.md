@@ -491,7 +491,25 @@ let obj = {
 }
 console.log(obj);   // {1: 'Monday', 2: 'Tuesday', 3: 'Wednesday', 4: 'Thursday', 5: 'Friday', 6: 'Saturday', 7: 'Sunday'}
 ```
+---
+## 📘 Chaining and Optional-Chaining
+* Access the variables with **Dot** which are nested or deeply nested
+```js
+let obj = {
+    first: 'Deepu',
+    last: 'Singh',
+    address: {
+        house: '51-d',
+        streetNo: '3'
+    }
+}
+// Chaining
+console.log(obj.address.streetNo);  // 3
 
+// Optional Chaining 
+console.log(obj.address?.near);     // undefined
+```
+⚠️ **Note :** in **Optional Chaining:** instead of **reference error** it will return **undefined** , if the value does not exist.
 ---
 ## 📘 Namespace :
 * **Namespace :** a container for variables and functions. Typically to keep variables functions with the same name separate.
