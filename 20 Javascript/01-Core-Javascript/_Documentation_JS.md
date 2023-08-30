@@ -511,6 +511,30 @@ console.log(obj.address?.near);     // undefined
 ```
 ⚠️ **Note :** in **Optional Chaining:** instead of **reference error** it will return **undefined** , if the value does not exist.
 ---
+
+## 📘 useful In-built Objects Properties 
+
+* **Object.keys(Object)**
+```js
+let obj = {
+    firstName: "Depeu",
+    lastName: "Singh"
+}
+
+// return only keys in array
+console.log(Object.keys(obj));      // ['firstName', 'lastName']
+
+// returns only values in array
+console.log(Object.values(obj));    //  ['Depeu', 'Singh']
+
+// return Array which include key-value as individual arrays
+console.log(Object.entries(obj));
+// [Array(2), Array(2)]
+// 0 : ['firstName', 'Depeu']
+// 1 : ['lastName', 'Singh']
+```
+
+---
 ## 📘 Namespace :
 * **Namespace :** a container for variables and functions. Typically to keep variables functions with the same name separate.
 
