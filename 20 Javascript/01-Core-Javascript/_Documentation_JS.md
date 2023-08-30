@@ -421,7 +421,7 @@ obj['last' + nameKey];
 2. If we try to **access** value which does not exist in Object then we will get **undefined**
 ---
 ## 📘Objects and Object Literals
-
+1. With **ES5**
 ```javascript
 // comparing current example with above example the object literals are easy to write and easy to read
 var person = {
@@ -455,6 +455,43 @@ greet({
 });
 
 ```
+2. With **ES6**
+
+* Properties short-cut
+```js
+const firstname = "Deepinder";
+let obj = {
+    firstname
+}
+console.log(obj);   // {firstname: 'Deepinder'}
+```
+* Function Short-cut
+```js
+const firstname = "Deepinder";
+let obj = {
+    firstname,
+    getFullName() {     // writing short name
+        return this.firstname
+    }
+}
+console.log(obj.getFullName());
+```
+* Computed Properties
+
+```js
+const weeks = [1, 2, 3, 4, 5, 6, 7];
+let obj = {
+    [weeks[0]]: "Monday",
+    [weeks[1]]: "Tuesday",
+    [weeks[2]]: "Wednesday",
+    [weeks[3]]: "Thursday",
+    [weeks[4]]: "Friday",
+    [weeks[5]]: "Saturday",
+    [weeks[6]]: "Sunday"
+}
+console.log(obj);   // {1: 'Monday', 2: 'Tuesday', 3: 'Wednesday', 4: 'Thursday', 5: 'Friday', 6: 'Saturday', 7: 'Sunday'}
+```
+
 ---
 ## 📘 Namespace :
 * **Namespace :** a container for variables and functions. Typically to keep variables functions with the same name separate.
@@ -1475,7 +1512,7 @@ a === b                // false (number === object)
 
 ---
 
-## 📘Dangerous Side Arrays and for in
+## 📘Dangerous Side Arrays and for-in
 In javascript Arrays are objects that is the reason we access property like this
 ```javascript
 var a = ['aa','bb','cc'];
@@ -1484,8 +1521,10 @@ a[0] // a
 
 // 0 : Key name & aa : is Value name
 ```
-* For Array always use **simple for loop**
-* For Objects always use **for in Loop**
+⚠️ **Note :**
+
+* For Array always use **simple for loop** and **for-of**, You cannot print index in for-of Loop
+* For Objects always use **for-in Loop**
 
 ```javascript
 Array.prototype.myCustomeFeatures = 'cool!';
