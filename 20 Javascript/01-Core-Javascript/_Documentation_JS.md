@@ -533,6 +533,18 @@ console.log(Object.entries(obj));
 // 0 : ['firstName', 'Depeu']
 // 1 : ['lastName', 'Singh']
 ```
+⚠️ **Conceptual Example :** Destructuring in for-of loop
+
+```js
+let obj = {
+    firstName: "Depeu",
+    lastName: "Singh"
+}
+
+for (const [firstName, lastName] of Object.entries(obj)) {
+    console.log(firstName + ' : ' + lastName);
+}
+```
 
 ---
 ## 📘 Namespace :
