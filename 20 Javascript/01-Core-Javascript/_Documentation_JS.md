@@ -285,7 +285,7 @@ isNew = 'yup!';
 isNew = 1;
 ```
 ---
-## 📘 Primitive types
+## 📘 Primitive types and Non Primitives types
 * **Primitive type :** A type of data that represents a single value. That is, not an object.
 
 1. **undefined :** undefined represents lack of existence (you should'nt set a variable to this)
@@ -295,8 +295,69 @@ isNew = 1;
 5. **String :** a sequence of character (both '' and "" can be used)
 6. **Symbol :** used in ES6
 
----
+* **Non-Primitive** : A type of data that represents multiple value.
 
+1. **Object**
+2. **Array**
+3. **Functions**
+
+## 📘 Other Data-Structures (ES6)
+1. **Sets :** 
+* A collection of unique values, so that means that a set can never have any duplicates. (its kind of array not exactly array)
+* Actual use is to **remove duplicate** values from arrays.
+* In **set** order does not matter, hence we cannot access values by using **index**. only use to check the values exist or not.
+* **Set** are iterable.
+```js
+const orderset = new Set(['pasta', 'pizza', 'pizza', 'Risotto', 'pasta', 'pizza']);
+console.log(orderset);  //  {'pasta', 'pizza', 'Risotto'}
+
+console.log(orderset.size);
+console.log(orderset.has('pizza')); // true
+console.log(orderset.has('maggi')); // false
+
+orderset.add('Garlic Bread');
+orderset.add('Garlic Bread');   // this will not added
+
+console.log(orderset);  // {'pasta', 'pizza', 'Risotto', 'Garlic Bread'}
+
+orderset.delete('pasta');
+console.log(orderset);  // {'pizza', 'Risotto', 'Garlic Bread'}
+
+for(let i of orderset) {
+    console.log(i)          // 'pizza', 'Risotto', 'Garlic Bread'
+}
+
+
+// Actual Real Example of Set
+const arr = ['pasta', 'pizza', 'pizza', 'Risotto', 'pasta', 'pizza'];
+const orderset = [...new Set(arr)];
+console.log(orderset);  //  {'pasta', 'pizza', 'Risotto'}
+```
+
+2. **Maps :**
+* its like *Objects* but the major difference is that, in objects the **keys are basically always strings**, but in maps we can have any type of key. it could even **be objects, or arrays or other maps.**
+
+```js
+const rest = new Map()  // always create empty map here
+rest.set('name', 'Deepu Bhasin');
+rest.set(1, 'web-developer');
+rest.set(true, 'apple')
+
+const arr = [1, 2];
+rest.set(arr, 'array value')
+
+
+console.log(rest.get(arr)); // array value
+console.log(rest.get(1));   //web-developer
+console.log(rest.get('1')); // undefined
+
+console.log(rest.has(true));    // true
+console.log(rest.has('test'));  // false
+
+console.log(rest.size);     // 3
+```
+
+---
 ## 📘 Operator Precedence and Associativity
 * **Operator Precedence :** which operator function gets called first. Functions are called in order of precedence (HIGHER precendence wins). Example : BDMAS
 ```javascript
