@@ -338,6 +338,8 @@ console.log(orderset);  //  {'pasta', 'pizza', 'Risotto'}
 * its like *Objects* but the major difference is that, in objects the **keys are basically always strings**, but in maps we can have any type of key. it could even **be objects, or arrays or other maps.**
 
 ```js
+// 1. Creating Map in this way
+
 const rest = new Map()  // always create empty map here
 rest.set('name', 'Deepu Bhasin');
 rest.set(1, 'web-developer');
@@ -355,11 +357,94 @@ console.log(rest.has(true));    // true
 console.log(rest.has('test'));  // false
 
 console.log(rest.size);     // 3
+
+
+// 2. Creating Map in this way
+
+const question = new Map([
+    ['question', 'what is the best programming language in the world'],
+    [1, 'c'],
+    [2, 'java'],
+    [true, 'correct'],
+    [false, 'Try Again']
+]);
+
+console.log(question)   //  {'question' => 'what is the best programming language in the world', 1 => 'c', 2 => 'java', true => 'correct', false => 'Try Again'}
+
+ for (let [key, value] of question) {
+    console.log(key + ' : ' + value);
+}
+
+// question : what is the best programming language in the world
+// 1 : c
+// 2 : java
+// true : correct
+// false : Try Again
+
+
+// Converting into array once again 
+const array = [...questions];
+```
+---
+
+## 📘Source of Data
+
+![Image](./images/source-of-data.png)
+
+![Image](./images/arrays-vs-set-object-vs-maps.png)
+---
+
+## 📘Stings & String Methods
+
+```js
+let firstname = "Deepinder Singh";
+
+console.log(firstname[0];)   // D
+console.log(firstname[1];)   // e
+console.log(firstname[2];)   // e
 ```
 
+* Methods
+
+1. indexOf
+2. lastIndexOf
+3. slice
+4. splice
+5. includes
+6. replace
+7. toLowerCase
+8. toUpperCase
+9. split
+10. join
+
+* Examples
+
+```js
+console.log('I am Web Developer'[0]);   // I
+console.log('I am Web Developer'[2]);   // a
+console.log('I am Web Developer'.length);   // 18
+
+// Methods
+// 1. indexOf
+console.log('I am Web Developer'.indexOf('a'));   // 2
+console.log('I am Web Developer'.indexOf('Web')); // 5
+
+// 2. lastIndexOf
+console.log('I am Web Developer'.lastIndexOf('Web')); // 5
+console.log('I am Web Developer'.lastIndexOf('e'));   // 16
+
+// 3. slice
+console.log('I am Web Developer'.slice(3));    // m Web Developer
+console.log('I am Web Developer'.slice(3, 7)); // m We
+
+// 4. includes
+console.log('I am Web Developer'.includes('Web'));  // true
+console.log('I am Web Developer'.includes('test')); // false
+```
 ---
+
 ## 📘 Operator Precedence and Associativity
-* **Operator Precedence :** which operator function gets called first. Functions are called in order of precedence (HIGHER precendence wins). Example : BDMAS
+* **Operator Precedence :** which operator function gets called first. Functions are called in order of precedence (HIGHER precedence wins). Example : BDMAS
 ```javascript
 var a = 3 + 4 * 5;
 console.log(a); //23
@@ -371,7 +456,7 @@ console.log(a); //23
 
 ```javascript
 var a = 1 + '2';
-console.log(a);     //
+console.log(a);
 ```
 ## 📘 Comparison
 
@@ -616,7 +701,7 @@ var greet = 'Hello!';
 var greet = 'Hola!';
 console.log(greet);
 
-// namespacing helping to resolve the issue of namespace collisions (means same name variables)
+// name spacing helping to resolve the issue of namespace collisions (means same name variables)
 var english = {};
 var spanish = {};
 
@@ -737,7 +822,7 @@ log('Hello');       // create string on fly
 
 log(function(){ console.log('Hi')}) // create function as  object on fly && it is considered as function expression
 ```
-Functions can pass as parameter in which you can pass function as paremeter use them like you do varaiables to other functions as well *introduces an entirely new class of programming called **Functional Programming***
+Functions can pass as parameter in which you can pass function as parameter use them like you do variables to other functions as well *introduces an entirely new class of programming called **Functional Programming***
 
 ---
 ## 📘 Pass By Value Vs By Reference
@@ -751,7 +836,6 @@ Functions can pass as parameter in which you can pass function as paremeter use 
 
 ![Image](./images/pass-by-refrence-2.png)
 
-* **Pass by value :** Simply means we copy the value and we create that value some where else in memory all **primitves types** are *Pass by refernce* examples. number, boolean, string etc
 ```javascript
 var a = 10;
 var b = a;
@@ -762,7 +846,7 @@ console.log(b) // 10
 ```
 ![image](./images/pass-by-refrence.png)
 
-*  __Pass by Reference__ : Objects in javacsript are stored in memory and are passed by reference. This means that we don't copy the value are did with primitive types. All **Objects types** are *Pass by reference* examples. array, funtions and objects
+*  __Pass by Reference__ : Objects in javascript are stored in memory and are passed by reference. This means that we don't copy the value are did with primitive types. All **Objects types** are *Pass by reference* examples. array, functions and objects
 
 ```javascript
 let obj1 = { name: "Deepu", password: "123" };
@@ -791,7 +875,7 @@ console.log(obj1);
 // { name: "dp", password: "456" };
 console.log(obj2);
 
-// equals operators sets up a new memrory space (new Address)
+// equals operators sets up a new memory space (new Address)
 obj1 = {name : 'Noni', password : '123'};
 
 console.log(obj1)
@@ -968,7 +1052,7 @@ obj.getFullName();
 ```
 ## 📘 Arrays (Collections of Anything)
 
-* Arrays are dyanmically type in javascript
+* Arrays are dynamically type in javascript
 
 ```javascript
 var arr = new Array();
@@ -992,6 +1076,29 @@ var array = [
 
 arr[3](arra[2].name)   // Hello Tony
 ```
+---
+
+## 📘 Functions and Default Parameters
+
+```js
+const bookings = [];
+const createBooking = function (
+    flightNum,
+    numPassengers = 1,
+    price = 199 * numPassengers
+) {
+    console.log(flightNum, numPassengers, price);
+};
+
+createBooking('LH1')
+createBooking('LH1', 3);
+createBooking('LH1', undefined, 2);
+```
+⚠️ **Note :** 
+* *javascript does not have passing by reference, only passing* by value even though it look like it's passing by reference. so there are language like c++, where you can pass a reference to any value, instead of the value itself. this works even with primitives, so you could pass a reference to the value of five. and then the original value outside of the function, would be changed and this is called pass by reference. 
+* for Objects, we do in fact pass in a reference so the memory address of the object. However that reference itself is still a value, it's simply a value that contains a memory address, so basically we pass a reference to the function but we do not pass by reference this is important thing.
+---
+
 ## 📘 arguments and Spread
 * **Arguments :** The parameters you pass to a function. javascript gives you keyword of the same name which contains them all. These are useful when you want to **send more parameter then defined**.
 * 'arguments' : is something special that the javascript engine sets up for you.
@@ -1164,7 +1271,7 @@ The closure also has access to __parameters__ :
 ```javascript
 const globalVariable = 'global var';
 
-function outterFunc(param1) {
+function outerFunc(param1) {
 
     const variable1 = 'var one';
 
@@ -1180,7 +1287,7 @@ function outterFunc(param1) {
     innerFunc('param one');
 }
 
-outterFunc('param two');
+outerFunc('param two');
 ```
 
 ```javascript
