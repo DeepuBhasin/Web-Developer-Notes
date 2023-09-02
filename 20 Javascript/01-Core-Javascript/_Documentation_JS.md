@@ -302,7 +302,7 @@ isNew = 1;
 3. **Functions**
 
 ## 📘 Other Data-Structures (ES6)
-1. **Sets :** 
+1. **Sets :**
 * A collection of unique values, so that means that a set can never have any duplicates. (its kind of array not exactly array)
 * Actual use is to **remove duplicate** values from arrays.
 * In **set** order does not matter, hence we cannot access values by using **index**. only use to check the values exist or not.
@@ -382,7 +382,7 @@ console.log(question)   //  {'question' => 'what is the best programming langua
 // false : Try Again
 
 
-// Converting into array once again 
+// Converting into array once again
 const array = [...questions];
 ```
 ---
@@ -652,13 +652,13 @@ let obj = {
 // Chaining
 console.log(obj.address.streetNo);  // 3
 
-// Optional Chaining 
+// Optional Chaining
 console.log(obj.address?.near);     // undefined
 ```
 ⚠️ **Note :** in **Optional Chaining:** instead of **reference error** it will return **undefined** , if the value does not exist.
 ---
 
-## 📘 useful In-built Objects Properties 
+## 📘 useful In-built Objects Properties
 
 * **Object.keys(Object)**
 ```js
@@ -929,10 +929,10 @@ The __this__ keyword is actually pretty straightforward to understand __what is 
 * On Object Level : __this === current Object__
 
 ```javascript
-// globale execution context
+// globals execution context
 console.log(this);       // window object
 
-// Function A Execution context and getting own this kwyword but it pointing to window object (same memory location)
+// Function A Execution context and getting own this keyword but it pointing to window object (same memory location)
 function a() {
     console.log(this);   // window object
     this.newVariable = 'hello';
@@ -1094,11 +1094,44 @@ createBooking('LH1')
 createBooking('LH1', 3);
 createBooking('LH1', undefined, 2);
 ```
-⚠️ **Note :** 
-* *javascript does not have passing by reference, only passing* by value even though it look like it's passing by reference. so there are language like c++, where you can pass a reference to any value, instead of the value itself. this works even with primitives, so you could pass a reference to the value of five. and then the original value outside of the function, would be changed and this is called pass by reference. 
+⚠️ **Note :**
+* *javascript does not have passing by reference, only passing* by value even though it look like it's passing by reference. so there are language like c++, where you can pass a reference to any value, instead of the value itself. this works even with primitives, so you could pass a reference to the value of five. and then the original value outside of the function, would be changed and this is called pass by reference.
 * for Objects, we do in fact pass in a reference so the memory address of the object. However that reference itself is still a value, it's simply a value that contains a memory address, so basically we pass a reference to the function but we do not pass by reference this is important thing.
 ---
 
+## 📘First-Class functions Vs Higher-Order functions
+
+![Image](./images/first-class-functions-higher-order-functions.png)
+
+```js
+const oneWord = function (str) {
+    return str.replace(/ /g, '').toLowerCase();
+}
+
+const upperFirstWord = function (str) {
+    const [first, ...others] = str.split(' ');
+    return [first.toUpperCase(), ...others].join(' ');
+}
+
+// Higher Order function (transform)
+const transform = function (str, fn) {
+    console.log(`Original string : ${str}`);
+    console.log(`Transformed string: ${fn(str)}`);
+    console.log(`Transformed by : ${fn.name}`);
+}
+transform('Javascript is the best !', upperFirstWord);  // here upperFirstWord is a callback function
+
+// Original string : Javascript is the best
+// Transformed string: JAVASCRIPT is the best
+// Transformed by : upperFirstWord
+
+transform('Javascript is the best !', oneWord); // here oneWord is a callback function
+// Original string : Javascript is the best !
+// Transformed string: javascriptisthebest!
+// Transformed by : oneWord
+```
+
+---
 ## 📘 arguments and Spread
 * **Arguments :** The parameters you pass to a function. javascript gives you keyword of the same name which contains them all. These are useful when you want to **send more parameter then defined**.
 * 'arguments' : is something special that the javascript engine sets up for you.
@@ -2727,7 +2760,7 @@ console.log(greeting1);     // Hi Tony Alicea
 ```
 
 ## 📘Destructuring  (on Array and Objects)
-* Destructuring is used to Destructure the values 
+* Destructuring is used to Destructure the values
 * Major Differnec beteen Object And Array Destructuring is **Order matter in array Destructuring but in Object only name**
 * Rest Operator is used for get all values and always use at the end
 
@@ -2957,7 +2990,7 @@ console.log(others);
 ```js
 function sum(...numbers) {
      // its now array
-    console.log(numbers);      
+    console.log(numbers);
 }
 sum(1, 2, 3, 4, 5, 6, 7, 8, 9);
 ```
@@ -2968,7 +3001,7 @@ sum(1, 2, 3, 4, 5, 6, 7, 8, 9);
 
 ```js
 undefined || null || '' || false || 0 || 'Hello' || 23  // 'Hello'
-'test' || 'ok'  // test 
+'test' || 'ok'  // test
 '' || 'ok'  // ok
 ```
 * AND Operator (&&) : it will return **false** value if the first value is false, it works opposite to **OR Operator**
