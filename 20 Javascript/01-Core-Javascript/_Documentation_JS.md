@@ -1223,6 +1223,7 @@ var person = {
 ---
 ## 📘 IIFEs
 * **Immediately Invoked Function Expressions** - A function that is executed right after it is created.
+* This function run once means not get store any where so we cannot call at any instance.
 
 ```javascript
 
@@ -1289,10 +1290,10 @@ var greeting = 'Hola';
 ---
 
 ## 📘Closure
+* **closure** is an inner function that has access to the scope of an enclosing function.
+* we don't create closure manually like we create a new array or a new function so a closure simply happens automatically in certain situations, we just need to recognize those situations.
 
-A **closure** is an inner function that has access to the scope of an enclosing function.<br/>
-
-A Closure has access to **variables** in 3 separate Scopes :
+> Closure has access to **variables** in 3 separate Scopes :
 1. Variables in its own scope.
 2. Variables in the scope of the outer function.
 3. Variables in the global scope.
@@ -1340,7 +1341,7 @@ sayHi('Tony');
 ![Image](./images/closures-2.png)
 
 ```javascript
-// Comman Example
+// Common Example
 function buildFunctions () {
     var arr = [];
     for(var i = 0; i < 3; i++) {
@@ -1350,7 +1351,7 @@ function buildFunctions () {
 }
 
 var fs = buildFunctions();
-// all are getting same 3 value because there environment is same means they all are referering to same 'i' variable
+// all are getting same 3 value because there environment is same means they all are referring to same 'i' variable
 fs[0]();    //3
 fs[1]();    //3
 fs[2]();    //3
@@ -1372,7 +1373,7 @@ arr.push(
 📚 **Conceptual Example :** Function Factories Pattern
 
 ```javascript
-function makeGreeting (langauge) {
+function makeGreeting (language) {
     return function (firstname, lastname){
         if(language === 'en') {
             console.log('Hello '+ firstname + ' ' + lastname)
@@ -1396,6 +1397,20 @@ greetSpanish('john', 'Doe');
 ![Image](./images/function-factories-2.png)
 ![Image](./images/function-factories-3.png)
 ![Image](./images/function-factories-4.png)
+
+⚠️ **Note :** conceptual Example
+
+```js
+let f;
+const g = function () {
+    const a = 23;
+    f = function () {
+        console.log(a * 2)
+    }
+}
+g();
+f();
+```
 
 ---
 
