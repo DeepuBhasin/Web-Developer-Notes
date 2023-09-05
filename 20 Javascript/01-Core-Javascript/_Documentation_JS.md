@@ -416,6 +416,7 @@ console.log(firstname[2];)   // e
 8. toUpperCase
 9. split
 10. join
+11. at(1) & at(-1)
 
 * Examples
 
@@ -3040,16 +3041,36 @@ console.log(test ?? 'Hello');   // 0
 ```
 ---
 ## 📘Arrays Methods
-1. Map
-2. Filter
-3. Reduce
-4. Sort
-5. include
-6. some
-7. every
-8. indexOf
+1. slice
+2. splice  (mutate original)
+3. reverse (mutate original)
+4. join
+5. at(1) & at(-1) 
+6. Map
+7. Filter
+8. Reduce
+9. Sort
+10. include
+11. some
+12. every
+13. indexOf
 
 ```js
+// Slice
+var startPosition = 0;
+var endPosition = 2;
+[1, 2, 3, 4, 5].slice();       // [1, 2, 3, 4, 5]   // shallow copy
+[1, 2, 3, 4, 5].slice(startPosition, endPosition);   // [1, 2]            // length = 2 - 0 = 2
+
+// Splice
+let arr = [1, 2, 3, 4, 5];
+var startPosition = 1;
+var howManyNeedToDelete = 1;
+var arrayNeedToAdd = [6, 7, 8, 9, 10];
+arr.splice(startPosition, howManyNeedToDelete, ...arrayNeedToAdd)
+console.log(arr);   // [1, 6, 7, 8, 9, 10, 3, 4, 5]
+
+// Sort
 const arr = [3, 7, 1, 9, 6];
 const sorted = arr.sort((a, b) => a - b);
 sorted  // [ 1, 3, 6, 7, 9 ]
@@ -3057,6 +3078,11 @@ sorted  // [ 1, 3, 6, 7, 9 ]
 const desc = arr.sort((a, b) => b - a)
 desc    // [ 9, 7, 6, 3, 1 ]
 ```
+
+⚠️ **Note :** in **forEach loops** you cannot add **continue & break** statements only in for loops you can.
+
+---
+
 
 ## 📘What is DOM
 * *In Simple words DOM is basically a connection point between HTML documents and Javascript Code. *
@@ -3108,6 +3134,25 @@ msg.textContent = 'testing ....';
 const bodyElement = document.querySelector('body');
 
 ```
+---
+
+## 📘Create Element
+
+```js
+let body = document.querySelector('body');
+let div = document.createElement('div');
+div.className = 'demo';
+div.innerHTML = `<h1>Hello World</h1>`;
+
+let p = document.createElement('p');
+p.className = 'hello';
+p.innerHTML = "This is html element"
+
+body.append(div);
+body.append(p);
+```
+![Image](./images/creating-element.png)
+
 ---
 
 ## 📘Event Listeners
