@@ -291,7 +291,9 @@ isNew = 1;
 1. **undefined :** undefined represents lack of existence (you should'nt set a variable to this)
 2. **Null :** null represents lack of existence (you can set a variable to this)
 3. **Boolean** : true or false
-4. **Number :** Floating point number (there's always some decimals). Unlike other programming languages, there's only one 'number' type ... and it can make math weird.
+4. **Number :** 
+   1. Floating point number (there's always some decimals). Unlike other programming languages, there's only one 'number' type ... and it can make math weird.
+   2. *in javaScript, all numbers are represented internally as floating point numbers so basically always as decimals no matter we are writing as integer or as decimal*. example *23 == 23.00 (true)*
 5. **String :** a sequence of character (both '' and "" can be used)
 6. **Symbol :** used in ES6
 
@@ -392,6 +394,43 @@ const array = [...questions];
 ![Image](./images/source-of-data.png)
 
 ![Image](./images/arrays-vs-set-object-vs-maps.png)
+---
+
+## 📘Numbers
+* Conversion
+
+```js
+Number('23')    // 23
++'23'           // 23
+```
+* Parsing
+
+```js
+Number.parseInt('2px')      // 2
+Number.parseFloat('2.5rm')  // 2.5
+```
+
+* Checking Number
+```js
+// Only check number or not
+Number.isNaN(10)        // false
+Number.isNaN('20')      // false
+Number.isNaN(+'20px')   // true
+Number.isNaN(20/0)      // false
+
+// For checking Integer Values
+Number.isInteger(10)        // true
+Number.isInteger(10.2)      // false
+Number.isInteger('20')      // false
+Number.isInteger(+'20px')   // false
+Number.isInteger(20/0)      // false
+
+// For checking Float Values (best)
+Number.isFinite(10)        // true
+Number.isFinite('20')      // false
+Number.isFinite(+'20px')   // false
+Number.isFinite(20/0)      // false
+```
 ---
 
 ## 📘Stings & String Methods
@@ -3261,3 +3300,37 @@ body.append(p);
 </script>
 ```
 ![Image](./images/dom-style.png)
+
+## 📘Math
+* squaroot
+
+```js
+Math.sqrt(25)   // 5
+```
+
+* Min and Max
+```js
+Math.max(5, 1, 2, 3, 4)  // 5
+Math.min(5, 1, 2, 3, 4)  // 1
+```
+
+* Random Number
+
+```js
+Math.trunc(Math.random() * 6) + 1;
+```
+* Round, ceil, floor, trunc
+```js
+Math.round(23.4) // 23
+Math.round(23.7) // 24
+
+Math.ceil(23.3)  // 24
+Math.ceil(23.7)  // 24
+
+Math.floor(23.4) // 23
+Math.floor(23.7) // 23
+
+Math.trunc(23.4) // 23
+Math.trunc(23.4) // 23
+```
+
