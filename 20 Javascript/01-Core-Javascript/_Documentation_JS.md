@@ -656,10 +656,11 @@ console.log(obj.address.streetNo);  // 3
 // Optional Chaining
 console.log(obj.address?.near);     // undefined
 ```
-⚠️ **Note :** in **Optional Chaining:** instead of **reference error** it will return **undefined** , if the value does not exist.
+⚠️ **Note :** in *Optional Chaining* instead of *reference error* it will return *undefined*, if the value does not exist.
+
 ---
 
-## 📘 useful In-built Objects Properties
+## 📘Useful In-built Objects Properties
 
 * **Object.keys(Object)**
 ```js
@@ -3050,10 +3051,12 @@ console.log(test ?? 'Hello');   // 0
 7. Filter
 8. Reduce
 9. Sort
-10. include
-11. some
-12. every
-13. indexOf
+10. some (return true/false)
+11. every (return true/false)
+12. include (return true/false)
+13. indexOf (return index)
+14. find (return value)
+15. findIndex(return value index)
 
 ```js
 // Slice
@@ -3081,7 +3084,8 @@ desc    // [ 9, 7, 6, 3, 1 ]
 
 ⚠️ **Note :**
 * in **forEach loops** you cannot add **continue & break** statements only in for loops you can.
-* **forEach methods** create **sideEffects** because of forEach we mutate the orginal array while in **map method** we cannot mutate the original array because it create new array.
+* **forEach methods** create **sideEffects** because of forEach we mutate the orginal array while in **map method** we cannot mutate the original array because it create new arra, and when we are doing sideEffect are not use *return* statement as well example in **forEach method** 
+* In **for loops** we create extra variables to store the results which create Problem while reading variables. but **map, filter, reduce** also reduce this problem. 
 ```js
 let array = [1, 2, 3, 4, 5];
 
@@ -3097,6 +3101,26 @@ array.forEach((element, i) => {
 
 // Foreach Method
 console.log(array); // original & forEach array
+```
+## 📘Delete Element from Object OR Array
+* **delete Method** (for array and Object)
+```js
+let array = [1, 2, 3, 4, 5];
+delete array[2];    // [1, 2, empty, 4, 5]
+console.log(array);
+
+let obj = {
+    firstname: "Deepinder",
+    lastname: "Singh"
+};
+delete obj['lastname'];
+console.log(obj);   // {firstname: 'Deepinder'}
+```
+* **splice method** (for array)
+
+```js
+let array = [1, 2, 3, 4, 5];
+array.splice(1, 1)  // [1, 3, 4, 5]
 ```
 
 ---
