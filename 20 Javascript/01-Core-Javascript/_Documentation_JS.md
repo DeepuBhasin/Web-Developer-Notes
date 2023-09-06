@@ -3057,7 +3057,10 @@ console.log(test ?? 'Hello');   // 0
 13. indexOf (return index)
 14. find (return value)
 15. findIndex(return value index)
+16. flat
+17. flatMap
 
+* Slice & Splice
 ```js
 // Slice
 var startPosition = 0;
@@ -3072,7 +3075,9 @@ var howManyNeedToDelete = 1;
 var arrayNeedToAdd = [6, 7, 8, 9, 10];
 arr.splice(startPosition, howManyNeedToDelete, ...arrayNeedToAdd)
 console.log(arr);   // [1, 6, 7, 8, 9, 10, 3, 4, 5]
-
+```
+* Sort
+```js
 // Sort
 const arr = [3, 7, 1, 9, 6];
 const sorted = arr.sort((a, b) => a - b);
@@ -3081,6 +3086,17 @@ sorted  // [ 1, 3, 6, 7, 9 ]
 const desc = arr.sort((a, b) => b - a)
 desc    // [ 9, 7, 6, 3, 1 ]
 ```
+
+* Flatten Array
+```js
+var arr = [1, [2, [3, [4, [5, [6, [7, 8, [9, 10]]]]]]]];
+var result = arr.flat();
+console.log(result);
+
+var result = arr.flat(Infinity);
+console.log(result);
+```
+
 
 ⚠️ **Note :**
 * in **forEach loops** you cannot add **continue & break** statements only in for loops you can.

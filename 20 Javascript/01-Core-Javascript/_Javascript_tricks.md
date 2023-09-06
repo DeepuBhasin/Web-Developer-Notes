@@ -19,15 +19,15 @@
 
 * Converting Array into object
 ```js
-var teckBrand = [
+var techBrand = [
     "Facebook",
     "Apple",
-    "Amazone",
+    "Amazons",
     "Netflix",
     "Google"
 ]
 
-var object = { ...teckBrand };
+var object = { ...techBrand };
 console.log(object);
 ```
 * Bases on condition
@@ -41,15 +41,7 @@ const student = {
 
 console.log(student);
 ```
-* Swaping numbers
 
-```js
-var a = 10;
-var b = 20;
-[a, b] = [b, a];
-
-console.log(a, b);
-```
 ## 📘Console
 
 * console.time
@@ -122,17 +114,6 @@ const grade2 = '';
 console.log(!!grade2);
 ```
 
-* use the **??** operator to check whether a variable is **null or undefined**
-```js
-var test;
-console.log(test ?? 'undefined');
-
-var test = null;
-console.log(test ?? 'null');
-
-var test = 'Deepu';
-console.log(test ?? 'undefined or null');
-```
 
 * Return Expression
 
@@ -152,27 +133,12 @@ console.log("a" + +"b");    // aNaN
 console.log(+"a" + +"b");   // NaN
 console.log(+"a" + "b");    //NaNb
 ```
-* Short circuit **|| or &&**
-```js
-var number = 10 || '';          // 10
-var name = true && 'Deepinder'  // 'Deepinder'
-```
 
 ---
 ## 📘Strings
 
 ```js
 var str = 'Hello My name is Deepinder singh and I am working as React Engineer. I am working in various companies. I working very hard to learn new things. I am also working in backend some time';
-
-// exist
-var sub = 'name';
-var result = str.includes(sub)
-console.log(result);            // true
-
-//exist where
-var sub = 'name';
-var result = str.indexOf(sub);
-console.log(result);
 
 //exist how many times
 var sub = 'working';
@@ -182,32 +148,6 @@ console.log(result);
 ---
 ## 📘Arrays
 
-* Flatten Array
-```js
-var arr = [1, [2, [3, [4, [5, [6, [7, 8, [9, 10]]]]]]]];
-var result = arr.flat();
-console.log(result);
-
-var result = arr.flat(Infinity);
-console.log(result);
-```
-* Remove Duplicate Value from Array
-
-```js
-var arr = [1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 8, 8, 8];
-console.log(...new Set(arr));
-```
-* Index Value
-
-```js
-var test = ['Deepinder', 'Deepu', 'Deepi', 'Dp'];
-
-console.log(test[0]);
-console.log(test.at(0));
-
-console.log(test[test.length - 1]);
-console.log(test.at(3));
-```
 * Create New array with in react (for dummy)
 
 ```js
@@ -264,40 +204,6 @@ let sortedArray = array.slice().sort((a, b) => a.id - (b.id))
 */
 
 ```
-
----
-## 📘Objects
-
-* Getting Both key and values
-
-```js
-let obj = {
-    name: 'Deepu',
-    age: 29,
-    phone: '9915099247',
-    job: 'Developer'
-}
-
-for (const [key, value] of Object.entries(obj)) {
-    console.log(`${key} : ${value}`);
-}
-```
-* 3 best features of Object
-
-```js
-const firstName = "Deepinder";
-const key = 'lastname';
-let obj = {
-    firstName,           // key and value name same
-    [key]: 'Singh',      // create dynamic key
-    getFullName() {      // do not write to function keyword
-        return this.firstName + ' ' + this[key]
-    }
-}
-console.log(obj.getFullName());
-```
-
-
 ---
 ## 📘Loops
 * Use **For in** always on **Objects**
