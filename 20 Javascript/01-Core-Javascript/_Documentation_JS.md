@@ -291,7 +291,7 @@ isNew = 1;
 1. **undefined :** undefined represents lack of existence (you should'nt set a variable to this)
 2. **Null :** null represents lack of existence (you can set a variable to this)
 3. **Boolean** : true or false
-4. **Number :** 
+4. **Number :**
    1. Floating point number (there's always some decimals). Unlike other programming languages, there's only one 'number' type ... and it can make math weird.
    2. *in javaScript, all numbers are represented internally as floating point numbers so basically always as decimals no matter we are writing as integer or as decimal*. example *23 == 23.00 (true)*
 5. **String :** a sequence of character (both '' and "" can be used)
@@ -3143,7 +3143,7 @@ var arr = new Array(7).fill(1);
 console.log(arr);   //  [1, 1, 1, 1, 1, 1, 1]
 
 
-// basically this Array.from method create array from other data structure example array from iterable things example [...new Set()] 
+// basically this Array.from method create array from other data structure example array from iterable things example [...new Set()]
 var arr = Array.from(
     { length: 10 },
     (element, index) => index + 1
@@ -3153,8 +3153,8 @@ console.log(arr);   // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 ⚠️ **Note :**
 * in **forEach loops** you cannot add **continue & break** statements only in for loops you can.
-* **forEach methods** create **sideEffects** because of forEach we mutate the orginal array while in **map method** we cannot mutate the original array because it create new arra, and when we are doing sideEffect are not use *return* statement as well example in **forEach method** 
-* In **for loops** we create extra variables to store the results which create Problem while reading variables. but **map, filter, reduce** also reduce this problem. 
+* **forEach methods** create **sideEffects** because of forEach we mutate the orginal array while in **map method** we cannot mutate the original array because it create new arra, and when we are doing sideEffect are not use *return* statement as well example in **forEach method**
+* In **for loops** we create extra variables to store the results which create Problem while reading variables. but **map, filter, reduce** also reduce this problem.
 ```js
 let array = [1, 2, 3, 4, 5];
 
