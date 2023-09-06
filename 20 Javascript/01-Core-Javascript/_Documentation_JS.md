@@ -3059,6 +3059,7 @@ console.log(test ?? 'Hello');   // 0
 15. findIndex(return value index)
 16. flat
 17. flatMap
+18. new Array(7).fill(1)
 
 * Slice & Splice
 ```js
@@ -3096,7 +3097,20 @@ console.log(result);
 var result = arr.flat(Infinity);
 console.log(result);
 ```
+* Creating & filling Array
 
+```js
+var arr = new Array(7).fill(1);
+console.log(arr);   //  [1, 1, 1, 1, 1, 1, 1]
+
+
+// basically this Array.from method create array from other data structure example array from iterable things example [...new Set()] 
+var arr = Array.from(
+    { length: 10 },
+    (element, index) => index + 1
+);
+console.log(arr);   // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+```
 
 ⚠️ **Note :**
 * in **forEach loops** you cannot add **continue & break** statements only in for loops you can.
@@ -3118,6 +3132,10 @@ array.forEach((element, i) => {
 // Foreach Method
 console.log(array); // original & forEach array
 ```
+
+![Image](./images/array-methods.png)
+
+---
 ## 📘Delete Element from Object OR Array
 * **delete Method** (for array and Object)
 ```js
@@ -3138,7 +3156,6 @@ console.log(obj);   // {firstname: 'Deepinder'}
 let array = [1, 2, 3, 4, 5];
 array.splice(1, 1)  // [1, 3, 4, 5]
 ```
-
 ---
 ## 📘What is DOM
 * *In Simple words DOM is basically a connection point between HTML documents and Javascript Code. *

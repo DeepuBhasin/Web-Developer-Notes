@@ -135,25 +135,9 @@ console.log(+"a" + "b");    //NaNb
 ```
 
 ---
-## 📘Strings
-
-```js
-var str = 'Hello My name is Deepinder singh and I am working as React Engineer. I am working in various companies. I working very hard to learn new things. I am also working in backend some time';
-
-//exist how many times
-var sub = 'working';
-var result = str.split(sub).length - 1;
-console.log(result);
-```
----
 ## 📘Arrays
 
-* Create New array with in react (for dummy)
-
-```js
-Array.from({length : 20}, (_,i) => i +1).map(item => `value : ${item}`)
-```
-* Sort Method
+* Sort Method (for string)
 
 ```js
 const array = [
