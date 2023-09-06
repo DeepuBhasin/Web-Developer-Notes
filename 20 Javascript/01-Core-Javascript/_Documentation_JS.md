@@ -3334,3 +3334,8 @@ Math.trunc(23.4) // 23
 Math.trunc(23.4) // 23
 ```
 
+* for Decimal
+
+```js
+(23.345).toFixed(2)     // 23.34
+``
