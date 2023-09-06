@@ -3045,7 +3045,7 @@ console.log(test ?? 'Hello');   // 0
 2. splice  (mutate original)
 3. reverse (mutate original)
 4. join
-5. at(1) & at(-1) 
+5. at(1) & at(-1)
 6. Map
 7. Filter
 8. Reduce
@@ -3079,11 +3079,27 @@ const desc = arr.sort((a, b) => b - a)
 desc    // [ 9, 7, 6, 3, 1 ]
 ```
 
-⚠️ **Note :** in **forEach loops** you cannot add **continue & break** statements only in for loops you can.
+⚠️ **Note :**
+* in **forEach loops** you cannot add **continue & break** statements only in for loops you can.
+* **forEach methods** create **sideEffects** because of forEach we mutate the orginal array while in **map method** we cannot mutate the original array because it create new array.
+```js
+let array = [1, 2, 3, 4, 5];
+
+let mapArray = array.map(element => element * element);
+
+// Map Method
+console.log(array);     // original Array
+console.log(mapArray);  // Map array
+
+array.forEach((element, i) => {
+    array[i] = element * element;
+});
+
+// Foreach Method
+console.log(array); // original & forEach array
+```
 
 ---
-
-
 ## 📘What is DOM
 * *In Simple words DOM is basically a connection point between HTML documents and Javascript Code. *
 * DOM is automatically created by the browser as soon as the HTML page loads and it's stored in a tree structure like in the given image, in this each html element is one object
