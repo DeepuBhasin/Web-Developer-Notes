@@ -3355,7 +3355,7 @@ now = new Date('December 24, 2015');
 console.log(now);
 //Thu Dec 24 2015 00:00:00 GMT+0530 (India Standard Time)
 ```
-* Get Date Paramters
+* Get Date Paramters : **getMethods()**
 
 ```js
 const d = new Date();
@@ -3370,7 +3370,7 @@ console.log(d.getTime());
 console.log(Date.now());
 ```
 
-* Set Date Parameters
+* Set Date Parameters : **setMethods()**
 ```js
 // Set Month
 const d = new Date();
@@ -3391,4 +3391,10 @@ const c = new Date();
 c.setMinutes(c.getMinutes() + 2);
 let t = c.getTime();
 console.log(t)
+```
+* Operations on Dates (minus two dates)
+
+```js
+let d = (new Date(2023, 8, 7) - new Date(2023, 8, 5)) / (60 * 60 * 1000 * 24)
+console.log(Math.abs(d));   // 2 days
 ```
