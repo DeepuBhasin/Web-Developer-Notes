@@ -293,31 +293,6 @@ const f = new Intl.RelativeTimeFormat('en-us', {
 })
 console.log(f.format(-4, "days"))
 ```
-* Adding Or Subtracting Days from Current date
-
-```js
-const date = new Date("june 21 2017");
-
-// Adding One Day in given Date
-date.setDate(date.getDate() + 1)
-
-// Subtracting One Day in given Date
-date.setDate(date.getDate() - 1)
-
-date.toDateString()
-```
-* Get **TimeStamp**
-```js
-console.log(new Date().getTime());  // 1692881806768
-```
-* Set Time
-
-```js
-const c = new Date();
-c.setMinutes(c.getMinutes() + 2);
-let t = c.getTime();
-console.log(t)
-```
 
 ## 📘Math
 * creating Random Number

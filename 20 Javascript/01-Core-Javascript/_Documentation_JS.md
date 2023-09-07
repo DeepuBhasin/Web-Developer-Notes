@@ -3338,4 +3338,57 @@ Math.trunc(23.4) // 23
 
 ```js
 (23.345).toFixed(2)     // 23.34
-``
+```
+---
+## 📘Dates and Time
+* create Date
+```js
+let now = new Date();
+console.log(now);
+//Thu Sep 07 2023 15:43:55 GMT+0530 (India Standard Time)
+
+now = new Date('Aug 02 2023');
+console.log(now);
+// Wed Aug 02 2023 00:00:00 GMT+0530 (India Standard Time)
+
+now = new Date('December 24, 2015');
+console.log(now);
+//Thu Dec 24 2015 00:00:00 GMT+0530 (India Standard Time)
+```
+* Get Date Paramters
+
+```js
+const d = new Date();
+console.log(d.getDate());
+console.log(d.getMonth());
+console.log(d.getFullYear());
+console.log(d.getHours());
+console.log(d.getMinutes());
+console.log(d.getSeconds());
+console.log(d.toLocaleString());
+console.log(d.getTime());
+console.log(Date.now());
+```
+
+* Set Date Parameters
+```js
+// Set Month
+const d = new Date();
+d.setMonth(1);
+console.log(d);
+//Tue Feb 07 2023 15:56:57 GMT+0530 (India Standard Time)
+
+// Set Date
+const date = new Date("june 21 2017");
+// Adding One Day in given Date
+date.setDate(date.getDate() + 1)
+// Subtracting One Day in given Date
+date.setDate(date.getDate() - 1)
+date.toDateString()
+
+// Set Minute
+const c = new Date();
+c.setMinutes(c.getMinutes() + 2);
+let t = c.getTime();
+console.log(t)
+```
