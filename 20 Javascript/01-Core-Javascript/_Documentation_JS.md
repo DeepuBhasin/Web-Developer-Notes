@@ -456,6 +456,7 @@ console.log(firstname[2];)   // e
 9. split
 10. join
 11. at(1) & at(-1)
+12. padStart & padEnd
 
 * Examples
 
@@ -3195,112 +3196,9 @@ console.log(obj);   // {firstname: 'Deepinder'}
 let array = [1, 2, 3, 4, 5];
 array.splice(1, 1)  // [1, 3, 4, 5]
 ```
----
-## 📘What is DOM
-* *In Simple words DOM is basically a connection point between HTML documents and Javascript Code. *
-* DOM is automatically created by the browser as soon as the HTML page loads and it's stored in a tree structure like in the given image, in this each html element is one object
 
-![Image](./images/dom-what-is-dom.png)
-
-![Image](./images/dom-tree.png)
-
-
-* **DOM** and **DOM Methods** are actually part of something called the **web APIs**. so the web API are like **libraries** that browsers implement and that we can access from our javascript.
-* Web Api are basically libraries that are also written in javascript and that are automatically available for us to use.
-* And there is actually an official DOM specification that browser implement, which is the reason why DOM manipulation works the same in all browsers.
-* There are various API like timer, fetch
-
-![Image](./images/dom-not-part-of-javascript.png)
 
 ---
-# 📔DOM Manipulation Api's
-
-## 📘Selectors
-
-* **querySelector**
-* use to select particular element
-* for **class** use **'.'** and for **id** use **#**
-```html
-<div id="message">Hello World ...</div>
-<script>
-    console.log(document.querySelector('#message'));
-</script>
-```
-![Image](images/dom-query-selector.png)
-
----
-## 📘Assigner
-
-* **textContent**
-* use to **get** the text content in the element
-* use to **set** the text content for the element
-```js
-const msg = document.querySelector('#message');1
-// Hello World ...
-console.log(msg.textContent);
-
-// setting new test
-msg.textContent = 'testing ....';
-
-// to select Body element
-const bodyElement = document.querySelector('body');
-
-```
----
-
-## 📘Create Element
-
-```js
-let body = document.querySelector('body');
-let div = document.createElement('div');
-div.className = 'demo';
-div.innerHTML = `<h1>Hello World</h1>`;
-
-let p = document.createElement('p');
-p.className = 'hello';
-p.innerHTML = "This is html element"
-
-body.append(div);
-body.append(p);
-```
-![Image](./images/creating-element.png)
-
----
-
-## 📘Event Listeners
-* An Event is something that happens on the page for example a mouse click, or a mouse moving or a key press or many other events Then with an event listener we can wait for a certain event to happen and then react to it.
-
-```html
-<button id="btn"> Click Me</button>
-<script>
-    let btn = document.querySelector("#btn");
-    btn.addEventListener("click", function () {
-        alert("Hello World")
-    })
-</script>
-```
-⚠️ **Note :** when ever you get *any value* from DOM  the *type* of that value is always **string**
-
-## 📘Style
-
-```html
-<button id="btn">Change</button>
-<div id="message">Hello World</div>
-<script>
-    let btn = document.querySelector("#btn");
-    btn.addEventListener("click", function () {
-        const msg = document.querySelector('#message');
-        msg.style.color = 'red';
-        msg.style.fontStyle = 'italic';
-        msg.style.fontSize = '50px';
-        msg.style.backgroundColor = 'yellow';
-        msg.style.marginTop = '20px'
-        msg.style.marginLeft = '20px';
-    })
-</script>
-```
-![Image](./images/dom-style.png)
-
 ## 📘Math
 * squaroot
 
@@ -3315,10 +3213,24 @@ Math.min(5, 1, 2, 3, 4)  // 1
 ```
 
 * Random Number
+* creating Random Number
 
 ```js
-Math.trunc(Math.random() * 6) + 1;
+// this will give number between 0 and 1
+Math.random()
+
+// this will give number between 0 and 6
+Math.random() * 6
+
+// this will convert 19.9999999 into 19
+Math.trunc(Math.random() * 6)
+
+// this will add 1 so we cannot get 0
+let dice = Math.trunc(Math.random() * 6) + 1;
+
+console.log(dice)
 ```
+
 * Round, ceil, floor, trunc
 ```js
 Math.round(23.4) // 23
@@ -3397,4 +3309,277 @@ console.log(t)
 ```js
 let d = (new Date(2023, 8, 7) - new Date(2023, 8, 5)) / (60 * 60 * 1000 * 24)
 console.log(Math.abs(d));   // 2 days
+```
+
+## 📘Internationlisation
+* Show data according to Countries like date format, currenct format, time, 5 days ago etc
+
+1. Dates : day, month, year, hours, minuts, seconds,  date, weekend, week,
+```js
+let now = new Date();
+let d = new Intl.DateTimeFormat('en-US', {
+    hour: 'numeric',
+    minute: 'numeric',
+    day: "numeric",
+    month: "long",
+    year: "2-digit",
+    weekday: "long"
+});
+console.log(d.format(now));
+
+// Thursday, September 7, 23 at 11:24 PM
+```
+
+```js
+// Simple
+const f = new Intl.DateTimeFormat('en-us', {
+})
+console.log(f.format());        //  6/17/2023
+
+// Simple
+const f = new Intl.DateTimeFormat('en-us', {
+    dateStyle: "full",
+    timeStyle: "full"
+})
+console.log(f.format());        // Saturday, June 17, 2023 at 7:30:41 PM India Standard Time
+
+// Complex One
+const today = new Date();
+console.log(today.toLocaleString());    // 17/6/2023, 7:21:53 pm
+
+const f = new Intl.DateTimeFormat('en-us', {
+    dateStyle: "full",
+    timeStyle: "full"
+    // dayPeriod: "long"
+})
+
+console.log(f.format(today));   // Saturday, June 17, 2023 at 7:22:03 PM India Standard Time
+```
+* Relative Time
+```js
+const f = new Intl.RelativeTimeFormat('en-us', {
+    style: "long"
+})
+console.log(f.format(-4, "days"))
+```
+
+
+2. Numbers : currency, style, units, useGroping
+
+```js
+// Simple Representation
+const number = 1111122223333444.1;
+const f = new Intl.NumberFormat("en-us", {
+    currency: 'USD',
+    style: "currency"
+})
+
+console.log(f.format(number));  // $1,111,122,223,333,444.10
+
+
+// Compact Representation
+
+const number = 11133444.1;
+const f = new Intl.NumberFormat("en-us", {
+    notation: "compact"
+})
+
+console.log(f.format(number));          // 11M  (Million)
+```
+---
+# 📔DOM (Document Object Model)
+
+## 📘What is DOM
+* *In Simple words DOM is basically a connection point between HTML documents and Javascript Code. *
+* DOM is automatically created by the browser as soon as the HTML page loads and it's stored in a tree structure like in the given image, in this each html element **is one object**
+
+![Image](./images/dom-what-is-dom.png)
+
+![Image](./images/dom-1.png)
+
+![Image](./images/dom-tree.png)
+
+* Every single node in the DOM Tree is of the type **Node** and such as everthing else in javascript each node is represented in javascript by an Object. This object get access to special node methods and properties, such as text content, child nodes parent nodes, clone nodes and many others.
+
+![Image](./images/dom-not-part-of-javascript.png)
+
+![Image](./images/dom-2.png)
+
+* **DOM** and **DOM Methods** are actually part of something called the **web APIs**. so the web API are like **libraries** that browsers implement and that we can access from our javascript.
+* Web Api are basically libraries that are also written in javascript and that are automatically available for us to use.
+* And there is actually an official DOM specification that browser implement, which is the reason why DOM manipulation works the same in all browsers.
+* There are various API like timer, fetch
+---
+## Selecting Element
+1.  **querySelector**
+
+* use to select particular element.
+
+```js
+document.querySelector('body')
+```
+
+* for **class** use **'.'** and for **id** use **#**.
+```html
+<div id="message">Hello World ...</div>
+<script>
+    console.log(document.querySelector('#message'));
+</script>
+```
+![Image](images/dom-query-selector.png)
+
+---
+## 📘Assigner
+
+* **textContent**
+* use to **get** the text content in the element
+* use to **set** the text content for the element
+```js
+const msg = document.querySelector('#message');1
+// Hello World ...
+console.log(msg.textContent);
+
+// setting new test
+msg.textContent = 'testing ....';
+
+// to select Body element
+const bodyElement = document.querySelector('body');
+
+```
+---
+
+## 📘Create Element
+* select, Create, Insert, Delete Example
+```js
+// Select
+let body = document.querySelector('body');
+
+// create
+let div = document.createElement('div');
+
+// Adding Class
+div.classList.add('demo1');
+div.classList.add('demo2');
+
+// Inserting Content
+div.textContent = 'Text Content';
+div.innerHTML = `<h1>Hello World</h1>`;
+
+let p = document.createElement('p');
+p.classList.add('hello');
+p.innerHTML = "This is html element"
+
+// Add
+body.prepend(div);
+body.append(p);
+
+// Remove
+div.addEventListener('click', function () {
+    this.remove();
+})
+
+let header = document.querySelector('header');
+let headerP = document.createElement('p');
+header.append(headerP);
+```
+![Image](./images/creating-element.png)
+
+* append
+* prepend
+* after
+* before
+* remove / parentElement.removeChild(elementName)
+---
+
+## 📘Event Listeners
+* An Event is something that happens on the page for example a mouse click, or a mouse moving or a key press or many other events Then with an event listener we can wait for a certain event to happen and then react to it.
+
+```html
+<button id="btn"> Click Me</button>
+<script>
+    let btn = document.querySelector("#btn");
+    btn.addEventListener("click", function () {
+        alert("Hello World")
+    })
+</script>
+```
+⚠️ **Note :** when ever you get *any value* from DOM  the *type* of that value is always **string**
+
+## 📘Style, Attributes, Data Sets & Classes
+
+1. Style
+```html
+<button id="btn">Change</button>
+<div id="message">Hello World</div>
+<script>
+    let btn = document.querySelector("#btn");
+    btn.addEventListener("click", function () {
+        const msg = document.querySelector('#message');
+        msg.style.color = 'red';
+        msg.style.fontStyle = 'italic';
+        msg.style.fontSize = '50px';
+        msg.style.backgroundColor = 'yellow';
+        msg.style.marginTop = '20px'
+        msg.style.marginLeft = '20px';
+    })
+</script>
+```
+![Image](./images/dom-style.png)
+
+⚠️ **Note :**
+
+* You can get style values as for only inline css using **style.height** etc
+* To get all values **getComputedStyle(element).color** it will return the color
+* **stye.setProperty('nameOfProperty', 'value')** for setting values
+
+2. Attribute (set, get)
+```html
+
+<body>
+    <img src="path" alt="Hello" designer="extra" data-test-id="image-data"/>
+</body>
+
+<script>
+let logo = document.querySelector('.navLogo');
+
+// these are accessble because these are standard values
+console.log(logo.alt)   // selecting alt attribute value
+console.log(logo.src)   // selecting src attribute value
+console.log(logo.className)
+
+// non- standard
+console.log(logo.getAttribute('designer'))
+
+// setter
+logo.setAttribute('company', 'Bankist');
+<script/>
+```
+
+3. Data Set
+* Always get using dataset
+* Always use **camalCase** instedOf **hyphen**
+
+
+```html
+<body>
+    <img src="path" alt="Hello" designer="extra" data-test-id="image-data"/>
+</body>
+
+<script>
+let logo = document.querySelector('.navLogo');
+
+logo.dataset.testId // image-data
+<script/>
+```
+
+4. Classes
+
+```js
+logo.classList.add('className1','className2','className3','className4');
+logo.classList.remove('');
+logo.classList.toggle('');
+logo.classList.contains('');
+
+// Dont'use
+logo.className = 'className1'
 ```
