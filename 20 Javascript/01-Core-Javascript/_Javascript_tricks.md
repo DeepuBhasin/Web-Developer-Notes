@@ -42,67 +42,7 @@ const student = {
 console.log(student);
 ```
 
-## 📘Console
 
-* console.time
-```js
-console.time();
-var arr = Array(1000).fill('Hello world')
-console.timeEnd();
-```
-* console.table
-```js
-// Array Example
-var teckBrand = [
-    {
-        id: 1,
-        name: 'Deepinder',
-        job: 'Web developer'
-    },
-    {
-        id: 2,
-        name: 'Deepu',
-        job: 'Web developer'
-    },
-    {
-        id: 3,
-        name: 'Dp',
-        job: 'Web developer'
-    }
-];
-console.table(teckBrand);
-
-// Object Example
-
-var response = {
-    approvedPrograms: [
-        { id: 1, name: 'Deepu' },
-        { id: 2, name: 'Deepinder' },
-        { id: 3, name: 'Deepi' }
-    ],
-    recomendedPrograms: [
-        { id: 1, name: 'Deepu' },
-        { id: 2, name: 'Deepinder' },
-        { id: 3, name: 'Deepi' }
-    ]
-}
-console.table(response)
-```
-* Color in Console
-
-```js
-console.log("%c Hello %cWorld", "color:yellow;", "background-color: red;")
-```
-* console.group
-
-```js
-console.group("New Group");
-console.log('Hello world 1');
-console.log('Hello world 2');
-console.log('Hello world 3');
-console.log('Hello world 4');
-console.groupEnd();
-```
 ## 📘Operators
 
 * use the **!!** operator to convert the result of an **expression into Boolean value**
@@ -174,9 +114,6 @@ Hello gh
 Hello ij
 */
 
-
-
-
 let sortedArray = array.slice().sort((a, b) => a.id - (b.id))
 // comparing Numbers
 /*
@@ -189,6 +126,36 @@ let sortedArray = array.slice().sort((a, b) => a.id - (b.id))
 
 ```
 ---
+## 📘Extra Features
+
+* **Generate Random Numbers** in javascript
+
+```js
+console.log(crypto.randomUUID());   // 1d35cbb8-e3ff-47b0-a9dc-8d0c499b9a56
+```
+* use of **use strick** mode
+  * Not allowed to make unwanted variables (like created after spelling mistake)
+```js
+const superLongVariable = "hi";
+superLongVariables = "bye";
+console.log(superLongVariables);    // bye
+
+// Correct one
+"use strict"
+const superLongVariable = "hi";
+superLongVariables = "bye";
+console.log(superLongVariables);    // bye
+```
+
+```html
+<!-- using by Module -->
+<script type="module">
+    const superLongVariable = "hi";
+    superLongVariables = "bye";         // error
+    console.log(superLongVariables);    // bye
+</script>
+```
+
 ## 📘Loops
 * Use **For in** always on **Objects**
 * Use **For of** always on **Array**
@@ -235,34 +202,64 @@ function test() {
 ```
 * if you have **very large if-else** statements then use **switch-case** code
 
+## 📘Console
 
----
-## 📘Extra Features
+* console.time
+```js
+console.time();
+var arr = Array(1000).fill('Hello world')
+console.timeEnd();
+```
+* console.table
+```js
+// Array Example
+var teckBrand = [
+    {
+        id: 1,
+        name: 'Deepinder',
+        job: 'Web developer'
+    },
+    {
+        id: 2,
+        name: 'Deepu',
+        job: 'Web developer'
+    },
+    {
+        id: 3,
+        name: 'Dp',
+        job: 'Web developer'
+    }
+];
+console.table(teckBrand);
 
-* **Generate Random Numbers** in javascript
+// Object Example
+
+var response = {
+    approvedPrograms: [
+        { id: 1, name: 'Deepu' },
+        { id: 2, name: 'Deepinder' },
+        { id: 3, name: 'Deepi' }
+    ],
+    recomendedPrograms: [
+        { id: 1, name: 'Deepu' },
+        { id: 2, name: 'Deepinder' },
+        { id: 3, name: 'Deepi' }
+    ]
+}
+console.table(response)
+```
+* Color in Console
 
 ```js
-console.log(crypto.randomUUID());   // 1d35cbb8-e3ff-47b0-a9dc-8d0c499b9a56
+console.log("%c Hello %cWorld", "color:yellow;", "background-color: red;")
 ```
-* use of **use strick** mode
-  * Not allowed to make unwanted variables (like created after spelling mistake)
+* console.group
+
 ```js
-const superLongVariable = "hi";
-superLongVariables = "bye";
-console.log(superLongVariables);    // bye
-
-// Correct one
-"use strict"
-const superLongVariable = "hi";
-superLongVariables = "bye";
-console.log(superLongVariables);    // bye
-```
-
-```html
-<!-- using by Module -->
-<script type="module">
-    const superLongVariable = "hi";
-    superLongVariables = "bye";         // error
-    console.log(superLongVariables);    // bye
-</script>
+console.group("New Group");
+console.log('Hello world 1');
+console.log('Hello world 2');
+console.log('Hello world 3');
+console.log('Hello world 4');
+console.groupEnd();
 ```

@@ -3229,6 +3229,11 @@ Math.trunc(Math.random() * 6)
 let dice = Math.trunc(Math.random() * 6) + 1;
 
 console.log(dice)
+
+//OR 
+let max = 6;
+let min = 2;
+console.log(Math.trunc(Math.random() * (max - min + 1) + min));
 ```
 
 * Round, ceil, floor, trunc
@@ -3490,21 +3495,6 @@ header.append(headerP);
 * before
 * remove / parentElement.removeChild(elementName)
 ---
-
-## 📘Event Listeners
-* An Event is something that happens on the page for example a mouse click, or a mouse moving or a key press or many other events Then with an event listener we can wait for a certain event to happen and then react to it.
-
-```html
-<button id="btn"> Click Me</button>
-<script>
-    let btn = document.querySelector("#btn");
-    btn.addEventListener("click", function () {
-        alert("Hello World")
-    })
-</script>
-```
-⚠️ **Note :** when ever you get *any value* from DOM  the *type* of that value is always **string**
-
 ## 📘Style, Attributes, Data Sets & Classes
 
 1. Style
@@ -3582,4 +3572,123 @@ logo.classList.contains('');
 
 // Dont'use
 logo.className = 'className1'
+```
+
+## 📘 Browers related things using javascript
+
+* we can access any element in the browser for example position from x & y direction with respect to view-port, Height & width of the Element.
+```js
+e.target.getBoundingClientRect()
+```
+
+* We can also get current **scroll position** & set scroll Postion
+```html
+<header style="height: 1700px; width: 100%; background: grey;">
+    <h3>Hello From Header</h3>
+</header>
+
+<main>
+    hello Main
+</main>
+
+<script>
+document.querySelector('header').addEventListener('click', function (event) {
+
+    // Print Current Mouse Pointer
+    let x = event.clientX;
+    let y = event.clientY;
+    console.log('x & y', x, y);
+
+    // Print view port your browser
+    console.log('Height & Width ', document.documentElement.clientHeight, document.documentElement.clientWidth);
+
+    // Scroll to 
+    window.scrollTo({
+        left: x,
+        top: y,
+        behavior: "smooth"
+    });
+
+    // OR For Scrolling
+    document.querySelector('main').scrollIntoView({ behavior: })
+
+});
+</script>
+```
+## 📘Event Listeners
+* An Event is something that happens on the page for example a **mouse click**, or a **mouse moving** or a **key press**, **scrolling**, **bigger screen** or many other events Then with an event listener we can wait for a certain event to happen and then react to it.
+
+1. mouseenter (like mouse hover)
+
+
+```html
+<button id="btn"> Click Me</button>
+<script>
+    let btn = document.querySelector("#btn");
+    btn.addEventListener("click", function () {
+        alert("Hello World")
+    })
+</script>
+```
+⚠️ **Note :** when ever you get *any value* from DOM  the *type* of that value is always **string**
+
+---
+
+## 📘Buubling and Capturing
+
+* let say click happens on the link and as we already know then DOM then generate a click event right away. However this event is actually not generated at the target element, instead *the event is actually generated at the root of the document so at the very top of the DOM tree* and from there the so-called **capturing phase** happens, where the event then travells all the way down from the document route to the target element And as the event travels down the tree it will pass through every single parent element of the target element. in example (image), as soon as the event reaches the target, the target phase begins where event can be handled right at the target. and as we already know we do that with eventListeners, So EventLsietners wait for a certain event to happen on a certain element and as soon as the event occurs it runs the attached callback function.
+
+![Image](./images/bubbling-capturing.png)
+
+⚠️ **Note :** by Default **Bubbling** behaviour is active hence 3rd parameter of **addEventListener** is *false*, For **Capturing** behaviour we have set it *true*. 
+
+```html
+<div id="gp"
+    style="height: 200px;width: 200px; border: 2px solid red; display: flex; align-items: center; justify-content: center;">
+    <div id="p"
+        style="height: 150px; width:150px; border: black 2px solid; display: flex; align-items: center; align-content: center; justify-content: center;">
+        <div id="c" style="height: 100px; width:  100px; border: 2px yellow solid;"></div>
+    </div>
+</div>
+
+<script>
+    // means tell about current element
+    // e.currentTarget == this
+
+    // means tell about where the event happens (and it will always same)
+    // e.target
+
+    let gp = document.querySelector('#gp');
+    let p = document.querySelector('#p');
+    let c = document.querySelector('#c');
+
+    gp.addEventListener('click', function (e) {
+        console.log('Grand Parent');
+        console.log('target', e.target);
+        console.log('current', e.currentTarget);
+        console.log(e.currentTarget === this);
+    }, false);
+    p.addEventListener('click', function (e) {
+        console.log('Parent');
+        console.log('target', e.target);
+        console.log('current', e.currentTarget);
+        console.log(e.currentTarget === this);
+    }, false);
+    c.addEventListener('click', function (e) {
+        console.log('Child');
+        console.log('target', e.target);
+        console.log('current', e.currentTarget);
+        console.log(e.currentTarget === this);
+    }, false);
+</script>
+```
+
+![Image](./images/event-delegation.png)
+
+* **To Stop this problem we use**
+
+```js
+c.addEventListener('click', function (e) {
+    e.stopPropagation()
+})
 ```
