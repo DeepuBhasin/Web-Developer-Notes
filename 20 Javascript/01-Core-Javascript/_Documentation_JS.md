@@ -3692,3 +3692,29 @@ c.addEventListener('click', function (e) {
     e.stopPropagation()
 })
 ```
+
+## 📘Event Delegation
+* In event delegation we use the fact the events bubble up and we do that by putting the eventListener on a comman parent of all the elements that we are interested in. 
+
+* In event delegation we need two things basically
+1. First, we add the event listener to a common parent element of all the elements that we're interested in.
+2. Determine what element originated the event so that we can than work with that element where the event was actually created.
+
+```html
+<ul id="categories">
+    <li data-category-value="apple">Apple</li>
+    <li data-category-value="mango">Mango</li>
+    <li data-category-value="banana">Banana</li>
+    <li data-category-value="kiwi">Kiwi</li>
+</ul>
+<script>
+    let cat = document.querySelector('#categories');
+    cat.addEventListener('click', function (e) {
+        console.log(e.target);
+
+        if (e.target.dataset.categoryValue === 'apple') {
+            alert('You have Selected Apple')
+        }
+    })
+</script>
+```
