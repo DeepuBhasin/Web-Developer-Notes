@@ -1650,7 +1650,7 @@ var output2 = mathProgram(2,1, sub);
 ```
 ---
 
-## 📘 Object-Oriented Javascript and Prototypal Inheritence (Classical Vs Prototypal Inheritance)
+## 📘 Object-Oriented Javascript and Prototypal Inheritance (Classical Vs Prototypal Inheritance)
 * **Inheritance :** One object gets access to the properties and methods of another object.
 * Classical Inheritance :  Verbose.
 * Prototypal Inheritance : Simple.
@@ -1694,6 +1694,12 @@ var f = {};
 a.__proto__ = Array.prototype   // true
 ```
 ![Image](./images/__proto__of_all.png)
+
+![Image](./images/prototype-__proto__.png)
+
+![Image](./images/how-prototypal-inheritance.png)
+
+![Image](./images/prototype-scope-chain.png)
 
 ## 📘 Reflection and Extend
 * **Reflection :** An Object can look at itself, listing and changing its properties and methods.
@@ -1755,7 +1761,9 @@ var dp = new Person('Deepinder', 'Singh');
 ---
 
 ## 📘 Function Constructors and '.prototype'
-* **'.prototype' :** property always created automatically  with function constructor only.
+* **'.prototype' :** property always created automatically  with function constructor only, each and every function in javascript automatically has a property called prototype and that includes ofcourse constructor functions. **Person.prototype** 
+* Now every object that's created by a certain constructor function will get access to all the methods and properties that we define on the constructors prototype property.
+
 * Function Constructors has **first letter** always **capital**
 
 ![Image](./images/function-constructor-prototype.png)
