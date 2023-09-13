@@ -1730,16 +1730,25 @@ var object = {};
 
 2. **Function Constructors :** A Normal function that is used to *construct objects*. The 'this' variables points a new empty object, and that object is returned from the function automatically.
 
-   1. **new** keyword will create an empty object first, if we do not use **return** keyword it will return empty object other wise normal return value
+   1. **new** keyword will create an empty object first.
    2. then **Person('john','Deo')** function will called with values, which help to add new **properties** and **methods** to *newly created object*
    3. then **this** keyword will bind according to the current object by new keyword.
+   4. if we do not use **return** keyword it will return empty object other wise normal return value
 
 ```javascript
+// Conceptual Example
+function Test() {
+    console.log(this);
+}
+new Test();
+
+// Normal Example
 function Person(firstname, lastname) {
     this.firstname = firstname;
     this.lastname = lastname;
 }
 
+// this means we are storing the result
 var john = new Person('john','Deo');
 var dp = new Person('Deepinder', 'Singh');
 ```
@@ -2261,8 +2270,8 @@ console.log(fullname);
 
 ![Image](./images/oop-5.png)
 
+![Image](./images/oop-prototypal.png)
 ---
-
 ## 📘Declarations and Expressions
 ```javascript
 // Declarations
@@ -2338,6 +2347,7 @@ console.log(me) // {firstname : 'Tony'}
 
 Person();   // Class Constructor Person cannot be invoked without 'new'
 ```
+
 ---
 ## 📘 Constructor
 * Constructor methods always exist wheather you defined or not defined.
