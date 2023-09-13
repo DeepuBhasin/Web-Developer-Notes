@@ -132,7 +132,7 @@ console.log(number1);
 
 ![Image](./images/gloabl-environment.png)
 
-* There will be always a **Gloabl Object**. in *Browser* it is **window**, each new tab have there own Global Execution context hence has its own window object
+* There will be always a **Global Object**. in *Browser* it is **window**, each new tab have there own Global Execution context hence has its own window object
 * in **Browser** : *window==this*
 
 ```javascript
@@ -2241,6 +2241,26 @@ console.log(fullname);
 * In javascript they are just a way of creating objects and the prototype chain.
 * **Syntactic Sugar :** A Different way to accomplish something in a prohgramming language, that doesn't actually introduce anything new under-the-hood.
 
+## 📘 The 4 Fundamental OOPS Principles
+
+![Image](./images/oop-1.png)
+
+1. Abstraction : Ignoring or hiding details that **don't matter**, allowing us to get an **overview** perspective of the thing we're implementing, instead of messing with details that don't really matter to our implementation.
+
+![Image](./images/oop-2.png)
+
+2. Encapsulation : Keeping properties and methods **private** inside the class, so they are **not accessible from outside the class**. Some methods can be **exposed** as a public interface (API).
+
+![Image](./images/oop-3.png)
+
+3. Inheritance : Making all properties and methods of a certian class **available to a child class**, forming a heriarchical relationship between classes. This allows us to **reuse common logic** and to model real-world realtionships.
+
+![Image](./images/oop-4.png)
+
+4. Polymorphism : A child class can **overwrite** a method it inherited from a parent class [it's more complex that, but enough for our purpose]
+
+![Image](./images/oop-5.png)
+
 ---
 
 ## 📘Declarations and Expressions
@@ -3718,3 +3738,5 @@ c.addEventListener('click', function (e) {
     })
 </script>
 ```
+## 📘DOM Traversing 
+* is basically walking through the DOM. which means that we can select an element based on another element for example a direct child or a direct parent element or sometimes we don't even know the structure of DOM at runtime.
