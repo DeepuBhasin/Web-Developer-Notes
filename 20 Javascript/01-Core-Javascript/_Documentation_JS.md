@@ -1761,7 +1761,7 @@ var dp = new Person('Deepinder', 'Singh');
 ---
 
 ## 📘 Function Constructors and '.prototype'
-* **'.prototype' :** property always created automatically  with function constructor only, each and every function in javascript automatically has a property called prototype and that includes ofcourse constructor functions. **Person.prototype** 
+* **'.prototype' :** property always created automatically  with function constructor only, each and every function in javascript automatically has a property called prototype and that includes ofcourse constructor functions. **Person.prototype**
 * Now every object that's created by a certain constructor function will get access to all the methods and properties that we define on the constructors prototype property.
 
 * Function Constructors has **first letter** always **capital**
@@ -2499,14 +2499,16 @@ class Person {
     constructor(name) {
         this.firstname = name;
     }
+
+    // this will be added to prototype property (also called instance methods)
     greet() {
         return `Hello, ${this.firstname}`;
     }
 
-    // this will attach to Person Property
+    // this will attach to Person Property (Means to function directly)
     static residence = 'Earth';
 
-    // this will attach to Person Property
+    // this will attach to Person Property (Means to function directly)
     static goodMorning() {
         return 'Good Morning';
     }
@@ -2521,11 +2523,52 @@ console.log(Person.goodMorning());      // Earth
 console.log(Person.residence);          // Good Morning
 console.log(me.__proto__);
 ```
+
+⚠️ **Note :** functions which are attach to **prototype** property only those functions get inhertited through prototypal chain and functions which are directly attached to **Constructor functions** are not get inherited are called **static methods**
+
+* Array Function
+```js
+// this function is not available in prototype object hence not get inherited & this method is called static Method
+Array.from()
+
+// this is available in prototype object hence get inherited
+Array.prototype.map()
+```
+
+* Custom Function
+
+```js
+Array.myMap = function () {
+    return 'Hello Attaching this function on Array function Constructor';
+}
+
+Array.prototype.myMap = function () {
+    return 'Hello Attaching this function on Array Prototype Object';
+}
+```
+
 ---
 
 ## 📘Private Fields with Getters and Setters, Private Methods
 
 ```javascript
+// Object literals
+  const account = {
+    owner: 'Deepu',
+    get fname() {
+        return this.owner;
+    },
+    set fname(name) {
+        this.owner = name;
+    }
+}
+
+console.log(account.fname);
+
+account.fname = 'Deepinder';
+console.log(account.fname);
+
+// Classes
 class Person {
 
     // Private Variable
@@ -2567,8 +2610,12 @@ console.log(me.greet());
 me.#firstName = 'Anthony';      // Cause Error
 
 console.log(me.greet());
+
+// calling that function and setting fname as simple property
 me.fname = 'Anthony';
 console.log(me.greet());
+
+// calling that function and getting as simple property
 console.log(me.fname);
 console.log(me.getFullName())
 ```
@@ -3268,7 +3315,7 @@ let dice = Math.trunc(Math.random() * 6) + 1;
 
 console.log(dice)
 
-//OR 
+//OR
 let max = 6;
 let min = 2;
 console.log(Math.trunc(Math.random() * (max - min + 1) + min));
@@ -3640,7 +3687,7 @@ document.querySelector('header').addEventListener('click', function (event) {
     // Print view port your browser
     console.log('Height & Width ', document.documentElement.clientHeight, document.documentElement.clientWidth);
 
-    // Scroll to 
+    // Scroll to
     window.scrollTo({
         left: x,
         top: y,
@@ -3678,7 +3725,7 @@ document.querySelector('header').addEventListener('click', function (event) {
 
 ![Image](./images/bubbling-capturing.png)
 
-⚠️ **Note :** by Default **Bubbling** behaviour is active hence 3rd parameter of **addEventListener** is *false*, For **Capturing** behaviour we have set it *true*. 
+⚠️ **Note :** by Default **Bubbling** behaviour is active hence 3rd parameter of **addEventListener** is *false*, For **Capturing** behaviour we have set it *true*.
 
 ```html
 <div id="gp"
@@ -3732,7 +3779,7 @@ c.addEventListener('click', function (e) {
 ```
 
 ## 📘Event Delegation
-* In event delegation we use the fact the events bubble up and we do that by putting the eventListener on a comman parent of all the elements that we are interested in. 
+* In event delegation we use the fact the events bubble up and we do that by putting the eventListener on a comman parent of all the elements that we are interested in.
 
 * In event delegation we need two things basically
 1. First, we add the event listener to a common parent element of all the elements that we're interested in.
@@ -3756,5 +3803,5 @@ c.addEventListener('click', function (e) {
     })
 </script>
 ```
-## 📘DOM Traversing 
+## 📘DOM Traversing
 * is basically walking through the DOM. which means that we can select an element based on another element for example a direct child or a direct parent element or sometimes we don't even know the structure of DOM at runtime.
