@@ -1873,23 +1873,22 @@ for(var prop in arr) {
 ## 📘 Object.create and Pure Prototypal Inheritance
 
 ```javascript
-
 const personPrototype = {
-  greet: function() {
-    console.log("Hello!");
-  }
+            greet: function () {
+        return this.name ?? this.name;
+    }
 };
 
 // it will create new empty object and then pointing out this prototype object
-
 const person = Object.create(personPrototype);
 console.log(person);     // empty object
 
-// Add Proprerties to the empty object
+// Add Properties to the empty object
 person.name = "John";
 person.age = 30;
 
 console.log(person); // { name :"John", person.age : 30}
+console.log(person.greet()); // john
 ```
 * **PolyFill :** code that adds a features which the engine may lack.
 
