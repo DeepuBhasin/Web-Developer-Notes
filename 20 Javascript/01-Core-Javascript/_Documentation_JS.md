@@ -2502,7 +2502,7 @@ console.log(mike.__proto__);
 console.log(mike.__proto__.__proto__);
 ```
 
-4. Object.create() prototype inhertitence
+4. Object.create() prototype inhertitence (this is best one as per standared)
 
 ```js
 const Person = {
