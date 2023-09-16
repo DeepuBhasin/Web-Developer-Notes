@@ -823,10 +823,10 @@ function greet() {
     console.log('hi');
 }
 ```
-* **Function Expression :** the statement which retun any thing.
+* **Function Expression :** the statement which return any thing.
 
 ```javascript
-// because here function is considered as object and creating on fly && it returns an object heance its a value
+// because here function is considered as object and creating on fly && it returns an object hence its a value
 var anonymousGreet = function () {
     console.log('hi');
 }
@@ -851,10 +851,8 @@ var anonymousGreet = function () {
 📚 **Conceptual Example :**
 
 ```javascript
-
 function log(a) {
     console.log(a);     // for not function
-
     a();                // for function
 }
 
@@ -1953,7 +1951,6 @@ class InformalPerson extends Person {
         return 'Yo ' + this.firstname;
     }
 }
-
 ```
 ---
 ## 📘 Odds and Ends
@@ -2406,7 +2403,7 @@ console.log(me);
 
 ---
 ## 📘 Extends and Prototypal Inheritance
-
+1. Simple Example with class only 
 ```javascript
 
 class Person {
@@ -2439,6 +2436,101 @@ console.log(Tony.__proto__);
 ```
 ![Image](./images/extends-prototypal.png)
 
+2. Pure Prototype Inheritence example with prototype
+
+```js
+const Person = fconst Person = function (firstname, birthYear) {
+    this.firstname = firstname;
+    this.birthYear = birthYear;
+}
+
+Person.prototype.calcAge = function () {
+    console.log(2037 - this.birthYear);
+}
+
+const Student = function (firstname, birthYear, course) {
+    Person.call(this, firstname, birthYear);
+    this.course = course;
+}
+
+// This will help to create Connection between two objects
+Student.prototype = Object.create(Person.prototype)
+
+Student.prototype.introduce = function () {
+    console.log(`My name is ${this.firstname} and study ${this.course}`);
+}
+
+const mike = new Student('Mike', 2020, 'Computer Science');
+mike.introduce()
+mike.calcAge()
+```
+Due this line, **Student.prototype = Object.create(Person.prototype)** that should be write on the exact line where it is written right now, this line create connection before add any new methods to the prototype object of student and that's because *Object.create* ill return an empty *object* and so at this point, *student.prototype* is empty. and so then onto that empty object *we can add methods* like *student.prototype.introduce* but id we did it the other way around means adding this *Student.prototype = Object.create(Person.prototype)* after *student.prototype.introduce*  method then *object.create* would basically overwrite to *student.prototype.introduce* this method.
+
+![Image](./images/prototype-inheritance-extends.png)
+
+3. Class Example
+
+```js
+class Person {
+    constructor(firstname, birthYear) {
+        this.firstname = firstname;
+        this.birthYear = birthYear;
+    }
+    calcAge() {
+        console.log(2037 - this.birthYear);
+    }
+}
+
+class Student extends Person {
+    constructor(firstname, birthYear, course) {
+        super(firstname, birthYear)
+        this.course = course;
+    }
+    introduce() {
+        console.log(`My name is ${this.firstname} and study ${this.course}`);
+    }
+}
+
+const mike = new Student('Mike', 2020, 'Computer Science');
+mike.introduce()
+mike.calcAge()
+
+// Prototype of Student which is Person
+console.log(mike.__proto__);
+
+// Prototype of Prototype of Student which is Person prototype
+console.log(mike.__proto__.__proto__);
+```
+
+4. Object.create() prototype inhertitence
+
+```js
+const Person = {
+    calcAge() {
+        console.log(2037 - this.birthYear);
+    }
+
+    inti(firstname, birthYear) {
+        this.firstname = firstname;
+        this.birthYear = birthYear;
+    }
+}
+const Student = Object.create(Person);
+Student.inti = function (firstname, birthYear, course) {
+    Person.inti.call(this, firstname, birthYear);
+    this.course = course;
+};
+
+Student.introduce = function () {
+    console.log(`My name is ${this.firstname} and I study ${this.course}`);
+}
+
+const jay = Object.create(Student);
+jay.inti('Jay', 2010, 'Computer Sci');
+jay.introduce();
+jay.calcAge();
+```
+![Image](./images/object-create-prototype-inheritance.png)
 
 📚 **Conceptual Example :** Extending Existing Class
 
