@@ -2063,6 +2063,20 @@ Convert the syntax of one programming language, to another. In this case languag
 ![Image](./images/asycnhronouse-code.png)
 ![Image](./images/asycnhronouse-code-2.png)
 
+---
+
+## How Internet works
+
+![Image](./images/how-internet-work'.png)
+![Image](./images/how-internet-work-2.png)
+
+---
+
+## 📘Ajax
+* **https://github.com/public-apis/public-apis** : Free Public api for various data
+
+
+----
 ## 📘 Promises, Async and Await
 
 * **Promise :** A Standarized approach to dealing with asynchronouse events and callbacks.
