@@ -268,7 +268,7 @@ console.log('finished execution');
 ```
 ---
 
-* Long running code also effect event loops events for example while executing this code if you click immidately click it will not print because while loop is executing that time.
+* Long running code also effect event loops events for example while executing this code if you click immediately click it will not print because while loop is executing that time.
 
 ---
 ## 📘 Types and Javascript
@@ -679,8 +679,10 @@ let obj = {
 console.log(obj);   // {1: 'Monday', 2: 'Tuesday', 3: 'Wednesday', 4: 'Thursday', 5: 'Friday', 6: 'Saturday', 7: 'Sunday'}
 ```
 ---
-## 📘 Chaining and Optional-Chaining
+## 📘 Chaining, Optional-Chaining and Chaining Method
 * Access the variables with **Dot** which are nested or deeply nested
+
+1. Chaining & Optional Chaining
 ```js
 let obj = {
     first: 'Deepu',
@@ -697,6 +699,37 @@ console.log(obj.address.streetNo);  // 3
 console.log(obj.address?.near);     // undefined
 ```
 ⚠️ **Note :** in *Optional Chaining* instead of *reference error* it will return *undefined*, if the value does not exist.
+
+2. Chaining Method
+
+* Calling one method after another, and each method. Affects the parent object. So obj.method1().method2() where both methods end up with a 'this' variable pointing at 'obj'
+
+```js
+ let obj = {
+    value: 0,
+    add(number) {
+        this.value += number;
+        console.log('Current Value : ', this.value);
+        return this;
+    },
+    subtract(number) {
+        this.value -= number;
+        console.log('Current Value : ', this.value);
+        return this;
+    },
+    multiply(number) {
+        this.value *= number;
+        console.log('Current Value : ', this.value);
+        return this;
+    },
+    divide(number) {
+        this.value /= number;
+        console.log('Current Value : ', this.value);
+        return this;
+    }
+};
+obj.add(6).subtract(1).multiply(4).divide(2);
+```
 
 ---
 
@@ -2020,17 +2053,16 @@ test();
 ⚠️ Note : it is very usefull but every browser do not work according "use strict mode"
 
 ---
-
-## 📘Method Chaining
-
-Calling one method after another, and each method. Affects the parent object. So obj.method1().method2() where both methods end up with a 'this' variable poiting at 'obj'
-
----
-
 ## 📘Transpile
 Convert the syntax of one programming language, to another. In this case language that don't really ever run anywhere, but instead are processed by 'transpilers' that generate javascript.
 
 ---
+
+## Asynchronouse Code
+
+![Image](./images/asycnhronouse-code.png)
+![Image](./images/asycnhronouse-code-2.png)
+
 ## 📘 Promises, Async and Await
 
 * **Promise :** A Standarized approach to dealing with asynchronouse events and callbacks.
@@ -2581,24 +2613,29 @@ console.log(me.greet());
 ```
 ---
 
-## 📘Public Static Fields
+## 📘Public Field, Public Methods & Public Static Fields
+* in public Field not using any kind of **let, const, var** etc
+
 
 ```javascript
 class Person {
+    // Public Field
     firstname;
+
+    // this will attach to Person Property (Means to function directly)
+    // Public static Field
+    static residence = 'Earth';
 
     constructor(name) {
         this.firstname = name;
     }
 
     // this will be added to prototype property (also called instance methods)
+    // Public Method
     greet() {
         return `Hello, ${this.firstname}`;
     }
-
-    // this will attach to Person Property (Means to function directly)
-    static residence = 'Earth';
-
+    
     // this will attach to Person Property (Means to function directly)
     static goodMorning() {
         return 'Good Morning';
@@ -2640,7 +2677,7 @@ Array.prototype.myMap = function () {
 
 ---
 
-## 📘Private Fields with Getters and Setters, Private Methods
+## 📘Private Fields with Public Getters and Setters, Private Methods
 
 ```javascript
 // Object literals
@@ -2662,7 +2699,7 @@ console.log(account.fname);
 // Classes
 class Person {
 
-    // Private Variable
+    // Private Field/ Private Variables
     #firstName;
     #lastName;
 
