@@ -3490,8 +3490,7 @@ Math.max(5, 1, 2, 3, 4)  // 5
 Math.min(5, 1, 2, 3, 4)  // 1
 ```
 
-* Random Number
-* creating Random Number
+* Creating Random Number
 
 ```js
 // this will give number between 0 and 1
