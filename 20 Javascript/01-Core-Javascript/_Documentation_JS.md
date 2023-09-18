@@ -2109,6 +2109,22 @@ setTimeout(function () {
     }, 1000)
 }, 1000)
 ```
+## 📘Promises, Fetch and consume Promise
+* **Promise :** A Standarized approach to dealing with asynchronouse events and callbacks.
+
+![Image](./images/what-is-promise.png)
+
+![Image](./images/promise-lifecycle.png)
+
+```js
+// Fetch method +  consuming Promise
+fetch('https://restcountries.com/v3.1/name/india')
+// .json() is a method that is available on all the response objects that is coming from fetch function so all of the resolved values
+// this .json() is also a asynchronous function so it means it will also return a new promise.
+.then(result => result.json())
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
 
 
 ----
@@ -2183,7 +2199,7 @@ setTimeout(() => {
 # 📔ES6
 
 ## 📘Block Scoping
-* **Block Scoping :2** variable scope is defined lexically by a block. in Javascript's case, curly braces.
+* **Block Scoping :** variable scope is defined lexically by a block. in Javascript's case, curly braces.
 ---
 ## 📘Block Statements and Lexical Environments
 
