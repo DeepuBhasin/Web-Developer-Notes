@@ -2109,12 +2109,14 @@ setTimeout(function () {
     }, 1000)
 }, 1000)
 ```
-## 📘Promises, Fetch and consume Promise
+## 📘Promises, Fetch, consume Promise and Chaining Fetch method
 * **Promise :** A Standarized approach to dealing with asynchronouse events and callbacks.
 
 ![Image](./images/what-is-promise.png)
 
 ![Image](./images/promise-lifecycle.png)
+
+* Fetch Method + Consuming promise
 
 ```js
 // Fetch method +  consuming Promise
@@ -2123,6 +2125,19 @@ fetch('https://restcountries.com/v3.1/name/india')
 // this .json() is also a asynchronous function so it means it will also return a new promise.
 .then(result => result.json())
 .then(result => console.log(result))
+.catch(error => console.log(error));
+```
+* Chaining fetch method
+
+```js
+fetch('https://restcountries.com/v3.1/name/india')
+.then(result => result.json())
+.then(result => {
+    return fetch('https://restcountries.com/v3.1/name/india')
+})
+// this then is dealing with the second fetch method
+.then(response => response.json())
+.then(response => console.log(response))
 .catch(error => console.log(error));
 ```
 
