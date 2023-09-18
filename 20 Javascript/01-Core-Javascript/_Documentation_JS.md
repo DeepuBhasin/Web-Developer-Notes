@@ -1,7 +1,9 @@
 # 📔 ES5
 ## 📘 Developer Responsibility
 
-Write good code so everyone can read and understand easily
+* Write good code so everyone can read and understand easily.
+* the harder is to understand code and to reason about the code the more difficult it will be to add new features add to more the functionality to the application. Hence it is called bad code.
+
 ---
 ## 📘 Operators are functions
 
@@ -2057,23 +2059,56 @@ test();
 Convert the syntax of one programming language, to another. In this case language that don't really ever run anywhere, but instead are processed by 'transpilers' that generate javascript.
 
 ---
-
-## Asynchronouse Code
-
-![Image](./images/asycnhronouse-code.png)
-![Image](./images/asycnhronouse-code-2.png)
-
----
-
 ## How Internet works
 
 ![Image](./images/how-internet-work'.png)
 ![Image](./images/how-internet-work-2.png)
 
 ---
+## Asynchronouse Code
+
+![Image](./images/asycnhronouse-code.png)
+![Image](./images/asycnhronouse-code-2.png)
+---
 
 ## 📘Ajax
 * **https://github.com/public-apis/public-apis** : Free Public api for various data
+
+```js
+let request = new XMLHttpRequest();
+request.open('GET', 'https://restcountries.com/v3.1/name/india');
+
+// data request.send();, we cannot do This because this code will run at the background : working as asynchronous
+request.send();
+
+request.addEventListener('load', function () {
+    const data = JSON.parse(this.responseText);
+    console.log(data);
+})
+```
+## 📘Callback-Hell
+* Callback hell : is when we have a lot of nested callbacks in order to execute asynchrounous tasks in sequence. and in fact this happens for all asynchronouse tasks, which are handled by callbacks and not just AJAX calls. for example let's say we have a set timeout function
+
+```js
+setTimeout(function () {
+    console.log('1 second Passed');
+    setTimeout(function () {
+        console.log('2 second Passed');
+        setTimeout(function () {
+            console.log('3 second Passed');
+            setTimeout(function () {
+                console.log('4 second Passed');
+                setTimeout(function () {
+                    console.log('5 second Passed');
+                    setTimeout(function () {
+                        console.log('6 second Passed');
+                    }, 1000)
+                }, 1000)
+            }, 1000)
+        }, 1000)
+    }, 1000)
+}, 1000)
+```
 
 
 ----
@@ -2449,7 +2484,7 @@ console.log(me);
 
 ---
 ## 📘 Extends and Prototypal Inheritance
-1. Simple Example with class only 
+1. Simple Example with class only
 ```javascript
 
 class Person {
@@ -2649,7 +2684,7 @@ class Person {
     greet() {
         return `Hello, ${this.firstname}`;
     }
-    
+
     // this will attach to Person Property (Means to function directly)
     static goodMorning() {
         return 'Good Morning';
