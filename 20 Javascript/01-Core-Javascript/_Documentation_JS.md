@@ -3,6 +3,7 @@
 
 * Write good code so everyone can read and understand easily.
 * the harder is to understand code and to reason about the code the more difficult it will be to add new features add to more the functionality to the application. Hence it is called bad code.
+* An important part of web-development is actually handle the errors. because its very common that errors happen in web-application.
 
 ---
 ## 📘 Operators are functions
@@ -2109,7 +2110,7 @@ setTimeout(function () {
     }, 1000)
 }, 1000)
 ```
-## 📘Promises, Fetch, consume Promise and Chaining Fetch method
+## 📘Promises, Fetc and consume Promise
 * **Promise :** A Standarized approach to dealing with asynchronouse events and callbacks.
 
 ![Image](./images/what-is-promise.png)
@@ -2127,7 +2128,7 @@ fetch('https://restcountries.com/v3.1/name/india')
 .then(result => console.log(result))
 .catch(error => console.log(error));
 ```
-* Chaining fetch method
+## 📘Chaining Promises method
 
 ```js
 fetch('https://restcountries.com/v3.1/name/india')
@@ -2141,9 +2142,57 @@ fetch('https://restcountries.com/v3.1/name/india')
 .catch(error => console.log(error));
 ```
 
+## 📘 Handling Error in Promises
+* All error will catch by **.catch** method.
+* **.catch** method at the end of the chain will basically catch any errors that occurs in any place in this whole promise chain no matter where that is.
+* so errors basically propogate down the chain until they are caught and only if they're not caught anywhere *then we get that uncaught error*
+
+```js
+// in this example we are getting status 404 but this request is success hence its not a fully valid request
+fetch('https://restcountries.com/v3.1/name/indiassss')
+.then(result => result.json())
+.then(response => console.log(response))
+.catch(error => console.log(error));
+```
+
+ ## 📘Finally Method
+* This method execute always
+* Practical use for showing/Hidding loading Spinners, printing logs etc
+
+```js
+ fetch('https://restcountries.com/v3.1/name/india')
+.then(result => {
+    if (result.ok == false) {
+        throw new Error('Country not found')
+    }
+    return result.json()
+})
+.then(response => console.log(response))
+.catch(error => console.log(error.message))
+.finally(data => console.log('finally Call Always'));
+```
+
+## 📘Thorwing Error Manually (best one)
+* Main concept is that when we throw an error **then method** will immiedately reject the promise, so then that rejected promise will travel down the chain until it is eventually caught somewhere.
+* **result** object which are getting in first then is very usefull for execute function related to HTTP request.
+* We are creating Error Manually using **Constructor Function**.
+```js
+ fetch('https://restcountries.com/v3.1/name/indiasss')
+.then(result => {
+    console.log(result);
+    if (result.ok == false) {
+        throw new Error('Country not found')
+    }
+    return result.json()
+})
+.then(response => console.log(response))
+.catch(error => console.log(error.message))
+.finally(data => console.log('finally Call Always'));
+```
+![Image](./images/promise-request-object.png)
 
 ----
-## 📘 Promises, Async and Await
+## 📘Promises, Async and Await
 
 * **Promise :** A Standarized approach to dealing with asynchronouse events and callbacks.
 
