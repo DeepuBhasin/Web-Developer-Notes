@@ -2200,9 +2200,30 @@ fetch('https://restcountries.com/v3.1/name/indiassss')
 
 ![Image](./images/how-asynchronouse-work-behind.png)
 
-## 📘Promises, Async and Await
+## 📘Polyfil of Promise
 
-* **Promise :** A Standarized approach to dealing with asynchronouse events and callbacks.
+```js
+// Prototyoe Example
+function test(c) {
+    function a() {
+        console.log('function a get called');
+    }
+    function b() {
+        console.log('function b get called');
+    }
+    c(a, b);
+}
+
+test(function (aa, bb) {
+    aa();
+    bb();
+})
+```
+
+
+
+
+
 
 ```javascript
 
