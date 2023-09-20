@@ -2200,7 +2200,64 @@ fetch('https://restcountries.com/v3.1/name/indiassss')
 
 ![Image](./images/how-asynchronouse-work-behind.png)
 
-## 📘Polyfil of Promise
+## 📘Build Simple Promise, Promisifying, Promise Shorthand and Polyfil of Promise
+
+* Simple Example of Promise
+```js
+let executor = function (resolve, reject) {
+    // make current function as asynchronous function (it just an example)
+    setTimeout(() => {
+        if (Math.random() >= 0.5) {
+            resolve('You win');
+        } else {
+            reject(new Error('You lost your money'));
+        }
+    }, 2000)
+}
+
+let lotteryPromise = new Promise(executor);
+lotteryPromise
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+```
+* **Promisifying** : means to convert callback based asynchronous behaviour to promise based.
+```js
+// Example 1
+const wait = function (second) {
+    return new Promise(function (resolve) {
+        setTimeout(resolve, 1000 * second)
+    });
+}
+
+wait(2).then(result => console.log('code executed'))
+
+
+// Example 2
+navigator.geolocation.getCurrentPosition(position => console.log(position), reject => console.log(reject))
+
+// converting into this 
+
+const getPosition = function () {
+    return new Promise((reject, resolve) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
+}
+getPosition()
+    .then(result => console.log(result))
+    .catch(error => console.log(error));
+```
+
+* **Shorthand of Promise**
+
+```js
+// Resolved Promise
+Promise.resolve('This is resolved Promise').then(result => console.log(result));
+
+// Rejected Promise
+Promise.reject(new Error("This is Rejected Promise")).catch(error => console.log(error));
+```
+
+📚 **conceptual Example :** To understand Polyfill for promise.
 
 ```js
 // Prototyoe Example
@@ -2219,12 +2276,7 @@ test(function (aa, bb) {
     bb();
 })
 ```
-
-
-
-
-
-
+* **Polyfill of Promise**
 ```javascript
 
 const PENDING = 0;
@@ -2286,6 +2338,34 @@ setTimeout(() => {
         console.log('3rd log : ' + val);
     })
 }, 3000);
+```
+
+## 📘Async/Await
+* it is special type of function which is called Async Function
+* It is just **Syntactic Sugar** of promise-then method
+* await == then
+```js
+async function getData() {
+    let data = await fetch('https://jsonplaceholder.typicode.com/posts');
+    data = await data.json();
+    console.log(data);
+}
+```
+
+## 📘Error Handling with try-catch 
+
+📚 **conceptual Example :**
+* if we get any kind of error that will get automatically in **catch block**
+
+```js
+ try {
+    let x = 10;
+    const y = 20;
+    y = 30;
+} catch (error) {
+    // get error variable automatically
+    console.log(error.message);     //  Assignment to constant variable.
+}
 ```
 
 ---
