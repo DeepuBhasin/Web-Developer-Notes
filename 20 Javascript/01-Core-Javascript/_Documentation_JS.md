@@ -2472,6 +2472,45 @@ console.log('console 1');
     console.log('console 3')
 }());
 ```
+## 📘Prmise.all, 
+* it save our bandwidth to run all calls in parallel
+```js
+async function getData() {
+    try {
+        let data1 = await fetch('https://jsonplaceholder.typicode.com/posts/1');
+        let data2 = await fetch('https://jsonplaceholder.typicode.com/posts/2');
+        let data3 = await fetch('https://jsonplaceholder.typicode.com/posts/3');
+
+        const urls = [
+            'https://jsonplaceholder.typicode.com/posts/1',
+            'https://jsonplaceholder.typicode.com/posts/2',
+            'https://jsonplaceholder.typicode.com/posts/3'
+        ];
+
+        const promises = urls.map(async url => {
+            const response = await fetch(url);
+            return response.json();
+        });
+
+        return [data1, data2, data3] = await Promise.all(promises);
+
+    } catch (error) {
+        // Handle errors here or rethrow them if needed
+        console.error(error);
+        throw error;
+    }
+}
+
+getData()
+    .then(data => {
+        console.log(data); // You can access the fetched data here
+    })
+    .catch(error => {
+        console.error("An error occurred:", error);
+    });
+```
+![Image](./images/promise-all.png)
+
 
 ---
 # 📔ES6
