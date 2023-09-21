@@ -2340,19 +2340,18 @@ setTimeout(() => {
 }, 3000);
 ```
 
-## 📘Async/Await
+## 📘Async/Await, Error Handling, Ordering of Async-Await
 * it is special type of function which is called Async Function
 * It is just **Syntactic Sugar** of promise-then method
 * await == then
 ```js
+// Simple Example
 async function getData() {
     let data = await fetch('https://jsonplaceholder.typicode.com/posts');
     data = await data.json();
     console.log(data);
 }
 ```
-
-## 📘Error Handling with try-catch 
 
 📚 **conceptual Example :**
 * if we get any kind of error that will get automatically in **catch block**
@@ -2366,6 +2365,112 @@ async function getData() {
     // get error variable automatically
     console.log(error.message);     //  Assignment to constant variable.
 }
+```
+* **Ordering of Async-Await**
+
+```js
+async function getData() {
+    try {
+        let data = await fetch('https://jsonplaceholder.typicode.com/posts');
+        if (data.ok === false) {
+            throw new Error('Page not found');
+        }
+        console.log('data', data)
+        console.log('console 2')
+        data = await data.json();
+        console.log(data);
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+console.log('console 1');
+getData();
+console.log('console 3');
+```
+![Image](./images/async-awit-order.png)
+
+---
+
+## 📘 Return with async-await
+* Resolve Promise (not a good example)
+```js
+async function getData() {
+    try {
+        let data = await fetch('https://jsonplaceholder.typicode.com/posts');
+        if (data.ok === false) {
+            throw new Error('Page not found');
+        }
+        data = await data.json();
+        return data
+    } catch (error) {
+        // if did not write this line then the current whole promise goes into then statement hence concidered as resolve
+        
+        // Reject promise returned from async function (rejecting manually)
+        throw error.message;
+    }
+}
+getData()
+.then(result => {
+    console.log('console 2');
+    console.log(result)
+    return result;
+})                                                 // get value if promise get resolve automatically
+.catch(error => console.log('Error : ' + error))   // get value if promise get reject manually
+.finally(() => console.log('console 3'));
+```
+
+* Rejected Promise (not a good example)
+```js
+async function getData() {
+    try {
+        let data = await fetch('https://jsonplaceholder.typicode.com/posts');
+        if (data.ok === false) {
+            throw new Error('Page not found');
+        }
+        data = await data.json();
+        return data
+    } catch (error) {
+        // if did not write this line then the current whole promise goes into then statement hence concidered as resolve
+        
+        // Reject promise returned from async function (rejecting manually)
+        throw error.message;
+    }
+}
+getData()
+.then(result => {
+    console.log('console 2');
+    console.log(result)
+    return result;
+})                                                 // get value if promise get resolve automatically
+.catch(error => console.log('Error : ' + error))   // get value if promise get reject manually
+.finally(() => console.log('console 3'));
+```
+* best example 
+
+```js
+ async function getData() {
+    try {
+        let data = await fetch('https://jsonplaceholder.typicode.com/posts ');
+        if (data.ok === false) {
+            throw new Error('Page not found');
+        }
+        data = await data.json();
+        return data
+    } catch (error) {
+        // Reject promise returned from async function
+        throw error.message;
+    }
+}
+console.log('console 1');
+(async function () {
+    try {
+        const data = await getData();
+        console.log(data);
+    } catch (error) {
+        console.log('Error : ' + error);
+    }
+    console.log('console 3')
+}());
 ```
 
 ---
