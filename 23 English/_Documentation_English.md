@@ -8,3 +8,32 @@
 
 ![Image](./image/common-nouns-1.png)
 ![Image](./image/common-nouns-2.png)
+
+* **Rules for converting from Singular to Plural**
+
+![Image](./image/common-nouns-3.png)
+
+
+* **Some noun are irregular**
+
+| Sr no | Singular | Plural   |
+| ----- | -------- | -------- |
+| 1     | man      | men      |
+| 2     | woman    | women    |
+| 3     | person   | people   |
+| 4     | child    | children |
+| 5     | tooth    | teeth    |
+| 6     | foot     | feet     |
+| 7     | mouse    | mice     |
+
+🧾 Questions
+1. *Fruit* and *vegetables* are good for you.
+2. *Books* can help you learn something new.
+3. map : *maps*, cake : *cakes*
+4. sandwich : *sandwiches*, cross : *crosses*, fox : *foxes*, tomato :*tomatoes*
+5. lily : *lilies*
+6. wife : *wives*, calf : *calves*, life : lives
+7. don't forget to take your jacket ! it's really cold outside today
+
+* Example 
+![Image](./image/common-nouns-4.png)
