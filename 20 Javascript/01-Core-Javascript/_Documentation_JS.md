@@ -2515,6 +2515,7 @@ getData()
 ![Image](./images/promise-all.png)
 
 ## Promise.race
+* it receive promise and return a promise
 *  it fulfills if the first promise to settle is fulfilled, and rejects if the first promise to settle is rejected.
 
 ```js
@@ -2563,6 +2564,43 @@ Promise.race([p5, p6]).then(
         // p6 is faster, so it rejects
     },
 );
+```
+## 📘Promise.allSettled, Promise.all, Promise.any
+* **Promise.allSettled :** We return all promise like reolved or rejected in single promise example in below code we will get all promise values
+
+```js
+Promise.allSettled([
+    Promise.resolve('Success'),
+    Promise.reject('Error'),
+    Promise.resolve('Another Error'),
+]).then(result => {
+    console.log(result);
+});
+```
+* **Promise.all :** in this case it will only return reject promise because in reject promise if one of the promise get rejected then whole promise get reject.
+```js
+   Promise.all([
+    Promise.resolve('Success'),
+    Promise.reject('Error'),
+    Promise.resolve('Another Error'),
+]).then(result => {
+    return result;
+}).then(result => {
+    console.log(result);
+}).catch(error => console.log(error))
+```
+* **Promise.any :** it will return only settled value which will resolve first, similar to promise.reject but it will return only reolved values.
+
+```js
+Promise.any([
+    Promise.resolve('Success'),
+    Promise.reject('Error'),
+    Promise.resolve('Another Error'),
+]).then(result => {
+    return result;
+}).then(result => {
+    console.log(result);
+}).catch(error => console.log(error))
 ```
 
 ---
