@@ -4405,3 +4405,14 @@ c.addEventListener('click', function (e) {
 ```
 ## 📘DOM Traversing
 * is basically walking through the DOM. which means that we can select an element based on another element for example a direct child or a direct parent element or sometimes we don't even know the structure of DOM at runtime.
+
+
+📔 Modern Javascript Development
+ * **webpack :** is called bundler which take raw code and tranform it into a javascript bundle.
+![Image](./images/modern-javascript-development-1.png)
+
+## 📘Modules
+
+![Image](./images/module-1.png)
+![Image](./images/module-2.png)
+![Image](./images/module-3.png)
