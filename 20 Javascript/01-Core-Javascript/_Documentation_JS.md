@@ -4489,7 +4489,7 @@ export default function (product, quantity) {
 // script.js
 
 // Importing module
-import { addToCart, totalPrice as price, tq } from "./ShoppingCart.js";
+import defaultExport, { addToCart, totalPrice as price, tq } from "./ShoppingCart.js";
 
 // now its become object
 import * as ShoppingCart from "./ShoppingCart.js"
@@ -4506,6 +4506,7 @@ console.log(tq);
 console.log(ShoppingCart.tq);
 
 add('apple', 4);
+defaultExport('mango', 4);
 ```
 
 
