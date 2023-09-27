@@ -4507,7 +4507,15 @@ console.log(ShoppingCart.tq);
 
 add('apple', 4);
 defaultExport('mango', 4);
+
+// printing all live values from array, hence its a live connection between modules
+console.log(ShoppingCart.cart);
 ```
+⚠️ **Note :**  best practice is just use one default export per module.
+
+![Image](./images/name-export-module.png)
+
+
 
 
 ---
