@@ -4416,3 +4416,150 @@ c.addEventListener('click', function (e) {
 ![Image](./images/module-1.png)
 ![Image](./images/module-2.png)
 ![Image](./images/module-3.png)
+
+## 📘Importing and Exporting Module
+* Imports are not copies of the export. They are instead like a live connection and so what that means is that I point to the same place in memory because again, otherwise if it was a copy then here we would not get anything in the array.
+* Importing script file with **type="module"**, the file download in *async* manner.
+
+```js
+//ShoppingCrat.js
+
+// Exporting Module
+console.log('Exporting Module');
+```
+
+```js
+//script.js
+
+// Importing module
+import "./ShoppingCart.js";
+console.log('Importing module');
+```
+
+```html
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <!-- Importing File with type module -->
+    <script type="module" src="./script.js"></script>
+</body>
+
+</html>
+```
+---
+## 📘Named and Default Exports
+* Every thing which we define in modules get scope in their own module untill unless we don't export them for example variables, function etc, hence become private
+* it will not put any variable on global scope.
+
+```js
+// ShoppingCart.js
+
+// Exporting Module
+export const shippingCost = 10;
+export const cart = [];
+
+export const addToCart = function (product, quantity) {
+    cart.push(product, quantity);
+    console.log(`${quantity} ${product} added to cart`);
+}
+
+const totalPrice = 237;
+const totalQuantity = 23;
+
+export { totalPrice, totalQuantity as tq }
+
+// only use when we export only one thing from whole module
+export default function (product, quantity) {
+    cart.push(product, quantity);
+    console.log(`${quantity} ${product} added to cart`);
+}
+```
+
+
+```js
+// script.js
+
+// Importing module
+import { addToCart, totalPrice as price, tq } from "./ShoppingCart.js";
+
+// now its become object
+import * as ShoppingCart from "./ShoppingCart.js"
+
+// import default export no matter what's that called
+import add from "./ShoppingCart.js"
+
+
+addToCart('bread', 3);
+
+console.log(price);
+console.log(tq);
+
+console.log(ShoppingCart.tq);
+
+add('apple', 4);
+```
+
+
+---
+## 📘await with module (Top level await)
+* It is *best and worst* for us as well because all code will block untill inless *await* does not get result from api. 
+
+```html
+<!-- index.html -->
+
+<!-- Importing File with type module -->
+<script type="module" src="./script.js"></script>
+```
+
+```js
+// script.js
+console.log('Fetching');
+let data = await fetch('https://jsonplaceholder.typicode.com/posts');
+data = await data.json();
+console.log(data);
+console.log('Something');
+
+// no need of this code due to Top level await
+async function () {
+    let data = await fetch();
+}
+
+```
+* Use full Example for **Top level Await**
+
+```js
+//script.js
+async function getLastPost() {
+    let data = await fetch('https://jsonplaceholder.typicode.com/posts');
+    data = await data.json();
+    return {
+        title: data.at(-1).title,
+        text: data.at(-1).body
+    }
+}
+
+const lastPost = getLastPost();
+console.log('using direct', lastPost);
+
+// Not very clean 
+lastPost.then(last => {
+    console.log('using then', last);
+})
+
+// best way
+const lastPost2 = await getLastPost();
+console.log('using await', lastPost2);
+```
+![Image](./images/top-level-await.png)
+
+---
+
