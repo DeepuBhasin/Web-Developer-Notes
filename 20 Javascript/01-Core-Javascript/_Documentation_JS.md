@@ -4604,3 +4604,32 @@ console.log('using await', lastPost2);
 
 ---
 
+## 📘The Module Pattern
+* Main goal of Module pattern is *encapsulate functionality*, to have private data and expose a *public API*, the best way you can achieving by using functions, *because functions give us privte data by default and allow us to return values which can become our public API*.
+
+* Now the problem, is that if we wanted one module per file like we have with ES6 modules then we would have to create different scripts and link all of them in the HTML file and that then creates a couple of problem like we have to be careful with the order in which we declare them in html and we would have all of the variables living in the global scope and finally we also couldn't bundle them together using a module bundler.
+```js
+ const ShoppingCart = (function () {
+const cart = [];
+const shippingCost = 10;
+const totalPrice = 237;
+const totalQuantity = 23;
+const addToCart = function (product, quantity) {
+    cart.push({ product, quantity });
+    console.log(`${quantity} ${product} added to cart`);
+};
+const orderStock = function (product, quantity) {
+    console.log(`${quantity} ${product} ordered from supplier`);
+}
+
+return {
+    addToCart,
+    cart,
+    totalPrice,
+    totalQuantity
+}
+}());
+
+ShoppingCart.addToCart('apple', 4);
+ShoppingCart.addToCart('pizza', 3);
+```
