@@ -4,7 +4,7 @@
 * Write good code so everyone can read and understand easily.
 * the harder is to understand code and to reason about the code the more difficult it will be to add new features add to more the functionality to the application. Hence it is called bad code.
 * An important part of web-development is actually handle the errors. because its very common that errors happen in web-application.
-
+* To test *APi* use *Network tab* with various **Throttling** options *fast/slow/offline*
 ---
 ## 📘 Operators are functions
 
@@ -2235,7 +2235,7 @@ wait(2).then(result => console.log('code executed'))
 // Example 2
 navigator.geolocation.getCurrentPosition(position => console.log(position), reject => console.log(reject))
 
-// converting into this 
+// converting into this
 
 const getPosition = function () {
     return new Promise((reject, resolve) => {
@@ -2404,7 +2404,7 @@ async function getData() {
         return data
     } catch (error) {
         // if did not write this line then the current whole promise goes into then statement hence concidered as resolve
-        
+
         // Reject promise returned from async function (rejecting manually)
         throw error.message;
     }
@@ -2431,7 +2431,7 @@ async function getData() {
         return data
     } catch (error) {
         // if did not write this line then the current whole promise goes into then statement hence concidered as resolve
-        
+
         // Reject promise returned from async function (rejecting manually)
         throw error.message;
     }
@@ -2445,7 +2445,7 @@ getData()
 .catch(error => console.log('Error : ' + error))   // get value if promise get reject manually
 .finally(() => console.log('console 3'));
 ```
-* best example 
+* best example
 
 ```js
  async function getData() {
@@ -4514,13 +4514,9 @@ console.log(ShoppingCart.cart);
 ⚠️ **Note :**  best practice is just use one default export per module.
 
 ![Image](./images/name-export-module.png)
-
-
-
-
 ---
 ## 📘await with module (Top level await)
-* It is *best and worst* for us as well because all code will block untill inless *await* does not get result from api. 
+* It is *best and worst* for us as well because all code will block untill inless *await* does not get result from api.
 
 ```html
 <!-- index.html -->
@@ -4528,8 +4524,10 @@ console.log(ShoppingCart.cart);
 <!-- Importing File with type module -->
 <script type="module" src="./script.js"></script>
 ```
-
+* Worst Examples
 ```js
+// Example 1
+
 // script.js
 console.log('Fetching');
 let data = await fetch('https://jsonplaceholder.typicode.com/posts');
@@ -4541,8 +4539,42 @@ console.log('Something');
 async function () {
     let data = await fetch();
 }
-
 ```
+
+```js
+// Example 2
+
+// ShoppingCart.js
+
+console.log('Start Fetching');
+// Blocking module (this code will block other code as well as other modules where we are exporting this file untill this api get resolve)
+await fetch('https://jsonplaceholder.typicode.com/posts');
+console.log('End Fetching');
+
+export default function (product, quantity) {
+    console.log('Hello World');
+}
+
+// Script.js
+
+import add from "./ShoppingCart.js"
+add()
+
+async function getLastPost() {
+    let data = await fetch('https://jsonplaceholder.typicode.com/posts');
+    data = await data.json();
+    return {
+        title: data.at(-1).title,
+        text: data.at(-1).body
+    }
+}
+// // best way
+const lastPost2 = await getLastPost();
+console.log('using await', lastPost2);
+```
+
+
+
 * Use full Example for **Top level Await**
 
 ```js
@@ -4559,7 +4591,7 @@ async function getLastPost() {
 const lastPost = getLastPost();
 console.log('using direct', lastPost);
 
-// Not very clean 
+// Not very clean
 lastPost.then(last => {
     console.log('using then', last);
 })
