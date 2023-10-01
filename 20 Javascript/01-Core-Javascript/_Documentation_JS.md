@@ -4633,3 +4633,87 @@ return {
 ShoppingCart.addToCart('apple', 4);
 ShoppingCart.addToCart('pizza', 3);
 ```
+---
+
+## 📘Common.js (another module system use in Node)
+
+```js
+export.addToCart = function (product) {
+    console.log('This is your ' + product);
+}
+
+const { addToCart } = require('./script.js');
+```
+## 📘NPM
+* its a software as well package repository.
+* **Why we need npm ?** : back in the day before we have NPM we used to include external libraries right into our HTML so basicallu using the script tag and this would then expose a global variable that we could use, but could create problems
+  1. it doesn't make much sense having the html loading all of the javascript that is just really messy
+  2. Also many times we would actually download a library file to our computer directly for example a jQuery Javascript file but then whenever a new version would come out, we would have to manually go to the site download the new version change the file in our file system manually and then include it here again, maybe with some other name with some other version number
+  3. before npm, there simply wasn't a single repository that conatined all the pacakages that we might need and so this made it even worse and more difficult to manually download libraries and manage them on our computer.
+
+* **Solution** : we really need a way to manage our dependencies in a better and more modern way and NPM is exactly how we do that.
+
+* command to install npm packages
+
+```
+npm init
+```
+* Just hitting enter, then it will end up with creating file **pacake.json**
+```js
+{
+  "name": "javascript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lodash-es": "^4.17.21"
+  }
+}
+```
+
+
+```
+npm install leaflet
+```
+
+* After installing packages (dependencies) **node_modules** folder get created and it will contain leaflet folder with various dependencies files.
+* More pacakages we installed it will goes into **node_modules** folder
+
+**Note :**
+1. if we want to use any bundler that wouldn't be easy without a module bundler and that's because leaflet library actually uses the common js module system. therefore we connot directly import it into our code. *We could only do that if later we used a module bundler*
+2.  Another way by importing *actuall path*
+
+```
+npm install lodash-es
+```
+
+```js
+import cloneDeep from "./node_modules/lodash-es/cloneDeep.js";
+
+const state = {
+    cart: [
+        {
+            product: 'bread',
+            quantity: 5
+        },
+        {
+            product: 'pizza',
+            quantity: 5
+        }
+    ],
+    user: {
+        loggedIn: true
+    }
+}
+
+let newState = cloneDeep(state);
+newState.user = false;
+
+console.log('State', state);
+console.log('new State', newState);
+``` 
