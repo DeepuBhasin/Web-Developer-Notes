@@ -4744,11 +4744,11 @@ newState.user = false;
 
 console.log('State', state);
 console.log('new State', newState);
-``` 
+```
 
 ## 📘Parcel (Module Bundler)
 * *its a bundler which allow you to run your application by bundling (merge) all your module files.*
-* When we install any bundler other dependencies also get installed like *live server* etc. In React we get webpack bundler by default which com with default settings in it like *build, run server* etc.  
+* When we install any bundler other dependencies also get installed like *live server* etc. In React we get webpack bundler by default which com with default settings in it like *build, run server* etc.
 * *devDependency* is basically like a tool that we need to build our application but it's not a dependency that we actually include in our code.
 
 * install package
@@ -4757,7 +4757,7 @@ npm i parcel --save-dev
 ```
 
 * html files
-```html 
+```html
 <!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
@@ -4830,4 +4830,27 @@ npm run start
 * by installing package globally you can run your package in whole computer
 ```
 npm install parcel -g
+```
+* best is always use locally package that you can always stay on the latest version.
+
+## 📘Babel
+* Babel is transpiler which convert you all kind of super code into ES5 code so browser can understand.
+* *parcel bundler* is automatically use *Babel* to transpile or code.
+* *Babel* works with *plugin and preset*. *Plugin* is a specific javascript feature that we want to transpile for example only want to convert *arrow functions* back to *ES5* not the other things, it does not make lots of sense because we want to convert every thing at the same time so usually instead of using single plugins for each features babel actually uses *presets*. **Preset** is basically a bunch of plugins bundled together, by default every bundler like *parcel or webpack* use **@babel/preset-env** and this preset will automatically select which javascript features should be compiled based on browser support and that will all happen automatically.
+* *Babel* only can convert ES6 Snytax not the features like *arrow functions, spread operators, classes, const, spread operators etc.* not the *promise, find methods, map methods* features. so we do **polyfilling** some time. For polyfilling we have stable library
+
+```
+npm install core-js
+```
+```js
+import 'core-js/stable';
+```
+
+* This is Polifilling async functions
+
+```
+npm install regenerator-runtime
+```
+```js
+import 'regenerator-runtime/runtime'
 ```
