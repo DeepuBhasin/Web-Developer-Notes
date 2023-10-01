@@ -4865,3 +4865,30 @@ import 'regenerator-runtime/runtime'
 ![Image](./images/paradime-functional.png)
 
 ![Image](./images/functional-programing.png)
+
+```js
+// Impure Function because it is disturbing the outer environment (sideEffect)
+const arr = [];
+function addingElement() {
+    arr.push(1);
+}
+
+addingElement();
+addingElement();
+addingElement();
+addingElement();
+console.log(arr);
+
+// Pure Function because it is not disturbing the outer environment (no sideEffect)    
+const arr = [1, 2];
+
+function addingNewElement(arr) {
+    const temp = [...arr];
+    temp.push(1);
+    return temp;
+}
+
+const arrNew = addingNewElement(arr);
+console.log('old', arr);
+console.log('new', arrNew);
+```
