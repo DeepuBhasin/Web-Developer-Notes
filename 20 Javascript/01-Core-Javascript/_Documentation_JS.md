@@ -4573,8 +4573,6 @@ const lastPost2 = await getLastPost();
 console.log('using await', lastPost2);
 ```
 
-
-
 * Use full Example for **Top level Await**
 
 ```js
@@ -4644,6 +4642,7 @@ export.addToCart = function (product) {
 
 const { addToCart } = require('./script.js');
 ```
+---
 ## 📘NPM
 * its a software as well package repository.
 * **Why we need npm ?** : back in the day before we have NPM we used to include external libraries right into our HTML so basicallu using the script tag and this would then expose a global variable that we could use, but could create problems
@@ -4745,7 +4744,7 @@ newState.user = false;
 console.log('State', state);
 console.log('new State', newState);
 ```
-
+---
 ## 📘Parcel (Module Bundler)
 * *its a bundler which allow you to run your application by bundling (merge) all your module files.*
 * When we install any bundler other dependencies also get installed like *live server* etc. In React we get webpack bundler by default which com with default settings in it like *build, run server* etc.
@@ -4812,6 +4811,7 @@ npx parcel index.html
 
 **Note :** *parcel index.html* will not work because *it intsalled in local package.json project*. So *npx parcel index.html* to run application locally.
 
+---
 ## 📘Create Manually Commands
 * creating manual command
 ```js
@@ -4825,7 +4825,7 @@ npx parcel index.html
 ```
 npm run start
 ```
-
+---
 ## 📘Install Package Globally
 * by installing package globally you can run your package in whole computer
 ```
@@ -4833,6 +4833,7 @@ npm install parcel -g
 ```
 * best is always use locally package that you can always stay on the latest version.
 
+---
 ## 📘Babel
 * Babel is transpiler which convert you all kind of super code into ES5 code so browser can understand.
 * *parcel bundler* is automatically use *Babel* to transpile or code.
@@ -4854,3 +4855,13 @@ npm install regenerator-runtime
 ```js
 import 'regenerator-runtime/runtime'
 ```
+---
+## 📘Clean Code
+![Image](./images/clean-code.png)
+![Image](./images/clean-code-1.png)
+
+---
+## 📘Declarative and Functional Javascript Principles
+![Image](./images/paradime-functional.png)
+
+![Image](./images/functional-programing.png)
