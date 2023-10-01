@@ -4686,6 +4686,34 @@ npm install leaflet
 
 **Note :**
 1. if we want to use any bundler that wouldn't be easy without a module bundler and that's because leaflet library actually uses the common js module system. therefore we connot directly import it into our code. *We could only do that if later we used a module bundler*
+
+```js
+// loading module
+import cloneDeep from "lodash-es";
+
+const state = {
+    cart: [
+        {
+            product: 'bread',
+            quantity: 5
+        },
+        {
+            product: 'pizza',
+            quantity: 5
+        }
+    ],
+    user: {
+        loggedIn: true
+    }
+}
+
+let deepClone = cloneDeep(state);
+deepClone.user = false;
+
+console.log('State', state);
+console.log('new State', deepClone);
+```
+
 2.  Another way by importing *actuall path*
 
 ```
@@ -4717,3 +4745,89 @@ newState.user = false;
 console.log('State', state);
 console.log('new State', newState);
 ``` 
+
+## 📘Parcel (Module Bundler)
+* *its a bundler which allow you to run your application by bundling (merge) all your module files.*
+* When we install any bundler other dependencies also get installed like *live server* etc. In React we get webpack bundler by default which com with default settings in it like *build, run server* etc.  
+* *devDependency* is basically like a tool that we need to build our application but it's not a dependency that we actually include in our code.
+
+* install package
+```
+npm i parcel --save-dev
+```
+
+* html files
+```html 
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <script type="module" src="./script.js"> </script>
+</body>
+
+</html>
+```
+
+* JS File
+```js
+// script.js
+import cloneDeep from "lodash-es";
+
+const state = {
+    cart: [
+        {
+            product: 'bread',
+            quantity: 5
+        },
+        {
+            product: 'pizza',
+            quantity: 5
+        }
+    ],
+    user: {
+        loggedIn: true
+    }
+}
+
+let newState = cloneDeep(state);
+newState.user = false;
+
+console.log('State', state);
+console.log('new State', newState);
+```
+
+* Run Bundler to run your application, *npx* is used to run application in local project and command will create a dist folder which have a build files
+
+```
+npx parcel index.html
+```
+
+**Note :** *parcel index.html* will not work because *it intsalled in local package.json project*. So *npx parcel index.html* to run application locally.
+
+## 📘Create Manually Commands
+* creating manual command
+```js
+// adding comand
+"scripts": {
+    "start" : "npx parcel index.html",
+    "build" : "npx parcel build index.html"
+}
+```
+* running command
+```
+npm run start
+```
+
+## 📘Install Package Globally
+* by installing package globally you can run your package in whole computer
+```
+npm install parcel -g
+```
