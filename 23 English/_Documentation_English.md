@@ -35,7 +35,7 @@
 6. wife : *wives*, calf : *calves*, life : lives
 7. don't forget to take your jacket ! it's really cold outside today
 
-* Example 
+* Example
 ![Image](./image/common-nouns-4.png)
 
 ## 📘Proper Noun
@@ -43,7 +43,7 @@
 * A noun is a word used to identify people, places, or things (common noun) or to name a particular one of these (proper noun). example You can buy *coffee* (common noun) at *Starbucks* (proper noun).
 * *A Proper noun is a noun that refers to a unique thing, such as (names, name of cities, planets, corporation etc.) but a common noun usually refers to a class of things.* Example *London* is the capital of *Great Britain*
 
-⚠️ Note : 
+⚠️ Note :
 * **That proper nouns are unique names. They are capitalized**. For Example **Olivia** wants to travel around **Europe** next year.
 * We should also Capitalize
 1. **Festivals :** **Christmas** and **Thanksgiving** are my two favorite holidays !
@@ -51,6 +51,25 @@
 3. The name of **books, films, plays, paintings**. We use capital letters for the nouns, adjectives and verbs in the titles : I've just finished reading **'The Old Man and the Sea'**.
 4. **Sometimes we use a person's name to refer to something they have created** : We were listening to **Mozart** the other day. I'm reading an **Iris Murdoch** now.
 5. **When you use a word about a family member (e.g mom, dad, uncle), capitalize it only if the word is being used exactly as you would use a name, i.e if you were addressing then person directly. if the word is not being used as a name, it is not capatalized** : Please ask *Dad* if he can buy wine on his way home. Is your *dad* coming over for dinner ?
-6. **Whenever you see capitalized word, question whether or not it is a proper noun. Make sure that the capitalized word is in fact a noun as there are also proper adjectives** : 
+6. **Whenever you see capitalized word, question whether or not it is a proper noun. Make sure that the capitalized word is in fact a noun as there are also proper adjectives** :
    1. *Asia* is one of the continents of the world. (proper noun)
    2. I don't really like **Asian** food. (proper adjective)
+
+## 📘Subject Pronouns
+* *A subject pronoun is a pronoun that takes the place of a noun as the subject of a sentence* for example : *She* told me about her worries.
+* basic concept of pronoun is **to avoid repetition of words**
+
+![Image](./image/subject-pronoun.png)
+
+* *We should replace the subject with a subject pronoun to avoid repetition.* for example  : <del>Mary is a student and Mary is very hard-working.</del> Mary is a student and she is very hard-working.
+* *We use the subject pronoun it when we refer to objects, things, animals, or ideas.* for example : Love is eternal. It will last forever.
+* *Sometimes when we don't know the sex of a baby, we can use it.* for example : Their baby is so small. It only weighs 2 kilos.
+* *We use it when we talk about time, weather, or temperature.* for example : What time is it? – It’s 7 o’clock. It’s quite cold today
+
+![Image](./image/pronoun-example-1.png) 
+
+🧾Questions
+1. Helen - *she*, dog - *it*, students - *they*, my brother and i - *we*
+2. Look at the cat. The cat is so cute : *It is so cute*
+3. The baby didn't sleep well __ kicking all night : *it*
+4. __ -10 degree outside. You should definitely wear a hat! : *it's*  
