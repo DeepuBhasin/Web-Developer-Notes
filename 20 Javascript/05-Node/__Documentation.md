@@ -71,8 +71,24 @@ fs.readFile('./input.txt', 'utf-8', (error, data) => {
 
 console.log('Executed End');
 ```
+## 📘Creating a Simple Web Server
 
+* app.js
+```js
+const http = require('http');
 
+const server = http.createServer((request, response) => {
+    response.end('Hello from server');
+});
+
+server.listen(8000, '127.0.0.1', () => {
+    console.log('Listening to request on port 8000');
+});
+```
+* Hit this address in google chrome
+```
+http://127.0.0.1:8000/
+```
 
 
 
