@@ -5,7 +5,7 @@
 
 ![Image](./images/why-and-when-to-use-node-js.png)
 
-## 📘Reading and Writing Files
+## 📘Reading and Writing Files (synchronous way)
 
 * input.txt
 ```
@@ -27,13 +27,50 @@ const textOut = `this is text which is adding through coding. ${textIn}\n Create
 fs.writeFileSync('./output.txt', textOut);  // this file will generate automatically
 ```
 
+```
+node app.js
+```
 
+## 📘Synchronous Vs Asynchronous
 
+![Image](./images/sync-vs-async.png)
+![Image](./images/sync-vs-async-1.png)
+![Image](./images/sync-vs-async-2.png)
+![Image](./images/sync-vs-async-3.png)
 
+## 📘Reading and Writing Files (asynchronous way)
+* Reading Data
+```js
+console.log('Execute Start');
 
+const fs = require('fs');
+fs.readFile('./input.tsssxt', 'utf-8', (error, data) => {
+    console.log('data : ', data);
+    console.log('error', error);
+})
 
+console.log('Executed End');
 
+// Execute Start
+// Executed End
+// data :  Hello may name is Deepinder Singh. I am working as front end engineer. My Primary technology is React.
+```
+* Reading and writing Data
+```js
+console.log('Execute Start');
 
+const fs = require('fs');
+fs.readFile('./input.txt', 'utf-8', (error, data) => {
+    if(error) return console.log('Error !!! file not found')
+    console.log('data : ', data);
+    console.log('error', error);
+    fs.writeFile('./output.txt', data + ' Coming data from async code', 'utf-8', err => {
+        console.log('Your fetch file and code written successfully');
+    })
+})
+
+console.log('Executed End');
+```
 
 
 
