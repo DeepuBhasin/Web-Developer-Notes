@@ -408,6 +408,8 @@ function App() {
 
 export default App;
 ```
+![Image](./images/children-prop.png)
+
 
 ---
 ## 📘How to Split a UI into component
