@@ -376,7 +376,38 @@ const eventHandlerCount() => {
 ## 📘Derived State
 
 * More you have **states** more you have **re-rendering**
+
 ![image](./images/driver-state.png)
+
+---
+
+## 📘Children Props
+
+* when we avoid to pass to many props then we use **children props**
+
+```js
+import React from 'react';
+import "./App.css"
+
+function Button({ onClick, backgroundColor, color, children }) {
+  return <button style={{ backgroundColor, color }} onClick={onClick}>{children}</button>
+}
+
+function App() {
+  return <div className='App'>
+    <Button onClick={() => alert('Hello World')} color={'black'} backgroundColor={'white'}>
+      Alert
+    </Button>
+
+    <Button onClick={() => alert('Alert with emojis')} color={'black'} backgroundColor={'white'}>
+      Hello 😁
+    </Button>
+
+  </div>
+}
+
+export default App;
+```
 
 ---
 ## 📘How to Split a UI into component
