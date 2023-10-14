@@ -361,6 +361,12 @@ const eventHandlerCount() => {
 ![Image](./images/local-vs-global.png)
 
 ---
+
+## 📘When and Where State Use
+![Image](./images/when-where-state-use.png)
+
+
+---
 ## 📘Lift-Up-State
 
 ![Image](./images/lift-up-state.png)
