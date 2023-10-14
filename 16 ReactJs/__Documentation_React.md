@@ -354,6 +354,13 @@ const eventHandlerCount() => {
 ![Image](./images/state-vs-props.png)
 
 ---
+# 📔Thinking in React State Management
+
+## 📘Local Vs Global State
+
+![Image](./images/local-vs-global.png)
+
+---
 ## 📘Lift-Up-State
 
 ![Image](./images/lift-up-state.png)
