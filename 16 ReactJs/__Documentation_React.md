@@ -410,7 +410,7 @@ export default App;
 ```
 ![Image](./images/children-prop.png)
 
-
+# 📔10. Thinking in React Components, Composition, and Reusability
 ---
 ## 📘How to Split a UI into component
 
@@ -477,6 +477,13 @@ export default App
 ## 📘Component Categories
 
 ![Image](./images/component-category.png)
+
+---
+## 📘Props Drilling
+
+* When we passing props down up to nth child is called props drilling
+
+---
 
 ## 📘Composition Component
 
