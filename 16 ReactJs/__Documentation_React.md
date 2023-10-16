@@ -410,7 +410,7 @@ export default App;
 ```
 ![Image](./images/children-prop.png)
 
-# 📔10. Thinking in React Components, Composition, and Reusability
+# 📔Thinking in React Components, Composition, and Reusability
 ---
 ## 📘How to Split a UI into component
 
@@ -547,6 +547,9 @@ function App() {
 export default App
 ```
 
+
+---
+
 ## 📘Components Vs Instances Vs Elements
 
 ![Image](./images/component-instance-element.png)
@@ -554,6 +557,7 @@ export default App
 ![Image](./images/component-instance-element-3.png)
 ![Image](./images/component-instance-element-4.png)
 
+---
 ## 📘Re-Rendering
 ![Image](./images/re-rendering.png)
 ![Image](./images/re-rendering-2.png)
