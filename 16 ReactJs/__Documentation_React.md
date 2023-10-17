@@ -546,10 +546,80 @@ function App() {
 }
 export default App
 ```
+## 📘Passing Elements as Props (Alternative to children)
+* mostly use in React-Router 
+```js
+import React from 'react';
+import "./App.css"
 
+function MyRender({ element }) {
+  return <div>
+    {element}
+  </div>
+}
+
+function Button({ onClick, backgroundColor, color, children }) {
+  return <button style={{ backgroundColor, color }} onClick={onClick}>{children}</button>
+}
+
+function App() {
+  return <div className='App'>
+    <MyRender element={<Button onClick={() => alert('Hello World')} color={'black'} backgroundColor={'white'}>
+      Alert
+    </Button>}>
+    </MyRender>
+  </div>
+}
+
+export default App;
+```
+---
+## 📘PropTypes
+* Best use with **Typescript**
+* **prop-types** this package automatically comes with **react-create-app**
+
+```js
+import PropTypes from "prop-types";
+```
+
+```js
+// in example sending wrong data type for background property
+import React from 'react';
+import PropTypes from "prop-types";
+import "./App.css";
+
+function Button({ onClick, backgroundColor, color, children }) {
+  const buttonStyle = {
+    backgroundColor,
+    color,
+  };
+
+  return <button style={buttonStyle} onClick={onClick}>{children}</button>;
+}
+
+Button.propTypes = {
+  onClick: PropTypes.func,
+  backgroundColor: PropTypes.string,
+  color: PropTypes.string.isRequired,
+  children: PropTypes.node
+};
+
+function App() {
+  return (
+    <div className='App'>
+      <Button onClick={() => alert('Hello World')} color={'red'} backgroundColor={111}> 
+        Alert
+      </Button>
+    </div>
+  );
+}
+
+export default App;
+```
+
+![Image](./images/propstype.png)
 
 ---
-
 ## 📘Components Vs Instances Vs Elements
 
 ![Image](./images/component-instance-element.png)
