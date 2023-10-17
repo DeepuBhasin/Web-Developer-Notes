@@ -620,6 +620,9 @@ export default App;
 ![Image](./images/propstype.png)
 
 ---
+
+# 📔How React Works Behind the Scenes
+
 ## 📘Components Vs Instances Vs Elements
 
 ![Image](./images/component-instance-element.png)
