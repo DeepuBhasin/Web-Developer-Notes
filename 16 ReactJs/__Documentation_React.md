@@ -626,27 +626,56 @@ export default App;
 ## 📘Components Vs Instances Vs Elements
 
 ![Image](./images/component-instance-element.png)
+
 ![Image](./images/component-instance-element-2.png)
+
 ![Image](./images/component-instance-element-3.png)
+
 ![Image](./images/component-instance-element-4.png)
 
 ---
-## 📘Re-Rendering
+## 📘Re-Rendering (Complete process)
+* Component -> Component Instance -> Rect Element -> Dom Element
+
+
 ![Image](./images/re-rendering.png)
+
+* Render Means = Render Phase + Commit Phase
+
 ![Image](./images/re-rendering-2.png)
+
+* Two Situations that Render Triggers
+
 ![Image](./images/re-rendering-3.png)
+
+* The Render Phase - Creating virtual Dom
+
+![Image](./images/the-render-phase.png)
+
+* How Virtual Dom get create behind the scene
+
 ![Image](./images/re-rendering-3-virtual-dom.png)
 
+* After creating Virtual Dom
 
-* **Reconciliation :** 
-* deciding exactly which DOM elements needs to be inserted, deleted or updated in order to reflect the latest state changes so the result of the reconciliation process is going to be a list of DOM operation that are necessary to update the current DOM with new state. 
-* Reconciliation is processed by a **reconciler** and we can say that the reconciler really is the **engine of react**. Its like **heart** of react. So its this reconciler that allows us to never touch the DOM directly and instead simply tell react what the next snapshot of the UI should look like based on state 
-* and the current reconciler in React is called Fiber
-* *The Fiber tree represents the virtual DOM that allows React to keep track of the work that needs to be done in a more fine-grained way. Each Fiber in the tree represents a unit of work that needs to be performed, such as updating a component or rendering a new element.*
+![Image](./images/the-reneder-phase-2.png)
+
+* Reconciliation
 
 ![Image](./images/re-rendering-5-reconciliation.png)
 
+* Fiber Tree
+
 ![Image](./images/re-rendering-6-reconciliation-fiber.png)
+
+> Reconciler
+* Reconciliation is processed by a **reconciler** and we can say that the reconciler really is the **engine of react**. Its like **heart** of react. So its this reconciler that allows us to never touch the DOM directly and instead simply tell react what the next snapshot of the UI should look like based on state 
+* and the current reconciler in React is called Fiber
+
+> Fiber Tree 
+* **Fiber Tree :** : so during the initial  render of the application fiber takes the entire React element tree. so the virtual Dom and based on it builds yet another tree, which is the fiber tree. The fiber tree is a special internal tree where for each component instance and DOM element in the app there is one so-called fiber. Now what's special about this tree is that unlike react element in the virtual DOM, fibers are not recrated on every render, So the fiber tree is never destroyed, instead, it's a mutable data structure And once it has created during the initial render, it simply mutated over and over again in the future reconciliation steps. and this makes fibers the perfect place for keeping track of things like the current component state, props, side effects, list of used hooks and more, So the actual state and props of any component instance that we see the screen are internally stored inside the corresponding fiber in the fiber tree. Now, each fiber also contains a queue of work to do like updating state updating refs, running registered, side effects, performing Dom updates and so on. This is why a fiber is also defined as a unit of work. 
+
+
 
 ![Image](./images/re-rendering-7-reconciliation-fiber.png)
 
@@ -654,7 +683,11 @@ export default App;
 
 ![Image](./images/re-rendering-9-painting.png)
 
+* **The once the commit phase is completed, the work in progress fiber tree becomes the current tree for the next render cycle that's because Fiber tree are never discard and never recreated from scratch, instead they are reused in order to save precious rendering time and with that, we close up the commit phase.**
+
 ![Image](./images/re-rendering-9-painting-2.png)
+
+![Image](./images/react-putting-all-together.png)
 
 ## 📘How Diffing Works
 
