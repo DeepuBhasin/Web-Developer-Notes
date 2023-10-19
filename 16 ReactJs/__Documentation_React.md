@@ -693,13 +693,49 @@ export default App;
 
 ![Image](./images/diffing-1.png)
 
+* The below photo conveys message :  when an element is removed from the Document Object Model (DOM), its associated state values are also removed, resulting in a reset of all values.
+
 ![Image](./images/diffing-2.png)
 
+* simple meaning of below photo : if the **attributes or props** of a component change, the component will retain its current state without resetting.
+
 ![Image](./images/diffing-3.png)
+
+Example of **key & without Key**
+
+```js
+import React, { useState } from 'react';
+import "./App.css";
+
+function CountButton({ parentCount }) {
+  const [count, setCount] = useState(0);
+
+  return <div>
+    <hr />
+    <h1>Parent Count : {parentCount}</h1>
+    <h1>Child Count : {count}</h1>
+    <button onClick={() => setCount(e => e + 1)}>Child Click</button>
+  </div>
+}
+
+function App() {
+  const [parentCount, setParentCount] = useState(0);
+  return (
+    <div className='App'>
+      <button onClick={() => setParentCount(e => e + 1)}>Parent Click</button>
+      <CountButton parentCount={parentCount} />
+      <CountButton parentCount={parentCount} key={parentCount} />
+    </div>
+  );
+}
+
+export default App;
+```
 
 ## 📘Keys 
 
 * Key help to re-render the component (reset values or state) Example : **When we are using Tabs**
+
 ![Image](./images/key-1.png)
 
 ![Image](./images/key-2.png)
@@ -717,6 +753,7 @@ export default App;
 ![Image](./images/functional-programming.png)
 
 ## 📘React Third Party Library
+
 ![Image](./images/react-3rd-party-library.png)
 
 ## 📘useEffect
