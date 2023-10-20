@@ -752,6 +752,18 @@ export default App;
 
 ![Image](./images/functional-programming.png)
 
+## 📘How state updates are batched
+
+![Image](./images/how-state-updates-are-batched-1.png)
+
+![Image](./images/how-state-updates-are-batched-2.png)
+
+![Image](./images/how-state-updates-are-batched-3.png)
+
+![Image](./images/how-state-updates-are-batched-4.png)
+
+![Image](./images/how-state-updates-are-batched-5.png)
+
 ## 📘React Third Party Library
 
 ![Image](./images/react-3rd-party-library.png)
