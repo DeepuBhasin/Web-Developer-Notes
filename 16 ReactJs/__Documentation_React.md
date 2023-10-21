@@ -764,6 +764,59 @@ export default App;
 
 ![Image](./images/how-state-updates-are-batched-5.png)
 
+example
+
+```js
+import React, { useState } from 'react';
+import "./App.css";
+function App() {
+  const [count, setCount] = useState(0);
+
+  function updateCount() {
+    setCount(e => e + 1);
+    setCount(e => e + 1);
+    setCount(e => e + 1);
+  }
+
+  return (<div>
+    <h1>count : {count}</h1>
+    <button onClick={updateCount}>Increment by 3</button>
+  </div>)
+}
+
+export default App;
+```
+
+## 📘Event Propagation and Delegation
+
+![Image](./images/event-propagation-event-delegation-1.png)
+
+* As soon as the event fires, a new event object will be created, but it will not be created where the click actually happened. Instead, the object will be created at the root of the document, so at the very top of the tree. From there, the event will then travel down the entire tree during the so called capturing phase
+
+![Image](./images/event-propagation-event-delegation-2.png)
+
+*  all the way until it reaches the target element and the target element is simply the element on which the event was actually first triggered. So at the target, we can choose to handle the event by placing and event handler function on that element.
+*  Then immediately after the target element has been reached, the event object travels all the way back up the entire tree during the so-called bubbling phase. 
+
+![Image](./images/event-propagation-event-delegation-3.png)
+
+> Now there are two very important things to understand about this process
+
+* 1. The first is that during the capturing and bubbling phase, the event really goes through every single child and parent element one by one. in fact, it's as if the event originated or happened in each of these dom elements 
+* The Second important thing is that by default, event handlers listen to events not only on the target but element also during the bubbling phase. so if we put these two things together, it means that every single event handler in a parent element will also be executed during the bubbling phase, as long as it's also listening for the same type of event **For example** *if we added another click event handler to the handler element, then during this whole process, both the handlers at the target and the header element would be executed when the click happens.*
+
+* Now, sometimes we actually don't want this behavior and so in that case, we can prevent the event from bubbling up any further simply by calling the **stop propagation** method on the event object
+* and this work in vanilla javascript and also in react, but it's actually very rarely necessary so only use this if there really is no other solution. 
+* Okay, so this essentially how events work in the browser. 
+
+![Image](./images/event-propagation-event-delegation-4.png)
+
+![Image](./images/event-propagation-event-delegation-5.png)
+
+## 📘Synthetic Events
+
+![Image](./images/synthetic-events.png)
+
 ## 📘React Third Party Library
 
 ![Image](./images/react-3rd-party-library.png)
