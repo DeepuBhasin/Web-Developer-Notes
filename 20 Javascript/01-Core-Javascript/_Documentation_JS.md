@@ -114,6 +114,27 @@ function test() {
     total; // 30 because of test function block scope
 }
 test();
+
+
+// Var case
+age = 10;
+console.log(age);   // 10
+let var;
+
+// Let case
+age = 10;
+console.log(age);   // cause error 
+let age;
+
+
+// setting value
+function test() {
+    age = 10;
+}
+
+let age;
+test();
+console.log(age);   // 10
 ```
 ---
 ## 📘Undefined vs Not Defined
