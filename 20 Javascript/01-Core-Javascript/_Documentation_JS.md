@@ -683,9 +683,17 @@ let obj = {
     firstname,
     getFullName() {     // writing short name
         return this.firstname
+    },
+    "getFname"() {
+        return this.firstname
+    },
+    "get Full name"() {
+        return this.firstname
     }
 }
 console.log(obj.getFullName());
+console.log(obj["getFname"]());
+console.log(obj["get Full name"]());
 ```
 * Computed Properties
 
