@@ -4921,3 +4921,10 @@ const arrNew = addingNewElement(arr);
 console.log('old', arr);
 console.log('new', arrNew);
 ```
+# 📔Extra
+* To Excape characters
+
+```js
+var firstname = "Deepinder";
+console.log(`i am \${firstname} Singh`);
+```
