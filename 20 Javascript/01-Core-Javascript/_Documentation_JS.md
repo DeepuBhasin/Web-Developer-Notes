@@ -3067,6 +3067,7 @@ jay.calcAge();
 ![Image](./images/object-create-prototype-inheritance.png)
 
 📚 **Conceptual Example :** Extending Existing Class
+1. Number Example
 
 ```javascript
 
@@ -3080,6 +3081,28 @@ let num = new myNumber(3.053);
 console.log(num.toFixed(1));
 console.log(num.addOne());
 ```
+
+2. Array Example
+
+```js
+class ConvertabelArray extends Array {
+    convert() {
+        let returnArray = [];
+        this.forEach(value => returnArray.push('Converted !! ' + value));
+        return returnArray;
+    }
+}
+
+let numberArray = new ConvertabelArray();
+
+numberArray.push(3)
+numberArray.push(4)
+numberArray.push(5)
+
+let result = numberArray.convert();
+console.log(result);
+```
+
 ---
 ## 📘Super
 * Simple Example
