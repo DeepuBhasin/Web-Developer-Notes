@@ -3135,8 +3135,9 @@ class Child extends Parent {
     greet() {
         console.log('Child Parent');
     }
-    greetParentFunction() {
+     greetParentFunction() {
         // calling parent function but with child values
+        this.greet();
         super.greet();
     }
 }
@@ -3150,6 +3151,7 @@ child.greetParentFunction();
 
 /* Output
 Hello, my name is Parent and I am 29
+Child Parent
 Child Parent
 Hello, my name is Child and I am 30
 */
