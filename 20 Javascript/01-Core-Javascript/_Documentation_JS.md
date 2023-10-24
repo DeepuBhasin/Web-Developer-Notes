@@ -3132,11 +3132,10 @@ class Child extends Parent {
         this.name = "Child";
         this.age = 30;
     }
-    greetParent() {
-        // calling parent function but with child values
-        this.greet();
+    greet() {
+        console.log('Child Parent');
     }
-    greetAnotherParent() {
+    greetParentFunction() {
         // calling parent function but with child values
         super.greet();
     }
@@ -3147,11 +3146,11 @@ let child = new Child();
 parent.greet();
 child.greet();
 
-child.greetAnotherParent();
+child.greetParentFunction();
 
 /* Output
 Hello, my name is Parent and I am 29
-Hello, my name is Child and I am 30
+Child Parent
 Hello, my name is Child and I am 30
 */
 ```
