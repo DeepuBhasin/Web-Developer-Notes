@@ -3082,7 +3082,7 @@ console.log(num.addOne());
 ```
 ---
 ## 📘Super
-
+* Simple Example
 ```javascript
 
 class Person {
@@ -3113,8 +3113,50 @@ class Tony extends Person {
 let me = new Tony();
 console.log(me.greet());
 ```
----
+* Example with **this** concept
 
+```js
+class Parent {
+    constructor() {
+        this.name = "Parent";
+        this.age = 29;
+    }
+    greet() {
+        console.log(`Hello, my name is ${this.name} and I am ${this.age}`);
+    }
+}
+
+class Child extends Parent {
+    constructor() {
+        super();
+        this.name = "Child";
+        this.age = 30;
+    }
+    greetParent() {
+        // calling parent function but with child values
+        this.greet();
+    }
+    greetAnotherParent() {
+        // calling parent function but with child values
+        super.greet();
+    }
+}
+let parent = new Parent();
+let child = new Child();
+
+parent.greet();
+child.greet();
+
+child.greetAnotherParent();
+
+/* Output
+Hello, my name is Parent and I am 29
+Hello, my name is Child and I am 30
+Hello, my name is Child and I am 30
+*/
+```
+
+---
 ## 📘Public Field, Public Methods & Public Static Fields
 * in public Field not using any kind of **let, const, var** etc
 
