@@ -983,12 +983,109 @@ const App = () => {
 
 export default App
 ```
+---
+
+# 📔Effects and Data Fetching
+
+## 📘Component lifecycle
+* Major point is here that component life cycle is totally depend upon **useEffect**
+* **useEffect** works only after the **painting on the browser** because if we Making an API request may cause the browser to become unresponsive until it receives a response from the server.
+
+
+![Image](./images/component-life-cyle.png)
+
+## 📘SideEffect
+
+![Image](./images/side-effect-in-react.png)
+
+![Image](./images/side-effect-in-react-1.png)
+
+* Use **useEffect** with **async/await** method
+```js
+import React, { useEffect } from 'react';
+import "./App.css";
+function App() {
+
+  useEffect(() => {
+    (async function () {
+      let data = await fetch('https://jsonplaceholder.typicode.com/posts');
+      data = await data.json();
+      console.log(data);
+    }()
+    )
+  }, [])
+
+  return null;
+}
+
+export default App;
+```
+## 📘Error Handling in useEffect
+* when ever your do any kind of **api** call you always must do **Error Handling**, always use **try-catch**
+* When ever user **Lost Internet Connection**
+* **1xx, 2xx, 3xx, 4xx, 5xx** Errors
+```js
+import { useEffect, useState } from 'react';
+import "./App.css";
+function App() {
+  const [loading, setLoading] = useState(false);
+  const [posts, setPosts] = useState([]);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    (async function () {
+      setLoading(true);
+
+      try {
+        let result = await fetch('https://jsonplaceholder.typicode.com/posts/9087');
+
+        if (!result.ok) throw new Error("Something went wrong with fetching posts")
+
+        let data = await result.json();
+        setPosts(data);
+        setError('');
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    }()
+    )
+  }, [])
+
+  return <div>
+    {loading && <h2>Loading...</h2>}
+    {!loading && !error && posts.length > 0 ? <ul>
+      {posts.map(item => {
+        return (<li key={item.id}>{item.title}</li>)
+      })}
+    </ul> : null}
+
+    {error && <h2> {error}</h2>}
+
+  </div>;
+}
+export default App;
+```
+
+## 📘Dependency Array
+![Image](./images/dependency-array.png)
+
+![Image](./images/dependency-array-1.png)
+
+![Image](./images/dependency-array-2.png)
+
+![Image](./images/dependency-array-3.png)
+
+
+
 
 ## 📘Custom Hooks
 ![Image](./images/custome-hook.png)
 
 ## 📘Functional Vs Class Component
 ![Image](./images/functional-vs-class.png)
+
 
 ## 📘useReducer
 ![Image](./images/user-reducer-1.png)
