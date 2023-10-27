@@ -965,7 +965,39 @@ B
 
 ![Image](./images/cleanup-function.png)
 
+* Clean-up function always works in two situation 
+1. Unmount
+2. Re-Rendering
 
+```js
+import { useEffect, useState } from 'react';
+import "./App.css";
+
+function List() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    return function () {
+      console.log('unmount count :', count);
+    }
+  }, [count])
+  return (<div>
+    <h3>count : {count}</h3>
+    <button onClick={() => setCount(n => n + 1)}>Count</button>
+  </div>)
+}
+
+function App() {
+  const [show, setShow] = useState(true);
+
+  return (<div>
+    <button onClick={() => setShow(n => !n)}>{show ? 'Hide' : 'Show'}</button>
+    {show && <List />}
+  </div>)
+}
+
+export default App;
+```
 
 ---
 
