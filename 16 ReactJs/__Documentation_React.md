@@ -878,7 +878,7 @@ function App() {
       setLoading(true);
 
       try {
-        let result = await fetch('https://jsonplaceholder.typicode.com/posts/9087');
+        let result = await fetch('https://jsonplaceholder.typicode.com/posts');
 
         if (!result.ok) throw new Error("Something went wrong with fetching posts")
 
@@ -998,6 +998,71 @@ function App() {
 
 export default App;
 ```
+
+```js
+// clean up function for http request
+
+import { useEffect, useState } from 'react';
+import "./App.css";
+
+function UserDetails({ post }) {
+  return (<div>
+    <h3> Id : {post.id}</h3>
+    <h3> User Id : {post.userId}</h3>
+    <h3> Title : {post.title}</h3>
+    <h3> Body : {post.body}</h3>
+  </div>)
+}
+
+
+function App() {
+  const [loading, setLoading] = useState(false);
+  const [post, setPost] = useState({});
+  const [error, setError] = useState('');
+  const [id, setId] = useState('');
+
+  useEffect(() => {
+    const controller = new AbortController();
+    (async function (id) {
+      if (id) {
+        setLoading(true);
+        try {
+          let result = await fetch('https://jsonplaceholder.typicode.com/posts/' + id, { signal: controller.signal });
+          if (!result.ok) throw new Error("Something went wrong with fetching posts")
+
+          let data = await result.json();
+          setPost(data);
+          setError('');
+        } catch (error) {
+          console.log('name', error.name);
+          console.log('message', error.message);
+          if (error.name !== "AbortError") {
+            setError(error.message);
+          }
+        } finally {
+          setLoading(false);
+        }
+      }
+    }(id)
+    )
+    return function () {
+      controller.abort();
+    }
+  }, [id])
+
+  return <div>
+    <input type='text' name='id' onChange={(e) => setId(e.target.value)} value={id} />
+    {loading && <h2>Loading...</h2>}
+    {!loading && !error && <UserDetails post={post} />}
+    {error && <h2> {error}</h2>}
+
+  </div>;
+}
+export default App;
+
+```
+
+
 
 ---
 
