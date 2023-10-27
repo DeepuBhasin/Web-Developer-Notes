@@ -821,64 +821,201 @@ export default App;
 
 ![Image](./images/react-3rd-party-library.png)
 
-## 📘useEffect
 
-![image](./images/create-side-effect.png)
+# 📔Effects and Data Fetching
 
-![image](./images/event-handler-vs-useeffect.png)
+## 📘Component lifecycle
+* Major point is here that component life cycle is totally depend upon **useEffect**
+* **useEffect** works only after the **painting on the browser** because if we Making an API request may cause the browser to become unresponsive until it receives a response from the server.
 
 
-## Handling Error 
+![Image](./images/component-life-cyle.png)
 
-* Go to the network tab
-* Select **Slow 3g** option first
-* while calling the option select **offline** option
+---
 
+## 📘SideEffect
+
+![Image](./images/side-effect-in-react.png)
+
+![Image](./images/side-effect-in-react-1.png)
+
+* Use **useEffect** with **async/await** method
 ```js
-import React, { useState } from 'react'
-import './App.css';
+import React, { useEffect } from 'react';
+import "./App.css";
+function App() {
 
-const App = () => {
-  const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [message, setMessage] = useState('Loading...');
-
-  const getData = async () => {
-    try {
-      let newData = await fetch('https://jsonplaceholder.typicode.com/posts');
-
-      if (!newData.ok) {
-        throw new Error("Failed to fetch data")
-      }
-
-      newData = await newData.json();
-      setData(newData)
-      setIsLoading(false);
-    } catch (err) {
-      console.log('Api response failed')
-      setMessage(err.message)
-    }
-  }
-
-  useState(() => {
-    getData();
+  useEffect(() => {
+    (async function () {
+      let data = await fetch('https://jsonplaceholder.typicode.com/posts');
+      data = await data.json();
+      console.log(data);
+    }()
+    )
   }, [])
 
-  return (isLoading ? <h1> {message}</h1 > :
-    <div>
-      {data.map(item => {
-        return (<li key={item.id}>id : {item.id} &  body : {item.body}</li>)
-      })}
-    </div>
-  )
+  return null;
 }
 
-export default App
+export default App;
+```
+---
+
+## 📘Error Handling in useEffect
+* when ever your do any kind of **api** call you always must do **Error Handling**, always use **try-catch**
+* When ever user **Lost Internet Connection**
+* **1xx, 2xx, 3xx, 4xx, 5xx** Errors
+```js
+import { useEffect, useState } from 'react';
+import "./App.css";
+function App() {
+  const [loading, setLoading] = useState(false);
+  const [posts, setPosts] = useState([]);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    (async function () {
+      setLoading(true);
+
+      try {
+        let result = await fetch('https://jsonplaceholder.typicode.com/posts/9087');
+
+        if (!result.ok) throw new Error("Something went wrong with fetching posts")
+
+        let data = await result.json();
+        setPosts(data);
+        setError('');
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    }()
+    )
+  }, [])
+
+  return <div>
+    {loading && <h2>Loading...</h2>}
+    {!loading && !error && posts.length > 0 ? <ul>
+      {posts.map(item => {
+        return (<li key={item.id}>{item.title}</li>)
+      })}
+    </ul> : null}
+
+    {error && <h2> {error}</h2>}
+
+  </div>;
+}
+export default App;
+```
+---
+
+
+
+## 📘Dependency Array
+![Image](./images/dependency-array.png)
+
+![Image](./images/dependency-array-1.png)
+
+![Image](./images/dependency-array-2.png)
+
+![Image](./images/dependency-array-3.png)
+
+
+Example : How useEffect Works after painting
+
+```js
+import { useEffect } from 'react';
+import "./App.css";
+function App() {
+
+  // render on initial render
+  useEffect(() => {
+    console.log('A');
+  }, [])
+
+  // render on every sideEffect
+  useEffect(() => {
+    console.log('B');
+  })
+
+  // render on every render
+  // it will print first because it render first in browser hence its a render logic
+  console.log('C');
+  return null;
+}
+
+export default App;
+
+/*output
+// initial render
+C   
+A
+B
+
+// on Every Render
+C
+B
+*/
 ```
 
-![Image](./images/effects-are-called.png)
+---
+
+## 📘Clean-up Function
 
 ![Image](./images/cleanup-function.png)
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## 📘Hooks
 
@@ -984,102 +1121,6 @@ const App = () => {
 export default App
 ```
 ---
-
-# 📔Effects and Data Fetching
-
-## 📘Component lifecycle
-* Major point is here that component life cycle is totally depend upon **useEffect**
-* **useEffect** works only after the **painting on the browser** because if we Making an API request may cause the browser to become unresponsive until it receives a response from the server.
-
-
-![Image](./images/component-life-cyle.png)
-
-## 📘SideEffect
-
-![Image](./images/side-effect-in-react.png)
-
-![Image](./images/side-effect-in-react-1.png)
-
-* Use **useEffect** with **async/await** method
-```js
-import React, { useEffect } from 'react';
-import "./App.css";
-function App() {
-
-  useEffect(() => {
-    (async function () {
-      let data = await fetch('https://jsonplaceholder.typicode.com/posts');
-      data = await data.json();
-      console.log(data);
-    }()
-    )
-  }, [])
-
-  return null;
-}
-
-export default App;
-```
-## 📘Error Handling in useEffect
-* when ever your do any kind of **api** call you always must do **Error Handling**, always use **try-catch**
-* When ever user **Lost Internet Connection**
-* **1xx, 2xx, 3xx, 4xx, 5xx** Errors
-```js
-import { useEffect, useState } from 'react';
-import "./App.css";
-function App() {
-  const [loading, setLoading] = useState(false);
-  const [posts, setPosts] = useState([]);
-  const [error, setError] = useState('');
-
-  useEffect(() => {
-    (async function () {
-      setLoading(true);
-
-      try {
-        let result = await fetch('https://jsonplaceholder.typicode.com/posts/9087');
-
-        if (!result.ok) throw new Error("Something went wrong with fetching posts")
-
-        let data = await result.json();
-        setPosts(data);
-        setError('');
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    }()
-    )
-  }, [])
-
-  return <div>
-    {loading && <h2>Loading...</h2>}
-    {!loading && !error && posts.length > 0 ? <ul>
-      {posts.map(item => {
-        return (<li key={item.id}>{item.title}</li>)
-      })}
-    </ul> : null}
-
-    {error && <h2> {error}</h2>}
-
-  </div>;
-}
-export default App;
-```
-
-## 📘Dependency Array
-![Image](./images/dependency-array.png)
-
-![Image](./images/dependency-array-1.png)
-
-![Image](./images/dependency-array-2.png)
-
-![Image](./images/dependency-array-3.png)
-
-
-
-
 ## 📘Custom Hooks
 ![Image](./images/custome-hook.png)
 
