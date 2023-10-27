@@ -1000,7 +1000,7 @@ export default App;
 ```
 
 ```js
-// clean up function for http request
+// clean up function for http request (with dependency array)
 
 import { useEffect, useState } from 'react';
 import "./App.css";
@@ -1059,7 +1059,41 @@ function App() {
   </div>;
 }
 export default App;
+```
 
+```js
+// clean up function with empty dependency array
+import { useEffect, useState } from 'react';
+import "./App.css";
+
+function HelloWorld() {
+  useEffect(() => {
+    const keydownHandler = function (e) {
+      if (e.code === "Escape") {
+        console.log('close');
+      }
+    }
+    document.addEventListener("keydown", keydownHandler);
+    return () => {
+      document.removeEventListener("keydown", keydownHandler);
+    }
+  }, [])
+
+  return <div>
+    Hello World
+  </div>
+}
+
+function App() {
+  const [show, setShow] = useState(false);
+  return <div>
+    <button onClick={() => setShow(e => !e)}> {show ? 'Hide' : 'Show'}</button>
+    {show && <HelloWorld />}
+  </div>
+
+}
+
+export default App;
 ```
 
 
