@@ -1066,11 +1066,25 @@ export default App;
 import { useEffect, useState } from 'react';
 import "./App.css";
 
-function HelloWorld() {
+function HelloWorldTwo() {
   useEffect(() => {
     const keydownHandler = function (e) {
       if (e.code === "Escape") {
-        console.log('close');
+        console.log('close Hello world one');
+      }
+    }
+    document.addEventListener("keydown", keydownHandler);
+    return () => {
+      document.removeEventListener("keydown", keydownHandler);
+    }
+  }, [])
+}
+
+function HelloWorldOne() {
+  useEffect(() => {
+    const keydownHandler = function (e) {
+      if (e.code === "Escape") {
+        console.log('close Hello world Two');
       }
     }
     document.addEventListener("keydown", keydownHandler);
@@ -1079,107 +1093,99 @@ function HelloWorld() {
     }
   }, [])
 
+
   return <div>
     Hello World
   </div>
 }
 
+
 function App() {
-  const [show, setShow] = useState(false);
+  const [showOne, setShowOne] = useState(false);
+  const [showTwo, setShowTwo] = useState(false);
   return <div>
-    <button onClick={() => setShow(e => !e)}> {show ? 'Hide' : 'Show'}</button>
-    {show && <HelloWorld />}
+    <button onClick={() => setShowOne(e => !e)}> {showOne ? 'Hide One' : 'Show One'}</button>
+    <button onClick={() => setShowTwo(e => !e)}> {showTwo ? 'Hide Two' : 'Show Two'}</button>
+    {showOne && <HelloWorldOne />}
+    {showTwo && <HelloWorldTwo />}
   </div>
 
 }
 
 export default App;
 ```
-
-
-
 ---
 
+# 📔Custom Hooks, Refs, and More State
 
+## 📘React Hooks and their rules
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## 📘Hooks
+![Image](./images/what-are-hooks.png)
 
 ![Image](./images/react-hooks-1.png)
 
 ![Image](./images/react-hooks-2.png)
+
 ![Image](./images/react-hooks-3.png)
+
 ![Image](./images/react-hooks-4.png)
+
+example
+
+```js
+import { useState } from 'react';
+import "./App.css";
+
+function App() {
+
+  const [count, setCount] = useState(0);
+
+  // this code will cause error
+  /*eslint-disable*/
+  if (count === 3) {
+    const [show, setShow] = useState(true);
+  }
+
+  return <div>
+    <h3>count : {count}</h3>
+    <button onClick={() => setCount(e => e + 1)}> Increment</button>
+  </div>
+}
+
+export default App;
+```
+![Image](images/practical-example-of-react-rules.png)
+---
+
+## 📘More Details of useState
 
 * we can initialize the values in useState Hooks by **callback function** as well
 * It only works on **initial render**
 * we cannot send parameters in **callback function**
-* best use when we are getting values from local storage and try to initialize in first render.
-
+* So whenever the initial value of the state depends on some sort of computation we should always pass the callback function example value from localstorage. otherwise we use separate **useEffect** function to get the value from **localstorage** and then set the value for that state
+Example
 ```js
-import React, { useState } from 'react'
-import './App.css';
+import { useEffect, useState } from 'react';
+import "./App.css";
 
-const App = () => {
-  const [data, setData] = useState(() => {
-    const data = [{ id: 1, body: 'ok' }, { id: 2, body: '22' }, { id: 3, body: '33' }];
-    return data;
+function App() {
+
+  const [count, setCount] = useState(() => {
+    return localStorage.getItem('count') || 0
   });
 
-  return (<div>
-    {data.map(item => {
-      return (<li key={item.id}>id : {item.id} &  body : {item.body}</li>)
-    })}
+  useEffect(() => {
+    localStorage.setItem('count', count);
+  }, [count])
+
+  return <div>
+    <h3>count : {count}</h3>
+    <button onClick={() => setCount(e => e + 1)}> Increment</button>
   </div>
-  )
+
 }
 
-export default App
+export default App;
 ```
 ![Image](./images/sumarry-usestate-hook.png)
 
@@ -1252,6 +1258,8 @@ const App = () => {
 export default App
 ```
 ---
+
+
 ## 📘Custom Hooks
 ![Image](./images/custome-hook.png)
 
