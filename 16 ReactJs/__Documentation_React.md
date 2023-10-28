@@ -1171,7 +1171,7 @@ import "./App.css";
 function App() {
 
   const [count, setCount] = useState(() => {
-    return localStorage.getItem('count') || 0
+    return Number(localStorage.getItem('count')) || 0
   });
 
   useEffect(() => {
