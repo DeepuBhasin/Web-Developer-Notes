@@ -1282,13 +1282,63 @@ const App = () => {
 export default App
 ```
 ![Image](./images/use-ref-value-persist.png)
-
-
-
 ---
+## 📘Whats are Custom Hooks When to create One
 
-## 📘Custom Hooks
 ![Image](./images/custome-hook.png)
+
+Example : Custom Hook with callback function
+
+```js
+import React, { useEffect, useState } from 'react';
+import './App.css';
+
+function useFetch(url) {
+  const [data, setData] = useState([]);
+  const [isLoading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch(url)
+      .then(result => result.json())
+      .then(result => {
+        setLoading(false);
+        setData(result);
+      });
+  }, [url]);
+
+  // for callback function example with optional chaining
+  const callbackFunction = n => n?.()
+
+  return [data, isLoading, callbackFunction]
+}
+
+const App = () => {
+  const [data, isLoading, callbackFunction] = useFetch('https://jsonplaceholder.typicode.com/posts');
+
+  if (!isLoading && data.length) {
+    callbackFunction(function () { console.log('Data loaded successfully') })
+  }
+
+  return (
+    <div>
+      {isLoading && <h3>Loading...</h3>}
+      {!isLoading && <ul>
+        {data.map(element => {
+          return (
+            <li key={element.id}>
+              <h3>user Id : {element.userId}</h3>
+              <h3>title :{element.title}</h3>
+            </li>
+          )
+        })}
+      </ul>}
+    </div>
+  );
+}
+
+export default App;
+```
 
 ## 📘Functional Vs Class Component
 ![Image](./images/functional-vs-class.png)
