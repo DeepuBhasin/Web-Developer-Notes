@@ -321,7 +321,7 @@ const [total, setTotal] = useState(0);
 * First parameter is **value**
 * Second Parameter is **Setter Function** for updating value
 
-⚠️**Note :** 
+⚠️**Note :**
 1. The value of **state** always preserve until it gets **unmount**
 2. we can only call hooks like use state on the top level of the function, not inside an if statement or inside another function or inside of loop.
 
@@ -538,7 +538,7 @@ function App() {
     }
   ];
   return (
-    // using composition 
+    // using composition
     <Main>
       <ChildComponent userList={array} />
     </Main>
@@ -547,7 +547,7 @@ function App() {
 export default App
 ```
 ## 📘Passing Elements as Props (Alternative to children)
-* mostly use in React-Router 
+* mostly use in React-Router
 ```js
 import React from 'react';
 import "./App.css"
@@ -607,7 +607,7 @@ Button.propTypes = {
 function App() {
   return (
     <div className='App'>
-      <Button onClick={() => alert('Hello World')} color={'red'} backgroundColor={111}> 
+      <Button onClick={() => alert('Hello World')} color={'red'} backgroundColor={111}>
         Alert
       </Button>
     </div>
@@ -669,11 +669,11 @@ export default App;
 ![Image](./images/re-rendering-6-reconciliation-fiber.png)
 
 > Reconciler
-* Reconciliation is processed by a **reconciler** and we can say that the reconciler really is the **engine of react**. Its like **heart** of react. So its this reconciler that allows us to never touch the DOM directly and instead simply tell react what the next snapshot of the UI should look like based on state 
+* Reconciliation is processed by a **reconciler** and we can say that the reconciler really is the **engine of react**. Its like **heart** of react. So its this reconciler that allows us to never touch the DOM directly and instead simply tell react what the next snapshot of the UI should look like based on state
 * and the current reconciler in React is called Fiber
 
-> Fiber Tree 
-* **Fiber Tree :** : so during the initial  render of the application fiber takes the entire React element tree. so the virtual Dom and based on it builds yet another tree, which is the fiber tree. The fiber tree is a special internal tree where for each component instance and DOM element in the app there is one so-called fiber. Now what's special about this tree is that unlike react element in the virtual DOM, fibers are not recrated on every render, So the fiber tree is never destroyed, instead, it's a mutable data structure And once it has created during the initial render, it simply mutated over and over again in the future reconciliation steps. and this makes fibers the perfect place for keeping track of things like the current component state, props, side effects, list of used hooks and more, So the actual state and props of any component instance that we see the screen are internally stored inside the corresponding fiber in the fiber tree. Now, each fiber also contains a queue of work to do like updating state updating refs, running registered, side effects, performing Dom updates and so on. This is why a fiber is also defined as a unit of work. 
+> Fiber Tree
+* **Fiber Tree :** : so during the initial  render of the application fiber takes the entire React element tree. so the virtual Dom and based on it builds yet another tree, which is the fiber tree. The fiber tree is a special internal tree where for each component instance and DOM element in the app there is one so-called fiber. Now what's special about this tree is that unlike react element in the virtual DOM, fibers are not recrated on every render, So the fiber tree is never destroyed, instead, it's a mutable data structure And once it has created during the initial render, it simply mutated over and over again in the future reconciliation steps. and this makes fibers the perfect place for keeping track of things like the current component state, props, side effects, list of used hooks and more, So the actual state and props of any component instance that we see the screen are internally stored inside the corresponding fiber in the fiber tree. Now, each fiber also contains a queue of work to do like updating state updating refs, running registered, side effects, performing Dom updates and so on. This is why a fiber is also defined as a unit of work.
 
 
 
@@ -732,7 +732,7 @@ function App() {
 export default App;
 ```
 
-## 📘Keys 
+## 📘Keys
 
 * Key help to re-render the component (reset values or state) Example : **When we are using Tabs**
 
@@ -796,18 +796,18 @@ export default App;
 ![Image](./images/event-propagation-event-delegation-2.png)
 
 *  all the way until it reaches the target element and the target element is simply the element on which the event was actually first triggered. So at the target, we can choose to handle the event by placing and event handler function on that element.
-*  Then immediately after the target element has been reached, the event object travels all the way back up the entire tree during the so-called bubbling phase. 
+*  Then immediately after the target element has been reached, the event object travels all the way back up the entire tree during the so-called bubbling phase.
 
 ![Image](./images/event-propagation-event-delegation-3.png)
 
 > Now there are two very important things to understand about this process
 
-* 1. The first is that during the capturing and bubbling phase, the event really goes through every single child and parent element one by one. in fact, it's as if the event originated or happened in each of these dom elements 
+* 1. The first is that during the capturing and bubbling phase, the event really goes through every single child and parent element one by one. in fact, it's as if the event originated or happened in each of these dom elements
 * The Second important thing is that by default, event handlers listen to events not only on the target but element also during the bubbling phase. so if we put these two things together, it means that every single event handler in a parent element will also be executed during the bubbling phase, as long as it's also listening for the same type of event **For example** *if we added another click event handler to the handler element, then during this whole process, both the handlers at the target and the header element would be executed when the click happens.*
 
 * Now, sometimes we actually don't want this behavior and so in that case, we can prevent the event from bubbling up any further simply by calling the **stop propagation** method on the event object
-* and this work in vanilla javascript and also in react, but it's actually very rarely necessary so only use this if there really is no other solution. 
-* Okay, so this essentially how events work in the browser. 
+* and this work in vanilla javascript and also in react, but it's actually very rarely necessary so only use this if there really is no other solution.
+* Okay, so this essentially how events work in the browser.
 
 ![Image](./images/event-propagation-event-delegation-4.png)
 
@@ -949,7 +949,7 @@ export default App;
 
 /*output
 // initial render
-C   
+C
 A
 B
 
@@ -965,7 +965,7 @@ B
 
 ![Image](./images/cleanup-function.png)
 
-* Clean-up function always works in two situation 
+* Clean-up function always works in two situation
 1. Unmount
 2. Re-Rendering
 
@@ -1190,25 +1190,48 @@ export default App;
 ![Image](./images/sumarry-usestate-hook.png)
 
 ## 📘UseRef
+
+* **useRef** is use to *stop manually selecting DOM element*
+* Selecting any element by using *document.getElementBy('id')* is not good idea because you already know that *React is all about being declarative and so manually selecting a Dom element like this is not really the react way of doing things* example not doing adding classes, id etc
+* **Majorly use** for
+  1. Selecting element
+  2. Storing Data for inputs or timer (setIntervale or setTimeout)
+
 ![Image](./images/useRef-1.png)
 
 ![Image](./images/useRef-2.png)
 
+Example
+
 ```js
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './App.css';
 
 const App = () => {
   //1. creating reference like creating element or class in vanilla javascript
-  const inputRef = useRef(null);
+  const inputElement = useRef(null);
+  const [inputValue, setInputValue] = useState('');
 
   useEffect(() => {
+    function callback(e) {
+
+      // checking the current element
+      if (document.activeElement === inputElement.current) return
+
+      if (e.code === "Enter") {
+        // make focus on selected element
+        inputElement.current.focus();
+        setInputValue('');
+      }
+    }
+    document.addEventListener('keydown', callback)
 
     // printing the selected element which is in current property
-    console.log(inputRef.current);
-    
-    // make focus on selected element
-    inputRef.current.focus();
+    console.log(inputElement.current);
+
+    // remove event listener when component get unmount
+    return () => document.removeEventListener("keydown", callback)
+
   }, [])
 
   return (<div>
@@ -1216,7 +1239,9 @@ const App = () => {
       type='text'
       name=''
       //2. attaching that reference which is provided by useRef by react, because react is declarative in nature
-      ref={inputRef}
+      ref={inputElement}
+      value={inputValue}
+      onChange={(e) => setInputValue(e.target.value)}
     />
   </div>
   )
@@ -1227,38 +1252,40 @@ export default App
 
 ![Image](./images/useRef-3.png)
 
+---
+## 📘Refs to persist data between Renders
+
+* In this example Component will not re-render but the value will *persist between Renders* for example *for count value*
+* best use when we don't want to show any data on DOM
+
+
 ```js
 import React, { useRef } from 'react'
 import './App.css';
 
 const App = () => {
-  const inputValue = useRef('test');
-  const inputHandler = (e) => {
-    inputValue.current = e.target.value
+  const inputElement = useRef(1);
 
-    // it will print 
-    console.log(inputValue.current);
+  const incrementHandler = function () {
+    inputElement.current += 1
+    console.log('ref', inputElement.current);
   }
 
-  // it will print only in install render after that it will not work
-  console.log(inputValue.current);
-
   return (<div>
-    {inputValue.current}
-    <br />
-    <input
-      type='text'
-      name=''
-      onChange={inputHandler}
-    />
-  </div>
-  )
+    <h1>Count : {inputElement.current}</h1>
+    <button onClick={() => incrementHandler()}>
+      Increment
+    </button>
+  </div>)
 }
 
 export default App
 ```
----
+![Image](./images/use-ref-value-persist.png)
 
+
+
+---
 
 ## 📘Custom Hooks
 ![Image](./images/custome-hook.png)
