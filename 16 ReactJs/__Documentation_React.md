@@ -1339,6 +1339,40 @@ const App = () => {
 
 export default App;
 ```
+```js
+// Another Example
+import { useEffect } from 'react';
+import "./App.css";
+
+function useEventHook(event, key, callback) {
+  const fn = function (e) {
+    if (e.code.toLowerCase() === key.toLowerCase()) {
+      callback?.(e.code);
+    }
+    console.log('yes');
+  }
+  useEffect(() => {
+    document.addEventListener(event, fn);
+    return () => document.removeEventListener(event, fn)
+  }, []);
+}
+
+function App() {
+
+  useEventHook("keydown", "enter", function (key) {
+    console.log("You Hit Enter ", key);
+  })
+
+  useEventHook("keydown", "escape", function (key) {
+    console.log("You Hit Enter ", key);
+  })
+  return null
+
+}
+
+export default App;
+```
+
 
 ## 📘Functional Vs Class Component
 ![Image](./images/functional-vs-class.png)
