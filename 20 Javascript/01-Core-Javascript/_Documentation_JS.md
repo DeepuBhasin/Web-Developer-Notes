@@ -123,7 +123,7 @@ let var;
 
 // Let case
 age = 10;
-console.log(age);   // cause error 
+console.log(age);   // cause error
 let age;
 
 
@@ -3341,7 +3341,7 @@ logThis((a, b) => { return a + b});
 ```
 
 ---
-## 📘 Arrow with 'this'
+## 📘Arrow with 'this'
 
 * **Arrow Function** doen't have **this** keyword byDefault as other function.
 
@@ -3363,14 +3363,17 @@ let me = {
 me.greet();
 ```
 ---
-## 📘 Returning Value
+## 📘Returning Value
 
 ```javascript
 let add = (a, b) => a + b;
 
 let sqr = x => x * x;
+
+// this line will create Object : {firstName: 'Deepinder', lastName: 'Singh'}
+let obj = (()=> ({firstName : "Deepinder", lastName : "Singh"}))();
 ```
-## 📘 Readability & Limitation
+## 📘Readability & Limitation
 
 ```javascript
 // good for if you are from mathematic background
@@ -3411,10 +3414,14 @@ let me = {
 me.greet();
 me.greet2();
 ```
+
+
+
 ----
 ## 📘Symbols & Using Symbols
 * **Hash Code :** A value generated from another value. The same value is always generated from the same input.
 * Symbols use **Memory Address** as value and return that value because its always unique. The value which we are providing is called **label** for reference Example
+* To print Symbol value **toString()** method is used.
 
 ```javascript
 // symbol returning a unique value which will be memory address and 'firstname' is label for that address
@@ -3426,9 +3433,14 @@ const firstname = Symbol('firstname');
 const grt1 = Symbol('greet');
 const grt2 = Symbol('greet');
 
+console.log(grt1.toString()) // Symbol(greet)
+
+console.log(typeof grt1)    // symbol
+
 grt1 === grt2   // false
 ```
-* Symbol Majorly use in **Object Properties** as *Property Name (string)*
+
+* Symbol Majorly use in **Object Properties** as *Property Name (string)* so cannot overwrite the property
 
 ```javascript
 const firstname = Symbol('firstname');
@@ -3436,7 +3448,6 @@ const firstname = Symbol('firstname');
 let obj = {};
 // its like obj[464847xvdgd646474] = 'Deepinder';
 obj[firstname] = 'Deepinder';
-
 
 obj.firstname = 'Dp';
 
@@ -3447,10 +3458,14 @@ console.log(obj.firstname)  // Dp
 // accessing Symbol Value
 console.log(obj[firstname]) // 'Deepinder'
 ```
+
+* **Symbol are not iterable **, that means if you loop over an object with a for loop.
+
 * **Magic Strings :** Strings that have a special meaning or usage in your program. This makes your program fragile, easily susceptible to bugs.
-* For Global use, we create **Global variables** with **Symbol.for** to avoid *collision* and *stop retendency*
+* For Global use, we create **Global variables** with **Symbol.for** to avoid *collision* and *stop retendency*, example you might have the case where you want *two Symbols which actually share the same ID*.
 
 ```javascript
+// Creating Symbol
 const HAIR_STRAIGHT = Symbol.for('Stright');
 const HAIR_CURLY = Symbol.for('Curly');
 const HAIR_WAVY = Symbol.for('Wavy');
@@ -3458,6 +3473,24 @@ const HAIR_WAVY = Symbol.for('Wavy');
 let curly = Symbol.for('Curly');
 console.log(curly === HAIR_CURLY); // true
 console.log(Symbol.keyFor(HAIR_CURLY));
+
+// Change Property of Symbol (its help you'u to not accidentally change properties)
+const ageSymbol1 = Symbol.for('age');
+
+let person = {
+    [ageSymbol1]: 29,
+    age : 32
+}
+
+function changeValue(person) {
+    const newAgeSymbol = Symbol.for('age');
+    person[newAgeSymbol] = 30;
+}
+changeValue(person);
+
+console.log(person["age"])          // 32
+// its not same, its different label for age === ageSymbol1 (false)
+console.log(person[ageSymbol1]);    // 30
 ```
 
 **Well-Known Symbols :** Symboles already built into the javascript engine, used by the engine for certain tasks.
@@ -3489,7 +3522,11 @@ for(const name in names) {
 // 1
 // 2
 ```
-## 📘 Iterators
+## 📘 Iterators & Generators
+* Iterators are basically *all objects* that know how access values in a collection of one at a time for example *array is such an iterator*, that means yo can loop through it and has a collection of objects and it know to output them one after another. You can create your own objects with your own iterator logic which doesn't necessarily means that you only have array where user enters numbers or what ever he want to output one after another, you might have an object where you have a completly different logic.
+
+* **Generators :** A generator is a function whic doesn't necessarily run to the end when we execute it. specifically a *generator is a function which yields certian values*, each time you call it yields the next value and you may your 5 - 10 and unlimited or only one value, and that of course closely resembles the behaviour of iterators where you also yield or get one value.
+
 * **Protocol :** Rules for how to exchange information
 * **Iteration Protocol :** The information that must be provided by an object to let itself be iterated over.
 * **Iterate Over :** To move from value to value across a set or list of values.
@@ -4974,7 +5011,7 @@ addingElement();
 addingElement();
 console.log(arr);
 
-// Pure Function because it is not disturbing the outer environment (no sideEffect)    
+// Pure Function because it is not disturbing the outer environment (no sideEffect)
 const arr = [1, 2];
 
 function addingNewElement(arr) {
