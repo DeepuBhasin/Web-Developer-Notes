@@ -1422,15 +1422,124 @@ export default class App extends Component {
 
 ![Image](./images/functional-vs-class.png)
 
+---
+
+# 📔The Advanced useReducer Hook
+
 
 ## 📘useReducer
 ![Image](./images/user-reducer-1.png)
+
 ![Image](./images/user-reducer-2.png)
+
 ![Image](./images/user-reducer-3.png)
+
 ![Image](./images/user-reducer-4.png)
+
 ![Image](./images/user-reducer-5.png)
+
+```js
+import React from 'react';
+import { useReducer } from 'react';
+
+// Initial Values
+const initialState = {
+  cakeCount: 0
+}
+
+// constants
+const reducerConstants = {
+  CAKE_INCREMENT: "CAKE_INCREMENT",
+  CAKE_DECREMENT: "CAKE_DECREMENT",
+  CAKE_RESET: "CAKE_RESET",
+  CAKE_INCREMENT_BY_VALUE: "CAKE_INCREMENT_BY_VALUE",
+}
+
+// Reducer (Pure function)
+function myReducer(state = initialState, action) {
+  switch (action.type) {
+    case reducerConstants.CAKE_INCREMENT: {
+      return {
+        ...state,
+        cakeCount: state.cakeCount + 1
+      }
+    }
+    case reducerConstants.CAKE_DECREMENT: {
+      return {
+        ...state,
+        cakeCount: state.cakeCount - 1
+      }
+    }
+    case reducerConstants.CAKE_RESET: {
+      return {
+        ...state,
+        cakeCount: 0
+      }
+    }
+    case reducerConstants.CAKE_INCREMENT_BY_VALUE: {
+      return {
+        ...state,
+        cakeCount: state.cakeCount + action.payload
+      }
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+function Show({ state }) {
+  return (<div>
+    <p>Count : {state.cakeCount}</p>
+  </div>)
+}
+
+function Button({ dispatch }) {
+  return (<div>
+    <button onClick={() => dispatch({ type: reducerConstants.CAKE_INCREMENT })}>Increment </button>
+    <button onClick={() => dispatch({ type: reducerConstants.CAKE_DECREMENT })}>Decrement </button>
+    <button onClick={() => dispatch({ type: reducerConstants.CAKE_RESET })}>Reset </button>
+    <button onClick={() => dispatch({ type: reducerConstants.CAKE_INCREMENT_BY_VALUE, payload: 3 })}>Increment by 3</button>
+  </div>)
+}
+
+function StructureOne() {
+  const [state, dispatch] = useReducer(myReducer, initialState);
+  return (
+    <div>
+      <Show state={state} />
+      <Button dispatch={dispatch} />
+    </div>
+  )
+}
+
+function StructureTwo() {
+  const [state, dispatch] = useReducer(myReducer, initialState);
+  return (
+    <div>
+      <Show state={state} />
+      <Button dispatch={dispatch} />
+    </div>
+  )
+}
+
+// Components
+function App() {
+  return (
+    <React.Fragment>
+      <StructureOne />
+      <StructureTwo />
+    </React.Fragment>
+  )
+}
+
+export default App
+```
+---
 
 ## 📘Router
 ![Image](./images/router-1.png)
+
 ![Image](./images/router-2.png)
+
 ![Image](./images/router-3.png)
