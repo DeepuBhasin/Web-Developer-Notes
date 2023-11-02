@@ -1372,9 +1372,54 @@ function App() {
 
 export default App;
 ```
+---
 
+# 📔React Before Hooks Class-Based React
 
 ## 📘Functional Vs Class Component
+
+```js
+import React, { Component } from 'react'
+
+export default class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      count: 0,
+      cakeCount: 0
+    };
+  }
+  
+  componentDidMount() { }
+  componentDidUpdate() { }
+  componentWillUnmount() { }
+
+  incrementCountHandler = () => {
+    this.setState(e => ({
+      ...e,
+      count: e.count + 1
+    }))
+  }
+  incrementCakeHandler = () => {
+    this.setState(e => ({
+      ...e,
+      cakeCount: e.cakeCount + 1
+    }))
+  }
+
+  render() {
+    return (
+      <div>
+        <h2>Count : {this.state.count}</h2>
+        <h2>Cake count : {this.state.cakeCount}</h2>
+        <button onClick={this.incrementCountHandler}>Count Increment</button>
+        <button onClick={this.incrementCakeHandler}>Cake Increment</button>
+      </div>
+    )
+  }
+}
+```
+
 ![Image](./images/functional-vs-class.png)
 
 
