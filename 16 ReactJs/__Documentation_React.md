@@ -1436,8 +1436,6 @@ export default class App extends Component {
 
 ![Image](./images/user-reducer-4.png)
 
-![Image](./images/user-reducer-5.png)
-
 ```js
 import React from 'react';
 import { useReducer } from 'react';
@@ -1537,7 +1535,16 @@ export default App
 ```
 ---
 
+## 📘useState Vs useReducer
+
+![Image](./images/usestate-vs-usereducer.png)
+
+![Image](./images/user-reducer-5.png)
+
+---
+
 ## 📘Router
+
 ![Image](./images/router-1.png)
 
 ![Image](./images/router-2.png)
