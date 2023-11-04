@@ -223,15 +223,135 @@ booksAfterUpdate
 
 ![Image](./images/serparation-summary.png)
 
+---
+
 ## 📘Style in JSX
 
 ![Image](./images/style.png)
 
-```
+1. Inline CSS
+```js
 <h1 style={{color : 'Red', height : '20px'}}>
     Hello World
 </h1>
 ```
+2. Module CSS
+
+```js
+import { NavLink } from "react-router-dom";
+import styles from "./PageNav.module.css";
+
+function PageNav() {
+  return (
+    <nav className={styles.nav}>
+      <ul>
+        <li>
+          <NavLink to="/">Home</NavLink>
+        </li>
+        <li>
+          <NavLink to="/price">Price</NavLink>
+        </li>
+        <li>
+          <NavLink to="/product">Product</NavLink>
+        </li>
+      </ul>
+    </nav>
+  );
+}
+
+export default PageNav;
+```
+
+```css
+.nav {
+  background-color: orangered;
+}
+
+.nav ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+}
+```
+![Image](./images/module-css.png)
+
+1. Make *Global CSS* From Module CSS, majorly use when classes are provided from external resources
+
+```css
+.nav ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* using global function */
+.nav :global(.active) {
+  background-color: lightgreen;
+}
+```
+
+
+4. Global CSS : just like normal class which we include normally. it majorly *includes common elements* css like *forms, body, \*, heading elements, variables etc*
+
+```css
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+```
+---
 
 ## 📘Props
 * Definition about Props
@@ -249,8 +369,12 @@ booksAfterUpdate
 * One way data Flow
 ![Image](./images/props-4.png)
 
+---
+
 ## 📘Rules in JSX
 ![Image](./images/rule-of-jsx.png)
+
+---
 
 ## 📘Conditional Rendering
 1. && (Short circuit)
@@ -1546,7 +1670,7 @@ export default App
 ---
 
 ## 📘Creating React App with vite
-* In **Vite**, we get es-lint byDefault in it 
+* In **Vite**, we get es-lint byDefault in it
 
 1. Enter Command
 ```
@@ -1563,7 +1687,7 @@ npm run dev
 ```
 
 * Installing **eslint**
-1. Command 
+1. Command
 ```
  npm install eslint vite-plugin-eslint eslint-config-react-app --save-dev
 ```
@@ -1639,4 +1763,77 @@ export default App;
 ```js
 <NavLink to="/">Home</NavLink>
 ```
+## 📘Nested Routes
+* use of **outlet** wrapper
 
+1. Address bar is like that
+
+```
+http://localhost:5173/price/usa
+```
+
+2. App.jsx
+```js
+import { BrowserRouter as Routers, Route, Routes } from "react-router-dom";
+import "./App.css";
+import Home from "./pages/Home";
+import Product from "./pages/Product";
+import Price from "./pages/Pricing";
+import PageNav from "./components/PageNav";
+
+function App() {
+  return (
+    <div>
+      <Routers>
+        <PageNav />
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/price" element={<Price />}>
+            {/* according to the route it will go first into price then go usa and it will print use component  */}
+            <Route index element={<h1>Index Element</h1>}></Route>
+            <Route path="india" element={<h1>India</h1>}></Route>
+            <Route path="usa" element={<h1>Usa</h1>}></Route>
+            <Route path="england" element={<h1>England</h1>}></Route>
+          </Route>
+          <Route path="/product" element={<Product />}></Route>
+        </Routes>
+      </Routers>
+    </div>
+  );
+}
+
+export default App;
+```
+3. Pricing.jsx
+
+```js
+import { Link, Outlet } from "react-router-dom";
+
+function Pricing() {
+  return (
+    <div>
+      Pricing
+      <ul style={{ display: "flex", justifyContent: "space-between" }}>
+        <li>
+          <Link to="india">India</Link>
+        </li>
+        <li>
+          <Link to="usa">USA</Link>
+        </li>
+        <li>
+          <Link to="england">England</Link>
+        </li>
+      </ul>
+      <Outlet />
+    </div>
+  );
+}
+
+export default Pricing;
+```
+
+## 📘Storing State in the URL
+
+![Image](./images/storing-state-in-the-url.png)
+
+![Image](./images/storing-state-in-the-url-1.png)
