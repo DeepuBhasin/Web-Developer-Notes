@@ -1389,7 +1389,7 @@ export default class App extends Component {
       cakeCount: 0
     };
   }
-  
+
   componentDidMount() { }
   componentDidUpdate() { }
   componentWillUnmount() { }
@@ -1542,11 +1542,101 @@ export default App
 ![Image](./images/user-reducer-5.png)
 
 ---
+# 📔React Router Building
+---
 
-## 📘Router
+## 📘Creating React App with vite
+* In **Vite**, we get es-lint byDefault in it 
+
+1. Enter Command
+```
+npm create vite@latest
+```
+2. Enter Project Name
+3. Select Frame work
+4. Select variant
+5. Install Every thing
+
+```
+npm install
+npm run dev
+```
+
+* Installing **eslint**
+1. Command 
+```
+ npm install eslint vite-plugin-eslint eslint-config-react-app --save-dev
+```
+
+2. create **.eslintrc.json**
+
+```js
+{
+  "extends": "react-app"
+}
+```
+3. Edit Code in **vite.config.js**
+
+```js
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react';
+import eslint from "vite-plugin-eslint"
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [react(), eslint()],
+})
+```
+
+
+## 📘Implementing Main Pages and Routes
 
 ![Image](./images/router-1.png)
 
 ![Image](./images/router-2.png)
 
+* command
+```
+ npm install react-router-dom
+```
+
+```js
+import {
+  BrowserRouter as Routers,
+  Route,
+  Link,
+  Routes,
+} from "react-router-dom";
+import "./App.css";
+import Home from "./pages/Home";
+import Product from "./pages/Product";
+import Price from "./pages/Pricing";
+
+function App() {
+  return (
+    <div>
+      <Routers>
+        <Link to="/">Home</Link>
+        <Link to="/price">Price</Link>
+        <Link to="/product">Product</Link>
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/price" element={<Price />}></Route>
+          <Route path="/product" element={<Product />}></Route>
+        </Routes>
+      </Routers>
+    </div>
+  );
+}
+
+export default App;
+```
+
 ![Image](./images/router-3.png)
+
+* With *NavLink* wrapper we can print **active** *class*
+
+```js
+<NavLink to="/">Home</NavLink>
+```
+
