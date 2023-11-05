@@ -2027,6 +2027,8 @@ function App() {
   console.log(data);
   // here it will undefined
 
+  if (!data) throw new Error('MyContext was used outside of the Provider')
+
   return (
     <ContextComponent>
       <ShowComponent />
@@ -2202,3 +2204,11 @@ function App() {
 
 export default App
 ```
+
+## 📘Thinking React Advance State Management
+
+![Image](./images/thinking-react-advance-state-1.png)
+
+![Image](./images/thinking-react-advance-state-2.png)
+
+![Image](./images/thinking-react-advance-state-3.png)
