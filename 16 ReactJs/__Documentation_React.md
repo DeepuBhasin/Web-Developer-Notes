@@ -1832,8 +1832,74 @@ function Pricing() {
 export default Pricing;
 ```
 
-## 📘Storing State in the URL
+## 📘Storing State in the URL (using param)
 
 ![Image](./images/storing-state-in-the-url.png)
 
 ![Image](./images/storing-state-in-the-url-1.png)
+
+```js
+// http://localhost:5173/price/england/pound
+
+import {useParams} from "react-router-dom";
+
+<Route
+  path="india/:currency?"
+  element={<Country con={"India"} />}
+/>
+
+function Country(props) {
+  const id = useParams();
+  return (
+    <h1>
+      Currency : {id.currency}
+    </h1>
+  );
+}
+```
+## 📘Storing State in the URL (using query string)
+
+```js
+// http://localhost:5173/price/india/rupee?govt=India&Bank=RBI
+
+import { useSearchParams } from "react-router-dom";
+
+function Country() {
+  const [queryString, setQueryString] = useSearchParams();
+  const govt = queryString.get("govt");
+  console.log(govt);
+  const bank = queryString.get("Bank");
+  console.log(bank);
+  
+  return (
+    <div>
+      <button onClick={() => setQueryString({ govt: "usa", Bank: "usa-bank" })}>
+        Click
+      </button>
+    </div>
+  );
+}
+```
+
+## 📘Programmatic Navigation
+
+```js
+import { useNavigate } from "react-router-dom";
+
+function Country() {
+  const navigate = useNavigate();
+
+  function PriceNavigation() {
+    navigate("/price");
+  }
+  return (
+    <div>
+      <button type="button" onClick={PriceNavigation}>Price</button>
+      <button type="button" onClick={(e)=> {
+          e.preventDefault();
+          navigate(-1);
+        }}>Back</button>
+    </div>
+  );
+}
+```
