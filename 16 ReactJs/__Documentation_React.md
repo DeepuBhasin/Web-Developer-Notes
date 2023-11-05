@@ -1831,6 +1831,7 @@ function Pricing() {
 
 export default Pricing;
 ```
+---
 
 ## 📘Storing State in the URL (using param)
 
@@ -1857,6 +1858,8 @@ function Country(props) {
   );
 }
 ```
+---
+
 ## 📘Storing State in the URL (using query string)
 
 ```js
@@ -1880,6 +1883,7 @@ function Country() {
   );
 }
 ```
+---
 
 ## 📘Programmatic Navigation (with useNavigate)
 
@@ -1903,6 +1907,7 @@ function Country() {
   );
 }
 ```
+---
 
 ## 📘Programmatic Navigation (with Navigate)
 
@@ -1946,4 +1951,175 @@ function App() {
 }
 
 export default App;
+```
+
+---
+
+# 📔Advanced State Management The Context API
+
+## 📘What is the Context API
+
+![Image](./images/context-api-1.png)
+
+![Image](./images/context-api-2.png)
+
+1. **Context Api + useState**
+
+```js
+import React, { createContext, useContext, useState } from 'react';
+
+// step 1 : creating context,  basically its a component
+const MyContext = createContext();
+
+function ContextComponent({ children }) {
+  const [count, setCount] = useState(0);
+
+  // step : 2 providing Data, its like props
+  const propsData = {
+    count: count,
+    setCount: setCount
+  }
+
+  return (
+    // step : 3 Creating Provider Wrapper
+    <MyContext.Provider value={propsData}>
+      {children}
+    </MyContext.Provider>
+  );
+}
+
+function ShowComponent() {
+  // step 4 :  Consume the context value,  
+  const { count } = useContext(MyContext);
+  return <div>
+    <h2>Show Component</h2>
+    <h3>count : {count}</h3>
+  </div>
+}
+
+function ButtonComponent() {
+  const { setCount } = useContext(MyContext)
+  return <div>
+    <h2>Button Component</h2>
+    <button onClick={() => setCount(e => e + 1)}>Update</button>
+  </div>
+}
+
+
+function App() {
+  return (
+    <ContextComponent>
+      <ShowComponent />
+      <ButtonComponent />
+    </ContextComponent>
+  )
+}
+
+export default App
+```
+
+2. ContextApi + useReducer
+
+```js
+import React, { createContext, useContext, useReducer } from 'react';
+
+// step 1 : creating context,  basically its a component
+const MyContext = createContext();
+
+// Initial Values
+const initialState = {
+  cakeCount: 0
+}
+
+// constants
+const reducerConstants = {
+  CAKE_INCREMENT: "CAKE_INCREMENT",
+  CAKE_DECREMENT: "CAKE_DECREMENT",
+  CAKE_RESET: "CAKE_RESET",
+  CAKE_INCREMENT_BY_VALUE: "CAKE_INCREMENT_BY_VALUE",
+}
+
+// Reducer (Pure function)
+function myReducer(state = initialState, action) {
+  switch (action.type) {
+    case reducerConstants.CAKE_INCREMENT: {
+      return {
+        ...state,
+        cakeCount: state.cakeCount + 1
+      }
+    }
+    case reducerConstants.CAKE_DECREMENT: {
+      return {
+        ...state,
+        cakeCount: state.cakeCount - 1
+      }
+    }
+    case reducerConstants.CAKE_RESET: {
+      return {
+        ...state,
+        cakeCount: 0
+      }
+    }
+    case reducerConstants.CAKE_INCREMENT_BY_VALUE: {
+      return {
+        ...state,
+        cakeCount: state.cakeCount + action.payload
+      }
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+function ContextComponent({ children }) {
+
+  const [state, dispatch] = useReducer(myReducer, initialState);
+
+
+  // step : 2 providing Data, its like props
+  const propsData = {
+    state,
+    dispatch
+  }
+
+  return (
+    // step : 3 Creating Provider Wrapper
+    <MyContext.Provider value={propsData}>
+      {children}
+    </MyContext.Provider>
+  );
+}
+
+function ShowComponent() {
+  // step 4 :  Consume the context value,  
+  const { state } = useContext(MyContext);
+  return <div>
+    <h2>Show Component</h2>
+    <p>Count : {state.cakeCount}</p>
+  </div>
+}
+
+function ButtonComponent() {
+  const { dispatch } = useContext(MyContext)
+  return <div>
+    <h2>Button Component</h2>
+    <button onClick={() => dispatch({ type: reducerConstants.CAKE_INCREMENT })}>Increment </button>
+    <button onClick={() => dispatch({ type: reducerConstants.CAKE_DECREMENT })}>Decrement </button>
+    <button onClick={() => dispatch({ type: reducerConstants.CAKE_RESET })}>Reset </button>
+    <button onClick={() => dispatch({ type: reducerConstants.CAKE_INCREMENT_BY_VALUE, payload: 3 })}>Increment by 3</button>
+  </div>
+}
+
+
+function App() {
+  return (
+    <ContextComponent>
+      <ShowComponent />
+      <ButtonComponent />
+    </ContextComponent>
+  )
+}
+
+export default App
 ```
