@@ -2018,7 +2018,27 @@ function App() {
 export default App
 ```
 
-2. ContextApi + useReducer
+⚠️ **Note :** if we try to print any context value in *App component* it will not print because provider is wrap is around the *showComponent and ButtonComponent* example 
+
+```js
+function App() {
+  // here it will undefined
+  const data = useContext(MyContext)
+  console.log(data);
+  // here it will undefined
+
+  return (
+    <ContextComponent>
+      <ShowComponent />
+      <ButtonComponent />
+    </ContextComponent>
+  )
+}
+```
+
+
+
+1. ContextApi + useReducer
 
 ```js
 import React, { createContext, useContext, useReducer } from 'react';
@@ -2073,9 +2093,7 @@ function myReducer(state = initialState, action) {
 }
 
 function ContextComponent({ children }) {
-
   const [state, dispatch] = useReducer(myReducer, initialState);
-
 
   // step : 2 providing Data, its like props
   const propsData = {
@@ -2113,6 +2131,67 @@ function ButtonComponent() {
 
 
 function App() {
+  return (
+    <ContextComponent>
+      <ShowComponent />
+      <ButtonComponent />
+    </ContextComponent>
+  )
+}
+
+export default App
+```
+
+> With Custom Hook
+
+```js
+import React, { createContext, useContext, useState } from 'react';
+
+const MyContext = createContext();
+
+function useMyCustomContext() {
+  function ContextComponent({ children }) {
+    const [state, dispatch] = useState(0)
+
+    const propsData = {
+      state,
+      dispatch
+    }
+
+    return (
+      <MyContext.Provider value={propsData}>
+        {children}
+      </MyContext.Provider>
+    );
+  }
+  const allContextProperties = useContext(MyContext);
+
+  return {
+    ContextComponent,
+    allContextProperties
+  }
+}
+
+function ShowComponent() {
+  const { allContextProperties } = useMyCustomContext();
+  return <div>
+    <h2>Show Component</h2>
+    <h3>count : {allContextProperties.state}</h3>
+  </div>
+}
+
+function ButtonComponent() {
+  const { allContextProperties } = useMyCustomContext();
+  return <div>
+    <h2>Button Component</h2>
+    <button onClick={() => allContextProperties.dispatch(e => e + 1)}>Increment </button>
+    <button onClick={() => allContextProperties.dispatch(e => e - 1)}>Decrement </button>
+    <button onClick={() => allContextProperties.dispatch(0)}>Reset </button>
+  </div>
+}
+
+function App() {
+  const { ContextComponent } = useMyCustomContext();
   return (
     <ContextComponent>
       <ShowComponent />
