@@ -1881,7 +1881,7 @@ function Country() {
 }
 ```
 
-## 📘Programmatic Navigation
+## 📘Programmatic Navigation (with useNavigate)
 
 ```js
 import { useNavigate } from "react-router-dom";
@@ -1902,4 +1902,48 @@ function Country() {
     </div>
   );
 }
+```
+
+## 📘Programmatic Navigation (with Navigate)
+
+```js
+import {
+  BrowserRouter as Routers,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
+import "./App.css";
+import Home from "./pages/Home";
+import Price from "./pages/Pricing";
+import PageNav from "./components/PageNav";
+
+function Country() {
+  return (
+    <div>
+      <h1>USA</h1>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <div>
+      <Routers>
+        <PageNav />
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/price" element={<Price />}>
+            {/* Redirecting to usa address */}
+            <Route index element={<Navigate replace to="usa" />}></Route>
+            <Route path="india" element={<Country />} />
+            <Route path="usa" element={<Country />} />
+          </Route>
+        </Routes>
+      </Routers>
+    </div>
+  );
+}
+
+export default App;
 ```
