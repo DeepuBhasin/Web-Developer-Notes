@@ -2037,10 +2037,86 @@ function App() {
   )
 }
 ```
+2. two ContextApi
+
+```js
+import React, { createContext, useContext, useState } from 'react';
+
+// step 1 : creating context,  basically its a component
+const MyContext = createContext();
+const CakeCountContext = createContext();
+
+function ContextComponent({ children }) {
+  const [count, setCount] = useState(0);
+
+  // step : 2 providing Data, its like props
+  const propsData = {
+    count: count,
+    setCount: setCount
+  }
+
+  return (
+    // step : 3 Creating Provider Wrapper
+    <MyContext.Provider value={propsData}>
+      {children}
+    </MyContext.Provider>
+  );
+}
+
+function CakeContextComponent({ children }) {
+  const [cakeCount, setCakeCount] = useState(0);
+
+  // step : 2 providing Data, its like props
+  const propsData = {
+    cakeCount: cakeCount,
+    setCakeCount: setCakeCount
+  }
+
+  return (
+    // step : 3 Creating Provider Wrapper
+    <CakeCountContext.Provider value={propsData}>
+      {children}
+    </CakeCountContext.Provider>
+  );
+}
+
+function ShowComponent() {
+  // step 4 :  Consume the context value,  
+  const { count } = useContext(MyContext);
+  const { cakeCount } = useContext(CakeCountContext)
+  return <div>
+    <h2>Show Component</h2>
+    <h3>count : {count}</h3>
+    <h3>Cake Count : {cakeCount}</h3>
+  </div>
+}
+
+function ButtonComponent() {
+  const { setCount } = useContext(MyContext);
+  const { setCakeCount } = useContext(CakeCountContext)
+  return <div>
+    <h2>Button Component</h2>
+    <button onClick={() => setCount(e => e + 1)}>Update</button>
+    <button onClick={() => setCakeCount(e => e + 1)}>Cake Count</button>
+  </div>
+}
+
+function App() {
+  return (
+    <ContextComponent>
+      <CakeContextComponent>
+        <ShowComponent />
+        <ButtonComponent />
+      </CakeContextComponent>
+    </ContextComponent>
+  )
+}
+
+export default App
+```
 
 
-
-1. ContextApi + useReducer
+3. ContextApi + useReducer
 
 ```js
 import React, { createContext, useContext, useReducer } from 'react';
@@ -2212,3 +2288,9 @@ export default App
 ![Image](./images/thinking-react-advance-state-2.png)
 
 ![Image](./images/thinking-react-advance-state-3.png)
+
+# 📔Performance Optimization and Advanced useEffect
+
+## Performance Optimization and Wasted Renders
+
+![Image](./images/performance-optimization-1.png)
