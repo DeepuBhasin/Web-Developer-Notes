@@ -2560,6 +2560,8 @@ const Archive = memo(({ show }) => {
 
 ![Image](./images/usememo-and-usecallback-2.png)
 
+1. **useMemo**
+
 Example
 
 * So the basic concept is here that when ever we pass **object or functions** child component always re-render even if we have same values in it.
@@ -2664,3 +2666,124 @@ const App = () => {
 export default App;
 ```
 
+2. useCallBack
+
+Example : in below example, We *pass Parent setCountHandler function object to Button Component* so when ever parent get re-render the setCountHandler reference always change hence child Component will re-render (Button Component), even though we use *memo*. 
+
+```js
+import React, { memo, useState } from 'react';
+
+function ShowComponent({ count }) {
+  console.log('Show Component');
+  return (
+    <h3> Count : {count}</h3>
+  )
+}
+
+const ButtonComponent = memo(
+  function ({ setCount }) {
+    console.log('Button Component');
+    return (
+      <button onClick={setCount}>Increment</button>
+    )
+  }
+)
+
+const App = () => {
+  const [count, setCount] = useState(0);
+
+  const setCountHandler = () => {
+    setCount(e => e + 1);
+  }
+
+  console.log('Parent Count');
+  return (
+    <React.Fragment>
+      <ShowComponent count={count} />
+      <ButtonComponent setCount={setCountHandler} />
+    </React.Fragment>
+  );
+}
+
+export default App;
+```
+
+```js
+// solution (but making handler function)
+import React, { memo, useState } from 'react';
+
+function ShowComponent({ count }) {
+  console.log('Show Component');
+  return (
+    <h3> Count : {count}</h3>
+  )
+}
+
+const ButtonComponent = memo(
+  function ({ setCount }) {
+    console.log('Button Component');
+    return (
+      <button onClick={setCount}>Increment</button>
+    )
+  }
+)
+
+const App = () => {
+  const [count, setCount] = useState(0);
+
+ // using callback 
+ const setCountHandler = useCallback(() => {
+    setCount(e => e + 1);
+  }, []);
+
+  console.log('Parent Count');
+  return (
+    <React.Fragment>
+      <ShowComponent count={count} />
+      <ButtonComponent setCount={setCountHandler} />
+    </React.Fragment>
+  );
+}
+
+export default App;
+```
+
+⚠️ **Note :** 
+1. *useMemo and useCallBack* always use when ever we found *slow components* which has visible bad performance use these two hooks to optimize components. Because unnecessary use of these hooks also leads problem because it consume lots of memory
+
+2. in below example we are passing *setter functions of useState* into child component, react gives guarantee that *setter functions of useState* always have stable identity which means that they will not change on renders like we can that these setter functions are automatically memoized.  
+
+```js
+// solution (without handler function)
+import React, { memo, useState } from 'react';
+
+function ShowComponent({ count }) {
+  console.log('Show Component');
+  return (
+    <h3> Count : {count}</h3>
+  )
+}
+
+const ButtonComponent = memo(
+  function ({ setCount }) {
+    console.log('Button Component');
+    return (
+      <button onClick={() => setCount(e => e + 1)}>Increment</button>
+    )
+  }
+)
+
+const App = () => {
+  const [count, setCount] = useState(0);
+
+  console.log('Parent Count');
+  return (
+    <React.Fragment>
+      <ShowComponent count={count} />
+      <ButtonComponent setCount={setCount} />
+    </React.Fragment>
+  );
+}
+
+export default App;
+```
