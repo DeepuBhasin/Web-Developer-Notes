@@ -2442,6 +2442,8 @@ export default App;
 
 ![Image](./images/memoization-1.png)
 
+⚠️ **Note :** The concept behind *memo, useMemo and useCallback* is **Memoization**
+
 Example 
 
 * in this example when ever state get change in **App Component (parent component)** the child components also get re-render. Hence **Static Child Component** make slow whole current page like when ever you enter inputs values you will see it takes to much time to enter new value.
@@ -2538,6 +2540,127 @@ const StaticChild = memo(() => {
     </ul>
   </React.Fragment>
 });
+
+// OR 
+const Archive = memo(({ show }) => {
+  return (<div>
+    {show && <StaticChild />}
+  </div>)
+})
+```
+![Image](./images/memoization-4-example.png)
+
+---
+
+## 📘Understanding useMemo and useCallback
+
+![Image](./images/issue-with-memo.png)
+
+![Image](./images/usememo-and-usecallback-1.png)
+
+![Image](./images/usememo-and-usecallback-2.png)
+
+Example
+
+* So the basic concept is here that when ever we pass **object or functions** child component always re-render even if we have same values in it.
+
+Example : 
+* in the below example, child component will re-render again and again even the values (name) is same but because of object on every re-render it will create a new memory address for object hence every children will re-render again, also if we use **memo** here as well it will also cause same problem. *This problem is always occur in Objects and functions because of memory address change on every render.*
+
+* Main Concept : *we are passing as object and that object is use for derived state in child component*
+
+```js
+// Problem without memo
+import React from 'react';
+import { useState } from 'react';
+
+const ChildComponent = ({ obj }) => {
+  const [data] = useState(obj)
+  console.log('Child component');
+  return (
+    <div>
+      <h1>Child Component</h1>
+      Name : {data.name} <br />
+      Job : {data.job}
+    </div>
+  )
+}
+
+const App = () => {
+  let obj = { name: "Deepu Bhasin", job: "React Developer" };
+  const [input, setInput] = useState('');
+  console.log('Parent Component');
+  return (<div>
+    <input type='text' name='name' placeholder='Enter Name' value={input} onChange={(e) => setInput(e.target.value)} />
+    <ChildComponent obj={obj} />
+
+  </div>)
+
+}
+
+export default App;
 ```
 
-![Image](./images/memoization-4-example.png)
+```js
+// problem with memo
+
+import React, { memo } from 'react';
+import { useState } from 'react';
+
+const ChildComponent = memo(({ obj }) => {
+  const [data] = useState(obj)
+  console.log('Child component');
+  return (
+    <div>
+      <h1>Child Component</h1>
+      Name : {data.name} <br />
+      Job : {data.job}
+    </div>
+  )
+})
+
+const App = () => {
+  let obj = { name: "Deepu Bhasin", job: "React Developer" };
+  const [input, setInput] = useState('');
+  console.log('Parent Component');
+  return (<div>
+    <input type='text' name='name' placeholder='Enter Name' value={input} onChange={(e) => setInput(e.target.value)} />
+    <ChildComponent obj={obj} />
+
+  </div>)
+
+}
+
+export default App;
+```
+
+```js
+// Solution using memo and useMemo
+import React, { memo, useMemo } from 'react';
+import { useState } from 'react';
+
+const ChildComponent = memo(({ obj }) => {
+  const [data] = useState(obj)
+  console.log('Child component');
+  return (
+    <div>
+      <h1>Child Component</h1>
+      Name : {data.name} <br />
+      Job : {data.job}
+    </div>
+  )
+})
+
+const App = () => {
+  let obj = useMemo(() => ({ name: "Deepu Bhasin", job: "React Developer" }), []);
+  const [input, setInput] = useState('');
+  console.log('Parent Component');
+  return (<div>
+    <input type='text' name='name' placeholder='Enter Name' value={input} onChange={(e) => setInput(e.target.value)} />
+    <ChildComponent obj={obj} />
+  </div>)
+}
+
+export default App;
+```
+
