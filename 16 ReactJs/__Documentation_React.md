@@ -2280,6 +2280,7 @@ function App() {
 
 export default App
 ```
+---
 
 ## 📘Thinking React Advance State Management
 
@@ -2289,8 +2290,254 @@ export default App
 
 ![Image](./images/thinking-react-advance-state-3.png)
 
+---
+
 # 📔Performance Optimization and Advanced useEffect
 
 ## Performance Optimization and Wasted Renders
 
 ![Image](./images/performance-optimization-1.png)
+
+![Image](./images/performance-optimization-2.png)
+
+---
+## The Profiler Developer Tool
+
+[!Image](./images/profiler-dev-tools-1.png)
+
+[!Image](./images/profiler-dev-tools-2.png)
+
+[!Image](./images/profiler-dev-tools-3.png)
+
+[!Image](./images/profiler-dev-tools-4.png)
+
+* **Yellow Color** : reflect where the state actual change
+* **Dark green :** reflect re-rendering
+* **green :** reflect not re-render
+
+---
+
+## A Surprising Optimization Trick With children
+
+* Most used concept in the real world. Mostly used with *complex or very slow render* components.
+
+1. In this example **Static Component** dont have any *props* but still it re-render because its get re-render after changing there state
+```js
+// Problem
+import React from 'react'
+import { useState } from 'react'
+import "./App.css"
+
+function StaticChild() {
+
+  const words = Array.from({ length: 100000 }, (_, i) => "word");
+
+  console.log('re-render static-component');
+  return <React.Fragment>
+    <h3>Static Child Component</h3>
+    <ul>
+      {words.map((e, i) => {
+        return (<li key={i}>
+          {i} : {e}
+        </li>)
+      })}
+
+    </ul>
+  </React.Fragment>
+}
+
+function DynamicChild({ count }) {
+  console.log('re-render Dynamic-component');
+  return <React.Fragment>
+    <h3>Dynamic Child Component</h3>
+    <h4>Count : {count}</h4>
+  </React.Fragment>
+}
+
+function Test() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div className='App'>
+      <button onClick={() => setCount(e => e + 1)}>Increase {count}</button>
+      <DynamicChild count={count} />
+      <StaticChild />
+    </div>
+  )
+}
+
+function App() {
+  return (
+    <Test>
+    </Test>
+  )
+}
+
+export default App;
+```
+
+1. In this example **Static Component** pass as composite component in **Test Component** and created before render of Test component, so it will not *re-render* again and again even the state get change in *Test component* only child components get re-render of *test Component*. This Concept will work in all scenarios where we are passing component as *children or props*
+
+
+```js
+// Solution
+
+import React from 'react'
+import { useState } from 'react'
+import "./App.css"
+
+function StaticChild() {
+
+  const words = Array.from({ length: 100000 }, (_, i) => "word");
+
+  console.log('re-render static-component');
+  return <React.Fragment>
+    <h3>Static Child Component</h3>
+    <ul>
+      {words.map((e, i) => {
+        return (<li key={i}>
+          {i} : {e}
+        </li>)
+      })}
+
+    </ul>
+  </React.Fragment>
+}
+
+function DynamicChild({ count }) {
+  console.log('re-render Dynamic-component');
+  return <React.Fragment>
+    <h3>Dynamic Child Component</h3>
+    <h4>Count : {count}</h4>
+  </React.Fragment>
+}
+
+function Test({ children }) {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div className='App'>
+      <button onClick={() => setCount(e => e + 1)}>Increase {count}</button>
+      {children}
+      <DynamicChild count={count} />
+    </div>
+  )
+}
+
+function App() {
+  return (
+    <Test>
+      <StaticChild />
+    </Test>
+  )
+}
+
+export default App;
+```
+---
+
+## 📘Understanding memo
+
+![Image](./images/memoization.png)
+
+![Image](./images/memoization-1.png)
+
+Example 
+
+* in this example when ever state get change in **App Component (parent component)** the child components also get re-render. Hence **Static Child Component** make slow whole current page like when ever you enter inputs values you will see it takes to much time to enter new value.
+```js
+// Problem
+import React from 'react'
+import { useState } from 'react'
+import "./App.css"
+
+const StaticChild = () => {
+  const words = Array.from({ length: 100000 }, (_, i) => "word");
+
+  console.log('re-render static-component');
+  return <React.Fragment>
+    <h3>Static Child Component</h3>
+    <ul>
+      {words.map((e, i) => {
+        return (<li key={i}>
+          {i} : {e}
+        </li>)
+      })}
+
+    </ul>
+  </React.Fragment>
+}
+
+function Archive({ show }) {
+  return (<div>
+    {show && <StaticChild />}
+  </div>)
+}
+
+function App() {
+  const userList = [
+    { name: "a", city: "a" },
+    { name: "b", city: "b" },
+    { name: "c", city: "c" },
+    { name: "d", city: "d" },
+    { name: "e", city: "e" },
+    { name: "f", city: "f" },
+  ];
+  const [inputValue, setInputValue] = useState('');
+  const [filterValues, setFilterValues] = useState(userList);
+  const [show, setShow] = useState(false);
+
+  const searchHandler = (e) => {
+    let value = e.target.value.trim();
+    setInputValue(value)
+    if (value.length === 0) {
+      setFilterValues(userList)
+    } else {
+      let filterValue = userList.filter(e => e.name.includes(value));
+      setFilterValues(filterValue)
+    }
+  }
+
+  return (
+    <div className='App'>
+      <button onClick={() => setShow(e => !e)}>Archive {show ? 'true' : "false"}</button><br />
+      <input type='search' name='user' value={inputValue} onChange={searchHandler} />
+      <ul>
+        {filterValues.map(e => {
+          return (<li key={e.name}>
+            Name : {e.name} <br />City : {e.city}
+          </li>)
+        })}
+      </ul>
+      <Archive show={show} />
+    </div >
+  )
+}
+
+export default App;
+```
+![Image](./images/memoization-3-example.png)
+
+* Solution, after applying **memo (memoization)** Component get *cached* and it will take time in first render after that it will work very fast as compare to above example.
+```js
+import React, { memo } from 'react'
+
+const StaticChild = memo(() => {
+  const words = Array.from({ length: 100000 }, (_, i) => "word");
+
+  console.log('re-render static-component');
+  return <React.Fragment>
+    <h3>Static Child Component</h3>
+    <ul>
+      {words.map((e, i) => {
+        return (<li key={i}>
+          {i} : {e}
+        </li>)
+      })}
+
+    </ul>
+  </React.Fragment>
+});
+```
+
+![Image](./images/memoization-4-example.png)
