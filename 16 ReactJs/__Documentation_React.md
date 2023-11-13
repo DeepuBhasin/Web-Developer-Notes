@@ -3256,3 +3256,5 @@ const App = () => {
 
 export default App;
 ```
+
+⚠️ **Note :** Placing whole *reducer functionality* into a single file like *Count Functionality (initialValue, Constants, Action Creator, reducer)* put into single file then it is called **Slice**
