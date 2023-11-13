@@ -2834,3 +2834,12 @@ export default App;
 ## 📘Don't Optimize Prematurely!
 
 ![Image](./images/dont-optimiz.png)
+
+## 📘useEffect Rules and Best Practice
+
+![Image](./images/useEffects-rulls-and-best-practice.png)
+
+![Image](./images/useEffects-rulls-and-best-practice-2.png)
+
+![Image](./images/useEffects-rulls-and-best-practice-3.png)
+
