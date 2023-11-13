@@ -2787,3 +2787,50 @@ const App = () => {
 
 export default App;
 ```
+⚠️ **Note :** Optimization can be done in following way
+* *context api, redux or any props in which we are passing objects* 
+* Component which take too much time to render due to *Heavy calculations*.
+* When component render to much and making serious effects on the other components like wasted renders
+
+---
+
+## 📘Optimization Bundle Size with code splitting
+
+![Image](./images/the-bunddle-and-code-splitting-1.png)
+
+* If the address get change then javascript will not load again in SPA
+
+![Image](./images/the-bunddle-and-code-splitting-2.png)
+
+* The js files get download later according to requirement
+
+![Image](./images/the-bunddle-and-code-splitting-3.png)
+
+* Most common example for *code splitting is with routing (at page level)*. **Suspense** is a advance React feature allow some component to suspense means it allows them to wait for something to happen. in our case these lazy component are gone be suspended while they are loading. Then we can use in-built *Suspense Component* to show a fallback with in our case is loading indicator.
+* Once the chunk downloaded it will not download again hence reduce our bandwidth
+
+```js
+// Simple example of lazy loading 
+import React, { Suspense, useState } from 'react';
+const ButtonComponent = React.lazy(() => import("./ButtonComponent.js"));
+const ShowComponent = React.lazy(() => import("./ShowComponent.js"));
+
+const App = () => {
+  const [count, setCount] = useState(0);
+  return (
+    <React.Fragment>
+      <Suspense fallback={<h1>Loading ...</h1>}>
+        <ShowComponent count={count} />
+        <ButtonComponent setCount={setCount} />
+      </Suspense>
+    </React.Fragment>
+  );
+}
+
+export default App;
+```
+---
+
+## 📘Don't Optimize Prematurely!
+
+![Image](./images/dont-optimiz.png)
