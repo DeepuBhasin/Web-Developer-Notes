@@ -1873,7 +1873,7 @@ function Country() {
   console.log(govt);
   const bank = queryString.get("Bank");
   console.log(bank);
-  
+
   return (
     <div>
       <button onClick={() => setQueryString({ govt: "usa", Bank: "usa-bank" })}>
@@ -1989,7 +1989,7 @@ function ContextComponent({ children }) {
 }
 
 function ShowComponent() {
-  // step 4 :  Consume the context value,  
+  // step 4 :  Consume the context value,
   const { count } = useContext(MyContext);
   return <div>
     <h2>Show Component</h2>
@@ -2018,7 +2018,7 @@ function App() {
 export default App
 ```
 
-⚠️ **Note :** if we try to print any context value in *App component* it will not print because provider is wrap is around the *showComponent and ButtonComponent* example 
+⚠️ **Note :** if we try to print any context value in *App component* it will not print because provider is wrap is around the *showComponent and ButtonComponent* example
 
 ```js
 function App() {
@@ -2081,7 +2081,7 @@ function CakeContextComponent({ children }) {
 }
 
 function ShowComponent() {
-  // step 4 :  Consume the context value,  
+  // step 4 :  Consume the context value,
   const { count } = useContext(MyContext);
   const { cakeCount } = useContext(CakeCountContext)
   return <div>
@@ -2188,7 +2188,7 @@ function ContextComponent({ children }) {
 }
 
 function ShowComponent() {
-  // step 4 :  Consume the context value,  
+  // step 4 :  Consume the context value,
   const { state } = useContext(MyContext);
   return <div>
     <h2>Show Component</h2>
@@ -2444,7 +2444,7 @@ export default App;
 
 ⚠️ **Note :** The concept behind *memo, useMemo and useCallback* is **Memoization**
 
-Example 
+Example
 
 * in this example when ever state get change in **App Component (parent component)** the child components also get re-render. Hence **Static Child Component** make slow whole current page like when ever you enter inputs values you will see it takes to much time to enter new value.
 ```js
@@ -2541,7 +2541,7 @@ const StaticChild = memo(() => {
   </React.Fragment>
 });
 
-// OR 
+// OR
 const Archive = memo(({ show }) => {
   return (<div>
     {show && <StaticChild />}
@@ -2566,7 +2566,7 @@ Example
 
 * So the basic concept is here that when ever we pass **object or functions** child component always re-render even if we have same values in it.
 
-Example : 
+Example :
 * in the below example, child component will re-render again and again even the values (name) is same but because of object on every re-render it will create a new memory address for object hence every children will re-render again, also if we use **memo** here as well it will also cause same problem. *This problem is always occur in Objects and functions because of memory address change on every render.*
 
 * Main Concept : *we are passing as object and that object is use for derived state in child component*
@@ -2668,7 +2668,7 @@ export default App;
 
 2. useCallBack
 
-Example : in below example, We *pass Parent setCountHandler function object to Button Component* so when ever parent get re-render the setCountHandler reference always change hence child Component will re-render (Button Component), even though we use *memo*. 
+Example : in below example, We *pass Parent setCountHandler function object to Button Component* so when ever parent get re-render the setCountHandler reference always change hence child Component will re-render (Button Component), even though we use *memo*.
 
 ```js
 import React, { memo, useState } from 'react';
@@ -2731,7 +2731,7 @@ const ButtonComponent = memo(
 const App = () => {
   const [count, setCount] = useState(0);
 
- // using callback 
+ // using callback
  const setCountHandler = useCallback(() => {
     setCount(e => e + 1);
   }, []);
@@ -2748,10 +2748,10 @@ const App = () => {
 export default App;
 ```
 
-⚠️ **Note :** 
+⚠️ **Note :**
 1. *useMemo and useCallBack* always use when ever we found *slow components* which has visible bad performance use these two hooks to optimize components. Because unnecessary use of these hooks also leads problem because it consume lots of memory
 
-2. in below example we are passing *setter functions of useState* into child component, react gives guarantee that *setter functions of useState* always have stable identity which means that they will not change on renders like we can that these setter functions are automatically memoized.  
+2. in below example we are passing *setter functions of useState* into child component, react gives guarantee that *setter functions of useState* always have stable identity which means that they will not change on renders like we can that these setter functions are automatically memoized.
 
 ```js
 // solution (without handler function)
@@ -2788,7 +2788,7 @@ const App = () => {
 export default App;
 ```
 ⚠️ **Note :** Optimization can be done in following way
-* *context api, redux or any props in which we are passing objects* 
+* *context api, redux or any props in which we are passing objects*
 * Component which take too much time to render due to *Heavy calculations*.
 * When component render to much and making serious effects on the other components like wasted renders
 
@@ -2810,7 +2810,7 @@ export default App;
 * Once the chunk downloaded it will not download again hence reduce our bandwidth
 
 ```js
-// Simple example of lazy loading 
+// Simple example of lazy loading
 import React, { Suspense, useState } from 'react';
 const ButtonComponent = React.lazy(() => import("./ButtonComponent.js"));
 const ShowComponent = React.lazy(() => import("./ShowComponent.js"));
@@ -2843,3 +2843,137 @@ export default App;
 
 ![Image](./images/useEffects-rulls-and-best-practice-3.png)
 
+---
+
+# 📔Redux and Modern Redux Toolkit (With Thunks)
+
+## 📘Redux
+
+![Image](./images/redux-1.png)
+
+![Image](./images/redux-2.png)
+
+![Image](./images/redux-3.png)
+
+## 📘Creating Redux Store, Reducer, Action Constants (Simple Version)
+
+```
+npm install redux react-redux
+```
+
+```js
+
+import React from 'react';
+import { createStore } from "redux";
+import { Provider, useDispatch, useSelector } from 'react-redux';
+
+// Initial Value
+const initialState = {
+  count: 0,
+};
+
+// Actions Constants
+const actionConstants = {
+  INCREMENT: "count/increment",
+  DECREMENT: "count/decrement",
+  RESET: "count/reset",
+  INCREMENT_BY_VALUE: "count/incrementByValue",
+}
+
+// Action Creator
+const actionCreator = {
+  incrementAction: function () {
+    return {
+      type: actionConstants.INCREMENT,
+      payload: 1
+    }
+  },
+  decrementAction: function () {
+    return {
+      type: actionConstants.DECREMENT,
+      payload: 1
+    }
+  },
+  resetAction: function () {
+    return {
+      type: actionConstants.RESET,
+      payload: 0
+    }
+  },
+  incrementByValueAction: function (value) {
+    return {
+      type: actionConstants.INCREMENT_BY_VALUE,
+      payload: value
+    }
+  }
+}
+
+// Reducer
+function reducer(state = initialState, action) {
+  switch (action.type) {
+    // Write complete login Here
+    case actionConstants.INCREMENT: {
+      return {
+        ...state,
+        count: state.count + action.payload
+      }
+    }
+    case actionConstants.DECREMENT: {
+      return {
+        ...state,
+        count: state.count - action.payload
+      }
+    }
+    case actionConstants.RESET: {
+      return {
+        ...state,
+        count: 0
+      }
+    }
+    case actionConstants.INCREMENT_BY_VALUE: {
+      return {
+        ...state,
+        count: state.count + action.payload
+      }
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+// create Store
+const store = createStore(reducer);
+
+function ShowComponent() {
+  const count = useSelector(state => state.count)
+  return (
+    <React.Fragment>
+      <h3> Count : {count}</h3>
+    </React.Fragment>
+  )
+}
+
+function ButtonComponent() {
+  const dispatch = useDispatch();
+  return (
+    <React.Fragment>
+      <button onClick={() => dispatch(actionCreator.incrementAction())}>Increment</button><br />
+      <button onClick={() => dispatch(actionCreator.decrementAction())}>Decrement</button><br />
+      <button onClick={() => dispatch(actionCreator.resetAction())}>Reset</button><br />
+      <button onClick={() => dispatch(actionCreator.incrementByValueAction(3))}>Increment By Value 3</button>
+    </React.Fragment>
+  )
+}
+
+const App = () => {
+  return (
+    <Provider store={store} >
+      <ShowComponent />
+      <ButtonComponent />
+    </Provider>
+  )
+}
+
+export default App;
+```
