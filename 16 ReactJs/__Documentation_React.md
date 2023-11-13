@@ -2560,7 +2560,41 @@ const Archive = memo(({ show }) => {
 
 ![Image](./images/usememo-and-usecallback-2.png)
 
+
 1. **useMemo**
+* The React useMemo Hook returns a memoized value.
+* Think of memoization as caching a value so that it does not need to be recalculated.
+* The useMemo Hook only runs when one of its dependencies update.
+* This can improve performance.
+* The useMemo and useCallback Hooks are similar. The main difference is that useMemo returns a memoized value and useCallback returns a memoized function.
+
+
+```js
+// Simple Example
+import './App.css'
+import { useMemo, useState } from 'react'
+const App = () => {
+  const [count, setCount] = useState(0);
+  const [item, setItem] = useState(10);
+
+  const isEven = useMemo(() => {
+    console.log('called is even function');
+    let i = 0;
+    while (i < 2000000000) i++;
+    return count % 2 === 0;
+  }, [count])
+
+return (
+    <div className='App'>
+      <div><button onClick={() => setCount((count) => count + 1)}>Count - {count}</button></div>
+      <span>{isEven ? 'Even' : 'Odd'}</span>
+      <div><button onClick={() => setItem((item) => item + 1)}>Item - {item}</button></div>
+    </div>
+  )
+}
+
+export default App;
+```
 
 Example
 
@@ -2666,7 +2700,15 @@ const App = () => {
 export default App;
 ```
 
-2. useCallBack
+2. **useCallBack**
+
+* The React useCallback Hook returns a memoized callback function.
+* Think of memoization as caching a value so that it does not need to be recalculated.
+* This allows us to isolate resource intensive functions so that they will not automatically run on every render.
+* The useCallback Hook only runs when one of its dependencies update.
+* This can improve performance.
+* The useCallback and useMemo Hooks are similar. The main difference is that useMemo returns a memoized value and
+useCallback returns a memoized function
 
 Example : in below example, We *pass Parent setCountHandler function object to Button Component* so when ever parent get re-render the setCountHandler reference always change hence child Component will re-render (Button Component), even though we use *memo*.
 
@@ -2861,6 +2903,7 @@ export default App;
 npm install redux react-redux
 ```
 
+1. Single Reducer
 ```js
 
 import React from 'react';
@@ -2971,6 +3014,242 @@ const App = () => {
     <Provider store={store} >
       <ShowComponent />
       <ButtonComponent />
+    </Provider>
+  )
+}
+
+export default App;
+```
+
+2. Combine Reducer
+
+```js
+import React from 'react';
+import { combineReducers, createStore } from "redux";
+import { Provider, useDispatch, useSelector } from 'react-redux';
+
+// Initial Value
+const firstInitialState = {
+  count: 0,
+};
+
+// Actions Constants
+const firstActionConstants = {
+  INCREMENT: "count/increment",
+  DECREMENT: "count/decrement",
+  RESET: "count/reset",
+  INCREMENT_BY_VALUE: "count/incrementByValue",
+}
+
+// Action Creator
+const firstActionCreator = {
+  incrementAction: function () {
+    return {
+      type: firstActionConstants.INCREMENT,
+      payload: 1
+    }
+  },
+  decrementAction: function () {
+    return {
+      type: firstActionConstants.DECREMENT,
+      payload: 1
+    }
+  },
+  resetAction: function () {
+    return {
+      type: firstActionConstants.RESET,
+      payload: 0
+    }
+  },
+  incrementByValueAction: function (value) {
+    return {
+      type: firstActionConstants.INCREMENT_BY_VALUE,
+      payload: value
+    }
+  }
+}
+
+// Reducer
+function firstReducer(state = firstInitialState, action) {
+  switch (action.type) {
+    // Write complete login Here
+    case firstActionConstants.INCREMENT: {
+      return {
+        ...state,
+        count: state.count + action.payload
+      }
+    }
+    case firstActionConstants.DECREMENT: {
+      return {
+        ...state,
+        count: state.count - action.payload
+      }
+    }
+    case firstActionConstants.RESET: {
+      return {
+        ...state,
+        count: 0
+      }
+    }
+    case firstActionConstants.INCREMENT_BY_VALUE: {
+      return {
+        ...state,
+        count: state.count + action.payload
+      }
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+// Second Reducer
+// Initial Value
+const secondInitialState = {
+  cake: 0,
+};
+
+// Actions Constants
+const secondActionConstants = {
+  INCREMENT: "cake/increment",
+  DECREMENT: "cake/decrement",
+  RESET: "cake/reset",
+  INCREMENT_BY_VALUE: "cake/incrementByValue",
+}
+
+// Action Creator
+const secondActionCreator = {
+  incrementAction: function () {
+    return {
+      type: secondActionConstants.INCREMENT,
+      payload: 1
+    }
+  },
+  decrementAction: function () {
+    return {
+      type: secondActionConstants.DECREMENT,
+      payload: 1
+    }
+  },
+  resetAction: function () {
+    return {
+      type: secondActionConstants.RESET,
+      payload: 0
+    }
+  },
+  incrementByValueAction: function (value) {
+    return {
+      type: secondActionConstants.INCREMENT_BY_VALUE,
+      payload: value
+    }
+  }
+}
+
+// Reducer
+function secondReducer(state = secondInitialState, action) {
+  switch (action.type) {
+    // Write complete login Here
+    case secondActionConstants.INCREMENT: {
+      return {
+        ...state,
+        cake: state.cake + action.payload
+      }
+    }
+    case secondActionConstants.DECREMENT: {
+      return {
+        ...state,
+        cake: state.cake - action.payload
+      }
+    }
+    case secondActionConstants.RESET: {
+      return {
+        ...state,
+        cake: 0
+      }
+    }
+    case secondActionConstants.INCREMENT_BY_VALUE: {
+      return {
+        ...state,
+        cake: state.cake + action.payload
+      }
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+const rootReducer = combineReducers({
+  countReducer: firstReducer,
+  cakeReducer: secondReducer
+})
+
+// create Store
+const store = createStore(rootReducer);
+
+function ShowCountComponent() {
+  const count = useSelector(state => state.countReducer.count);
+  return (
+    <React.Fragment>
+      <h3>Count Component  <em>Count : {count}</em></h3>
+    </React.Fragment>
+  )
+}
+function ButtonCountComponent() {
+  const dispatch = useDispatch();
+  return (
+    <React.Fragment>
+      <button onClick={() => dispatch(firstActionCreator.incrementAction())}>Increment</button><br />
+      <button onClick={() => dispatch(firstActionCreator.decrementAction())}>Decrement</button><br />
+      <button onClick={() => dispatch(firstActionCreator.resetAction())}>Reset</button><br />
+      <button onClick={() => dispatch(firstActionCreator.incrementByValueAction(3))}>Increment By Value 3</button>
+    </React.Fragment>
+  )
+}
+
+function ShowCakeComponent() {
+  const cake = useSelector(state => state.cakeReducer.cake);
+  return (
+    <React.Fragment>
+      <h3>Cake Component  <em>Cake : {cake}</em></h3>
+    </React.Fragment>
+  )
+}
+function ButtonCakeComponent() {
+  const dispatch = useDispatch();
+  return (
+    <React.Fragment>
+      <button onClick={() => dispatch(secondActionCreator.incrementAction())}>Increment</button><br />
+      <button onClick={() => dispatch(secondActionCreator.decrementAction())}>Decrement</button><br />
+      <button onClick={() => dispatch(secondActionCreator.resetAction())}>Reset</button><br />
+      <button onClick={() => dispatch(secondActionCreator.incrementByValueAction(3))}>Increment By Value 3</button>
+    </React.Fragment>
+  )
+}
+
+function CountStructureComponent() {
+  return (
+    <React.Fragment>
+      <ShowCountComponent />
+      <ButtonCountComponent />
+    </React.Fragment>
+  )
+}
+
+function CakeStructureComponent() {
+  return (
+    <React.Fragment>
+      <ShowCakeComponent />
+      <ButtonCakeComponent />
+    </React.Fragment>
+  )
+}
+
+const App = () => {
+  return (
+    <Provider store={store} >
+      <CountStructureComponent />
+      <CakeStructureComponent />
     </Provider>
   )
 }
