@@ -3338,6 +3338,14 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import logger from "redux-logger";
 
 // Initial state
+import React from 'react';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
+import thunk from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension'
+import logger from "redux-logger";
+
+// Initial state
 const initialPostData = {
   post: [],
   loading: false,
@@ -3360,7 +3368,7 @@ const deletePostAction = () => ({ type: postConstants.DELETE_DATA, payload: [] }
 
 
 // MiddleWare
-const fetchPostAction = () => {
+const fetchPostThunkAction = () => {
   return async (dispatch, getState) => {
     dispatch(fetchPostsRequest());
 
@@ -3420,7 +3428,7 @@ function ShowDataComponent() {
 
   return (
     <div className="App">
-      <button onClick={() => dispatch(fetchPostAction())}>Fetch Data</button>
+      <button onClick={() => dispatch(fetchPostThunkAction())}>Fetch Data</button>
       <button onClick={() => dispatch(deletePostAction())}>Delete Data</button>
 
       {state.loading && <h1>Loading...</h1>}
