@@ -2897,6 +2897,8 @@ export default App;
 
 ![Image](./images/redux-3.png)
 
+---
+
 ## 📘Creating Redux Store, Reducer, Action Constants (Simple Version)
 
 ```
@@ -3258,3 +3260,64 @@ export default App;
 ```
 
 ⚠️ **Note :** Placing whole *reducer functionality* into a single file like *Count Functionality (initialValue, Constants, Action Creator, reducer)* put into single file then it is called **Slice**
+
+---
+## 📘The Legacy Way of Connecting Components to Redux (Old Way)
+
+```js
+// ShowCakeComponent.js
+
+import React from 'react';
+import { connect } from "react-redux"
+
+const ShowCakeComponent = ({ cake }) => {
+    return (
+        <React.Fragment>
+            <h3>Cake Component  <em>Cake : {cake}</em></h3>
+        </React.Fragment>
+    );
+}
+
+function mapStateToProps(state) {
+    return {
+        cake: state.cakeReducer.cake
+    }
+}
+
+export default connect(mapStateToProps, null)(ShowCakeComponent);
+```
+
+```js
+// ButtonCakeComponent.js
+
+import React from 'react';
+import { connect } from "react-redux";
+import { secondActionCreator } from "./App"
+
+function ButtonCakeComponent({ dispatch }) {
+    return (
+        <React.Fragment>
+            <button onClick={() => dispatch(secondActionCreator.incrementAction())}>Increment</button><br />
+            <button onClick={() => dispatch(secondActionCreator.decrementAction())}>Decrement</button><br />
+            <button onClick={() => dispatch(secondActionCreator.resetAction())}>Reset</button><br />
+            <button onClick={() => dispatch(secondActionCreator.incrementByValueAction(3))}>Increment By Value 3</button>
+        </React.Fragment>
+    )
+}
+
+function mapDispatchToProps(dispatch) {
+    return { dispatch }
+}
+
+export default connect(null, mapDispatchToProps)(ButtonCakeComponent)
+```
+
+---
+
+## 📘Redux Middleware and Thunks
+
+![Image](./redux-images/redux-middleware.png)
+
+![Image](./redux-images/redux-middleware-1.png)
+
+![Image](./redux-images/redux-middleware-2.png)
