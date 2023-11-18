@@ -3321,3 +3321,123 @@ export default connect(null, mapDispatchToProps)(ButtonCakeComponent)
 ![Image](./redux-images/redux-middleware-1.png)
 
 ![Image](./redux-images/redux-middleware-2.png)
+
+```
+npm install redux react-redux
+npm install redux-thunk
+npm install redux-devtools-extension
+npm i --save redux-logger
+```
+
+```js
+import React from 'react';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
+import thunk from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension'
+import logger from "redux-logger";
+
+// Initial state
+const initialPostData = {
+  post: [],
+  loading: false,
+  error: null,
+};
+
+// Constants
+const postConstants = {
+  DELETE_DATA: 'DELETE_DATA',
+  FETCH_POSTS_REQUEST: 'FETCH_POSTS_REQUEST',
+  FETCH_POSTS_SUCCESS: 'FETCH_POSTS_SUCCESS',
+  FETCH_POSTS_FAILURE: 'FETCH_POSTS_FAILURE',
+};
+
+// Action Creators
+const fetchPostsRequest = () => ({ type: postConstants.FETCH_POSTS_REQUEST, payload: [] });
+const fetchPostsSuccess = (data) => ({ type: postConstants.FETCH_POSTS_SUCCESS, payload: data });
+const fetchPostsFailure = (error) => ({ type: postConstants.FETCH_POSTS_FAILURE, error });
+
+const fetchPostAction = () => {
+  return async (dispatch, getState) => {
+    dispatch(fetchPostsRequest());
+
+    // current State
+    console.log('Current State 1', getState());
+
+    try {
+      let responseData = await fetch('https://jsonplaceholder.typicode.com/posts');
+      responseData = await responseData.json();
+      dispatch(fetchPostsSuccess(responseData));
+      console.log('Current State 2', getState());
+    } catch (error) {
+      dispatch(fetchPostsFailure(error));
+      console.log('Current State 3', getState());
+    }
+  };
+};
+
+const deletePostAction = () => ({ type: postConstants.DELETE_DATA, payload: [] });
+
+// Reducer
+const reducer = (state = initialPostData, action) => {
+  switch (action.type) {
+    case postConstants.FETCH_POSTS_REQUEST:
+      return { ...state, loading: true, error: null, post: [] };
+    case postConstants.FETCH_POSTS_SUCCESS:
+      return { ...state, loading: false, post: action.payload, error: null };
+    case postConstants.FETCH_POSTS_FAILURE:
+      return { ...state, loading: false, error: action.error };
+    case postConstants.DELETE_DATA:
+      return { ...state, loading: false, post: action.payload, error: null };
+    default:
+      return state;
+  }
+};
+
+// Store
+const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk, logger)));
+
+// Test component
+function ShowDataComponent() {
+  const state = useSelector((state) => state);
+  const dispatch = useDispatch();
+
+  const data = state.post.map((item) => (
+    <tr key={item.id}>
+      <td>{item.id}</td>
+      <td>{item.title}</td>
+    </tr>
+  ));
+
+  return (
+    <div className="App">
+      <button onClick={() => dispatch(fetchPostAction())}>Fetch Data</button>
+      <button onClick={() => dispatch(deletePostAction())}>Delete Data</button>
+
+      {state.loading && <h1>Loading...</h1>}
+
+      {!state.loading && (
+        <table border="2" cellPadding="2" cellSpacing="3" style={{ textAlign: 'center' }}>
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Title</th>
+            </tr>
+          </thead>
+          <tbody>{data}</tbody>
+        </table>
+      )}
+    </div>
+  );
+}
+
+// App component
+const App = () => (
+  <Provider store={store}>
+    <ShowDataComponent />
+  </Provider>
+);
+
+export default App;
+```
+
