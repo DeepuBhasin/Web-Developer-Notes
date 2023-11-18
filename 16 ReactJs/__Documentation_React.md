@@ -3353,10 +3353,13 @@ const postConstants = {
 };
 
 // Action Creators
-const fetchPostsRequest = () => ({ type: postConstants.FETCH_POSTS_REQUEST, payload: [] });
+const fetchPostsRequest = () => ({ type: postConstants.FETCH_POSTS_REQUEST });
 const fetchPostsSuccess = (data) => ({ type: postConstants.FETCH_POSTS_SUCCESS, payload: data });
-const fetchPostsFailure = (error) => ({ type: postConstants.FETCH_POSTS_FAILURE, error });
+const fetchPostsFailure = (error) => ({ type: postConstants.FETCH_POSTS_FAILURE, payload: error });
+const deletePostAction = () => ({ type: postConstants.DELETE_DATA, payload: [] });
 
+
+// MiddleWare
 const fetchPostAction = () => {
   return async (dispatch, getState) => {
     dispatch(fetchPostsRequest());
@@ -3366,6 +3369,12 @@ const fetchPostAction = () => {
 
     try {
       let responseData = await fetch('https://jsonplaceholder.typicode.com/posts');
+
+      if (!responseData.ok) {
+        throw new Error('Api is not working')
+      }
+
+      console.log(responseData);
       responseData = await responseData.json();
       dispatch(fetchPostsSuccess(responseData));
       console.log('Current State 2', getState());
@@ -3376,7 +3385,7 @@ const fetchPostAction = () => {
   };
 };
 
-const deletePostAction = () => ({ type: postConstants.DELETE_DATA, payload: [] });
+
 
 // Reducer
 const reducer = (state = initialPostData, action) => {
@@ -3386,7 +3395,7 @@ const reducer = (state = initialPostData, action) => {
     case postConstants.FETCH_POSTS_SUCCESS:
       return { ...state, loading: false, post: action.payload, error: null };
     case postConstants.FETCH_POSTS_FAILURE:
-      return { ...state, loading: false, error: action.error };
+      return { ...state, loading: false, error: action.payload.error };
     case postConstants.DELETE_DATA:
       return { ...state, loading: false, post: action.payload, error: null };
     default:
