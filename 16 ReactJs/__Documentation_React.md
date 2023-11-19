@@ -3314,7 +3314,7 @@ export default connect(null, mapDispatchToProps)(ButtonCakeComponent)
 
 ---
 
-## 📘Redux Middleware and Thunks
+## 📘Redux Middleware and Thunks (with redux devtools)
 
 ![Image](./redux-images/redux-middleware.png)
 
@@ -3322,12 +3322,16 @@ export default connect(null, mapDispatchToProps)(ButtonCakeComponent)
 
 ![Image](./redux-images/redux-middleware-2.png)
 
+* Redux + React Redux + Thunk + Devtools
 ```
-npm install redux react-redux
+npm install redux 
+npm install react-redux
 npm install redux-thunk
 npm install redux-devtools-extension
-npm i --save redux-logger
+npm install --save redux-logger
 ```
+
+⚠️ **Note :** You have install extension in google chrome for dev tools
 
 ```js
 import React from 'react';
@@ -3412,7 +3416,10 @@ const reducer = (state = initialPostData, action) => {
 };
 
 // Store
-const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk, logger)));
+const store = createStore(
+  reducer, 
+  composeWithDevTools(applyMiddleware(thunk, logger))
+);
 
 // Test component
 function ShowDataComponent() {
@@ -3457,4 +3464,6 @@ const App = () => (
 
 export default App;
 ```
+![Image](./images/the-redux-dev-tools.png)
 
+---
