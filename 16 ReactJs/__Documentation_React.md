@@ -3324,7 +3324,7 @@ export default connect(null, mapDispatchToProps)(ButtonCakeComponent)
 
 * Redux + React Redux + Thunk + Devtools
 ```
-npm install redux 
+npm install redux
 npm install react-redux
 npm install redux-thunk
 npm install redux-devtools-extension
@@ -3417,7 +3417,7 @@ const reducer = (state = initialPostData, action) => {
 
 // Store
 const store = createStore(
-  reducer, 
+  reducer,
   composeWithDevTools(applyMiddleware(thunk, logger))
 );
 
@@ -3629,6 +3629,8 @@ export default App;
 ---
 
 ## 📘Redux Toolkit (RTK) (with middleware)
+* Best part of RTK is that we don't need to install any middleware likes *thunks* etc.
+* Here we use **fetch method** even don't need to install any third party *http request library* for making request like axios. In RTK we get all things int (like the things i did in *SavAtree Project* for calling api)
 
 ```js
 import React from 'react';
