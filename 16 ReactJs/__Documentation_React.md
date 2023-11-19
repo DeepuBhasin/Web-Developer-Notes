@@ -3488,22 +3488,38 @@ const countSlice = createSlice({
     count: 0
   },
   reducers: {
-    incrementCountAction: function (state) {
-      state.count = state.count + 1
+    incrementCountAction: function (state, action) {
+      state.count += 1
+      console.log(action);
     },
     decrementCountAction: function (state) {
-      state.count = state.count - 1
+      state.count -= 1
     },
     resetCountAction: function (state) {
       state.count = 0
     },
     incrementByValueCountAction: function (state, action) {
-      state.count = state.count + action.payload
+      state.count += action.payload
+    },
+    decrementByValueCountAction: {
+      // preparing new payload, incase we are not sending objects while calling this action
+      prepare(type, value) {
+        return {
+          payload: { type, value }
+        }
+      },
+      reducer(state, action) {
+        state.count -= action.payload.value
+      }
     }
   }
 });
 
-const { incrementCountAction, decrementCountAction, resetCountAction, incrementByValueCountAction } = countSlice.actions;
+const { incrementCountAction, decrementCountAction, resetCountAction, incrementByValueCountAction, decrementByValueCountAction } = countSlice.actions;
+
+console.log('action', incrementCountAction());
+// {type: 'count/incrementCountAction', payload: undefined}
+
 const countReducer = countSlice.reducer;
 
 // initialState + Action Creator + Reducer
@@ -3514,16 +3530,16 @@ const cakeSlice = createSlice({
   },
   reducers: {
     incrementCakeAction: function (state) {
-      state.cake = state.cake + 1
+      state.cake += 1
     },
     decrementCakeAction: function (state) {
-      state.cake = state.cake - 1
+      state.cake -= 1
     },
     resetCakeAction: function (state) {
       state.cake = 0
     },
     incrementByValueCakeAction: function (state, action) {
-      state.cake = state.cake + action.payload
+      state.cake += action.payload
     }
   }
 });
@@ -3556,6 +3572,7 @@ function ButtonCountComponent() {
       <button onClick={() => dispatch(decrementCountAction())}>Decrement</button><br />
       <button onClick={() => dispatch(resetCountAction())}>Reset</button><br />
       <button onClick={() => dispatch(incrementByValueCountAction(3))}>Increment By Value 3</button>
+      <button onClick={() => dispatch(decrementByValueCountAction("Decrement Value", 3))}>Decrement By Value 3</button>
     </React.Fragment>
   )
 }
@@ -3609,3 +3626,121 @@ const App = () => {
 
 export default App;
 ```
+---
+
+## 📘Redux Toolkit (RTK) (with middleware)
+
+```js
+import React from 'react';
+import { configureStore, createSlice } from "@reduxjs/toolkit"
+import { Provider, useDispatch, useSelector } from "react-redux";
+
+// Initial State +  Action + Reducer
+const postSlice = createSlice({
+  name: 'post',
+  initialState: {
+    post: [],
+    loading: false,
+    error: null,
+  },
+  reducers: {
+    fetchPostsRequestAction: function (state) {
+      state.loading = true;
+    },
+    fetchPostsSuccessAction: function (state, action) {
+      state.loading = false;
+      state.post = action.payload
+    },
+    fetchPostsFailureAction: function (state, action) {
+      state.loading = false;
+      state.error = action.payload
+    },
+    deletePostActionAction: function (state, action) {
+      state.loading = false;
+      state.post = []
+    }
+  }
+});
+
+const { fetchPostsRequestAction, fetchPostsSuccessAction, fetchPostsFailureAction, deletePostActionAction } = postSlice.actions;
+const postReducer = postSlice.reducer;
+
+
+//Middle ware (means not install any thunks)
+const fetchPostThunkAction = () => {
+  return async (dispatch, getState) => {
+    dispatch(fetchPostsRequestAction());
+
+    // current State
+    console.log('Current State 1', getState());
+
+    try {
+      let responseData = await fetch('https://jsonplaceholder.typicode.com/posts');
+
+      if (!responseData.ok) {
+        throw new Error('Api is not working')
+      }
+
+      console.log(responseData);
+      responseData = await responseData.json();
+      dispatch(fetchPostsSuccessAction(responseData));
+      console.log('Current State 2', getState());
+    } catch (error) {
+      dispatch(fetchPostsFailureAction(error));
+      console.log('Current State 3', getState());
+    }
+  };
+};
+
+
+// Store
+const store = configureStore({
+  reducer: {
+    postReducer: postReducer
+  }
+});
+
+// Test component
+function ShowDataComponent() {
+  const state = useSelector((state) => state.postReducer);
+  const dispatch = useDispatch();
+
+  const data = state.post.map((item) => (
+    <tr key={item.id}>
+      <td>{item.id}</td>
+      <td>{item.title}</td>
+    </tr>
+  ));
+
+  return (
+    <div className="App">
+      <button onClick={() => dispatch(fetchPostThunkAction())}>Fetch Data</button>
+      <button onClick={() => dispatch(deletePostActionAction())}>Delete Data</button>
+
+      {state.loading && <h1>Loading...</h1>}
+
+      {!state.loading && (
+        <table border="2" cellPadding="2" cellSpacing="3" style={{ textAlign: 'center' }}>
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Title</th>
+            </tr>
+          </thead>
+          <tbody>{data}</tbody>
+        </table>
+      )}
+    </div>
+  );
+}
+
+// App component
+const App = () => (
+  <Provider store={store}>
+    <ShowDataComponent />
+  </Provider>
+);
+
+export default App;
+```
+⚠️ **Note :** For thunk in RTK we can use **createAsyncThunks functions**. but it needs lots of extra work as compare to normal Action creator Middlewares.
