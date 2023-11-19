@@ -3746,3 +3746,11 @@ const App = () => (
 export default App;
 ```
 ⚠️ **Note :** For thunk in RTK we can use **createAsyncThunks functions**. but it needs lots of extra work as compare to normal Action creator Middlewares.
+
+---
+
+## 📘When to use Context Api or Redux
+
+![Image](./images/context-api-1.png)
+
+![Image](./images/context-api-2.png)
