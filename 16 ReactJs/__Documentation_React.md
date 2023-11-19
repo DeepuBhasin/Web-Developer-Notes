@@ -3316,11 +3316,11 @@ export default connect(null, mapDispatchToProps)(ButtonCakeComponent)
 
 ## 📘Redux Middleware and Thunks (with redux devtools)
 
-![Image](./redux-images/redux-middleware.png)
+![Image](./images/redux-middleware.png)
 
-![Image](./redux-images/redux-middleware-1.png)
+![Image](./image/../images/redux-middleware-thunk-1.png)
 
-![Image](./redux-images/redux-middleware-2.png)
+![Image](./image/../images/redux-middleware-thunk-2.png)
 
 * Redux + React Redux + Thunk + Devtools
 ```
@@ -3467,3 +3467,145 @@ export default App;
 ![Image](./images/the-redux-dev-tools.png)
 
 ---
+
+## 📘What is Redux Toolkit (RTK) (without middleware)
+
+![Image](./images/react-toolkit-1.png)
+
+```
+npm i @reduxjs/toolkit
+```
+
+```js
+import React from 'react';
+import { configureStore, createSlice } from "@reduxjs/toolkit"
+import { Provider, useDispatch, useSelector } from 'react-redux';
+
+// initialState + Action Creator + Reducer
+const countSlice = createSlice({
+  name: 'count',
+  initialState: {
+    count: 0
+  },
+  reducers: {
+    incrementCountAction: function (state) {
+      state.count = state.count + 1
+    },
+    decrementCountAction: function (state) {
+      state.count = state.count - 1
+    },
+    resetCountAction: function (state) {
+      state.count = 0
+    },
+    incrementByValueCountAction: function (state, action) {
+      state.count = state.count + action.payload
+    }
+  }
+});
+
+const { incrementCountAction, decrementCountAction, resetCountAction, incrementByValueCountAction } = countSlice.actions;
+const countReducer = countSlice.reducer;
+
+// initialState + Action Creator + Reducer
+const cakeSlice = createSlice({
+  name: 'cake',
+  initialState: {
+    cake: 0
+  },
+  reducers: {
+    incrementCakeAction: function (state) {
+      state.cake = state.cake + 1
+    },
+    decrementCakeAction: function (state) {
+      state.cake = state.cake - 1
+    },
+    resetCakeAction: function (state) {
+      state.cake = 0
+    },
+    incrementByValueCakeAction: function (state, action) {
+      state.cake = state.cake + action.payload
+    }
+  }
+});
+
+const { incrementCakeAction, decrementCakeAction, resetCakeAction, incrementByValueCakeAction } = cakeSlice.actions;
+const cakeReducer = cakeSlice.reducer;
+
+
+// create Store
+const store = configureStore({
+  reducer: {
+    countReducer,
+    cakeReducer
+  }
+});
+
+function ShowCountComponent() {
+  const count = useSelector(state => state.countReducer.count);
+  return (
+    <React.Fragment>
+      <h3>Count Component  <em>Count : {count}</em></h3>
+    </React.Fragment>
+  )
+}
+function ButtonCountComponent() {
+  const dispatch = useDispatch();
+  return (
+    <React.Fragment>
+      <button onClick={() => dispatch(incrementCountAction())}>Increment</button><br />
+      <button onClick={() => dispatch(decrementCountAction())}>Decrement</button><br />
+      <button onClick={() => dispatch(resetCountAction())}>Reset</button><br />
+      <button onClick={() => dispatch(incrementByValueCountAction(3))}>Increment By Value 3</button>
+    </React.Fragment>
+  )
+}
+
+function ShowCakeComponent() {
+  const cake = useSelector(state => state.cakeReducer.cake);
+  return (
+    <React.Fragment>
+      <h3>Cake Component  <em>Cake : {cake}</em></h3>
+    </React.Fragment>
+  )
+}
+function ButtonCakeComponent() {
+  const dispatch = useDispatch();
+  return (
+    <React.Fragment>
+      <button onClick={() => dispatch(incrementCakeAction())}>Increment</button><br />
+      <button onClick={() => dispatch(decrementCakeAction())}>Decrement</button><br />
+      <button onClick={() => dispatch(resetCakeAction())}>Reset</button><br />
+      <button onClick={() => dispatch(incrementByValueCakeAction(3))}>Increment By Value 3</button>
+    </React.Fragment>
+  )
+}
+
+function CountStructureComponent() {
+  return (
+    <React.Fragment>
+      <ShowCountComponent />
+      <ButtonCountComponent />
+    </React.Fragment>
+  )
+}
+
+function CakeStructureComponent() {
+  return (
+    <React.Fragment>
+      <ShowCakeComponent />
+      <ButtonCakeComponent />
+    </React.Fragment>
+  )
+}
+
+const App = () => {
+  return (
+    <Provider store={store} >
+      <CountStructureComponent />
+      <CakeStructureComponent />
+    </Provider>
+  )
+}
+
+export default App;
+```
