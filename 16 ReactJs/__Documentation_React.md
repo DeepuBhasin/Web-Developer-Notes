@@ -3754,3 +3754,252 @@ export default App;
 ![Image](./images/context-api-1.png)
 
 ![Image](./images/context-api-2.png)
+
+---
+
+# 📔React Router With Data Loading (v6.4+)
+
+## 📘A New Way Of Implementing Routes
+* Main Advantage of this concept is that to centralized routing system.
+* Call Api While Rendering of component same time, means api will call not execute after render of component
+```
+npm install react-router-dom@6
+```
+
+```js
+import React from 'react';
+import { createBrowserRouter, RouterProvider, Outlet, Link } from 'react-router-dom'
+
+const router = createBrowserRouter([
+  {
+    element: <AppLayout />,
+    children: [
+      {
+        path: '/',
+        element: <Home />
+      },
+      {
+        path: '/menu',
+        element: <Menu />
+      }
+    ]
+  },
+  {
+    path: '/show',
+    element: <Show />
+  }
+
+]);
+function App() {
+  return (<React.Fragment>
+    <RouterProvider router={router} >
+
+    </RouterProvider>
+  </React.Fragment>)
+}
+
+function Home() {
+  return <React.Fragment>
+    <h2>Hello From Home Page</h2>
+  </React.Fragment>
+}
+
+function Menu() {
+  return <React.Fragment>
+    <h2>Hello From Menu Page</h2>
+  </React.Fragment>
+}
+
+
+function Show() {
+  return <React.Fragment>
+    <Link to="/">Home</Link>
+    <h2>Hello From Show Page</h2>
+  </React.Fragment>
+}
+
+function AppLayout() {
+  return <React.Fragment>
+    <Link to="/">Home</Link>
+    <Link to="/menu">Menu</Link>
+    <Link to="/show">Show</Link>
+    <h2>App Layout Component</h2>
+    <Outlet />
+  </React.Fragment>
+}
+
+export default App
+```
+
+---
+
+## 📘Fetching Data With React Router Loaders
+
+```js
+import React from 'react';
+import { createBrowserRouter, RouterProvider, Outlet, Link, useLoaderData } from 'react-router-dom'
+
+const router = createBrowserRouter([
+  {
+    element: <AppLayout />,
+    children: [
+      {
+        path: '/',
+        element: <Home />
+      },
+      {
+        path: '/menu',
+        element: <Menu />,
+        loader: getData
+      }
+    ]
+  },
+  {
+    path: '/show',
+    element: <Show />
+  }
+
+]);
+
+async function getData() {
+  let data = await fetch('https://jsonplaceholder.typicode.com/posts');
+  return await data.json();
+}
+
+function App() {
+  return (<React.Fragment>
+    <RouterProvider router={router} >
+
+    </RouterProvider>
+  </React.Fragment>)
+}
+
+function Home() {
+  return <React.Fragment>
+    <h2>Hello From Home Page</h2>
+  </React.Fragment>
+}
+
+function Menu() {
+  // React fetching data at same time as it start rendering the correct route means every thing happens on same time. (best use)
+  // in previous example we always fetch data on render approach, means we render the component first and then after fetch data which create data loading water falls
+  const data = useLoaderData();
+  return <React.Fragment>
+    <h2>Hello From Menu Page</h2>
+    <h3>Data</h3>
+    <ul>
+      {data.map(e => {
+        return <li key={e.id}>{e.title}</li>
+      })}
+    </ul>
+  </React.Fragment>
+}
+
+
+function Show() {
+  return <React.Fragment>
+    <Link to="/">Home</Link>
+    <h2>Hello From Show Page</h2>
+  </React.Fragment>
+}
+
+function AppLayout() {
+  return <React.Fragment>
+    <Link to="/">Home</Link>
+    <Link to="/menu">Menu</Link>
+    <Link to="/show">Show</Link>
+    <h2>App Layout Component</h2>
+    <Outlet />
+  </React.Fragment>
+}
+
+export default App
+```
+
+---
+
+## 📘Display Loading Indicator
+
+```js
+import React from 'react';
+import { createBrowserRouter, RouterProvider, Outlet, Link, useLoaderData, useNavigation } from 'react-router-dom'
+
+const router = createBrowserRouter([
+  {
+    element: <AppLayout />,
+    children: [
+      {
+        path: '/',
+        element: <Home />
+      },
+      {
+        path: '/menu',
+        element: <Menu />,
+        loader: getData
+      }
+    ]
+  },
+  {
+    path: '/show',
+    element: <Show />
+  }
+
+]);
+
+async function getData() {
+  let data = await fetch('https://jsonplaceholder.typicode.com/posts');
+  return await data.json();
+}
+
+function App() {
+  return (<React.Fragment>
+    <RouterProvider router={router} >
+
+    </RouterProvider>
+  </React.Fragment>)
+}
+
+function Home() {
+  return <React.Fragment>
+    <h2>Hello From Home Page</h2>
+  </React.Fragment>
+}
+
+function Menu() {
+  const data = useLoaderData();
+  return <React.Fragment>
+    <h2>Hello From Menu Page</h2>
+    <h3>Data</h3>
+    <ul>
+      {data.map(e => {
+        return <li key={e.id}>{e.title}</li>
+      })}
+    </ul>
+  </React.Fragment>
+}
+
+
+function Show() {
+  return <React.Fragment>
+    <Link to="/">Home</Link>
+    <h2>Hello From Show Page</h2>
+  </React.Fragment>
+}
+
+function AppLayout() {
+
+  const navigation = useNavigation();
+  console.log(navigation);
+  const isLoading = navigation.state === 'loading'
+  return <React.Fragment>
+    <Link to="/">Home</Link>
+    <Link to="/menu">Menu</Link>
+    <Link to="/show">Show</Link>
+    <h2>App Layout Component</h2>
+    {isLoading && <h2>Loading...</h2>}
+    {!isLoading && <Outlet />}
+  </React.Fragment>
+}
+
+export default App
+```
