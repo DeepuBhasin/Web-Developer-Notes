@@ -767,7 +767,6 @@ obj.add(6).subtract(1).multiply(4).divide(2);
 
 ## 📘Useful In-built Objects Properties
 
-* **Object.keys(Object)**
 ```js
 let obj = {
     firstName: "Depeu",
@@ -775,16 +774,24 @@ let obj = {
 }
 
 // return only keys in array
-console.log(Object.keys(obj));      // ['firstName', 'lastName']
+console.log(Object.keys(obj));
+//Output :  ['firstName', 'lastName']
 
 // returns only values in array
-console.log(Object.values(obj));    //  ['Depeu', 'Singh']
+console.log(Object.values(obj));
+//Output : ['Depeu', 'Singh']
 
 // return Array which include key-value as individual arrays
 console.log(Object.entries(obj));
 // [Array(2), Array(2)]
 // 0 : ['firstName', 'Depeu']
 // 1 : ['lastName', 'Singh']
+
+const entries = [['name', 'John'], ['age', 30], ['city', 'New York']];
+const obj = Object.fromEntries(entries);
+
+console.log(obj);
+// Output: { name: 'John', age: 30, city: 'New York' }
 ```
 ⚠️ **Conceptual Example :** Destructuring in for-of loop
 
