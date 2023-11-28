@@ -4003,3 +4003,558 @@ function AppLayout() {
 
 export default App
 ```
+---
+
+## 📘Handling Errors With Error Elements
+
+* in this case if error occur in child component it will automatically pop out error to Parent automatically if incase it not handle in there local component (using errorElement property)
+
+```js
+import React from 'react';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Outlet,
+  Link,
+  useLoaderData,
+  useNavigation,
+  useRouteError
+} from 'react-router-dom'
+
+const router = createBrowserRouter([
+  {
+    element: <AppLayout />,
+    // handling error
+    errorElement: <Error />,
+
+    children: [
+      {
+        path: '/',
+        element: <Home />
+      },
+      {
+        path: '/menu',
+        element: <Menu />,
+        loader: getData,
+        // handling error
+        errorElement: <Error />
+      }
+    ]
+  },
+  {
+    path: '/show',
+    element: <Show />
+  }
+
+]);
+
+async function getData() {
+  // for example you put wrong address here
+  let data = await fetch('https://jsonplaceholder.typicode.com/posts');
+  return await data.json();
+}
+
+function Error() {
+  const error = useRouteError();
+  console.log(error);
+  return <React.Fragment>
+    <h2>{error.data}</h2>
+    <h2>{error.message}</h2>
+  </React.Fragment>
+}
+
+function App() {
+  return (<React.Fragment>
+    <RouterProvider router={router} >
+
+    </RouterProvider>
+  </React.Fragment>)
+}
+
+function Home() {
+  return <React.Fragment>
+    <h2>Hello From Home Page</h2>
+  </React.Fragment>
+}
+
+function Menu() {
+  const data = useLoaderData();
+  return <React.Fragment>
+    <h2>Hello From Menu Page</h2>
+    <h3>Data</h3>
+    <ul>
+      {data.map(e => {
+        return <li key={e.id}>{e.title}</li>
+      })}
+    </ul>
+  </React.Fragment>
+}
+
+
+function Show() {
+  return <React.Fragment>
+    <Link to="/">Home</Link>
+    <h2>Hello From Show Page</h2>
+  </React.Fragment>
+}
+
+function AppLayout() {
+
+  const navigation = useNavigation();
+  console.log(navigation);
+  const isLoading = navigation.state === 'loading'
+  return <React.Fragment>
+    <Link to="/">Home</Link>
+    <Link to="/menu">Menu</Link>
+    <Link to="/show">Show</Link>
+    <h2>App Layout Component</h2>
+    {isLoading && <h2>Loading...</h2>}
+    {!isLoading && <Outlet />}
+  </React.Fragment>
+}
+
+export default App
+```
+---
+
+## 📘Fetching Post using params property
+
+```js
+import React from 'react';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Outlet,
+  Link,
+  useLoaderData,
+  useNavigation,
+  useRouteError
+} from 'react-router-dom'
+
+const router = createBrowserRouter([
+  {
+    element: <AppLayout />,
+    errorElement: <Error />,
+    children: [
+      {
+        path: '/',
+        element: <Home />
+      },
+      {
+        path: '/all-posts',
+        element: <AllPosts />,
+        loader: getData,
+        errorElement: <Error />
+      },
+      {
+        path: '/single-post/:postId',
+        element: <SinglePost />,
+        loader: getData,
+        errorElement: <Error />
+      }
+    ]
+  },
+  {
+    path: '/show',
+    element: <Show />
+  }
+]);
+
+// Fetch Order according params (this params property we get automatically)
+async function getData({ params }) {
+  let id = params.postId ? '/' + params.postId : '';
+  let data = await fetch('https://jsonplaceholder.typicode.com/posts' + id);
+  return await data.json();
+}
+
+function Error() {
+  const error = useRouteError();
+  console.log(error);
+  return <React.Fragment>
+    <h2>{error.data}</h2>
+    <h2>{error.message}</h2>
+  </React.Fragment>
+}
+
+function App() {
+  return (<React.Fragment>
+    <RouterProvider router={router} >
+
+    </RouterProvider>
+  </React.Fragment>)
+}
+
+function Home() {
+  return <React.Fragment>
+    <h2>Hello From Home Page</h2>
+  </React.Fragment>
+}
+
+function AllPosts() {
+  const data = useLoaderData();
+  return <React.Fragment>
+    <h2>Hello From All Post Page</h2>
+    <h3>Data</h3>
+    <ul>
+      {data.map(e => {
+        return <li key={e.id}>{e.title}</li>
+      })}
+    </ul>
+  </React.Fragment>
+}
+
+function SinglePost() {
+  const data = useLoaderData();
+  return <React.Fragment>
+    <h2>Hello From Single Page Post</h2>
+    <ul>
+      <li>Title : {data.userId}</li>
+      <li>Id : {data.id}</li>
+      <li>Title : {data.title}</li>
+      <li>Body : {data.body}</li>
+    </ul>
+  </React.Fragment>
+}
+
+function Show() {
+  return <React.Fragment>
+    <Link to="/">Home</Link>
+    <h2>Hello From Show Page</h2>
+  </React.Fragment>
+}
+
+function AppLayout() {
+  const navigation = useNavigation();
+  console.log(navigation);
+  const isLoading = navigation.state === 'loading'
+  return <React.Fragment>
+    <ul>
+      <li><Link to="/">Home</Link></li>
+      <li><Link to="/all-posts">All Posts</Link></li>
+      <li><Link to="/single-post/12">Single Post</Link></li>
+    </ul>
+    <h2>App Layout Component</h2>
+    {isLoading && <h2>Loading...</h2>}
+    {!isLoading && <Outlet />}
+  </React.Fragment>
+}
+
+export default App
+```
+
+---
+
+## 📘Writing data with react router actions
+
+```js
+import React from 'react';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Outlet,
+  Link,
+  useLoaderData,
+  useNavigation,
+  useRouteError,
+  Form,
+  redirect
+} from 'react-router-dom'
+const router = createBrowserRouter([
+  {
+    element: <AppLayout />,
+    errorElement: <Error />,
+    children: [
+      {
+        path: '/',
+        element: <Home />
+      },
+      {
+        path: '/all-posts',
+        element: <AllPosts />,
+        loader: getData,
+        errorElement: <Error />
+      },
+      {
+        path: '/single-post/:postId',
+        element: <SinglePost />,
+        loader: getData,
+        errorElement: <Error />
+      },
+      {
+        path: '/order',
+        element: <Order />,
+        action: OrderAction
+      }
+    ]
+  },
+  {
+    path: '/show',
+    element: <Show />
+  }
+]);
+
+function Order() {
+  return <React.Fragment>
+    <Form method='POST'>
+      <input name='firstname' type='text' placeholder='Enter First-name' required /><br />
+      <input name='lastname' type='text' placeholder='Enter Last-name' required /><br />
+      <button>Submit</button>
+    </Form>
+  </React.Fragment>
+}
+
+async function OrderAction({ request }) {
+  // its a javascript browser api for form data
+
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+
+  // from here you can use data like send data to api, to redux etc
+  console.log(data);
+  return redirect('/');
+}
+
+// Fetch Order according params (this params property we get automatically)
+async function getData({ params }) {
+  let id = params.postId ? '/' + params.postId : '';
+  let data = await fetch('https://jsonplaceholder.typicode.com/posts' + id);
+  return await data.json();
+}
+
+function Error() {
+  const error = useRouteError();
+  return <React.Fragment>
+    <h2>{error.data}</h2>
+    <h2>{error.message}</h2>
+  </React.Fragment>
+}
+
+function App() {
+  return (<React.Fragment>
+    <RouterProvider router={router} >
+
+    </RouterProvider>
+  </React.Fragment>)
+}
+
+function Home() {
+  return <React.Fragment>
+    <h2>Hello From Home Page</h2>
+  </React.Fragment>
+}
+
+function AllPosts() {
+  const data = useLoaderData();
+  return <React.Fragment>
+    <h2>Hello From All Post Page</h2>
+    <h3>Data</h3>
+    <ul>
+      {data.map(e => {
+        return <li key={e.id}>{e.title}</li>
+      })}
+    </ul>
+  </React.Fragment>
+}
+
+function SinglePost() {
+  const data = useLoaderData();
+  return <React.Fragment>
+    <h2>Hello From Single Page Post</h2>
+    <ul>
+      <li>Title : {data.userId}</li>
+      <li>Id : {data.id}</li>
+      <li>Title : {data.title}</li>
+      <li>Body : {data.body}</li>
+    </ul>
+  </React.Fragment>
+}
+
+function Show() {
+  return <React.Fragment>
+    <Link to="/">Home</Link>
+    <h2>Hello From Show Page</h2>
+  </React.Fragment>
+}
+
+function AppLayout() {
+  const navigation = useNavigation();
+  const isLoading = navigation.state === 'loading'
+  return <React.Fragment>
+    <ul>
+      <li><Link to="/">Home</Link></li>
+      <li><Link to="/all-posts">All Posts</Link></li>
+      <li><Link to="/single-post/12">Single Post</Link></li>
+      <li><Link to="/order">Order</Link></li>
+    </ul>
+    <h2>App Layout Component</h2>
+    {isLoading && <h2>Loading...</h2>}
+    {!isLoading && <Outlet />}
+  </React.Fragment>
+}
+
+export default App
+```
+
+---
+
+## 📘Error handling in form actions
+
+```js
+import React from 'react';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Outlet,
+  Link,
+  useLoaderData,
+  useNavigation,
+  useRouteError,
+  Form,
+  redirect,
+  useActionData
+} from 'react-router-dom'
+const router = createBrowserRouter([
+  {
+    element: <AppLayout />,
+    errorElement: <Error />,
+    children: [
+      {
+        path: '/',
+        element: <Home />
+      },
+      {
+        path: '/all-posts',
+        element: <AllPosts />,
+        loader: getData,
+        errorElement: <Error />
+      },
+      {
+        path: '/single-post/:postId',
+        element: <SinglePost />,
+        loader: getData,
+        errorElement: <Error />
+      },
+      {
+        path: '/order',
+        element: <Order />,
+        action: OrderAction
+      }
+    ]
+  },
+  {
+    path: '/show',
+    element: <Show />
+  }
+]);
+
+function Order() {
+  const formErrors = useActionData();
+  console.log(formErrors);
+  return <React.Fragment>
+    <Form method='POST'>
+      <input name='firstname' type='text' placeholder='Enter First-name' required /><br />
+      {formErrors?.firstname && <p>{formErrors?.firstname}</p>}
+      <input name='lastname' type='text' placeholder='Enter Last-name' required /><br />
+      {formErrors?.lastname && <p>{formErrors?.lastname}</p>}
+      <button>Submit</button>
+    </Form>
+  </React.Fragment>
+}
+
+async function OrderAction({ request }) {
+  // its a javascript browser api for form data
+
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+
+  const textMatch = /^[a-zA-Z]+$/;
+  const errors = {};
+  if (!textMatch.test(data.firstname)) errors.firstname = "Please enter alpha-characters only";
+  if (!textMatch.test(data.lastname)) errors.lastname = "Please enter alpha-characters only";
+  if (Object.keys(errors).length > 0) return errors;
+
+  // from here you can use data like send data to api, to redux etc
+  console.log(data);
+  return redirect('/');
+}
+
+// Fetch Order according params (this params property we get automatically)
+async function getData({ params }) {
+  let id = params.postId ? '/' + params.postId : '';
+  let data = await fetch('https://jsonplaceholder.typicode.com/posts' + id);
+  return await data.json();
+}
+
+function Error() {
+  const error = useRouteError();
+  return <React.Fragment>
+    <h2>{error.data}</h2>
+    <h2>{error.message}</h2>
+  </React.Fragment>
+}
+
+function App() {
+  return (<React.Fragment>
+    <RouterProvider router={router} >
+
+    </RouterProvider>
+  </React.Fragment>)
+}
+
+function Home() {
+  return <React.Fragment>
+    <h2>Hello From Home Page</h2>
+  </React.Fragment>
+}
+
+function AllPosts() {
+  const data = useLoaderData();
+  return <React.Fragment>
+    <h2>Hello From All Post Page</h2>
+    <h3>Data</h3>
+    <ul>
+      {data.map(e => {
+        return <li key={e.id}>{e.title}</li>
+      })}
+    </ul>
+  </React.Fragment>
+}
+
+function SinglePost() {
+  const data = useLoaderData();
+  return <React.Fragment>
+    <h2>Hello From Single Page Post</h2>
+    <ul>
+      <li>Title : {data.userId}</li>
+      <li>Id : {data.id}</li>
+      <li>Title : {data.title}</li>
+      <li>Body : {data.body}</li>
+    </ul>
+  </React.Fragment>
+}
+
+function Show() {
+  return <React.Fragment>
+    <Link to="/">Home</Link>
+    <h2>Hello From Show Page</h2>
+  </React.Fragment>
+}
+
+function AppLayout() {
+  const navigation = useNavigation();
+  const isLoading = navigation.state === 'loading'
+  return <React.Fragment>
+    <ul>
+      <li><Link to="/">Home</Link></li>
+      <li><Link to="/all-posts">All Posts</Link></li>
+      <li><Link to="/single-post/12">Single Post</Link></li>
+      <li><Link to="/order">Order</Link></li>
+    </ul>
+    <h2>App Layout Component</h2>
+    {isLoading && <h2>Loading...</h2>}
+    {!isLoading && <Outlet />}
+  </React.Fragment>
+}
+
+export default App
+```
