@@ -1,7 +1,16 @@
-## 📘What is TypeScript
+
+## 📔Getting Started with Typescript
+
+* **TypeScript :** 
+1. Helps us catch errors during development  (i.e before the code gets **compiled**) which force you to write Filter, cleaner and better code.
+2. **Uses 'type annotations' to analyze our code.**
+3. Our active during development.
+4. Doesn't provide any performance optimization.
+5. It fix all errors on **run-time**.
+
 ![Image](./images/what-typescript.jpeg)
 
-* **TypeScript :** type system only helps you during development (i.e before the code gets **compiled**) which force you to write Filter, cleaner and better code.
+![Image](./images/converting-typescript-into-javascript.png)
 
 📚 **Conceptual Example :** 
 
@@ -16,14 +25,20 @@
 console.log(add(1, 2));
 console.log(add('1', '2'));
 ```
-
-Command for installing Typescript on Globally
-
+---
+### 📘Environment Setup 
+* Command for installing Typescript on Globally
 ```
-npm install -g typescript
+npm install -g typescript ts-node
 ```
-* TypeScript is *Programming language* heance need **complier** for execute the codes.
-* Extention is **.ts**
+
+* To check 
+```
+npx tsc --help
+```
+
+* TypeScript is *Programming language* hance need **complier** for execute the codes.
+* Extension is **.ts**
 
 Example 
 
@@ -53,13 +68,20 @@ function add(num1, num2) {
 }
 console.log(add(1, 2));
 ```
-⚠️ **Note :** always import javascript files in *html files* *beacuse* browser can only understand *javascript* not the *typescript*
+⚠️ **Note :** always import javascript files in *html files* *because* browser can only understand *javascript* not the *typescript*
+
+![Image](./images/typescript-overview.png)
+---
+
+## 📔TypeScript Basics Basic Types
 
 ## 📘Core Types
+
 ![Image](./images/core-typescript.png)
 
 * Core javascript Example for **type checking**, but we are checking Error on **Run Time**, which effect our speed 
-```javascript
+
+```js
 function add(n1, n2) {
     if (typeof n1 !== 'number' || typeof n2 !== 'number') {
         throw new Error('Invalid Input');
@@ -71,7 +93,12 @@ console.log(add(2, 3.5));   // 5.5
 console.log(add('2', 3));   // Error
 ```
 ⚠️ **Note :** The key difference is: **Javascript use "dynamic types"** (resolved at runtime), **TypeScript uses "static types"** (set during development)
-* Number Type
+
+---
+
+### 📘Various types in TypeScript
+
+1. Number Type
 ```javascript
 let age : number = 1;
 
@@ -79,16 +106,16 @@ function add (n1:number, n2:number) {
     return n1 + n2;
 }
 ```
-* Boolean Type 
+2. Boolean Type 
 ```javascript
 let isLogin : boolean = true;
 ```
-* String Type
+3. String Type
 
 ```javascript
 let fullName : string = 'Deepinder Singh';
 ```
-* Object Type
+4. Object Type
 ```javascript
 type Person{
     name : String;
@@ -101,7 +128,7 @@ let person : Person={
 }
 console.log(person.name);
 ```
-* Array String & Nested Array
+5. Array of String & Nested Array
 
 ```javascript
 type Product {
@@ -127,7 +154,7 @@ const product : Product = {
   }
 }
 ```
-* Tuple
+7. Tuple
 ```javascript
 type Person {
     name : String;
@@ -144,7 +171,7 @@ let person : Person = {
 // Because in tupal we cannot add more than two element
 person.role.push('operator')    // Error
 ```
-* Enum Type
+8. Enum Type
   
 ```javascript
 enum Role {ADMIN = 1, READ_ONLY = 2, AUTHOR = 3};
@@ -158,7 +185,7 @@ if(person.role === Role.ADMIN) {
     console.log('Admin')
 }
 ```
-* Any
+9. Any
   
 ```javascript
 type Person {
@@ -169,13 +196,13 @@ let person : Person = {
     role : [2, 'Admin', true]
 }
 ```
-* Union Type
+10. Union Type
   
 ```javascript
 let age : number | string;
 
 ```
-* Literal Type
+11. Literal Type
 ```javascript
 function test (name : 'Deepu' | 'Dp') {
     return name
