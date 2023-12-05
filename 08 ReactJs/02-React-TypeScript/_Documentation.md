@@ -1,14 +1,31 @@
+## 📔React with Typescript
+
 ### 📘Command
 ```
 npx create-react-app <appname> --template typescript
 ```
+---
+
 ### 📘Rules for TypeScript in React
+
 ![Image](./images/1-typescript-rules.png)
+
+* There is no major change in react code like adding any special of fantastic code. 
+* It only help in checking types
+---
+
+## 📔Types Around Props and State
+
+### Changes with typescript
+
+![Image](./images/changes-with-type.png)
+
+----
 
 ### 📘Types in Props
 ![Image](./images/2-typesofprops.png)
 
-### 📘Basic Example of PropType (String)
+Example
 
 ```javascript
 import './App.css';
@@ -33,7 +50,11 @@ function App() {
 
 export default App;
 ```
-* Here is problem in this approach beacuse its basically strictly tight to only _TypeScript_ not to _React_.
+---
+
+### 📘Explicit Component Type Annotations
+
+* Here is problem in this approach because its basically strictly tight to only *Typescript* not to *React*.
 
 ![Image](./images/3-problem-simple-approach.png)
 
@@ -61,53 +82,57 @@ const Child: React.FunctionComponent<ChildProps> = ({color})=> {
 }
 
 ```
-* Best Apporach for React with TypeScript and you will get all the various above options as well like default value etc.
+* Best Approach for React with TypeScript and you will get all the various above options as well like default value etc.
+* It also take care the children props automatically if we pass child elements in it (will not produce any error)
 
 ![Image](./images/5-react-typescript-approach.png)
 
+![Image](./images/react-functional-component.png)
+---
 
-### Basic Example of PropType (Function)
 
+### 📘Annotations with Children(String, Function)
 ```javascript
-
-import './App.css';
+import React from "react";
 
 interface ChildProps {
-  onClick : ()=> void
+  color: string;
+  onClick: () => void;
 }
 
-const Child: React.FunctionComponent<ChildProps> = ({color, onClick})=> {
+const Child: React.FunctionComponent<ChildProps> = ({ color, onClick }) => {
   return (
     <div>
+      Child {color} <br />
       <button onClick={onClick}>Click Me</button>
     </div>
   );
-}
+};
 
-
-function App() {
+function Parent() {
   return (
-    <div className="App">
-        <Child onClick={()=> console.log('Hello World')}/>
+    <div>
+      <Child color="Red" onClick={() => console.log("Hello World")} />
     </div>
   );
 }
-export default App;
+export default Parent;
 ```
+---
 
-### 📘UseState
+### 📘State with TypeScript UseState
 
 ```javascript
+
 // string type
 const [name, setName] = useState<string>('');
 
-// String of Array
+// Array of String
 const [guest, setGuest] = useState<string[]>([]);
 
 // Union Type
-const [user,setUser] = useState<{name : string, age : number} | undefined>();
+const [user, setUser] = useState<{name : string, age : number} | undefined>();
 
-// checking curcit condition
 {user && user.name}
 ```
 
