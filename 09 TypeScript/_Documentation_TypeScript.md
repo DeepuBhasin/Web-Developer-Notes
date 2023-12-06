@@ -115,18 +115,32 @@ let isLogin : boolean = true;
 ```javascript
 let fullName : string = 'Deepinder Singh';
 ```
-4. Object Type
+4. Object Type : 
 ```javascript
-type Person{
-    name : String;
-    age : Number
-}
+// 1. Defining data type only
+type Person = {
+  name: String;
+  age: Number;
+};
 
-let person : Person={
-    name : 'Deepu',
-    age : 30
-}
+let person: Person = {
+  name: "Deepu",
+  age: 30,
+};
 console.log(person.name);
+
+//2. Defining value only
+type Person = {
+  name: String;
+  age: 30 | 31 | 32;    // defining 3 values only
+};
+
+let person: Person = {
+  name: "Deepu",
+  age: 33,  // this line will cause error
+};
+console.log(person.name);
+
 ```
 5. Array of String & Nested Array
 
@@ -154,7 +168,7 @@ const product : Product = {
   }
 }
 ```
-7. Tuple
+6. Tuple
 ```javascript
 type Person {
     name : String;
@@ -171,7 +185,7 @@ let person : Person = {
 // Because in tupal we cannot add more than two element
 person.role.push('operator')    // Error
 ```
-8. Enum Type
+7. Enum Type
   
 ```javascript
 enum Role {ADMIN = 1, READ_ONLY = 2, AUTHOR = 3};
