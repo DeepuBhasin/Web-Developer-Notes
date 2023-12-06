@@ -228,7 +228,7 @@ function reverse(str) {
 }
 
 ```	
-2. Backword loop
+2. Backward loop
 		
 ```javascript
 function reverse(str) {
@@ -865,47 +865,47 @@ function merge(sortedArr1, sortedArr2) {
 * *Time Complexity : O(N + M)* where N and M are length of sorted input Arrays
 * *Space Complexity : O(N + M)* Result arrays as long as input Arrays Combined
 
-|Sri No| Operation | Examples Algorithm | Time Complexity|
-|------|-----------|--------------------|----------------|
-|1.|Iterating over Half a collection with a for loop|reverseString|O(n)
-|2.|Iteration over Half a collection with a loop ||O(n)
-|3.|Iterating over two different collections with separate for-loops| Anagrams, merge | O(n + m)
-|4.|Iterating over some collection with Nested for-loops|Bubble/Secltion Sort| O(n^2)
-|5.|Iterating over a collection with a for loop that has Nested for-loop iterating over a Different collection|stringPatternSearch|O(n * m)
-|6.|Sorting (Bubble and Selection Sort)|Bubble/Selection Sort|O(n^2)
-|7.|Sorting|Anagrams(Solution 2) | O(n * log n)
-|8.|Search(on unsorted Array)|Linear Search|O(n)
-|9.|Searching (on sorted Array)|Binary Search| O(log n)
+| Sri No | Operation                                                                                                  | Examples Algorithm    | Time Complexity |
+| ------ | ---------------------------------------------------------------------------------------------------------- | --------------------- | --------------- |
+| 1.     | Iterating over Half a collection with a for loop                                                           | reverseString         | O(n)            |
+| 2.     | Iteration over Half a collection with a loop                                                               |                       | O(n)            |
+| 3.     | Iterating over two different collections with separate for-loops                                           | Anagrams, merge       | O(n + m)        |
+| 4.     | Iterating over some collection with Nested for-loops                                                       | Bubble/Secltion Sort  | O(n^2)          |
+| 5.     | Iterating over a collection with a for loop that has Nested for-loop iterating over a Different collection | stringPatternSearch   | O(n * m)        |
+| 6.     | Sorting (Bubble and Selection Sort)                                                                        | Bubble/Selection Sort | O(n^2)          |
+| 7.     | Sorting                                                                                                    | Anagrams(Solution 2)  | O(n * log n)    |
+| 8.     | Search(on unsorted Array)                                                                                  | Linear Search         | O(n)            |
+| 9.     | Searching (on sorted Array)                                                                                | Binary Search         | O(log n)        |
 
 ## What are Data Structures?
 * Data Structures are structures that hold data and define how we both access and modify that data.
 * Array and JS Objects are examples of two different Data structures
 
-|Sri No|Name|
-|-|-|
-|1.|__Hash Tables (JS Objects)__|
-|2.|__Arrays__|
-|3.|Stacks|
-|4.|Queues|
-|5.|Trees|
-|6.|Binary Search Trees|
-|7.|Binary Heaps|
-|8.|Graphs|
-|9.|Linked List|
-|10.| Double Linked List|
+| Sri No | Name                         |
+| ------ | ---------------------------- |
+| 1.     | __Hash Tables (JS Objects)__ |
+| 2.     | __Arrays__                   |
+| 3.     | Stacks                       |
+| 4.     | Queues                       |
+| 5.     | Trees                        |
+| 6.     | Binary Search Trees          |
+| 7.     | Binary Heaps                 |
+| 8.     | Graphs                       |
+| 9.     | Linked List                  |
+| 10.    | Double Linked List           |
 
 
 ## Big O of Objects
 * Javascript Objects : __unordered, key value paris__
   
-|Sri No|Operation|Time Complexity|
-|-|-|-|
-|1.|Insert|O(1) / Constant Time|
-|2.|Removal|O(1) / Constant Time|
-|3.|Object.keys()|O(N) / Liner Time|
-|4.|Object.values()|O(N) / Liner Time|
-|5.|Searching|O(N) / Liner Time|
-|6.|Accessing (key)|O(1) / Constant Time|
+| Sri No | Operation       | Time Complexity      |
+| ------ | --------------- | -------------------- |
+| 1.     | Insert          | O(1) / Constant Time |
+| 2.     | Removal         | O(1) / Constant Time |
+| 3.     | Object.keys()   | O(N) / Liner Time    |
+| 4.     | Object.values() | O(N) / Liner Time    |
+| 5.     | Searching       | O(N) / Liner Time    |
+| 6.     | Accessing (key) | O(1) / Constant Time |
 
 > When to use JS Objects to store your Data
 * when you do not need order
@@ -914,27 +914,27 @@ function merge(sortedArr1, sortedArr2) {
 ## Big O of Arrays
 * Arrays : __Ordered list of data__
   
-|Sri No|Operation|Time Complexity|
-|-|-|-|
-|1.|Searching|O(N) / Liner Time|
-|2.|Accessing (index) |O(1) / Constant Time|
-|3.|Insert|O(N) / O(1) for end|
-|4.|Removal|O(N) / O(1) for end|
+| Sri No | Operation         | Time Complexity      |
+| ------ | ----------------- | -------------------- |
+| 1.     | Searching         | O(N) / Liner Time    |
+| 2.     | Accessing (index) | O(1) / Constant Time |
+| 3.     | Insert            | O(N) / O(1) for end  |
+| 4.     | Removal           | O(N) / O(1) for end  |
 
 
 > Big O of Arrays Methods
 
-|Sri No|Operation|Time Complexity|
-|-|-|-|
-|1.|push|O(1)|
-|2.|pop|O(1)|
-|3.|shift|O(N)|
-|4.|unshift|O(N)|
-|5.|concate|O(N)|
-|6.|Slice|O(N)|
-|7.|splice|O(N)|
-|8.|sort|O(N * log N)
-|9.|forEach/map/filter/reduce/etc|O(N)
+| Sri No | Operation                     | Time Complexity |
+| ------ | ----------------------------- | --------------- |
+| 1.     | push                          | O(1)            |
+| 2.     | pop                           | O(1)            |
+| 3.     | shift                         | O(N)            |
+| 4.     | unshift                       | O(N)            |
+| 5.     | concate                       | O(N)            |
+| 6.     | Slice                         | O(N)            |
+| 7.     | splice                        | O(N)            |
+| 8.     | sort                          | O(N * log N)    |
+| 9.     | forEach/map/filter/reduce/etc | O(N)            |
 
 > When to use JS Objects to store your Data
 * when you do not need order
@@ -942,12 +942,12 @@ function merge(sortedArr1, sortedArr2) {
 
 > Array vs Object
 > 
-|Sri No|Operation|Array Time Complexity|Object Time Comlexity|
-|-|-|-|-|
-|1.|Insertion|O(1) / O(1) for end| O(1)|
-|2.|Removal|O(N) / O(1) for end| O (1)|
-|3.|Searching|O(N)|O(N)|
-|4.|Accessing| (index) O(1)|(Key) O(1)|
+| Sri No | Operation | Array Time Complexity | Object Time Comlexity |
+| ------ | --------- | --------------------- | --------------------- |
+| 1.     | Insertion | O(1) / O(1) for end   | O(1)                  |
+| 2.     | Removal   | O(N) / O(1) for end   | O (1)                 |
+| 3.     | Searching | O(N)                  | O(N)                  |
+| 4.     | Accessing | (index) O(1)          | (Key) O(1)            |
 
 ## What's the best Data Structure
 * There is none
