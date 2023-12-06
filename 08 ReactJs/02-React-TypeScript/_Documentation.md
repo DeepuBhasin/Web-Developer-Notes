@@ -203,7 +203,7 @@ import { useEffect, useRef } from "react";
 export default UseRefComponent;
 ```
 * __HTMLInputElement | null(null)__ in this line we provide *null* value as *type* because Typescript understand that you will not assign this *refElement* to any *htmlElement* hence once our all htmlElements are ready in react then Typescript will automatically considered *HtmlInputElement* to *refElement*
-* in __useEffect__ we are checking that do not print *refElement* until its null, once *HtmlElement* is ready then use *refElement*
+* in __useEffect__ are you pointing to some html element because its initial value is null that is why we put if condition over there, once Html Element is ready then it will point to *refElement*.
 ---
 
 ### Complete Example of all type
@@ -264,3 +264,5 @@ npm install redux
 npm install react-redux
 npm install redux-thunk
 ```
+
+![Image](./images/redux-setup.png)
