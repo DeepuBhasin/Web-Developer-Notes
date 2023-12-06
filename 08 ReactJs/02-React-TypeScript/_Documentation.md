@@ -136,6 +136,10 @@ const [user, setUser] = useState<{name : string, age : number} | undefined>();
 {user && user.name}
 ```
 
+---
+
+## 📔Types Around Events and Refs
+
 ### 📘Event Handlers Events
 
 ```javascript
@@ -175,6 +179,8 @@ export default EventComponent;
 
 ![Image](./images/8-event-interface-go-to-defination.png)
 
+---
+
 ### 📘useRef
 
 ```javascript
@@ -196,8 +202,59 @@ import { useEffect, useRef } from "react";
 
 export default UseRefComponent;
 ```
-* __HTMLInputElement | null(null)__ this is line second parameter is used for checking null value beacuse we are providing __null__ value to it.
-* in __useEffect__ we are checking the __inputRef__ is not ready do not render and wait untill it not created.
+* __HTMLInputElement | null(null)__ in this line we provide *null* value as *type* because Typescript understand that you will not assign this *refElement* to any *htmlElement* hence once our all htmlElements are ready in react then Typescript will automatically considered *HtmlInputElement* to *refElement*
+* in __useEffect__ we are checking that do not print *refElement* until its null, once *HtmlElement* is ready then use *refElement*
+---
+
+### Complete Example of all type
+```js
+import React, { useState } from "react";
+
+function App() {
+  const [name, setName] = useState<string>("Default");
+  const [isLogged, setIsLogged] = useState<boolean>(false);
+  const [users, setUsers] = useState<
+    { name: string; age: number }[] | undefined
+  >([]);
+
+  const setNameHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setName("Mike Singh");
+  };
+
+  const setAuthenticationHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setIsLogged((e) => !e);
+  };
+
+  const setUsersHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setUsers([
+      { name: "Deo Singh", age: 29 },
+      { name: "Micheal", age: 29 },
+    ]);
+  };
+
+  return (
+    <div>
+      <h1>Name : {name}</h1>
+      <h1>IsLogged In : {isLogged ? "Yes" : "No"}</h1>
+      <ul>
+        {users?.map((e) => {
+          return (
+            <li key={e.name}>
+              Name {e.name} Age {e.age}
+            </li>
+          );
+        })}
+      </ul>
+      <button onClick={setNameHandler}>Set Name</button>
+      <button onClick={setAuthenticationHandler}>Set Authentication</button>
+      <button onClick={setUsersHandler}>Set Users</button>
+    </div>
+  );
+}
+
+export default App;
+```
+
 
 ### 📘Redux
 ```
