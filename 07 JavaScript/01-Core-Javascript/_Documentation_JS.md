@@ -467,7 +467,7 @@ console.log(firstname[1];)   // e
 console.log(firstname[2];)   // e
 ```
 
-* conversion 
+* conversion
 ```js
 let age = 10;
 
@@ -5046,4 +5046,4 @@ console.log('new', arrNew);
 ```js
 var firstname = "Deepinder";
 console.log(`i am \${firstname} Singh`);
-```
+``ss
