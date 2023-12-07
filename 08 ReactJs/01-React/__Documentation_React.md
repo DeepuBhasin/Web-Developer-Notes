@@ -3342,14 +3342,6 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import logger from "redux-logger";
 
 // Initial state
-import React from 'react';
-import { createStore, applyMiddleware } from 'redux';
-import { Provider, useDispatch, useSelector } from 'react-redux';
-import thunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension'
-import logger from "redux-logger";
-
-// Initial state
 const initialPostData = {
   post: [],
   loading: false,
