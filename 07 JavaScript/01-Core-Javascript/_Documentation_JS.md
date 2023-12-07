@@ -5046,4 +5046,16 @@ console.log('new', arrNew);
 ```js
 var firstname = "Deepinder";
 console.log(`i am \${firstname} Singh`);
-``ss
+```
+
+* Throw Error in Error-Handling
+
+```js
+try {
+    throw new Error('Error Message')
+    
+    // or
+
+    throw {message : 'Error', status : '404'}
+}
+```
