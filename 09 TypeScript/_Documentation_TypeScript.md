@@ -115,7 +115,7 @@ let isLogin : boolean = true;
 ```javascript
 let fullName : string = 'Deepinder Singh';
 ```
-4. Object Type : 
+4. Object Type 
 ```javascript
 // 1. Defining data type only
 type Person = {
@@ -145,35 +145,27 @@ console.log(person.name);
 5. Array of String & Nested Array
 
 ```javascript
-type Product {
-  id: String;
-  price: Number;
-  tags: String[];
-  randomData : any[];
-  isAccess : Boolean[];
-  details: {
-    title: String;
-    description: String;
-  }
-}
-const product : Product = {
-  id: 'abc1',
-  price: 12.99,
-  tags: ['great-offer', 'hot-and-new'],
-  randomData : ['test', 1, true]
-  isAccess : [true, false, true]
-  details: {
-    title: 'Red Carpet',
-    description: 'A great carpet - almost brand-new!'
-  }
-}
+type PersonDetails = {
+  hobbies: string[];
+  speedOfCar: number[];
+  loggedInHistory: boolean[];
+  jobInCompanies: { companyName: string; timeSpent: string }[];
+};
+
+let person: PersonDetails = {
+  hobbies: [],
+  speedOfCar: [],
+  loggedInHistory: [],
+  jobInCompanies: [],
+};
+
 ```
 6. Tuple
 ```javascript
 type Person {
     name : String;
     age : Number;
-    role : [Number, String];    // only can add two types
+    role : [Number, String];    // only can add two types with fixed length
 }
 
 let person : Person = {
@@ -188,15 +180,19 @@ person.role.push('operator')    // Error
 7. Enum Type
   
 ```javascript
-enum Role {ADMIN = 1, READ_ONLY = 2, AUTHOR = 3};
-let person = {
-    name : 'Deepinder',
-    age : 19,
-    role : Role.ADMIN
+enum Role {
+  ADMIN = "admin",
+  READ_ONLY = "read_only",
+  AUTHOR = "author",
 }
+let person = {
+  name: "Deepinder",
+  age: 19,
+  role: Role.ADMIN,
+};
 
-if(person.role === Role.ADMIN) {
-    console.log('Admin')
+if (person.role === Role.ADMIN) {
+  console.log("Admin");
 }
 ```
 9. Any
@@ -210,13 +206,13 @@ let person : Person = {
     role : [2, 'Admin', true]
 }
 ```
-10. Union Type
+10. Union Type (means or type)
   
 ```javascript
 let age : number | string;
 
 ```
-11. Literal Type
+11. Literal Type (matching with exact value)
 ```javascript
 function test (name : 'Deepu' | 'Dp') {
     return name
@@ -226,7 +222,7 @@ test('Dp');
 test('ok'); // cause error because value not in option
 ```
 
-* Types Aliases Custom Types
+12. Types Aliases Custom Types
 
 ```javascript
 type Role = number | string;
@@ -235,7 +231,7 @@ type ValidUser = boolean | number;
 let role: Role; 
 let isLogin  : ValidUser;
 ```
-* Function Return Type
+13. Function Return Type
 
 ```javascript
 // returning number
@@ -250,7 +246,58 @@ function printValue () : void {
 
 add(1,2);
 ```
-* Function Type Callback
+---
+
+### 📘Functions Type
+1. Return Type
+
+```js
+function sum(n1 : number, n2 : number) : number {
+    return n1 + n2;
+}
+
+sum(1, 2);
+```
+2. Void Type
+
+```js
+function printValue (n1: number, n2 : number) : void {
+    console.log(n1 + n2);
+}
+
+printValue(1, 2);
+```
+**⚠️Note :** like in above example if do like this *console.log(printValue(1, 2))* then we get *undefined* because *console.log()* has return type is *undefined* and we cannot set return type as *undefined* for any **function** use always *void* instead of *undefined*
+
+```js
+function sum() {
+    return;     // undefined
+}
+
+sum()
+```
+4. Function as type
+
+```js
+let sumOfTwoNumber = (a: number, b: number): number => {
+  return a + b;
+};
+let subtractOfThreeNumber = (a: number, b: number, c: number): number => {
+  return a + b + c;
+};
+
+let commonFunction: (a: number, b: number) => number;
+
+commonFunction = sumOfTwoNumber;
+
+commonFunction(1, 2);
+
+commonFunction = subtractOfThreeNumber; // cause error
+```
+![Image](./images/function-as-type.png)
+
+
+5. Callback Type
 
 ```javascript
 function cal(n1 : number, n2 : number, cb : (res : number) => void) : void{
