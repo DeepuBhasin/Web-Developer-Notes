@@ -467,6 +467,15 @@ console.log(firstname[1];)   // e
 console.log(firstname[2];)   // e
 ```
 
+* conversion 
+```js
+let age = 10;
+
+console.log(''+ 10);
+console.log(age.toString())
+
+```
+
 * Methods
 
 1. indexOf
