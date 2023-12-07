@@ -307,9 +307,14 @@ function cal(n1 : number, n2 : number, cb : (res : number) => void) : void{
 
 cal(1, 2, (result) => console.log(result));
 ```
-* The never Type
+
+
+### 📘Error Type
+1. Never Type
 
 ```javascript
+// These type are use when we want to throw errors
+
 function generateError(message : string, code : number) : never {
     // through types error are never type
     throw {message: message, errorCode : code}
