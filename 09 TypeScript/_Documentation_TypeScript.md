@@ -115,13 +115,13 @@ let isLogin : boolean = true;
 ```javascript
 let fullName : string = 'Deepinder Singh';
 ```
-4. Object Type
+4. Object Type : you can use with *type* and *interface*
 ```javascript
 // 1. Defining only object type
 let Person : Object {
   name : 'Deep',
   age : 30
-} 
+}
 
 
 // 2. Defining Object type with defined properties
@@ -150,6 +150,55 @@ let person: Person = {
 
 console.log(person.name);
 ```
+**⚠️Note :** Difference between *type* and *interface*
+
+```js
+// In General we always use type keyword
+
+/*
+For type
+1 it also allow you create other types other than object type (custom type  )
+*/
+
+type UserType = "Admin" | "Viewer";
+type AddFn = (a: number, b: number) => number;
+
+/*
+for Interfaces
+1. Implement in Classes
+*/
+
+interface Credentials {
+  email: string;
+  password: string;
+}
+
+let cred: Credentials;
+cred = {
+  email: "dp",
+  password: "dp",
+};
+
+class AuthCredentials implements Credentials {
+  email: string = "ok";
+  password: string = "ok";
+  username: string = "ok";
+}
+
+function Login(credentials: Credentials) {
+  return;
+}
+
+Login(cred);
+Login(new AuthCredentials());
+
+// 2. Extend Interface
+interface Credentials {
+  mode: string;
+}
+```
+
+
 5. Array of String & Nested Array
 
 ```javascript
@@ -203,7 +252,7 @@ if (person.role === Role.ADMIN) {
   console.log("Admin");
 }
 ```
-9. Any
+8. Any
 
 ```javascript
 type Person {
@@ -214,13 +263,13 @@ let person : Person = {
     role : [2, 'Admin', true]
 }
 ```
-10. Union Type (means or type)
+9. Union Type (means or type)
 
 ```javascript
 let age : number | string;
 
 ```
-11. Literal Type (matching with exact value)
+10. Literal Type (matching with exact value)
 ```javascript
 function test (name : 'Deepu' | 'Dp') {
     return name
@@ -230,14 +279,25 @@ test('Dp');
 test('ok'); // cause error because value not in option
 ```
 
-12. Types Aliases Custom Types
+11. Types Aliases Custom Types
 
 ```javascript
+
+let role : number | string;
+
+// instead of above we can use the below statement
+
 type Role = number | string;
 type ValidUser = boolean | number;
+type AddingTwoNumber = (a: number, b: number) => number;
 
 let role: Role;
-let isLogin  : ValidUser;
+let isLogin: ValidUser;
+let sum: AddingTwoNumber = (a, b) => {
+  return a + b;
+};
+
+sum(3, 3);
 ```
 
 ---
