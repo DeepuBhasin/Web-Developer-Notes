@@ -117,7 +117,14 @@ let fullName : string = 'Deepinder Singh';
 ```
 4. Object Type
 ```javascript
-// 1. Defining data type only
+// 1. Defining only object type
+let Person : Object {
+  name : 'Deep',
+  age : 30
+} 
+
+
+// 2. Defining Object type with defined properties
 type Person = {
   name: String;
   age: Number;
@@ -129,7 +136,8 @@ let person: Person = {
 };
 console.log(person.name);
 
-//2. Defining value only
+
+//3. Defining Object type with defined properties with specific values
 type Person = {
   name: String;
   age: 30 | 31 | 32;    // defining 3 values only
@@ -139,14 +147,14 @@ let person: Person = {
   name: "Deepu",
   age: 33,  // this line will cause error
 };
-console.log(person.name);
 
+console.log(person.name);
 ```
 5. Array of String & Nested Array
 
 ```javascript
 type PersonDetails = {
-  hobbies: string[];
+  hobbies: string[];  // Array<string>
   speedOfCar: number[];
   loggedInHistory: boolean[];
   jobInCompanies: { companyName: string; timeSpent: string }[];
@@ -231,21 +239,7 @@ type ValidUser = boolean | number;
 let role: Role;
 let isLogin  : ValidUser;
 ```
-13. Function Return Type
 
-```javascript
-// returning number
-function add(n1 : number, n2 : number) : number {
-    return n1 + n2;
-}
-
-// returning void
-function printValue () : void {
-    console.log('Hello World')
-}
-
-add(1,2);
-```
 ---
 
 ### 📘Functions Type
