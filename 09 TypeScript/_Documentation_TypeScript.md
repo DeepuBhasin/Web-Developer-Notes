@@ -1,7 +1,7 @@
 
 ## 📔Getting Started with Typescript
 
-* **TypeScript :** 
+* **TypeScript :**
 1. Helps us catch errors during development  (i.e before the code gets **compiled**) which force you to write Filter, cleaner and better code.
 2. **Uses 'type annotations' to analyze our code.**
 3. Our active during development.
@@ -12,7 +12,7 @@
 
 ![Image](./images/converting-typescript-into-javascript.png)
 
-📚 **Conceptual Example :** 
+📚 **Conceptual Example :**
 
 ```javascript
  function add(num1, num2) {
@@ -26,13 +26,13 @@ console.log(add(1, 2));
 console.log(add('1', '2'));
 ```
 ---
-### 📘Environment Setup 
+### 📘Environment Setup
 * Command for installing Typescript on Globally
 ```
 npm install -g typescript ts-node
 ```
 
-* To check 
+* To check
 ```
 npx tsc --help
 ```
@@ -40,7 +40,7 @@ npx tsc --help
 * TypeScript is *Programming language* hance need **complier** for execute the codes.
 * Extension is **.ts**
 
-Example 
+Example
 
 ```javascript
 // index.ts
@@ -49,7 +49,7 @@ const num1 = document.querySelector('#num1')! as HTMLInputElement;
 
 function add(num1 : number, num2 : number) {
     return +num1 + +num2;
-    
+
 }
 console.log(add(1, 2));
 ```
@@ -79,7 +79,7 @@ console.log(add(1, 2));
 
 ![Image](./images/core-typescript.png)
 
-* Core javascript Example for **type checking**, but we are checking Error on **Run Time**, which effect our speed 
+* Core javascript Example for **type checking**, but we are checking Error on **Run Time**, which effect our speed
 
 ```js
 function add(n1, n2) {
@@ -106,7 +106,7 @@ function add (n1:number, n2:number) {
     return n1 + n2;
 }
 ```
-2. Boolean Type 
+2. Boolean Type
 ```javascript
 let isLogin : boolean = true;
 ```
@@ -115,7 +115,7 @@ let isLogin : boolean = true;
 ```javascript
 let fullName : string = 'Deepinder Singh';
 ```
-4. Object Type 
+4. Object Type
 ```javascript
 // 1. Defining data type only
 type Person = {
@@ -178,7 +178,7 @@ let person : Person = {
 person.role.push('operator')    // Error
 ```
 7. Enum Type
-  
+
 ```javascript
 enum Role {
   ADMIN = "admin",
@@ -196,7 +196,7 @@ if (person.role === Role.ADMIN) {
 }
 ```
 9. Any
-  
+
 ```javascript
 type Person {
     role : any[];
@@ -207,7 +207,7 @@ let person : Person = {
 }
 ```
 10. Union Type (means or type)
-  
+
 ```javascript
 let age : number | string;
 
@@ -228,7 +228,7 @@ test('ok'); // cause error because value not in option
 type Role = number | string;
 type ValidUser = boolean | number;
 
-let role: Role; 
+let role: Role;
 let isLogin  : ValidUser;
 ```
 13. Function Return Type
@@ -242,7 +242,7 @@ function add(n1 : number, n2 : number) : number {
 // returning void
 function printValue () : void {
     console.log('Hello World')
-} 
+}
 
 add(1,2);
 ```
@@ -325,11 +325,11 @@ const result = generateError('An error occured !', 500);
 console.log(result) // not print undefined
 ```
 
-⚠️ **Note :** 
+⚠️ **Note :**
 * Where to use or not
 ```javascript
 // its not a good practice
-let age : number = 1; 
+let age : number = 1;
 
 
 // Good practice
@@ -338,3 +338,80 @@ age = 10;
 ```
 * Avoid **any** type as much you can
 
+---
+
+## 📔The TypeScript Compiler and its Configuration
+
+### 📘Using Watch Mode (for single file)
+```js
+"scripts": {
+  "compile": "npx tsc index.ts --w"
+}
+```
+```
+npm run compile
+```
+
+---
+### 📘Using Watch Mode (for Multiple file/Complete Folder)
+* this command will create *tsconfig.json* file which only use during setup only
+```
+npx tsc --init
+```
+
+* After set up *tsconfig* file, then this command will compile whole ts files in folder
+
+```
+npx tsc
+```
+
+* now this command will watch all ts files in the folder
+
+```
+npx tsc --watch
+```
+
+### 📘Exclude and Include Files
+* Add this property in *tsconfig.json*
+
+```js
+"exclude": ["./node_modules", "./sending.ts", "*.proposal.ts"],
+"include": ["./index.ts"],
+"files": ["./index.ts"]   // same like include
+```
+---
+
+### 📘Setting a Compilation Target
+*  Set the JavaScript language version for emitted JavaScript and include compatible library declarations like *let const & var*.
+
+```js
+"target": "es2016",
+```
+
+---
+### 📘Understanding TypeScript Core Libs
+
+*  Specify a set of bundled library declaration files that describe the target runtime environment.
+
+```js
+"lib": [
+  "DOM",
+  "ES6",
+  "DOM.Iterable",
+  "ScriptHost"
+]
+```
+---
+
+### 📘Working with Source Maps
+
+* Create source map files for emitted JavaScript files, this will help to debug our code on the browser
+* This files help use for *Debugging and Development* like for example *just in case we want to see js files in our browser (source tab) in that case we are not able to understand that code because it get minified or compiled version*
+
+```js
+"sourceMap": true
+```
+
+![Image](./images/source-map-1.png)
+
+![Image](./images/source-map-2.png)
