@@ -26,6 +26,13 @@ console.log(add(1, 2));
 console.log(add('1', '2'));
 ```
 ---
+
+### 📘Informatics for typeScript
+1. After putting colons **:** we enter into the *typeScript* world.
+
+
+
+---
 ### 📘Environment Setup
 * Command for installing Typescript on Globally
 ```
@@ -269,14 +276,44 @@ let person : Person = {
 let age : number | string;
 
 ```
-10. Literal Type (matching with exact value)
+10. Literal Type
 ```javascript
-function test (name : 'Deepu' | 'Dp') {
-    return name
+// Example with values
+type MyName = "Deepu" | "Dp";
+
+function test(name: MyName) {
+  return name;
 }
 
-test('Dp');
-test('ok'); // cause error because value not in option
+test("Dp");
+test("ok"); // cause error because value not in option
+
+// Example with data types
+
+type Admin = { permission: string[] };
+
+type AppUser = { userName: string };
+
+type MobileApp = Admin | AppUser;
+
+type AppAdmin = Admin & AppUser;
+
+let admin: AppAdmin;
+let addMobile: MobileApp;
+
+admin = { permission: ["login"], userName: "Admin" };
+addMobile = { permission: ["Local"] };
+
+interface newAdmin {
+  permission: [];
+}
+
+interface newAppUSer {
+  userName: string;
+}
+interface NewAppAdmin extends newAdmin, newAppUSer {}
+
+interface NewMobileApp extends newAdmin {}
 ```
 
 11. Types Aliases Custom Types
@@ -299,8 +336,48 @@ let sum: AddingTwoNumber = (a, b) => {
 
 sum(3, 3);
 ```
-
 ---
+12. Making Sense Of Generic Types
+
+```js
+// 1. For Type
+type DataStorage<T> = {
+  // here T is called place holder
+  storage: T[];
+  add: (data: T) => void;
+};
+
+type User = {
+  name: string;
+  age: number;
+};
+
+let textStorage: DataStorage<string> = {
+  storage: ["f", "g"],
+  add: (d) => console.log(d),
+};
+
+let userStorage: DataStorage<User> = {
+  storage: [{ name: "dp", age: 30 }],
+  add: (user) => console.log(user),
+};
+
+//2. For Functions
+function merge<T, U>(a: T, b: U) {
+  return {
+    ...a,
+    ...b,
+  };
+}
+
+const userFn1 = merge<{ name: string }, { age: number }>(
+  { name: "Dp" },
+  { age: 29 }
+);
+
+// type script is intelligent enough that what parameter you are sending and where we have to bind it
+const userFn2 = merge({ name: "Dp" }, { age: 29 });
+```
 
 ### 📘Functions Type
 1. Return Type
