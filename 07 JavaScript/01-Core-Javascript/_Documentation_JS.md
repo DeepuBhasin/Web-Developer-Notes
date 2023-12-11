@@ -5059,3 +5059,22 @@ try {
     throw {message : 'Error', status : '404'}
 }
 ```
+
+### 📘Form Data
+```html
+<form onsubmit="getFormData(event)">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <button type="submit">Submit</button>
+</form>
+
+<script>
+    function getFormData(e) {
+        e.preventDefault();
+        let formData = new FormData(e.currentTarget);
+        console.log(Object.fromEntries(formData));
+    }
+</script>
+```
