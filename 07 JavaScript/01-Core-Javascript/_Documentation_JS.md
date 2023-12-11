@@ -1660,6 +1660,16 @@ multiplyByTwo(4)    // 8
 let multiplyByTen = multiply.bind(this, 10);
 multiplyByTwo(5)    // 50
 ```
+
+**📚Conceptual Example :**
+
+```js
+function test(firstName) {
+    console.log(firstName);
+}
+setTimeout(test.bind(null, 'Deepinder Singh'), 1000);
+```
+
 ---
 
 ## 📘 Functional Programming
