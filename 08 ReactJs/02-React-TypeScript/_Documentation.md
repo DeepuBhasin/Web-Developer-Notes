@@ -2,7 +2,11 @@
 
 ### 📘Command
 ```
-npx create-react-app <appname> --template typescript
+npx create-react-app rts --template typescript
+```
+
+```
+npx create-vite@latest rts
 ```
 ---
 
@@ -92,32 +96,68 @@ const Child: React.FunctionComponent<ChildProps> = ({color})=> {
 
 
 ### 📘Annotations with Children(String, Function)
-```javascript
-import React from "react";
+```js
+import {type FC, type PropsWithChildren, type ReactNode } from "react";
 
-interface ChildProps {
-  color: string;
-  onClick: () => void;
-}
-
-const Child: React.FunctionComponent<ChildProps> = ({ color, onClick }) => {
-  return (
-    <div>
-      Child {color} <br />
-      <button onClick={onClick}>Click Me</button>
-    </div>
-  );
+// 1
+type CourseType = {
+  title: string;
+  description: string;
+  children: ReactNode;
 };
 
-function Parent() {
+// OR
+
+type CourseType = PropsWithChildren<{ title: string; description: string }>;
+// 1
+
+// 2
+function Course({ title, description, children }: CourseType) {
+  return (
+    <section>
+      <div>
+        <h2>Title : {title}</h2>
+      </div>
+      <div>
+        <p>Description : {description}</p>
+      </div>
+      {children}
+    </section>
+  );
+}
+
+// OR
+
+const Course: FC<CourseType> = ({ title, description, children }) => {
+  return (
+    <section>
+      <div>
+        <h2>Title : {title}</h2>
+      </div>
+      <div>
+        <p>Description : {description}</p>
+      </div>
+      {children}
+    </section>
+  );
+};
+// 2
+
+function App() {
   return (
     <div>
-      <Child color="Red" onClick={() => console.log("Hello World")} />
+      <Course title="Hello" description="This is hello world">
+        <p>This is child Element</p>
+      </Course>
     </div>
   );
 }
-export default Parent;
+
+export default App;
 ```
+
+![Image](./images/children-props.png)
+
 ---
 
 ### 📘State with TypeScript UseState
@@ -134,6 +174,18 @@ const [guest, setGuest] = useState<string[]>([]);
 const [user, setUser] = useState<{name : string, age : number} | undefined>();
 
 {user && user.name}
+
+// Array for Object
+type UserType = {
+  name : string;
+  age : number
+}[]
+
+/* 1 or */
+const [user, setUser] = useState<UserType[]>([]);
+// or
+const [user, setUser] = useState<Array<UserType>>([]);
+/* 1 or */
 ```
 
 ---
@@ -183,27 +235,44 @@ export default EventComponent;
 
 ### 📘useRef
 
-```javascript
-import { useEffect, useRef } from "react";
-  const UseRefComponent : React.FC= ()=> {
-  const inputRef = useRef<HTMLInputElement | null>(null);
-    
-  useEffect(()=>{
-    if(!inputRef.current){
-        return;
-    }
-    inputRef.current.focus();
-  },[])
-  
-  return <div>
-      <input ref={inputRef}/>
-  </div>
+```js
+import React, { useRef } from "react";
+
+function App() {
+  const inputName = useRef<HTMLInputElement>(null);
+  const inputEmail = useRef<HTMLInputElement>(null);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const name = inputName.current!.value;
+    console.log(name);
+
+    const email = inputEmail.current!.value;
+    console.log(email);
+
+    // to reset value
+    e.currentTarget.reset();
+  };
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="name">Name:</label>
+        <input type="text" id="name" name="name" required ref={inputName} />
+        <label htmlFor="email">Email:</label>
+        <input type="email" id="email" name="email" required ref={inputEmail} />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  );
 }
 
-export default UseRefComponent;
+export default App;
 ```
-* __HTMLInputElement | null(null)__ in this line we provide *null* value as *type* because Typescript understand that you will not assign this *refElement* to any *htmlElement* hence once our all htmlElements are ready in react then Typescript will automatically considered *HtmlInputElement* to *refElement*
-* in __useEffect__ are you pointing to some html element because its initial value is null that is why we put if condition over there, once Html Element is ready then it will point to *refElement*.
+![Image](./images/useref.png)
+
+* **useRef** will give error in starting because react it create to *undefined* thats why we provide default as *null*.
+* *goal.current!* this *!* sign represent that we are sure about the value, it will never null (because we get the value according to above example **after** submitting the form)
 ---
 
 ### Complete Example of all type
@@ -254,15 +323,3 @@ function App() {
 
 export default App;
 ```
-
-
-### 📘Redux
-```
-npm install @types/react-redux
-npm install axios
-npm install redux
-npm install react-redux
-npm install redux-thunk
-```
-
-![Image](./images/redux-setup.png)
