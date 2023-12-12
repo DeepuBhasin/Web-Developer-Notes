@@ -323,3 +323,130 @@ function App() {
 
 export default App;
 ```
+---
+
+## 📔Advanced Component Types Dynamic Component
+
+### 📘Dynamic Component
+```js
+import React, {
+  type PropsWithChildren,
+  type FC,
+  useState,
+  type ReactNode,
+} from "react";
+
+type HintType = {
+  mode: "hint";
+  heading: "h1" | "h2" | "h3";
+  children: ReactNode;
+};
+
+type WarningType = {
+  mode: "warning";
+  children: ReactNode;
+};
+
+type InfoProps = HintType | WarningType;
+
+const Info: FC<InfoProps> = (props) => {
+  if (props.mode === "warning") {
+    return (
+      <React.Fragment>
+        <h2>Warning</h2>
+        <p>{props.children}</p>
+      </React.Fragment>
+    );
+  }
+
+  return <props.heading>{props.children}</props.heading>;
+};
+
+function App() {
+  const [name, setName] = useState<string>("");
+  const [inputName, setInputName] = useState<string[]>([]);
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setInputName([...inputName, name]);
+    setName("");
+  };
+
+  let warningBox: ReactNode;
+  if (inputName.length >= 4) {
+    warningBox = <Info mode="warning">You have enter more than 4 names</Info>;
+  } else {
+    warningBox = (
+      <Info mode="hint" heading="h3">
+        You can enter More names
+      </Info>
+    );
+  }
+
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <input
+          placeholder="Enter Name"
+          type="text"
+          id="name"
+          name="name"
+          required
+          value={name}
+          onChange={(e: ChangeEventHandler<HTMLInputElement>) =>
+            setName(e.target.value)
+          }
+        />
+        <button type="submit">Submit</button>
+      </form>
+      {warningBox}
+
+      <ul>
+        {inputName.map((e: string) => {
+          return <li key={e}>{e}</li>;
+        })}
+      </ul>
+    </div>
+  );
+}
+
+export default App;
+```
+
+---
+
+### 📘Building Better Wrapper Components with ComponentPropsWithoutRef
+
+```js
+import React, { ComponentPropsWithoutRef } from "react";
+
+type InputType = {
+  label: string;
+  type: string;
+} & ComponentPropsWithoutRef<"input">;
+
+function Input({ label, type, ...props }: InputType) {
+  return (
+    <p>
+      <label htmlFor="">{label}</label>
+      <input type={type} {...props} />
+    </p>
+  );
+}
+
+function App() {
+  return (
+    <div>
+      <form>
+        <Input
+          label="FirstName"
+          type="text"
+          placeholder="Enter FirstName"
+          disabled
+        />
+      </form>
+    </div>
+  );
+}
+
+export default App;
+```
