@@ -68,28 +68,16 @@ Command to execute File
 ```
 npx tsc index.ts
 ```
-This command will create a new file **index.js** and convert your whole typescript code into javascript code
 
-```javascript
-var btn = document.querySelector('#button');
-var num1 = document.querySelector('#num1');
-function add(num1, num2) {
-    return +num1 + +num2;
-}
-console.log(add(1, 2));
-```
-⚠️ **Note :** always import javascript files in *html files* *because* browser can only understand *javascript* not the *typescript*
-
-![Image](./images/typescript-overview.png)
 ---
 
 ## 📔TypeScript Basics Basic Types
 
-## 📘Core Types
+### 📘Core Types
 
 ![Image](./images/core-typescript.png)
 
-* Core javascript Example for **type checking**, but we are checking Error on **Run Time**, which effect our speed
+Core javascript Example for **type checking**, but we are checking Error on **Run Time**, which effect our speed
 
 ```js
 function add(n1, n2) {
