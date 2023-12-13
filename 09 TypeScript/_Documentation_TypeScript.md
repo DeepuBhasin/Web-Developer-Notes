@@ -8,9 +8,10 @@
 4. Doesn't provide any performance optimization.
 5. It fix all errors on **run-time**.
 
+
+
 ![Image](./images/what-typescript.jpeg)
 
-![Image](./images/converting-typescript-into-javascript.png)
 
 📚 **Conceptual Example :**
 
@@ -25,6 +26,8 @@
 console.log(add(1, 2));
 console.log(add('1', '2'));
 ```
+![Image](./images/runtime-compile-time.png)
+
 ---
 
 ### 📘Informatics for typeScript
