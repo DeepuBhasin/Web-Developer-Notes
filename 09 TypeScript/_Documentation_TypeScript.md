@@ -7,33 +7,13 @@
 3. Our active during development.
 4. Doesn't provide any performance optimization.
 5. It fix all errors on **run-time**.
+6.  After putting colons **:** we enter into the *typeScript* world.
 
 
 
 ![Image](./images/what-typescript.jpeg)
 
-
-📚 **Conceptual Example :**
-
-```javascript
- function add(num1, num2) {
-    if (typeof num1 === 'number' && typeof num2 === 'number') {
-        return num1 + num2;
-    } else {
-        return +num1 + +num2;
-    }
-}
-console.log(add(1, 2));
-console.log(add('1', '2'));
-```
 ![Image](./images/runtime-compile-time.png)
-
----
-
-### 📘Informatics for typeScript
-1. After putting colons **:** we enter into the *typeScript* world.
-
-
 
 ---
 ### 📘Environment Setup
