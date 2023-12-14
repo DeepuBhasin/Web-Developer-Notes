@@ -7,11 +7,29 @@
 3. Our active during development.
 4. Doesn't provide any performance optimization.
 5. It fix all errors on **run-time**.
-6.  After putting colons **:** we enter into the *typeScript* world.
 
 
 
 ![Image](./images/what-typescript.jpeg)
+
+
+
+---
+
+### 📘Informatics things
+1. After putting colons **:** we enter into the *typeScript* world.
+
+2. Where to use or not
+```javascript
+// its not a good practice
+let age : number = 1;
+
+
+// Good practice
+let age : number;
+age = 10;
+```
+3. Run-Time vs Compile-Time
 
 ![Image](./images/runtime-compile-time.png)
 
@@ -252,6 +270,8 @@ if (person.role === 1) {
 ```
 
 8. Any
+* When we use **any** it disabled all type checking
+* Avoid as much you can
 
 ```javascript
 type Person {
@@ -323,6 +343,42 @@ interface NewAppAdmin extends newAdmin, newAppUSer {}
 
 interface NewMobileApp extends newAdmin {}
 ```
+11. unknown
+* Think of **unknown** in TypeScript like a box that could contain any type of value, but you're not sure exactly what's inside. TypeScript wants you to be careful when using values of unknown types, so you have to do some checks before you use them.
+
+```js
+// Using any
+let valueAny: any = "Hello, TypeScript!";
+let lengthAny: number = valueAny.length; // No type-checking, TypeScript assumes any type
+
+// Using unknown
+let valueUnknown: unknown = "Hello, TypeScript!";
+
+// Uncommenting the line below will result in a TypeScript error
+// let lengthUnknown: number = valueUnknown.length; // Error! You need to check the type first
+
+// Checking the type before using it
+if (typeof valueUnknown === "string") {
+  let lengthUnknown: number = valueUnknown.length; // OK, TypeScript is satisfied with the type-checking
+  console.log(lengthUnknown); // Outputs the length: 18
+} else {
+  a;
+  console.log("Not a string"); // This branch is taken if the type is not a string
+}
+```
+
+12. never
+
+* In TypeScript, never is a type that represents a situation where something will never happen. It's like saying, **"This function will never return anything" or "This code will never reach this point"**
+* In this example, the throwError function is declared to never return anything (never). It always throws an error, and once an error is thrown, the function doesn't continue executing. The never type is used to describe situations where your code won't proceed any further. 
+
+```js
+function throwError(message: string): never {
+    throw new Error(message);
+}
+```
+
+
 
 ---
 
@@ -417,36 +473,6 @@ function cal(n1 : number, n2 : number, cb : (res : number) => void) : void{
 
 cal(1, 2, (result) => console.log(result));
 ```
-
-
-### 📘Error Type
-1. Never Type
-
-```javascript
-// These type are use when we want to throw errors
-
-function generateError(message : string, code : number) : never {
-    // through types error are never type
-    throw {message: message, errorCode : code}
-}
-
-const result = generateError('An error occured !', 500);
-
-console.log(result) // not print undefined
-```
-
-⚠️ **Note :**
-* Where to use or not
-```javascript
-// its not a good practice
-let age : number = 1;
-
-
-// Good practice
-let age : number;
-age = 10;
-```
-* Avoid **any** type as much you can
 
 ---
 
