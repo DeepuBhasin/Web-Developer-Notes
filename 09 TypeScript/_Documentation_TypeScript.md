@@ -84,6 +84,8 @@ function add (n1:number, n2:number) {
     return n1 + n2;
 }
 ```
+
+
 2. Boolean Type
 ```javascript
 let isLogin : boolean = true;
@@ -364,18 +366,28 @@ function printValue (n1: number, n2 : number) : void {
 printValue(1, 2);
 ```
 
-**⚠️Note :** like in above example if do like this *console.log(printValue(1, 2))* then we get *undefined* because *console.log()* has return type is *undefined* and we cannot set return type as *undefined* for any **function** use always *void* instead of *undefined*
+**⚠️Note :** 
+* *void functions* has *undefined* return type. 
+* *void* is also standard way to return type instead of *undefined*
+* Typescript never allow us to place *undefined* instead of *void* 
 
 ```js
-function sum() {
+// if we want undefined then we have to place return;
+function sum() : undefined{
     return;     // undefined
 }
 
 sum()
 ```
-2. Return type as function
+2. Function as type itself
 
 ```js
+// Simple Example
+let addTwoNumber: Function;
+addTwoNumber = (a: any, b: any) => a + b;
+
+
+// Good Example
 let sumOfTwoNumber = (a: number, b: number): number => {
   return a + b;
 };
