@@ -371,14 +371,12 @@ if (typeof valueUnknown === "string") {
 
 * In TypeScript, never is a type that represents a situation where something will never happen. It's like saying, **"This function will never return anything" or "This code will never reach this point"**
 * In this example, the throwError function is declared to never return anything (never). It always throws an error, and once an error is thrown, the function doesn't continue executing. The never type is used to describe situations where your code won't proceed any further. 
-
+* Another example is **Infinite Loop**
 ```js
 function throwError(message: string): never {
     throw new Error(message);
 }
 ```
-
-
 
 ---
 
