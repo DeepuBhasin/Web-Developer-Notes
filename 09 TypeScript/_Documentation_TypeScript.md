@@ -101,7 +101,6 @@ let Person : Object {
   age : 30
 }
 
-
 // 2. Defining Object type with defined properties
 type Person = {
   name: String;
@@ -113,7 +112,6 @@ let person: Person = {
   age: 30,
 };
 console.log(person.name);
-
 
 //3. Defining Object type with defined properties with specific values
 type Person = {
@@ -212,7 +210,7 @@ let person : Person = {
 // Because in tupal we cannot add more than two element
 person.role.push('operator')    // Error
 ```
-7. Enum Type
+1. Enum Type : when want to **use like constants** (when we use *same words* all over that application)
 
 ```javascript
 enum Role {
@@ -220,16 +218,37 @@ enum Role {
   READ_ONLY = "read_only",
   AUTHOR = "author",
 }
+
 let person = {
   name: "Deepinder",
   age: 19,
-  role: Role.ADMIN,
+  role: Role.ADMIN,   // providing value just like constant
 };
 
 if (person.role === Role.ADMIN) {
   console.log("Admin");
 }
 ```
+**⚠️ Note :** if we don't provide any value in *enum type* then it will take *index values* automatically.
+
+```js
+enum Role {
+  ADMIN,
+  READ_ONLY,
+  AUTHOR,
+}
+
+let person = {
+  name: "Deepinder",
+  age: 19,
+  role: Role.ADMIN,
+};
+
+if (person.role === 1) {
+  console.log("Admin");
+}
+```
+
 8. Any
 
 ```javascript
@@ -241,13 +260,30 @@ let person : Person = {
     role : [2, 'Admin', true]
 }
 ```
-9. Union Type (means or type)
+9. Union Type (means OR)
 
 ```javascript
 let age : number | string;
 
+// Conceptual Example
+function combined(a: number | string, b: number | string): number | string {
+
+  let result: string | number;
+  
+  if (typeof a === "number" && typeof b === "number") {
+    result = a + b;
+  } else {
+    result = a.toString() + b.toString();
+  }
+  return result;
+}
+
+console.log(combined(1, 2));
+console.log(combined("1", "2"));
 ```
-10. Literal Type
+10. Literal Type : 
+* when you provide **specific values** not the **data types**.
+* It always use with **union type** in example we are providing two values *Deepu OR Dp*
 ```javascript
 // Example with values
 type MyName = "Deepu" | "Dp";
@@ -260,7 +296,6 @@ test("Dp");
 test("ok"); // cause error because value not in option
 
 // Example with data types
-
 type Admin = { permission: string[] };
 
 type AppUser = { userName: string };
@@ -287,10 +322,11 @@ interface NewAppAdmin extends newAdmin, newAppUSer {}
 interface NewMobileApp extends newAdmin {}
 ```
 
-11. Types Aliases Custom Types
+---
+
+### 📘Types Aliases Custom Types
 
 ```javascript
-
 let role : number | string;
 
 // instead of above we can use the below statement
@@ -307,68 +343,27 @@ let sum: AddingTwoNumber = (a, b) => {
 
 sum(3, 3);
 ```
+
 ---
-12. Making Sense Of Generic Types
-
-```js
-// 1. For Type
-type DataStorage<T> = {
-  // here T is called place holder
-  storage: T[];
-  add: (data: T) => void;
-};
-
-type User = {
-  name: string;
-  age: number;
-};
-
-let textStorage: DataStorage<string> = {
-  storage: ["f", "g"],
-  add: (d) => console.log(d),
-};
-
-let userStorage: DataStorage<User> = {
-  storage: [{ name: "dp", age: 30 }],
-  add: (user) => console.log(user),
-};
-
-//2. For Functions
-function merge<T, U>(a: T, b: U) {
-  return {
-    ...a,
-    ...b,
-  };
-}
-
-const userFn1 = merge<{ name: string }, { age: number }>(
-  { name: "Dp" },
-  { age: 29 }
-);
-
-// type script is intelligent enough that what parameter you are sending and where we have to bind it
-const userFn2 = merge({ name: "Dp" }, { age: 29 });
-```
 
 ### 📘Functions Type
-1. Return Type
+1. Return type as Data Type : data type like **number, string, void etc**
 
 ```js
+// Number Type
 function sum(n1 : number, n2 : number) : number {
     return n1 + n2;
 }
-
 sum(1, 2);
-```
-2. Void Type
 
-```js
+// Void Type
 function printValue (n1: number, n2 : number) : void {
     console.log(n1 + n2);
 }
 
 printValue(1, 2);
 ```
+
 **⚠️Note :** like in above example if do like this *console.log(printValue(1, 2))* then we get *undefined* because *console.log()* has return type is *undefined* and we cannot set return type as *undefined* for any **function** use always *void* instead of *undefined*
 
 ```js
@@ -378,12 +373,13 @@ function sum() {
 
 sum()
 ```
-4. Function as type
+2. Return type as function
 
 ```js
 let sumOfTwoNumber = (a: number, b: number): number => {
   return a + b;
 };
+
 let subtractOfThreeNumber = (a: number, b: number, c: number): number => {
   return a + b + c;
 };
@@ -399,7 +395,7 @@ commonFunction = subtractOfThreeNumber; // cause error
 ![Image](./images/function-as-type.png)
 
 
-5. Callback Type
+3. Callback Type
 
 ```javascript
 function cal(n1 : number, n2 : number, cb : (res : number) => void) : void{
@@ -517,3 +513,47 @@ npx tsc --watch
 ![Image](./images/source-map-1.png)
 
 ![Image](./images/source-map-2.png)
+
+
+---
+11. Making Sense Of Generic Types
+
+```js
+// 1. For Type
+type DataStorage<T> = {
+  // here T is called place holder
+  storage: T[];
+  add: (data: T) => void;
+};
+
+type User = {
+  name: string;
+  age: number;
+};
+
+let textStorage: DataStorage<string> = {
+  storage: ["f", "g"],
+  add: (d) => console.log(d),
+};
+
+let userStorage: DataStorage<User> = {
+  storage: [{ name: "dp", age: 30 }],
+  add: (user) => console.log(user),
+};
+
+//2. For Functions
+function merge<T, U>(a: T, b: U) {
+  return {
+    ...a,
+    ...b,
+  };
+}
+
+const userFn1 = merge<{ name: string }, { age: number }>(
+  { name: "Dp" },
+  { age: 29 }
+);
+
+// type script is intelligent enough that what parameter you are sending and where we have to bind it
+const userFn2 = merge({ name: "Dp" }, { age: 29 });
+```
