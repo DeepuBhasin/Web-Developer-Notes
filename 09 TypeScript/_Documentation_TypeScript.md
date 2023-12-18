@@ -77,6 +77,10 @@ Command to execute File
 ```
 npx tsc index.ts
 ```
+Command to execute File and See output
+```
+npx ts-node index.ts
+```
 
 ---
 
@@ -506,12 +510,25 @@ let obj = {
   firstName: "Deep",
   lastName: "Singh",
   age: 3,
+  address: {
+    houseNo: "51-d",
+    streetNo: 3,
+  },
 };
 
-let { firstName, lastName }: { firstName: string; lastName: string } = obj;
+let {
+  firstName,
+  lastName,
+  address: { houseNo, streetNo },
+}: {
+  firstName: string;
+  lastName: string;
+  address: { houseNo: string; streetNo: number };
+} = obj;
 
 console.log(firstName);
 console.log(lastName);
+console.log(houseNo);
 ```
 
 
