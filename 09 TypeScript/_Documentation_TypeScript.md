@@ -17,6 +17,7 @@
 ---
 
 ### 📘Informatics things
+
 1. After putting colons **:** we enter into the *typeScript* world.
 
 2. Where to use or not
@@ -69,6 +70,19 @@ npx tsc index.ts
 
 ---
 
+### 📘 Type Annotations Vs Type Inference 
+* **Type annotations :** Code we add to tell typescript what type of value a variable will refer to
+*  **Type inference :** Typescript tries to figure out what type of value a variables refers to
+
+![Image](./images/typescript-annotation-type-inference.png)
+
+* Understand the Type Inference
+
+![Image](./images/type-inference-1.png)
+
+* When to use Type Inference
+![Image](./images/type-inference-2.png)
+
 ## 📔TypeScript Basics Basic Types
 
 ### 📘Core Types
@@ -114,6 +128,7 @@ let isLogin : boolean = true;
 let fullName : string = 'Deepinder Singh';
 ```
 4. Object Type : you can use with *type* and *interface*
+* **interface** : Describe the structure of object. More stronger than *type*
 ```javascript
 // 1. Defining only object type
 let Person : Object {
@@ -153,11 +168,16 @@ console.log(person.name);
 
 /*
 For type
-1 it also allow you create other types other than object type (custom type  )
+1 you can use on the other data types like on string boolean but interface are only use on object data types only
 */
 
-type UserType = "Admin" | "Viewer";
-type AddFn = (a: number, b: number) => number;
+type UserType = "Admin" | "Viewer"; // like here we are using on string
+
+interface UserType  {
+  value = "Admin" | "View"
+}
+
+const User = interface.value  // error
 
 /*
 for Interfaces
@@ -189,7 +209,7 @@ Login(cred);
 Login(new AuthCredentials());
 
 // 2. Extend Interface
-interface Credentials {
+interface CredentialsMode extends Credentials {
   mode: string;
 }
 ```
@@ -230,7 +250,7 @@ let person : Person = {
 // Because in tupal we cannot add more than two element
 person.role.push('operator')    // Error
 ```
-1. Enum Type : when want to **use like constants** (when we use *same words* all over that application)
+7. Enum Type : when want to **use like constants** (when we use *same words* all over that application)
 
 ```javascript
 enum Role {
@@ -270,17 +290,17 @@ if (person.role === 1) {
 ```
 
 8. Any
-* When we use **any** it disabled all type checking
-* Avoid as much you can
+* When we use **any** it disabled all type checking.
+* Means TS has no idea what this is - can't check for correct property references.
+* Avoid as much you can.
 
 ```javascript
-type Person {
-    role : any[];
-}
+let obj: any = {
+  name: 'Deep',
+  age: 3,
+};
 
-let person : Person = {
-    role : [2, 'Admin', true]
-}
+obj.test; // no error from type script
 ```
 9. Union Type (means OR)
 
@@ -291,7 +311,7 @@ let age : number | string;
 function combined(a: number | string, b: number | string): number | string {
 
   let result: string | number;
-  
+
   if (typeof a === "number" && typeof b === "number") {
     result = a + b;
   } else {
@@ -303,7 +323,7 @@ function combined(a: number | string, b: number | string): number | string {
 console.log(combined(1, 2));
 console.log(combined("1", "2"));
 ```
-10. Literal Type : 
+10. Literal Type :
 * when you provide **specific values** not the **data types**.
 * It always use with **union type** in example we are providing two values *Deepu OR Dp*
 ```javascript
@@ -316,32 +336,6 @@ function test(name: MyName) {
 
 test("Dp");
 test("ok"); // cause error because value not in option
-
-// Example with data types
-type Admin = { permission: string[] };
-
-type AppUser = { userName: string };
-
-type MobileApp = Admin | AppUser;
-
-type AppAdmin = Admin & AppUser;
-
-let admin: AppAdmin;
-let addMobile: MobileApp;
-
-admin = { permission: ["login"], userName: "Admin" };
-addMobile = { permission: ["Local"] };
-
-interface newAdmin {
-  permission: [];
-}
-
-interface newAppUSer {
-  userName: string;
-}
-interface NewAppAdmin extends newAdmin, newAppUSer {}
-
-interface NewMobileApp extends newAdmin {}
 ```
 11. unknown
 * Think of **unknown** in TypeScript like a box that could contain any type of value, but you're not sure exactly what's inside. TypeScript wants you to be careful when using values of unknown types, so you have to do some checks before you use them.
@@ -370,12 +364,36 @@ if (typeof valueUnknown === "string") {
 12. never
 
 * In TypeScript, never is a type that represents a situation where something will never happen. It's like saying, **"This function will never return anything" or "This code will never reach this point"**
-* In this example, the throwError function is declared to never return anything (never). It always throws an error, and once an error is thrown, the function doesn't continue executing. The never type is used to describe situations where your code won't proceed any further. 
+* In this example, the throwError function is declared to never return anything (never). It always throws an error, and once an error is thrown, the function doesn't continue executing. The never type is used to describe situations where your code won't proceed any further.
 * Another example is **Infinite Loop**
 ```js
 function throwError(message: string): never {
     throw new Error(message);
 }
+```
+13. Null
+
+```js
+let nothingMuch : null = null;
+```
+
+14. Void
+
+```js
+function test() : void {
+  console.log('Hello World')
+}
+test();
+```
+
+15. Classes
+
+```js
+class Car {
+
+}
+
+let car1 : Car = new Car();
 ```
 
 ---
@@ -403,6 +421,10 @@ sum(3, 3);
 ---
 
 ### 📘Functions Type
+
+![Image](./images/typescript-annotation-type-inference-function.png)
+
+
 1. Return type as Data Type : data type like **number, string, void etc**
 
 ```js
@@ -420,10 +442,10 @@ function printValue (n1: number, n2 : number) : void {
 printValue(1, 2);
 ```
 
-**⚠️Note :** 
-* *void functions* has *undefined* return type. 
+**⚠️Note :**
+* *void functions* has *undefined* return type.
 * *void* is also standard way to return type instead of *undefined*
-* Typescript never allow us to place *undefined* instead of *void* 
+* Typescript never allow us to place *undefined* instead of *void*
 
 ```js
 // if we want undefined then we have to place return;
@@ -436,27 +458,14 @@ sum()
 2. Function as type itself
 
 ```js
-// Simple Example
-let addTwoNumber: Function;
-addTwoNumber = (a: any, b: any) => a + b;
-
-
-// Good Example
-let sumOfTwoNumber = (a: number, b: number): number => {
+let sumOfTwoNumber: (a: number, b: number) => number = (
+  a: number,
+  b: number
+): number => {
   return a + b;
 };
 
-let subtractOfThreeNumber = (a: number, b: number, c: number): number => {
-  return a + b + c;
-};
-
-let commonFunction: (a: number, b: number) => number;
-
-commonFunction = sumOfTwoNumber;
-
-commonFunction(1, 2);
-
-commonFunction = subtractOfThreeNumber; // cause error
+sumOfTwoNumber(1, 2);
 ```
 ![Image](./images/function-as-type.png)
 
@@ -511,7 +520,7 @@ npx tsc --watch
 ```js
 "exclude": ["./node_modules", "./sending.ts", "*.proposal.ts"],
 "include": ["./index.ts"],
-"files": ["./index.ts"]   // same like include
+"files": ["./index.ts"]   // same like include but you cannot include folders here
 ```
 ---
 
@@ -550,11 +559,208 @@ npx tsc --watch
 
 ![Image](./images/source-map-2.png)
 
-
 ---
-11. Making Sense Of Generic Types
+
+## 📔Classes Interfaces
+
+### 📘Private and public Access Modifiers
 
 ```js
+class Department {
+  public name: string;
+  constructor(n: string) {
+    this.name = n;
+  }
+
+  public getName() {
+    console.log(this.name);
+  }
+
+  private describe(this: Department) {
+    console.log("ok", this.name);
+  }
+}
+
+let obj1 = new Department("Computer Sci");
+obj1.getName();
+//obj1.describe();  // this will cause Error
+```
+
+### Shorthand Initialization
+* no need to create variables
+* no need to create variables with in constructor method
+* just only need to initialize in parameters
+```js
+class Department {
+  constructor(public name: string) {}
+
+  public getName() {
+    console.log(this.name);
+  }
+
+  private describe(this: Department) {
+    console.log("ok", this.name);
+  }
+}
+
+let obj1 = new Department("Computer Sci");
+obj1.getName();
+```
+
+* Static Members & Static methods
+* Access Specifiers (public private protected)
+* Abstract
+* Inheritance
+* interfaces
+---
+
+
+## 📔Advanced Types
+
+### 📘Intersection Types
+* Intersection allows us to combine the other types
+
+1. Type Interface
+
+```js
+type Admin = {
+  name: string;
+  privileges: string[];
+};
+
+type Employees = {
+  name: string;
+  startDate: Date;
+};
+
+type ElevatedEmployee = Admin & Employees;
+
+const e1: ElevatedEmployee = {
+  name: "Deep",
+  startDate: new Date(),
+  privileges: ["create-server"],
+};
+```
+2. Interface Type
+
+```js
+interface Admin {
+  name: string;
+  privileges: string[];
+}
+
+interface Employees {
+  name: string;
+  startDate: Date;
+}
+
+type ElevatedEmployee = Admin & Employees;
+
+interface ElevatedEmployeeInterface extends Admin, Employees {}
+
+const e1: ElevatedEmployee = {
+  name: "Deep",
+  startDate: new Date(),
+  privileges: ["create-server"],
+};
+```
+### 📘More on Type Guards
+
+1. For String : we use *typeof*
+
+```js
+function add(a, b) {
+    if (typeof a === "number" && typeof b === "number") {
+        // this is called type guard
+        return a + b;
+    }
+    else {
+        return a.toString() + a.toString();
+    }
+}
+add(1, 2);
+add("a", "b");
+```
+
+2. For Object : we use *in*
+
+```js
+var obj = {
+    name: "Deep",
+    age: 30,
+};
+if ("name" in obj) {
+    console.log("name property exist in obj");
+}
+else {
+    console.log("name property does not exist");
+}
+```
+3. For Class : we use *instanceOf*
+
+```js
+class Car {
+  drive() {
+    console.log("Driving....");
+  }
+}
+
+class Truck {
+  drive() {
+    console.log("Driving Truck....");
+  }
+  loadCargo(amount: number) {
+    console.log("Loading cargo..." + amount);
+  }
+}
+
+type Vehicle = Car | Truck;
+
+const v1 = new Car();
+const v2 = new Truck();
+
+function useVehicle(vehicle: Vehicle) {
+  vehicle.drive();
+
+  if (vehicle instanceof Truck) {
+    vehicle.loadCargo(1000);
+  }
+}
+
+useVehicle(v1);
+useVehicle(v2);
+```
+
+---
+
+### 📘Type Casting
+
+* Typecasting : helps typescript that some value is of specific type where typescript not able to detected by its own but you as developer know.
+
+```js
+let inputElement = document.getElementById("#firstName")!; // refer to not null by using ! sign
+let inputElement = <HTMLInputElement>document.getElementById("#firstName")!; // type casting
+let inputElement = document.getElementById("#firstName")! as HTMLInputElement; // type casting
+
+inputElement.value = "Deep Singh";
+
+// or
+let inputElement = document.getElementById("#firstName");
+
+if (inputElement) {
+  (inputElement as HTMLInputElement).value = "Deep Singh";
+}
+```
+---
+
+## 📔Generics
+
+## 📘Creating a Generic Function
+* Generic Type : is a type which is kind of connected with some other type and really flexible regarding which exact type that other type is.
+
+```js
+const names : Array<string> = [];
+
 // 1. For Type
 type DataStorage<T> = {
   // here T is called place holder
@@ -592,4 +798,64 @@ const userFn1 = merge<{ name: string }, { age: number }>(
 
 // type script is intelligent enough that what parameter you are sending and where we have to bind it
 const userFn2 = merge({ name: "Dp" }, { age: 29 });
+```
+
+---
+
+### 📘Working with Constraints (extends)
+* Make Generic placeholder for specific type
+
+```js
+function merge<T extends object, U extends object>(objA: T, objB: U) {
+  return Object.assign(objA, objB);
+}
+
+const mergeObj = merge(
+  { name: "Deep", hobbies: ["sports"] },
+  { job: "web development" }
+);
+
+console.log(mergeObj);
+```
+
+---
+
+### 📘Another Generic Function
+* We are just care about that *datatype* or *custom datatype* which have *length* property nothing else.
+```js
+interface Lengthy {
+  length: number;
+}
+
+function countAndDescribe<T extends Lengthy>(element: T): [T, string] {
+  let describeElement = "Got no Value";
+  if (element.length === 1) {
+    describeElement = "Got 1 Element.";
+  } else if (element.length > 1) {
+    describeElement = "Got " + element.length + " elements";
+  }
+  return [element, describeElement];
+}
+
+countAndDescribe("Hello World");
+countAndDescribe(["Hello World"]);
+countAndDescribe([]);
+countAndDescribe(2525);
+```
+---
+
+### 📘The keyof Constraint
+* to check the key in the object
+```js
+function extractAndConvert<T extends object, U extends keyof T>(
+  obj: T,
+  key: U
+) {
+  return obj[key];
+}
+
+extractAndConvert({ name: "Dp" }, "name");
+
+// cause Error
+extractAndConvert({}, "name");
 ```
