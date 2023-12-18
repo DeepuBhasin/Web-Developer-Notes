@@ -499,6 +499,24 @@ cal(1, 2, (result) => console.log(result));
 
 ---
 
+### 📘Destructure using Object Notation
+
+```js
+let obj = {
+  firstName: "Deep",
+  lastName: "Singh",
+  age: 3,
+};
+
+let { firstName, lastName }: { firstName: string; lastName: string } = obj;
+
+console.log(firstName);
+console.log(lastName);
+```
+
+
+---
+
 ## 📔The TypeScript Compiler and its Configuration
 
 ### 📘Using Watch Mode (for single file)
