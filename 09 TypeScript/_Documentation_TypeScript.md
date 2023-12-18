@@ -34,6 +34,16 @@ age = 10;
 
 ![Image](./images/runtime-compile-time.png)
 
+4. TypeScript only cares about **types** not about any **logic**
+
+```js
+function add(a : number, b : number) : number {
+  return a - b ;  // here we are return subtraction not addition 
+}
+
+add(1, 3);
+```
+
 ---
 ### 📘Environment Setup
 * Command for installing Typescript on Globally
@@ -81,7 +91,13 @@ npx tsc index.ts
 ![Image](./images/type-inference-1.png)
 
 * When to use Type Inference
+
 ![Image](./images/type-inference-2.png)
+
+* Inference around function
+
+![Image](./images/typescript-annotation-type-inference-function-arguments.png)
+
 
 ## 📔TypeScript Basics Basic Types
 
