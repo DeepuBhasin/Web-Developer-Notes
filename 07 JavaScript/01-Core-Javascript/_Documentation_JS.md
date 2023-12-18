@@ -326,6 +326,7 @@ isNew = 1;
 1. **Object**
 2. **Array**
 3. **Functions**
+4. **Classes**
 
 ## 📘 Other Data-Structures (ES6)
 1. **Sets :**
