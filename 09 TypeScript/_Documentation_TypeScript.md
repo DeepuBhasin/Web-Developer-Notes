@@ -148,7 +148,7 @@ let isLogin : boolean = true;
 let fullName : string = 'Deepinder Singh';
 ```
 4. Object Type : you can use with *type* and *interface*
-* **interface** : Describe the structure of object. More stronger than *type*
+* **interface** : Describe the structure of object. More stronger than **type**
 ```javascript
 // 1. Defining only object type
 let Person : Object {
@@ -156,7 +156,7 @@ let Person : Object {
   age : 30
 }
 
-// 2. Defining Object type with defined properties
+// 2. Type Annotation
 type Person = {
   name: String;
   age: Number;
@@ -168,10 +168,10 @@ let person: Person = {
 };
 console.log(person.name);
 
-//3. Defining Object type with defined properties with specific values
-type Person = {
-  name: String;
-  age: 30 | 31 | 32;    // defining 3 values only
+//3. interface
+interface Person = {
+  name: string;
+  age: number
 };
 
 let person: Person = {
@@ -181,77 +181,13 @@ let person: Person = {
 
 console.log(person.name);
 ```
-**⚠️Note :** Difference between *type* and *interface*
 
-```js
-// In General we always use type keyword
-
-/*
-For type
-1 you can use on the other data types like on string boolean but interface are only use on object data types only
-*/
-
-type UserType = "Admin" | "Viewer"; // like here we are using on string
-
-interface UserType  {
-  value = "Admin" | "View"
-}
-
-const User = interface.value  // error
-
-/*
-for Interfaces
-1. Implement in Classes
-*/
-
-interface Credentials {
-  email: string;
-  password: string;
-}
-
-let cred: Credentials;
-cred = {
-  email: "dp",
-  password: "dp",
-};
-
-class AuthCredentials implements Credentials {
-  email: string = "ok";
-  password: string = "ok";
-  username: string = "ok";
-}
-
-function Login(credentials: Credentials) {
-  return;
-}
-
-Login(cred);
-Login(new AuthCredentials());
-
-// 2. Extend Interface
-interface CredentialsMode extends Credentials {
-  mode: string;
-}
-```
 
 
 5. Array of String & Nested Array
 
 ```javascript
-type PersonDetails = {
-  hobbies: string[];  // Array<string>
-  speedOfCar: number[];
-  loggedInHistory: boolean[];
-  jobInCompanies: { companyName: string; timeSpent: string }[];
-};
-
-let person: PersonDetails = {
-  hobbies: [],
-  speedOfCar: [],
-  loggedInHistory: [],
-  jobInCompanies: [],
-};
-
+const hobbies : (string | number)[] = ['kite', 10, 'Study']
 ```
 6. Tuple
 ```javascript
@@ -440,6 +376,100 @@ sum(3, 3);
 
 ---
 
+### 📘Interfaces
+
+1. Only Care about property mandatory property
+
+```js
+interface DriveSpeed {
+  // its only cares about this property and it should be exist in object
+  drive: () => string;
+}
+
+const civicCar = {
+  name: "Civic",
+  model: 2018,
+  speed: 1000,
+  drive: function () {
+    return `${this.name} car with ${this.model} runs at ${this.speed} on highway`;
+  },
+};
+
+const fordCar = {
+  name: "Ford",
+  isHandBreak: true,
+  isSuspension: true,
+  speed: 1000,
+  drive: function () {
+    return `${this.name} car runs at ${this.speed} on highway`;
+  },
+};
+
+function checkCarSpeed(obj: DriveSpeed): void {
+  console.log(obj.drive());
+}
+
+checkCarSpeed(civicCar);
+checkCarSpeed(fordCar);
+
+```
+
+2. Difference between Interface and Type
+
+```js
+// In General we always use type keyword
+
+/*
+For type
+1 you can use on the other data types like on string boolean but interface are only use on object data types only
+*/
+
+type UserType = "Admin" | "Viewer"; // like here we are using on string
+
+interface UserType  {
+  value = "Admin" | "View"
+}
+
+const User = interface.value  // error
+
+/*
+for Interfaces
+1. Implement in Classes
+*/
+
+interface Credentials {
+  email: string;
+  password: string;
+}
+
+let cred: Credentials;
+cred = {
+  email: "dp",
+  password: "dp",
+};
+
+class AuthCredentials implements Credentials {
+  email: string = "ok";
+  password: string = "ok";
+  username: string = "ok";
+}
+
+function Login(credentials: Credentials) {
+  return;
+}
+
+Login(cred);
+Login(new AuthCredentials());
+
+// 2. Extend Interface
+interface CredentialsMode extends Credentials {
+  mode: string;
+}
+```
+
+
+---
+
 ### 📘Functions Type
 
 ![Image](./images/typescript-annotation-type-inference-function.png)
@@ -614,6 +644,15 @@ npx tsc --watch
 
 ## 📔Classes Interfaces
 
+* Class, Object, Members, Functions
+* Inheritance (extends & super method)
+* Members and function over-ridding
+* Access Specifiers (public private protected)
+* Static Members & Static methods
+* Abstract
+* interfaces
+---
+
 ### 📘Private and public Access Modifiers
 
 ```js
@@ -645,25 +684,27 @@ obj1.getName();
 class Department {
   constructor(public name: string) {}
 
-  public getName() {
+  public getName(): void {
     console.log(this.name);
   }
+}
 
-  private describe(this: Department) {
-    console.log("ok", this.name);
+class Administrator extends Department {
+  constructor(public headName: string, name: string) {
+    super(name);
+  }
+
+  public headNameHandler(): void {
+    console.log(this.headName);
   }
 }
 
 let obj1 = new Department("Computer Sci");
 obj1.getName();
-```
 
-* Static Members & Static methods
-* Access Specifiers (public private protected)
-* Abstract
-* Inheritance
-* interfaces
----
+let obj2 = new Administrator("Computer Sci", "Deep");
+obj2.getName();
+```
 
 
 ## 📔Advanced Types
