@@ -415,7 +415,7 @@ export default App;
 ---
 
 ### 📘Building Better Wrapper Components with ComponentPropsWithoutRef
-
+* *ComponentPropsWithoutRef* this help use to accept built in props for elements like *input props, a link props button props*
 ```js
 import React, { ComponentPropsWithoutRef } from "react";
 
@@ -445,6 +445,185 @@ function App() {
         />
       </form>
     </div>
+  );
+}
+
+export default App;
+```
+
+---
+### 📘Building a Wrapper Component That Renders Different Elements (button and link)
+
+```js
+import { type ComponentPropsWithoutRef, type ReactNode } from "react";
+
+type ButtonType = {
+  el: "button";
+  children: ReactNode;
+} & ComponentPropsWithoutRef<"button">;
+
+type LinkType = {
+  el: "link";
+  children: ReactNode;
+} & ComponentPropsWithoutRef<"a">;
+
+function Button(props: ButtonType | LinkType) {
+  if (props.el === "button") {
+    return <button>{props.children}</button>;
+  }
+  return <a {...props}>{props.children}</a>;
+}
+
+function App() {
+  return (
+    <div>
+      <Button el="button" type="button">
+        Submit
+      </Button>
+      <Button el="link" href="google.com">
+        Google Link
+      </Button>
+    </div>
+  );
+}
+
+export default App;
+```
+
+---
+
+### 📘Building a Better Polymorphic Component with Generics
+
+```js
+import {
+  type ElementType,
+  type ComponentPropsWithoutRef,
+  type ReactNode,
+} from "react";
+type ContainerType<T extends ElementType> = {
+  as?: T;
+  children: ReactNode;
+} & ComponentPropsWithoutRef<T>;
+
+function Container<C extends ElementType>({
+  children,
+  as,
+  ...otherProps
+}: ContainerType<C>) {
+  const Component = as || "div";
+  return <Component {...otherProps}>{children}</Component>;
+}
+
+function App() {
+  return (
+    <div>
+      <Container as="input" type="text" onClick={() => alert("Hello World")}>
+        Click Me
+      </Container>
+    </div>
+  );
+}
+
+export default App;
+```
+
+---
+
+### 📘Using forwardRef with TypeScript
+
+```js
+import React, { ComponentPropsWithoutRef, forwardRef, useRef } from "react";
+
+type InputType = {
+  label: string;
+  type: string;
+} & ComponentPropsWithoutRef<"input">;
+
+const Input = forwardRef<HTMLInputElement, InputType>(
+  ({ label, type, ...props }: InputType, ref) => {
+    return (
+      <p>
+        <label htmlFor="">{label}</label>
+        <input type={type} {...props} ref={ref} />
+      </p>
+    );
+  }
+);
+
+function App() {
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  function showValue() {
+    console.log(inputRef.current!.value);
+  }
+
+  return (
+    <div>
+      <form>
+        <Input
+          label="FirstName"
+          type="text"
+          placeholder="Enter FirstName"
+          ref={inputRef}
+        />
+        <button type="button" onClick={showValue}>
+          Show Value
+        </button>
+      </form>
+    </div>
+  );
+}
+
+export default App;
+
+```
+
+---
+
+### 📘Sharing Logic with unknown Type Casting (using Form + useRef)
+
+```js
+import {
+  useRef,
+  type ComponentPropsWithoutRef,
+  type FormEvent,
+  type ReactNode,
+} from "react";
+
+type FormType = {
+  children: ReactNode;
+  onSave: (data: unknown) => void;
+} & ComponentPropsWithoutRef<"form">;
+
+function Form({ children, onSave, ...otherProps }: FormType) {
+  const formRef = useRef<HTMLFormElement | null>(null);
+  function handleOnSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData);
+    onSave(data);
+    formRef.current?.reset();
+  }
+  return (
+    <form onSubmit={handleOnSubmit} {...otherProps} ref={formRef}>
+      {children}
+    </form>
+  );
+}
+
+function App() {
+  function handleSave(data: unknown) {
+    const extractData = data as { firstName: string; lastName: string };
+    console.log(extractData);
+  }
+
+  return (
+    <Form action="" method="post" onSave={handleSave}>
+      <input type="text" name="firstName" placeholder="Enter First Name" />
+      <br />
+      <input type="text" name="lastName" placeholder="Enter Last Name" />
+      <br />
+      <button type="submit">Submit</button>
+    </Form>
   );
 }
 

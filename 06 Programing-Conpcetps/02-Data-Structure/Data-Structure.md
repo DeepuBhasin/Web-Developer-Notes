@@ -694,13 +694,13 @@ function linearSearchFind(arr, cb) {
   return undefined;
 }
 ``` 
-* *Time Compexity for Linear Search : O(N) /  Linear Time Complexity*
+* *Time Complexity for Linear Search : O(N) /  Linear Time Complexity*
 * Our Search Algorithm in the worst case needs to iterate over every item in Array to check if it is the value we are looking for.
-* *O(N) / Linear Time Compexity* is the best we can do for searching an __unsorted array__. On a __sorted array__ we can get a much better time compexity with *Binary Search*.
+* *O(N) / Linear Time Complexity* is the best we can do for searching an __unsorted array__. On a __sorted array__ we can get a much better time compexity with *Binary Search*.
 ---
 ## Binary Search
 * It is a Searching Algorithm that can search in O(log n) time for a __sorted__ array, compared to Linear Search's O(N) time for an unsorted array.
-* Binary Search can achive O(Log N) Time Compexity by eliminating __HALF__ of remaining things to search for with each search 
+* Binary Search can achieve O(Log N) Time Compexity by eliminating __HALF__ of remaining things to search for with each search 
 * const sortedNumsArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 ```javascript
@@ -754,10 +754,10 @@ function stringPatternSearch(text, pattern) {
 * *Space Complexity : O(1)* 
 
 ## What is Sorting
-* Sorting is the process of rearranging the items in a collection, to be in a certian order.
+* Sorting is the process of rearranging the items in a collection, to be in a certain order.
 * Sorting is so commonly needed and used
 
-> Different Sorting Algorightms
+> Different Sorting Algorithms
 * Bubble Sort
 * Insertion Sort
 * Selection Sort
@@ -769,7 +769,7 @@ function stringPatternSearch(text, pattern) {
 
 All these different sorts have different time complexities and vary in their difficulty to conceptualize and implement.
 
-## Bubble Sort Pseudocode
+## Bubble Sort Pseudopod
 * Create a for-loop that checks if the current iterated number and the next iterated number are generated or less than each other
 * if current number greater than next number, swap using helper function (using temp variable or Snap shot)
 * Nest above loop in an for-loop that runs Array Length times.
@@ -799,16 +799,16 @@ function bubbleSort(array) {
   return array;
 }
 ```
-* *Time Complexity for Bubble Sort : O(N^2) / Quadratic Time Complexity* with the minor optimization, the true time complexity is 0.5(N^2 + N). But with Big O Simplicfication, this is still O(N^2)
+* *Time Complexity for Bubble Sort : O(N^2) / Quadratic Time Complexity* with the minor optimization, the true time complexity is 0.5(N^2 + N). But with Big O Simplification, this is still O(N^2)
 
 * Optimization Example
-  * For unoptimized solution, let's assume we pass in Array of length 5 to sort
+  * For unOptimized solution, let's assume we pass in Array of length 5 to sort
     * 5^2 : 5 * 5 -> 5 + 5 + 5 + 5 + 5
   * For optimization solution, let's assume we pass in Array of length 5 to sort
     * 5 + 4 + 3 + 2 + 1
     * We are really doing : N + (N - 1) + (N - 2) + ...... + 1 -> n(n+1)/2 -> 0.5(N^2 + N) 
 
-## What is Seletion sort
+## What is Selection sort
 * It is another Sorting Algorithm
 * For sorting an array of numbers from least to greatest, Selection Sort sorts by moving smaller values to the start as iterates thru array
 * Bubble Sort moved larger values to the end as it iterated thru away.
