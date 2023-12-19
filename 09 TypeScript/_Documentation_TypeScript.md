@@ -676,7 +676,7 @@ obj1.getName();
 //obj1.describe();  // this will cause Error
 ```
 
-### Shorthand Initialization
+### 📘Shorthand Initialization
 * no need to create variables
 * no need to create variables with in constructor method
 * just only need to initialize in parameters
@@ -705,6 +705,39 @@ obj1.getName();
 let obj2 = new Administrator("Computer Sci", "Deep");
 obj2.getName();
 ```
+
+**📚 Conceptual Example :** 
+
+```js
+import { faker } from "@faker-js/faker";
+
+class User {
+  name: string;
+  location: {
+    lat: number;
+    lng: number;
+  };
+  constructor() {
+    this.name = faker.person.fullName();
+    /*
+      Because in the above code we have said that it will object and have lat and lng properties but we did not declare hence we will get error if do like in below code
+      this.location.lat = "111"  // cause error
+      this.location.lng = "111"  // cause error 
+    */
+    this.location = {
+      lat: faker.location.latitude(),
+      lng: faker.location.longitude(),
+    };
+  }
+ }
+
+const obj = new User();
+```
+
+
+
+---
+
 
 
 ## 📔Advanced Types
@@ -951,3 +984,14 @@ extractAndConvert({ name: "Dp" }, "name");
 // cause Error
 extractAndConvert({}, "name");
 ```
+### 📘Type Definition Files
+
+* It create a bridge between typescript file and javascript file
+* It help typescript to understand what kind of datatype of parameter required for function and what kind of parameter data type function will return.
+
+![image](./images/type-defination-file.png)
+
+* to Instal type definition files for particular files.
+* these files are with **\<anyFilename>\.d.ts**
+
+![Image](./images/type-defination-file-libray.png)
