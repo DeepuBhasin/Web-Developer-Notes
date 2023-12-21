@@ -491,6 +491,8 @@ console.log(age.toString())
 10. join
 11. at(1) & at(-1)
 12. padStart & padEnd
+13. charCodeAt()
+14. charAt()
 
 * Examples
 
@@ -515,6 +517,13 @@ console.log('I am Web Developer'.slice(3, 7)); // m We
 // 4. includes
 console.log('I am Web Developer'.includes('Web'));  // true
 console.log('I am Web Developer'.includes('test')); // false
+
+// 5. charCodeAt
+"X".charCodeAt()
+
+// 6. charAt
+"Xabcd".charAt(1)   // 'a'
+
 ```
 ---
 
