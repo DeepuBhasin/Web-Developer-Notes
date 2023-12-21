@@ -1198,6 +1198,17 @@ var array = [
 
 arr[3](arra[2].name)   // Hello Tony
 ```
+**📚 Conceptual Example :** Destructing of array method
+
+```js
+function test(arr) {
+    var length = arr.length;
+    console.log(length);
+}
+test([1, 2, 3, 4]);
+```
+
+
 ---
 
 ## 📘 Functions and Default Parameters
