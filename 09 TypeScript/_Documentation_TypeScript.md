@@ -44,6 +44,10 @@ function add(a : number, b : number) : number {
 add(1, 3);
 ```
 
+5. We get common methods when we define type more than one
+
+![Image](./images/two-type.png)
+
 ---
 ### 📘Environment Setup
 * Command for installing Typescript on Globally
@@ -642,14 +646,14 @@ npx tsc --watch
 
 ---
 
-## 📔Classes Interfaces
+## 📔Classes
 
 * Class, Object, Members, Functions
 * Inheritance (extends & super method)
 * Members and function over-ridding
 * Access Specifiers (public private protected)
 * Static Members & Static methods
-* Abstract
+* Abstract Classes (cannot create object of this class)
 * interfaces
 ---
 
@@ -733,12 +737,35 @@ class User {
 
 const obj = new User();
 ```
+### 📘Abstract Classes
+
+```js
+abstract class College {
+  abstract name: string;
+  abstract getName(): string;
+  abstract setName(name: string): void;
+}
+
+class Student extends College {
+  name: string;
+  getName(): string {
+    return this.name;
+  }
+  setName(n: string) {
+    this.name = n;
+  }
+}
+
+let obj = new Student();
+```
+
+### 📘Abstract Vs Interface
+
+![Image](./images/abstract-vs-interface.png)
 
 
 
 ---
-
-
 
 ## 📔Advanced Types
 
@@ -791,7 +818,7 @@ const e1: ElevatedEmployee = {
 ```
 ### 📘More on Type Guards
 
-1. For String : we use *typeof*
+1. **For Primitives** : we use *typeof* like : string, number, boolean, symbol
 
 ```js
 function add(a, b) {
@@ -807,7 +834,7 @@ add(1, 2);
 add("a", "b");
 ```
 
-2. For Object : we use *in*
+2. **For Non-Primitives** : we use *in* for objects only
 
 ```js
 var obj = {
@@ -821,7 +848,7 @@ else {
     console.log("name property does not exist");
 }
 ```
-3. For Class : we use *instanceOf*
+3. **For Function Constructor** : we use *instanceOf* like classes, function constructors
 
 ```js
 class Car {
@@ -844,7 +871,7 @@ type Vehicle = Car | Truck;
 const v1 = new Car();
 const v2 = new Truck();
 
-function useVehicle(vehicle: Vehicle) {
+function useVehicle(vehicle: **Vehicle**) {
   vehicle.drive();
 
   if (vehicle instanceof Truck) {
