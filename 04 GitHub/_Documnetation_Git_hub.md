@@ -3,20 +3,20 @@
 ## 📘What is Git ?	
 1. it is Distribution version Control System (to keep tracks of files) 
 2. it's system that records changes to our files over time 
-3. we can recally specfic versions of those files at any given time
+3. we can really specific versions of those files at any given time
 4. Many people can easily collaborate on a project and have their own version project files on their computer 
 5. Full form of GIT **Global Information Tracker**
 
 > and main advantages of this
 
 * Easily recovers files 
-* Who intrduce issue and when
+* Who introduce issue and when
 * RollBack to previous working state
 * it is based on Distribution System 
-* It capture sanpshot not the difference
+* It capture snapshot not the difference
 * Almost every operation is local 
-* Git has integrity (Check sum (is used to check the origniality (kind of public and private key))) 
-* Git Generaly only adds data (increasing Reposirtoy)
+* Git has integrity (Check sum (is used to check the originality (kind of public and private key))) 
+* Git Generally only adds data (increasing Repository)
 
 ---
 
@@ -24,7 +24,7 @@
 
 * it is git is website which store the git hub repository
 * it is not just a cloud storage but a full version control System powered by git.
-* Central online repository which mutiple team-members could access 
+* Central online repository which multiple team-members could access 
 * github alternatives are gitlab, bitbucket 
 
 ---
@@ -69,7 +69,7 @@ git config --global --list
 git version
 ```
 ---
-## 📘Linux Commnds 
+## 📘Linux Commands  
 1. Return Present Directory path 
 ```
 pwd
@@ -488,8 +488,8 @@ cd ~
 cd .ssh
 ```
 3. List all the keys
-* test_rsa : **private key**
-* test_rsa.pub : **public key**
+* id_rsa : **private key**
+* id_rsa.pub : **public key**
  
 ```
 ls
@@ -497,20 +497,26 @@ ls
 4. Generate Key
 
 ```
-ssh-keygen -f test_rsa
+ssh-keygen -f id_rsa
 ```
 * then hit enters again and again
 
-5. Add private key into your system
+5. Add your SSH key to the ssh-agent:
 
 ```
-ssh-add ~/.ssh/test_rsa
+eval "$(ssh-agent -s)"
 ```
 
-6. Copy Public key and Paste into Git Key section
+6. Add private key into your system
 
 ```
-cat test_rsa.pub
+ssh-add ~/.ssh/id_rsa
+```
+
+7. Copy Public key and Paste into Git Key section
+
+```
+cat id_rsa.pub
 ```
 * Example like this then copy this command and paste into git ssh key section
 
