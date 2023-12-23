@@ -38,7 +38,7 @@ age = 10;
 
 ```js
 function add(a : number, b : number) : number {
-  return a - b ;  // here we are return subtraction not addition 
+  return a - b ;  // here we are return subtraction not addition
 }
 
 add(1, 3);
@@ -88,7 +88,7 @@ npx ts-node index.ts
 
 ---
 
-### 📘 Type Annotations Vs Type Inference 
+### 📘 Type Annotations Vs Type Inference
 * **Type annotations :** Code we add to tell typescript what type of value a variable will refer to
 *  **Type inference :** Typescript tries to figure out what type of value a variables refers to
 
@@ -210,7 +210,10 @@ let person : Person = {
 // Because in tupal we cannot add more than two element
 person.role.push('operator')    // Error
 ```
-7. Enum Type : when want to **use like constants** (when we use *same words* all over that application)
+7. Enum Type : 
+* **Enumeration**
+* when want to **use like constants** (when we use *same words* all over that application)
+* Major difference between *enum and object* is **objects** are use to store various information where are **enum** are collection of very closely related values eg only User-Types : Admin, View, Operator etc like a constant.
 
 ```javascript
 enum Role {
@@ -248,6 +251,11 @@ if (person.role === 1) {
   console.log("Admin");
 }
 ```
+* Where you should use
+
+![Image](./images/enum-type.png)
+
+
 
 8. Any
 * When we use **any** it disabled all type checking.
@@ -534,6 +542,24 @@ function cal(n1 : number, n2 : number, cb : (res : number) => void) : void{
 
 cal(1, 2, (result) => console.log(result));
 ```
+**⚠️ Note :** ShortHand for functions returns
+
+```js
+interface User {
+  firstName: string;
+  lastName: string;
+  getFullName(): string;
+}
+
+let user: User = {
+  firstName: "",
+  lastName: "",
+  getFullName: function (): string {
+    return this.firstName + this.lastName;
+  },
+};
+```
+
 
 ---
 
@@ -710,7 +736,7 @@ let obj2 = new Administrator("Computer Sci", "Deep");
 obj2.getName();
 ```
 
-**📚 Conceptual Example :** 
+**📚 Conceptual Example :**
 
 ```js
 import { faker } from "@faker-js/faker";
@@ -726,7 +752,7 @@ class User {
     /*
       Because in the above code we have said that it will object and have lat and lng properties but we did not declare hence we will get error if do like in below code
       this.location.lat = "111"  // cause error
-      this.location.lng = "111"  // cause error 
+      this.location.lng = "111"  // cause error
     */
     this.location = {
       lat: faker.location.latitude(),
