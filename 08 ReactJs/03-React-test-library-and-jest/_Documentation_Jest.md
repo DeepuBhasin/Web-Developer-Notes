@@ -1,23 +1,396 @@
-### Testing Libraries
+## 📔Code Step by Step
+
+Library Link
+
+```
+https://jestjs.io/docs/api
+```
+
+### 📘Basic
+
+* To run test
+
+```
+npm run test
+```
+* To run Particular File
+
+```
+npm run test App
+```
+
+
+```js
+export const sum = (a: number, b: number): number => {
+  return a + b;
+};
+
+import { sum } from "./sum";
+
+test("Sum of two numbers", () => {
+  const number1 = 10;
+  const number2 = 20;
+  const output = 30;
+
+  // this code is use to test things
+  expect(sum(number1, number2)).toBe(output);
+});
+```
+### 📘How to test
+
+1.1 Table
+
+```js
+test("renders learn react link", () => {
+  render(<App />);
+  const toBeTest = screen.getByText(/First Text to be test/i);
+  expect(toBeTest).toBeInTheDocument();
+});
+
+```
+
+
+| Sr No. | Test For                   | Screen Property                                  | Expected for                  | Expect Property                                       | Extra                                   |
+| ------ | -------------------------- | ------------------------------------------------ | ----------------------------- | ----------------------------------------------------- | --------------------------------------- |
+| 1.     | For any Text               | screen.getByText(/First Text to be test/i)       | Checking for Existence in Dom | expect(toBeTest).toBeInTheDocument();                 | **i** is use for case sensitivity       |
+| 2.     | Alt                        | screen.getByAltText(/logo-img/i)                 | Checking for Existence in Dom | expect(toBeTest).toBeInTheDocument();                 |                                         |
+| 3.     | Title                      | screen.getByTitle(/logo Image/i)                 | Checking for Existence in Dom | expect(toBeTest).toBeInTheDocument()                  |                                         |
+| 4.     | Placeholder                | screen.getByPlaceholderText(/Enter First Name/i) | Checking for Existence in Dom | expect(toBeTest).toBeInTheDocument()                  | All Inputs are written in **table 1.2** |
+| 5.     | Attribute (id, name, type) | screen.getByPlaceholderText(/Enter First Name/i) | Check Attribute Exist         | expect(toBeTest).toHaveAttribute("name", "firstName") |
+
+---
+
+1.2 All Inputs
+
+| Sr no | Html Elements     | Aria Role                   |
+| ----- | ----------------- | --------------------------- |
+| 1     | input,type="text" | screen.getbyRole('textbox') |
+| 2     | button            | button                      |
+| 3     | h1 - h6           | heading                     |
+| 4     | ul li             | list                        |
+| 5     | a                 | link                        |
+| 6     | table thead       | rowgroup                    |
+| 7     | table tbody       | rowgroup                    |
+| 8     | table td          | cell                        |
+| 9     | table tr          | row                         |
+| 10    | table th          | columnheader                |
+
+
+### 📘Groups
+
+```js
+// Helping to creating group
+describe('Text Here', ()=> {});
+
+// To Run particular group only
+describe.only('Text Here',()=> {});
+
+// To Skip group
+describe.skip("Text Here", ()=> {});
+```
+### 📘Events
+
+1. OnChange Event on input
+
+```js
+import React, { useState } from "react";
+
+export const App = () => {
+  const [firstName, setFirstName] = useState<string>("");
+
+  function handleSetFirstName(e: React.ChangeEvent<HTMLInputElement>): void {
+    setFirstName(e.target.value);
+  }
+
+  return (
+    <div className="App">
+      <input
+        type="text"
+        placeholder="Enter First Name"
+        name="firstName"
+        value={firstName}
+        onChange={handleSetFirstName}
+      />
+    </div>
+  );
+};
+
+// Test File
+import { fireEvent, render, screen } from "@testing-library/react";
+import { App } from "./App";
+
+describe("Testing only UI Elements", () => {
+  test("Testing input Element", () => {
+    render(<App />);
+
+    // creating event object
+    const eventObject = {
+      target: {
+        value: "Deepinder Singh",
+      },
+    };
+    const toBeText = screen.getByRole("textbox") as HTMLInputElement;
+
+    // Means we are trigging event like putting values into input
+    fireEvent.change(toBeText, eventObject);
+
+    // expecting that value after entering value
+    expect(toBeText.value).toBe(eventObject.target.value);
+  });
+});
+```
+2. OnClick of Button
+
+```js
+import React, { useState } from "react";
+
+function App() {
+  const [firstName, setFirstName] = useState<string>("Deepu Bhasin");
+
+  function handleSetFirstName(
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ): void {
+    setFirstName("Deepinder Singh");
+  }
+
+  return (
+    <div>
+      <p>{firstName}</p>
+      <button type="button" onClick={handleSetFirstName}>
+        Click Me
+      </button>
+    </div>
+  );
+}
+
+export default App;
+
+// Test File
+import { fireEvent, render, screen } from "@testing-library/react";
+import App from "./App";
+
+describe("Testing only UI Elements", () => {
+  test("Rendering Button Only", () => {
+    render(<App />);
+    const firstName = screen.getByText("Deepu Bhasin");
+    expect(firstName).toBeInTheDocument();
+  });
+
+  test("Firing event from button", () => {
+    render(<App />);
+    const btn = screen.getByRole("button") as HTMLButtonElement;
+
+    // Means we are trigging event like clicking button
+    fireEvent.click(btn);
+
+    // expecting that value after entering value
+    expect(screen.getByText("Deepinder Singh")).toBeInTheDocument();
+  });
+});
+```
+
+### 📘Extensions
+1. For Files
+* App.test.js
+* App.test.tsx
+* App.test.jsx
+* App.spec.js
+* App.spec.tsx
+* App.spec.jsx
+
+2. For Folder
+* \_\_tests\_\_ : You can put any file name in this folder it will run that file automatically
+
+### 📘Hooks
+
+1. beforeAll() : run only once before all test
+2. beforeEach() : run every time before each test
+3. afterAll() : run only once after all test
+4. afterEach() :  run every time after each test
+
+```js
+before(("Text Here")=> {
+    // initialization every thing here
+})
+```
+
+### 📘Functional Component Method(functions) Testing
+
+* Helper.ts
+```js
+export const getString = (): string => {
+  console.log("hi");
+
+  return "hi";
+};
+
+export const getSum = (a: number, b: number): number => {
+  console.log(a + b);
+  return a + b;
+};
+```
+
+* App.tsx
+
+```js
+import React, { useState } from "react";
+import { getString, getSum } from "./helper";
+
+function App() {
+  const [firstName, setFirstName] = useState<string>("Deepu Bhasin");
+
+  function handleSetFirstName(
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ): void {
+    setFirstName("Deepinder Singh");
+  }
+
+  return (
+    <div>
+      <p>{firstName}</p>
+      <button
+        type="button"
+
+        // using of test data id
+
+        data-testid="btn-click"
+        onClick={handleSetFirstName}
+      >
+        Click Me
+      </button>
+      <button onClick={getString}>Get String</button>
+      <button onClick={() => getSum(1, 2)}>get Sum</button>
+    </div>
+  );
+}
+
+export default App;
+```
+
+* App.test.tsx
+
+```js
+import { fireEvent, render, screen } from "@testing-library/react";
+import App from "./App";
+import { getString, getSum } from "./helper";
+
+describe("Internal Component Functions", () => {
+  test("Firing event from button", () => {
+    render(<App />);
+
+    // get value from the test id
+    const btn = screen.getByTestId("btn-click") as HTMLButtonElement;
+    fireEvent.click(btn);
+    expect(screen.getByText("Deepinder Singh")).toBeInTheDocument();
+  });
+});
+
+describe("External Component Functions", () => {
+  test("Helper functions", () => {
+    expect(getString()).toMatch("hi");
+    expect(getSum(1, 2)).toBe(3);
+  });
+});
+```
+
+### 📘RTL
+* This is test library which is use to find UI Element like button, input, heading, any thing etc.
+
+* Steps in testing UI
+  1. Render Component
+  2. Find element and action
+  3. Assertions 
+
+* Type of RTL Queries
+  1. Find Single Element
+     1. getBy
+     2. queryBy
+     3. findBy
+  2. Find Multiple elements
+     1. getAllBy
+     2. queryAllBy
+     3. findAllBy
+
+Table 2
+
+| Sr No | Type      | Description            | syntax                                         | Examples                    |
+| ----- | --------- | ---------------------- | ---------------------------------------------- | --------------------------- |
+| 1     | getbyRole | use for Semantics tags | screen.getByRole("button", {name : "Click 1"}) | input, button, headings etc |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### 📘Testing Libraries
 ![Images](./images/1-various-pacakages.png)
 
 ---
 
-### ARIA ROLE && Finding Element
-#### 1. Role 
+### 📘Basic Structure
 
-|Sr no|Html Elements | Aria Role|
-|-|-|-|
-|1|input,type="text"|screen.getbyRole('textbox')|
-|2|button|button|
-|3|h1 - h6|heading|
-|4|ul li|list|
-|5|a|link|
-|6|table thead|rowgroup|
-|7|table tbody|rowgroup|
-|8|table td|cell|
-|9|table tr|row|
-|10|table th|columnheader|
+```js
+test('Describe the test', ()=> {
+    // render the component
+
+    // Manipulate the component of find an element in it
+
+    // Assertion - make sure the component is doing
+    // what we expect it to do
+})
+```
+
+### ARIA ROLE && Finding Element
+#### 1. Role
+
+| Sr no | Html Elements     | Aria Role                   |
+| ----- | ----------------- | --------------------------- |
+| 1     | input,type="text" | screen.getbyRole('textbox') |
+| 2     | button            | button                      |
+| 3     | h1 - h6           | heading                     |
+| 4     | ul li             | list                        |
+| 5     | a                 | link                        |
+| 6     | table thead       | rowgroup                    |
+| 7     | table tbody       | rowgroup                    |
+| 8     | table td          | cell                        |
+| 9     | table tr          | row                         |
+| 10    | table th          | columnheader                |
 
 #### 2. Label
 
@@ -28,22 +401,22 @@
 <script>
     // 1 method
     screen.getByLabelText(/enter email/i);
-    
+
     // 2 method (best one)
     screen.getByRole('textbox', {name : /enter email/i});
-</script> 
+</script>
 ```
 * very useful in the case of re-order of html input elements
 
 #### Excape hatches
 
-* __These is not a good practice for testing__ but __data-testid__ is more use than __container.querySelector()__ 
+* __These is not a good practice for testing__ but __data-testid__ is more use than __container.querySelector()__
 * Sometimes finding elements by role just doesn't work well
-* Two 'excape hatches' - ways to find elements when then preffered 'role' approach doesn't work 
-  
-  
-  1. data-testid _Fallback #1_ 
-  2. conatiner.querySelector() _Fallback #2_ 
+* Two 'excape hatches' - ways to find elements when then preffered 'role' approach doesn't work
+
+
+  1. data-testid _Fallback #1_
+  2. conatiner.querySelector() _Fallback #2_
 
 ```javascript
 import React from "react";
@@ -85,7 +458,7 @@ test('render one row per user', () => {
 
     // find all the row in the table
     const rows = within(screen.getByTestId('user')).getAllByRole('rows');
-    
+
     //Assertion
     expect(rows).toHaveLength(2);
 });
@@ -144,27 +517,27 @@ screen.logTestingPlaygroundURL();
 this comment will give you __URL__ in terminal you just need to copy paste that link after that you will get suggestions for various __queries__
 
 ### Assertion
-|Sr no| Type| Explain|
-|-|-|-|
-|1|toHaveLength(2)|will find exact 2 number ot things|
-|2|toBeinTheDocument()|will find the element in the document|
-|3|expext(nameInput).toHaveValue('')| will find the exact value of any input|
+| Sr no | Type                              | Explain                                |
+| ----- | --------------------------------- | -------------------------------------- |
+| 1     | toHaveLength(2)                   | will find exact 2 number ot things     |
+| 2     | toBeinTheDocument()               | will find the element in the document  |
+| 3     | expext(nameInput).toHaveValue('') | will find the exact value of any input |
 
 
 ![Images](./images/4-4-expect.png)
 
 
 
-### Jest Vs RTL 
+### Jest Vs RTL
 
-__JEST__ : 
+__JEST__ :
 * Jest is javascript testing framework
 * Jest is a test runner that find tests, runs the tests, determines whether the tests passed or failed and reports it back in a human readable manner.
 
-__RTL__ : 
+__RTL__ :
 * javascript testing utility that provides virtual DOM for testing React Component.
-* Testing library is infact a family packages which helps test UI components
-* The core library is called DOM testing library and RTL is simaply a wrapper around this core library to test React applications in an easier way.
+* Testing library is infect a family packages which helps test UI components
+* The core library is called DOM testing library and RTL is simply a wrapper around this core library to test React applications in an easier way.
 ---
 
 ### 📘Anatom of a Test
@@ -202,13 +575,13 @@ test('Greet Render Correctly',()=> {
     render(<Greet/>);
     const textElement = screen.getByText(/Hello/i);
     expect(textElement).toBeInTheDocument();
-}) 
+})
 
 test('Greet Render Correctly',()=> {
     render(<Greet name="Deepu"/>);
     const textElement = screen.getByText(/Hello Deepu/i);
     expect(textElement).toBeInTheDocument();
-}) 
+})
 ```
 ```
 npm run test
@@ -234,12 +607,12 @@ A metric that can help you understand how much of your software code is tested.
 
 ```javascript
 // add this line into json-packege.json
-"coverage" : "yarn test --coverage"         
+"coverage" : "yarn test --coverage"
 ```
 1. _yarn test --coverage_ : will return data when files get changed.
 2. _yarn test --coverage --watchAll_ : will return all test with meaningful report.
-3. _yarn test --coverage --watchAll --collectCoverageFrom='src/components/**/*.{ts,tsx}'_ : it will cover all the files which are located in __src/component/__ folders with __ts__ or __tsx__ extentions  
-4. _yarn test --coverage --watchAll --collectCoverageFrom='!src/components/**/*.{types, stories,contants,test,spec}.{ts,tsx}'_ : this is use for ignoring all other files which are located in src folder using __!__ (not operator)  
+3. _yarn test --coverage --watchAll --collectCoverageFrom='src/components/**/*.{ts,tsx}'_ : it will cover all the files which are located in __src/component/__ folders with __ts__ or __tsx__ extentions
+4. _yarn test --coverage --watchAll --collectCoverageFrom='!src/components/**/*.{types, stories,contants,test,spec}.{ts,tsx}'_ : this is use for ignoring all other files which are located in src folder using __!__ (not operator)
 
 ![Image](./images/coverager.png)
 ---
@@ -275,13 +648,13 @@ describe('Greet', ()=> {
         render(<Greet/>);
         const textElement = screen.getByText(/Hello/i);
         expect(textElement).toBeInTheDocument();
-    }) 
+    })
 
     test('Greet Render Correctly',()=> {
         render(<Greet name="Deepu"/>);
         const textElement = screen.getByText(/Hello Deepu/i);
         expect(textElement).toBeInTheDocument();
-    }) 
+    })
 })
 
 ```
@@ -295,11 +668,11 @@ describe('Greet', ()=> {
 
 ![Images](./images/4-1-render.png)
 
-in this image, when ever we __render__ a __component__ a __Fake Browser Environment__ is created in __NodeJs Environment__ by library called __JS Dom__ it like create html elements over there.  
+in this image, when ever we __render__ a __component__ a __Fake Browser Environment__ is created in __NodeJs Environment__ by library called __JS Dom__ it like create html elements over there.
 
 ![Images](./images/4-2-screen.png)
 
-in this image, we can access the element that are created in Fake Browser Environment by using __screen__ object and that is imported from __react-testing-library__ 
+in this image, we can access the element that are created in Fake Browser Environment by using __screen__ object and that is imported from __react-testing-library__
 
 ![Images](./images/4-3-aria-roles.png)
 
@@ -307,19 +680,19 @@ These are the various roles used while testing
 
 > Various Queries
 
-__Screen Methods__ 
+__Screen Methods__
 
-|Sri|Query|Detail|
-|---|-----|------|
-|1. |getAllByRoles|Will find mutilple elements in fake environment|
-|2. |getByRoles|Will find exact Single elements in fake environment if it found more then one or less than one it will return error|
-|3. |getByText|To check that text exist on the document|
+| Sri | Query         | Detail                                                                                                              |
+| --- | ------------- | ------------------------------------------------------------------------------------------------------------------- |
+| 1.  | getAllByRoles | Will find mutilple elements in fake environment                                                                     |
+| 2.  | getByRoles    | Will find exact Single elements in fake environment if it found more then one or less than one it will return error |
+| 3.  | getByText     | To check that text exist on the document                                                                            |
 
-__Expect Methods (Assertions)__ 
+__Expect Methods (Assertions)__
 
-|Sri|Query|Combine with|Detail|
-|---|-----|------|------------|
-|1.|toBeInTheDocument|getByText|Find the text with in the document|
+| Sri | Query             | Combine with | Detail                             |
+| --- | ----------------- | ------------ | ---------------------------------- |
+| 1.  | toBeInTheDocument | getByText    | Find the text with in the document |
 
 ![Images](./images/4-6-rtl-queries.png)
 
