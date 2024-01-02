@@ -53,18 +53,6 @@ test("Sum of two numbers", () => {
 ```
 
 
-### 📘Groups
-
-```js
-// Helping to creating group
-describe('Text Here', ()=> {});
-
-// To Run particular group only
-describe.only('Text Here',()=> {});
-
-// To Skip group
-describe.skip("Text Here", ()=> {});
-```
 ### 📘Events
 
 1. OnChange Event on input
@@ -300,180 +288,6 @@ describe("Check UI", () => {
 
 
 
-
-
-
-
-
-### 📘getAllByRole
-
-```js
-function App() {
-  return (
-    <div>
-      <button>Click</button>
-      <button>Click</button>
-      <button>Click</button>
-      <button>Click</button>
-      <button>Click</button>
-      <button>Click</button>
-      <button>Click</button>
-      <button>Click</button>
-    </div>
-  );
-}
-
-export default App;
-
-// test 
-import { render, screen } from "@testing-library/react";
-import App from "./App";
-
-describe("Checking getAllByRole", () => {
-  test("Calculate the total length", () => {
-    render(<App />);
-    const btn = screen.getAllByRole("button");
-
-    // Checking length
-    expect(btn).toHaveLength(8);
-
-    // checking exist of not
-    for (let i = 0; i < btn.length; i++) {
-      expect(btn[i]).toBeInTheDocument();
-    }
-  });
-});
-```
-
-### 📘getByDisplayValue
-```js
-function App() {
-  return (
-    <div>
-      <input type="text" name="firstName" defaultValue="Deepu" />
-      <input type="text" name="firstName" defaultValue="Deepinder Singh" />
-    </div>
-  );
-}
-
-export default App;
-
-// Test
-import { render, screen, configure } from "@testing-library/react";
-import App from "./App";
-configure({ testIdAttribute: "id" });
-describe("Check UI", () => {
-  test("Re-Rendering", () => {
-    render(<App />);
-    let inputValue1 = screen.getByDisplayValue("Deepu");
-    expect(inputValue1).toBeInTheDocument();
-
-    let inputValue2 = screen.getByDisplayValue("Deepinder Singh");
-    expect(inputValue2).toBeInTheDocument();
-  });
-});
-```
-
-
----
-
-### 📘queryByRole
-* is use for not visible in DOM
-```js
-import { useState } from "react";
-
-function App() {
-  const [show, setShow] = useState<boolean>(false);
-
-  return (
-    <div>
-      <button type="button" onClick={() => setShow((n) => !n)}>
-        Switch Button
-      </button>
-      <br />
-      {show && (
-        <button type="button" onClick={() => alert("Hello World")}>
-          Profile Button
-        </button>
-      )}
-    </div>
-  );
-}
-
-export default App;
-
-// test
-import { render, screen, configure } from "@testing-library/react";
-import App from "./App";
-configure({ testIdAttribute: "id" });
-
-describe("Check UI", () => {
-  test("testing with queryByAll", () => {
-    render(<App />);
-    let btn = screen.queryByRole("button", { name: "Profile Button" });
-    expect(btn).not.toBeInTheDocument();
-  });
-});
-```
-
----
-
-### 📘findByRole
-* is use for async/await task
-
-```js
-import { useEffect, useState } from "react";
-
-function App() {
-  const [show, setShow] = useState<boolean>(false);
-
-  useEffect(() => {
-    const timeoutId = setTimeout(function () {
-      setShow((n) => !n);
-    }, 1000);
-
-    // Clear the timeout on component unmount (cleanup)
-    return () => clearTimeout(timeoutId);
-  }, []);
-
-  return (
-    <div>
-      <button type="button" onClick={() => setShow((prevShow) => !prevShow)}>
-        Switch Button
-      </button>
-      <br />
-      {show && (
-        <button type="button" onClick={() => alert("Hello World")}>
-          Profile Button
-        </button>
-      )}
-    </div>
-  );
-}
-
-export default App;
-
-// test
-import { render, screen, configure } from "@testing-library/react";
-import App from "./App";
-configure({ testIdAttribute: "id" });
-
-describe("Check UI", () => {
-  test("testing with queryByAll", async () => {
-    render(<App />);
-    let btn = await screen.findByRole(
-      "button",
-      { name: "Profile Button" },
-      { timeout: 3000 }
-    );
-    expect(btn).toBeInTheDocument();
-  });
-});
-```
-
-
-
-
 ---
 
 ### 📘withIn()
@@ -508,88 +322,9 @@ describe("Check UI", () => {
 });
 ```
 
-### 📘UserEvent Library + Act function
-1. Click Event
 
-Please first update your version to 14
 
-```
-npm install user-event@14
-```
-Example
-
-```js
-import { useState } from "react";
-
-function App() {
-  const [name, setName] = useState<string>("Hello World");
-  return (
-    <div>
-      <h1>{name}</h1>
-      <button onClick={() => setName("Hi World")}>Change</button>
-    </div>
-  );
-}
-
-export default App;
-
-// test
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import App from "./App";
-
-test("Testing User Event", async () => {
-  userEvent.setup();
-  render(<App />);
-  let btn = screen.getByRole("button", { name: "Change" });
-    await act(async () => await userEvent.type(btn, "Hi World"));
-  expect(
-    screen.getByRole("heading", { name: /Hi world/i })
-  ).toBeInTheDocument();
-});
-
-```
-2. OnChange Event
-
-```js
-import { useState } from "react";
-
-function App() {
-  const [name, setName] = useState<string>("");
-  return (
-    <div>
-      <h1>{name}</h1>
-      <label htmlFor="name">Name</label>
-      <input
-        id="name"
-        type="text"
-        name="firstName"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-    </div>
-  );
-}
-
-export default App;
-
-// test
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import App from "./App";
-
-test("Testing User Event", async () => {
-  userEvent.setup();
-  render(<App />);
-  let btn = screen.getByRole("textbox", { name: "Name" });
-  await act(async () => await userEvent.type(btn, "Hi World"));
-  expect(
-    screen.getByRole("heading", { name: /Hi world/i })
-  ).toBeInTheDocument();
-});
-```
-
-### 📘Props Testing 
+### 📘Props Testing
 1. Passing values only
 
 ```js
@@ -685,42 +420,6 @@ test("Testing User Event", async () => {
 ![Images](./images/1-various-pacakages.png)
 
 ---
-
-
-
-
-
-
----
-### Testing Playground
-
-```javascript
-screen.logTestingPlaygroundURL();
-
-
-//  https://testing-playground.com/#markup=DwEwlgbgfMAuCGAjANgUxrAFq+IMCcNMoA5eAW1WAHosioBRc+MZGu9w97XDRAexABPAhjwAreADsqtPHAnTUAAUkyAdAGN+5dvNpdYhvAGcKs2PMtQzlZba069MAy9gDhbpGhfhoQA
-```
-this comment will give you __URL__ in terminal you just need to copy paste that link after that you will get suggestions for various __queries__
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
----
-Code Evolution
 
 ### Jest Vs RTL
 
@@ -826,9 +525,19 @@ A metric that can help you understand how much of your software code is tested.
 
 * use for grouping the test
 
-```javascript
-describe('string',()=> {});
+Syntax
+```js
+// Helping to creating group
+describe('Text Here', ()=> {});
+
+// To Run particular group only
+describe.only('Text Here',()=> {});
+
+// To Skip group
+describe.skip("Text Here", ()=> {});
 ```
+
+Example
 
 ```javascript
 describe('Greet', ()=> {
@@ -846,6 +555,9 @@ describe('Greet', ()=> {
 })
 
 ```
+
+---
+
 
 ### 📘Assertions & All Expect functions
 * When writing tests, we often need to check that values meet certain conditions.
@@ -882,31 +594,32 @@ describe('Greet', ()=> {
    1. Test Component renders
    2. Test component renders with props
    3. Test component renders in different states
-   4. Test Component reacts to events 
+   4. Test Component reacts to events
 
-2. Not 
+2. Not
    1. Implementation details (login)
    2. Third party code
    3. Code that is not important from a user point of view
 
+---
 
-### 📘RTL
+### 📘RTL (React Testing Library)
 * This is test library which is use to find UI Elements on the page like button, input, heading, any thing etc.
 
 * Steps in testing UI
   1. Render Component
   2. Find element and action
-  3. Assertions 
+  3. Assertions
 
 * Type of RTL Queries
-  
+
   1. Find Single elements
-     1. getBy
-     2. queryBy
-     3. findBy
-  
+     1. getBy : **if not found return error**
+     2. queryBy : **return null if no elements match**
+     3. findBy: **return a Promise which resolves when an element is found**
+
   2. Find Multiple elements
-     1. getAllBy
+     1. getAllBy :
      2. queryAllBy
      3. findAllBy
 
@@ -914,18 +627,58 @@ describe('Greet', ()=> {
 
 ---
 
-## 📔getBy... Queries
+## 📔getBy... & getAllBy... Queries
 
-* getBy.. class of queries return the matching node for a query, and **throw a descriptive error if no elements match or if more than one match is found**
+* **getBy..** class of queries return the matching node for a query, and **throw a descriptive error if no elements match or if more than one match is found**
 
-### 📘getByRole
+* **getAllBy...** returns an array of all matching nodes for a query and throws an error if no elements match.
+
+> 8 Different query methods & Priority Order for Queries
+1. getByRole
+2. getByLabelText
+3. getByPlaceholderText
+4. getByText
+5. getByDisplayValue
+6. getByAltText
+7. getByTitle
+8. getByTestId
+
+> Table of all getByQueries
+
+| Sr No | Type                    | Description                                                                        |
+| ----- | ----------------------- | ---------------------------------------------------------------------------------- |
+| 1     | getByRole               | use for Semantics tags                                                             |
+| 2     | getAllByRole            | use for Semantics tags                                                             |  |  |
+| 3     | getByPlaceholderText    | use for elements which have placeholder attribute                                  |  |  |
+| 4     | getAllByPlaceholderText | use for elements which have placeholder attribute                                  |  |
+| 5     | getByText               | use for div, p,headings, buttons                                                   |
+| 6     | getAllByPlaceHolder     | use for div, p,headings, buttons                                                   |
+| 7     | getByTestId             | use for attach data-testId attribute to any element                                |
+| 8     | getAllByTestId          | use for attach data-testId attribute to any element                                |
+| 9     | getByDisplayValue       | returns the input, textarea, or select element that has the matching display value |
+| 10    | getAllByDisplayValue    | returns the input, textarea, or select element that has the matching display value |
+| 11    | getByTitle              | use for title attribute                                                            |
+| 12    | getAllByTitle           | use for title attribute                                                            |
+| 13    | getByAltText            | use for image alt attribute                                                        |
+| 14    | getAllByAltText         | use for image alt attribute                                                        |
+| 15    | getByLabelText          | use for label of form elements                                                     |
+| 16    | getAllByLabelText       | use for label of form elements                                                     |
+
+
+
+---
+
+### 📘getByRole & getAllByRole
+
+1. **getByRole**
+
 * Always give high priority than other **getBy...**
-* **getByRole** queries for elements with the given role. 
-* **Role** refers to the **ARIA (Accessible Rich Internet Applications)** role which provides **semantic meaning** to content to ensure people using assistive technologies are able to use them. 
+* **getByRole** queries for elements with the given role.
+* **Role** refers to the **ARIA (Accessible Rich Internet Applications)** role which provides **semantic meaning** to content to ensure people using assistive technologies are able to use them.
 
 
 * By default, **many semantics elements in HTML have a role**
- 
+
   | Sr  | Type              | Role                        |
   | --- | ----------------- | --------------------------- |
   | 1   | input,type="text" | screen.getbyRole('textbox') |
@@ -934,7 +687,8 @@ describe('Greet', ()=> {
   | 4   | h1 to h6          | Heading role                |
   | 5   | checkbox          | checkbox role               |
   | 6   | Radio buttons     | radio role                  |
-  | 7   | ul li             | list                        |
+  | 7   | ul                | list                        |
+  | 7   | li                | listitem                    |
   | 8   | table thead       | rowgroup                    |
   | 9   | table tbody       | rowgroup                    |
   | 10  | table td          | cell                        |
@@ -947,28 +701,6 @@ describe('Greet', ()=> {
   ```html
   <div role="hello-world-text"> Hello Worl </div>
   ```
-
-> Table of all getByQueries
-
-| Sr No | Type                 | Description                               |
-| ----- | -------------------- | ----------------------------------------- |
-| 1     | getByRole            | use for Semantics tags                    |
-| 2     | getAllByRole         | use for Semantics tags                    |  |  |
-| 3     | getByPlaceHolder     | elements which have placeholder property  |  |  |
-| 4     | getAllByPlaceHolder  | elements which have placeholder property  |  |
-| 5     | getByText            | usefor div, p,headings, buttons           |
-| 6     | getAllByPlaceHolder  | use for div, p,headings, buttons          |
-| 7     | getByTestId          | use for attach data-testId to any element |
-| 8     | getAllByTestId       | use for attach data-testId to any element |
-| 9     | getByDisplayValue    | for showing value in inputs               |
-| 10    | getAllByDisplayValue | use for showing value in inputs           |
-| 11    | getByTitle           | use for title attributes                  |
-| 12    | getAllByTitle        | use for title                             |
-| 13    | getByAltText         | use for image alt attribute               |
-| 14    | getAllByAltText      | use for image alt attribute               |
-| 15    | getByLabelText       | use for label of form elements            |
-| 16    | getAllByLabelText    | use for label of form elements            |
-<br/>
 
 
 > Various options for getRole
@@ -1009,4 +741,353 @@ test("Testing getByRole with name option", () => {
   expect(submitBtn).toBeInTheDocument();
 });
 ```
+2. **getAllByRoles**
 
+```js
+const userName = ["Deep", "Dp", "Deepinder Singh"];
+function App() {
+  return (
+    <div>
+      <ul>
+        {userName.map((e) => (
+          <li key={e}>{e}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default App;
+
+// test
+import { render, screen } from "@testing-library/react";
+import App from "./App";
+
+describe("App.test", () => {
+  test("Render Ul element", () => {
+    render(<App />);
+    const ulElement = screen.getByRole("list");
+    expect(ulElement).toBeInTheDocument();
+  });
+
+  test("Render li elements", () => {
+    render(<App />);
+    const liItems = screen.getAllByRole("listitem");
+    expect(liItems).toHaveLength(liItems.length);
+  });
+});
+```
+
+---
+
+### 📘textMatch
+
+* TextMatch represents a type which can be either a
+  1. String
+  2. Regex
+  3. Function (no need to learn)
+
+Example
+
+```html
+<div>Hello World</div>
+```
+
+1. String
+
+```js
+screen.getByText('Hello World') // full string match
+
+screen.getByText('llo Wor', {exact : false}) // substring match
+
+screen.getByText('hello world', {exact : false}) // ignore case
+```
+
+2. Regex
+
+```js
+screen.getByText(/World/) // substring match
+
+screen.getByText(/world/i) // substring match, ignore case
+
+screen.getByText(/^hello world$/i) // full string match ignore case
+```
+
+3. Function
+
+```js
+screen.getByText((content)=> content.startsWith('Hello'))
+```
+
+---
+
+## 📔queryBy... & queryAllBy... Queries
+1. **queryBy**
+
+* Returns the matching node for a query and **return null if no elements match**
+* **UseFull for asserting an element that is not present in the DOM**
+* Throws an error if more than one match is found
+
+2. **queryAllBy**
+
+* Returns an array of all matching nodes for a query and return an empty array no elements match
+---
+
+### 📘queryByRole
+* is use for not visible in DOM
+
+```js
+import { useState } from "react";
+
+function App() {
+  const [show, setShow] = useState<boolean>(false);
+
+  return (
+    <div>
+      <button type="button" onClick={() => setShow((n) => !n)}>
+        Toggle Button
+      </button>
+      <br />
+      {show && <h1>Hello World</h1>}
+    </div>
+  );
+}
+export default App;
+
+// test
+import { render, screen } from "@testing-library/react";
+import App from "./App";
+
+test("testing with queryByAll", () => {
+  render(<App />);
+  let btn = screen.queryByRole("heading", { name: /Hello World/i });
+  expect(btn).not.toBeInTheDocument();
+});
+```
+
+---
+
+## 📔findBy... & findAllBy... Queries
+
+* What if elements are not present in the DOM to begin but make their way into the DOM after some time ?
+  * For example, data that is fetched from a server will be rendered only after a few milliseconds
+
+1. **findBy**
+* Returns a Promise which resolves when an element is found which matches the given query
+* **The Promises is rejected of no element is found or if more than one element is found after a default timeout of 1000ms**
+
+---
+
+### 📘findByRole
+* is use for async/await task
+
+```js
+import { useEffect, useState } from "react";
+
+function App() {
+  const [show, setShow] = useState<boolean>(false);
+
+  useEffect(() => {
+    let id = setTimeout(() => {
+      setShow((n) => !n);
+    }, 1000);
+    return () => clearTimeout(id);
+  }, []);
+
+  return (
+    <div>
+      <button type="button" onClick={() => setShow((prevShow) => !prevShow)}>
+        Toggle Button
+      </button>
+      <br />
+      {show && <h1>Hello World</h1>}
+    </div>
+  );
+}
+
+export default App;
+
+// test
+import { render, screen } from "@testing-library/react";
+import App from "./App";
+
+test("testing useEffect with findBy", async () => {
+  render(<App />);
+  let btn = await screen.findByRole(
+    "button",
+    { name: /Toggle Button/i },
+    { timeout: 3000 }
+  );
+  expect(btn).toBeInTheDocument();
+});
+
+```
+---
+## 📔Debugging
+
+1. Debug
+
+```js
+// use this line any where and it will print DOM in terminal
+screen.debug();
+```
+
+2. logRoles
+
+```js
+import { render, screen, logRoles } from "@testing-library/react";
+import App from "./App";
+
+test("testing useEffect with findBy", async () => {
+  const { container } = render(<App />);
+
+  // to print all roles on page
+  logRoles(container;)
+
+  let btn = await screen.findByRole(
+    "button",
+    { name: /Toggle Button/i },
+    { timeout: 2000 }
+  );
+
+  expect(btn).toBeInTheDocument();
+});
+```
+---
+### 📘Testing Playground
+1. Testing playground extension
+
+
+2. Testing playground Function
+```javascript
+screen.logTestingPlaygroundURL();
+
+
+//  https://testing-playground.com/#markup=DwEwlgbgfMAuCGAjANgUxrAFq+IMCcNMoA5eAW1WAHosioBRc+MZGu9w97XDRAexABPAhjwAreADsqtPHAnTUAAUkyAdAGN+5dvNpdYhvAGcKs2PMtQzlZba069MAy9gDhbpGhfhoQA
+```
+this comment will give you __URL__ in terminal you just need to copy paste that link after that you will get suggestions for various __queries__
+
+---
+
+## 📔User Interactions 
+
+### 📘user-event
+
+* A companion library for testing library that simulates user interactions by dispatching  the event that would happen if the interaction took place in browser
+
+>fireEvent vs user-event
+
+* fireEvent is a method from RTL which is used to dispatch DOM events
+* user-event simulates full interactions, which may fire multiple events and do additional checks along the way.
+
+
+**Please first update your version to 14**
+
+```
+npm install user-event@14
+```
+
+**📚 Note :** All userEvents are **async**
+
+---
+
+
+### 📘Various userEvent Interaction
+
+
+1. Mouse Event : **Click Event **
+
+Example
+
+```js
+import { useState } from "react";
+
+function App() {
+  const [name, setName] = useState<string>("Hello World");
+  return (
+    <div>
+      <h1>{name}</h1>
+      <button onClick={() => setName("Hi World")}>Change</button>
+    </div>
+  );
+}
+
+export default App;
+
+// test
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import App from "./App";
+
+test("Testing userEvent for mouse event", async () => {
+  userEvent.setup();
+  render(<App />);
+  let btn = screen.getByRole("button", { name: "Change" });
+    await act(async () => await userEvent.type(btn, "Hi World"));
+  expect(
+    screen.getByRole("heading", { name: /Hi world/i })
+  ).toBeInTheDocument();
+});
+
+```
+2. Keyboard Event : **OnChange Event**
+
+```js
+import { useState } from "react";
+
+function App() {
+  const [name, setName] = useState<string>("");
+  return (
+    <div>
+      <h1>{name}</h1>
+      <label htmlFor="name">Name</label>
+      <input
+        id="name"
+        type="text"
+        name="firstName"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+    </div>
+  );
+}
+
+export default App;
+
+// test
+import { act, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import App from "./App";
+
+test("Testing User Event", async () => {
+  userEvent.setup();
+  render(<App />);
+  let inputElement = screen.getByRole("textbox", { name: "Name" });
+  await act(async () => await userEvent.type(inputElement, "Hello World"));
+  expect(
+    screen.getByRole("heading", { name: /Hello world/i })
+  ).toBeInTheDocument();
+});
+
+test("Elements are focused in the right order", async () => {
+  userEvent.setup();
+  render(<App />);
+  let inputElement = screen.getByRole("textbox", { name: "Name" });
+  let btn = screen.getByRole("button", { name: /Button/i });
+
+  // for input
+  await act(async () => await userEvent.tab());
+  expect(inputElement).toHaveFocus();
+
+  // for button
+  await act(async () => await userEvent.tab());
+  expect(btn).toHaveFocus();
+});
+
+```
+
+| Sr No | Category  | Events                                                                                                                |
+| ----- | --------- | --------------------------------------------------------------------------------------------------------------------- |
+| 1     | Mouse     | 1. click() <br/> 2.dbClick() <br/> 3.tripleClick() <br/> 4. hover() <br/> unhover()                                   |
+| 2     | keyboard  | 1. type <br/> 2. tab() <br/> 3. clear() <br/> 4. selectOption()   <br/> 5. deselectOptions() <br/> 6. upload() {file} |
+| 3     | clipboard | 1. copy() <br/> 2. cut() <br/> 3. paste()                                                                             |
