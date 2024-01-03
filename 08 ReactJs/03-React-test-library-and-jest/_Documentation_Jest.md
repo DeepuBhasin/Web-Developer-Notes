@@ -1,10 +1,16 @@
-## 📔Code Step by Step
-
 Library Link
 
 ```
 https://jestjs.io/docs/api
 ```
+---
+
+### 📘Testing Libraries
+
+![Images](./images/1-various-pacakages.png)
+
+---
+
 
 ### 📘Complete Explanation
 
@@ -20,6 +26,7 @@ in this image, when ever we __render__ a __component__ a __Fake Browser Environm
 
 in this image, we can access the element that are created in Fake Browser Environment by using __screen__ object and that is imported from __react-testing-library__
 
+---
 
 ### 📘Basic
 
@@ -324,100 +331,6 @@ describe("Check UI", () => {
 
 
 
-### 📘Props Testing
-1. Passing values only
-
-```js
-export function Child({ name }: { name: string }) {
-  return <h1>{name}</h1>;
-}
-
-function App() {
-  return (
-    <div>
-      <Child name="Hello World" />
-    </div>
-  );
-}
-
-export default App;
-
-// test
-import { render, screen } from "@testing-library/react";
-import { Child } from "./App";
-
-test("Testing User Event", () => {
-  const props = "Hello World";
-
-  render(<Child name={props} />);
-  const text = screen.getByRole("heading", { name: props });
-  expect(text).toBeInTheDocument();
-});
-```
-2. Passing Function
-
-```js
-export function Child({
-  onClick,
-}: {
-  onClick: MouseEventHandler<HTMLButtonElement>;
-}) {
-  return (
-    <button type="button" onClick={onClick}>
-      Call
-    </button>
-  );
-}
-
-function App() {
-  return (
-    <div>
-      <Child onClick={() => alert("Hello World")} />
-    </div>
-  );
-}
-
-export default App;
-
-// test
-import { render, screen } from "@testing-library/react";
-import { Child } from "./App";
-import userEvent from "@testing-library/user-event";
-
-test("Testing User Event", async () => {
-  userEvent.setup();
-  const props = jest.fn();
-
-  render(<Child onClick={props} />);
-  const btn = screen.getByRole("button", { name: "Call" });
-  await userEvent.click(btn);
-
-  expect(props).toBeCalled();
-});
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### 📘Testing Libraries
-![Images](./images/1-various-pacakages.png)
 
 ---
 
@@ -571,15 +484,16 @@ describe('Greet', ()=> {
 
 > Table 3.1 - For Positive Assertion Cases
 
-| Sr No | Method Name                                      | Description                           |
-| ----- | ------------------------------------------------ | ------------------------------------- |
-| 1.    | expect(elementToBeTest).toHaveValue("anyValue")  | to check value                        |
-| 2.    | expect(elementToBeTest).toHave("anyValue")       | to check exact result                 |
-| 3.    | expect(elementToBeTest).toHaveClass("className") | To class exist in that element        |
-| 4.    | expect(elementToBeTest).toHaveAttribute("id")    | To check attribute exist of not       |
-| 5.    | expect(elementToBeTest).toBeInTheDocument()      | To check element exist in the DOM     |
-| 6.    | toBeEnable() / toBeEDisabled()                   | To check element is enable / disabled |
-| 7.    | toBeCalled()                                     | To to call function in the document   |
+| Sr No | Method Name                                      | Description                                        |
+| ----- | ------------------------------------------------ | -------------------------------------------------- |
+| 1.    | expect(elementToBeTest).toHaveValue("anyValue")  | to check value                                     |
+| 2.    | expect(elementToBeTest).toHave("anyValue")       | to check exact result                              |
+| 3.    | expect(elementToBeTest).toHaveClass("className") | To class exist in that element                     |
+| 4.    | expect(elementToBeTest).toHaveAttribute("id")    | To check attribute exist of not                    |
+| 5.    | expect(elementToBeTest).toBeInTheDocument()      | To check element exist in the DOM                  |
+| 6.    | toBeEnable() / toBeEDisabled()                   | To check element is enable / disabled              |
+| 7.    | toBeCalled()                                     | To to call function in the document                |
+| 7.    | toHavBeenCalledTimes()                           | To to call function in the document how many times |
 
 >Table 3.2 - For Negative Assertion Cases (use only **not**)
 
@@ -881,6 +795,7 @@ test("testing with queryByAll", () => {
 ### 📘findByRole
 * is use for async/await task
 
+1. **SetTimeOut**
 ```js
 import { useEffect, useState } from "react";
 
@@ -920,8 +835,52 @@ test("testing useEffect with findBy", async () => {
   );
   expect(btn).toBeInTheDocument();
 });
-
 ```
+2. **Real Api**
+
+```js
+import React, { useEffect, useState } from "react";
+
+function App() {
+  const [users, setUsers] = useState<string[]>([]);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((res) => res.json())
+      .then((data) => setUsers(data.map((user: { name: string }) => user.name)))
+      .catch((error) => setError("Error fetching users"));
+  }, []);
+
+  return (
+    <div>
+      <h1>Users</h1>
+      {error && <p>{error}</p>}
+      <ul>
+        {users.map((user) => (
+          <li key={user}>{user}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default App;
+
+// test
+import { render, screen } from "@testing-library/react";
+import App from "./App";
+
+describe("App component", () => {
+  it("Calling real API", async () => {
+    render(<App />);
+    const users = await screen.findAllByRole("listitem");
+    expect(users).toHaveLength(users.length);
+  });
+});
+```
+
+
 ---
 ## 📔Debugging
 
@@ -1091,3 +1050,134 @@ test("Elements are focused in the right order", async () => {
 | 1     | Mouse     | 1. click() <br/> 2.dbClick() <br/> 3.tripleClick() <br/> 4. hover() <br/> unhover()                                   |
 | 2     | keyboard  | 1. type <br/> 2. tab() <br/> 3. clear() <br/> 4. selectOption()   <br/> 5. deselectOptions() <br/> 6. upload() {file} |
 | 3     | clipboard | 1. copy() <br/> 2. cut() <br/> 3. paste()                                                                             |
+---
+### 📘 Custom-Hook testing
+
+```js
+//useCount.tsx
+import React, { useState } from "react";
+
+type CountType = {
+  initialCount?: number;
+};
+
+export function useCount({ initialCount = 0 }: CountType) {
+  const [count, setCount] = useState<number>(initialCount);
+
+  function handleIncrementSetCount(): void {
+    setCount((n) => n + 1);
+  }
+  function handleDecrementSetCount(): void {
+    setCount((n) => n - 1);
+  }
+
+  return {
+    count,
+    handleIncrementSetCount,
+    handleDecrementSetCount,
+  };
+}
+
+// test
+import { renderHook, act } from "@testing-library/react";
+import { useCount } from "./useCount";
+
+describe("useCount", () => {
+  it("should increment and decrement count correctly", () => {
+    // get result property
+    const { result } = renderHook(() => useCount({ initialCount: 0 }));
+
+    // get current property in result
+    expect(result.current.count).toBe(0);
+
+    act(() => result.current.handleIncrementSetCount());
+
+    expect(result.current.count).toBe(1);
+
+    act(() => result.current.handleDecrementSetCount());
+
+    expect(result.current.count).toBe(0);
+  });
+});
+```
+
+### Props & Mocking functions
+
+1. **Passing values only** : just simply passing parameters thats it
+
+```js
+export function Child({ name }: { name: string }) {
+  return <h1>{name}</h1>;
+}
+
+function App() {
+  return (
+    <div>
+      <Child name="Hello World" />
+    </div>
+  );
+}
+
+export default App;
+
+// test
+import { render, screen } from "@testing-library/react";
+import { Child } from "./App";
+
+test("Testing User Event", () => {
+  const props = "Hello World";
+
+  render(<Child name={props} />);
+  const text = screen.getByRole("heading", { name: props });
+  expect(text).toBeInTheDocument();
+});
+```
+2. **Passing Function** : 
+* Passing function is done by **Mocking functions**. 
+* In Mocking we *don't care about real functions (means not implement real function), just only care that functions are called*
+
+```js
+export function Child({
+  onClick,
+}: {
+  onClick: MouseEventHandler<HTMLButtonElement>;
+}) {
+  return (
+    <button type="button" onClick={onClick}>
+      Call
+    </button>
+  );
+}
+
+function App() {
+  return (
+    <div>
+      <Child onClick={() => alert("Hello World")} />
+    </div>
+  );
+}
+
+export default App;
+
+// test
+import { render, screen } from "@testing-library/react";
+import { Child } from "./App";
+import userEvent from "@testing-library/user-event";
+
+test("Testing User Event", async () => {
+  userEvent.setup();
+  const props = jest.fn();
+
+  render(<Child onClick={props} />);
+  const btn = screen.getByRole("button", { name: "Call" });
+  await userEvent.click(btn);
+
+  expect(props).toBeCalled();
+});
+```
+### 📘MSW 
+* Mocking HTTP Request
+
+---
+
+## 📔Static analysis testing
