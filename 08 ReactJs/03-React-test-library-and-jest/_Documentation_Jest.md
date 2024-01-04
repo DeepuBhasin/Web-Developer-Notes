@@ -928,7 +928,7 @@ this comment will give you __URL__ in terminal you just need to copy paste that 
 
 ---
 
-## 📔User Interactions 
+## 📔User Interactions
 
 ### 📘user-event
 
@@ -1132,8 +1132,8 @@ test("Testing User Event", () => {
   expect(text).toBeInTheDocument();
 });
 ```
-2. **Passing Function** : 
-* Passing function is done by **Mocking functions**. 
+2. **Passing Function** :
+* Passing function is done by **Mocking functions**.
 * In Mocking we *don't care about real functions (means not implement real function), just only care that functions are called*
 
 ```js
@@ -1175,9 +1175,185 @@ test("Testing User Event", async () => {
   expect(props).toBeCalled();
 });
 ```
-### 📘MSW 
+---
+
+### 📘MSW
 * Mocking HTTP Request
 
 ---
 
 ## 📔Static analysis testing
+* **Testing checks if your code works or not, whereas static analysis checks if it is written well or not**
+* Process of verifying that your code meets certain expectations without actually running it
+  * Ensure consistent style and formatting
+  * Check for common mistakes and possible bugs
+  * Limit the complexity of code and
+  * Verify type consistency
+
+* Static testing analyses such as readability, consistency error handling, type checking and alignment with best practices
+
+* Various tools for static analysis testing tool
+  1. TypeScript
+  2. Eslint
+  3. Prettier
+  4. Husky
+  5. lint-staged
+
+---
+### 📘ESlint
+* ESlint is a tool for identify and reporting on petters found in ECMAScript/Javascript code, with the goal of making code more consistent and avoiding bugs
+* **ESlint get byDefault installed in *create-react-app*
+
+Steps
+
+1. First install ESlint extension
+2. To install eslint for jest-dom
+
+```
+npm install --save-dev eslint-plugin-jest-dom
+```
+3. Add the below code in **package.json**
+
+```js
+"eslintConfig": {
+  "extends": [
+    "react-app",
+    "react-app/jest",
+    "plugin:jest-dom/recommended" // this one
+  ]
+},
+```
+
+4. Add this line in your **package.json** under **scripts**. (here we ignoring all the files and folder which are in gitignore file)
+
+```js
+"lint": "eslint --ignore-path .gitignore ."
+```
+5. Run Command
+
+```js
+npm run lint
+```
+
+![ESlint](./images/eslint-error.png)
+
+---
+
+### 📘Prettier
+* Prettier is an opinionated code formatter that ensure that all outputted code conforms to a consistent style
+
+1. Add Extension **prettier**
+
+2. First install package
+
+```
+npm install --save-dev --save-exact prettier
+```
+
+3. Add this line in your **package.json** under **scripts**. (here we ignoring all the files and folder which are in gitignore file & for all the other files in the project that end with extension ts,tsx,css,scss please format the code)
+
+```js
+"format": "prettier --ignore-path .gitignore --write \"**/*.{ts,tsx,css,scss}\""
+```
+4. If you want to Add External File with Configuration (create file with below name)
+
+```
+.prettierrc.json
+```
+
+5. Add Code
+
+```js
+{
+    "semi": true,
+    "singleQuote": false
+}
+```
+6. Command
+
+```
+npm run format
+```
+
+7. To configure with your project (optional)
+
+```
+npm install --save-dev eslint-config-prettier
+```
+
+```js
+"eslintConfig": {
+  "extends": [
+    "react-app",
+    "react-app/jest",
+    "plugin:jest-dom/recommended",
+    "eslint-config-prettier"  // this line
+  ]
+},
+```
+
+---
+### 📘Husky
+
+* **It help to make sure the code is automatically linted and formatted before somebody commits their code**
+* Husky adds a pre-commit script in which you can check every thing like **formatting, linting etc**
+* Husky is a tool that helps improve your commits and more
+
+1. To install package
+```
+npm install husky --save-dev
+```
+2. To install File
+```
+npx husky-init
+```
+3. After the run of above command the **.husky** folder will create then -> **pre-commit** file & add below command (make sure your **lint and format command** should be in package.json file)
+
+```
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npm run lint && npm run format
+```
+
+4. When you **do commit husky** will run automatically
+
+![husky](./images/husky.png)
+
+---
+
+### 📘lint-Staged
+* It helps to lint or formate specific files that are about to be committed 
+* Run linters (and formatters) against staged git files
+
+1. Install Package
+```
+npm install lint-staged
+```
+
+2. Add this Code in **package.json**
+
+```js
+"lint-staged": {
+  "*.{ts,tsx}": [
+    "eslint"
+  ],
+  "*.{ts,tsx,css,scss}": [
+    "eslint",
+    "prettier --write"
+  ]
+}
+```
+
+3. Add this code in **pre-commit** file
+
+```
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npx lint-staged
+```
+
+4. Now **do commit**
+
+![lint-staged](./images/lint-staged.png)
