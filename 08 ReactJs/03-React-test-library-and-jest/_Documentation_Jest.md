@@ -160,22 +160,6 @@ describe("Testing only UI Elements", () => {
   });
 });
 ```
-
-
-
-### 📘Hooks
-
-1. beforeAll() : run only once before all test
-2. beforeEach() : run every time before each test
-3. afterAll() : run only once after all test
-4. afterEach() :  run every time after each test
-
-```js
-before(("Text Here")=> {
-    // initialization every thing here
-})
-```
-
 ### 📘Functional Component Method(functions) Testing
 
 * Helper.ts
@@ -292,43 +276,6 @@ describe("Check UI", () => {
   });
 });
 ```
-
-
-
----
-
-### 📘withIn()
-* To find the text or element in element
-
-```js
-function App() {
-  return (
-    <div>
-      Hi div
-      <p>Hi</p>
-      <p>Hello World</p>
-    </div>
-  );
-}
-
-export default App;
-
-// test
-import { render, screen, configure, within } from "@testing-library/react";
-import App from "./App";
-configure({ testIdAttribute: "id" });
-
-describe("Check UI", () => {
-  test("testing with queryByAll", () => {
-    render(<App />);
-    let btn = screen.getByText("Hi div");
-    let childElement = within(btn).getByText("Hi");
-    expect(childElement).toBeInTheDocument();
-    expect(btn).toBeInTheDocument();
-  });
-});
-```
-
 
 
 
@@ -494,6 +441,9 @@ describe('Greet', ()=> {
 | 6.    | toBeEnable() / toBeEDisabled()                   | To check element is enable / disabled              |
 | 7.    | toBeCalled()                                     | To to call function in the document                |
 | 7.    | toHavBeenCalledTimes()                           | To to call function in the document how many times |
+| 8.    | toHaveBeenCalledWith()                           | this is use to match the exact value               |
+| 9.    | expect(elementToBeTest).toHaveLength()           | to calculate the length                            |
+| 10.   | expect(elementToBeTest).toBe()                   | to Check the exact value                           |
 
 >Table 3.2 - For Negative Assertion Cases (use only **not**)
 
@@ -555,7 +505,7 @@ describe('Greet', ()=> {
 5. getByDisplayValue
 6. getByAltText
 7. getByTitle
-8. getByTestId
+8. getByTestId (because we are modifying the html Code)
 
 > Table of all getByQueries
 
@@ -1357,3 +1307,100 @@ npx lint-staged
 4. Now **do commit**
 
 ![lint-staged](./images/lint-staged.png)
+
+---
+
+### 📘withIn()
+* To find the text or element in element
+
+```js
+function App() {
+  return (
+    <div data-testid="user">
+      <h1>Hello World</h1>
+      <h2>Hello User</h2>
+    </div>
+  );
+}
+
+export default App;
+
+
+// test
+import { render, screen, within } from "@testing-library/react";
+import App from "./App";
+
+test("Testing WithIn", () => {
+  render(<App />);
+  let element = screen.getByTestId("user");
+  let childElement = within(element).getByRole("heading", { level: 2 });
+  expect(element).toBeInTheDocument();
+  expect(childElement).toBeInTheDocument();
+});
+```
+---
+
+### 📘Hooks
+
+1. beforeAll() : run only once before all test
+2. beforeEach() : run every time before each test
+3. afterAll() : run only once after all test
+4. afterEach() :  run every time after each test
+
+```js
+before(("Text Here")=> {
+    // initialization every thing here
+})
+```
+
+⚠️ **Note :** Avoid BeforeHooks if you can instead you can make this
+
+```js
+import React from "react";
+
+export function Child({ users }: { users: { name: string }[] }) {
+  return (
+    <React.Fragment>
+      <ul>
+        {users.map((e) => (
+          <li key={e.name}>name</li>
+        ))}
+      </ul>
+    </React.Fragment>
+  );
+}
+
+function App() {
+  return (
+    <div>
+      <Child users={[{ name: "John" }, { name: "dp" }, { name: "deep" }]} />
+    </div>
+  );
+}
+
+export default App;
+
+
+// test
+import { render, screen } from "@testing-library/react";
+import { Child } from "./App";
+
+function renderComponent() {
+  const users = [{ name: "Deepinder" }, { name: "dp" }, { name: "deep" }];
+  render(<Child users={users} />);
+}
+
+test("Checking Length", () => {
+  renderComponent();
+  const li = screen.getAllByRole("listitem");
+  expect(li).toHaveLength(3);
+});
+
+test("Checking to be in the document", () => {
+  renderComponent();
+  const li = screen.getAllByRole("listitem");
+  for (let i = 0; i < li.length; i++) {
+    expect(li[i]).toBeInTheDocument();
+  }
+});
+```
