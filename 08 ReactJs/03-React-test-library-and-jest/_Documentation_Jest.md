@@ -489,6 +489,17 @@ describe('Greet', ()=> {
 
 📚 **Note :  The suffix can be one of Role, LabelText, PlaceHolderText, Text, DisplayValue, AltText, Title and finally TestId**
 
+
+---
+
+### 📘When to use each
+
+| Sri | Goal of Test                          | Use                 |
+| --- | ------------------------------------- | ------------------- |
+| 1.  | Prove an element exist                | getBy, getAllBy     |
+| 2.  | Prove an element does not exist       | queryBy, queryAllBy |
+| 3.  | Make sure an element eventually exist | findBy, findAllBy   |
+
 ---
 
 ## 📔getBy... & getAllBy... Queries
@@ -575,6 +586,7 @@ describe('Greet', ()=> {
    3. the value of the aria-label attribute
 
 ```js
+// Label + button Example
 function App() {
   return (
     <div>
@@ -603,6 +615,39 @@ test("Testing getByRole with name option", () => {
   expect(firstNameInput).toBeInTheDocument();
   expect(lastNameInput).toBeInTheDocument();
   expect(submitBtn).toBeInTheDocument();
+});
+
+
+// Aria-Label Example
+// this is use when we don't have any label for button etc
+import React from "react";
+import log from "./logo.svg";
+
+function App() {
+  return (
+    <div>
+      <button aria-label="sign-up">
+        <img src="log" alt="" />
+      </button>
+      <button aria-label="sign-out">
+        <img src="log" alt="" />
+      </button>
+    </div>
+  );
+}
+export default App;
+
+
+// test
+import { render, screen } from "@testing-library/react";
+import App from "./App";
+
+test("Driven Approach", () => {
+  render(<App />);
+  const signUpBtn = screen.getByRole("button", { name: /sign-up/i });
+  const signOutBtn = screen.getByRole("button", { name: /sign-out/i });
+  expect(signUpBtn).toBeInTheDocument();
+  expect(signOutBtn).toBeInTheDocument();
 });
 ```
 2. **getAllByRoles**
@@ -641,6 +686,29 @@ describe("App.test", () => {
   });
 });
 ```
+---
+
+### 📘Throw-Error
+* When are already know in advance that it will throw error
+```js
+function App() {
+  return <div>App</div>;
+}
+
+export default App;
+
+// test
+
+import { render, screen } from "@testing-library/react";
+import App from "./App";
+
+test("Driven Approach", () => {
+  render(<App />);
+  // we already know that, this textbox role does not exist so it will throw error
+  expect(() => screen.getByRole("textbox")).toThrow();
+});
+```
+
 
 ---
 
@@ -1273,7 +1341,7 @@ npm run lint && npm run format
 ---
 
 ### 📘lint-Staged
-* It helps to lint or formate specific files that are about to be committed 
+* It helps to lint or formate specific files that are about to be committed
 * Run linters (and formatters) against staged git files
 
 1. Install Package
