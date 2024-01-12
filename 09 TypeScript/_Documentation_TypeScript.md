@@ -6,13 +6,13 @@
 2. **Uses 'type annotations' to analyze our code.**
 3. Our active during development.
 4. Doesn't provide any performance optimization.
-5. It fix all errors on **run-time**.
+5. It fix all errors on **Compile-time**.
 
 
 
 ![Image](./images/what-typescript.jpeg)
 
-
+6. **Once the code get convert by Compiler that code get convert into *byteCode* which only assembler or machine can understand**
 
 ---
 
