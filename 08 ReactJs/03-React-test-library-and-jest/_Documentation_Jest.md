@@ -467,6 +467,60 @@ describe('Greet', ()=> {
 
 ---
 
+
+
+### 📘Extend expected (customize our own code)
+
+```js
+function App() {
+  return (
+    <div>
+      <form action="" aria-label="form">
+        <button>Save </button>
+        <button>Login</button>
+      </form>
+    </div>
+  );
+}
+
+export default App;
+
+
+// test
+import { render, screen, within } from "@testing-library/react";
+import App from "./App";
+
+function toContainRole(
+  container: HTMLElement,
+  role: string,
+  quantity: number = 1,
+) {
+  const elements = within(container).getAllByRole(role);
+
+  if (elements.length === quantity) {
+    return {
+      pass: true,
+    };
+  }
+
+  return {
+    pass: false,
+    message: () =>
+      `Expected to find ${quantity} ${role} elements. Found ${elements.length} instead`,
+  };
+}
+
+expect.extend({ toContainRole });
+
+test("Driven Approach", () => {
+  render(<App />);
+  const form = screen.getByRole("form");
+  expect(form).toContainRole("button", 2);
+});
+```
+
+---
+
 ### 📘RTL (React Testing Library)
 * This is test library which is use to find UI Elements on the page like button, input, heading, any thing etc.
 
