@@ -431,20 +431,19 @@ describe('Greet', ()=> {
 
 > Table 3.1 - For Positive Assertion Cases
 
-| Sr No | Method Name                                        | Description                                        |
-| ----- | -------------------------------------------------- | -------------------------------------------------- |
-| 1.    | expect(elementToBeTest).toHaveValue("anyValue")    | to check value                                     |
-| 2.    | expect(elementToBeTest).toHave("anyValue")         | to check exact result                              |
-| 3.    | expect(elementToBeTest).toHaveClass("className")   | To class exist in that element                     |
-| 4.    | expect(elementToBeTest).toHaveAttribute("id")      | To check attribute exist of not                    |
-| 5.    | expect(elementToBeTest).toBeInTheDocument()        | To check element exist in the DOM                  |
-| 6.    | toBeEnable() / toBeEDisabled()                     | To check element is enable / disabled              |
-| 7.    | toBeCalled()                                       | To to call function in the document                |
-| 7.    | toHavBeenCalledTimes()                             | To to call function in the document how many times |
-| 8.    | toHaveBeenCalledWith()                             | this is use to match the exact value               |
-| 9.    | expect(elementToBeTest).toHaveLength()             | to calculate the length                            |
-| 10.   | expect(elementToBeTest).toBe()                     | to Check the exact value                           |
-| 11.   | expect(elementToBeTest).toContainRole('button', 2) | To check element exist and how many exist          |
+| Sr No | Method Name                                      | Description                                        |
+| ----- | ------------------------------------------------ | -------------------------------------------------- |
+| 1.    | expect(elementToBeTest).toHaveValue("anyValue")  | to check value                                     |
+| 2.    | expect(elementToBeTest).toHave("anyValue")       | to check exact result                              |
+| 3.    | expect(elementToBeTest).toHaveClass("className") | To class exist in that element                     |
+| 4.    | expect(elementToBeTest).toHaveAttribute("id")    | To check attribute exist of not                    |
+| 5.    | expect(elementToBeTest).toBeInTheDocument()      | To check element exist in the DOM                  |
+| 6.    | toBeEnable() / toBeEDisabled()                   | To check element is enable / disabled              |
+| 7.    | toBeCalled()                                     | To to call function in the document                |
+| 7.    | toHavBeenCalledTimes()                           | To to call function in the document how many times |
+| 8.    | toHaveBeenCalledWith()                           | this is use to match the exact value               |
+| 9.    | expect(elementToBeTest).toHaveLength()           | to calculate the length                            |
+| 10.   | expect(elementToBeTest).toBe()                   | to Check the exact value                           |
 
 >Table 3.2 - For Negative Assertion Cases (use only **not**)
 
@@ -570,7 +569,6 @@ describe('Greet', ()=> {
   | 10  | table td          | cell                        |
   | 11  | table tr          | row                         |
   | 10  | table th          | columnheader                |
-  | 11  | Form              | form                        |
 
 
 * if you can want to make **custom-role**
