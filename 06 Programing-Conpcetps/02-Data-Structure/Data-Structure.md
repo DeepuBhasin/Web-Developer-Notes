@@ -1,6 +1,30 @@
-## Big O Notation Bar Graph
-![Image](big_O_NotationGraph.png)
+### 📘How to represent complexity ? 
+
+![how-complexity](./images/how-to-represent-complexity.png)
+
 ---
+
+### 📘Big-O Notation
+
+![Image](./images/big-o-notation-1.png)
+
+![Image](./images/big-o-notation-2.png)
+
+![Image](./images/big-o-notation-3.png)
+
+![Image](./images/big-o-notation-4.png)
+
+![Image](./images/big-o-notation-5.png)
+
+
+---
+
+### 📘Big O Notation Bar Graph
+
+![bigO-Notation](./images/big_O_NotationGraph.png)
+
+---
+
 ## What does _Better_ implementation means ?
 
 > "Better" means faster time to finish and to use less memory (RAM), although there is much stronger emphasis on the former
@@ -27,9 +51,34 @@ console.time('v2');
 console.log(sumUpToV2(100000000));
 console.timeEnd('v2');	
 ```
+---
+
+### 📘Objects-Big-O
+An Object is a collection of key value pairs
+1. Insert - O(1)
+2. Remove - O(1)
+3. Access - O(1)
+4. Search - O(n)
+5. Object.keys - O(n)
+6. Object.values - O(n)
+7. Object.entries - O(n)
 
 ---
-## Identifying Runtime Complexity (Rules of Thumb)
+
+### 📘Array-Big-O
+An array is an ordered collection of values
+
+1. Insert / Remove at end - O(1)
+2. Insert / Remove at beginning - O(n)
+3. Access - O(1)
+4. Search - O(n)
+5. Push / Pop - O(n)
+6. Shift / UnShift / Concat / Slice / Splice - O(n)
+7. forEach / map / filter / reduce - O(n)
+
+---
+
+### 📘Identifying Runtime Complexity (Rules of Thumb)
 
 1. Iterating over a collection OR using N as a pointer with a for loop  : O(n)
 2. Iterating over the same collection with nested for loops  : O(n^2)
@@ -263,6 +312,76 @@ function reverse(str) {
 * *Time Complexity : O(N) we go over every charcter in input String Space Complexity : O(N )* 
 
 ---
+
+
+## 📔Algorithm 
+
+### 📘Fibonacci sequence
+---
+
+Problem : Give a number 'n', find the first 'n' elements of the Fibonacci sequence.
+
+in Mathematics, the Fibonacci sequence is a sequence in which each number is the sum of the two proceeding ones.
+
+**Formula** : fn = fn-1 + fn-2
+
+the first two numbers is the sequence are 0 and 1.
+
+Example
+
+1. fibonacci(2) = [0, 1]
+2. fibonacci(3) = [0, 1, 1]
+3. fibonacci(7) = [0, 1, 1, 2, 3, 5, 8]
+
+```js
+function fibonacciProgram(n) {
+    let fib = [0, 1];
+    if (n === 0 || n === 1) return { number: 0, sum: 0 };
+    if (n === 2) return { number: 1, sum: fib };
+
+    if (n > 2) {
+        for (let i = 2; i < n; i++) {
+            fib[i] = fib[i - 1] + fib[i - 2];
+        }
+    }
+
+    return { number: n, sum: fib }
+}
+
+console.log(fibonacciProgram(7));
+```
+
+---
+
+### 📘Factorial of a number
+
+Problem : Give an integer 'n', find the factorial of that integer
+
+In mathematics, the factorial of a non-negative integer 'n', denoted n!, is the product of all positive integers less than or equal to 'n'.
+
+Factorial of zero is 1
+
+factorial(4) = 24
+
+factorial(5) = 120
+
+```js
+function factorial(n) {
+    if (n === 0) {
+        return 1
+    }
+
+    let fact = 1;
+    for (let i = 1; i <= n; i++) {
+        fact = fact * i;
+    }
+    return fact
+}
+
+console.log(factorial(5));
+```
+
+
 ## Palindrome Algorithm
 
 Example
