@@ -380,7 +380,25 @@ function factorial(n) {
 
 console.log(factorial(5));
 ```
+---
 
+### 📘Recursion
+
+**What ?**
+
+Recursion is a problem solving technique where the solution depends on solutions to smaller instances of the same problem.
+
+Recursion is when a function calls itself
+
+**Why ?**
+
+A great technique to simplify your solution
+
+if you find yourself breaking down your problem into smaller versions of the same problem, recursion is very useful
+
+**A few points about recursion**
+1. Every Recursion solution needs to have a base case a - condition to terminate the recursion
+2. Recursion might simplify solving problem but it does not always translate to a faster solution.
 
 ## Palindrome Algorithm
 
