@@ -3327,8 +3327,6 @@ export default connect(null, mapDispatchToProps)(ButtonCakeComponent)
 npm install redux
 npm install react-redux
 npm install redux-thunk
-npm install redux-devtools-extension
-npm install --save redux-logger
 ```
 
 ⚠️ **Note :** You have install extension in google chrome for dev tools
@@ -3337,9 +3335,8 @@ npm install --save redux-logger
 import React from 'react';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider, useDispatch, useSelector } from 'react-redux';
-import thunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension'
-import logger from "redux-logger";
+import { thunk } from 'redux-thunk';
+
 
 // Initial state
 const initialPostData = {
@@ -3357,11 +3354,45 @@ const postConstants = {
 };
 
 // Action Creators
-const fetchPostsRequest = () => ({ type: postConstants.FETCH_POSTS_REQUEST });
-const fetchPostsSuccess = (data) => ({ type: postConstants.FETCH_POSTS_SUCCESS, payload: data });
-const fetchPostsFailure = (error) => ({ type: postConstants.FETCH_POSTS_FAILURE, payload: error });
-const deletePostAction = () => ({ type: postConstants.DELETE_DATA, payload: [] });
+const fetchPostsRequest = () => {
+  return {
+    type: postConstants.FETCH_POSTS_REQUEST
+  }
+}
+const fetchPostsSuccess = (data) => {
+  return {
+    type: postConstants.FETCH_POSTS_SUCCESS,
+    payload: data
+  }
+};
+const fetchPostsFailure = (error) => {
+  return {
+    type: postConstants.FETCH_POSTS_FAILURE,
+    payload: error
+  }
+};
+const deletePostAction = () => {
+  return {
+    type: postConstants.DELETE_DATA,
+    payload: []
+  }
+};
 
+// Reducer
+const reducer = (state = initialPostData, action) => {
+  switch (action.type) {
+    case postConstants.FETCH_POSTS_REQUEST:
+      return { ...state, loading: true, error: null, post: [] };
+    case postConstants.FETCH_POSTS_SUCCESS:
+      return { ...state, loading: false, post: action.payload, error: null };
+    case postConstants.FETCH_POSTS_FAILURE:
+      return { ...state, loading: false, error: action.payload.error };
+    case postConstants.DELETE_DATA:
+      return { ...state, loading: false, post: action.payload, error: null };
+    default:
+      return state;
+  }
+};
 
 // MiddleWare
 const fetchPostThunkAction = () => {
@@ -3390,27 +3421,10 @@ const fetchPostThunkAction = () => {
 };
 
 
-
-// Reducer
-const reducer = (state = initialPostData, action) => {
-  switch (action.type) {
-    case postConstants.FETCH_POSTS_REQUEST:
-      return { ...state, loading: true, error: null, post: [] };
-    case postConstants.FETCH_POSTS_SUCCESS:
-      return { ...state, loading: false, post: action.payload, error: null };
-    case postConstants.FETCH_POSTS_FAILURE:
-      return { ...state, loading: false, error: action.payload.error };
-    case postConstants.DELETE_DATA:
-      return { ...state, loading: false, post: action.payload, error: null };
-    default:
-      return state;
-  }
-};
-
 // Store
 const store = createStore(
   reducer,
-  composeWithDevTools(applyMiddleware(thunk, logger))
+  applyMiddleware(thunk)
 );
 
 // Test component
