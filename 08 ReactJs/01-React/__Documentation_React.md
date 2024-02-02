@@ -3474,14 +3474,14 @@ export default App;
 
 ---
 
-## 📘Redux with Redux-Saga
+## 📘Redux with Redux-Saga (with get and post request)
 
 ```js
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
-import { takeEvery, put } from "redux-saga/effects";
+import { takeEvery, put } from 'redux-saga/effects';
 
 // Constants
 export const postConstants = {
@@ -3489,6 +3489,9 @@ export const postConstants = {
   FETCH_POSTS_REQUEST: 'FETCH_POSTS_REQUEST',
   FETCH_POSTS_SUCCESS: 'FETCH_POSTS_SUCCESS',
   FETCH_POSTS_FAILURE: 'FETCH_POSTS_FAILURE',
+  ADD_POST_REQUEST: 'ADD_POST_REQUEST',
+  ADD_POST_SUCCESS: 'ADD_POST_SUCCESS',
+  ADD_POST_FAILURE: 'ADD_POST_FAILURE',
 };
 
 // Action Creators
@@ -3496,6 +3499,13 @@ export const fetchPostsRequest = () => ({ type: postConstants.FETCH_POSTS_REQUES
 export const fetchPostsSuccess = (data) => ({ type: postConstants.FETCH_POSTS_SUCCESS, payload: data });
 export const fetchPostsFailure = (error) => ({ type: postConstants.FETCH_POSTS_FAILURE, payload: { error } });
 export const deletePostAction = () => ({ type: postConstants.DELETE_DATA, payload: [] });
+
+export const addPostRequest = (title, body) => ({
+  type: postConstants.ADD_POST_REQUEST,
+  payload: { title, body },
+});
+export const addPostSuccess = (data) => ({ type: postConstants.ADD_POST_SUCCESS, payload: data });
+export const addPostFailure = (error) => ({ type: postConstants.ADD_POST_FAILURE, payload: { error } });
 
 // Initial state
 const initialPostData = {
@@ -3508,13 +3518,17 @@ const initialPostData = {
 const reducer = (state = initialPostData, action) => {
   switch (action.type) {
     case postConstants.FETCH_POSTS_REQUEST:
+    case postConstants.ADD_POST_REQUEST:
       return { ...state, loading: true, error: null, posts: [] };
     case postConstants.FETCH_POSTS_SUCCESS:
       return { ...state, loading: false, posts: action.payload, error: null };
     case postConstants.FETCH_POSTS_FAILURE:
+    case postConstants.ADD_POST_FAILURE:
       return { ...state, loading: false, error: action.payload.error };
     case postConstants.DELETE_DATA:
       return { ...state, loading: false, posts: action.payload, error: null };
+    case postConstants.ADD_POST_SUCCESS:
+      return { ...state, loading: false, posts: [...state.posts, action.payload], error: null };
     default:
       return state;
   }
@@ -3531,13 +3545,33 @@ function* getPost() {
   }
 }
 
+function* addPost(action) {
+  try {
+    const { title, body } = action.payload;
+    const response = yield fetch('https://jsonplaceholder.typicode.com/posts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ title, body }),
+    });
+    const responseData = yield response.json();
+    yield put(addPostSuccess(responseData));
+  } catch (error) {
+    yield put(addPostFailure(error));
+  } finally {
+    yield put(fetchPostsRequest());
+  }
+}
+
 function* PostSageFunction() {
   yield takeEvery(postConstants.FETCH_POSTS_REQUEST, getPost);
+  yield takeEvery(postConstants.ADD_POST_REQUEST, addPost);
 }
 
 const sagaMiddleware = createSagaMiddleware();
 const rootReducer = combineReducers({
-  post: reducer
+  post: reducer,
 });
 
 // Store
@@ -3549,6 +3583,9 @@ function ShowDataComponent() {
   const { posts, loading } = useSelector((state) => state.post);
   const dispatch = useDispatch();
 
+  const [title, setTitle] = useState('');
+  const [body, setBody] = useState('');
+
   const data = posts.map((item) => (
     <tr key={item.id}>
       <td>{item.id}</td>
@@ -3556,10 +3593,31 @@ function ShowDataComponent() {
     </tr>
   ));
 
+  const handleFetchData = () => {
+    dispatch(fetchPostsRequest());
+  };
+
+  const handleDeleteData = () => {
+    dispatch(deletePostAction());
+  };
+
+  const handleAddPost = () => {
+    dispatch(addPostRequest(title, body));
+    setTitle('');
+    setBody('');
+  };
+
   return (
     <div className="App">
-      <button onClick={() => dispatch(fetchPostsRequest())}>Fetch Data</button>
-      <button onClick={() => dispatch(deletePostAction())}>Delete Data</button>
+      <button onClick={handleFetchData}>Fetch Data</button>
+      <button onClick={handleDeleteData}>Delete Data</button>
+
+      <div>
+        <h2>Add Post</h2>
+        <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
+        <input type="text" placeholder="Body" value={body} onChange={(e) => setBody(e.target.value)} />
+        <button onClick={handleAddPost}>Add Post</button>
+      </div>
 
       {loading && <h1>Loading...</h1>}
 
