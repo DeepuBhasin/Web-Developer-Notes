@@ -3615,6 +3615,11 @@ const App = () => {
 export default App;
 ```
 
+**⚠️ Note :** 
+
+1. **take()** method work in sequence / blocking sequence flow. It also work one once not matter how many time you called any function. you will use **take() & Call()**
+2. **takeEvery()** method work in non-sequence / non-blocking sequence (will create a parallel thread)
+
 ---
 
 ## 📘Redux with Redux-Saga (with get and post request)
