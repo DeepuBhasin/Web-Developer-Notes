@@ -3960,8 +3960,8 @@ console.log(test ?? 'Hello');   // 0
 11. every (return true/false)
 12. include (return true/false)
 13. indexOf (return index)
-14. find (return value)
-15. findIndex(return value index)
+14. find (return first find value)
+15. findIndex(return first find index)
 16. flat
 17. flatMap
 18. new Array(7).fill(1)
@@ -3982,6 +3982,44 @@ var arrayNeedToAdd = [6, 7, 8, 9, 10];
 arr.splice(startPosition, howManyNeedToDelete, ...arrayNeedToAdd)
 console.log(arr);   // [1, 6, 7, 8, 9, 10, 3, 4, 5]
 ```
+* Filter
+
+```js
+const fruits = [
+    { id: 1, name: "apple", price: 10, quantity: 5 },
+    { id: 2, name: "Banana", price: 15, quantity: 10 },
+    { id: 3, name: "Mango", price: 25, quantity: 15 },
+    { id: 1, name: "apple", price: 25, quantity: 15 },
+];
+
+let filterData = fruits.filter(e => {
+    return e.price < 20 && e.quantity < 14
+});
+
+console.log(filterData);
+
+// [
+//   { id: 1, name: 'apple', price: 10, quantity: 5 },
+//   { id: 2, name: 'Banana', price: 15, quantity: 10 }
+// ]
+```
+* Find
+```js
+const fruits = [
+    { id: 1, name: "apple", price: 10, quantity: 5 },
+    { id: 2, name: "Banana", price: 15, quantity: 10 },
+    { id: 3, name: "Mango", price: 25, quantity: 15 },
+    { id: 1, name: "apple", price: 25, quantity: 15 },
+];
+
+let filterData = fruits.find(e => {
+    return e.name === "apple"
+});
+
+console.log(filterData);
+//{ id: 1, name: 'apple', price: 10, quantity: 5 }
+```
+
 * Sort
 ```js
 // Sort
