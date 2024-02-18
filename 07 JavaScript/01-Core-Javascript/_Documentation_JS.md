@@ -580,9 +580,14 @@ var a;
 a = 0;
 
 if(a || a === 0) {      // will execute
-//  because === has higher order precedence than or operator
+//  because === has higher order precedence than || operator
  console.log('Something is there');
 }
+
+// Example 3
+
+console.log(!true);     // false
+console.log(!!true);    // true
 ```
 ---
 
@@ -3412,7 +3417,7 @@ me.greet();
 ```
 ---
 ## 📘Returning Value
-
+* Arrow function has **Implecit (automatically return)** feature
 ```javascript
 let add = (a, b) => a + b;
 
