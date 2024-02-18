@@ -558,6 +558,7 @@ Number(true)    // 1
 
 1 == '1'    // true
 1 === '1'   // false
+1 + null    // 1
 ```
 ---
 ## 📘 Existence and Booleans
