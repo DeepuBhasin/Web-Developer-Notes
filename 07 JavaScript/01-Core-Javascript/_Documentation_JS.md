@@ -3727,6 +3727,15 @@ const array = [1, 2];
 const [first = 1, second = 2, three = 3] = array;
 console.log(three);
 ```
+* Default Property
+
+```js
+const arr = [1, 2, 3, 4, 5];
+
+const { length } = arr;
+
+console.log(length);
+```
 
 2. Object Destructuring
 
