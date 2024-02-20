@@ -3737,6 +3737,19 @@ const { length } = arr;
 console.log(length);
 ```
 
+* Get nested array
+
+```js
+const arr = {
+    locations: ['Mountain View', 'New York', 'London']
+};
+
+const { locations: [a, b, c] } = arr;
+
+console.log(a);
+```
+
+
 2. Object Destructuring
 
 * Aliase Name
@@ -3859,7 +3872,7 @@ const company = [...products, {     // creating new Object
 }]
 
 ```
-* **Conceptual Example :** for destructring of object in which order does not matter
+* **Conceptual Example :** for destructring of object in which order does not matter (Application Use)
 ```js
 function test({ first = 'default', last = 'default', job = 'default', dob = 'default' }) {
     console.log(dob, job, last, first);
@@ -3868,7 +3881,7 @@ function test({ first = 'default', last = 'default', job = 'default', dob = 'def
 test({
     job: "Web Developer",
     dob: "24-11-1993",
-    last: - "Singh",
+    last: "Singh",
     first: "Deepu"
 });
 ```
