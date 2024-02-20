@@ -1245,6 +1245,48 @@ createBooking('LH1', undefined, 2);
 ⚠️ **Note :**
 * *javascript does not have passing by reference, only passing* by value even though it look like it's passing by reference. so there are language like c++, where you can pass a reference to any value, instead of the value itself. this works even with primitives, so you could pass a reference to the value of five. and then the original value outside of the function, would be changed and this is called pass by reference.
 * for Objects, we do in fact pass in a reference so the memory address of the object. However that reference itself is still a value, it's simply a value that contains a memory address, so basically we pass a reference to the function but we do not pass by reference this is important thing.
+
+
+* Some More Examples on **Default Parameters**
+
+```javascript
+function greet(fname = 'Tony', lname = 'Alicea') {
+    return `Hi ${fname} ${lname}`;
+}
+
+let greeting1 = greet();
+console.log(greeting1); //Hi Tony Alicea
+
+let greeting2 = greet('Anthony');
+console.log(greeting2); // Hi Anthony Alicea
+
+// Good Example
+let greeting3 = greet(null, 'p. Alicea');
+console.log(greeting3); // Hi null p.Alicea
+
+// Good Example
+let greeting4 = greet(undefined, 'P. Alicea');
+console.log(greeting4); // Hi Tony P.Alicea```
+```
+
+```javascript
+function greet(fname = 'Tony', lname = 'Alicea', phrase = () => {return `Hi ${fname} ${lname}`}) {
+    return phrase();
+}
+
+let greeting1 = greet();
+console.log(greeting1);     // Hi Tony Alicea
+
+
+// Good example
+function greet(fname = 'Tony', phrase = () => {return `Hi ${fname} ${lname}`}, lname = 'Alicea') {
+    return phrase();
+}
+
+let greeting1 = greet();
+console.log(greeting1);     // Hi Tony Alicea
+```
+
 ---
 
 ## 📘First-Class functions Vs Higher-Order functions
@@ -3575,10 +3617,8 @@ for(const name in names) {
 // 1
 // 2
 ```
-## 📘 Iterators & Generators
+## 📘 Iterators
 * Iterators are basically *all objects* that know how access values in a collection of one at a time for example *array is such an iterator*, that means yo can loop through it and has a collection of objects and it know to output them one after another. You can create your own objects with your own iterator logic which doesn't necessarily means that you only have array where user enters numbers or what ever he want to output one after another, you might have an object where you have a completly different logic.
-
-* **Generators :** A generator is a function whic doesn't necessarily run to the end when we execute it. specifically a *generator is a function which yields certian values*, each time you call it yields the next value and you may your 5 - 10 and unlimited or only one value, and that of course closely resembles the behaviour of iterators where you also yield or get one value.
 
 * **Protocol :** Rules for how to exchange information
 * **Iteration Protocol :** The information that must be provided by an object to let itself be iterated over.
@@ -3646,46 +3686,77 @@ while(!next.done) {
     next = iterator.next();
 }
 ```
+---
 
-## 📘 Default Parameters
+## 📘Generators
+* Generator is a function that can be entered and exited multiple times. Normally, when we call a function, the function will run and it returns some value but with with generators We can run some code, return of value and then go right back into the function at the same place that we left it.
+* A generator function is a special type of function in JavaScript that allows you to control the iteration behavior explicitly. It can "yield" multiple values one at a time, rather than returning a single value like a regular function. This makes it useful for generating sequences or handling asynchronous operations.
 
-```javascript
-function greet(fname = 'Tony', lname = 'Alicea') {
-    return `Hi ${fname} ${lname}`;
+```js
+// Define a generator function
+function* generateSequence() {
+    yield 1; // yields the value 1
+    yield 2; // yields the value 2
+    yield 3; // yields the value 3
 }
 
-let greeting1 = greet();
-console.log(greeting1); //Hi Tony Alicea
+// Create a generator object
+const generator = generateSequence();
 
-let greeting2 = greet('Anthony');
-console.log(greeting2); // Hi Anthony Alicea
+console.log(generator.next());
+console.log(generator.next());
+console.log(generator.next());
+console.log(generator.next());
 
-// Good Example
-let greeting3 = greet(null, 'p. Alicea');
-console.log(greeting3); // Hi null p.Alicea
+/*
+{ value: 1, done: false }
+{ value: 2, done: false }
+{ value: 3, done: false }
+{ value: undefined, done: true }
+*/
 
-// Good Example
-let greeting4 = greet(undefined, 'P. Alicea');
-console.log(greeting4); // Hi Tony P.Alicea```
+
+// With forOf Example
+
+for (const iterator of generateSequence()) {
+    console.log(iterator);
+}
+/*
+1
+2
+3
+*/
+```
+**📚 Conceptual Example** : if you want to itrarte an Object then we can use generators
+
+```js
+let obj = {
+    name: "Deep",
+    job: "Web Developer",
+    age: 30,
+    language: "javascript",
+    frameWork: "React"
+}
+
+function* generateSequence(item) {
+    yield item.name;
+    yield item.language;
+    yield item.frameWork;
+}
+
+for (const iterator of generateSequence(obj)) {
+    console.log(iterator);
+}
+
+/*
+Deep
+javascript
+React
+*/
 ```
 
-```javascript
-function greet(fname = 'Tony', lname = 'Alicea', phrase = () => {return `Hi ${fname} ${lname}`}) {
-    return phrase();
-}
+---
 
-let greeting1 = greet();
-console.log(greeting1);     // Hi Tony Alicea
-
-
-// Good example
-function greet(fname = 'Tony', phrase = () => {return `Hi ${fname} ${lname}`}, lname = 'Alicea') {
-    return phrase();
-}
-
-let greeting1 = greet();
-console.log(greeting1);     // Hi Tony Alicea
-```
 
 ## 📘Destructuring  (on Array and Objects)
 * Destructuring is used to Destructure the values
@@ -5150,7 +5221,7 @@ console.log(`i am \${firstname} Singh`);
 ```js
 try {
     throw new Error('Error Message')
-    
+
     // or
 
     throw {message : 'Error', status : '404'}
