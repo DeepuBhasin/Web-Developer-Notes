@@ -3755,6 +3755,87 @@ React
 */
 ```
 
+* Generator Delegation (Adding two generators functions)
+
+```js
+const nickNames = {
+    houseName: "Deepu",
+    thaparCollege: "Dp",
+    PunjabiUniversity: "Deepi"
+};
+
+const obj = {
+    nickNames,
+    name: "Deep",
+    job: "Web Developer",
+    age: 30,
+    language: "javascript",
+    frameWork: "React"
+}
+
+function* getNames(name) {
+    yield name.PunjabiUniversity;
+    yield name.thaparCollege;
+    yield name.houseName;
+}
+
+function* generateSequence(item) {
+    yield item.name;
+    yield item.language;
+    yield item.frameWork;
+    const itemNames = getNames(item.nickNames);
+    // calling another yield function
+    yield* itemNames;
+}
+
+for (const iterator of generateSequence(obj)) {
+    console.log(iterator);
+}
+
+/*
+Deep
+javascript
+React
+Deepi
+Dp
+Deepu
+*/
+```
+* Genrator with Symbol.iterator
+
+```js
+const nickNames = {
+    houseName: "Deepu",
+    thaparCollege: "Dp",
+    PunjabiUniversity: "Deepi",
+    // Symbol.iterator teach the for loop to how iterate the objects
+    [Symbol.iterator]: function* () {
+        yield this.houseName;
+        yield this.PunjabiUniversity;
+    }
+}
+
+const obj = {
+    nickNames,
+    name: "Deep",
+    job: "Web Developer",
+    age: 30,
+    language: "javascript",
+    frameWork: "React",
+    [Symbol.iterator]: function* () {
+        yield this.name;
+        yield this.language;
+        yield this.frameWork;
+        // this is calling generator function
+        yield* this.nickNames
+    }
+};
+
+for (const iterator of obj) {
+    console.log(iterator);
+}
+```
+
 ---
 
 
