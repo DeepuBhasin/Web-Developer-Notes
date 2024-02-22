@@ -6,7 +6,11 @@
 
 ![Image](./images/paradime.png)
 
+
+
 ![Image](./images/event-loop.png)
+
+![Javascript-Engine](./images/javascipt-engine.png)
 
 ![Image](./images/node-environment.png)
 

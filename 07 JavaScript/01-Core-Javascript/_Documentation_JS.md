@@ -5,6 +5,7 @@
 * the harder is to understand code and to reason about the code the more difficult it will be to add new features add to more the functionality to the application. Hence it is called bad code.
 * An important part of web-development is actually handle the errors. because its very common that errors happen in web-application.
 * To test *APi* use *Network tab* with various **Throttling** options *fast/slow/offline*
+* **Brendan Eich** is a person who created javascript. 
 ---
 ## 📘 Operators are functions
 
@@ -18,6 +19,7 @@ var a = 3;
 // Example 2
 var b = 3 + 2;
 ```
+
 ---
 
 ## 📘 Conceptual Aside
@@ -191,7 +193,7 @@ function test() {
 ```
 ---
 ## 📘Single Threaded, Synchronous Execution
- * **Single Threaded :** one command at a time. Under the hood of the browser, maybe not.
+ * **Single Threaded :** one command at a time. Under the hood of the browser, maybe not. (the biggest way to check that a language is single threaded : it has only one call stack)
  * **Synchronous :** one at a time.
 ---
 
