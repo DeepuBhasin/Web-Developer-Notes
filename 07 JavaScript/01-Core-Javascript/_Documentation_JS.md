@@ -314,7 +314,7 @@ isNew = 1;
 ## 📘 Primitive types and Non Primitives types
 * **Primitive type :** A type of data that represents a single value. That is, not an object.
 
-1. **undefined :** undefined represents lack of existence (you should'nt set a variable to this)
+1. **undefined :** undefined represents lack of existence or undefined is the absence of a definition (you should'nt set a variable to undefined in any case because javascript Engine is already doing this)
 2. **Null :** null represents lack of existence (you can set a variable to this)
 3. **Boolean** : true or false
 4. **Number :**
