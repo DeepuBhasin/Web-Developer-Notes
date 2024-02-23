@@ -538,8 +538,7 @@ console.log(a); //23
 * **Associativity :** What order operator functions get called in: LEFT-TO-RIGHT or RIGHT-TO-LEFT. when functions have the *same* precedence. Example : 1+2+3/3/4
 ---
 ## 📘 Coercion
-* **Coercion :** Converting a value from one type to another. This happens quite in javascript because it's dynamically typed. This happens quite often in javascript because it's dynamically typed.
-
+* **Coercion :** Converting a value from one type to another. This happens quite in all dynamically typed languages like php, javascript etc. 
 ```javascript
 var a = 1 + '2';
 console.log(a);
@@ -562,6 +561,8 @@ Number(true)    // 1
 1 === '1'   // false
 1 + null    // 1
 ```
+**⚠️ Note :** you can use **Object.is(1, 1)** instead of **=== (strick quality check)**
+
 ---
 ## 📘 Existence and Booleans
 

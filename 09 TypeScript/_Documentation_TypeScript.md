@@ -1,4 +1,12 @@
 
+## 📔Information
+
+1. **Compile time** is like reading through the recipe before you start baking. You check if you have all the ingredients and make sure you understand the instructions. If there's a mistake in the recipe or you're missing an ingredient, you'll notice it before you even turn on the oven. This is similar to catching errors in your code before you run it.
+
+2. **Runtime** is like actually baking the cake. Once you start mixing the ingredients and putting it in the oven, you might encounter issues like the cake not rising properly or burning. These are problems that only occur when you're actively making the cake, just like runtime errors happen when the program is running.
+
+---
+
 ## 📔Getting Started with Typescript
 
 * **TypeScript :**
