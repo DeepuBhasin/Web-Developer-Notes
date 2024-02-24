@@ -5,7 +5,7 @@
 * the harder is to understand code and to reason about the code the more difficult it will be to add new features add to more the functionality to the application. Hence it is called bad code.
 * An important part of web-development is actually handle the errors. because its very common that errors happen in web-application.
 * To test *APi* use *Network tab* with various **Throttling** options *fast/slow/offline*
-* **Brendan Eich** is a person who created javascript. 
+* **Brendan Eich** is a person who created javascript.
 ---
 ## 📘 Operators are functions
 
@@ -479,6 +479,8 @@ console.log(age.toString())
 
 ```
 
+**⚠️ Note :** is a method that is attached on the **base Object** that why get on string, array, number etc.
+
 * Methods
 
 1. indexOf
@@ -538,7 +540,7 @@ console.log(a); //23
 * **Associativity :** What order operator functions get called in: LEFT-TO-RIGHT or RIGHT-TO-LEFT. when functions have the *same* precedence. Example : 1+2+3/3/4
 ---
 ## 📘 Coercion
-* **Coercion :** Converting a value from one type to another. This happens quite in all dynamically typed languages like php, javascript etc. 
+* **Coercion :** Converting a value from one type to another. This happens quite in all dynamically typed languages like php, javascript etc.
 ```javascript
 var a = 1 + '2';
 console.log(a);
@@ -1604,7 +1606,11 @@ const g = function () {
 g();
 f();
 ```
+* Top best Examples of Closures
 
+1. Memoization/Caching
+2. Call once any function
+3. Getting 3 in for loop
 ---
 
 ## 📘Closures and Callbacks
@@ -1704,7 +1710,7 @@ let obj1 = {
     firstName: "Deepu",
     lastName: "Bhasin",
     getFullName() {
-        return this.firstName + ' ' + this.lastName
+        console.log(this.firstName + ' ' + this.lastName);
     }
 }
 
@@ -1713,7 +1719,12 @@ let obj2 = {
     lastName: "Singh"
 }
 
+// USing apply
 obj1.getFullName.apply(obj2);
+
+// Using Prototype Chain
+obj2.__proto__ = obj1;
+obj2.getFullName();
 
 ```
 
