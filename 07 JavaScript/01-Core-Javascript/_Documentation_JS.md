@@ -1722,7 +1722,7 @@ let obj2 = {
 // USing apply
 obj1.getFullName.apply(obj2);
 
-// Using Prototype Chain
+// Using Prototype Chain (we are doing here prototypal Inheritance)
 obj2.__proto__ = obj1;
 obj2.getFullName();
 
@@ -1831,6 +1831,8 @@ var output2 = mathProgram(2,1, sub);
 ## 📘 Understanding the Prototype
 * **Prototype Chain :** is a chain which allow you to access properties of methods of another object.
 
+![ProtoTypeChain](./images/prototype-chain-with-object.png)
+
 ![Image](./images/prototype-chain.png)
 
 ```javascript
@@ -1838,8 +1840,8 @@ var person = {
     firstName: 'Deepinder',
     lastName: 'Singh',
     age: 29,
-    getfullName() {
-        return this.firstName + ' ' + this.lastName;
+    getFullName() {
+        console.log(this.firstName + ' ' + this.lastName);
     }
 }
 var john = {
@@ -1848,10 +1850,19 @@ var john = {
 }
 
 // don't do this EVER! for demo purposes only
+
+// this is called prototype inheritance
 john.__proto__ = person;
 console.log(john);
 console.log(john.age);
 
+//Checking Prototype inheritance from parent
+console.log(person.isPrototypeOf(john));
+
+//for-in loop + hasOwnProperty
+for (const key in john) {
+    console.log('key : ' + key + ' hasOwnProperty : ' + john.hasOwnProperty(key));
+}
 ```
 ![Image](./images/__proto__.png)
 
