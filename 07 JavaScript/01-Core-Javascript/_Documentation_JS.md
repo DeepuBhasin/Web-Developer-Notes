@@ -897,6 +897,16 @@ console.log(greet)
 
 // printing property which we are attaching to it
 console.log(greet.language)
+
+// what properties own by this function
+console.log(greet.hasOwnProperty('name'));      //true
+console.log(greet.hasOwnProperty('language'));  //true
+console.log(greet.hasOwnProperty('call'));      //false
+console.log(greet.hasOwnProperty('apply'));     //false
+console.log(greet.hasOwnProperty('bind'));      //false
+
+//Prototype inheritance
+console.log(greet.__proto__ == Function.prototype);
 ```
 ![Image](./images/example-functions-are-object.png)
 
@@ -1723,7 +1733,7 @@ let obj2 = {
 obj1.getFullName.apply(obj2);
 
 // Using Prototype Chain (we are doing here prototypal Inheritance)
-obj2.__proto__ = obj1;
+obj2.= Objec.create(obj1);
 obj2.getFullName();
 
 ```
@@ -1829,11 +1839,13 @@ var output2 = mathProgram(2,1, sub);
 
 ---
 ## 📘 Understanding the Prototype
-* **Prototype Chain :** is a chain which allow you to access properties of methods of another object.
+* **Prototype Chain :** is a chain which allow you to access properties of methods of another object. **Every this is object in javascript** : because of **prototype inheritance**, it pointing to the **Base Object** at the end. 
 
 ![ProtoTypeChain](./images/prototype-chain-with-object.png)
 
 ![Image](./images/prototype-chain.png)
+
+![PrototypeChain](./images/prototype-chain-pattern.png)
 
 ```javascript
 var person = {
@@ -1883,6 +1895,8 @@ a.__proto__ = Array.prototype   // true
 ![Image](./images/how-prototypal-inheritance.png)
 
 ![Image](./images/prototype-scope-chain.png)
+
+**⚠️Note :** Only Functions have proptotype property
 
 ## 📘 Reflection and Extend
 * **Reflection :** An Object can look at itself, listing and changing its properties and methods.
@@ -1949,6 +1963,16 @@ var dp = new Person('Deepinder', 'Singh');
 
 * Function Constructors has **first letter** always **capital**
 
+* Only Function have **proptotype** property
+
+```js
+var arr = [];
+console.log(arr.prototype);     // undefined
+console.log(Array.prototype);   // native function
+console.log(String.prototype);   // native function
+```
+
+
 ![Image](./images/function-constructor-prototype.png)
 
 ```javascript
@@ -1956,6 +1980,11 @@ function Person(firstname, lastname) {
     this.firstname = firstname;
     this.lastname = lastname;
 }
+
+// this is porinting to the Constructor function (these both are same thing)
+console.log(Person.prototype);
+console.log(john.__proto__ == Person.prototype);    // true
+
 
 Person.prototype.getFullName = function () {
     return this.firstname + ' ' + this.lastname;
@@ -2055,15 +2084,23 @@ for(var prop in arr) {
 ```
 ## 📘 Object.create and Pure Prototypal Inheritance
 
+* **Object.create :** this method is used for Prototype Inheritance. its is replacement of **__proto__**
 ```javascript
 const personPrototype = {
-            greet: function () {
-        return this.name ?? this.name;
+    job: "React Developer",
+    greet: function () {
+        console.log(this.name ?? this.name);
     }
 };
 
+// using dander Prototype (strictly avoid)
+var person = {};
+person.__proto__ = personPrototype;
+console.log(person);
+// or
+
 // it will create new empty object and then pointing out this prototype object
-const person = Object.create(personPrototype);
+var person = Object.create(personPrototype);
 console.log(person);     // empty object
 
 // Add Properties to the empty object
@@ -2071,8 +2108,17 @@ person.name = "John";
 person.age = 30;
 
 console.log(person); // { name :"John", person.age : 30}
-console.log(person.greet()); // john
+person.greet();      // john
+
+// for-in loop
+for (var key in person) {
+    console.log(`key : ${key} & hasOwnProperty : ${person.hasOwnProperty(key)}`);
+}
 ```
+
+**⚠️Note :** Only Functions have proptotype property
+
+
 * **PolyFill :** code that adds a features which the engine may lack.
 
 ```javascript
@@ -3156,7 +3202,7 @@ console.log(mike.__proto__);
 console.log(mike.__proto__.__proto__);
 ```
 
-4. Object.create() prototype inhertitence (this is best one as per standared)
+4. Object.create() prototype inheritence (this is best one as per standared)
 
 ```js
 const Person = {
@@ -4170,6 +4216,19 @@ console.log(test ?? 'Hello');   // 0
 16. flat
 17. flatMap
 18. new Array(7).fill(1)
+
+
+**⚠️ Note :** The all Above methods are coming from **Base Array Object**. You can see from below example
+```js
+const arr = [];
+
+console.log(arr.hasOwnProperty('length'));
+console.log(arr.hasOwnProperty('map'));
+console.log(arr.hasOwnProperty('filter'));
+
+console.log(arr.__proto__ == Array.Prototype)   // true
+```
+
 
 * Slice & Splice
 ```js
