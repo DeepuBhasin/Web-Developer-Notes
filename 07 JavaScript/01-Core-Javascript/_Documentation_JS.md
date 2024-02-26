@@ -6,6 +6,7 @@
 * An important part of web-development is actually handle the errors. because its very common that errors happen in web-application.
 * To test *APi* use *Network tab* with various **Throttling** options *fast/slow/offline*
 * **Brendan Eich** is a person who created javascript.
+* Imperative : Explain every thing & Declarative : Do Automatically.
 ---
 ## 📘 Operators are functions
 
@@ -1767,6 +1768,38 @@ setTimeout(test.bind(null, 'Deepinder Singh'), 1000);
 
 ## 📘 Functional Programming
 
+* Main Concept of functional Programming is : A functions has to always return the same output, given the same input and the function cannot modify any thing **outdside** of itself.
+
+```js
+// Non-Pure Function because it makes side effect.
+
+// Example 1
+const array = [1, 2, 3, 4];
+function mutateArray(array) {
+    array.pop()
+}
+mutateArray(array);
+console.log(array);
+
+// Example 2 : This is also effecting outside the world by printing hello world
+
+function test() {
+    console.log("Hi World");
+}
+
+
+// Pure Function beacuse it does not make any side effect.
+const array = [1, 2, 3, 4];
+function mutateArray(array) {
+    let temp = [...array];
+    temp.pop();
+    return temp;
+}
+let newArray = mutateArray(array);
+console.log(array);
+console.log(newArray);
+```
+
 * Libraries : underscore , lodash
 
 ```javascript
@@ -1839,7 +1872,7 @@ var output2 = mathProgram(2,1, sub);
 
 ---
 ## 📘 Understanding the Prototype
-* **Prototype Chain :** is a chain which allow you to access properties of methods of another object. **Every this is object in javascript** : because of **prototype inheritance**, it pointing to the **Base Object** at the end. 
+* **Prototype Chain :** is a chain which allow you to access properties of methods of another object. **Every this is object in javascript** : because of **prototype inheritance**, it pointing to the **Base Object** at the end.
 
 ![ProtoTypeChain](./images/prototype-chain-with-object.png)
 
@@ -1963,7 +1996,7 @@ var dp = new Person('Deepinder', 'Singh');
 
 * Function Constructors has **first letter** always **capital**
 
-* Only Function have **proptotype** property
+* Only Function have **proptotype** property (constructor Functions only) & **proptotype** useless with other any thing.
 
 ```js
 var arr = [];
@@ -2156,17 +2189,21 @@ var john = new Person('john', 'Doe');
 */
 
 class Person {
-    constructor(firstname, lastname) {
-        this.firstname = firstname;
-        this.lastname = lastname;
+    constructor(firstName, lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     greet() {
-        return 'Hi ' + this.firstname;
+        console.log('Hi ' + this.firstName);;
     }
 }
-
 var john = new Person('john', 'Doe');
+
+// because john has all prototypal (inheritance) functions from Person
+console.log(Person.prototype.isPrototypeOf(john));
+// OR
+console.log(john instanceof Person);
 
 /*
 //just like
