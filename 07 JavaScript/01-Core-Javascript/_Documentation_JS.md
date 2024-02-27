@@ -214,7 +214,7 @@ function test() {
 ```javascript
 function b(){
     var myVar;
-    console.log(myvar);
+    console.log(myVar);
 }
 function a() {
     var myVar = 2;
@@ -338,30 +338,30 @@ isNew = 1;
 * In **set** order does not matter, hence we cannot access values by using **index**. only use to check the values exist or not.
 * **Set** are iterable.
 ```js
-const orderset = new Set(['pasta', 'pizza', 'pizza', 'Risotto', 'pasta', 'pizza']);
-console.log(orderset);  //  {'pasta', 'pizza', 'Risotto'}
+const orderSet = new Set(['pasta', 'pizza', 'pizza', 'Risotto', 'pasta', 'pizza']);
+console.log(orderSet);  //  {'pasta', 'pizza', 'Risotto'}
 
-console.log(orderset.size);
-console.log(orderset.has('pizza')); // true
-console.log(orderset.has('maggi')); // false
+console.log(orderSet.size);
+console.log(orderSet.has('pizza')); // true
+console.log(orderSet.has('maggi')); // false
 
-orderset.add('Garlic Bread');
-orderset.add('Garlic Bread');   // this will not added
+orderSet.add('Garlic Bread');
+orderSet.add('Garlic Bread');   // this will not added
 
-console.log(orderset);  // {'pasta', 'pizza', 'Risotto', 'Garlic Bread'}
+console.log(orderSet);  // {'pasta', 'pizza', 'Risotto', 'Garlic Bread'}
 
-orderset.delete('pasta');
-console.log(orderset);  // {'pizza', 'Risotto', 'Garlic Bread'}
+orderSet.delete('pasta');
+console.log(orderSet);  // {'pizza', 'Risotto', 'Garlic Bread'}
 
-for(let i of orderset) {
+for(let i of orderSet) {
     console.log(i)          // 'pizza', 'Risotto', 'Garlic Bread'
 }
 
 
 // Actual Real Example of Set
 const arr = ['pasta', 'pizza', 'pizza', 'Risotto', 'pasta', 'pizza'];
-const orderset = [...new Set(arr)];
-console.log(orderset);  //  {'pasta', 'pizza', 'Risotto'}
+const orderSet = [...new Set(arr)];
+console.log(orderSet);  //  {'pasta', 'pizza', 'Risotto'}
 ```
 
 2. **Maps :**
@@ -1375,7 +1375,7 @@ greet('john','Doe', 'es', 'patiala', 'punjab');  // john , Doe, es
 
 ---
 ## 📘Framework Aside
-* *Dangerous Aside :* Automatic Semicolon Insertion, means its not compulsory to add Semicoln at the end of line because javascript do automatically.
+* *Dangerous Aside :* Automatic Semicolon Insertion, means its not compulsory to add Semicolon at the end of line because javascript do automatically.
 * It only occurs in the case of **returns**
 
 ![Image](./images/syntax-parser.png)
@@ -1443,7 +1443,7 @@ function(name) {    // invalid
     return name
 }
 
-// () is a operator which help to execute expresions like (3+4)
+// () is a operator which help to execute expressions like (3+4)
 (3 + 5) * 5;        // valid
 
 // we are creating function and running it all the same time
@@ -1454,7 +1454,7 @@ function(name) {    // invalid
 // you never put statements in expressions
 (if () {})          // invalid
 
-// function are special objects, here we are creating function object and function has sepcial property that '() invoking a function' hence called IIFE
+// function are special objects, here we are creating function object and function has special property that '() invoking a function' hence called IIFE
 (function doubleNumber(num){
     return num * 2;
 }(5));  // 10
@@ -1481,7 +1481,7 @@ console.log(greeting)       // Hello Tony
 
 ⚠️ Why are they used ? <br/>
 
-The main reason to use and IIFE that, its __preserve a private scope with in your function__ which help to not overridding any global variables.
+The main reason to use and IIFE that, its __preserve a private scope with in your function__ which help to not overriding any global variables.
 
 ```javascript
 var greeting = 'Hola';
@@ -1531,10 +1531,10 @@ outerFunc('param two');
 ```
 
 ```javascript
-function greet(whattosay){
+function greet(whatToSay){
     // it return function object which is created on fly
     return function (name) {
-        console.log(whattosay + ' ' + name)
+        console.log(whatToSay + ' ' + name)
     }
 }
 
@@ -1662,21 +1662,21 @@ const tripleAdd = num1 => num2 => num3 => num1 + num2 + num3;
 
 tripleAdd(10)(20)(30); // 60
 ```
-Why is this usefull ? <br/>
+Why is this useful ? <br/>
 
-Because now i can create __mulitple utility functions__ out of this For example:
+Because now i can create __multiple utility functions__ out of this For example:
 
 ```javascript
 const carriedMultiple = (number1) => number2 => number1 * number2;
 
-const carriedMutipleBy5 = carriedMultiple(5);
+const carriedMultipleBy5 = carriedMultiple(5);
 
-carriedMutipleBy5(4); // 20
+carriedMultipleBy5(4); // 20
 ```
 
 ```javascript
 // Write a function that keep track of how many times it was called and return that number
-function myfunction() {
+function myFunction() {
     let count = 0;
     return function () {
         count++;
@@ -1684,7 +1684,7 @@ function myfunction() {
     }
 }
 
-let output = myfunction();
+let output = myFunction();
 
 console.log(output());  // 1
 console.log(output());  // 2
@@ -1703,12 +1703,12 @@ These methods are used to __manipulate__ the __this__ keyword.
 
 ```javascript
 
-functionObject.call(object, argument1,agrgument2, argument3, ...argumentn);
+functionObject.call(object, argument1,argument2, argument3, ...argumentN);
 
-functionObject.apply(object,[argument1,agrgument2, argument3, ...argumentn]);
+functionObject.apply(object,[argument1,argument2, argument3, ...argumentN]);
 
 // it will return new copy of function
-functionObject.bind(object, argument1,agrgument2, argument3, ...argumentn);
+functionObject.bind(object, argument1,argument2, argument3, ...argumentN);
 
 ```
 
@@ -1734,7 +1734,7 @@ let obj2 = {
 obj1.getFullName.apply(obj2);
 
 // Using Prototype Chain (we are doing here prototypal Inheritance)
-obj2.= Objec.create(obj1);
+obj2.= Object.create(obj1);
 obj2.getFullName();
 
 ```
@@ -1768,8 +1768,8 @@ setTimeout(test.bind(null, 'Deepinder Singh'), 1000);
 
 ## 📘 Functional Programming
 
-* The idea of functional progaramming is the idea of separation of data and functions or data and the effect that happen on that data.  
-* Pure Funstions : A functions has to always return the same output, given the same input and the function cannot modify any thing **outdside** of itself.
+* The idea of functional programming is the idea of separation of data and functions or data and the effect that happen on that data.  
+* Pure Functions : A functions has to always return the same output, given the same input and the function cannot modify any thing **outside** of itself.
 
 ```js
 // Non-Pure Function because it makes side effect.
@@ -1789,7 +1789,7 @@ function test() {
 }
 
 
-// Pure Function beacuse it does not make any side effect.
+// Pure Function because it does not make any side effect.
 const array = [1, 2, 3, 4];
 function mutateArray(array) {
     let temp = [...array];
@@ -1849,7 +1849,7 @@ function sub(a , b) {
     return a - b;
 }
 
-function mulitply(a , b) {
+function multiply(a , b) {
     return a * b;
 }
 
@@ -1906,7 +1906,7 @@ const data = compose(multiply, addition);
 console.log(data(6));
 ```
 
-**⚠️ Note :** In functional programming lesser the number of paramater more your function is good
+**⚠️ Note :** In functional programming lesser the number of parameter more your function is good
 
 ---
 
@@ -1991,7 +1991,7 @@ if ('keyName' in ObjectName) {
     // value Exist
 }
 
-// 3. For loop (it will also print prototype chaine values)
+// 3. For loop (it will also print prototype chain values)
 for (var key in ObjectName) {
     console.log(key)
 }
