@@ -1768,7 +1768,8 @@ setTimeout(test.bind(null, 'Deepinder Singh'), 1000);
 
 ## 📘 Functional Programming
 
-* Main Concept of functional Programming is : A functions has to always return the same output, given the same input and the function cannot modify any thing **outdside** of itself.
+* The idea of functional progaramming is the idea of separation of data and functions or data and the effect that happen on that data.  
+* Pure Funstions : A functions has to always return the same output, given the same input and the function cannot modify any thing **outdside** of itself.
 
 ```js
 // Non-Pure Function because it makes side effect.
@@ -1887,7 +1888,7 @@ const data = compose(multiply, addition);
 console.log(data(6));
 
 
-// Pipes Example
+// Pipes Example        
 function compose(fn1, fn2) {
     return function (number) {
         return fn1(fn2(number));
@@ -1904,6 +1905,8 @@ const addition = function (num) {
 const data = compose(multiply, addition);
 console.log(data(6));
 ```
+
+**⚠️ Note :** In functional programming lesser the number of paramater more your function is good
 
 ---
 
