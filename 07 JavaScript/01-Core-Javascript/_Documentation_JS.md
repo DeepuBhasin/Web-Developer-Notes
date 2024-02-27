@@ -3307,10 +3307,11 @@ Student.introduce = function () {
     console.log(`My name is ${this.firstname} and I study ${this.course}`);
 }
 
-const jay = Object.create(Student);
+const jay = Object.create(Student, {age : 19});
 jay.inti('Jay', 2010, 'Computer Sci');
 jay.introduce();
 jay.calcAge();
+jay.age
 ```
 ![Image](./images/object-create-prototype-inheritance.png)
 
