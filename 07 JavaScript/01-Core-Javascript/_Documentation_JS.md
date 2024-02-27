@@ -1863,6 +1863,48 @@ function mathProgram(num1, num2, fn) {
 var output1 = mathProgram(1,2, sum);
 var output2 = mathProgram(2,1, sub);
 ```
+
+## 📘Composability & Pipes
+* is a system design principle that deals with this relationship of components
+* Composability : **Right to Left** && Pipes : **Left to Right**
+
+```js
+// Composabilty Example
+function compose(fn1, fn2) {
+    return function (number) {
+        return fn2(fn1(number));
+    }
+}
+
+const multiply = function (num) {
+    return num * 2
+}
+const addition = function (num) {
+    return num + 2
+}
+
+const data = compose(multiply, addition);
+console.log(data(6));
+
+
+// Pipes Example
+function compose(fn1, fn2) {
+    return function (number) {
+        return fn1(fn2(number));
+    }
+}
+
+const multiply = function (num) {
+    return num * 2
+}
+const addition = function (num) {
+    return num + 2
+}
+
+const data = compose(multiply, addition);
+console.log(data(6));
+```
+
 ---
 
 ## 📘 Object-Oriented Javascript and Prototypal Inheritance (Classical Vs Prototypal Inheritance)
