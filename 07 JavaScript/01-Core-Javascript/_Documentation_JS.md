@@ -2755,12 +2755,18 @@ console.log('console 1');
 * it save our bandwidth to run all calls in parallel.
 * if the one promise get reject all promise will reject.
 ```js
+Promise.all([
+    fetch('https://jsonplaceholder.typicode.com/posts/1').then(result => result.json()),
+    fetch('https://jsonplaceholder.typicode.com/posts/2').then(result => result.json()),
+    fetch('https://jsonplaceholder.typicode.com/posts/3').then(result => result.json())
+]).then(result => console.log(result))
+    .catch(error => {
+        console.log(error);
+    });
+
+//using async/await
 async function getData() {
     try {
-        let data1 = await fetch('https://jsonplaceholder.typicode.com/posts/1');
-        let data2 = await fetch('https://jsonplaceholder.typicode.com/posts/2');
-        let data3 = await fetch('https://jsonplaceholder.typicode.com/posts/3');
-
         const urls = [
             'https://jsonplaceholder.typicode.com/posts/1',
             'https://jsonplaceholder.typicode.com/posts/2',
