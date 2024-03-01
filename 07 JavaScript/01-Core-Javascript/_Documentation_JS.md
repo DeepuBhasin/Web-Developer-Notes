@@ -6,7 +6,14 @@
 * An important part of web-development is actually handle the errors. because its very common that errors happen in web-application.
 * To test *APi* use *Network tab* with various **Throttling** options *fast/slow/offline*
 * **Brendan Eich** is a person who created javascript.
+---
+## 📘Terminologies
+
 * Imperative : Explain every thing & Declarative : Do Automatically.
+* TightCoupling : means every thing is connected.
+* Implicit : doing every thing by own.
+
+
 ---
 ## 📘 Operators are functions
 
@@ -1477,6 +1484,20 @@ console.log(greeting)       // Hello Tony
     console.log(greeting +' '+ name);
 }('john'));
 ```
+
+**📚 conceptual Example:**
+
+```js
+var firstName = "deep";
+
+var test = (function (firstName) {
+    firstName = "newDeep";
+}(firstName))
+
+console.log(firstName);
+```
+
+
 ![Image](./images/iife.png)
 
 ⚠️ Why are they used ? <br/>
@@ -1768,7 +1789,7 @@ setTimeout(test.bind(null, 'Deepinder Singh'), 1000);
 
 ## 📘 Functional Programming
 
-* The idea of functional programming is the idea of separation of data and functions or data and the effect that happen on that data.  
+* The idea of functional programming is the idea of separation of data and functions or data and the effect that happen on that data.
 * Pure Functions : A functions has to always return the same output, given the same input and the function cannot modify any thing **outside** of itself.
 
 ```js
@@ -1888,7 +1909,7 @@ const data = compose(multiply, addition);
 console.log(data(6));
 
 
-// Pipes Example        
+// Pipes Example
 function compose(fn1, fn2) {
     return function (number) {
         return fn1(fn2(number));
@@ -2848,6 +2869,56 @@ Promise.race([p5, p6]).then(
     },
 );
 ```
+
+**📚 conceptual Example :**
+```js
+function promisify(item, delay) {
+    return new Promise(resolve => {
+        setTimeout(() => resolve(item), delay)
+    })
+}
+
+const a = () => promisify('a', 100);
+const b = () => promisify('b', 5000);
+const c = () => promisify('c', 3000);
+
+async function parallel() {
+    const promises = [a(), b(), c()];
+    const [output1, output2, output3] = await Promise.all(promises);
+    return `parallel is done ${output1} ${output2} ${output3}`;
+}
+
+async function sequence() {
+    const output1 = await a();
+    const output2 = await b();
+    const output3 = await c();
+    return `sequence is done ${output1} ${output2} ${output3}`;
+}
+
+async function race() {
+    const promises = [a(), b(), c()];
+    const [output] = await Promise.race(promises);
+    return `race is done ${output}`;
+}
+
+/*
+1. in the example, code is the same for parallel and sequence functions then why sequence is taking so much time as compared to parallel. Because in parallel all promises start on the same but in the sequence function, the next one will not start until the previous one is complete, hence total execution for parallel was 5000 (because it covers all promises) but for the sequence was 100 + 3000 + 5000 = 8100 Therefore sequence is late.
+2. Order does not matter
+
+// Output
+race is done a
+parallel is done a b c
+sequence is done a b c
+*/
+
+sequence().then(console.log)
+parallel().then(console.log)
+race().then(console.log)
+```
+
+
+
+
 ## 📘Promise.allSettled, Promise.all, Promise.any
 * **Promise.allSettled :** We return all promise like reolved or rejected in single promise example in below code we will get all promise values
 
