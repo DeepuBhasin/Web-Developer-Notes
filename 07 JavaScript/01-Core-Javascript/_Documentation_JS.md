@@ -1514,6 +1514,7 @@ var greeting = 'Hola';
 ```
 ![Image](./images/iffe-module-pattern.png)
 
+**⚠️ Note:** in ES6 it is working is **import and export modules**, where named or default represent as public api and non-named or non-default represent as non-public api.
 ---
 
 ## 📘Closure
@@ -5533,24 +5534,206 @@ const arrNew = addingNewElement(arr);
 console.log('old', arr);
 console.log('new', arrNew);
 ```
+## 📘 Errors, Throw, SyntaxError, ReferenceError and Error handling
+
+* **Error** is constructor function so we can create instance, But creating instance is not useful for us untill we **throw** it.
+* **throw** keyword is stop the execution of code
+
+```js
+// not useful
+new Error("Error Message")
+
+// fully useful
+throw new Error("Error Message")
+```
+* We can throw any thing, it will stop execution of the code
+
+```js
+throw "string"  // string
+
+throw true // boolean
+
+throw 1 // number
+
+throw {message : 'Error', status : '404'} // object
+
+// Example
+throw "string"
+console.log("Hello world")  // this line will not work
+```
+
+* Error has three properties
+    1. name : actual name of the error
+    2. message : error message
+    3. stack trace : show call stack
+
+```js
+const b = new Error("Error Message");
+console.log(b.name);
+console.log(b.message);
+console.log(b.stack);
+```
+* SyntaxError : grammer mistake of javascript and it has throw keyword inbuilt thats why code execution stop.
+
+```js
+new SyntaxError("Hello Error")
+```
+* RefernceError : when you are not declaring any varaiable and it has throw keyword inbuilt thats why code execution stop.
+
+```js
+new ReferenceError("Hello Error")
+```
+
+* **Error Hanlding** : Some we might want to catch that error instead of stopping the entire program. So if we get any error in any **Execution Context** if we do not any **catch statment** then that error will catch by browers inbuilt catch statment.
+
+![Error-Handling](./images/error-handling.png)
+
+* Error Handling can done by
+    1. try catch methods : only handle synchronous errors
+    2. catch : only handle asynchronous errors
+
+* Try-Catch Method
+```js
+//1 try-catch
+function test() {
+    // try block means we want to try a code
+    try {
+        // here i make a mistake by wrong spellings
+        consol.log("this works")
+
+        // or
+        throw new Error("Making mistake");
+    }
+    // catch block means if any error occur in try block i will catch it automatically
+    catch (e) {
+        console.log(e.message);
+    }
+    // finally
+    finally {
+        console.log("This line of code will always work");
+        return true;
+    }
+
+    // this will never work because we return our function from finally
+    console.log("This line of code will not work")
+}
+
+test();
+
+/*
+output :
+consol is not defined
+This line of code will always work
+*/
+
+//Nested Try-Catch
+function test() {
+    try {
+        try {
+            something();
+        } catch (e) {
+            throw new Error(e)
+        }
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+test();
+// outout : ReferenceError: something is not defined
+```
+* Catch Method
+
+```js
+// this code will not work according to try-catch (synchronous error) because setTimeout work as asynchronous
+function test() {
+    try {
+        setTimeout(function () {
+            ok
+        }, 1000);
+    } catch (e) {
+        console.log(e.message);
+    }
+}
+
+test();
+
+// Example
+Promise.resolve('hello Code')
+    .then(response => {
+        throw new Error("#1 Fail")
+    }).catch(e => console.log(e.message))
+```
+
+**📚 Conceptual Example:**
+
+```js
+// 1. Catching error
+Promise.resolve('hello Code')
+    .then(() => {
+        // throwing error from here
+        throw new Error("#1 Fail")
+    }).catch(e => {
+        // error handled here
+        return e + ` adding catch 1 `;
+    }).then(e => {
+        console.log(e);
+        return e + 'adding then 1';
+    }).then(e => {
+        console.log(e)
+    }).catch(e => {
+        // this will not give any out put because once error get handled then another catch statement will not work
+        console.log(e);
+    })
+```
+```js
+// 2. catching error in nested promise
+Promise.resolve('hello Code')
+    .then(() => {
+        // this is asynchronous code js engine will not wait here hence it will move to next line
+        Promise.resolve().then(() => {
+            throw new Error("#fail 2")
+        }).catch(e => {
+            // this will handle their promise error
+            console.log('first catch ' + e.message)
+        });
+        // here it is returning value from here because its working like synchronous code
+        return 5;
+    }).then((r) => {
+        // its getting value from the above then block
+        console.log(r);
+    }).then(e => {
+        // this code creating new error
+        something();
+    }).catch(e => {
+        // this code handling error of then block
+        console.log(e.message);
+    })
+```
+**⚠️ Note :** Example 2 **catching error in nested promise** become little bit difficult, some time it become worse when you are not handling error properlly in nested promise so in that cases we use **try-catch block with async/await functions** because in their its quite easy and also it make synchronous code.
+
+```js
+// nested promise with try-catch
+(async function () {
+    try {
+        await Promise.resolve("#fail 1");
+        await Promise.reject("#fail 2");
+        await Promise.reject("#fail 3");
+    } catch (e) {
+        console.log(e);
+    }
+    console.log("Executed Try and catch");
+}());
+
+```
+
+---
 # 📔Extra
 * To Excape characters
 
 ```js
 var firstname = "Deepinder";
 console.log(`i am \${firstname} Singh`);
-```
-
-* Throw Error in Error-Handling
-
-```js
-try {
-    throw new Error('Error Message')
-
-    // or
-
-    throw {message : 'Error', status : '404'}
-}
 ```
 
 ### 📘Form Data
