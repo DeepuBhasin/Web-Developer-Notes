@@ -5726,6 +5726,24 @@ Promise.resolve('hello Code')
 }());
 
 ```
+* **Extends Error**: these are various usefull because in normal errors some time all information is printing so hacker can use that information.
+
+```js
+class AuthenticationError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = 'authenticationError';
+        this.favoriteSnack = "apple"
+    }
+}
+
+const a = new AuthenticationError("This is custom error");
+
+console.log(a.name);
+console.log(a.message);
+console.log(a.stack);
+```
+
 
 ---
 # 📔Extra
