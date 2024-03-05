@@ -416,6 +416,8 @@ npx webpack
 
 ## 📘1. Loaders (CSS/Style)
 
+a. Simple CSS 
+
 * It help to load that files which we cannot import using modules
 * Import **CSS** Files like *SASS, LESS, Handlebars, XML* and so much
 * Loaders are javascript libraries which allowed you to load all stuffs
@@ -516,6 +518,99 @@ helloWorldButton.render();
 npx webpack
 ```
 ![Loader](./images/loader-js.png)
+
+
+b. Module CSS
+
+1. Webpack
+
+```js
+const path = require('path');
+
+module.exports = {
+    entry: './src/index.js',
+    output: {
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, './dist'),
+    },
+    mode: 'none',
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: [
+                    {
+                        loader: 'style-loader'
+                    },
+                    {
+                        // this option enable to load css as module
+                        loader: 'css-loader', options: { modules: true }
+                    }
+                ]
+            }
+        ]
+    }
+}
+```
+
+2. clearButton.css
+
+```css
+.button {
+  background-color: red;
+}
+```
+
+3. clearButton.js
+
+```js
+import style from "./clearButton.css";
+
+export default function renderTestButton() {
+    const el = document.createElement("button");
+    el.classList.add([`${style.button}`])
+    el.innerHTML = "clear";
+    el.onclick = function () {
+        alert("clear button")
+    }
+    document.body.appendChild(el);
+}
+```
+4. index.js
+
+```js
+import renderTestButton from "./clearButton"
+
+renderTestButton();
+```
+
+5. index.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+    <h1 class="header">Hey this is webpack</h1>
+    <button class="button">Click Me</button>
+    <script src="./dist/bundle.js"></script>
+</body>
+
+</html>
+```
+6. Package.json
+```js
+  "scripts": {
+    "build": "webpack --mode development --config=webpack.config.js"
+  },
+```
+
+![moduleCss](./images/module-css.png)
 
 ## 📘2. Loaders (SCSS)
 
