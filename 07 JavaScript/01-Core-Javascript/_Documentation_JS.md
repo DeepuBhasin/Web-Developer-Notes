@@ -1516,7 +1516,9 @@ var greeting = 'Hola';
 
 **⚠️ Note:** in node we use **require("") with module.export {}**  and in ES6 it is working is **import and export modules**, where named or default represent as public api and non-named or non-default represent as non-public api.
 
+1. By using ES6 (Import/Export)
 ```js
+
 // sum1.js
 export default (function (a, b) {
     return a + b
@@ -1550,6 +1552,45 @@ console.log(sumOfThere(1, 2, 3));
 </body>
 
 </html>
+```
+
+2. By using Node.js (require)
+
+```js
+//sum1.js
+function sum(a, b) {
+    return a + b
+}
+
+function multiply(a, b) {
+    return a * b
+}
+
+module.exports = {
+    sum,
+    multiply
+}
+
+// sum.js
+function sum(a, b, c) {
+    return a + b + c;
+}
+
+module.exports = sum
+
+//index.js
+// no need to add ".js" because node.js understand automatically
+const { sum: sumOfTwoNumber, multiply } = require("./sum1");
+const sumOfThere = require("./sum2");
+
+// Note : instead of multiple line of import you can create a index.js file where you will import all files then we will import this index.js file
+
+console.log(sumOfTwoNumber(1, 2));
+console.log(sumOfThere(1, 2, 3));
+console.log(multiply(2, 2));
+```
+```
+node index.js
 ```
 
 ---
@@ -5092,9 +5133,18 @@ c.addEventListener('click', function (e) {
 
 ## 📘Modules
 
+Modules in javascript
+1. CommonJs (require)
+2. ES6 (import and export)
+3. AMD (Define/ Require)
+4. @import (CSS/SCSS)
+5. Image URL Reference
+
 ![Image](./images/module-1.png)
+
 ![Image](./images/module-2.png)
-![Image](./images/module-3.png)
+
+  ![Image](./images/module-3.png)
 
 ## 📘Importing and Exporting Module
 * Imports are not copies of the export. They are instead like a live connection and so what that means is that I point to the same place in memory because again, otherwise if it was a copy then here we would not get anything in the array.
