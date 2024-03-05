@@ -133,7 +133,7 @@ npx webpack
 * this command will create **dist** folder and create **main.js** file in it
 ---
 ## 📘Custom Configuration (Basic)
-* create **webpack.config.js** 
+* create **webpack.config.js**
 * Entry Point and Output Point
 
 
@@ -144,12 +144,12 @@ const path = require('path');
 module.exports = {
     // entry point for webpack
     entry: './src/index.js',
-    
+
     output: {
          // output file name
         filename: 'bundle.js',
 
-        // it will create bundler.js file in dist folder 
+        // it will create bundler.js file in dist folder
         path: path.resolve(__dirname, './dist')
     },
     mode: 'none'
@@ -168,9 +168,9 @@ npx webpack
 1. asset/resource : use when importing large files
 2. asset/inline : use when importing small files
 3. asset : webpack decide automatically select one from above conditions ( condition : asset/resource > 8 kilobytes > asset/inline )
-4. asset/source : Read the string and injects that string directly into javascript bundles 
+4. asset/source : Read the string and injects that string directly into javascript bundles
 
-## 📘1. Importing Image through webpacks (Asset/Resource)
+## 📘1. Importing Image through webpack (Asset/Resource) + font family
 
 1. Write rules in webpack (because webpack cannot understand the image files)
 
@@ -182,15 +182,21 @@ module.exports = {
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, './dist')
+
+        // export into particular folder
+        assetModuleFilename: "images/[hash][ext]",
+
+        // this parameter will automatically delete all files and images from build folder which are not in use
+        clean: true
     },
     mode: 'none',
 
     // adding rules for loading images
     module: {
         rules: [
-            {   
-                // loading tff files
-                test: /\.(ttf)$/,
+            {
+                // loading font families
+                test: /\.(ttf | woff | woff2)$/,
                 type: 'asset/resource'
 
             },
@@ -212,7 +218,7 @@ function addImage() {
     const img = document.createElement('img');
     img.alt = 'Work';
     img.width = 300;
-    img.src = work;
+    img.src = work; 
     const body = document.querySelector('body');
     body.appendChild(img);
 }
@@ -240,8 +246,8 @@ npx webpack
 
 ## 📘 PublicPath
 1. Adding Specific Folder
-* this is use to load image from sepecific path like **local Path**, **CDN Path**
-* this features only works in **webpaack5**
+* this is use to load image from specific path like **local Path**, **CDN Path**
+* this features only works in **webpack5**
 ```js
 const path = require('path');
 
@@ -250,7 +256,7 @@ module.exports = {
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, './dist'),
-        
+
         // this is use to get the file from particular folder
         publicPath: './dist/'
     },
@@ -280,7 +286,7 @@ publicPath: 'https://some-random-url.com/'
 ```
 ![CDN-publicPath](./images/publicPath-cdn.png)
 
-## 📘2. Importing Image through webpacks (Asset/Inline)
+## 📘2. Importing Image through webpack (Asset/Inline)
 * Like Importing File like **base64**
 * Main disadvantage is that it will **increase** js file size
 * Main Advantage is that if the sizes if Normal images are very large our web page will make a **http request** to load images which is very expensive so converting into **base64** will save our **http request**
@@ -308,8 +314,8 @@ module.exports = {
 ```
 ![base64-Image](./images/asset-inline-base64.png)
 
-## 📘3. Importing Image through webpacks (Asset)
-* webpack decide automatically and select one option from above conditions 
+## 📘3. Importing Image through webpack (Asset)
+* webpack decide automatically and select one option from above conditions
 * ( condition : asset/resource > 8 kilobytes > asset/inline )
 
 ```js
@@ -407,7 +413,7 @@ npx webpack
 
 ![Image](./images/text-file.png)
 ---
-## 📘Loaders 
+## 📘Loaders
 1. CSS Loader
 2. SCSS Loader
 3. JS Loader
@@ -416,7 +422,7 @@ npx webpack
 
 ## 📘1. Loaders (CSS/Style)
 
-a. Simple CSS 
+a. Simple CSS
 
 * It help to load that files which we cannot import using modules
 * Import **CSS** Files like *SASS, LESS, Handlebars, XML* and so much
@@ -441,10 +447,10 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [
-                    //Then second the style loader takes the CSS and inject it into the page using style tags 
+                    //Then second the style loader takes the CSS and inject it into the page using style tags
                     'style-loader',
 
-                    //first  the css loader reads the contents of the css file and return this contents, but it doesn't do anything  else with this css 
+                    //first  the css loader reads the contents of the css file and return this contents, but it doesn't do anything  else with this css
                     'css-loader'
                 ]
             }
@@ -510,9 +516,9 @@ import HelloWorldButton from './components/hello-world-button'
 
 const helloWorldButton = new HelloWorldButton();
 helloWorldButton.render();
-``` 
+```
 
-5. Command 
+5. Command
 
 ```
 npx webpack
@@ -612,7 +618,7 @@ renderTestButton();
 
 ![moduleCss](./images/module-css.png)
 
-## 📘2. Loaders (SCSS)
+## 📘2. Loaders (SCSS/SASS)
 
 * Command to install package
 
@@ -660,9 +666,9 @@ module.exports = {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader']
             },
-            {   
-                // load scss file
-                test: /\.scss$/,
+            {
+                // load scss/sass file
+                test: /\.s[ac]ss$/,
                 // loader will load from right to left
                 use: ['style-loader', 'css-loader', 'sass-loader']
             }
@@ -674,7 +680,7 @@ module.exports = {
 ## 📘3. Loader (JS)
 * by default **we don't** need any loader to load JS files
 * But If we to add latest feature of javascript on not fully advanced browsers in that case we use JS loader called **babel**.
-* It is compiler which convert Latest javascrit code into browser compatible.
+* It is compiler which convert Latest javascript code into browser compatible.
 
 * Command to install packages
 
@@ -702,9 +708,9 @@ module.exports = {
                     loader: 'babel-loader',
                     options: {
                         // convert ES1-N => ES5 , support all latest features of ES6
-                        presets: ['@babel/env'], 
+                        presets: ['@babel/env'],
 
-                        // Laod all Latest JS Class features
+                        // Load all Latest JS Class features
                         plugins: ['@babel/plugin-proposal-class-properties']
 
                     }
@@ -712,7 +718,7 @@ module.exports = {
             }
         ]
     }
-} 
+}
 ```
 * hello-world-button.js
 
@@ -741,7 +747,7 @@ export default HelloWorldButton
 
 ## 📘4. Loader (File Loader (png, svg, jpg, gif files etc))
 
-1. Command 
+1. Command
 ```
 npm install file-loader
 ```
@@ -776,7 +782,7 @@ module.exports = {
             filename: 'index.html',
             user: 'Admin',
             template: './index.html',
-            // to minfiy the output of file
+            // to minify the output of file
             minify : false
         })
     ]
@@ -822,7 +828,7 @@ export default WorkImage;
 
 </html>
 ```
-5. Command 
+5. Command
 
 ```
 npx webpack
@@ -833,7 +839,7 @@ npx webpack
 
 ## 📘Plugins
 
-* Plugins are additionl javascript libraries that do everything that loaders cannot do.
+* Plugins are additional javascript libraries that do everything that loaders cannot do.
 * Plugins can also modify how the bundles themselves are created. For Example, **uglifyJSplugin** takes the bundle.js and minimize the contents to decrease the bundle size.
 * You can add other various **plugins from webpack official website**
 
@@ -873,7 +879,7 @@ module.exports = {
     plugins: [
         new TerserPlugin()
     ]
-} 
+}
 ```
 
 2. Run Command
@@ -911,7 +917,7 @@ module.exports = {
         rules: [
             {
                 test: /\.css$/,
-                
+
                 // loading MiniCssExtractPlugin style loader instead of normal Loader
                 use: [MiniCssExtractPlugin.loader, 'css-loader']
             },
@@ -937,14 +943,14 @@ module.exports = {
     },
     plugins: [
         new TerserPlugin(),
-        // loading MiniCssExtractPlugin Class 
+        // loading MiniCssExtractPlugin Class
         new MiniCssExtractPlugin({
 
             // Making output file name
             filename: 'styles.css',
         })
     ]
-} 
+}
 ```
 
 ## 📘3. MiniCssExtractPlugin (with double Files for css)
@@ -974,14 +980,14 @@ export default Heading;
 ```css
 h1 {
     color:  grey;
-} 
+}
 ```
 5. Run build Command
 
 ```
 npx webpack
 ```
-![Minfiy](./images/minifiplugin.png)
+![Minify](./images/minifiplugin.png)
 
 ## 📘Browser Caching
 
@@ -991,7 +997,7 @@ npx webpack
 1. For Javascript Files
 ```js
 filename: 'bundle.[contenthash].js',
-``` 
+```
 2. For CSS Files
 ```js
 filename: 'styles[contenthash].css',
@@ -1002,7 +1008,7 @@ filename: 'styles[contenthash].css',
 1. Command to install Package
 ```
 npm install clean-webpack-plugin
-``` 
+```
 
 2. webpack.config.js
 
@@ -1013,7 +1019,7 @@ const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-// package  
+// package
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
     entry: './src/index.js',
@@ -1066,7 +1072,7 @@ output: {
     filename: 'bundle.[contenthash].js',
     path: path.resolve(__dirname, './dist'),
 
-    //just add this line 
+    //just add this line
     clean: true
 }
 ```
@@ -1074,7 +1080,7 @@ output: {
 ## 📘Generating HTML Files Automatically During Webpack Build Process
 
 * This **html-webpack-plugin** plugin is use to create html file with adding newly generated files (with random names) of **js** or **css** automatically.
-* It will create a new **index.html** file in **dist folder** (beacuse we have mention about dist folder) 
+* It will create a new **index.html** file in **dist folder** (because we have mention about dist folder)
 
 
 1. webpack.config.js
@@ -1095,7 +1101,7 @@ module.exports = {
 
         // Output file folder
         path: path.resolve(__dirname, './dist/'),
-        
+
         // Adding directory in file
         publicPath: './'
     },
@@ -1122,9 +1128,9 @@ module.exports = {
         // instance of creating html file
         new HtmlWebpackPlugin()
     ]
-} 
+}
 ```
-2. Command 
+2. Command
 
 ```
 npx webpack
@@ -1150,7 +1156,7 @@ npx webpack
 ⚠️ Note : you can check various other options on internet
 
 ---
-## 📘Integration with Template 
+## 📘Integration with Template
 
 * With **webpack** (best one)
 1. webpack.config.js
@@ -1280,7 +1286,7 @@ module.exports = {
                 }
             },
             {
-                //Adding handling handle for a Handlerbar File
+                //Adding handling handle for a Handlebar File
                 test: /\.hbs$/,
                 use: ['handlebars-loader']
             }
@@ -1304,7 +1310,7 @@ module.exports = {
             heading: 'Hello Deepinder Singh'
         })
     ]
-} 
+}
 ```
 3. Command
 
@@ -1317,7 +1323,7 @@ npx webpack
 
 ## 📘Production Vs Development Builds
 
-* Usually producation builds require a different setup than development builds in production
+* Usually production builds require a different setup than development builds in production
 * In Production, we want our website to be fast as possible and our bundles should be as small as possible
 * On the other hand, during development we often want to see an additional information inside our javascript code like for example source maps and other stuff
 
@@ -1326,10 +1332,10 @@ npx webpack
 // to set mode
 module.exports = {
     mode: 'production',
-} 
+}
 
 
-// OR 
+// OR
 
 "scripts": {
     "build": "webpack --mode=development",
@@ -1344,7 +1350,7 @@ module.exports = {
   * production
 
 ⚠️ **Note :
-* ** when we use **producation mode** our bundle get automatically minified  and in **Development mode** our files get remain same as written. 
+* ** when we use **production mode** our bundle get automatically minified  and in **Development mode** our files get remain same as written.
 * In **Production mode** by default **TerserPlugin** is already installed
 
 2. Js file
@@ -1362,7 +1368,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 ```
 
-Example 
+Example
 
 * for Development file : **webpack.dev.config**
 
@@ -1407,7 +1413,7 @@ module.exports = {
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin()
     ]
-} 
+}
 ```
 * For Production : **webpack.production.config.js**
 
@@ -1456,10 +1462,10 @@ module.exports = {
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin()
     ]
-} 
+}
 ```
 
-* Package.json File 
+* Package.json File
 
 ```js
 "scripts": {
@@ -1467,7 +1473,7 @@ module.exports = {
     "dev": "webpack --config=webpack.dev.config.js"
   }
 
-// OR 
+// OR
 
 "scripts": {
     "build": "webpack --mode=production --config=webpack.production.config.js",
@@ -1482,18 +1488,18 @@ module.exports = {
 * When ever we change any thing in the file and then save the file, it will reload automatically.
 
 
-1. webpack.config.js : Add this Object in **module.exports** 
+1. webpack.config.js : Add this Object in **module.exports**
 ```js
 devServer: {
     port: 9000,
     static: {
-        // point to which directory to be run 
+        // point to which directory to be run
         directory: path.resolve(__dirname, './dist')
     },
     devMiddleware: {
         // pointing file name which will use as index file
         index: 'index.html',
-        // application will write in disk means in ram 
+        // application will write in disk means in ram
         writeToDisk: true
     },
     open: true,
@@ -1519,9 +1525,9 @@ npm install webpack-dev-server --save-dev
 ```
 npm run dev
 ```
-![Liveserver](./images/live-server.png)
+![live-server](./images/live-server.png)
 
-## 📘Analysing Bundle
+## 📘Analyzing Bundle
 1. Package
 
 ```
@@ -1539,8 +1545,8 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 
  ## 📘Module-Federation
 * It allow one application to dynamically load modules from another application at runtime
-* no need to install separate plaugin it is by default with in webpack 
-* There is an Example in **ModuleFedrationPlugin(Simple-Example) folder**
+* no need to install separate plugin it is by default with in webpack
+* There is an Example in **ModuleFederationPlugin(Simple-Example) folder**
 ```js
 const { ModuleFederationPlugin } = require('webpack').container;
 plugins: [
@@ -1554,11 +1560,11 @@ plugins: [
     // Name of application
     name: 'HelloWorldApp'
     filename: 'remoteEntry.js'
-    
+
     })
 ]
 ```
-* creating name for the application, During the build process , webpack will generate a file that contains everything, this application export to the outer world so that other application can use that. 
+* creating name for the application, During the build process , webpack will generate a file that contains everything, this application export to the outer world so that other application can use that.
 
 ```js
 name : 'HelloworldApp'
@@ -1569,7 +1575,7 @@ name : 'HelloworldApp'
 ```js
 filename: 'remoteEntry.js'
 ```
-* To expose File 
+* To expose File
 
 ```js
 exposes: {
@@ -1582,13 +1588,13 @@ exposes: {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, './dist/'),
-    
-    // this paramter is use for creating CDN Link for accessing remoteEntry.js File
+
+    // this parameter is use for creating CDN Link for accessing remoteEntry.js File
     publicPath: 'http://localhost:9001/'
 },
 ```
 
-* **Remotes** : Asscess files of other Applications
+* **Remotes** : Assess files of other Applications
 ```js
 new ModuleFederationPlugin({
     name: 'KiwiApp',
@@ -1600,7 +1606,7 @@ new ModuleFederationPlugin({
 * Load Component of Other Application
 
 ```js
-// use dynamicimport because remote bundle are loaded asynchronously
+// use dynamic import because remote bundle are loaded asynchronously
 import('HelloWorldApp/HelloWorldButton').then(HelloWorldModule => {
     const HelloWorldButton = HelloWorldModule.default;
     const helloWorldButton = new HelloWorldButton();
