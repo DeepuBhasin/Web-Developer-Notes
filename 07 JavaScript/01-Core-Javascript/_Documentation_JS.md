@@ -1514,9 +1514,12 @@ var greeting = 'Hola';
 ```
 ![Image](./images/iffe-module-pattern.png)
 
-**⚠️ Note:** in node we use **require("") with module.export {}**  and in ES6 it is working is **import and export modules**, where named or default represent as public api and non-named or non-default represent as non-public api.
+**⚠️ Note:**
+1. In **Node** we use **require("") with module.export {}**
+2. In **ES6** it is working is **import and export modules**, where named or default represent as public api and non-named or non-default represent as non-public api fot this understanding **bundler** help browser to understand this ES6 Code
 
-1. By using ES6 (Import/Export)
+
+**By using ES6 (Import/Export)**
 ```js
 
 // sum1.js
@@ -1554,7 +1557,7 @@ console.log(sumOfThere(1, 2, 3));
 </html>
 ```
 
-2. By using Node.js (require)
+**By using Node.js (require)**
 
 ```js
 //sum1.js
