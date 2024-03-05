@@ -1,10 +1,27 @@
+## 📘Reference
+
+[https://github.com/gauravsoni1/webpack-udemy](https://github.com/gauravsoni1/webpack-udemy)
+
+
 ## 📘Syllabus
 1. Simple configuration
 2. loaders and asset modules
 3. webpack plugins
-4. code spliting
-5. integration with Expresson.js
-6. Module Federation
+4. code splitting
+5. integration with Expression.js
+6. Managing Modules
+7. Module Federation
+8. Optimization (production and development builds)
+   1. Bundle analysis
+   2. Duplicating prevention
+   3. Lazy Loading
+   4. Dead code elimination
+   5. Shimming
+   6. CSS Splitting
+9. Build React App using webpack
+   1.  React specification Configurations
+   2.  Route Management
+   3.  CSS enhancement
 
 ---
 * Webpack version 5 is best one
@@ -13,6 +30,16 @@
 * by default is will create **production** build.
 * you can write any name of **webpack.config.js**, just need to add that file in the command in the package.json file
 ---
+## 📘How Webpack works
+
+![WebpackDependencyGraph](./images/webpack-dependency-image.png)
+
+
+Webpack will locate the **index.js** file as the entry point for the project. Upon entry, it will identify files, such as JavaScript, CSS, or image files, with dependencies using **require or import statements**, while disregarding any files that are not imported into any other file. This demonstrates Webpack's intelligence in recognizing and managing dependencies within the project. After all optimizations, it will create bundle files (such as bundle.js, bundle.css). These bundle files are then used in the **index.html** file.
+
+---
+
+
 ## 📘Why do we need
 1. Eliminate the sequence of including javascript
 2. Make Build, Js & CSS Minify & entry File
