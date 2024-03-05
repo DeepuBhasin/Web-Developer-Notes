@@ -1514,7 +1514,44 @@ var greeting = 'Hola';
 ```
 ![Image](./images/iffe-module-pattern.png)
 
-**⚠️ Note:** in ES6 it is working is **import and export modules**, where named or default represent as public api and non-named or non-default represent as non-public api.
+**⚠️ Note:** in node we use **require("") with module.export {}**  and in ES6 it is working is **import and export modules**, where named or default represent as public api and non-named or non-default represent as non-public api.
+
+```js
+// sum1.js
+export default (function (a, b) {
+    return a + b
+})
+
+// sum2.js
+export default (function (a, b, c) {
+    return a + b + c;
+})
+
+//index.js
+import sumOfTwo from "./sum1.js";
+import sumOfThere from "./sum2.js";
+
+
+console.log(sumOfTwo(1, 2));
+console.log(sumOfThere(1, 2, 3));
+
+//index.html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="module" src="./index.js"></script>
+</body>
+
+</html>
+```
+
 ---
 
 ## 📘Closure
@@ -5772,3 +5809,5 @@ console.log(`i am \${firstname} Singh`);
     }
 </script>
 ```
+
+![Thankyou](./images/thankyou.png)
