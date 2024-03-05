@@ -1540,7 +1540,10 @@ import sumOfThere from "./sum2.js";
 console.log(sumOfTwo(1, 2));
 console.log(sumOfThere(1, 2, 3));
 
-//index.html
+```
+
+```html
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -1556,6 +1559,45 @@ console.log(sumOfThere(1, 2, 3));
 
 </html>
 ```
+OR
+
+```
+npm install webpack webpack-cli --save-dev
+```
+
+```js
+// using webpack
+const path = require('path');
+
+module.exports = {
+    // entry point for webpack
+    entry: './index.js',
+
+    output: {
+        // output file name
+        filename: 'bundle.js',
+
+        // it will create bundler.js file in dist folder 
+        path: path.resolve(__dirname, './dist')
+    }
+}
+```
+
+```js
+//package.json
+"scripts": {
+    "build": "npx webpack --mode development --config webpack.config.js"
+}
+```
+```
+npm run start
+```
+```
+cd dist/
+node bundle.js
+```
+
+
 
 **By using Node.js (require)**
 
