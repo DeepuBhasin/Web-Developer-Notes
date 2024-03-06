@@ -1,5 +1,7 @@
 ## 📘Information
 
+* Main Concept of Webpack : **Load all stuff from webpack rather than loading from different-different files in a single html file example Images, CSS files, Js Files, Json Files etc**
+
 * Reference : [https://github.com/gauravsoni1/webpack-udemy](https://github.com/gauravsoni1/webpack-udemy)
 * To install in dev we use
 ```
@@ -10,7 +12,10 @@ npm i --save-dev <package-name>
 ```npm
 npm i --save lodash jquery validate.js toaster bootstrap
 ```
-
+* Parameter : By using **"--"** sign you provide parameter
+```js
+"build" : "webpack --config=webpack.config.js --mode=development"
+```
 
 ## 📘Syllabus
 1. Simple configuration
@@ -32,12 +37,7 @@ npm i --save lodash jquery validate.js toaster bootstrap
    2.  Route Management
    3.  CSS enhancement
 
----
-* Webpack version 5 is best one
-* Written in **Javascript**
-* It is by default in React, Angular etc for builds etc
-* by default is will create **production** build.
-* you can write any name of **webpack.config.js**, just need to add that file in the command in the package.json file
+
 ---
 ## 📘How Webpack works
 
@@ -172,6 +172,132 @@ npx webpack
 ![Basic-Custom-Configuration](./images/custom-configuration-basic.png)
 
 ---
+
+## 📘Module Export/Import using Node & ES6
+
+**By using ES6 (Import/Export)**
+```js
+
+// sum1.js
+export default (function (a, b) {
+    return a + b
+})
+
+// sum2.js
+export default (function (a, b, c) {
+    return a + b + c;
+})
+
+//index.js
+import sumOfTwo from "./sum1.js";
+import sumOfThere from "./sum2.js";
+
+
+console.log(sumOfTwo(1, 2));
+console.log(sumOfThere(1, 2, 3));
+
+```
+
+```html
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="module" src="./index.js"></script>
+</body>
+
+</html>
+```
+OR
+
+```
+npm install webpack webpack-cli --save-dev
+```
+
+```js
+// using webpack
+const path = require('path');
+
+module.exports = {
+    // entry point for webpack
+    entry: './index.js',
+
+    output: {
+        // output file name
+        filename: 'bundle.js',
+
+        // it will create bundler.js file in dist folder
+        path: path.resolve(__dirname, './dist')
+    }
+}
+```
+
+```js
+//package.json
+"scripts": {
+    "build": "npx webpack --mode development --config webpack.config.js"
+}
+```
+```
+npm run start
+```
+```
+cd dist/
+node bundle.js
+```
+
+
+
+**By using Node.js (require)**
+
+```js
+//sum1.js
+function sum(a, b) {
+    return a + b
+}
+
+function multiply(a, b) {
+    return a * b
+}
+
+module.exports = {
+    sum,
+    multiply
+}
+
+// sum.js
+function sum(a, b, c) {
+    return a + b + c;
+}
+
+module.exports = sum
+
+//index.js
+// no need to add ".js" because node.js understand automatically
+const { sum: sumOfTwoNumber, multiply } = require("./sum1");
+const sumOfThere = require("./sum2");
+
+// Note : instead of multiple line of import you can create a index.js file where you will import all files then we will import this index.js file
+
+console.log(sumOfTwoNumber(1, 2));
+console.log(sumOfThere(1, 2, 3));
+console.log(multiply(2, 2));
+```
+```
+node index.js
+```
+
+
+
+
+---
 ## 📘Assets
 * There are four types of assets
 1. asset/resource : use when importing large files
@@ -227,7 +353,7 @@ function addImage() {
     const img = document.createElement('img');
     img.alt = 'Work';
     img.width = 300;
-    img.src = work; 
+    img.src = work;
     const body = document.querySelector('body');
     body.appendChild(img);
 }
@@ -627,6 +753,21 @@ renderTestButton();
 
 ![moduleCss](./images/module-css.png)
 
+
+**⚠️Note :** you can load other css/sass into another css/sass files by using
+
+1. For CSS
+```css
+@import url("./path/to/css/file.css");
+```
+
+2. For SASS
+
+```css
+@import "./path/to/scss/file.scss";
+```
+
+
 ## 📘2. Loaders (SCSS/SASS)
 
 * Command to install package
@@ -845,8 +986,8 @@ npx webpack
 ![File-loader](./images/file-loader.png)
 
 ---
-## 📘Multiple Entry Points 
-* mostly use where you have multiple html pages like home, about, contact us etc. 
+## 📘Multiple Entry Points
+* mostly use where you have multiple html pages like home, about, contact us etc.
 * Not use in frontEnd Frameworks like react, angular, vue etc
 
 ```js
@@ -1042,6 +1183,52 @@ h1 {
 npx webpack
 ```
 ![Minify](./images/minifiplugin.png)
+
+## 📘CopyPlugin
+* This plugin is used to copy stuff from **source folder** to **dist folder**
+
+* Command
+```
+npm i --save-dev copy-webpack-plugin
+```
+
+* webpack
+
+```js
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
+
+module.exports = {
+    entry: './src/index.js',
+    output: {
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, './dist'),
+        clean: true
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: path.resolve(__dirname, "src/index.html"),
+            inject: true
+        }),
+        new CopyPlugin({
+            patterns: [
+                {
+                    // don't use "./" here
+                    from: path.resolve(__dirname, "src/images"),
+                    to: path.resolve(__dirname, "dist/images")
+                },
+                {
+                    from: path.resolve(__dirname, "src/assets"),
+                    to: path.resolve(__dirname, "dist/assets")
+                }
+            ]
+        })
+    ]
+}
+```
+![CopyPlugin](./images/copy-plugin.png)
 
 ## 📘Browser Caching
 
@@ -1547,7 +1734,7 @@ module.exports = {
 devServer: {
     port: 9000,
     static: {
-        // point to which directory to be run
+        // point to which directory to be run (this is main point)
         directory: path.resolve(__dirname, './dist')
     },
     devMiddleware: {
