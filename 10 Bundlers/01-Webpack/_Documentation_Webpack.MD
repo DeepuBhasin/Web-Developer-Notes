@@ -1,6 +1,15 @@
-## 📘Reference
+## 📘Information
 
-[https://github.com/gauravsoni1/webpack-udemy](https://github.com/gauravsoni1/webpack-udemy)
+* Reference : [https://github.com/gauravsoni1/webpack-udemy](https://github.com/gauravsoni1/webpack-udemy)
+* To install in dev we use
+```
+npm i --save-dev <package-name>
+```
+* To install multiple packages
+
+```npm
+npm i --save lodash jquery validate.js toaster bootstrap
+```
 
 
 ## 📘Syllabus
@@ -836,6 +845,51 @@ npx webpack
 ![File-loader](./images/file-loader.png)
 
 ---
+## 📘Multiple Entry Points 
+* mostly use where you have multiple html pages like home, about, contact us etc. 
+* Not use in frontEnd Frameworks like react, angular, vue etc
+
+```js
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+    entry: {
+        indexFile: "./src/index.js",
+        productsFile: "./src/products.js",
+    },
+    output: {
+        // [name] is a variable, these are the key names of entry object
+        filename: './[name].bundle.js',
+        path: path.resolve(__dirname, './dist'),
+        clean: true
+    },
+    mode: 'none',
+    plugins: [
+        // instance of creating html file
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, "src/index.html"),
+            // basically entry files
+            chunks: ["indexFile"],
+            inject: true,
+            filename: "index.html"
+        }),
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, "src/products.html"),
+            // basically entry files
+            chunks: ["productsFile"],
+            inject: true,
+            filename: "products.html"
+        }),
+    ]
+}
+```
+
+
+![multipleEntryPoint](./images/mulitple-entry-point.png)
+
+---
+
 
 ## 📘Plugins
 
