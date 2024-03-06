@@ -1873,11 +1873,11 @@ Now, the browser will cache this file, so when it requests another HTML file tha
 ---
 
 ## 📘Lazy Loading
-* It help to load every thing late
+* It help to load every thing late.
+* very useful when you don't want to load every thing on first visit which also help in reducing bandwidth.
+* in frame work you get this feature inbuilt 
 
-
-Example : We want that Model.js fill only loads on the click of button
-
+Example : We want that **Model.js** file only loads on the click of button
 
 1. Model.js
 
@@ -1942,6 +1942,7 @@ function createModelButton() {
     const button = document.createElement('button');
     button.textContent = "Modal Button";
     button.addEventListener('click', function () {
+    // its working like a promise which resolve after some time like a web request
         import(/* webpackChunkName : modal */ "./Modal").then(model => {
             const createModal = model.createModal;
             createModal()
@@ -1957,7 +1958,15 @@ createModelButton()
 ![lazyLoading2](./images/lazyloading-2.png)
 
 
+## 📘Adding hash to output bundles
+* This is use remove to cache files and it is important when you are creating new bundles
+* by using **[contenthash]** or **[contenthash:8]** or **[contenthash:16].js**
+```js
+ filename: './[name].[contenthash].js',
+```
 
+
+---
  ## 📘Module-Federation
 * It allow one application to dynamically load modules from another application at runtime
 * no need to install separate plugin it is by default with in webpack
