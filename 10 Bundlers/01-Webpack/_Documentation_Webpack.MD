@@ -1230,6 +1230,8 @@ module.exports = {
 ```
 ![CopyPlugin](./images/copy-plugin.png)
 
+---
+
 ## 📘Browser Caching
 
 * just add this line, it will create a some random file name
@@ -1766,7 +1768,10 @@ npm install webpack-dev-server --save-dev
 ```
 npm run dev
 ```
+
 ![live-server](./images/live-server.png)
+
+# 📔Optimization
 
 ## 📘Analyzing Bundle
 1. Package
@@ -1783,6 +1788,89 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
         new BundleAnalyzerPlugin()
     ]
 ```
+![bundleAnalyzer](./images/bundle-analyzer.png)
+
+![bundleAnalyzer](./images/bundle-analyzer-1.png)
+
+---
+
+## 📘Webpack split code
+* It helps to remove duplicate code/library
+* It helps to split our code
+* Make Common library which are use in different-different files
+
+**Before optimization**
+
+![beforeCodeSplit](./images/beforeCodeSplit-1.png)
+
+![beforeCodeSplit](./images/beforeCodeSplit-2.png)
+
+In the above diagram **lodash library** showing twice because its has used in two files which makes our bundle size too much large (1.10 MB)
+
+**After Optimization**
+
+* webpack file
+```js
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
+module.exports = {
+    entry: {
+        index1: "./src/index.js",
+        index2: "./src/index2.js",
+    },
+    output: {
+        filename: './[name].[contenthash].js',
+        path: path.resolve(__dirname, './dist'),
+        clean: true
+    },
+    // this is parmeter use for optimization
+    optimization: {
+        splitChunks: {
+            chunks: "all"
+        }
+    },
+    plugins: [
+        // instance of creating html file
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, "src/index.html"),
+            // basically entry files
+            chunks: ["index1"],
+            inject: true,
+            filename: "index1.html"
+        }),
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, "src/index2.html"),
+            // basically entry files
+            chunks: ["index2"],
+            inject: true,
+            filename: "index2.html"
+        }),
+        new CopyPlugin({
+            patterns: [
+                {
+                    from: path.resolve(__dirname, "src/images"),
+                    to: path.resolve(__dirname, "dist/images")
+                },
+            ]
+        }),
+        new BundleAnalyzerPlugin()
+    ]
+}
+```
+
+![afterCodeSplit1](./images/afterCodeSplit-1.png)
+
+![afterCodeSplit2](./images/afterCodeSplit-2.png)
+
+Now in the above example lodash file extract separately which reduce the bundle size as well now our project become of **All (582.02 KB) **
+
+![afterCodeSplit3](./images/afterCodeSplit-3.png)
+
+Now, the browser will cache this file, so when it requests another HTML file that consumes this file, the browser will retrieve it from the cache instead of fetching a new file from the server, resulting in faster performance. If we make any changes to our code, such as in index.js or any other file, only that specific file will be updated, not the lodash file, allowing for faster loading times
+---
 
  ## 📘Module-Federation
 * It allow one application to dynamically load modules from another application at runtime
