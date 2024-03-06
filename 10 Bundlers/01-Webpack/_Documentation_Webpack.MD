@@ -996,8 +996,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: {
-        indexFile: "./src/index.js",
-        productsFile: "./src/products.js",
+        indexFile: path.resolve(__dirname, "./src/index.js"),
+        productsFile: path.resolve(__dirname, "./src/products.js"),
     },
     output: {
         // [name] is a variable, these are the key names of entry object
@@ -1871,6 +1871,92 @@ Now in the above example lodash file extract separately which reduce the bundle 
 
 Now, the browser will cache this file, so when it requests another HTML file that consumes this file, the browser will retrieve it from the cache instead of fetching a new file from the server, resulting in faster performance. If we make any changes to our code, such as in index.js or any other file, only that specific file will be updated, not the lodash file, allowing for faster loading times
 ---
+
+## 📘Lazy Loading
+* It help to load every thing late
+
+
+Example : We want that Model.js fill only loads on the click of button
+
+
+1. Model.js
+
+```js
+
+export function createModal() {
+    // Create modal container
+    var modal = document.createElement('div');
+    modal.style.display = "none";
+    modal.style.position = "fixed";
+    modal.style.zIndex = "1";
+    modal.style.left = "0";
+    modal.style.top = "0";
+    modal.style.width = "100%";
+    modal.style.height = "100%";
+    modal.style.overflow = "auto";
+    modal.style.backgroundColor = "rgba(0,0,0,0.4)";
+
+    // Create modal content
+    var modalContent = document.createElement('div');
+    modalContent.style.backgroundColor = "#fefefe";
+    modalContent.style.margin = "15% auto";
+    modalContent.style.padding = "20px";
+    modalContent.style.border = "1px solid #888";
+    modalContent.style.width = "80%";
+    modalContent.style.boxShadow = "0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)";
+    modalContent.style.animationName = "animatetop";
+    modalContent.style.animationDuration = "0.4s";
+
+    // Create close button
+    var closeBtn = document.createElement('span');
+    closeBtn.className = "close";
+    closeBtn.innerHTML = "&times;";
+    closeBtn.style.color = "#aaa";
+    closeBtn.style.float = "right";
+    closeBtn.style.fontSize = "28px";
+    closeBtn.style.fontWeight = "bold";
+    closeBtn.onclick = function () {
+        modal.style.display = "none";
+    };
+
+    // Create modal text
+    var modalText = document.createElement('p');
+    modalText.textContent = "This is a modal box!";
+
+    // Append elements
+    modalContent.appendChild(closeBtn);
+    modalContent.appendChild(modalText);
+    modal.appendChild(modalContent);
+
+    // Append modal to body
+    document.body.appendChild(modal);
+
+    // Show modal
+    modal.style.display = "block";
+}
+```
+
+* index.js
+```js
+function createModelButton() {
+    const button = document.createElement('button');
+    button.textContent = "Modal Button";
+    button.addEventListener('click', function () {
+        import(/* webpackChunkName : modal */ "./Modal").then(model => {
+            const createModal = model.createModal;
+            createModal()
+        });
+    });
+    document.body.prepend(button);
+}
+createModelButton()
+```
+
+![lazyLoading1](./images/lazyloading-1.png)
+
+![lazyLoading2](./images/lazyloading-2.png)
+
+
 
  ## 📘Module-Federation
 * It allow one application to dynamically load modules from another application at runtime
