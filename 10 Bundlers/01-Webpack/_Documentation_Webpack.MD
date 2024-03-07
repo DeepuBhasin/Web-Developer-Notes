@@ -42,6 +42,12 @@ npm i --save lodash jquery validate.js toaster bootstrap
    1.  React specification Configurations
    2.  Route Management
    3.  CSS enhancement
+10. Micro-frontend project
+    1.  Connecting
+    2.  Navigating
+    3.  State management
+    4.  Loading
+    5.  Eventing
 
 
 ---
@@ -2480,3 +2486,7 @@ import('HelloWorldApp/HelloWorldButton').then(HelloWorldModule => {
 });
 ```
 ![RemoteEntry.js](./images/moduleFedrationPlugin-RemoteEntry.png)
+
+---
+
+# 📔Micro-Front End
