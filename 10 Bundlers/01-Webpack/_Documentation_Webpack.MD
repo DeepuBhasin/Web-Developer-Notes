@@ -2070,6 +2070,8 @@ module.exports = {
         new PurgeCSSPlugin({
             // these settings use as it is
             paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
+            // this parameter is use for to not remove these style classes
+            safelist: ['dummy-class']
         }),
     ],
     module: {
@@ -2082,6 +2084,31 @@ module.exports = {
     },
 }
 ```
+---
+
+## 📘Remove Dead JS (Tree Shaking concept)
+* If we want to use feature we have to use **ES6 syntaxes** like import/export not common js concept
+* We must use **production mode**, Because in production mode unwanted javascript automatically removed
+
+![deadJS](./images/deadjs-1.png)
+
+* To run two webpack files
+```js
+  "scripts": {
+    "build": "webpack --config=webpack.development.js & webpack --config=webpack.production.js"
+  },
+```
+
+* webpack.development.js
+```js
+mode: "development",
+```
+
+* webpack.production.js
+```
+mode: "production",
+```
+
 
 ---
  ## 📘Module-Federation
