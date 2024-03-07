@@ -2220,6 +2220,8 @@ npm i --save-dev webpack-merge
     "prod": "webpack --config=webpack.production.js "
 },
 ```
+---
+
 # 📔React
 
 * At the back end react using **webpack** which includes hot reloading, css loader etc these are things handle by **react-cli**
