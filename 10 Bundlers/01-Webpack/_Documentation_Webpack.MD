@@ -17,6 +17,12 @@ npm i --save lodash jquery validate.js toaster bootstrap
 "build" : "webpack --config=webpack.config.js --mode=development"
 ```
 
+* Concept of ("\*\*/\*") : /\*\*/\*: This is a wildcard pattern often used in file path patterns. Here's what it means:
+  1. /\*\*/: Matches any directory and any subdirectories recursively. The double asterisk (**) matches zero or more directories.
+  2. \*: Matches any file within those directories.
+
+---
+
 ## 📘Syllabus
 1. Simple configuration
 2. loaders and asset modules
@@ -178,10 +184,10 @@ npx webpack
 * This concept is use to **attach element on window object** like "$" sign attach to window for jquery
 * This is very useful in case of old libraries
 
-Example : 
+Example :
 
 
-* suppose we have this import statement "moment library" someone remove by mistake 
+* suppose we have this import statement "moment library" someone remove by mistake
 ```js
 import mnt from "moment";
 
@@ -1197,6 +1203,9 @@ module.exports = {
 
             // Making output file name
             filename: 'styles.css',
+
+            //or
+            //filename: "[name].css",
         })
     ]
 }
@@ -1929,7 +1938,7 @@ Now, the browser will cache this file, so when it requests another HTML file tha
 ## 📘Lazy Loading
 * It help to load every thing late.
 * very useful when you don't want to load every thing on first visit which also help in reducing bandwidth.
-* in frame work you get this feature inbuilt 
+* in frame work you get this feature inbuilt
 
 Example : We want that **Model.js** file only loads on the click of button
 
@@ -2019,6 +2028,60 @@ createModelButton()
  filename: './[name].[contenthash].js',
 ```
 
+## 📘Remove Dead CSS
+* The CSS which is not use in project
+
+![deadCss](./images/deadcss-1.png)
+
+
+1. Packages
+
+```
+npm i purgecss-webpack-plugin glob
+```
+
+2. webpack.config.js
+
+```js
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { PurgeCSSPlugin } = require('purgecss-webpack-plugin')
+const glob = require("glob");
+const PATHS = {
+    src: path.join(__dirname, 'src')
+}
+
+module.exports = {
+    entry: path.resolve(__dirname, './src/index.js'),
+    output: {
+        filename: './bundle.js',
+        path: path.resolve(__dirname, './dist'),
+        clean: true
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            filename: "index.html",
+            template: path.resolve(__dirname, "src/index.html")
+        }),
+        new MiniCssExtractPlugin({
+            filename: 'styles.[name].css',
+        }),
+        new PurgeCSSPlugin({
+            // these settings use as it is
+            paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
+        }),
+    ],
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader']
+            }
+        ]
+    },
+}
+```
 
 ---
  ## 📘Module-Federation
