@@ -20,6 +20,7 @@
 3. **Lexical Environments** : *where something sits physically in the code you write*. 'Lexical' means 'having' to do with words or grammar. A lexical environment exists in programming languages in which **where** you write something is important.
 
 ---
+
 ## 📘 Name/Value Pairs and Objects
 
 * A Name which **maps** to a **unique value**. eg *Address = '100 Main St.'*.
@@ -34,11 +35,8 @@
 ---
 ## 📘Creation & Hoisting
 
-⚠️ **Why Hoisting?**
-* Using function before actual declaration.
-* var hoisting is just a byproduct.
+Execution Context has two phase
 
-Javascript Execution Context has two phase<br/>
 1. **Creation Phase** : Set up memory for variables and functions, also set placeholder for variables called **undefined**.
 2. **Execution Phase** : means assigns values to variables but not for functions.
 
@@ -49,54 +47,57 @@ In javascript __variables and functions__ are all hoisted to the top of the scop
 
 
 so during the creation phase javascript engine moves your variables and function declarations of the top their respective scope
-```javascript
-console.log(number1);
+
+```js
+// Example 1
+
+console.log(number1);   // undefined
 var number1 = 10;
 
-// javascript is doing this process in background
+// Example 2 (best one)
+
+//  declaring then initializing
+var number1;
+console.log(number1);   // undefined
+number1 = 10;
+
+// initializing then declaring
+number1 = 10;
+console.log(number1);   // 10
 var number1;
 
-console.log(number1);
+// Example 3
 
-number1 = 10;
-```
-
-```javascript
 var num = 50;
-
 function logNumber() {
     console.log(num);   // undefined
     var num = 10;
 }
-
 logNumber();
 ```
 
-⚠️ Note <br/>
-* __let, const, function Expression and classes__ are not hoisted.
-* In **const** : Only **Primitive Values** are **immutable** but *Array and Objects* are **non-primitive** types values
+⚠️ Note
+
+* **let, const, function Expression (Arrows Functions), classes** are not hoisted.
+* In **const** : Only **Primitive Values** are **immutable** but *Array and Objects* are **non-primitive** types values so these are **mutable**
 * __Temporal Dead Zone__ :
   * is the time between the __declaration__ and __the initialization__ of _let_ and _const_ variables.
   * Temporal Dead Zone is the term to describe the state where variables are in the scope but they are not yet declared.
   * why TDZ : **Make it easier to avoid and catch errors**, accessing variables before declaration is a bad practice and should be avoided.
 
+```js
+age = 10;
+console.log(age);   // cause error because of TDZ
+let age;
+```
+---
 
+## 📘Block Scope Vs Functional scope
 
 ![Image](./images/1-hositing-scope.png)
 
-```javascript
-function logNumber() {
-    var num1 = num2 = 10;
-}
-
-console.log(num1)   // error
-console.log(num2)   // 20 because it become global variable
-
-logNumber();
-```
-
-
-```javascript
+```js
+// Example 1
 function test() {
     let total = 0;
     if (true) {
@@ -111,37 +112,37 @@ function test() {
 test();
 
 
-// Var case
-age = 10;
-console.log(age);   // 10
-let var;
-
-// Let case
-age = 10;
-console.log(age);   // cause error
-let age;
-
-
-// setting value
+// Example 2
 function test() {
     age = 10;
 }
-
 let age;
 test();
-console.log(age);   // 10
+console.log(age);   // 10 because age variable has global scope due to let variable
+```
+**📚 Conceptual Example :** Creating global variables with using var let or const. 
+
+```js
+function logNumber() {
+    var num1 = num2 = 10;
+}
+
+console.log(num1)   // error because its a functional scope
+console.log(num2)   // 20 because it become global variable
+
+logNumber();
 ```
 ---
 ## 📘Undefined vs Not Defined
 * **undefined** : is special value in javascript, it will take memory space.
 
-```javascript
+```js
 // undefined : means value is not set
 var number1;
 console.log(number1);
 number1 = 10;
 ```
-```javascript
+```js
 // Not defined : means does not exist
 console.log(number1);
 ```
@@ -1578,7 +1579,7 @@ module.exports = {
         // output file name
         filename: 'bundle.js',
 
-        // it will create bundler.js file in dist folder 
+        // it will create bundler.js file in dist folder
         path: path.resolve(__dirname, './dist')
     }
 }
