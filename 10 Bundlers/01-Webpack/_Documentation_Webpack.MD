@@ -1889,7 +1889,7 @@ module.exports = {
         path: path.resolve(__dirname, './dist'),
         clean: true
     },
-    // this is parmeter use for optimization
+    // this is parameter use for optimization
     optimization: {
         splitChunks: {
             chunks: "all"
@@ -2108,6 +2108,117 @@ mode: "development",
 ```
 mode: "production",
 ```
+---
+
+# 📔 Production Vs Development
+
+## 📘 Various Plugins
+| Sr No. | Production                                 | Development               |
+| ------ | ------------------------------------------ | ------------------------- |
+| 1      | Minification of HTML, CSS, JS              | No Need                   |
+| 2      | Tree Shaking/Dead Code, Elimination JS/CSS | Also                      |
+| 3      | Copying of assets to dist                  | Also                      |
+| 4      | Production env variables                   | Development env variables |
+| 5      | Split chunks                               | Some time require         |
+| 6      | Production Mode                            | Development Mode          |
+| 7      | Bundle analyzer                            | Must                      |
+| 8      | set up loaders                             | Must                      |
+| 9      | Entry and output Specification             | Must                      |
+| 10     | Html File creation                         | Must                      |
+
+
+## 📘Splitting Webpack configuration
+
+1. webpack.common.js
+
+```js
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { PurgeCSSPlugin } = require('purgecss-webpack-plugin')
+const glob = require("glob");
+const PATHS = {
+    src: path.join(__dirname, 'src')
+}
+
+module.exports = {
+    plugins: [
+        new HtmlWebpackPlugin({
+            filename: "index.html",
+            template: path.resolve(__dirname, "src/index.html")
+        }),
+        new MiniCssExtractPlugin({
+            filename: 'styles.[name].css',
+        }),
+        new PurgeCSSPlugin({
+            paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
+        }),
+    ],
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader']
+            }
+        ]
+    },
+}
+```
+2. webpack.development.js
+
+```js
+const { merge } = require("webpack-merge");
+const commonConfig = require('./webpack.common');
+const path = require('path');
+
+module.exports = merge(commonConfig, {
+    mode: "development",
+    entry: path.resolve(__dirname, './src/index.js'),
+    output: {
+        filename: './bundle.development.js',
+        path: path.resolve(__dirname, './dist-development'),
+        clean: true
+    }
+})
+```
+
+3. webpack.production.js
+
+```js
+const { merge } = require("webpack-merge");
+const commonConfig = require('./webpack.common');
+const path = require('path');
+
+module.exports = merge(commonConfig, module.exports = {
+    mode: "production",
+    entry: path.resolve(__dirname, './src/index.js'),
+    output: {
+        filename: './bundle.production.js',
+        path: path.resolve(__dirname, './dist-production'),
+        clean: true
+    },
+    optimization: {
+        splitChunks: {
+            chunks: "all"
+        }
+    },
+})
+```
+
+4. Package Name
+
+```
+npm i --save-dev webpack-merge
+```
+5. Package.json
+
+```js
+"scripts": {
+    "dev": "webpack --config=webpack.development.js",
+    "prod": "webpack --config=webpack.production.js "
+},
+```
+
 
 
 ---
