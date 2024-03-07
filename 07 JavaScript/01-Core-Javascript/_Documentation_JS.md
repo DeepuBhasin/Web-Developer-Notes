@@ -1,11 +1,11 @@
 # 📔 ES5
 ## 📘 Developer Responsibility
 
-* Write good code so everyone can read and understand easily with DRY Concept.
+* **Brendan Eich** is a person who created javascript.
+* Write good code so everyone can read and understand easily.
 * the harder is to understand code and to reason about the code the more difficult it will be to add new features add to more the functionality to the application. Hence it is called bad code.
 * An important part of web-development is actually handle the errors. because its very common that errors happen in web-application.
 * To test *APi* use *Network tab* with various **Throttling** options *fast/slow/offline*
-* **Brendan Eich** is a person who created javascript.
 ---
 ## 📘Terminologies
 
@@ -15,18 +15,7 @@
 
 
 ---
-## 📘 Operators are functions
 
-* in Example 1 : **=** is an *operator (function)*  which takes **2** parameters **a** and **3** and then assign value.
-* in Example 2 : **+** is an *operator (function)*  which takes **2** parameters **3** and **2** and then return and expression.
-
-```javascript
-// Example 1
-var a = 3;
-
-// Example 2
-var b = 3 + 2;
-```
 
 ---
 
@@ -212,6 +201,22 @@ function test() {
 ![Image](./images/function-invocation-and-the-execution-stack.png)
 
 ---
+
+## 📘 Operators are functions
+
+* in Example 1 : **=** is an *operator (function)*  which takes **2** parameters **a** and **3** and then assign value.
+* in Example 2 : **+** is an *operator (function)*  which takes **2** parameters **3** and **2** and then return and expression.
+
+```javascript
+// Example 1
+var a = 3;
+
+// Example 2
+var b = 3 + 2;
+```
+
+---
+
 ## 📘 Functions, Context and Variable Environments
 * **Variable Environments :** Where the variables live. and how they related to each other in memory.
 
