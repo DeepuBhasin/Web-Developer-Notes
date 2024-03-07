@@ -2218,7 +2218,189 @@ npm i --save-dev webpack-merge
     "prod": "webpack --config=webpack.production.js "
 },
 ```
+# 📔React
 
+* At the back end react using **webpack** which includes hot reloading, css loader etc these are things handle by **react-cli**
+
+| Sr No | Plugin Name/ Modules     | Description                  |
+| ----- | ------------------------ | ---------------------------- |
+| 1     | html-webpack-plugin      | To codes into html file      |
+| 2     | MiniCssExtractPlugin     | For minify css               |
+| 3     | style-loader, css-loader | Loading CSS Files            |
+| 4     | sass-loader              | Loading S[AC]CC Files        |
+| 5     | asset/resource           | Loading Images of any format |
+| 6     | devServer                | For run Dev server           |
+| 7     | mode                     | Development/Production       |
+| 8     | babel-loader             | to understand JSX code       |
+
+
+* Webpack.config.js for react
+```js
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const EsLintPlugin = require("eslint-webpack-plugin");
+
+module.exports = {
+  mode: "development",
+  entry: path.resolve(__dirname, "src/index.js"),
+  output: {
+    filename: "[name].bundle.js",
+    path: path.resolve(__dirname, "dist"),
+  },
+  plugins: [
+    new EsLintPlugin(),
+    new HtmlWebpackPlugin({
+      template: "./src/index.html",
+      filename: "index.html",
+    }),
+    new MiniCssExtractPlugin(),
+  ],
+  devServer: {
+    static: {
+      directory: path.resolve(__dirname, "dist"),
+    },
+    port: 9000,
+    open: true,
+    historyApiFallback: true,
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        include: path.resolve(__dirname, "src"),
+        exclude: path.resolve(__dirname, "node_modules"),
+        use: [
+          {
+            loader: "babel-loader",
+            options: {
+              presets: [
+                [
+                  "@babel/preset-env",
+                  {
+                    targets: "defaults",
+                  },
+                ],
+                "@babel/preset-react",
+              ],
+            },
+          },
+          {
+            loader: "eslint-loader",
+            options: {
+              fix: true,
+            },
+          },
+        ],
+      },
+      {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                plugins: [["postcss-preset-env", {}]],
+              },
+            },
+          },
+        ],
+      },
+      {
+        test: /\.s[ac]ss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                plugins: [["postcss-preset-env", {}]],
+              },
+            },
+          },
+          "sass-loader",
+        ],
+      },
+      {
+        test: /\.(jpg|png|jpeg|gif)$/,
+        type: "asset/resource",
+      },
+    ],
+  },
+  optimization: {
+    splitChunks: {
+      chunks: "all",
+    },
+  },
+};
+```
+
+* package.json
+
+```js
+{
+  "name": "10-react-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack build --config webpack.config.js",
+    "serve": "webpack serve --config webpack.config.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fortawesome/free-solid-svg-icons": "^6.0.0",
+    "@fortawesome/react-fontawesome": "^0.1.17",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^5.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "autoprefixer": "^10.4.2",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.2.3",
+    "css-loader": "^6.6.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-webpack-plugin": "^3.1.1",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.5.3",
+    "postcss-loader": "^6.2.1",
+    "postcss-preset-env": "^7.4.2",
+    "sass": "^1.49.9",
+    "sass-loader": "^12.6.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.68.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
+  }
+}
+```
+* .eslintrc
+
+```js
+{
+  "parser": "babel-eslint",
+  "extends": ["airbnb"],
+  "rules": {
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "import/extensions": "off"
+  }
+}
+```
 
 
 ---
