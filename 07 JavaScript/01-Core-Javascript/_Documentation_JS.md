@@ -74,6 +74,14 @@ function logNumber() {
     var num = 10;
 }
 logNumber();
+
+// Example 4
+var text = "Hello World";
+function testFn() {
+    console.log(text);
+}
+var text = "Hi World"; // it overwritten the value of text
+testFn();
 ```
 
 ⚠️ Note
@@ -120,7 +128,7 @@ let age;
 test();
 console.log(age);   // 10 because age variable has global scope due to let variable
 ```
-**📚 Conceptual Example :** Creating global variables with using var let or const. 
+**📚 Conceptual Example :** Creating global variables
 
 ```js
 function logNumber() {
