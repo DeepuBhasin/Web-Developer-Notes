@@ -171,6 +171,58 @@ npx webpack
 ```
 ![Basic-Custom-Configuration](./images/custom-configuration-basic.png)
 
+
+---
+
+## 📘Shimming
+* This concept is use to **attach element on window object** like "$" sign attach to window for jquery
+* This is very useful in case of old libraries
+
+Example : 
+
+
+* suppose we have this import statement "moment library" someone remove by mistake 
+```js
+import mnt from "moment";
+
+(function () {
+    const d = mnt(new Date()).format("DD-MM-YYYY");
+    console.log(d);
+}())
+```
+![shimming1](./images/shimming-1.png)
+
+![shimming2](./images/shimming-2.png)
+
+* We can bind **element to window object** using **webpack**, in that we no need to import library in files
+
+```js
+// webpack.config.js
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+
+module.exports = {
+    entry: path.resolve(__dirname, './src/index.js'),
+    output: {
+        filename: './bundle.js',
+        path: path.resolve(__dirname, './dist'),
+        clean: true
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            filename: "index.html",
+            template: path.resolve(__dirname, "src/index.html")
+        }),
+        new webpack.ProvidePlugin({
+            mnt: "moment"
+        })
+    ]
+}
+```
+![shimming3](./images/shimming-3.png)
+
+
 ---
 
 ## 📘Module Export/Import using Node & ES6
@@ -585,7 +637,7 @@ module.exports = {
                     //Then second the style loader takes the CSS and inject it into the page using style tags
                     'style-loader',
 
-                    //first  the css loader reads the contents of the css file and return this contents, but it doesn't do anything  else with this css
+                    //first the css loader reads the contents of the css file and return this contents, but it doesn't do anything  else with this css
                     'css-loader'
                 ]
             }
@@ -1084,7 +1136,9 @@ npx webpack
 ```
 
 ## 📘2. MiniCssExtractPlugin (with single File for css)
-* Use to Extract our CSS into a separate File
+* Use to Extract our CSS into a separate File with minify version
+* It also remove duplicate files
+* If some of files using same css file it will create into a single common file so every one can use
 * This will create a single file where it will put all css code into single file, but in **css-loader & style-loader** it will inject css code into style according to files.
 
 1. Command for install package
@@ -1113,13 +1167,13 @@ module.exports = {
             {
                 test: /\.css$/,
 
-                // loading MiniCssExtractPlugin style loader instead of normal Loader
+                // loading MiniCssExtractPlugin style loader instead of normal Loader, basically all loaders will inject into MiniCSS file
                 use: [MiniCssExtractPlugin.loader, 'css-loader']
             },
             {
                 test: /\.scss$/,
 
-                // loading MiniCssExtractPlugin style loader instead of normal Loader
+                // loading MiniCssExtractPlugin style loader instead of normal Loader, basically all loaders will inject into MiniCSS file
                 use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
             },
             {
