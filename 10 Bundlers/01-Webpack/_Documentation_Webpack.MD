@@ -1809,6 +1809,8 @@ devServer: {
         writeToDisk: true
     },
     open: true,
+
+    // this parameter is use for routing purpose (to make http request)
     historyApiFallback: true,
     hot: true,
     compress: true
@@ -2299,6 +2301,7 @@ module.exports = {
           MiniCssExtractPlugin.loader,
           "css-loader",
           {
+            // to use advance css we are adding polyfill
             loader: "postcss-loader",
             options: {
               postcssOptions: {
@@ -2340,7 +2343,7 @@ module.exports = {
 
 * package.json
 
-```js
+```json
 {
   "name": "10-react-project",
   "version": "1.0.0",
@@ -2389,9 +2392,9 @@ module.exports = {
   }
 }
 ```
-* .eslintrc
+* .eslintrc (you get all information for internet so don't need to remembers)
 
-```js
+```json
 {
   "parser": "babel-eslint",
   "extends": ["airbnb"],
