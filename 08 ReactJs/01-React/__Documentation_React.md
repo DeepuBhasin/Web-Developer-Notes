@@ -14,6 +14,13 @@ let total = 0;
 
 // On every render normal total variable value get reset to zero but in useState and useRef value will not reset on every render it will persist the value
 ```
+* **React only cares about showing content and handling user events**
+
+## 📘How Bundle.js files create
+
+![BundleFiles](./images/output.png)
+
+
 
 ## 📘Why we require React
 * Server-Side-Rendering vs Client-Side-Rendering
