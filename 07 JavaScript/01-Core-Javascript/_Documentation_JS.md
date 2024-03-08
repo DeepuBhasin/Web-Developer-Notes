@@ -1,5 +1,5 @@
 # 📔 ES5
-## 📘 Developer Responsibility
+## 📘Developer Responsibility
 
 * **Brendan Eich** is a person who created javascript.
 * Write good code so everyone can read and understand easily.
@@ -14,14 +14,14 @@
 * **TightCoupling** : means every thing is connected.
 ---
 
-## 📘 Conceptual Aside
+## 📘Conceptual Aside
 1. **Syntax Parsers** : A program that reads your code and determines what it does and if its grammar is valid e.g an interpreter or a compiler.
 2. **Execution Contexts** : *A Wrapper to help manage the code that is running*. There are lots of lexical environments which one is currently running is managed via execution context. It can contain things beyond what you've written in your code.
 3. **Lexical Environments** : *where something sits physically in the code you write*. 'Lexical' means 'having' to do with words or grammar. A lexical environment exists in programming languages in which **where** you write something is important.
 
 ---
 
-## 📘 Name/Value Pairs and Objects
+## 📘Name/Value Pairs and Objects
 
 * A Name which **maps** to a **unique value**. eg *Address = '100 Main St.'*.
 * The name may be defined more than once, but only can have one value in any given **context**.
@@ -176,58 +176,40 @@ window.b();         // hello world
 this.window.b();    // hello world
 ```
 ---
-## 📘 The Execution Context : Code Execution (Your Code)
-Code Execute line by line
+## 📘The Execution Context : Code Execution (Your Code)
+* Code Execute line by line in javascript
 
-```javascript
-test();
-
-console.log(a);             // undefined
-
+```js
+console.log(a);     // undefined
 var a = 'Hello world';
-
-console.log(a);
-
-function test() {
-    console.log('Hello world');
-}
+console.log(a);     // Hello world
 ```
 ---
 ## 📘Single Threaded, Synchronous Execution
- * **Single Threaded :** one command at a time. Under the hood of the browser, maybe not. (the biggest way to check that a language is single threaded : it has only one call stack)
+
+ * **Single Threaded :** 
+   * one command at a time. Under the hood of the browser, maybe not. 
+   * the biggest way to check that a language is single threaded : it has only one call stack
+   *  when ever we open any new tab we will get on thread for each tab
  * **Synchronous :** one at a time.
 ---
 
-## Function Invocation and The Execution Stack
+## 📘Function Invocation and The Execution Stack
 * **Invocation** : Running a function. in javascript, by using **parenthesis()**
-* when ever a function get invoke it will create new **Execution Context** for it for example **a() && b()** creating its own execution context.
+* When ever a function get invoke it will create new **Execution Context** for it for example **a() && b()** creating its own execution context.
 
-![Image](./images/function-invocation-and-the-execution-stack.png)
-
----
-
-## 📘 Operators are functions
-
-* in Example 1 : **=** is an *operator (function)*  which takes **2** parameters **a** and **3** and then assign value.
-* in Example 2 : **+** is an *operator (function)*  which takes **2** parameters **3** and **2** and then return and expression.
-
-```javascript
-// Example 1
-var a = 3;
-
-// Example 2
-var b = 3 + 2;
-```
+![functionExecutionStack](./images/function-invocation-and-the-execution-stack.png)
 
 ---
 
 ## 📘 Functions, Context and Variable Environments
-* **Variable Environments :** Where the variables live. and how they related to each other in memory.
+* **Variable Environments :** Where the variables live and how they related to each other in memory.
 
-![Image](./images/function-invocation-and-the-execution-stack.png)
+![var](./images/function-context-and-variables-environment.png)
 
 * Value of variables also depend upon **scope**. in below example the value of **myVar** depends upon scope.
-```javascript
+
+```js
 function b(){
     var myVar;
     console.log(myVar);
@@ -244,7 +226,8 @@ a();
 console.log(myVar);
 ```
 ---
-## The Scope Chain
+
+## 📘The Scope Chain
 
 * **Scope :** where a variable is available in your code. and if it's truly the same variable or a new copy
 
@@ -262,12 +245,11 @@ function a() {
 
 var myVar = 1;
 a();
-
 ```
-![Image](./images/scope-chain.png)
+![scopeChain](./images/scope-chain.png)
 
 
-```javascript
+```js
 // function 'b' is sit lexically inside the function 'a'
 
 function a() {
@@ -281,13 +263,13 @@ function a() {
 
 var myVar = 1;
 a();
-
 ```
-![Image](./images/scope-chain-another-example.png)
+![globalScopeChain](./images/scope-chain-another-example.png)
 
 ---
 
-## 📘 What about Asynchronous Callbacks
+
+## 📘What about Asynchronous Callbacks
 * **Asynchronous :** more than one at a time.
 
 ```javascript
@@ -547,6 +529,20 @@ console.log('I am Web Developer'.includes('test')); // false
 
 ```
 ---
+
+## 📘 Operators are functions
+
+* in Example 1 : **=** is an *operator (function)*  which takes **2** parameters **a** and **3** and then assign value.
+* in Example 2 : **+** is an *operator (function)*  which takes **2** parameters **3** and **2** and then return and expression.
+
+```javascript
+// Example 1
+var a = 3;
+
+// Example 2
+var b = 3 + 2;
+```
+
 
 ## 📘 Operator Precedence and Associativity
 * **Operator Precedence :** which operator function gets called first. Functions are called in order of precedence (HIGHER precedence wins). Example : BDMAS
