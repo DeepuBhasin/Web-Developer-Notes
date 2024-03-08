@@ -2432,7 +2432,9 @@ plugins: [
     // Name of application
     name: 'HelloWorldApp'
     filename: 'remoteEntry.js'
-
+    exposes: {
+        './HelloWorldButton': './src/components/hello-world-button/hello-world-button.js'
+        }
     })
 ]
 ```
@@ -2490,3 +2492,129 @@ import('HelloWorldApp/HelloWorldButton').then(HelloWorldModule => {
 ---
 
 # 📔Micro-Front End
+## 📘Run-Time Integration
+
+![Image](./images/images/runtime-intigration.png)
+
+## 📘Html Webpack Plugin
+
+![Image](./images/images/htmlwebpackplugin.png)
+
+
+![Image](./images/images/htmlwebpackplugin-2.png)
+
+* This Plugin automatically add various **javascript files** which is generated from **webpack** into **html File**.
+
+## 📘Various Steps
+* Various Steps
+
+![Image](./images/images/various-steps-for-mfe.png)
+
+* Adding Module Plugin in **Remote**
+
+![Image](./images/images/module-fedration.png)
+
+* Adding Module Object in **Remote** plugin
+
+![Image](./images/images/object-modul-fedration.png)
+
+* Adding Module Object in **Host** plugin
+
+![Image](./images/images/host-module.png)
+
+```javascript
+remotes : {
+    products : "products@http:/localhost:8081/remoteEntry.js"
+}
+```
+## 📘Network Call
+1. Loading Files From Remote MFE
+
+![Image](./images/images/remote-entry.png)
+
+* **main.js :** Main file is created by bundler
+* **remoteEntry.js :** This file is developed by ModuleFederationPlugin like **manifesto** which has list of all loading files from MFE example *componentIndex.tsx*, it provide direction to another MFE for which file you need to load.
+* **src_index.js :** which have all the components files in it
+
+2. Loading Files in Host MFE
+
+* When container loads its first load **index.js** file and allow **webpack** to load other **MFEs** files in **Host** example 
+```javascript
+import {useStore} from "container/StoreModule"
+```
+this like will load all files from mfe
+
+![Image](./images/images/conatiner-webpack.png)
+
+3. Combining All things
+
+![Image](./images/images/final-call.png)
+
+## 📘Configuration
+1. For Container (Host)
+
+![Image](./images/images/configuration.png)
+
+```javascript
+import {useStore} from "products/StoreModule";
+```
+* in this case if webpack do not able to find **products** dependency in **node module**, then it will look into **ModuleFederationPlugin** *remotes* object for that module.
+
+```javascript
+remotes : {
+    products : 'products@http://localhost:8081/remoteEntry.js'
+}
+```
+* it will match with that **products** key
+
+```javascript
+// Making Another Example
+
+// Naming Key
+remotes : {
+    productsApp : 'products@http://localhost:8081/remoteEntry.js'
+}
+
+// import
+import {useStore} from "productsApp/StoreModule";
+```
+
+2. For Products (remote)
+
+![Image](./images/images/remote-config.png)
+
+## 📘Share Dependencies
+
+* This parameter help use to stop loading duplicate library which are already exist in Host
+
+```js
+// it means Remote Application will take library from Host Application
+shared: ["react", "react-dom"],
+
+```
+
+
+![Image](./images/images/share-dependency.png)
+
+* Share Dependency with **singleton**
+
+![Image](./images/images/share-dependency-singletone.png)
+
+
+# 📔 Extra
+
+* Loading env variables
+
+```javascript
+if(process.env.NODE_ENV === 'development') {
+    
+}
+```
+* import synchronous and asynchronous files
+```js
+// synchronous
+import {} from "node_module";
+
+// asynchronous
+import('file.js');
+```
