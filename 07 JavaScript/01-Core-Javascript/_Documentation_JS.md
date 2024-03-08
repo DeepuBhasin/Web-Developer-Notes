@@ -142,39 +142,38 @@ logNumber();
 ```
 ---
 ## 📘Undefined vs Not Defined
-* **undefined** : is special value in javascript, it will take memory space.
+* **undefined** : is special value in javascript and assign by JS Engine while hoisting, it will take memory space.
 
 ```js
 // undefined : means value is not set
 var number1;
-console.log(number1);
-number1 = 10;
-```
-```js
+console.log(number1);   // undefined
+
 // Not defined : means does not exist
 console.log(number1);
 ```
 ---
 ## 📘The Global Environment and The Global Object
-* when ever code is run in javascript it's run inside an execution context. Meaning a wrapper that the javascript engine wrap that up, that code that you've written in **global execution**.
+* When ever code is run in javascript it's run inside an execution context. Meaning a wrapper that the javascript engine wrap that up, that code that you've written in **global execution**.
 
-![Image](./images/gloabl-environment.png)
+![globalExecutionEnvironment](./images/gloabl-environment.png)
 
 * There will be always a **Global Object**. in *Browser* it is **window**, each new tab have there own Global Execution context hence has its own window object
-* in **Browser** : *window==this*
+  * in **Browser** : *window == this*
+  * in **Node.js** : *global == this*
 
-```javascript
+```js
 var a = 10;
+console.log(a)  // 10
+window.a        // 10
+console.log(b)  // 10
+
 function b() {
     console.log('hello world');
 }
-a         // 10
-window.a  // 10
-this.a    // 10
-
-b();        // hello world
-window.b();
-this.window.b();
+b();                // hello world
+window.b();         // hello world
+this.window.b();    // hello world
 ```
 ---
 ## 📘 The Execution Context : Code Execution (Your Code)
