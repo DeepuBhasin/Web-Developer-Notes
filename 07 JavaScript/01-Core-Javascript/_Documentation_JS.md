@@ -291,17 +291,15 @@ document.addEventListener('click', clickHandler)
 waitThreeSeconds();
 console.log('finished execution');
 ```
----
 
-* Long running code also effect event loops events for example while executing this code if you click immediately click it will not print because while loop is executing that time.
+* Long running code also effect eventLoops for example while executing this code if you click immediately it will not print because while loop is executing that time.
 
 ---
-## 📘 Types and Javascript
-* **Dynamic Typing :** : you don't tell the engine what type of data a variable holds, it figures it out while your coding is running. Variables can hold different types of values because it's all figured out during execution.
+## 📘 Types in Javascript
+* **Dynamic Typing :** you don't tell to the engine that what type of data a variable holds, it figures it out while your coding is running. Variables can hold different types of values because it's all figured out during execution.
 
 ``` javascript
 // Static  Typing
-
 bool isNew = 'hello'; // an error
 
 // Dynamic Typing
@@ -320,7 +318,7 @@ isNew = 1;
    1. Floating point number (there's always some decimals). Unlike other programming languages, there's only one 'number' type ... and it can make math weird.
    2. *in javaScript, all numbers are represented internally as floating point numbers so basically always as decimals no matter we are writing as integer or as decimal*. example *23 == 23.00 (true)*
 5. **String :** a sequence of character (both '' and "" can be used)
-6. **Symbol :** used in ES6
+6. **Symbol :** used in ES6, which represent unique value mostly use in object keys
 
 * **Non-Primitive** : A type of data that represents multiple value.
 
@@ -331,17 +329,19 @@ isNew = 1;
 
 ## 📘 Other Data-Structures (ES6)
 1. **Sets :**
-* A collection of unique values, so that means that a set can never have any duplicates. (its kind of array not exactly array)
-* Actual use is to **remove duplicate** values from arrays.
-* In **set** order does not matter, hence we cannot access values by using **index**. only use to check the values exist or not.
+* A collection of unique values, so that means that a **Set** can never have any duplicates. (its kind of array not exactly array)
+* In **set** order does not matter, hence we cannot access values by using **index**, Only use to check the values exist or not.
 * **Set** are iterable.
 ```js
 const orderSet = new Set(['pasta', 'pizza', 'pizza', 'Risotto', 'pasta', 'pizza']);
+
+console.log(typeof orderSet);   // object
+
 console.log(orderSet);  //  {'pasta', 'pizza', 'Risotto'}
 
-console.log(orderSet.size);
-console.log(orderSet.has('pizza')); // true
-console.log(orderSet.has('maggi')); // false
+console.log(orderSet.size);             // 3
+console.log(orderSet.has('pizza'));     // true
+console.log(orderSet.has('toffee'));    // false
 
 orderSet.add('Garlic Bread');
 orderSet.add('Garlic Bread');   // this will not added
@@ -351,31 +351,33 @@ console.log(orderSet);  // {'pasta', 'pizza', 'Risotto', 'Garlic Bread'}
 orderSet.delete('pasta');
 console.log(orderSet);  // {'pizza', 'Risotto', 'Garlic Bread'}
 
+// Set are iterable hence for-of loop can be use
 for(let i of orderSet) {
     console.log(i)          // 'pizza', 'Risotto', 'Garlic Bread'
 }
+```
 
-
-// Actual Real Example of Set
+**💻 Application Use :**
+* Remove Duplicate values from array
+```js
 const arr = ['pasta', 'pizza', 'pizza', 'Risotto', 'pasta', 'pizza'];
 const orderSet = [...new Set(arr)];
 console.log(orderSet);  //  {'pasta', 'pizza', 'Risotto'}
 ```
 
 2. **Maps :**
-* its like *Objects* but the major difference is that, in objects the **keys are basically always strings**, but in maps we can have any type of key. it could even **be objects, or arrays or other maps.**
+* its like *Objects* but the major difference is that, in objects the **keys are always strings**, but in **Maps** we can have any type of key. it could even **be objects, or arrays or other maps.**
 
 ```js
 // 1. Creating Map in this way
 
 const rest = new Map()  // always create empty map here
-rest.set('name', 'Deepu Bhasin');
+rest.set('name', 'John Singh');
 rest.set(1, 'web-developer');
 rest.set(true, 'apple')
 
 const arr = [1, 2];
 rest.set(arr, 'array value')
-
 
 console.log(rest.get(arr)); // array value
 console.log(rest.get(1));   //web-developer
@@ -388,7 +390,6 @@ console.log(rest.size);     // 3
 
 
 // 2. Creating Map in this way
-
 const question = new Map([
     ['question', 'what is the best programming language in the world'],
     [1, 'c'],
