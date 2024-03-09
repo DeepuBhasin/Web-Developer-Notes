@@ -566,15 +566,17 @@ console.log(a);
 
 ```javascript
 var a = 3 < 2 < 1 ;
+console.log(a);     // true (true > false)
+
+var a = 1 < 2 < 3;  // true (true > false)
 console.log(a);
 
-var a = 1 < 2 < 3
-console.log(a);
-
-Number(undefined) // NaN
-Number(null)    // 0
-Number(false)   // 0
-Number(true)    // 1
+Number(undefined)   // NaN
+Number(null)        // 0
+Number(false)       // 0
+Number('')          // 0
+Number(0)           // 0
+Number(true)        // 1
 
 1 == '1'    // true
 1 === '1'   // false
@@ -586,14 +588,15 @@ Number(true)    // 1
 ## 📘 Existence and Booleans
 
 ```javascript
-Boolean(undefined)      // false
-Boolean(null)           // false
-Boolean("")             // false
-Boolean(0)              // false
+Boolean(undefined)  // false
+Boolean(null)       // false
+Boolean("")         // false
+Boolean(0)          // false
+Boolean(false)      // false
 
 // Example 1
 var a;
-if(a) {                 // will not execute
+if(a) {             // will not execute
     console.log('Something is there');
 }
 
@@ -607,10 +610,10 @@ if(a || a === 0) {      // will execute
 }
 
 // Example 3
-
 console.log(!true);     // false
 console.log(!!true);    // true
 ```
+
 ---
 
 
