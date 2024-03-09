@@ -20,7 +20,7 @@ npm i --save lodash jquery validate.js toaster bootstrap
 "build" : "webpack --config=webpack.config.js --mode=development"
 ```
 
-* Concept of ("\*\*/\*") : /\*\*/\*: This is a wildcard pattern often used in file path patterns. Here's what it means:
+* Concept of ("\*\*/\*") : This is a wildcard pattern often used in file path patterns. Here's what it means:
   1. /\*\*/: Matches any directory and any subdirectories recursively. The double asterisk (**) matches zero or more directories.
   2. \*: Matches any file within those directories.
 
@@ -587,7 +587,7 @@ a. Simple CSS
 * Loaders are javascript libraries which allowed you to load all stuffs
 * These loader always inject our CSS code into **style tags**
 
-1. Webpack Coding
+**1. Webpack Coding**
 
 ```js
 const path = require('path');
@@ -684,7 +684,9 @@ npx webpack
 ![Loader](./images/loader-js.png)
 
 
-b. Module CSS
+**b. Module CSS**
+
+**1. By USing CSS-Loader**
 
 1. Webpack
 
@@ -720,9 +722,14 @@ module.exports = {
 2. clearButton.css
 
 ```css
+button {
+  background-color: yellow;
+}
+
 .button {
   background-color: red;
 }
+
 ```
 
 3. clearButton.js
@@ -756,7 +763,7 @@ renderTestButton();
 
 <head>
     <title>Document</title>
-    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./dist/styles.css">
 </head>
 
 <body>
@@ -768,14 +775,95 @@ renderTestButton();
 </html>
 ```
 6. Package.json
-```js
-  "scripts": {
+```json
+"scripts": {
     "build": "webpack --mode development --config=webpack.config.js"
-  },
+},
 ```
 
 ![moduleCss](./images/module-css.png)
 
+
+
+**2. By USing MiniCssExtractPlugin (best one)**
+
+1. webpack.config.js
+
+```js
+const path = require("path");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+module.exports = {
+    entry: path.resolve(__dirname, "./src/index.js"),
+    output: {
+        filename: "bundle.js",
+        path: path.resolve(__dirname, "dist"),
+        clean: true
+    },
+    module: {
+        rules: [
+            {
+                // for loading normal css
+                test: /\.css$/,
+                exclude: /\.module\.css$/,
+                use: ['style-loader', 'css-loader']
+            },
+            {
+                // for loading module css
+                test: /\.module\.css$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: {
+                                // for production mode
+                                // localIdentName: '[hash:base64]'
+
+                                // for development mode
+                                localIdentName: '[local]--[md4:hash:7]'
+                            }
+                        }
+                    }
+                ]
+            },
+        ]
+    },
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: 'styles.css',
+        })
+    ]
+};
+```
+
+2. clearButton.module.css
+
+```css
+button {
+  background-color: yellow;
+}
+
+.button {
+  background-color: red;
+}
+```
+
+3. clearButton.js
+
+```js
+import style from "./clearButton.module.css";
+
+export default function renderTestButton() {
+    const el = document.createElement("button");
+    el.classList.add([`${style.button}`])
+    el.innerHTML = "clear";
+    el.onclick = function () {
+        alert("clear button")
+    }
+    document.body.appendChild(el);
+}
+```
 
 **⚠️Note :** you can load other css/sass into another css/sass files by using
 
@@ -1122,7 +1210,6 @@ npm install mini-css-extract-plugin --save-dev
 
 ```js
 const path = require('path');
-// installing package
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -1177,7 +1264,7 @@ module.exports = {
 ```
 
 ## 📘3. MiniCssExtractPlugin (with double Files for css)
-* created Two separate files for **js and css**
+* Create Two separate files for **js and css**
 * When we **build**, all **CSS** code goes into **style.css** and all **js** code goes into **bundle.js**
 
 1. webpack.config.js (same code above one)
@@ -1211,6 +1298,146 @@ h1 {
 npx webpack
 ```
 ![Minify](./images/minifiplugin.png)
+
+## 📘Compressing and Removing duplicate css code (best one) 
+* To remove compress and duplicate css we use **CssMinimizerPlugin**
+
+* Package command
+```
+npm i css-minimizer-webpack-plugin
+```
+
+* Webpack.config.js
+
+```js
+const path = require("path");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+
+module.exports = {
+    entry: path.resolve(__dirname, "./src/index.js"),
+    output: {
+        filename: "bundle.js",
+        path: path.resolve(__dirname, "dist"),
+        clean: true
+    },
+    optimization: {
+        // this is use to use other minimizer as well, otherwise it is disabling js minimizers
+        '...',
+        minimize: true,
+        minimizer: [
+            new CssMinimizerPlugin({
+                minimizerOptions: {
+                    preset: [
+                        'default',
+                        {
+                            discardComments: {
+                                removeAll: true
+                            }
+                        }
+                    ]
+                }
+            })
+        ],
+    },
+    module: {
+        rules: [
+            {
+                // for loading normal css
+                test: /\.css$/,
+                exclude: /\.module\.css$/,
+                use: ['style-loader', 'css-loader']
+            },
+            {
+                // for loading module css
+                test: /\.module\.css$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: {
+                                // for production mode
+                                // localIdentName: '[hash:base64]'
+
+                                // for development mode
+                                localIdentName: '[local]--[md4:hash:7]'
+                            }
+                        }
+                    }
+                ]
+            },
+        ]
+    },
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: 'styles.css',
+        })
+    ]
+};
+```
+
+* clearButton.js
+
+```js
+import style from "./clearButton.module.css";
+
+export default function renderTestButton() {
+    const el = document.createElement("button");
+    el.classList.add([`${style.button}`])
+    el.innerHTML = "clear";
+    el.onclick = function () {
+        alert("clear button")
+    }
+    document.body.appendChild(el);
+}
+```
+
+* clearButton.module.css
+
+```css
+button {
+  background-color: yellow;
+  background-color: yellow;
+  background-color: yellow;
+  background-color: yellow;
+}
+.button {
+  background-color: red;
+}
+```
+
+* index.js
+
+```js
+import renderTestButton from "./clearButton"
+
+renderTestButton();
+```
+
+* index.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <link rel="stylesheet" href="./dist/styles.css">
+</head>
+
+<body>
+    <h1 class="header">Hey this is webpack</h1>
+    <button class="button">Click Me</button>
+    <script src="./dist/bundle.js"></script>
+</body>
+
+</html>
+```
+
+![CssMinimizerPlugin](./images/CssMinimizerPlugin.png)
+
+---
 
 ## 📘CopyPlugin
 * This plugin is used to copy stuff from **source folder** to **dist folder**
@@ -1261,7 +1488,7 @@ module.exports = {
 ---
 
 
-## 📘Cleaning Dist Folder Before Generating New Bundle
+## 📘Cleaning Dist Folder Before Generating New Bundle (best one)
 
 1. Command to install Package
 ```
@@ -1324,6 +1551,7 @@ module.exports = {
 }
 ```
 * By using **clean:true** parameter in **output** Object, but will work in greater than **5.20** version of webpack
+* Not very useful
 
 ```js
 output: {
@@ -1978,7 +2206,8 @@ createModelButton()
 ## 📘Adding hash to output bundles
 * If the content is not change then filename will be same, if the content get change it will create new file and file name will change
 * This is use remove to cache files and it is important when you are creating new bundles
-*  **[contenthash]** with **:8, :12, :16** are use to create md5 algo string
+* **[contenthash]** with **:8, :12, :16, :20** are use to create md5 algo string
+* **[hash:7]** with **:8, :9, :10**
 * **[name]** are use to create fileName as it is
 
 1. For Javascript Files
