@@ -1299,7 +1299,7 @@ npx webpack
 ```
 ![Minify](./images/minifiplugin.png)
 
-## 📘Compressing and Removing duplicate css code (best one) 
+## 📘Compressing and Removing duplicate css code (best one)
 * To remove compress and duplicate css we use **CssMinimizerPlugin**
 
 * Package command
