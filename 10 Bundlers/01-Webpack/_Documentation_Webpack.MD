@@ -28,15 +28,19 @@ npm i --save lodash jquery validate.js toaster bootstrap
 
 ## 📘Syllabus
 
-1. Simple configuration
-2. loaders and asset modules
-3. Webpack plugins
-4. 7 Ways of handling CSS
-5. Improving Browser support
-6. Strategies for code splitting
-7. Source Maps
-8.  Dev & Hot Middleware
-9.  Optimization (production and development builds)
+1. Import Modules (es6 and common.js)
+2. Custom Configuration
+3. Asset (loading images)
+4. Loaders
+   1. CSS Loaders (CSS, S[AS]SS,POSTCSS)
+   2. JS Loaders
+5. Multiple Entry Files
+6. Webpack plugins
+7. Improving Browser support
+8. Strategies for code splitting
+9. Source Maps
+10. Dev & Hot Middleware
+11. Optimization (production and development builds)
     1.  Bundle analysis
     2.  Duplicating prevention
     3.  Lazy Loading
@@ -46,8 +50,8 @@ npm i --save lodash jquery validate.js toaster bootstrap
     7.  CSS Splitting
     8.  Compressing your bundles
     9.  Optimization Images
-10. Module Federation
-11. Build React App using webpack
+12. Module Federation
+13. Build React App using webpack
     1.  React specification Configurations
     2.  Route Management
     3.  CSS enhancement
@@ -313,56 +317,6 @@ npx webpack
 **⚠️ Note :** In both development and production environments, regardless of the number of JavaScript files involved, all code will be merged into a single file specified by the output filename parameter in the configuration. For example, if the output filename parameter is set to "bundle.js", the merged JavaScript code will be saved in a file named "bundle.js
 
 ![OutputIntoSingleFile](./images/output-into-singel-file.png)
-
----
-
-## 📘Shimming
-* This concept is use to **attach element on window object** like "$" sign attach to window for jquery
-* This is very useful in case of old libraries
-
-Example :
-
-
-* suppose we have this import statement "moment library" someone remove by mistake
-```js
-import mnt from "moment";
-
-(function () {
-    const d = mnt(new Date()).format("DD-MM-YYYY");
-    console.log(d);
-}())
-```
-![shimming1](./images/shimming-1.png)
-
-![shimming2](./images/shimming-2.png)
-
-* We can bind **element to window object** using **webpack**, in that we no need to import library in files
-
-```js
-// webpack.config.js
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require('path');
-const webpack = require('webpack');
-
-module.exports = {
-    entry: path.resolve(__dirname, './src/index.js'),
-    output: {
-        filename: './bundle.js',
-        path: path.resolve(__dirname, './dist'),
-        clean: true
-    },
-    plugins: [
-        new HtmlWebpackPlugin({
-            filename: "index.html",
-            template: path.resolve(__dirname, "src/index.html")
-        }),
-        new webpack.ProvidePlugin({
-            mnt: "moment"
-        })
-    ]
-}
-```
-![shimming3](./images/shimming-3.png)
 
 
 
@@ -2231,6 +2185,56 @@ npm i --save-dev webpack-merge
     "prod": "webpack --config=webpack.production.js "
 },
 ```
+
+## 📘Shimming
+* This concept is use to **attach element on window object** like "$" sign attach to window for jquery
+* This is very useful in case of old libraries
+
+Example :
+
+
+* suppose we have this import statement "moment library" someone remove by mistake
+```js
+import mnt from "moment";
+
+(function () {
+    const d = mnt(new Date()).format("DD-MM-YYYY");
+    console.log(d);
+}())
+```
+![shimming1](./images/shimming-1.png)
+
+![shimming2](./images/shimming-2.png)
+
+* We can bind **element to window object** using **webpack**, in that we no need to import library in files
+
+```js
+// webpack.config.js
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+
+module.exports = {
+    entry: path.resolve(__dirname, './src/index.js'),
+    output: {
+        filename: './bundle.js',
+        path: path.resolve(__dirname, './dist'),
+        clean: true
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            filename: "index.html",
+            template: path.resolve(__dirname, "src/index.html")
+        }),
+        new webpack.ProvidePlugin({
+            mnt: "moment"
+        })
+    ]
+}
+```
+![shimming3](./images/shimming-3.png)
+
+
 ---
 
 # 📔React
