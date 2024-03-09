@@ -1260,19 +1260,6 @@ module.exports = {
 
 ---
 
-## 📘Browser Caching
-
-* just add this line, it will create a some random file name
-* If the content is not change then filename will be same, if the content get change it will create new file and file name will change
-
-1. For Javascript Files
-```js
-filename: 'bundle.[contenthash].js',
-```
-2. For CSS Files
-```js
-filename: 'styles[contenthash].css',
-```
 
 ## 📘Cleaning Dist Folder Before Generating New Bundle
 
@@ -1989,11 +1976,20 @@ createModelButton()
 
 
 ## 📘Adding hash to output bundles
+* If the content is not change then filename will be same, if the content get change it will create new file and file name will change
 * This is use remove to cache files and it is important when you are creating new bundles
-* by using **[contenthash]** or **[contenthash:8]** or **[contenthash:16].js**
+*  **[contenthash]** with **:8, :12, :16** are use to create md5 algo string
+* **[name]** are use to create fileName as it is
+
+1. For Javascript Files
 ```js
- filename: './[name].[contenthash].js',
+filename: '[name].[contenthash].js',
 ```
+2. For CSS Files
+```js
+filename: '[name].[contenthash].css',
+```
+---
 
 ## 📘Remove Dead CSS
 * The CSS which is not use in project
