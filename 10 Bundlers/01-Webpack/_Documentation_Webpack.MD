@@ -3,6 +3,9 @@
 * Main Concept of Webpack : **Load all stuff from webpack rather than loading from different-different files in a single html file example Images, CSS files, Js Files, Json Files etc**
 
 * Reference : [https://github.com/gauravsoni1/webpack-udemy](https://github.com/gauravsoni1/webpack-udemy)
+
+* Make Starting point for directory : [https://github.com/vp-online-courses/webpack-optimization-starter](https://github.com/vp-online-courses/webpack-optimization-starter)
+
 * To install in dev we use
 ```
 npm i --save-dev <package-name>
@@ -24,30 +27,30 @@ npm i --save lodash jquery validate.js toaster bootstrap
 ---
 
 ## 📘Syllabus
+
 1. Simple configuration
 2. loaders and asset modules
-3. webpack plugins
-4. code splitting
-5. integration with Expression.js
-6. Managing Modules
-7. Module Federation
-8. Optimization (production and development builds)
-   1. Bundle analysis
-   2. Duplicating prevention
-   3. Lazy Loading
-   4. Dead code elimination
-   5. Shimming
-   6. CSS Splitting
-9. Build React App using webpack
-   1.  React specification Configurations
-   2.  Route Management
-   3.  CSS enhancement
-10. Micro-frontend project
-    1.  Connecting
-    2.  Navigating
-    3.  State management
-    4.  Loading
-    5.  Eventing
+3. Webpack plugins
+4. 7 Ways of handling CSS
+5. Improving Browser support
+6. Strategies for code splitting
+7. Source Maps
+8.  Dev & Hot Middleware
+9.  Optimization (production and development builds)
+    1.  Bundle analysis
+    2.  Duplicating prevention
+    3.  Lazy Loading
+    4.  Dead code elimination
+    5.  Shimming
+    6.  Tree Shaking
+    7.  CSS Splitting
+    8.  Compressing your bundles
+    9.  Optimization Images
+10. Module Federation
+11. Build React App using webpack
+    1.  React specification Configurations
+    2.  Route Management
+    3.  CSS enhancement
 
 
 ---
@@ -152,88 +155,6 @@ helloWorld();
 npx webpack
 ```
 * this command will create **dist** folder and create **main.js** file in it
----
-## 📘Custom Configuration (Basic)
-* create **webpack.config.js**
-* Entry Point and Output Point
-
-
-```js
-// to get the absolute path, it is available in node automatically
-const path = require('path');
-
-module.exports = {
-    // entry point for webpack
-    entry: './src/index.js',
-
-    output: {
-         // output file name
-        filename: 'bundle.js',
-
-        // it will create bundler.js file in dist folder
-        path: path.resolve(__dirname, './dist')
-    },
-    mode: 'none'
-}
-```
-
-* Then run this command
-```
-npx webpack
-```
-![Basic-Custom-Configuration](./images/custom-configuration-basic.png)
-
-
----
-
-## 📘Shimming
-* This concept is use to **attach element on window object** like "$" sign attach to window for jquery
-* This is very useful in case of old libraries
-
-Example :
-
-
-* suppose we have this import statement "moment library" someone remove by mistake
-```js
-import mnt from "moment";
-
-(function () {
-    const d = mnt(new Date()).format("DD-MM-YYYY");
-    console.log(d);
-}())
-```
-![shimming1](./images/shimming-1.png)
-
-![shimming2](./images/shimming-2.png)
-
-* We can bind **element to window object** using **webpack**, in that we no need to import library in files
-
-```js
-// webpack.config.js
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require('path');
-const webpack = require('webpack');
-
-module.exports = {
-    entry: path.resolve(__dirname, './src/index.js'),
-    output: {
-        filename: './bundle.js',
-        path: path.resolve(__dirname, './dist'),
-        clean: true
-    },
-    plugins: [
-        new HtmlWebpackPlugin({
-            filename: "index.html",
-            template: path.resolve(__dirname, "src/index.html")
-        }),
-        new webpack.ProvidePlugin({
-            mnt: "moment"
-        })
-    ]
-}
-```
-![shimming3](./images/shimming-3.png)
-
 
 ---
 
@@ -358,6 +279,90 @@ console.log(multiply(2, 2));
 node index.js
 ```
 
+## 📘Custom Configuration (Basic)
+* create **webpack.config.js**
+* Entry Point and Output Point
+
+
+```js
+// to get the absolute path, it is available in node automatically
+const path = require('path');
+
+module.exports = {
+    // entry point for webpack
+    entry: './src/index.js',
+
+    output: {
+         // output file name
+        filename: 'bundle.js',
+
+        // it will create bundler.js file in dist folder
+        path: path.resolve(__dirname, './dist')
+    },
+    mode: 'none'
+}
+```
+
+* Then run this command
+```
+npx webpack
+```
+![Basic-Custom-Configuration](./images/custom-configuration-basic.png)
+
+
+**⚠️ Note :** In both development and production environments, regardless of the number of JavaScript files involved, all code will be merged into a single file specified by the output filename parameter in the configuration. For example, if the output filename parameter is set to "bundle.js", the merged JavaScript code will be saved in a file named "bundle.js
+
+![OutputIntoSingleFile](./images/output-into-singel-file.png)
+
+---
+
+## 📘Shimming
+* This concept is use to **attach element on window object** like "$" sign attach to window for jquery
+* This is very useful in case of old libraries
+
+Example :
+
+
+* suppose we have this import statement "moment library" someone remove by mistake
+```js
+import mnt from "moment";
+
+(function () {
+    const d = mnt(new Date()).format("DD-MM-YYYY");
+    console.log(d);
+}())
+```
+![shimming1](./images/shimming-1.png)
+
+![shimming2](./images/shimming-2.png)
+
+* We can bind **element to window object** using **webpack**, in that we no need to import library in files
+
+```js
+// webpack.config.js
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+
+module.exports = {
+    entry: path.resolve(__dirname, './src/index.js'),
+    output: {
+        filename: './bundle.js',
+        path: path.resolve(__dirname, './dist'),
+        clean: true
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            filename: "index.html",
+            template: path.resolve(__dirname, "src/index.html")
+        }),
+        new webpack.ProvidePlugin({
+            mnt: "moment"
+        })
+    ]
+}
+```
+![shimming3](./images/shimming-3.png)
 
 
 
@@ -2538,7 +2543,7 @@ remotes : {
 
 2. Loading Files in Host MFE
 
-* When container loads its first load **index.js** file and allow **webpack** to load other **MFEs** files in **Host** example 
+* When container loads its first load **index.js** file and allow **webpack** to load other **MFEs** files in **Host** example
 ```javascript
 import {useStore} from "container/StoreModule"
 ```
@@ -2607,7 +2612,7 @@ shared: ["react", "react-dom"],
 
 ```javascript
 if(process.env.NODE_ENV === 'development') {
-    
+
 }
 ```
 * import synchronous and asynchronous files
