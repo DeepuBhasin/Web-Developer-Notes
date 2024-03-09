@@ -307,6 +307,9 @@ var isNew = true;   // no error
 isNew = 'yup!';
 isNew = 1;
 ```
+
+* **typeOf :** is operator which returns the type of variable. 
+
 ---
 ## 📘 Primitive types and Non Primitives types
 * **Primitive type :** A type of data that represents a single value. That is, not an object.
@@ -424,20 +427,22 @@ const array = [...questions];
 ---
 
 ## 📘Numbers
-* Conversion
+* **Conversion :** from string to number
 
 ```js
-Number('23')    // 23
-+'23'           // 23
+let num = '10';
+
+console.log(typeof Number(num));    // number
+console.log(typeof (+num));         // number
 ```
-* Parsing
+* **Parsing :** getting number from string
 
 ```js
 Number.parseInt('2px')      // 2
 Number.parseFloat('2.5rm')  // 2.5
 ```
 
-* Checking Number
+* **Checking Number**
 ```js
 // Only check number or not
 Number.isNaN(10)        // false
@@ -461,42 +466,41 @@ Number.isFinite(20/0)      // false
 ---
 
 ## 📘Stings & String Methods
-
+* **Accessing value**
 ```js
-let firstname = "Deepinder Singh";
+let firstName = "John Singh";
 
-console.log(firstname[0];)   // D
-console.log(firstname[1];)   // e
-console.log(firstname[2];)   // e
+console.log(firstName[0];)   // J
+console.log(firstName[1];)   // o
+console.log(firstName[2];)   // h
 ```
 
-* conversion
+* **Conversion** : from 
 ```js
 let age = 10;
 
-console.log(''+ 10);
-console.log(age.toString())
-
+console.log(typeof String(10))
+console.log(typeof ('' + 10))
+console.log(typeof age.toString())
 ```
 
-**⚠️ Note :** is a method that is attached on the **base Object** that why get on string, array, number etc.
+**⚠️ Note :** **toString()** is a method that is attached on the **base Object** that why get on string, array, number etc.
 
-* Methods
+* **Methods**
 
-1. indexOf
-2. lastIndexOf
-3. slice
-4. splice
+1. length
+2. indexOf
+3. lastIndexOf
+4. slice
 5. includes
 6. replace
 7. toLowerCase
 8. toUpperCase
 9. split
-10. join
-11. at(1) & at(-1)
-12. padStart & padEnd
-13. charCodeAt()
-14. charAt()
+10. at(1) & at(-1)
+11. padStart & padEnd
+12. charCodeAt()
+13. charAt()
 
 * Examples
 
@@ -523,11 +527,10 @@ console.log('I am Web Developer'.includes('Web'));  // true
 console.log('I am Web Developer'.includes('test')); // false
 
 // 5. charCodeAt
-"X".charCodeAt()
+"X".charCodeAt()    // ASCII Code 88
 
 // 6. charAt
 "Xabcd".charAt(1)   // 'a'
-
 ```
 ---
 
