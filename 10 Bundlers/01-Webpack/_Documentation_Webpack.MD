@@ -2543,7 +2543,7 @@ module.exports = {
           MiniCssExtractPlugin.loader,
           "css-loader",
           {
-            // to use advance css we are adding polyfill
+            // to use advance css we are adding polyfill like -webkit things
             loader: "postcss-loader",
             options: {
               postcssOptions: {
