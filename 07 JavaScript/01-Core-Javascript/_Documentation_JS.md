@@ -424,6 +424,7 @@ const array = [...questions];
 ![Image](./images/source-of-data.png)
 
 ![Image](./images/arrays-vs-set-object-vs-maps.png)
+
 ---
 
 
@@ -440,6 +441,7 @@ var a = 3;
 var b = 3 + 2;
 ```
 
+---
 
 ## 📘 Operator Precedence and Associativity
 * **Operator Precedence :** which operator function gets called first. Functions are called in order of precedence (HIGHER precedence wins). Example : BDMAS
@@ -497,17 +499,6 @@ console.log(a);     // true (true > false)
 
 var a = 1 < 2 < 3;  // true (true > false)
 console.log(a);
-
-Number(undefined)   // NaN
-Number(null)        // 0
-Number(false)       // 0
-Number('')          // 0
-Number(0)           // 0
-Number(true)        // 1
-
-1 == '1'    // true
-1 === '1'   // false
-1 + null    // 1
 ```
 **⚠️ Note :** you can use **Object.is(1, 1)** instead of **=== (strick quality check)**
 
@@ -561,6 +552,18 @@ Number.parseFloat('2.5rm')  // 2.5
 
 * **Checking Number**
 ```js
+// checking falsy values
+Number(undefined)   // NaN
+Number(null)        // 0
+Number(false)       // 0
+Number('')          // 0
+Number(0)           // 0
+Number(true)        // 1
+
+1 == '1'    // true
+1 === '1'   // false
+1 + null    // 1
+
 // Only check number or not
 Number.isNaN(10)        // false
 Number.isNaN('20')      // false
