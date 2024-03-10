@@ -74,7 +74,9 @@
 
 ### Reducer
 A Reducer is a function that receives the __current state__ and __an action object__, _decides how to update the state base on the action and returns the new state._
+
 ---
+
 #### Rules of Reducers
 * The new state value should only be calculated based on the state and action arguments.
 * Reducers are not allowed to modify the **existing state.**
@@ -86,7 +88,9 @@ A Reducer is a function that receives the __current state__ and __an action obje
 * The only way to change the state inside it is to dispatch an action.
 ---
 ⚠️ When it receives an actions that causes a change to the state, the store will notify all the registered listeners that a change to the state has been made. This allow various parts of the system, like the UI, to update themselves according to the new state. 
+
 ---
+
 ### Command for Redux
 
 ```

@@ -466,7 +466,7 @@ Number.isFinite(20/0)      // false
 ---
 
 ## 📘Stings & String Methods
-* **Accessing value**
+* **Accessing value :** using index
 ```js
 let firstName = "John Singh";
 
@@ -475,13 +475,14 @@ console.log(firstName[1];)   // o
 console.log(firstName[2];)   // h
 ```
 
-* **Conversion** : from
+* **Conversion** : from any type string
 ```js
 let age = 10;
 
 console.log(typeof String(10))
 console.log(typeof ('' + 10))
 console.log(typeof age.toString())
+console.log(typeof [1, 2, 3].toString())
 ```
 
 **⚠️ Note :** **toString()** is a method that is attached on the **base Object** that why get on string, array, number etc.
@@ -555,13 +556,31 @@ var a = 3 + 4 * 5;
 console.log(a); //23
 ```
 * **Associativity :** What order operator functions get called in: LEFT-TO-RIGHT or RIGHT-TO-LEFT. when functions have the *same* precedence. Example : 1+2+3/3/4
+
+```js
+function test() {
+    let count = 0;
+    return function () {
+        return count++;
+    }
+}
+
+const outPut = test();
+console.log(outPut());  // 0
+console.log(outPut());  // 1
+console.log(outPut());  // 2
+```
+
 ---
+
 ## 📘 Coercion
 * **Coercion :** Converting a value from one type to another. This happens quite in all dynamically typed languages like php, javascript etc.
+
 ```javascript
 var a = 1 + '2';
 console.log(a);
 ```
+
 ## 📘 Comparison
 
 ```javascript
@@ -621,7 +640,7 @@ console.log(!!true);    // true
 * operators are functions example || (OR Operator is a function)
 ```javascript
 undefined || 'hi'       // hi
-'hi' || 'hello'         // hi
+'hi' || 'hello'         // hi  
 null || 'hi'            // hi
 0 || 'hi'               // hi
 
@@ -639,6 +658,43 @@ window.libraryName = window.libraryName || 'lib 2';
 console.log(libraryName);
 ```
 ---
+
+**💻 Application Use :**
+
+**Short Circuit :** Short-circuit evaluation is a useful feature in JavaScript that can help improve performance and avoid unnecessary computations, especially when dealing with conditional logic.
+
+1. **OR Operator (||)** is use, it will return **true** value always. Associativity is left-to-right
+
+    ```js
+    undefined || null || '' || false || 0 || 'Hello' || 23  // 'Hello'
+
+    'test' || 'ok'  // test
+    '' || 'ok'  // ok
+    ```
+2. **AND Operator (&&)** : it will return **false** value if the first value is false, it works opposite to **OR Operator**. Associativity is left-to-right
+
+    ```js
+    0 && 'jonas'    // 0
+    1 && 'john'    // john
+    'hello' && 23 && null && 'jonas'    // null
+    ```
+---
+
+## 📘Nullish
+
+* Only check **null** or **undefined** value
+* Not include **0 (zero)** or **"" (empty string)**
+
+```js
+const test = 0;
+console.log(test || 'Hello');   // hello
+
+// Nullish : null and undefined (Not 0 or '')
+console.log(test ?? 'Hello');   // 0
+```
+
+
+---
 ## 📘 Objects and Dot
 
 ![Image](./images/object-dot.png)
@@ -647,21 +703,20 @@ console.log(libraryName);
 var person = new Object();
 
 // [] is a operator
+person['firstName'] = "john";
+person['lastName'] = "Doe";
 
-person['firstname'] = "Tony";
-person['lastname'] = "Alicea";
-
-var firstNameProperty = "firstname";
+var firstNameProperty = "firstName";
 console.log(person);
 console.log(person[firstNameProperty]);
 
 // . is a operator
-console.log(person.firstname);
+console.log(person.firstName);
 
 person.address = new Object();
 
 // . has left-to-right associativity
-person.address.street = "51 d street no 3 ranjit nagar near seona chowk patiala punjab";
+person.address.street = "New Your Street 51-d";
 
 console.log(person.address.street);
 console.log(person['address']['street']);
@@ -670,18 +725,19 @@ console.log(person['address']['street']);
 1. Major difference between **Dot** and **Brackets** by using *brackets* we can *access or create* any dynamic value for example
 
 ```js
-const nameKey = "name";
+const NameKey = "Name";
 var obj = {
-    firstname : "Deepinder",
-    lastname : "Singh"
+    firstName : "Deepinder",
+    lastName : "Singh"
 }
 
-obj['first' + nameKey];
-obj['last' + nameKey];
+obj['first' + NameKey];
+obj['last' + NameKey];
 ```
 2. If we try to **access** value which does not exist in Object then we will get **undefined**
 ---
 ## 📘Objects and Object Literals
+
 1. With **ES5**
 ```javascript
 // comparing current example with above example the object literals are easy to write and easy to read
@@ -4463,35 +4519,7 @@ function sum(...numbers) {
 }
 sum(1, 2, 3, 4, 5, 6, 7, 8, 9);
 ```
----
 
-## 📘Short Circuit
-* OR Operator (||)  : it will return **true** value always
-
-```js
-undefined || null || '' || false || 0 || 'Hello' || 23  // 'Hello'
-'test' || 'ok'  // test
-'' || 'ok'  // ok
-```
-* AND Operator (&&) : it will return **false** value if the first value is false, it works opposite to **OR Operator**
-
-```js
-0 && 'jonas'    // 0
-1 && 'Deepu'    // Deepu
-'hello' && 23 && null && 'jonas'    // null
-```
----
-
-## 📘Nullish
-* Only check **null** or **undefined** value
-* Not include **0 (zero)** or **"" (empty string)**
-```js
-const test = 0;
-console.log(test || 'Hello');   // hello
-
-// Nullish : null and undefined (Not 0 or '')
-console.log(test ?? 'Hello');   // 0
-```
 ---
 ## 📘Arrays Methods
 1. slice
