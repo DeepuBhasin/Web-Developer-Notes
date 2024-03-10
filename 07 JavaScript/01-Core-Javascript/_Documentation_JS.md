@@ -426,114 +426,6 @@ const array = [...questions];
 ![Image](./images/arrays-vs-set-object-vs-maps.png)
 ---
 
-## 📘Numbers
-* **Conversion :** from string to number
-
-```js
-let num = '10';
-
-console.log(typeof Number(num));    // number
-console.log(typeof (+num));         // number
-```
-* **Parsing :** getting number from string
-
-```js
-Number.parseInt('2px')      // 2
-Number.parseFloat('2.5rm')  // 2.5
-```
-
-* **Checking Number**
-```js
-// Only check number or not
-Number.isNaN(10)        // false
-Number.isNaN('20')      // false
-Number.isNaN(+'20px')   // true
-Number.isNaN(20/0)      // false
-
-// For checking Integer Values
-Number.isInteger(10)        // true
-Number.isInteger(10.2)      // false
-Number.isInteger('20')      // false
-Number.isInteger(+'20px')   // false
-Number.isInteger(20/0)      // false
-
-// For checking Float Values (best)
-Number.isFinite(10)        // true
-Number.isFinite('20')      // false
-Number.isFinite(+'20px')   // false
-Number.isFinite(20/0)      // false
-```
----
-
-## 📘Stings & String Methods
-* **Accessing value :** using index
-```js
-let firstName = "John Singh";
-
-console.log(firstName[0];)   // J
-console.log(firstName[1];)   // o
-console.log(firstName[2];)   // h
-```
-
-* **Conversion** : from any type string
-```js
-let age = 10;
-
-console.log(typeof String(10))
-console.log(typeof ('' + 10))
-console.log(typeof age.toString())
-console.log(typeof [1, 2, 3].toString())
-```
-
-**⚠️ Note :** **toString()** is a method that is attached on the **base Object** that why get on string, array, number etc.
-
-* **Methods**
-
-1. length
-2. indexOf
-3. lastIndexOf
-4. slice
-5. includes
-6. replace
-7. toLowerCase
-8. toUpperCase
-9. split
-10. at(1) & at(-1)
-11. padStart & padEnd
-12. charCodeAt()
-13. charAt()
-
-* Examples
-
-```js
-console.log('I am Web Developer'[0]);   // I
-console.log('I am Web Developer'[2]);   // a
-console.log('I am Web Developer'.length);   // 18
-
-// Methods
-// 1. indexOf
-console.log('I am Web Developer'.indexOf('a'));   // 2
-console.log('I am Web Developer'.indexOf('Web')); // 5
-
-// 2. lastIndexOf
-console.log('I am Web Developer'.lastIndexOf('Web')); // 5
-console.log('I am Web Developer'.lastIndexOf('e'));   // 16
-
-// 3. slice
-console.log('I am Web Developer'.slice(3));    // m Web Developer
-console.log('I am Web Developer'.slice(3, 7)); // m We
-
-// 4. includes
-console.log('I am Web Developer'.includes('Web'));  // true
-console.log('I am Web Developer'.includes('test')); // false
-
-// 5. charCodeAt
-"X".charCodeAt()    // ASCII Code 88
-
-// 6. charAt
-"Xabcd".charAt(1)   // 'a'
-```
----
 
 ## 📘 Operators are functions
 
@@ -571,6 +463,22 @@ console.log(outPut());  // 1
 console.log(outPut());  // 2
 ```
 
+---
+
+
+## 📘Major Falsy Values
+
+1. **false:** The boolean value false itself is falsy.
+
+2. **0 (zero) :** The number zero is falsy.
+
+3. **'' (empty string) :** An empty string is falsy.
+
+4. **null :** The absence of any value is falsy.
+
+5. **undefined :** A variable that has been declared but has not been assigned a value is falsy.
+
+6. **NaN (Not a Number) :** Represents a value that is not a legal number and is falsy.
 ---
 
 ## 📘 Coercion
@@ -632,6 +540,118 @@ if(a || a === 0) {      // will execute
 console.log(!true);     // false
 console.log(!!true);    // true
 ```
+
+---
+
+## 📘Numbers
+* **Conversion :** from string to number
+
+```js
+let num = '10';
+
+console.log(typeof Number(num));    // number
+console.log(typeof (+num));         // number
+```
+* **Parsing :** getting number from string
+
+```js
+Number.parseInt('2px')      // 2
+Number.parseFloat('2.5rm')  // 2.5
+```
+
+* **Checking Number**
+```js
+// Only check number or not
+Number.isNaN(10)        // false
+Number.isNaN('20')      // false
+Number.isNaN(+'20px')   // true
+Number.isNaN(20/0)      // false
+
+// For checking Integer Values
+Number.isInteger(10)        // true
+Number.isInteger(10.2)      // false
+Number.isInteger('20')      // false
+Number.isInteger(+'20px')   // false
+Number.isInteger(20/0)      // false
+
+// For checking Float Values (best)
+Number.isFinite(10)        // true
+Number.isFinite('20')      // false
+Number.isFinite(+'20px')   // false
+Number.isFinite(20/0)      // false
+```
+---
+
+## 📘Stings & String Methods
+* **Accessing value :** using index
+```js
+let firstName = "John Singh";
+
+console.log(firstName[0];)   // J
+console.log(firstName[1];)   // o
+console.log(firstName[2];)   // h
+```
+
+* **Conversion** : from any type to string
+```js
+let age = 10;
+
+console.log(typeof String(10))
+console.log(typeof ('' + 10))
+console.log(typeof age.toString())
+console.log(typeof [1, 2, 3].toString())
+```
+
+**⚠️ Note :** **toString()** is a method that is attached on the **base Object** that why get on string, array, number etc.
+
+* **Methods**
+
+1. length
+2. indexOf
+3. lastIndexOf
+4. slice
+5. includes
+6. replace
+7. toLowerCase
+8. toUpperCase
+9. split
+10. at(1) & at(-1)
+11. padStart & padEnd
+12. charCodeAt()
+13. charAt()
+
+* Examples
+
+```js
+console.log('I am Web Developer'[0]);   // I
+console.log('I am Web Developer'[2]);   // a
+console.log('I am Web Developer'.length);   // 18
+
+// Methods
+// 1. indexOf
+console.log('I am Web Developer'.indexOf('a'));   // 2
+console.log('I am Web Developer'.indexOf('Web')); // 5
+
+// 2. lastIndexOf
+console.log('I am Web Developer'.lastIndexOf('Web')); // 5
+console.log('I am Web Developer'.lastIndexOf('e'));   // 16
+
+// 3. slice
+console.log('I am Web Developer'.slice(3));    // m Web Developer
+console.log('I am Web Developer'.slice(3, 7)); // m We
+
+// 4. includes
+console.log('I am Web Developer'.includes('Web'));  // true
+console.log('I am Web Developer'.includes('test')); // false
+
+// 5. charCodeAt
+"X".charCodeAt()    // ASCII Code 88
+
+// 6. charAt
+"Xabcd".charAt(1)   // 'a'
+```
+
+
 
 ---
 
