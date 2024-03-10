@@ -330,6 +330,8 @@ isNew = 1;
 3. **Functions**
 4. **Classes**
 
+---
+
 ## 📘 Other Data-Structures (ES6)
 1. **Sets :**
 * A collection of unique values, so that means that a **Set** can never have any duplicates. (its kind of array not exactly array)
