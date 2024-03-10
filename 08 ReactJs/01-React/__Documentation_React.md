@@ -474,6 +474,30 @@ const eventHandlerCount() => {
 
 ![Image](./images/use-state-rule-practicle-use.png)
 
+**📚 Conceptual Example :** if the current state pointing to same array/object address then React assumes no rerender is required
+
+```js
+function App() {
+  const [book, setBook] = React.useState([]);
+
+  function handleSetBook() {
+    // bad code 
+    book.push({ id: Date.now(), name: "John" });
+    console.log(book);
+    setBook(book)
+  }
+
+  return <div>
+    {book.map(e => {
+      return e
+    })}
+    <button onClick={handleSetBook}>Add</button>
+  </div>
+}
+
+export default App
+```
+
 ---
 ## 📘Controlled Elements
 
