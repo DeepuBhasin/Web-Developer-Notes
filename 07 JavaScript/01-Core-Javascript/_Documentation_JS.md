@@ -187,8 +187,8 @@ console.log(a);     // Hello world
 ---
 ## 📘Single Threaded, Synchronous Execution
 
- * **Single Threaded :** 
-   * one command at a time. Under the hood of the browser, maybe not. 
+ * **Single Threaded :**
+   * one command at a time. Under the hood of the browser, maybe not.
    * the biggest way to check that a language is single threaded : it has only one call stack
    *  when ever we open any new tab we will get on thread for each tab
  * **Synchronous :** one at a time.
@@ -308,7 +308,7 @@ isNew = 'yup!';
 isNew = 1;
 ```
 
-* **typeOf :** is operator which returns the type of variable. 
+* **typeOf :** is operator which returns the type of variable.
 
 ---
 ## 📘 Primitive types and Non Primitives types
@@ -475,7 +475,7 @@ console.log(firstName[1];)   // o
 console.log(firstName[2];)   // h
 ```
 
-* **Conversion** : from 
+* **Conversion** : from
 ```js
 let age = 10;
 
