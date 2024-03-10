@@ -640,7 +640,7 @@ console.log(!!true);    // true
 * operators are functions example || (OR Operator is a function)
 ```javascript
 undefined || 'hi'       // hi
-'hi' || 'hello'         // hi  
+'hi' || 'hello'         // hi
 null || 'hi'            // hi
 0 || 'hi'               // hi
 
@@ -727,8 +727,8 @@ console.log(person['address']['street']);
 ```js
 const NameKey = "Name";
 var obj = {
-    firstName : "Deepinder",
-    lastName : "Singh"
+    firstName : "John",
+    lastName : "Doe"
 }
 
 obj['first' + NameKey];
@@ -736,30 +736,31 @@ obj['last' + NameKey];
 ```
 2. If we try to **access** value which does not exist in Object then we will get **undefined**
 ---
-## 📘Objects and Object Literals
+## 📘Objects and Object Literals and Advance features
 
-1. With **ES5**
+* **Object Literals**
+
 ```javascript
 // comparing current example with above example the object literals are easy to write and easy to read
 var person = {
-    firstname : 'Tony',
-    lastname : 'Alicea',
-    addres : {
-        street : "51 d street no 3 ranjit nagar near seona chowk patiala punjab"
+    firstName : 'Tony',
+    lastName : 'Doe',
+    address : {
+        street : "New York Street 3 51-d"
     }
 };
 console.log(person);
 
-// Example of creating Object on Fly
+
 function greet(person) {
-    console.log('Hi' + person.firstname);
+    console.log('Hi' + person.firstName);
 }
 
 var Tony = {
-    firstname : 'Tony',
-    lastname : 'Alicea',
-    addres : {
-        street : "51 d street no 3 ranjit nagar near seona chowk patiala punjab"
+    firstName : 'Tony',
+    lastName : 'Doe',
+    address : {
+        street : "New York Street 3 51-d"
     }
 };
 
@@ -767,41 +768,39 @@ greet(Tony);
 
 // creating object on fly
 greet({
-    firstname : 'Mary',
-    lastname : 'Doe'
+    firstName : 'Mary',
+    lastName : 'Doe'
 });
 
 ```
-2. With **ES6**
-
-* Properties short-cut
+* **Properties short-cut**
 ```js
-const firstname = "Deepinder";
+const firstName = "John";
 let obj = {
-    firstname
+    firstName
 }
-console.log(obj);   // {firstname: 'Deepinder'}
+console.log(obj);
 ```
-* Function Short-cut
+* **Function Short-cut**
 ```js
-const firstname = "Deepinder";
+const firstName = "John";
 let obj = {
-    firstname,
+    firstName,
     getFullName() {     // writing short name
-        return this.firstname
+        return this.firstName
     },
-    "getFname"() {
-        return this.firstname
+    "getFName"() {
+        return this.firstName
     },
     "get Full name"() {
-        return this.firstname
+        return this.firstName
     }
 }
 console.log(obj.getFullName());
-console.log(obj["getFname"]());
+console.log(obj["getFName"]());
 console.log(obj["get Full name"]());
 ```
-* Computed Properties
+* **Computed Properties**
 
 ```js
 const weeks = [1, 2, 3, 4, 5, 6, 7];
@@ -816,14 +815,15 @@ let obj = {
 }
 console.log(obj);   // {1: 'Monday', 2: 'Tuesday', 3: 'Wednesday', 4: 'Thursday', 5: 'Friday', 6: 'Saturday', 7: 'Sunday'}
 ```
----
-## 📘 Chaining, Optional-Chaining and Chaining Method
-* Access the variables with **Dot** which are nested or deeply nested
 
-1. Chaining & Optional Chaining
+---
+## 📘 Chaining and Optional-Chaining
+
+To access the properties we have to use **(.) Dot operator** for nested or deeply nested.
+
 ```js
 let obj = {
-    first: 'Deepu',
+    first: 'John',
     last: 'Singh',
     address: {
         house: '51-d',
@@ -838,36 +838,6 @@ console.log(obj.address?.near);     // undefined
 ```
 ⚠️ **Note :** in *Optional Chaining* instead of *reference error* it will return *undefined*, if the value does not exist.
 
-2. Chaining Method
-
-* Calling one method after another, and each method. Affects the parent object. So obj.method1().method2() where both methods end up with a 'this' variable pointing at 'obj'
-
-```js
- let obj = {
-    value: 0,
-    add(number) {
-        this.value += number;
-        console.log('Current Value : ', this.value);
-        return this;
-    },
-    subtract(number) {
-        this.value -= number;
-        console.log('Current Value : ', this.value);
-        return this;
-    },
-    multiply(number) {
-        this.value *= number;
-        console.log('Current Value : ', this.value);
-        return this;
-    },
-    divide(number) {
-        this.value /= number;
-        console.log('Current Value : ', this.value);
-        return this;
-    }
-};
-obj.add(6).subtract(1).multiply(4).divide(2);
-```
 
 ---
 
@@ -903,7 +873,7 @@ console.log(obj);
 
 ```js
 let obj = {
-    firstName: "Depeu",
+    firstName: "John",
     lastName: "Singh"
 }
 
@@ -911,6 +881,7 @@ for (const [firstName, lastName] of Object.entries(obj)) {
     console.log(firstName + ' : ' + lastName);
 }
 ```
+
 
 ---
 ## 📘 Namespace :
@@ -1278,6 +1249,37 @@ let obj = {
 }
 obj.getFullName();
 ```
+
+**💻 Application Example :** **Method Chaining**, Calling one method after another, and each method. Affects the parent object. So obj.method1().method2() where both methods end up with a 'this' variable pointing at 'obj'
+
+```js
+ let obj = {
+    value: 0,
+    add(number) {
+        this.value += number;
+        console.log('Current Value : ', this.value);
+        return this;
+    },
+    subtract(number) {
+        this.value -= number;
+        console.log('Current Value : ', this.value);
+        return this;
+    },
+    multiply(number) {
+        this.value *= number;
+        console.log('Current Value : ', this.value);
+        return this;
+    },
+    divide(number) {
+        this.value /= number;
+        console.log('Current Value : ', this.value);
+        return this;
+    }
+};
+obj.add(6).subtract(1).multiply(4).divide(2);
+```
+
+
 ## 📘 Arrays (Collections of Anything)
 
 * Arrays are dynamically type in javascript
