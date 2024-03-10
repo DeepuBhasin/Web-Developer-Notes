@@ -487,6 +487,16 @@ function App() {
     setBook(book)
   }
 
+  // solution
+   function handleSetBook() {
+    // solution : it creating new array with new array address
+    const tempArray = [
+      ...book,
+      { id: Date.now(), name: "John" }
+    ];
+    setBook(tempArray)
+  }
+
   return <div>
     {book.map(e => {
       return e
@@ -497,6 +507,9 @@ function App() {
 
 export default App
 ```
+
+
+
 
 ---
 ## 📘Controlled Elements
