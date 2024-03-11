@@ -268,5 +268,5 @@ Content-Type: application/json
     "title": "Deepu Singh",
     "body": "He is a React developer"
 }
-
 ```
+![RestClient](./images/rest-client.png)
