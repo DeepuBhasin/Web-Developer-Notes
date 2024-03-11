@@ -5973,3 +5973,70 @@ console.log(`i am \${firstname} Singh`);
 ```
 
 ![Thankyou](./images/thankyou.png)
+
+## 📘Console
+
+* console.time
+```js
+console.time();
+var arr = Array(1000).fill('Hello world')
+console.timeEnd();
+```
+* console.table
+```js
+// Array Example
+var teckBrand = [
+    {
+        id: 1,
+        name: 'Deepinder',
+        job: 'Web developer'
+    },
+    {
+        id: 2,
+        name: 'Deepu',
+        job: 'Web developer'
+    },
+    {
+        id: 3,
+        name: 'Dp',
+        job: 'Web developer'
+    }
+];
+console.table(teckBrand);
+
+// Object Example
+
+var response = {
+    approvedPrograms: [
+        { id: 1, name: 'Deepu' },
+        { id: 2, name: 'Deepinder' },
+        { id: 3, name: 'Deepi' }
+    ],
+    recomendedPrograms: [
+        { id: 1, name: 'Deepu' },
+        { id: 2, name: 'Deepinder' },
+        { id: 3, name: 'Deepi' }
+    ]
+}
+console.table(response)
+```
+* Color in Console
+
+```js
+console.log("%c Hello %cWorld", "color:yellow;", "background-color: red;")
+```
+* console.group
+
+```js
+console.group("New Group");
+console.log('Hello world 1');
+console.log('Hello world 2');
+console.log('Hello world 3');
+console.log('Hello world 4');
+console.groupEnd();
+```
+* console.clear : it will clear all values
+
+```js
+console.clear();
+```
