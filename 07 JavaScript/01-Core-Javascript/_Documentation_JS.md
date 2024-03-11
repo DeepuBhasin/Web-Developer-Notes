@@ -985,7 +985,7 @@ console.log(greet.__proto__ == Function.prototype);
 ---
 
 ## 📘 Function Statements and Function Expressions
-* **Expression :** A unit of code that results in a value. It does n't have to save to a variable.
+* **Expression :** A unit of code that results in a value. It does n't have to save to a variable (an expression is something that produces a value)
 
 ```javascript
 // mean concept is that what ever the variable returning a value is called expression like number, object etc
