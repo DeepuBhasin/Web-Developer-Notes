@@ -235,3 +235,38 @@ json_decode()
 let data = JSON.parse('{ "name": "Deepinder Singh", "dob": 754140600000 }');
         console.log(new Date(data.dob));
 ```
+
+## 📘React Client
+* Install extension **Rest Client**
+* api.http
+
+```
+# Making get request
+GET https://jsonplaceholder.typicode.com/users/1 HTTP/1.1
+Content-Type: application/json
+
+###
+GET https://jsonplaceholder.typicode.com/posts/1 HTTP/1.1
+Content-Type: application/json
+
+###
+POST https://jsonplaceholder.typicode.com/posts HTTP/1.1
+Content-Type: application/json
+
+{
+    "userId": "1234",
+    "title": "Deepinder Singh",
+    "body": "He is a web developer"
+}
+
+###
+PUT https://jsonplaceholder.typicode.com/posts/1 HTTP/1.1
+Content-Type: application/json
+
+{
+    "userId": "1234",
+    "title": "Deepu Singh",
+    "body": "He is a React developer"
+}
+
+```
