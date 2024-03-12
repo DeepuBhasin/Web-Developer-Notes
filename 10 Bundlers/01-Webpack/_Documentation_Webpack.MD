@@ -24,6 +24,13 @@ npm i --save lodash jquery validate.js toaster bootstrap
   1. /\*\*/: Matches any directory and any subdirectories recursively. The double asterisk (**) matches zero or more directories.
   2. \*: Matches any file within those directories.
 
+* All bundlers are using concept of common.js
+
+```js
+module.exports= {
+    
+}
+```
 ---
 
 ## 📘Syllabus

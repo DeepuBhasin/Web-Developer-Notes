@@ -12,6 +12,8 @@
 * **Implicit** : doing every thing by own.
 * **Imperative** : Explain every thing & **Declarative** : Do Automatically.
 * **TightCoupling** : means every thing is connected.
+* **Iterating** : arrays, strings
+* **enumerating** : objects
 ---
 
 ## 📘Conceptual Aside
@@ -47,6 +49,8 @@ In javascript __variables and functions__ are all hoisted to the top of the scop
 
 
 so during the creation phase javascript engine moves your variables and function declarations of the top their respective scope
+
+![Hoisting](./images/hoisting.png)
 
 ```js
 // Example 1
@@ -172,8 +176,8 @@ console.log(number1);
 ![globalExecutionEnvironment](./images/gloabl-environment.png)
 
 * There will be always a **Global Object**. in *Browser* it is **window**, each new tab have there own Global Execution context hence has its own window object
-  * in **Browser** : *window == this*
-  * in **Node.js** : *global == this*
+  * in **Browser** : *window == this* && *window == globalThis*
+  * in **Node.js** : *global == this* && *global == globalThis*
 
 ```js
 var a = 10;
@@ -642,13 +646,14 @@ console.log(typeof [1, 2, 3].toString())
 4. slice
 5. includes
 6. replace
-7. toLowerCase
-8. toUpperCase
-9. split
-10. at(1) & at(-1)
-11. padStart & padEnd
-12. charCodeAt()
-13. charAt()
+7. replaceAll
+8. toLowerCase
+9. toUpperCase
+10. split
+11. at(1) & at(-1)
+12. trim
+13. charCodeAt()
+14. charAt()
 
 * Examples
 
@@ -915,7 +920,6 @@ console.log(Object.entries(obj));
 
 const entries = [['name', 'John'], ['age', 30], ['city', 'New York']];
 const obj = Object.fromEntries(entries);
-
 console.log(obj);
 // Output: { name: 'John', age: 30, city: 'New York' }
 ```
@@ -4577,21 +4581,22 @@ sum(1, 2, 3, 4, 5, 6, 7, 8, 9);
 1. slice
 2. splice  (mutate original)
 3. reverse (mutate original)
-4. join
-5. at(1) & at(-1)
-6. Map
-7. Filter
-8. Reduce
-9. Sort
-10. some (return true/false)
-11. every (return true/false)
-12. include (return true/false)
-13. indexOf (return index)
-14. find (return first find value)
-15. findIndex(return first find index)
-16. flat
-17. flatMap
-18. new Array(7).fill(1)
+4. concate
+5. join
+6. at(1) & at(-1)
+7. Map
+8. Filter
+9. Reduce
+10. Sort
+11. some (return true/false)
+12. every (return true/false)
+13. include (return true/false)
+14. indexOf (return index)
+15. find (return first find value)
+16. findIndex(return first find index)
+17. flat
+18. flatMap
+19. new Array(7).fill(1)
 
 
 **⚠️ Note :** The all Above methods are coming from **Base Array Object**. You can see from below example
@@ -4679,6 +4684,10 @@ console.log(result);
 
 var result = arr.flat(Infinity);
 console.log(result);
+
+var result = [1,2,,,,,,,,,,,3].flat();
+console.log(result) // [1,2,3]
+
 ```
 * Creating & filling Array
 
