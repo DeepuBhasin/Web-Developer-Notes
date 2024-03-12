@@ -9,8 +9,8 @@
 ---
 ## 📘Terminologies
 
-* **Imperative** : Explain every thing & **Declarative** : Do Automatically.
 * **Implicit** : doing every thing by own.
+* **Imperative** : Explain every thing & **Declarative** : Do Automatically.
 * **TightCoupling** : means every thing is connected.
 ---
 
@@ -127,6 +127,19 @@ function test() {
 let age;
 test();
 console.log(age);   // 10 because age variable has global scope due to let variable
+
+
+// Example 3
+
+var firstName = "javascript";
+
+if (true) {
+    var firstName = "React";
+    console.log(firstName);     // React
+}
+
+// the re-declaration of firstName inside the if block overrides the outer declaration. This behavior is due to the fact that var has function scope or global scope, but not block scope.
+console.log(firstName);         // React
 ```
 **📚 Conceptual Example :** Creating global variables
 
@@ -268,6 +281,18 @@ a();
 
 ---
 
+**⚠️Note : ** Context Vs Scope
+
+
+```js
+// context means where we are within the object example this function exist in window object
+function test() {
+    // variable 'a' scope only exist in this function only
+    var a = 10;
+}
+```
+
+---
 
 ## 📘What about Asynchronous Callbacks
 * **Asynchronous :** more than one at a time.
