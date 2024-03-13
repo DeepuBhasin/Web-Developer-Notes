@@ -330,6 +330,14 @@ npx webpack
 
 ---
 ## 📘Assets
+
+Processing images with webpack
+* using images inside HTML
+* Referencing images inside CSS
+* Importing images inside Javascript code
+* Compressing your images for production build
+
+
 * There are four types of assets
 1. asset/resource : use when importing large files
 2. asset/inline : use when importing small files
@@ -368,7 +376,7 @@ module.exports = {
             },
             {
                 // loading png or jpg files
-                test: /\.(png|jpg)$/,
+                test: /\.(png|jpg|svg)$/,
                 type: 'asset/resource'
             }
         ]
