@@ -2370,7 +2370,7 @@ npx webpack --mode=production
 
 **2. With ImageMinimizerWebpack (best, popular and verified)**
 * It works as same above but with better performance
-
+* It also minify dynamic import files
 
 1. Packages
 
@@ -2407,7 +2407,7 @@ module.exports = {
 
                             // for minimizing png
                             ['imagemin-pngquant', {
-                                quality: [0.65, [0.90]],
+                                quality: [0.65, 0.90],
                                 speed: 4
                             }],
                             // for minimizing gif
@@ -2475,10 +2475,179 @@ module.exports = {
 npx webpack --mode=production
 ```
 
+4. addImage.js
+
+```js
+// Load image using static import
+
+import work from "./work.jpg";      // importing file
+import thumb from "./thumb.png"     // importing file
+import big from "./big.jpg"         // importing file
+
+// OR
+
+// Load images by dynamic import
+export function addImage1() {
+    const img = document.createElement('img');
+    img.alt = 'Work';
+    img.width = 300;
+    import("./work.jpg").then(module => {
+        img.src = module.default;
+        const body = document.querySelector('body');
+        body.appendChild(img);
+    })
+}
+
+export function addImage2() {
+    const img = document.createElement('img');
+    img.alt = 'thumb';
+
+    img.width = 300;
+    import("./thumb.png").then(module => {
+        img.src = module.default;
+        const body = document.querySelector('body');
+        body.appendChild(img);
+    })
+}
+export function addImage3() {
+    const img = document.createElement('img');
+    img.alt = 'big';
+    img.width = 300;
+    import("./big.jpg").then(module => {
+        img.src = module.default;
+        const body = document.querySelector('body');
+        body.appendChild(img);
+    })
+}
+```
+
+5. index.js
+
+```js
+import { addImage1, addImage2, addImage3 } from "./add-images";
+
+addImage1();
+addImage2();
+addImage3();
+```
 ![ProductionImage](./images/productionModeFileErro-3.png)
 
----
+## 📘CopyPlugin With ImageMinimizerPlugin
 
+* This feature is use for minify the copy images from a particular folder
+
+this build is generated in dev mode
+
+![copyImages](./images/copy-plugin-with-minize.png)
+
+
+1. Webpack.config.js
+
+```js
+const path = require("path");
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
+
+module.exports = {
+    entry: path.resolve(__dirname, "./src/index.js"),
+    output: {
+        filename: "bundle.js",
+        path: path.resolve(__dirname, "dist"),
+        clean: true
+    },
+
+    optimization: {
+        minimizer: [
+            `...`,
+            new ImageMinimizerPlugin({
+
+                // this option allow to do minification
+                minimizer: {
+                    implementation: ImageMinimizerPlugin.imageminMinify,
+                    options: {
+                        plugins: [
+                            // for minimizing images
+                            ['imagemin-mozjpeg', { quality: 40 }],
+
+                            // for minimizing png
+                            ['imagemin-pngquant', {
+                                quality: [0.65, 0.90],
+                                speed: 4
+                            }],
+                            // for minimizing gif
+                            ['imagemin-gifsicle', { interlaced: true }],
+
+                            // for minimizing svg
+                            ['imagemin-svgo', {
+                                plugins: [
+                                    {
+                                        name: 'preset-default',
+                                        params: {
+                                            overrides: {
+                                                reviewViewBox: false,
+                                                addAttributesToSVGElements: {
+                                                    params: {
+                                                        attributes: [
+                                                            { xmlns: "http://www.w3.org/2000/svg" }
+                                                        ]
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }],
+                        ]
+                    }
+                }
+            })
+        ]
+    },
+    module: {
+        rules: [
+            {
+                // loading font families
+                test: /\.(ttf | woff | woff2)$/,
+                type: 'asset/resource'
+
+            },
+            {
+                // loading png or jpg files
+                test: /\.(png|jpg|svg)$/,
+                type: 'asset',
+
+                /* Parser Condition is use if the file size
+                    file size > 10KB  then use asset/ resources
+                    file size < 10Kb  then asset / inline
+                */
+                parser: {
+                    dataUrlCondition: {
+                        maxSize: 10 * 1024
+                    }
+                },
+                generator: {
+                    filename: "./images/[name].[contenthash:12][ext]"
+                }
+            }
+        ]
+    },
+    plugins: [
+        // copy data from one folder to another folder
+        new CopyPlugin({
+            patterns: [
+                {
+                    from: path.resolve(__dirname, "src/image"),
+                    to: path.resolve(__dirname, "dist/image")
+                },
+            ]
+        }),
+    ]
+};
+```
+
+![copyImage](./images/copy-plugin-with-minize-1.png)
+
+---
 
 ## 📘Analyzing Bundle
 1. Package

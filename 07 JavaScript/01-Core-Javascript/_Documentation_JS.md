@@ -2663,6 +2663,26 @@ setTimeout(function () {
 
 ![Image](./images/promise-lifecycle.png)
 
+
+* Basic and Conceptual Example
+
+```js
+function getData(condition, time) {
+    return new Promise((resolve, reject) => {
+        setTimeout(function () {
+            if (condition) {
+                resolve([1, 2, 3, 4, 5])
+            } else {
+                reject("Not able to load array")
+            }
+        }, time)
+    })
+}
+
+const apiData = getData(true, 2000);
+```
+
+
 * Fetch Method + Consuming promise
 
 ```js
