@@ -999,7 +999,11 @@ module.exports = {
 ![css-in-js-1](./images/css-in-js-2.png)
 
 
-**2. By USing Emotion :** this will allow you write css easily without any presets, no babel configuration or any other configuration
+ ## 📘2.By Using Emotion : 
+ 
+ this will allow you write css easily **without any presets, no babel configuration or any other configuration**
+
+There are two types
 
 * By using Framework Agnostic (without frame work)
 * By using react Framework
@@ -1104,9 +1108,6 @@ module.exports = {
 };
 ```
 ![css-js-3](./images/css-in-js-3.png)
-
----
-
 
 ---
 
