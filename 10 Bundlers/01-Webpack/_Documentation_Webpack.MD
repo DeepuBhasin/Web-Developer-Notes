@@ -345,7 +345,7 @@ a. Simple CSS
 * Loaders are javascript libraries which allowed you to load all stuffs
 * These loader always inject our CSS code into **style tags**
 
-**1. Webpack Coding**
+**1. Normal CSS files**
 
 ```js
 const path = require('path');
@@ -444,7 +444,7 @@ npx webpack
 
 **b. Module CSS**
 
-**1. By USing CSS-Loader**
+**1. By Using CSS-Loader**
 
 1. Webpack
 
@@ -543,7 +543,7 @@ renderTestButton();
 
 
 
-**2. By USing MiniCssExtractPlugin (best one)**
+**2. By Using MiniCssExtractPlugin (best one)**
 
 1. webpack.config.js
 
