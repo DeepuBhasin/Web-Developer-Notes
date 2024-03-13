@@ -326,499 +326,14 @@ npx webpack
 
 ![OutputIntoSingleFile](./images/output-into-singel-file.png)
 
-
-
 ---
 
-# 📔Assets
-
-* There are four types of assets
-1. asset/resource : use when importing large files
-2. asset/inline : use when importing small files
-3. asset : webpack decide automatically select one from above conditions ( condition : asset/resource > 8 kilobytes > asset/inline )
-4. asset/source : Read the string and injects that string directly into javascript bundles
-5. Loading Image according to condition ( condition : asset/resource > 10 kilobytes > asset/inline )
-
-## 📘1. Importing Image through webpack (Asset/Resource) + font family
-
-1. Write rules in webpack (because webpack cannot understand the image files)
-
-```js
-const path = require('path');
-
-module.exports = {
-    entry: './src/index.js',
-    output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, './dist')
-
-        // export into particular folder
-        assetModuleFilename: "images/[hash][ext]",
-
-        // this parameter will automatically delete all files and images from build folder which are not in use
-        clean: true
-    },
-    mode: 'none',
-
-    // adding rules for loading images
-    module: {
-        rules: [
-            {
-                // loading font families
-                test: /\.(ttf | woff | woff2)$/,
-                type: 'asset/resource'
-
-            },
-            {
-                // loading png or jpg files
-                test: /\.(png|jpg|svg)$/,
-                type: 'asset/resource'
-            }
-        ]
-    }
-}
-```
-2. writing a function for importing image file (add-images.js)
-
-```js
-import work from "./wok.jpg";
-
-function addImage() {
-    const img = document.createElement('img');
-    img.alt = 'Work';
-    img.width = 300;
-    img.src = work;
-    const body = document.querySelector('body');
-    body.appendChild(img);
-}
-
-export default addImage;
-```
-
-3. importing files
-
-```js
-import helloWorld from './hello-world.js'
-import addImage from "./add-image.js"
-
-helloWorld();
-addImage();
-```
-
-4. Run Command
-
-```
-npx webpack
-```
-
-5. You will get out put in **dist folder** with **bundle.js** and **ff034541606f59c6b4e5.jpg** (some random name)
-
-**⚠️ Note :**
-
-**PublicPath Option**
-
-1. Adding Specific Folder
-* this is use to load image from specific path like **local Path**, **CDN Path**
-* this features only works in **webpack5**
-```js
-output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, './dist'),
-
-    // this is use to get the file from particular folder
-    publicPath: './dist/'
-}
-```
-![publicPath](./images/publicPath.png)
-
-2. Adding CDN Link
-* this link will **append to every images which will generated from webpack**
-```js
-// For CDN link
-publicPath: 'https://some-random-url.com/'
-```
-![CDN-publicPath](./images/publicPath-cdn.png)
-
-## 📘2. Importing Image through webpack (Asset/Inline)
-* Like Importing File like **base64**
-* Main disadvantage is that it will **increase** js file size
-* Main Advantage is that if the sizes if Normal images are very large our web page will make a **http request** to load images which is very expensive so converting into **base64** will save our **http request**
-
-```js
-const path = require('path');
-
-module.exports = {
-    entry: './src/index.js',
-    output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, './dist'),
-    },
-    mode: 'none',
-    module: {
-        rules: [
-            {
-                test: /\.(png|jpg)$/,
-                // creating base 64 images file
-                type: 'asset/inline'
-            }
-        ]
-    }
-}
-```
-![base64-Image](./images/asset-inline-base64.png)
-
-## 📘3. Importing Image through webpack (Asset)
-* webpack decide automatically and select one option from above conditions
-* ( condition : asset/resource > 8 kilobytes > asset/inline )
-
-```js
-const path = require('path');
-
-module.exports = {
-    entry: './src/index.js',
-    output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, './dist'),
-    },
-    mode: 'none',
-    module: {
-        rules: [
-            {
-                test: /\.(png|jpg)$/,
-                // asset type
-                type: 'asset',
-            }
-        ]
-    }
-}
-```
-
-* Make condition for loading converting image up to a particular condition
-
-```js
-const path = require('path');
-
-module.exports = {
-    entry: './src/index.js',
-    output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, './dist'),
-    },
-    mode: 'none',
-    module: {
-        rules: [
-            {
-                test: /\.(png|jpg)$/,
-                type: 'asset',
-
-                // Making condition
-                parser: {
-                    dataUrlCondition: {
-                        maxSize: 300 * 1024         // 300 hundred kilobytes
-                    }
-                }
-            }
-        ]
-    }
-}
-```
-## 📘4. Importing Image through webpack (Asset Source)
-* Asset source reads the contents of the file into a Javascript String and injects that string directly into the javascript bundle as is without any modfications similarly to asset in line
-* This type of asset module doesn't generate any file in the output directory
-* **Below we are reading text file**
-
-1. Create **text** file
-```js
-// work.txt
-Work image file
-```
-
-2. Webpack File
-
-```js
-const path = require('path');
-
-module.exports = {
-    entry: './src/index.js',
-    output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, './dist'),
-    },
-    mode: 'none',
-    module: {
-        rules: [
-            {
-                test: /\.(png|jpg)$/,
-                type: 'asset',
-            },
-            {
-                test: /\.txt/,
-                type: 'asset/source'
-            }
-        ]
-    }
-}
-```
-3. Command
-```
-npx webpack
-```
-![Image](./images/text-file.png)
-
-
-## 📘Make condition for Asset/Resource OR Asset/Inline)
-
-* using **Parse Condition** is use if the file size
-* file size > 10KB  then use **asset/ resources**
-* file size < 10Kb  then **asset / inline**
-
-```js
-const path = require("path");
-
-module.exports = {
-    entry: path.resolve(__dirname, "./src/index.js"),
-    output: {
-        filename: "bundle.js",
-        path: path.resolve(__dirname, "dist"),
-        clean: true
-    },
-    module: {
-        rules: [
-            {
-                // loading font families
-                test: /\.(ttf | woff | woff2)$/,
-                type: 'asset/resource'
-
-            },
-            {
-                // loading png or jpg files
-                test: /\.(png|jpg|svg)$/,
-                type: 'asset',
-
-                /* Parser Condition is use if the file size
-                    file size > 10KB  then use asset/ resources
-                    file size < 10Kb  then asset / inline
-                */
-                parser: {
-                    dataUrlCondition: {
-                        maxSize: 10 * 1024
-                    }
-                },
-                // this parameter is use for generating output file into a particular folder
-                generator: {
-                    filename: "./images/[name].[contenthash:12][ext]"
-                }
-            }
-        ]
-    }
-};
-```
----
-
-# 📔Processing Images with webpack
-
-## 📘Loading Image in production (with optimization)
-
-**1. With image-webpack-loader**
-
-* complete optimization and compress with good quality
-
-1. Packages
-
-```
-npm i image-webpack-loader
-```
-
-![ProductionModeFileError](./images/productionModeFileErro.png)
-
-
-2. webpack.config.js
-
-```js
-const path = require("path");
-
-module.exports = {
-    entry: path.resolve(__dirname, "./src/index.js"),
-    output: {
-        filename: "bundle.js",
-        path: path.resolve(__dirname, "dist"),
-        clean: true
-    },
-    module: {
-        rules: [
-            {
-                // loading font families
-                test: /\.(ttf | woff | woff2)$/,
-                type: 'asset/resource'
-
-            },
-            {
-                // loading png or jpg files
-                test: /\.(png|jpg|svg)$/,
-                type: 'asset',
-
-                /* Parser Condition is use if the file size
-                    file size > 10KB  then use asset/ resources
-                    file size < 10Kb  then asset / inline
-                */
-                parser: {
-                    dataUrlCondition: {
-                        maxSize: 10 * 1024
-                    }
-                },
-                generator: {
-                    filename: "./images/[name].[contenthash:12][ext]"
-                },
-                use: {
-                    loader: 'image-webpack-loader',
-                    options: {
-                        /*JPG*/
-                        mozjpeg: {
-                            /*
-                                Most Important parameter
-                                compression quality
-                                0 to 100
-                                40 is best one
-                            */
-                            quality: 40
-                        },
-                        /* for PNG*/
-                        pngquant: {
-                            /* maximum and minimum value*/
-                            quality: [0.65, 0.90],
-                            /* default value*/
-                            speed: 4
-                        }
-                    }
-                }
-            }
-        ]
-    }
-};
-```
-3. Command : Run your webpack in production mode in this case
-
-```
-npx webpack --mode=production
-```
-
-![ProductionModeFileError](./images/productionModeFileErro-2.png)
-
-**2. With ImageMinimizerWebpack (best, popular and verified)**
-* It works as same above but with better performance
-
-
-1. Packages
-
-```
-npm install imagemin imagemin-mozjpeg imagemin-pngquant imagemin-gifsicle imagemin-svgo
-```
-
-2. webpack.config.js
-
-```js
-const path = require("path");
-const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
-
-module.exports = {
-    entry: path.resolve(__dirname, "./src/index.js"),
-    output: {
-        filename: "bundle.js",
-        path: path.resolve(__dirname, "dist"),
-        clean: true
-    },
-
-    optimization: {
-        minimizer: [
-            `...`,
-            new ImageMinimizerPlugin({
-
-                // this option allow to do minification
-                minimizer: {
-                    implementation: ImageMinimizerPlugin.imageminMinify,
-                    options: {
-                        plugins: [
-                            // for minimizing images
-                            ['imagemin-mozjpeg', { quality: 40 }],
-
-                            // for minimizing png
-                            ['imagemin-pngquant', {
-                                quality: [0.65, [0.90]],
-                                speed: 4
-                            }],
-                            // for minimizing gif
-                            ['imagemin-gifsicle', { interlaced: true }],
-
-                            // for minimizing svg
-                            ['imagemin-svgo', {
-                                plugins: [
-                                    {
-                                        name: 'preset-default',
-                                        params: {
-                                            overrides: {
-                                                reviewViewBox: false,
-                                                addAttributesToSVGElements: {
-                                                    params: {
-                                                        attributes: [
-                                                            { xmlns: "http://www.w3.org/2000/svg" }
-                                                        ]
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                ]
-                            }],
-                        ]
-                    }
-                }
-            })
-        ]
-    },
-    module: {
-        rules: [
-            {
-                // loading font families
-                test: /\.(ttf | woff | woff2)$/,
-                type: 'asset/resource'
-
-            },
-            {
-                // loading png or jpg files
-                test: /\.(png|jpg|svg)$/,
-                type: 'asset',
-
-                /* Parser Condition is use if the file size
-                    file size > 10KB  then use asset/ resources
-                    file size < 10Kb  then asset / inline
-                */
-                parser: {
-                    dataUrlCondition: {
-                        maxSize: 10 * 1024
-                    }
-                },
-                generator: {
-                    filename: "./images/[name].[contenthash:12][ext]"
-                }
-            }
-        ]
-    }
-};
-```
-3. Command : Run your webpack in production mode in this case
-
-```
-npx webpack --mode=production
-```
-
-![ProductionImage](./images/productionModeFileErro-3.png)
-
----
-## 📘Loaders
-1. CSS Loader
-2. SCSS Loader
-3. JS Loader
-4. File Loader (png, svg, jpg, jpeg, gif files etc)
+# 📔Loaders
+
+1. CSS Loader (loading css files)
+2. SCSS Loader (loading s[a|c]ss files)
+3. JS Loader (loading js files)
+4. File Loader (only loading png, svg, jpg, jpeg, gif files etc not optimizing)
 
 
 ## 📘1. Loaders (CSS/Style)
@@ -1340,6 +855,445 @@ npx webpack
 ![File-loader](./images/file-loader.png)
 
 ---
+
+# 📔Assets (loading of image/ font)
+
+* There are four types of assets
+1. asset/resource : use when importing large files
+2. asset/inline : use when importing small files
+3. asset : webpack decide automatically select one from above conditions ( condition : asset/resource > 10 kilobytes > asset/inline )
+4. asset/source : Read the string and injects that string directly into javascript bundles
+
+## 📘1. Importing Image through webpack (Asset/Resource) + font family
+
+1. Write rules in webpack (because webpack cannot understand the image files)
+
+```js
+const path = require('path');
+
+module.exports = {
+    entry: './src/index.js',
+    output: {
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, './dist')
+
+        // export into particular folder
+        assetModuleFilename: "images/[hash][ext]",
+
+        // this parameter will automatically delete all files and images from build folder which are not in use
+        clean: true
+    },
+    mode: 'none',
+
+    // adding rules for loading images
+    module: {
+        rules: [
+            {
+                // loading font families
+                test: /\.(ttf | woff | woff2)$/,
+                type: 'asset/resource'
+
+            },
+            {
+                // loading png or jpg files
+                test: /\.(png|jpg|svg)$/,
+                type: 'asset/resource'
+            }
+        ]
+    }
+}
+```
+2. writing a function for importing image file (add-images.js)
+
+```js
+import work from "./wok.jpg";
+
+function addImage() {
+    const img = document.createElement('img');
+    img.alt = 'Work';
+    img.width = 300;
+    img.src = work;
+    const body = document.querySelector('body');
+    body.appendChild(img);
+}
+
+export default addImage;
+```
+
+3. importing files
+
+```js
+import helloWorld from './hello-world.js'
+import addImage from "./add-image.js"
+
+helloWorld();
+addImage();
+```
+
+4. Run Command
+
+```
+npx webpack
+```
+
+5. You will get out put in **dist folder** with **bundle.js** and **ff034541606f59c6b4e5.jpg** (some random name)
+
+**⚠️ Note :**
+
+**PublicPath Option**
+
+1. Adding Specific Folder
+* this is use to load image from specific path like **local Path**, **CDN Path**
+* this features only works in **webpack5**
+```js
+output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, './dist'),
+
+    // this is use to get the file from particular folder
+    publicPath: './dist/'
+}
+```
+![publicPath](./images/publicPath.png)
+
+2. Adding CDN Link
+* this link will **append to every images which will generated from webpack**
+```js
+// For CDN link
+publicPath: 'https://some-random-url.com/'
+```
+![CDN-publicPath](./images/publicPath-cdn.png)
+
+## 📘2. Importing Image through webpack (Asset/Inline)
+* Like Importing File like **base64**
+* Main disadvantage is that it will **increase** js file size
+* Main Advantage is that if the sizes if Normal images are very large our web page will make a **http request** to load images which is very expensive so converting into **base64** will save our **http request**
+
+```js
+const path = require('path');
+
+module.exports = {
+    entry: './src/index.js',
+    output: {
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, './dist'),
+    },
+    mode: 'none',
+    module: {
+        rules: [
+            {
+                test: /\.(png|jpg)$/,
+                // creating base 64 images file
+                type: 'asset/inline'
+            }
+        ]
+    }
+}
+```
+![base64-Image](./images/asset-inline-base64.png)
+
+## 📘3. Importing Image through webpack (Asset)
+* webpack decide automatically and select one option from above conditions
+* ( condition : asset/resource > 10 kilobytes > asset/inline )
+
+```js
+const path = require('path');
+
+module.exports = {
+    entry: './src/index.js',
+    output: {
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, './dist'),
+    },
+    mode: 'none',
+    module: {
+        rules: [
+            {
+                test: /\.(png|jpg)$/,
+                // asset type
+                type: 'asset',
+            }
+        ]
+    }
+}
+```
+
+* Make condition for loading converting image up to a particular condition
+
+```js
+const path = require('path');
+
+module.exports = {
+    entry: './src/index.js',
+    output: {
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, './dist'),
+    },
+    mode: 'none',
+    module: {
+        rules: [
+            {
+                test: /\.(png|jpg)$/,
+                type: 'asset',
+
+                // Making condition
+                 parser: {
+                    dataUrlCondition: {
+                        maxSize: 10 * 1024
+                    }
+                },
+                // this parameter is use for generating output file into a particular folder
+                generator: {
+                    filename: "./images/[name].[contenthash:12][ext]"
+                }
+            }
+        ]
+    }
+}
+```
+## 📘4. Importing Image through webpack (Asset Source)
+* Asset source reads the contents of the file into a Javascript String and injects that string directly into the javascript bundle as is without any modifications similarly to asset in line
+* This type of asset module doesn't generate any file in the output directory
+* **Below we are reading text file**
+
+1. Create **text** file
+```js
+// work.txt
+Work image file
+```
+
+2. Webpack File
+
+```js
+const path = require('path');
+
+module.exports = {
+    entry: './src/index.js',
+    output: {
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, './dist'),
+    },
+    mode: 'none',
+    module: {
+        rules: [
+            {
+                test: /\.(png|jpg)$/,
+                type: 'asset',
+            },
+            {
+                test: /\.txt/,
+                type: 'asset/source'
+            }
+        ]
+    }
+}
+```
+3. Command
+```
+npx webpack
+```
+![Image](./images/text-file.png)
+
+---
+
+## 📘Optimizing and Compressing Images
+
+**1. With image-webpack-loader**
+
+* complete optimization and compress with good quality
+
+1. Packages
+
+```
+npm i image-webpack-loader
+```
+
+![ProductionModeFileError](./images/productionModeFileErro.png)
+
+
+2. webpack.config.js
+
+```js
+const path = require("path");
+
+module.exports = {
+    entry: path.resolve(__dirname, "./src/index.js"),
+    output: {
+        filename: "bundle.js",
+        path: path.resolve(__dirname, "dist"),
+        clean: true
+    },
+    module: {
+        rules: [
+            {
+                // loading font families
+                test: /\.(ttf | woff | woff2)$/,
+                type: 'asset/resource'
+
+            },
+            {
+                // loading png or jpg files
+                test: /\.(png|jpg|svg)$/,
+                type: 'asset',
+
+                /* Parser Condition is use if the file size
+                    file size > 10KB  then use asset/ resources
+                    file size < 10Kb  then asset / inline
+                */
+                parser: {
+                    dataUrlCondition: {
+                        maxSize: 10 * 1024
+                    }
+                },
+                generator: {
+                    filename: "./images/[name].[contenthash:12][ext]"
+                },
+                use: {
+                    loader: 'image-webpack-loader',
+                    options: {
+                        /*JPG*/
+                        mozjpeg: {
+                            /*
+                                Most Important parameter
+                                compression quality
+                                0 to 100
+                                40 is best one
+                            */
+                            quality: 40
+                        },
+                        /* for PNG*/
+                        pngquant: {
+                            /* maximum and minimum value*/
+                            quality: [0.65, 0.90],
+                            /* default value*/
+                            speed: 4
+                        }
+                    }
+                }
+            }
+        ]
+    }
+};
+```
+3. Command : Run your webpack in production mode in this case
+
+```
+npx webpack --mode=production
+```
+
+![ProductionModeFileError](./images/productionModeFileErro-2.png)
+
+**2. With ImageMinimizerWebpack (best, popular and verified)**
+* It works as same above but with better performance
+
+
+1. Packages
+
+```
+npm install imagemin imagemin-mozjpeg imagemin-pngquant imagemin-gifsicle imagemin-svgo
+```
+
+2. webpack.config.js
+
+```js
+const path = require("path");
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+
+module.exports = {
+    entry: path.resolve(__dirname, "./src/index.js"),
+    output: {
+        filename: "bundle.js",
+        path: path.resolve(__dirname, "dist"),
+        clean: true
+    },
+
+    optimization: {
+        minimizer: [
+            `...`,
+            new ImageMinimizerPlugin({
+
+                // this option allow to do minification
+                minimizer: {
+                    implementation: ImageMinimizerPlugin.imageminMinify,
+                    options: {
+                        plugins: [
+                            // for minimizing images
+                            ['imagemin-mozjpeg', { quality: 40 }],
+
+                            // for minimizing png
+                            ['imagemin-pngquant', {
+                                quality: [0.65, [0.90]],
+                                speed: 4
+                            }],
+                            // for minimizing gif
+                            ['imagemin-gifsicle', { interlaced: true }],
+
+                            // for minimizing svg
+                            ['imagemin-svgo', {
+                                plugins: [
+                                    {
+                                        name: 'preset-default',
+                                        params: {
+                                            overrides: {
+                                                reviewViewBox: false,
+                                                addAttributesToSVGElements: {
+                                                    params: {
+                                                        attributes: [
+                                                            { xmlns: "http://www.w3.org/2000/svg" }
+                                                        ]
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }],
+                        ]
+                    }
+                }
+            })
+        ]
+    },
+    module: {
+        rules: [
+            {
+                // loading font families
+                test: /\.(ttf | woff | woff2)$/,
+                type: 'asset/resource'
+
+            },
+            {
+                // loading png or jpg files
+                test: /\.(png|jpg|svg)$/,
+                type: 'asset',
+
+                /* Parser Condition is use if the file size
+                    file size > 10KB  then use asset/ resources
+                    file size < 10Kb  then asset / inline
+                */
+                parser: {
+                    dataUrlCondition: {
+                        maxSize: 10 * 1024
+                    }
+                },
+                generator: {
+                    filename: "./images/[name].[contenthash:12][ext]"
+                }
+            }
+        ]
+    }
+};
+```
+3. Command : Run your webpack in production mode in this case
+
+```
+npx webpack --mode=production
+```
+
+![ProductionImage](./images/productionModeFileErro-3.png)
+
+---
+
 ## 📘Multiple Entry Points
 * mostly use where you have multiple html pages like home, about, contact us etc.
 * Not use in frontEnd Frameworks like react, angular, vue etc
