@@ -2649,6 +2649,129 @@ module.exports = {
 
 ---
 
+
+
+## 📘Generating WEBP Images Out of JPEG or PNG
+
+* in below code we are using copy-plugin you can generate from code as well
+
+```js
+const path = require("path");
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
+
+module.exports = {
+    entry: path.resolve(__dirname, "./src/index.js"),
+    output: {
+        filename: "bundle.js",
+        path: path.resolve(__dirname, "dist"),
+        clean: true
+    },
+
+    optimization: {
+        minimizer: [
+            `...`,
+            new ImageMinimizerPlugin({
+
+                // this option allow to do minification
+                minimizer: {
+                    implementation: ImageMinimizerPlugin.imageminMinify,
+                    options: {
+                        plugins: [
+                            // for minimizing images
+                            ['imagemin-mozjpeg', { quality: 40 }],
+
+                            // for minimizing png
+                            ['imagemin-pngquant', {
+                                quality: [0.65, 0.90],
+                                speed: 4
+                            }],
+                            // for minimizing gif
+                            ['imagemin-gifsicle', { interlaced: true }],
+
+                            // for minimizing svg
+                            ['imagemin-svgo', {
+                                plugins: [
+                                    {
+                                        name: 'preset-default',
+                                        params: {
+                                            overrides: {
+                                                reviewViewBox: false,
+                                                addAttributesToSVGElements: {
+                                                    params: {
+                                                        attributes: [
+                                                            { xmlns: "http://www.w3.org/2000/svg" }
+                                                        ]
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }],
+                        ]
+                    }
+                },
+                // this option is use to generate webp files
+                generator: [
+                    {
+                        type: "asset",
+                        preset: "webp-custom-name",
+                        implementation: ImageMinimizerPlugin.imageminGenerate,
+                        options: {
+                            plugins: ['imagemin-webp']
+                        }
+                    }
+                ]
+            })
+        ]
+    },
+    module: {
+        rules: [
+            {
+                // loading font families
+                test: /\.(ttf | woff | woff2)$/,
+                type: 'asset/resource'
+
+            },
+            {
+                // loading png or jpg files
+                test: /\.(png|jpg|svg)$/,
+                type: 'asset',
+
+                /* Parser Condition is use if the file size
+                    file size > 10KB  then use asset/ resources
+                    file size < 10Kb  then asset / inline
+                */
+                parser: {
+                    dataUrlCondition: {
+                        maxSize: 10 * 1024
+                    }
+                },
+                generator: {
+                    filename: "./images/[name].[contenthash:12][ext]"
+                }
+            }
+        ]
+    },
+    plugins: [
+        new CopyPlugin({
+            patterns: [
+                {
+                    from: path.resolve(__dirname, "src/image"),
+                    to: path.resolve(__dirname, "dist/image")
+                },
+            ]
+        }),
+    ]
+};
+```
+
+![generatingImage](./images/generating-webp-from-jpeg-png.png)
+
+---
+
+
 ## 📘Analyzing Bundle
 1. Package
 
