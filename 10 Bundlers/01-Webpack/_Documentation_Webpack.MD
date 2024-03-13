@@ -856,6 +856,257 @@ npx webpack
 
 ---
 
+
+---
+
+## 📘CSS-in-JS
+**1. By Using JSS :** this will allow you write css in js and need some presets
+
+* When we write CSS in JS  (like material ui)
+
+Advantages
+
+* No class name collision
+* Business Logic and styles for your components can live together
+* Styles can depend on javascript variables (like we can use styles variables in if-else conditions)
+
+Disadvantages
+* bundle size (here you will get so much larger size because all css will merge into js file) , you can code spliting and lazy loading
+* you can't cache your javascript and CSS separately
+* Performance
+
+1. Packages
+
+```
+npm install jss-preset-default jss
+```
+2. index.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <link rel="stylesheet" href="./dist/styles.css">
+</head>
+
+<body>
+    <script src="./dist/bundle.js"></script>
+</body>
+
+</html>
+```
+
+3. infoButton.js
+```js
+import jss from "jss";
+import preset from "jss-preset-default";
+
+jss.setup(preset())
+
+const jssStyles = {
+    button: {
+        backgroundColor: "skyBlue",
+        border: "none",
+        color: "white",
+        fontSize: "15px",
+        borderRadius: "3px",
+        padding: "5px",
+        cursor: "pointer",
+        margin: "3px"
+    }
+}
+
+const { classes } = jss.createStyleSheet(jssStyles).attach()
+
+
+export default function renderInfoButton() {
+    const el = document.createElement("button");
+    el.classList.add([`${classes.button}`])
+    el.innerHTML = "Clear";
+    el.onclick = function () {
+        alert("Clear button")
+    }
+    document.body.appendChild(el);
+}
+```
+4. SuccessButton.js
+
+```js
+import jss from "jss";
+import preset from "jss-preset-default";
+
+jss.setup(preset())
+
+const jssStyles = {
+    button: {
+        backgroundColor: "lightgreen",
+        border: "none",
+        color: "white",
+        fontSize: "15px",
+        borderRadius: "3px",
+        padding: "5px",
+        cursor: "pointer",
+        margin: "3px"
+    }
+}
+
+const { classes } = jss.createStyleSheet(jssStyles).attach()
+
+
+export default function renderSuccessButton() {
+    const el = document.createElement("button");
+    el.classList.add([`${classes.button}`])
+    el.innerHTML = "Success";
+    el.onclick = function () {
+        alert("Success button")
+    }
+    document.body.appendChild(el);
+}
+```
+
+5. index.js
+
+```js
+import renderInfoButton from "./InfoButton";
+import renderSuccessButton from "./SuccessButton";
+
+renderSuccessButton();
+renderInfoButton();
+```
+
+6. webpack.config.js
+
+```js
+const path = require("path");
+
+module.exports = {
+    entry: path.resolve(__dirname, "./src/index.js"),
+    output: {
+        filename: "bundle.js",
+        path: path.resolve(__dirname, "dist"),
+        clean: true
+    }
+};
+```
+
+![css-in-js-1](./images/css-in-js-1.png)
+
+![css-in-js-1](./images/css-in-js-2.png)
+
+
+**2. By USing Emotion :** this will allow you write css easily without any presets, no babel configuration or any other configuration
+
+* By using Framework Agnostic (without frame work)
+* By using react Framework
+
+
+1. Packages
+
+```
+npm install --save @emotion/css
+```
+
+2. index.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <link rel="stylesheet" href="./dist/styles.css">
+</head>
+
+<body>
+    <script src="./dist/bundle.js"></script>
+</body>
+
+</html>
+```
+3. infoButton.js
+```js
+import { css } from "@emotion/css"
+
+const button = css`
+    background-color: skyBlue;
+    border: none;
+    color: white;
+    font-size: 15px;
+    border-radius: 3px;
+    padding: 5px;
+    cursor: pointer;
+    margin: 3px`;
+
+
+export default function renderInfoButton() {
+    const el = document.createElement("button");
+    el.classList.add([`${button}`])
+    el.innerHTML = "Clear";
+    el.onclick = function () {
+        alert("Clear button")
+    }
+    document.body.appendChild(el);
+}
+```
+
+4. SuccessButton.js
+
+```js
+import { css } from "@emotion/css"
+
+const button = css`
+    background-color: lightGreen;
+    border: none;
+    color: white;
+    font-size: 15px;
+    border-radius: 3px;
+    padding: 5px;
+    cursor: pointer;
+    margin: 3px`;
+
+
+export default function renderSuccessButton() {
+    const el = document.createElement("button");
+    el.classList.add([`${button}`])
+    el.innerHTML = "Success";
+    el.onclick = function () {
+        alert("Success button")
+    }
+    document.body.appendChild(el);
+}
+```
+5. index.js
+
+```js
+import renderInfoButton from "./InfoButton";
+import renderSuccessButton from "./SuccessButton";
+
+renderSuccessButton();
+renderInfoButton();
+```
+6. webpack.config.js
+
+```js
+const path = require("path");
+
+module.exports = {
+    entry: path.resolve(__dirname, "./src/index.js"),
+    output: {
+        filename: "bundle.js",
+        path: path.resolve(__dirname, "dist"),
+        clean: true
+    }
+};
+```
+![css-js-3](./images/css-in-js-3.png)
+
+---
+
+
+---
+
 # 📔Assets (loading of image/ font)
 
 * There are four types of assets
@@ -1096,204 +1347,6 @@ npx webpack
 
 ---
 
-## 📘Optimizing and Compressing Images
-
-**1. With image-webpack-loader**
-
-* complete optimization and compress with good quality
-
-1. Packages
-
-```
-npm i image-webpack-loader
-```
-
-![ProductionModeFileError](./images/productionModeFileErro.png)
-
-
-2. webpack.config.js
-
-```js
-const path = require("path");
-
-module.exports = {
-    entry: path.resolve(__dirname, "./src/index.js"),
-    output: {
-        filename: "bundle.js",
-        path: path.resolve(__dirname, "dist"),
-        clean: true
-    },
-    module: {
-        rules: [
-            {
-                // loading font families
-                test: /\.(ttf | woff | woff2)$/,
-                type: 'asset/resource'
-
-            },
-            {
-                // loading png or jpg files
-                test: /\.(png|jpg|svg)$/,
-                type: 'asset',
-
-                /* Parser Condition is use if the file size
-                    file size > 10KB  then use asset/ resources
-                    file size < 10Kb  then asset / inline
-                */
-                parser: {
-                    dataUrlCondition: {
-                        maxSize: 10 * 1024
-                    }
-                },
-                generator: {
-                    filename: "./images/[name].[contenthash:12][ext]"
-                },
-                use: {
-                    loader: 'image-webpack-loader',
-                    options: {
-                        /*JPG*/
-                        mozjpeg: {
-                            /*
-                                Most Important parameter
-                                compression quality
-                                0 to 100
-                                40 is best one
-                            */
-                            quality: 40
-                        },
-                        /* for PNG*/
-                        pngquant: {
-                            /* maximum and minimum value*/
-                            quality: [0.65, 0.90],
-                            /* default value*/
-                            speed: 4
-                        }
-                    }
-                }
-            }
-        ]
-    }
-};
-```
-3. Command : Run your webpack in production mode in this case
-
-```
-npx webpack --mode=production
-```
-
-![ProductionModeFileError](./images/productionModeFileErro-2.png)
-
-**2. With ImageMinimizerWebpack (best, popular and verified)**
-* It works as same above but with better performance
-
-
-1. Packages
-
-```
-npm install imagemin imagemin-mozjpeg imagemin-pngquant imagemin-gifsicle imagemin-svgo
-```
-
-2. webpack.config.js
-
-```js
-const path = require("path");
-const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
-
-module.exports = {
-    entry: path.resolve(__dirname, "./src/index.js"),
-    output: {
-        filename: "bundle.js",
-        path: path.resolve(__dirname, "dist"),
-        clean: true
-    },
-
-    optimization: {
-        minimizer: [
-            `...`,
-            new ImageMinimizerPlugin({
-
-                // this option allow to do minification
-                minimizer: {
-                    implementation: ImageMinimizerPlugin.imageminMinify,
-                    options: {
-                        plugins: [
-                            // for minimizing images
-                            ['imagemin-mozjpeg', { quality: 40 }],
-
-                            // for minimizing png
-                            ['imagemin-pngquant', {
-                                quality: [0.65, [0.90]],
-                                speed: 4
-                            }],
-                            // for minimizing gif
-                            ['imagemin-gifsicle', { interlaced: true }],
-
-                            // for minimizing svg
-                            ['imagemin-svgo', {
-                                plugins: [
-                                    {
-                                        name: 'preset-default',
-                                        params: {
-                                            overrides: {
-                                                reviewViewBox: false,
-                                                addAttributesToSVGElements: {
-                                                    params: {
-                                                        attributes: [
-                                                            { xmlns: "http://www.w3.org/2000/svg" }
-                                                        ]
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                ]
-                            }],
-                        ]
-                    }
-                }
-            })
-        ]
-    },
-    module: {
-        rules: [
-            {
-                // loading font families
-                test: /\.(ttf | woff | woff2)$/,
-                type: 'asset/resource'
-
-            },
-            {
-                // loading png or jpg files
-                test: /\.(png|jpg|svg)$/,
-                type: 'asset',
-
-                /* Parser Condition is use if the file size
-                    file size > 10KB  then use asset/ resources
-                    file size < 10Kb  then asset / inline
-                */
-                parser: {
-                    dataUrlCondition: {
-                        maxSize: 10 * 1024
-                    }
-                },
-                generator: {
-                    filename: "./images/[name].[contenthash:12][ext]"
-                }
-            }
-        ]
-    }
-};
-```
-3. Command : Run your webpack in production mode in this case
-
-```
-npx webpack --mode=production
-```
-
-![ProductionImage](./images/productionModeFileErro-3.png)
-
----
-
 ## 📘Multiple Entry Points
 * mostly use where you have multiple html pages like home, about, contact us etc.
 * Not use in frontEnd Frameworks like react, angular, vue etc
@@ -1340,11 +1393,12 @@ module.exports = {
 ---
 
 
-## 📘Plugins
+# 📔Plugins
 
 * Plugins are additional javascript libraries that do everything that loaders cannot do.
 * Plugins can also modify how the bundles themselves are created. For Example, **uglifyJSplugin** takes the bundle.js and minimize the contents to decrease the bundle size.
 * You can add other various **plugins from webpack official website**
+
 
 ## 📘1. Minification Plugin (for javascript)
 * if the javascript files size is less hence your websites will load fast.
@@ -1353,7 +1407,14 @@ module.exports = {
 
 * **TerserPlugin :** this plugin is use to reduce the size of **bundle.js**
 
-1. webpack.config.js
+
+1. Packages
+
+```
+npm install terser-webpack-plugin
+```
+
+2. webpack.config.js
 ```js
 const path = require('path');
 
@@ -1496,7 +1557,7 @@ npx webpack
 ```
 ![Minify](./images/minifiplugin.png)
 
-## 📘Compressing and Removing duplicate css code (best one)
+## 📘4.Compressing and Removing duplicate css code (best one)
 * To remove compress and duplicate css we use **CssMinimizerPlugin**
 
 * Package command
@@ -1636,7 +1697,7 @@ renderTestButton();
 
 ---
 
-## 📘CopyPlugin
+## 📘5.CopyPlugin
 * This plugin is used to copy stuff from **source folder** to **dist folder**
 
 * Command
@@ -1685,7 +1746,7 @@ module.exports = {
 ---
 
 
-## 📘Cleaning Dist Folder Before Generating New Bundle (best one)
+## 📘6.Cleaning Dist Folder Before Generating New Bundle (best one)
 
 1. Command to install Package
 ```
@@ -1760,7 +1821,7 @@ output: {
 }
 ```
 
-## 📘Generating HTML Files Automatically During Webpack Build Process
+## 📘7.Generating HTML Files Automatically During Webpack Build Process
 
 * This **html-webpack-plugin** plugin is use to create html file with adding newly generated files (with random names) of **js** or **css** automatically.
 * It will create a new **index.html** file in **dist folder** (because we have mention about dist folder)
@@ -2215,6 +2276,206 @@ npm run dev
 
 # 📔Optimization
 
+
+## 📘Optimizing and Compressing Images
+
+**1. With image-webpack-loader**
+
+* complete optimization and compress with good quality
+
+1. Packages
+
+```
+npm i image-webpack-loader
+```
+
+![ProductionModeFileError](./images/productionModeFileErro.png)
+
+
+2. webpack.config.js
+
+```js
+const path = require("path");
+
+module.exports = {
+    entry: path.resolve(__dirname, "./src/index.js"),
+    output: {
+        filename: "bundle.js",
+        path: path.resolve(__dirname, "dist"),
+        clean: true
+    },
+    module: {
+        rules: [
+            {
+                // loading font families
+                test: /\.(ttf | woff | woff2)$/,
+                type: 'asset/resource'
+
+            },
+            {
+                // loading png or jpg files
+                test: /\.(png|jpg|svg)$/,
+                type: 'asset',
+
+                /* Parser Condition is use if the file size
+                    file size > 10KB  then use asset/ resources
+                    file size < 10Kb  then asset / inline
+                */
+                parser: {
+                    dataUrlCondition: {
+                        maxSize: 10 * 1024
+                    }
+                },
+                generator: {
+                    filename: "./images/[name].[contenthash:12][ext]"
+                },
+                use: {
+                    loader: 'image-webpack-loader',
+                    options: {
+                        /*JPG*/
+                        mozjpeg: {
+                            /*
+                                Most Important parameter
+                                compression quality
+                                0 to 100
+                                40 is best one
+                            */
+                            quality: 40
+                        },
+                        /* for PNG*/
+                        pngquant: {
+                            /* maximum and minimum value*/
+                            quality: [0.65, 0.90],
+                            /* default value*/
+                            speed: 4
+                        }
+                    }
+                }
+            }
+        ]
+    }
+};
+```
+3. Command : Run your webpack in production mode in this case
+
+```
+npx webpack --mode=production
+```
+
+![ProductionModeFileError](./images/productionModeFileErro-2.png)
+
+**2. With ImageMinimizerWebpack (best, popular and verified)**
+* It works as same above but with better performance
+
+
+1. Packages
+
+```
+npm install imagemin imagemin-mozjpeg imagemin-pngquant imagemin-gifsicle imagemin-svgo
+```
+
+2. webpack.config.js
+
+```js
+const path = require("path");
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+
+module.exports = {
+    entry: path.resolve(__dirname, "./src/index.js"),
+    output: {
+        filename: "bundle.js",
+        path: path.resolve(__dirname, "dist"),
+        clean: true
+    },
+
+    optimization: {
+        minimizer: [
+            `...`,
+            new ImageMinimizerPlugin({
+
+                // this option allow to do minification
+                minimizer: {
+                    implementation: ImageMinimizerPlugin.imageminMinify,
+                    options: {
+                        plugins: [
+                            // for minimizing images
+                            ['imagemin-mozjpeg', { quality: 40 }],
+
+                            // for minimizing png
+                            ['imagemin-pngquant', {
+                                quality: [0.65, [0.90]],
+                                speed: 4
+                            }],
+                            // for minimizing gif
+                            ['imagemin-gifsicle', { interlaced: true }],
+
+                            // for minimizing svg
+                            ['imagemin-svgo', {
+                                plugins: [
+                                    {
+                                        name: 'preset-default',
+                                        params: {
+                                            overrides: {
+                                                reviewViewBox: false,
+                                                addAttributesToSVGElements: {
+                                                    params: {
+                                                        attributes: [
+                                                            { xmlns: "http://www.w3.org/2000/svg" }
+                                                        ]
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }],
+                        ]
+                    }
+                }
+            })
+        ]
+    },
+    module: {
+        rules: [
+            {
+                // loading font families
+                test: /\.(ttf | woff | woff2)$/,
+                type: 'asset/resource'
+
+            },
+            {
+                // loading png or jpg files
+                test: /\.(png|jpg|svg)$/,
+                type: 'asset',
+
+                /* Parser Condition is use if the file size
+                    file size > 10KB  then use asset/ resources
+                    file size < 10Kb  then asset / inline
+                */
+                parser: {
+                    dataUrlCondition: {
+                        maxSize: 10 * 1024
+                    }
+                },
+                generator: {
+                    filename: "./images/[name].[contenthash:12][ext]"
+                }
+            }
+        ]
+    }
+};
+```
+3. Command : Run your webpack in production mode in this case
+
+```
+npx webpack --mode=production
+```
+
+![ProductionImage](./images/productionModeFileErro-3.png)
+
+---
+
+
 ## 📘Analyzing Bundle
 1. Package
 
@@ -2312,9 +2573,11 @@ Now in the above example lodash file extract separately which reduce the bundle 
 ![afterCodeSplit3](./images/afterCodeSplit-3.png)
 
 Now, the browser will cache this file, so when it requests another HTML file that consumes this file, the browser will retrieve it from the cache instead of fetching a new file from the server, resulting in faster performance. If we make any changes to our code, such as in index.js or any other file, only that specific file will be updated, not the lodash file, allowing for faster loading times
+
 ---
 
 ## 📘Lazy Loading
+
 * It help to load every thing late.
 * very useful when you don't want to load every thing on first visit which also help in reducing bandwidth.
 * in frame work you get this feature inbuilt
@@ -2500,253 +2763,6 @@ mode: "development",
 ```
 mode: "production",
 ```
-
----
-
-## 📘CSS-in-JS
-**1. By Using JSS :** this will allow you write css in js and need some presets
-
-* When we write CSS in JS  (like material ui)
-
-Advantages
-
-* No class name collision
-* Business Logic and styles for your components can live together
-* Styles can depend on javascript variables (like we can use styles variables in if-else conditions)
-
-Disadvantages
-* bundle size (here you will get so much larger size because all css will merge into js file) , you can code spliting and lazy loading
-* you can't cache your javascript and CSS separately
-* Performance
-
-1. Packages
-
-```
-npm install jss-preset-default jss
-```
-2. index.html
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title>Document</title>
-    <link rel="stylesheet" href="./dist/styles.css">
-</head>
-
-<body>
-    <script src="./dist/bundle.js"></script>
-</body>
-
-</html>
-```
-
-3. infoButton.js
-```js
-import jss from "jss";
-import preset from "jss-preset-default";
-
-jss.setup(preset())
-
-const jssStyles = {
-    button: {
-        backgroundColor: "skyBlue",
-        border: "none",
-        color: "white",
-        fontSize: "15px",
-        borderRadius: "3px",
-        padding: "5px",
-        cursor: "pointer",
-        margin: "3px"
-    }
-}
-
-const { classes } = jss.createStyleSheet(jssStyles).attach()
-
-
-export default function renderInfoButton() {
-    const el = document.createElement("button");
-    el.classList.add([`${classes.button}`])
-    el.innerHTML = "Clear";
-    el.onclick = function () {
-        alert("Clear button")
-    }
-    document.body.appendChild(el);
-}
-```
-4. SuccessButton.js
-
-```js
-import jss from "jss";
-import preset from "jss-preset-default";
-
-jss.setup(preset())
-
-const jssStyles = {
-    button: {
-        backgroundColor: "lightgreen",
-        border: "none",
-        color: "white",
-        fontSize: "15px",
-        borderRadius: "3px",
-        padding: "5px",
-        cursor: "pointer",
-        margin: "3px"
-    }
-}
-
-const { classes } = jss.createStyleSheet(jssStyles).attach()
-
-
-export default function renderSuccessButton() {
-    const el = document.createElement("button");
-    el.classList.add([`${classes.button}`])
-    el.innerHTML = "Success";
-    el.onclick = function () {
-        alert("Success button")
-    }
-    document.body.appendChild(el);
-}
-```
-
-5. index.js
-
-```js
-import renderInfoButton from "./InfoButton";
-import renderSuccessButton from "./SuccessButton";
-
-renderSuccessButton();
-renderInfoButton();
-```
-
-6. webpack.config.js
-
-```js
-const path = require("path");
-
-module.exports = {
-    entry: path.resolve(__dirname, "./src/index.js"),
-    output: {
-        filename: "bundle.js",
-        path: path.resolve(__dirname, "dist"),
-        clean: true
-    }
-};
-```
-
-![css-in-js-1](./images/css-in-js-1.png)
-
-![css-in-js-1](./images/css-in-js-2.png)
-
-
-**2. By USing Emotion :** this will allow you write css easily without any presets, no babel configuration or any other configuration
-
-* By using Framework Agnostic (without frame work)
-* By using react Framework
-
-
-1. Packages
-
-```
-npm install --save @emotion/css
-```
-
-2. index.html
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title>Document</title>
-    <link rel="stylesheet" href="./dist/styles.css">
-</head>
-
-<body>
-    <script src="./dist/bundle.js"></script>
-</body>
-
-</html>
-```
-3. infoButton.js
-```js
-import { css } from "@emotion/css"
-
-const button = css`
-    background-color: skyBlue;
-    border: none;
-    color: white;
-    font-size: 15px;
-    border-radius: 3px;
-    padding: 5px;
-    cursor: pointer;
-    margin: 3px`;
-
-
-export default function renderInfoButton() {
-    const el = document.createElement("button");
-    el.classList.add([`${button}`])
-    el.innerHTML = "Clear";
-    el.onclick = function () {
-        alert("Clear button")
-    }
-    document.body.appendChild(el);
-}
-```
-
-4. SuccessButton.js
-
-```js
-import { css } from "@emotion/css"
-
-const button = css`
-    background-color: lightGreen;
-    border: none;
-    color: white;
-    font-size: 15px;
-    border-radius: 3px;
-    padding: 5px;
-    cursor: pointer;
-    margin: 3px`;
-
-
-export default function renderSuccessButton() {
-    const el = document.createElement("button");
-    el.classList.add([`${button}`])
-    el.innerHTML = "Success";
-    el.onclick = function () {
-        alert("Success button")
-    }
-    document.body.appendChild(el);
-}
-```
-5. index.js
-
-```js
-import renderInfoButton from "./InfoButton";
-import renderSuccessButton from "./SuccessButton";
-
-renderSuccessButton();
-renderInfoButton();
-```
-6. webpack.config.js
-
-```js
-const path = require("path");
-
-module.exports = {
-    entry: path.resolve(__dirname, "./src/index.js"),
-    output: {
-        filename: "bundle.js",
-        path: path.resolve(__dirname, "dist"),
-        clean: true
-    }
-};
-```
-![css-js-3](./images/css-in-js-3.png)
-
----
 
 # 📔 Production Vs Development
 
