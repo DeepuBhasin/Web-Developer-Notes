@@ -857,21 +857,24 @@ npx webpack
 ---
 
 
----
+## 📔CSS-in-JS 
 
-## 📘CSS-in-JS
-**1. By Using JSS :** this will allow you write css in js and need some presets
+* This will allow you to write **CSS** code into **JS** like **Material UI**
 
-* When we write CSS in JS  (like material ui)
 
-Advantages
+## 📘1.By Using JSS : 
+
+* this will allow you write css in js and need **some presets**
+
+**Advantages**
 
 * No class name collision
 * Business Logic and styles for your components can live together
 * Styles can depend on javascript variables (like we can use styles variables in if-else conditions)
 
-Disadvantages
-* bundle size (here you will get so much larger size because all css will merge into js file) , you can code spliting and lazy loading
+**Disadvantages**
+
+* bundle size (here you will get so much larger size because all css will merge into js file) , you can code splitting and lazy loading
 * you can't cache your javascript and CSS separately
 * Performance
 
