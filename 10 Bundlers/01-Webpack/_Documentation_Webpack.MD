@@ -857,12 +857,12 @@ npx webpack
 ---
 
 
-## 📔CSS-in-JS 
+## 📔CSS-in-JS
 
 * This will allow you to write **CSS** code into **JS** like **Material UI**
 
 
-## 📘1.By Using JSS : 
+## 📘1.By Using JSS :
 
 * this will allow you write css in js and need **some presets**
 
@@ -999,8 +999,8 @@ module.exports = {
 ![css-in-js-1](./images/css-in-js-2.png)
 
 
- ## 📘2.By Using Emotion : 
- 
+ ## 📘2.By Using Emotion :
+
  this will allow you write css easily **without any presets, no babel configuration or any other configuration**
 
 There are two types
