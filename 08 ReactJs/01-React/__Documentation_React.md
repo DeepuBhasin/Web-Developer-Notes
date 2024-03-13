@@ -1127,9 +1127,64 @@ B
 */
 ```
 
+**📚 conceptual example :**
+
+```js
+import React, { useEffect, useState } from 'react'
+
+function App() {
+
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    document.body.addEventListener("click", function () {
+      console.log(count);
+    })
+  }, [])
+
+  return (
+    <div>
+      <h2>{count}</h2>
+      <button onClick={() => setCount(c => c + 1)} > Increment</button>
+    </div >
+  )
+}
+
+export default App
+```
+
 ---
 
 ## 📘Clean-up Function
+
+```js
+// open console and see the problem first
+import React, { useEffect, useState } from 'react'
+
+function App() {
+
+  const [count, setCount] = useState(0);
+
+  // this is not a good code
+  useEffect(() => {
+    const t = function () {
+      console.log(count);
+    }
+    document.body.addEventListener("click", t);
+  }, [])
+
+  return (
+    <div>
+      <h2>{count}</h2>
+      <button onClick={() => setCount(c => c + 1)} > Increment</button>
+    </div >
+  )
+}
+
+export default App
+```
+
+
 
 ![Image](./images/cleanup-function.png)
 

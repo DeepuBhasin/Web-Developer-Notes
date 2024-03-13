@@ -1,5 +1,6 @@
 ## 📘Information
 
+* If you want more information about particular plugin you must go onto official documentation always
 * Main Concept of Webpack : **Load all stuff from webpack rather than loading from different-different files in a single html file example Images, CSS files, Js Files, Json Files etc**
 
 * Reference : [https://github.com/gauravsoni1/webpack-udemy](https://github.com/gauravsoni1/webpack-udemy)
@@ -2268,7 +2269,10 @@ module.exports = {
         }),
         new PurgeCSSPlugin({
             // these settings use as it is
-            paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
+            paths: glob.sync(
+                `${PATHS.src}/**/*`,
+                // this option will not allowed to match with any directory , accept only files
+                { nodir: true }),
             // this parameter is use for to not remove these style classes
             safelist: ['dummy-class']
         }),
@@ -2307,6 +2311,252 @@ mode: "development",
 ```
 mode: "production",
 ```
+
+---
+
+## 📘CSS-in-JS
+**1. By Using JSS :** this will allow you write css in js and need some presets
+
+* When we write CSS in JS  (like material ui)
+
+Advantages
+
+* No class name collision
+* Business Logic and styles for your components can live together
+* Styles can depend on javascript variables (like we can use styles variables in if-else conditions)
+
+Disadvantages
+* bundle size (here you will get so much larger size because all css will merge into js file) , you can code spliting and lazy loading
+* you can't cache your javascript and CSS separately
+* Performance
+
+1. Packages
+
+```
+npm install jss-preset-default jss
+```
+2. index.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <link rel="stylesheet" href="./dist/styles.css">
+</head>
+
+<body>
+    <script src="./dist/bundle.js"></script>
+</body>
+
+</html>
+```
+
+3. infoButton.js
+```js
+import jss from "jss";
+import preset from "jss-preset-default";
+
+jss.setup(preset())
+
+const jssStyles = {
+    button: {
+        backgroundColor: "skyBlue",
+        border: "none",
+        color: "white",
+        fontSize: "15px",
+        borderRadius: "3px",
+        padding: "5px",
+        cursor: "pointer",
+        margin: "3px"
+    }
+}
+
+const { classes } = jss.createStyleSheet(jssStyles).attach()
+
+
+export default function renderInfoButton() {
+    const el = document.createElement("button");
+    el.classList.add([`${classes.button}`])
+    el.innerHTML = "Clear";
+    el.onclick = function () {
+        alert("Clear button")
+    }
+    document.body.appendChild(el);
+}
+```
+4. SuccessButton.js
+
+```js
+import jss from "jss";
+import preset from "jss-preset-default";
+
+jss.setup(preset())
+
+const jssStyles = {
+    button: {
+        backgroundColor: "lightgreen",
+        border: "none",
+        color: "white",
+        fontSize: "15px",
+        borderRadius: "3px",
+        padding: "5px",
+        cursor: "pointer",
+        margin: "3px"
+    }
+}
+
+const { classes } = jss.createStyleSheet(jssStyles).attach()
+
+
+export default function renderSuccessButton() {
+    const el = document.createElement("button");
+    el.classList.add([`${classes.button}`])
+    el.innerHTML = "Success";
+    el.onclick = function () {
+        alert("Success button")
+    }
+    document.body.appendChild(el);
+}
+```
+
+5. index.js
+
+```js
+import renderInfoButton from "./InfoButton";
+import renderSuccessButton from "./SuccessButton";
+
+renderSuccessButton();
+renderInfoButton();
+```
+
+6. webpack.config.js
+
+```js
+const path = require("path");
+
+module.exports = {
+    entry: path.resolve(__dirname, "./src/index.js"),
+    output: {
+        filename: "bundle.js",
+        path: path.resolve(__dirname, "dist"),
+        clean: true
+    }
+};
+```
+
+![css-in-js-1](./images/css-in-js-1.png)
+
+![css-in-js-1](./images/css-in-js-2.png)
+
+
+**2. By USing Emotion :** this will allow you write css easily without any presets, no babel configuration or any other configuration
+
+* By using Framework Agnostic (without frame work)
+* By using react Framework
+
+
+1. Packages
+
+```
+npm install --save @emotion/css
+```
+
+2. index.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <link rel="stylesheet" href="./dist/styles.css">
+</head>
+
+<body>
+    <script src="./dist/bundle.js"></script>
+</body>
+
+</html>
+```
+3. infoButton.js
+```js
+import { css } from "@emotion/css"
+
+const button = css`
+    background-color: skyBlue;
+    border: none;
+    color: white;
+    font-size: 15px;
+    border-radius: 3px;
+    padding: 5px;
+    cursor: pointer;
+    margin: 3px`;
+
+
+export default function renderInfoButton() {
+    const el = document.createElement("button");
+    el.classList.add([`${button}`])
+    el.innerHTML = "Clear";
+    el.onclick = function () {
+        alert("Clear button")
+    }
+    document.body.appendChild(el);
+}
+```
+
+4. SuccessButton.js
+
+```js
+import { css } from "@emotion/css"
+
+const button = css`
+    background-color: lightGreen;
+    border: none;
+    color: white;
+    font-size: 15px;
+    border-radius: 3px;
+    padding: 5px;
+    cursor: pointer;
+    margin: 3px`;
+
+
+export default function renderSuccessButton() {
+    const el = document.createElement("button");
+    el.classList.add([`${button}`])
+    el.innerHTML = "Success";
+    el.onclick = function () {
+        alert("Success button")
+    }
+    document.body.appendChild(el);
+}
+```
+5. index.js
+
+```js
+import renderInfoButton from "./InfoButton";
+import renderSuccessButton from "./SuccessButton";
+
+renderSuccessButton();
+renderInfoButton();
+```
+6. webpack.config.js
+
+```js
+const path = require("path");
+
+module.exports = {
+    entry: path.resolve(__dirname, "./src/index.js"),
+    output: {
+        filename: "bundle.js",
+        path: path.resolve(__dirname, "dist"),
+        clean: true
+    }
+};
+```
+![css-js-3](./images/css-in-js-3.png)
+
 ---
 
 # 📔 Production Vs Development
