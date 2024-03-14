@@ -291,6 +291,70 @@ console.log(multiply(2, 2));
 node index.js
 ```
 
+---
+# 📔Environment variable
+
+* **Parsing Environment variable on windows**
+
+1. By using package.json file
+
+```json
+"scripts": {
+"dev": "set NODE_ENV=development && webpack --config=webpack.development.js",
+"prod": "set NODE_ENV=production &&  webpack --config=webpack.production.js"
+},
+```
+
+2. By using webpack.config.js file
+
+```json
+mode : "production"
+mode : "development"
+```
+
+* **For any platform like window, mack, linux**
+
+1. Package name
+
+```
+npm i cross-env
+```
+
+2. package.json
+
+```json
+"scripts": {
+"dev": "cross-env NODE_ENV=development && webpack --config=webpack.development.js",
+"prod": "cross-env NODE_ENV=production &&  webpack --config=webpack.production.js"
+},
+```
+
+
+* index.js
+
+```javascript
+
+console.log(process.env.NODE_ENV);
+
+if(process.env.NODE_ENV === 'development') {
+
+}
+```
+
+
+## 📘Static and Dynamic loading
+
+```js
+// synchronous
+import {} from "node_module";
+
+// asynchronous
+import('file.js');
+```
+
+---
+
+
 ## 📘Custom Configuration (Basic)
 * create **webpack.config.js**
 * Entry Point and Output Point
@@ -334,7 +398,7 @@ npx webpack
 2. SCSS Loader (loading s[a|c]ss files)
 3. JS Loader (loading js files)
 4. File Loader (only loading png, svg, jpg, jpeg, gif files etc not optimizing)
-
+5. TypeScript Loader
 
 ## 📘1. Loaders (CSS/Style)
 
@@ -856,6 +920,113 @@ npx webpack
 
 ---
 
+## 📘5.Typescript Loader
+
+* Helps to catch more bugs at **compile type**
+
+1. Packages names
+
+```
+npm i @babel/preset-typescript @babel/core @babel/preset-env typescript
+```
+
+2. webpack.config.js
+
+```js
+const path = require('path');
+
+module.exports = {
+    entry: './src/index.js',
+    output: {
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, './dist'),
+    },
+    resolve: {
+        // this will help you the check import file extensions
+        extensions: [".ts", ".js"]
+    },
+    module: {
+        rules: [
+            {
+                // this rule is for javascript and typescript
+                test: /\.(ts|js)$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [
+                            '@babel/env',
+
+                            // this babel loader will help to execute typescript file
+                            "@babel/preset-typescript"
+                        ],
+                    }
+                }
+            }
+        ]
+    }
+}
+```
+
+3. tsconfig.json
+
+```json
+{
+  "compilerOptions": {
+    "module": "ES2015",
+    "target": "ES2015",
+    "noImplicitAny": true,
+    "noUnusedParameters": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["/node_modules", "dist"]
+}
+```
+4. package.json
+
+```json
+// here we are only checking files not emitting
+
+"scripts": {
+"dev": "webpack --config=webpack.development.js",
+"prod": "webpack --config=webpack.production.js",
+"typecheck": "tsc --noEmit"
+},
+```
+
+5. utils.ts
+
+```js
+export function sum(num1: number, num2: number) {
+  return num1 + num2;
+}
+```
+
+6. index.js
+
+```js
+import { sum } from "./utils.ts"
+console.log(sum(1, 2));
+```
+
+7. index.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="./dist/bundle.js"></script>
+</body>
+
+</html>
+```
+
+---
 
 ## 📔CSS-in-JS
 
@@ -2278,8 +2449,28 @@ npm run dev
 
 ![live-server](./images/live-server.png)
 
+
+---
+
 # 📔Optimization
 
+## 📘Adding hash to output bundles
+* If the content is not change then filename will be same, if the content get change it will create new file and file name will change
+* This is use remove to cache files and it is important when you are creating new bundles
+* **[contenthash]** with **:8, :12, :16, :20** are use to create md5 algo string
+* **[hash:7]** with **:8, :9, :10**
+* **[name]** are use to create fileName as it is
+
+1. For Javascript Files
+```js
+filename: '[name].[contenthash].js',
+```
+2. For CSS Files
+```js
+filename: '[name].[contenthash].css',
+```
+
+---
 
 ## 📘Optimizing and Compressing Images
 
@@ -2958,23 +3149,8 @@ createModelButton()
 
 ![lazyLoading2](./images/lazyloading-2.png)
 
-
-## 📘Adding hash to output bundles
-* If the content is not change then filename will be same, if the content get change it will create new file and file name will change
-* This is use remove to cache files and it is important when you are creating new bundles
-* **[contenthash]** with **:8, :12, :16, :20** are use to create md5 algo string
-* **[hash:7]** with **:8, :9, :10**
-* **[name]** are use to create fileName as it is
-
-1. For Javascript Files
-```js
-filename: '[name].[contenthash].js',
-```
-2. For CSS Files
-```js
-filename: '[name].[contenthash].css',
-```
 ---
+
 
 ## 📘Remove Dead CSS
 * The CSS which is not use in project
@@ -3059,23 +3235,7 @@ mode: "development",
 ```
 mode: "production",
 ```
-
-# 📔 Production Vs Development
-
-## 📘 Various Plugins
-| Sr No. | Production                                 | Development               |
-| ------ | ------------------------------------------ | ------------------------- |
-| 1      | Minification of HTML, CSS, JS              | No Need                   |
-| 2      | Tree Shaking/Dead Code, Elimination JS/CSS | Also                      |
-| 3      | Copying of assets to dist                  | Also                      |
-| 4      | Production env variables                   | Development env variables |
-| 5      | Split chunks                               | Some time require         |
-| 6      | Production Mode                            | Development Mode          |
-| 7      | Bundle analyzer                            | Must                      |
-| 8      | set up loaders                             | Must                      |
-| 9      | Entry and output Specification             | Must                      |
-| 10     | Html File creation                         | Must                      |
-
+---
 
 ## 📘Splitting Webpack configuration
 
@@ -3217,6 +3377,29 @@ module.exports = {
 ```
 ![shimming3](./images/shimming-3.png)
 
+---
+
+
+
+
+---
+
+
+# 📔 Production Vs Development
+
+## 📘 Various Plugins
+| Sr No. | Production                                 | Development               |
+| ------ | ------------------------------------------ | ------------------------- |
+| 1      | Minification of HTML, CSS, JS              | No Need                   |
+| 2      | Tree Shaking/Dead Code, Elimination JS/CSS | Also                      |
+| 3      | Copying of assets to dist                  | Also                      |
+| 4      | Production env variables                   | Development env variables |
+| 5      | Split chunks                               | Some time require         |
+| 6      | Production Mode                            | Development Mode          |
+| 7      | Bundle analyzer                            | Must                      |
+| 8      | set up loaders                             | Must                      |
+| 9      | Entry and output Specification             | Must                      |
+| 10     | Html File creation                         | Must                      |
 
 ---
 
@@ -3591,22 +3774,3 @@ shared: ["react", "react-dom"],
 * Share Dependency with **singleton**
 
 ![Image](./images/images/share-dependency-singletone.png)
-
-
-# 📔 Extra
-
-* Loading env variables
-
-```javascript
-if(process.env.NODE_ENV === 'development') {
-
-}
-```
-* import synchronous and asynchronous files
-```js
-// synchronous
-import {} from "node_module";
-
-// asynchronous
-import('file.js');
-```
