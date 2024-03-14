@@ -294,6 +294,8 @@ node index.js
 ---
 # 📔Environment variable
 
+## 📘1. By using only NODE_ENV variable (not to much good)
+
 * **Parsing Environment variable on windows**
 
 1. By using package.json file
@@ -341,6 +343,65 @@ if(process.env.NODE_ENV === 'development') {
 
 }
 ```
+---
+
+## 📘2. By Using Any Env Variable (best one)
+
+1. Package Names
+
+```
+npm dotenv env-cmd
+```
+
+2. .env.development
+```
+#This is variable name
+FILE_TYPE="Uncompressed and Un-minify"
+```
+
+3. .env.production
+
+```
+#This is variable name
+FILE_TYPE="compressed and minify"
+```
+
+4. webpack.config.js
+
+```js
+const path = require("path");
+const webpack = require("webpack");
+
+module.exports = {
+    entry: path.resolve(__dirname, "./src/index.js"),
+    output: {
+        filename: "bundle.js",
+        path: path.resolve(__dirname, "dist"),
+        clean: true
+    },
+    plugins: [
+        // here we are defining our process.env as global variable like shimming concept
+        new webpack.DefinePlugin({
+            "process.env": JSON.stringify(process.env)
+        })
+    ]
+};
+```
+
+5. Package.json
+
+```js
+"scripts": {
+    "dev": "env-cmd -f .env.development webpack --config=webpack.development.js",
+    "prod": "env-cmd -f .env.production webpack --config=webpack.production.js"
+},
+```
+
+![EnvironmentVariable](./images/environment-variable.png)
+
+![EnvironmentVariable](./images/environment-variable-2.png)
+---
+
 
 
 ## 📘Static and Dynamic loading
@@ -2420,7 +2481,7 @@ npm run dev
 
 ---
 
-## 📘Source Map
+## 📘2. Source Map
 
 * This feature help us to find error on Production Mode (like compressed code)
 * It will generate a source map files which will redirect to the original file
