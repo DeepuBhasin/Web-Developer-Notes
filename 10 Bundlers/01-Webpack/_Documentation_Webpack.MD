@@ -307,8 +307,9 @@ node index.js
 
 2. By using webpack.config.js file
 
-```json
+```js
 mode : "production"
+// OR
 mode : "development"
 ```
 
