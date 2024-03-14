@@ -2194,7 +2194,22 @@ npx webpack
 
 ---
 
-## 📘Production Vs Development Builds
+# 📔 Production Vs Development Builds
+
+## 📘 Various Plugins
+| Sr No. | Production                                 | Development               |
+| ------ | ------------------------------------------ | ------------------------- |
+| 1      | Minification of HTML, CSS, JS              | No Need                   |
+| 2      | Tree Shaking/Dead Code, Elimination JS/CSS | Also                      |
+| 3      | Copying of assets to dist                  | Also                      |
+| 4      | Production env variables                   | Development env variables |
+| 5      | Split chunks                               | Some time require         |
+| 6      | Production Mode                            | Development Mode          |
+| 7      | Bundle analyzer                            | Must                      |
+| 8      | set up loaders                             | Must                      |
+| 9      | Entry and output Specification             | Must                      |
+| 10     | Html File creation                         | Must                      |
+
 
 * Usually production builds require a different setup than development builds in production
 * In Production, we want our website to be fast as possible and our bundles should be as small as possible
@@ -2403,8 +2418,30 @@ npm run dev
 
 ![live-server](./images/live-server.png)
 
-
 ---
+
+## 📘Source Map
+
+* This feature help us to find error on Production Mode (like compressed code)
+* It will generate a source map files which will redirect to the original file
+
+**Before Source Map**
+
+![beforeSourceMap](./images/sourceMap1.png)
+
+**After Source Map**
+
+* webpack.config.js
+```js
+devtool: "source-map",
+```
+
+![AfterSourceMap](./images/sourceMap2.png)
+
+![AfterSourceMap](./images/sourceMap3.png)
+---
+
+
 
 # 📔Optimization
 
@@ -3380,23 +3417,6 @@ module.exports = {
 
 ---
 
-# 📔 Production Vs Development
-
-## 📘 Various Plugins
-| Sr No. | Production                                 | Development               |
-| ------ | ------------------------------------------ | ------------------------- |
-| 1      | Minification of HTML, CSS, JS              | No Need                   |
-| 2      | Tree Shaking/Dead Code, Elimination JS/CSS | Also                      |
-| 3      | Copying of assets to dist                  | Also                      |
-| 4      | Production env variables                   | Development env variables |
-| 5      | Split chunks                               | Some time require         |
-| 6      | Production Mode                            | Development Mode          |
-| 7      | Bundle analyzer                            | Must                      |
-| 8      | set up loaders                             | Must                      |
-| 9      | Entry and output Specification             | Must                      |
-| 10     | Html File creation                         | Must                      |
-
----
 
 # 📔React
 
