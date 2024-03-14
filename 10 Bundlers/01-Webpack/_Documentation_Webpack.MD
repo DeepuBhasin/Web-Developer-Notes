@@ -987,7 +987,6 @@ module.exports = {
 
 ```js
 // here we are only checking files not emitting
-
 "scripts": {
     "dev": "webpack --config=webpack.development.js",
     "prod": "webpack --config=webpack.production.js",
@@ -1523,7 +1522,10 @@ npx webpack
 
 ---
 
-## 📘Multiple Entry Points
+# 📔Other Features
+
+
+## 📘1. Multiple Entry Points
 * mostly use where you have multiple html pages like home, about, contact us etc.
 * Not use in frontEnd Frameworks like react, angular, vue etc
 
@@ -1873,7 +1875,7 @@ renderTestButton();
 
 ---
 
-## 📘5.CopyPlugin
+## 📘5. CopyPlugin
 * This plugin is used to copy stuff from **source folder** to **dist folder**
 
 * Command
@@ -1922,7 +1924,7 @@ module.exports = {
 ---
 
 
-## 📘6.Cleaning Dist Folder Before Generating New Bundle (best one)
+## 📘6. Cleaning Dist Folder Before Generating New Bundle (best one)
 
 1. Command to install Package
 ```
@@ -1997,7 +1999,7 @@ output: {
 }
 ```
 
-## 📘7.Generating HTML Files Automatically During Webpack Build Process
+## 📘7. Generating HTML Files Automatically During Webpack Build Process
 
 * This **html-webpack-plugin** plugin is use to create html file with adding newly generated files (with random names) of **js** or **css** automatically.
 * It will create a new **index.html** file in **dist folder** (because we have mention about dist folder)
@@ -2076,7 +2078,7 @@ npx webpack
 ⚠️ Note : you can check various other options on internet
 
 ---
-## 📘Integration with Template
+## 📘8. Integration with Template
 
 * With **webpack** (best one)
 1. webpack.config.js
@@ -2391,7 +2393,7 @@ module.exports = {
 "scripts": {
     "build": "webpack --config=webpack.production.config.js",
     "dev": "webpack --config=webpack.dev.config.js"
-  }
+}
 
 // OR
 
@@ -2403,7 +2405,7 @@ module.exports = {
 ![prod-dev](./images/prod-dev.png)
 ---
 
-## 📘Live Server
+## 📘1. Live Server
 * it will run our application as **live server**
 * When ever we change any thing in the file and then save the file, it will reload automatically.
 
