@@ -1522,195 +1522,6 @@ npx webpack
 
 ---
 
-# 📔Other Features
-
-
-## 📘1. Multiple Entry Points
-* mostly use where you have multiple html pages like home, about, contact us etc.
-* Not use in frontEnd Frameworks like react, angular, vue etc
-
-```js
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-
-module.exports = {
-    entry: {
-        indexFile: path.resolve(__dirname, "./src/index.js"),
-        productsFile: path.resolve(__dirname, "./src/products.js"),
-    },
-    output: {
-        // [name] is a variable, these are the key names of entry object
-        filename: './[name].bundle.js',
-        path: path.resolve(__dirname, './dist'),
-        clean: true
-    },
-    mode: 'none',
-    plugins: [
-        // instance of creating html file
-        new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, "src/index.html"),
-            // basically entry files
-            chunks: ["indexFile"],
-            inject: true,
-            filename: "index.html"
-        }),
-        new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, "src/products.html"),
-            // basically entry files
-            chunks: ["productsFile"],
-            inject: true,
-            filename: "products.html"
-        }),
-    ]
-}
-```
-
-![multipleEntryPoint](./images/mulitple-entry-point.png)
-
----
-## 📘Splitting Webpack configuration
-
-1. webpack.common.js
-
-```js
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { PurgeCSSPlugin } = require('purgecss-webpack-plugin')
-const glob = require("glob");
-const PATHS = {
-    src: path.join(__dirname, 'src')
-}
-
-module.exports = {
-    plugins: [
-        new HtmlWebpackPlugin({
-            filename: "index.html",
-            template: path.resolve(__dirname, "src/index.html")
-        }),
-        new MiniCssExtractPlugin({
-            filename: 'styles.[name].css',
-        }),
-        new PurgeCSSPlugin({
-            paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
-        }),
-    ],
-    module: {
-        rules: [
-            {
-                test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader']
-            }
-        ]
-    },
-}
-```
-2. webpack.development.js
-
-```js
-const { merge } = require("webpack-merge");
-const commonConfig = require('./webpack.common');
-const path = require('path');
-
-module.exports = merge(commonConfig, {
-    mode: "development",
-    entry: path.resolve(__dirname, './src/index.js'),
-    output: {
-        filename: './bundle.development.js',
-        path: path.resolve(__dirname, './dist-development'),
-        clean: true
-    }
-})
-```
-
-3. webpack.production.js
-
-```js
-const { merge } = require("webpack-merge");
-const commonConfig = require('./webpack.common');
-const path = require('path');
-
-module.exports = merge(commonConfig, module.exports = {
-    mode: "production",
-    entry: path.resolve(__dirname, './src/index.js'),
-    output: {
-        filename: './bundle.production.js',
-        path: path.resolve(__dirname, './dist-production'),
-        clean: true
-    },
-    optimization: {
-        splitChunks: {
-            chunks: "all"
-        }
-    },
-})
-```
-
-4. Package Name
-
-```
-npm i --save-dev webpack-merge
-```
-5. Package.json
-
-```js
-"scripts": {
-    "dev": "webpack --config=webpack.development.js",
-    "prod": "webpack --config=webpack.production.js "
-},
-```
-
-## 📘Shimming
-* This concept is use to **attach element on window object** like "$" sign attach to window for jquery
-* This is very useful in case of old libraries
-
-Example :
-
-
-* suppose we have this import statement "moment library" someone remove by mistake
-```js
-import mnt from "moment";
-
-(function () {
-    const d = mnt(new Date()).format("DD-MM-YYYY");
-    console.log(d);
-}())
-```
-![shimming1](./images/shimming-1.png)
-
-![shimming2](./images/shimming-2.png)
-
-* We can bind **element to window object** using **webpack**, in that we no need to import library in files
-
-```js
-// webpack.config.js
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require('path');
-const webpack = require('webpack');
-
-module.exports = {
-    entry: path.resolve(__dirname, './src/index.js'),
-    output: {
-        filename: './bundle.js',
-        path: path.resolve(__dirname, './dist'),
-        clean: true
-    },
-    plugins: [
-        new HtmlWebpackPlugin({
-            filename: "index.html",
-            template: path.resolve(__dirname, "src/index.html")
-        }),
-        new webpack.ProvidePlugin({
-            mnt: "moment"
-        })
-    ]
-}
-```
-![shimming3](./images/shimming-3.png)
-
----
-
-
 # 📔Plugins
 
 * Plugins are additional javascript libraries that do everything that loaders cannot do.
@@ -3380,11 +3191,194 @@ mode: "production",
 ```
 ---
 
+# 📔Other Features
 
 
+## 📘1. Multiple Entry Points
+* mostly use where you have multiple html pages like home, about, contact us etc.
+* Not use in frontEnd Frameworks like react, angular, vue etc
+
+```js
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+    entry: {
+        indexFile: path.resolve(__dirname, "./src/index.js"),
+        productsFile: path.resolve(__dirname, "./src/products.js"),
+    },
+    output: {
+        // [name] is a variable, these are the key names of entry object
+        filename: './[name].bundle.js',
+        path: path.resolve(__dirname, './dist'),
+        clean: true
+    },
+    mode: 'none',
+    plugins: [
+        // instance of creating html file
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, "src/index.html"),
+            // basically entry files
+            chunks: ["indexFile"],
+            inject: true,
+            filename: "index.html"
+        }),
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, "src/products.html"),
+            // basically entry files
+            chunks: ["productsFile"],
+            inject: true,
+            filename: "products.html"
+        }),
+    ]
+}
+```
+
+![multipleEntryPoint](./images/mulitple-entry-point.png)
 
 ---
+## 📘Splitting Webpack configuration
 
+1. webpack.common.js
+
+```js
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { PurgeCSSPlugin } = require('purgecss-webpack-plugin')
+const glob = require("glob");
+const PATHS = {
+    src: path.join(__dirname, 'src')
+}
+
+module.exports = {
+    plugins: [
+        new HtmlWebpackPlugin({
+            filename: "index.html",
+            template: path.resolve(__dirname, "src/index.html")
+        }),
+        new MiniCssExtractPlugin({
+            filename: 'styles.[name].css',
+        }),
+        new PurgeCSSPlugin({
+            paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
+        }),
+    ],
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader']
+            }
+        ]
+    },
+}
+```
+2. webpack.development.js
+
+```js
+const { merge } = require("webpack-merge");
+const commonConfig = require('./webpack.common');
+const path = require('path');
+
+module.exports = merge(commonConfig, {
+    mode: "development",
+    entry: path.resolve(__dirname, './src/index.js'),
+    output: {
+        filename: './bundle.development.js',
+        path: path.resolve(__dirname, './dist-development'),
+        clean: true
+    }
+})
+```
+
+3. webpack.production.js
+
+```js
+const { merge } = require("webpack-merge");
+const commonConfig = require('./webpack.common');
+const path = require('path');
+
+module.exports = merge(commonConfig, module.exports = {
+    mode: "production",
+    entry: path.resolve(__dirname, './src/index.js'),
+    output: {
+        filename: './bundle.production.js',
+        path: path.resolve(__dirname, './dist-production'),
+        clean: true
+    },
+    optimization: {
+        splitChunks: {
+            chunks: "all"
+        }
+    },
+})
+```
+
+4. Package Name
+
+```
+npm i --save-dev webpack-merge
+```
+5. Package.json
+
+```js
+"scripts": {
+    "dev": "webpack --config=webpack.development.js",
+    "prod": "webpack --config=webpack.production.js "
+},
+```
+---
+
+## 📘Shimming
+* This concept is use to **attach element on window object** like "$" sign attach to window for jquery
+* This is very useful in case of old libraries
+
+Example :
+
+
+* suppose we have this import statement "moment library" someone remove by mistake
+```js
+import mnt from "moment";
+
+(function () {
+    const d = mnt(new Date()).format("DD-MM-YYYY");
+    console.log(d);
+}())
+```
+![shimming1](./images/shimming-1.png)
+
+![shimming2](./images/shimming-2.png)
+
+* We can bind **element to window object** using **webpack**, in that we no need to import library in files
+
+```js
+// webpack.config.js
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+
+module.exports = {
+    entry: path.resolve(__dirname, './src/index.js'),
+    output: {
+        filename: './bundle.js',
+        path: path.resolve(__dirname, './dist'),
+        clean: true
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            filename: "index.html",
+            template: path.resolve(__dirname, "src/index.html")
+        }),
+        new webpack.ProvidePlugin({
+            mnt: "moment"
+        })
+    ]
+}
+```
+![shimming3](./images/shimming-3.png)
+
+---
 
 # 📔 Production Vs Development
 
