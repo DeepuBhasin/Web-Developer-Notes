@@ -1394,7 +1394,7 @@ module.exports = {
                     options: {
                         presets:
                             ['@babel/preset-env'],
-                        // this is the plugin to create source-map for css-in-js code and it should always on first    
+                        // this is the plugin to create source-map for css-in-js code and it should always on first
                         plugins: [
                             "@emotion"
                         ]

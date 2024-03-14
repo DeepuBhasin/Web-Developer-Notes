@@ -374,11 +374,44 @@ button:focus-visible {
 ![Image](./images/props-3.png)
 
 * One way data Flow
+
 ![Image](./images/props-4.png)
+
+**📚 conceptual Example :**
+
+```js
+import React from 'react'
+
+function Button({ children, ...rest }) {
+  return <button {...rest}>{children} </button>
+}
+
+function App() {
+  const onClick = () => {
+    console.log("Button Click")
+  }
+
+  const onMouseMove = () => {
+    console.log("On Mouse")
+  }
+
+  return <React.Fragment>
+    <div>
+      <Button onClick={onClick}>Click Me</Button>
+    </div>
+    <div>
+      <Button onMouseMove={onMouseMove}>Move Mouse on Me</Button>
+    </div>
+  </React.Fragment>
+}
+
+export default App
+```
 
 ---
 
 ## 📘Rules in JSX
+
 ![Image](./images/rule-of-jsx.png)
 
 ---
