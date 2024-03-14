@@ -1341,6 +1341,79 @@ module.exports = {
 ```
 ![css-js-3](./images/css-in-js-3.png)
 
+
+## 📘Source Map for CSS-in-JS for emotion
+
+* it will help you to read your code in development mode
+* It will help you to redirect to code file
+* It also increase the class-name readability
+
+1. Package Name
+
+```
+npm i @emotion/babel-plugin
+```
+
+2. webpack.config.js
+
+```js
+const path = require("path");
+
+module.exports = {
+    entry: path.resolve(__dirname, "./src/index.js"),
+    output: {
+        filename: "bundle.js",
+        path: path.resolve(__dirname, "dist"),
+        clean: true
+    },
+    devtool: "source-map",
+    module: {
+        rules: [
+            {
+                test: /\.(ttf | woff | woff2)$/,
+                type: 'asset/resource'
+
+            },
+            {
+                test: /\.(png|jpg|svg)$/,
+                type: 'asset',
+                parser: {
+                    dataUrlCondition: {
+                        maxSize: 10 * 1024
+                    }
+                },
+                generator: {
+                    filename: "./images/[name].[contenthash:12][ext]"
+                }
+            },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets:
+                            ['@babel/preset-env'],
+                        // this is the plugin to create source-map for css-in-js code and it should always on first    
+                        plugins: [
+                            "@emotion"
+                        ]
+
+                    }
+                }
+            }
+        ]
+    },
+};
+```
+![SourceMapHash](./images/css-in-js-source-map-1.png)
+
+![SourceMapHash](./images/css-in-js-source-map-2.png)
+
+![SourceMapHash](./images/css-in-js-source-map-3.png)
+
+
+
 ---
 
 # 📔Assets (loading of image/ font)
@@ -2494,7 +2567,11 @@ npm run dev
 
 * webpack.config.js
 ```js
+// use in production mode
 devtool: "source-map",
+
+// use in development mode (it also decrease the build time)
+devtool: "eval-source-map",
 ```
 
 ![AfterSourceMap](./images/sourceMap2.png)
