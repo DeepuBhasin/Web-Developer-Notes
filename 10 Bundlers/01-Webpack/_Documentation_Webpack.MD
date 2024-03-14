@@ -985,13 +985,13 @@ module.exports = {
 ```
 4. package.json
 
-```json
+```js
 // here we are only checking files not emitting
 
 "scripts": {
-"dev": "webpack --config=webpack.development.js",
-"prod": "webpack --config=webpack.production.js",
-"typecheck": "tsc --noEmit"
+    "dev": "webpack --config=webpack.development.js",
+    "prod": "webpack --config=webpack.production.js",
+    "typecheck": "tsc --noEmit"
 },
 ```
 
