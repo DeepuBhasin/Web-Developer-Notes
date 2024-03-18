@@ -1106,7 +1106,7 @@ console.log(sum(1, 2));
 
 **Disadvantages**
 
-* bundle size (here you will get so much larger size because all css will merge into js file) , you can code splitting and lazy loading
+* bundle size (here you will get so much larger size because all css will merge into js file) , you can  itting and lazy loading
 * you can't cache your javascript and CSS separately
 * Performance
 
@@ -2509,8 +2509,12 @@ module.exports = {
 * it will run our application as **live server**
 * When ever we change any thing in the file and then save the file, it will reload automatically.
 
+1. Package need to install
+```
+npm install webpack-dev-server --save-dev
+```
 
-1. webpack.config.js : Add this Object in **module.exports**
+2. webpack.config.js : Add this Object in **module.exports**
 ```js
 devServer: {
     port: 9000,
@@ -2532,23 +2536,13 @@ devServer: {
     compress: true
 }
 ```
-1. Package need to install
-```
-npm install webpack-dev-server --save-dev
-```
 
-
-3. Package.json
+4. Package.json
 
 ```
-"dev": "webpack serve --mode=development --config=webpack.dev.config.js --hot"
+webpack serve --mode=development --config=webpack.dev.config.js --hot"
 ```
 
-3. Command
-
-```
-npm run dev
-```
 
 ![live-server](./images/live-server.png)
 
@@ -3277,6 +3271,23 @@ createModelButton()
 ![lazyLoading1](./images/lazyloading-1.png)
 
 ![lazyLoading2](./images/lazyloading-2.png)
+
+
+
+
+**⚠️ Note :** we can load multiple dynamic loadings 
+
+```js
+// bootstrap & jquery are packages which are installed by using npm
+
+Promise.all([
+    import('bootstrap' /* webpackChunkName: "bootstrap"*/),
+    import('jquery' /* webpackChunkName: "jquery"*/)
+]).then(function ({ Model }, { default: $ }) {
+    console.log(Model);
+    console.log($);
+}).catch(console.log);
+```
 
 ---
 

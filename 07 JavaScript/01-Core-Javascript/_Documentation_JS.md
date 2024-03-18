@@ -3044,6 +3044,47 @@ console.log('console 1');
 * it save our bandwidth to run all calls in parallel.
 * if the one promise get reject all promise will reject.
 ```js
+// Best Example
+
+function getUserDetails(condition, time) {
+    return new Promise((resolve, reject) => {
+        setTimeout(function () {
+            if (condition) {
+                const useData = [
+                    { id: 1, name: "Deep" },
+                    { id: 2, name: "John" },
+                    { id: 3, name: "Doe" },
+                ]
+                resolve(useData)
+            } else {
+                reject("Unable to load user details")
+            }
+        }, time)
+    })
+}
+
+function getCollegeDetails(condition, time) {
+    return new Promise((resolve, reject) => {
+        setTimeout(function () {
+            if (condition) {
+                const useData = [
+                    { id: 1, name: "Computer Department" },
+                    { id: 2, name: "Math Department" },
+                    { id: 3, name: "Science Department" },
+                ]
+                resolve(useData)
+            } else {
+                reject("Unable to load College details")
+            }
+        }, time)
+    })
+}
+
+const getAllApiData = Promise.all([getCollegeDetails(true, 3000), getUserDetails(true, 5000)]);
+
+getAllApiData.then(result => console.log(result)).catch(console.log)
+
+// Example 2
 Promise.all([
     fetch('https://jsonplaceholder.typicode.com/posts/1').then(result => result.json()),
     fetch('https://jsonplaceholder.typicode.com/posts/2').then(result => result.json()),
