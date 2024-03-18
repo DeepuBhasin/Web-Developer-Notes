@@ -936,7 +936,7 @@ for (const [firstName, lastName] of Object.entries(obj)) {
 ```
 ---
 
-## 📘 Namespace :
+## 📘Namespace :
 * **Namespace :** a container for variables and functions. Typically to keep variables functions with the same name separate.
 
 ```javascript
@@ -956,7 +956,7 @@ console.log(spanish.greet);
 ```
 ---
 
-## 📘 JSON and Object Literals
+## 📘JSON and Object Literals
 
 * **JSON :** javascript object notation.
 
@@ -1014,7 +1014,7 @@ console.log(greet.__proto__ == Function.prototype);
 
 ---
 
-## 📘 Function Statements and Function Expressions
+## 📘Function Statements and Function Expressions
 * **Expression :** A unit of code that results in a value. It does n't have to save to a variable (an expression is something that produces a value)
 
 ```javascript
@@ -1080,7 +1080,7 @@ log(function(){ console.log('Hi')}) // create function as  object on fly && it i
 Functions can pass as parameter in which you can pass function as parameter use them like you do variables to other functions as well *introduces an entirely new class of programming called **Functional Programming***
 
 ---
-## 📘 Pass By Value Vs By Reference
+## 📘Pass By Value Vs By Reference
 
 * **Mutate :** To change something.
 * **Immutable :** means it can't be changed.
@@ -1099,7 +1099,6 @@ var a = 11;
 console.log(a) // 11
 console.log(b) // 10
 ```
-![image](./images/pass-by-refrence.png)
 
 *  __Pass by Reference__ : Objects in javascript are stored in memory and are passed by reference. This means that we don't copy the value are did with primitive types. All **Objects types** are *Pass by reference* examples. array, functions and objects
 
@@ -1140,6 +1139,10 @@ console.log(obj2)
 // { name: "dp", password: "456" };
 ```
 
+![image](./images/pass-by-refrence.png)
+
+---
+
 ## 📘Cloning of Object
 
 1. **Shallow Cloning :** Copy all properties up to only for *first level*, it is done by **Object.assign({}, alreadyDeclaredObject)**
@@ -1151,12 +1154,12 @@ console.log(obj2)
     age: 29
 }
 
-const obj2 = Object.assign({}, obj1);
+const obj2 = Object.assign({}, obj1, {job : "React"});
 obj2.firstName = "Deepu";
 obj2.lastName = "Bhasin";
 
 console.log('obj1', obj1);  // {firstName: 'Deepinder', lastName: 'Singh', age: 29}
-console.log('obj2', obj2)   // {firstName: 'Deepu', lastName: 'Bhasin', age: 29}
+console.log('obj2', obj2)   // {firstName: 'Deepu', lastName: 'Bhasin', age: 29, job: 'React'}
 ```
 2. **Deep Cloning :** Copy all properties up to *all level*. it is done by
 * **JSON.parse(JSON.stringify(alreadyDeclaredObject))**
@@ -1177,6 +1180,7 @@ console.log('obj2', obj2)   // {firstName: 'Deepu', lastName: 'Bhasin', age: 29}
 ```
 
 ---
+
 ## 📘 Objects, Functions and This
 The __this__ keyword is actually pretty straightforward to understand __what is does is it refers to whatever object it is directly inside (property) of.__
 
