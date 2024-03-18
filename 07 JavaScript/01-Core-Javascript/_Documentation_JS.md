@@ -975,12 +975,12 @@ console.log(objectLiteral)
     "isAProgrammer" : true
 }
 ```
-1. **JSON,stringify(ObjectLiteral) :** it will convert JS Object into JSON String.
+1. **JSON.stringify(ObjectLiteral) :** it will convert JS Object into JSON String.
 2. **JSON.parse(string) :** it will convert JSON string into JS Object.
 
 ---
 
-## 📘 Functions are Object
+## 📘Functions are Object
 * **First Class Functions :** Everything you can do with other types you can do with functions. Assign them to variables, pass them around, create them on the fly.
 
 ![Image](./images/funtions-are-object.png)
@@ -1049,6 +1049,7 @@ anonymousGreet();
 
 ```
 ![Image](./images/function-expressions-invoke.png)
+
 
 ⚠️ **Note** : Function Expressions are not hoisted this is the only main difference between **Function Declaration** and **Function Expressions**
 
