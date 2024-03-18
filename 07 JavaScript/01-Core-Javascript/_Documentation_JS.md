@@ -285,7 +285,7 @@ a();
 
 ---
 
-**⚠️Note : ** Context Vs Scope
+**⚠️Note :** Context Vs Scope
 
 
 ```js
@@ -685,11 +685,7 @@ console.log('I am Web Developer'.includes('test')); // false
 // 6. charAt
 "Xabcd".charAt(1)   // 'a'
 ```
-
-
-
 ---
-
 
 ## 📘 Default Value
 * operators are functions example || (OR Operator is a function)
@@ -712,7 +708,6 @@ var libraryName = "Lib 1";
 window.libraryName = window.libraryName || 'lib 2';
 console.log(libraryName);
 ```
----
 
 **💻 Application Use :**
 
@@ -747,8 +742,6 @@ console.log(test || 'Hello');   // hello
 // Nullish : null and undefined (Not 0 or '')
 console.log(test ?? 'Hello');   // 0
 ```
-
-
 ---
 ## 📘 Objects and Dot
 
@@ -870,7 +863,6 @@ let obj = {
 }
 console.log(obj);   // {1: 'Monday', 2: 'Tuesday', 3: 'Wednesday', 4: 'Thursday', 5: 'Friday', 6: 'Saturday', 7: 'Sunday'}
 ```
-
 ---
 ## 📘 Chaining and Optional-Chaining
 
@@ -893,37 +885,44 @@ console.log(obj.address?.near);     // undefined
 ```
 ⚠️ **Note :** in *Optional Chaining* instead of *reference error* it will return *undefined*, if the value does not exist.
 
-
 ---
-
 ## 📘Useful In-built Objects Properties
 
 ```js
 let obj = {
-    firstName: "Depeu",
+    firstName: "Deep",
     lastName: "Singh"
 }
+```
+**1. Object.keys() :** it will only returns **keys of object as array**
 
-// return only keys in array
+```js
 console.log(Object.keys(obj));
 //Output :  ['firstName', 'lastName']
+```
 
-// returns only values in array
+
+**2. Object.values() :** it will only returns **values of Object as array**
+```js
 console.log(Object.values(obj));
-//Output : ['Depeu', 'Singh']
+//Output : ['Deep', 'Singh']
+```
 
-// return Array which include key-value as individual arrays
+**3. Object.entries() :** Array which include **key-value as individual arrays**
+```js
 console.log(Object.entries(obj));
 // [Array(2), Array(2)]
-// 0 : ['firstName', 'Depeu']
+// 0 : ['firstName', 'Deep']
 // 1 : ['lastName', 'Singh']
-
+```
+**4. Object.fromEntries()** : it will create object from nested array
+```js
 const entries = [['name', 'John'], ['age', 30], ['city', 'New York']];
 const obj = Object.fromEntries(entries);
 console.log(obj);
 // Output: { name: 'John', age: 30, city: 'New York' }
 ```
-⚠️ **Conceptual Example :** Destructuring in for-of loop
+**⚠️ Conceptual Example :** Destructuring using for-of loop
 
 ```js
 let obj = {
@@ -935,15 +934,14 @@ for (const [firstName, lastName] of Object.entries(obj)) {
     console.log(firstName + ' : ' + lastName);
 }
 ```
-
-
 ---
+
 ## 📘 Namespace :
 * **Namespace :** a container for variables and functions. Typically to keep variables functions with the same name separate.
 
 ```javascript
 var greet = 'Hello!';
-var greet = 'Hola!';
+var greet = 'Ho!';
 console.log(greet);
 
 // name spacing helping to resolve the issue of namespace collisions (means same name variables)
@@ -951,12 +949,13 @@ var english = {};
 var spanish = {};
 
 english.greet = 'Hello!';
-spanish.greet = 'Hola!';
+spanish.greet = 'Ho!';
 
 console.log(english.greet);
 console.log(spanish.greet);
 ```
 ---
+
 ## 📘 JSON and Object Literals
 
 * **JSON :** javascript object notation.
@@ -964,20 +963,22 @@ console.log(spanish.greet);
 ```javascript
 
 var objectLiteral = {
-    firstname : 'Mary',
-    isAprogrammer : true
+    firstName : 'Mary',
+    isAProgrammer : true
 }
 
 console.log(objectLiteral)
 
 // json format
 {
-    "firstname" : 'Mary',
-    "isAprogrammer" : true
+    "firstName" : "Mary",
+    "isAProgrammer" : true
 }
 ```
 1. **JSON,stringify(ObjectLiteral) :** it will convert JS Object into JSON String.
 2. **JSON.parse(string) :** it will convert JSON string into JS Object.
+
+---
 
 ## 📘 Functions are Object
 * **First Class Functions :** Everything you can do with other types you can do with functions. Assign them to variables, pass them around, create them on the fly.
