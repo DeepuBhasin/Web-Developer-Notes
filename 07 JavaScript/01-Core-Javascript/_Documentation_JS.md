@@ -1089,7 +1089,7 @@ Functions can pass as parameter in which you can pass function as parameter use 
 
 ![Image](./images/pass-by-refrence-1.png)
 
-![Image](./images/pass-by-refrence-2.png)
+
 
 ```javascript
 var a = 10;
@@ -1101,6 +1101,8 @@ console.log(b) // 10
 ```
 
 *  __Pass by Reference__ : Objects in javascript are stored in memory and are passed by reference. This means that we don't copy the value are did with primitive types. All **Objects types** are *Pass by reference* examples. array, functions and objects
+
+![image](./images/pass-by-refrence.png)
 
 ```javascript
 let obj1 = { name: "Deepu", password: "123" };
@@ -1115,6 +1117,8 @@ console.log(obj2);
 ```
 
 * **By Reference (even as Parameter)**
+
+
 
 ```javascript
 function changeGreeting(obj) {
@@ -1139,7 +1143,7 @@ console.log(obj2)
 // { name: "dp", password: "456" };
 ```
 
-![image](./images/pass-by-refrence.png)
+![Image](./images/pass-by-refrence-2.png)
 
 ---
 
