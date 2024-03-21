@@ -694,10 +694,6 @@ git rebase -i HEAD~4
 
 ---
 
-## tags 
-
----
-
 ### alias and Vi Editior
 
 	1. vi ~/.bashrc : to open source 2. to save: esc -> : ->wq -> enter
