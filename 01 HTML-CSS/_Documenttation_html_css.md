@@ -178,21 +178,198 @@ body {
 **⚠️ Note :**
 1. Ul li element has by default **40px padding**
 
+---
+
+## 📘Position values
+1. Static : Not Effected by Top, Bottom, Left, Right properties/values
+2. Relative : tblr value cause element to be moved from its **normal position**
+3. Absolute : Positioned relative to its parent element that is positioned **relative**. If we does not provide relative to its parent then it will take **body** is reference.
+4. Fixed : Position relative to the **viewport**
+5. Sticky : Positioned based on scroll position
 
 ---
 
-## 📘Max-width
+## 📘Max-width & Min-Width
 
-* Always use max-width instead of width.
 * Width create horizontal scrollbar
 
-```css
-.container {
-  max-width: 600px;
+Example : 
+* When we use **width** in **px** then it will fixed our image size hence responsiveness will not work
+* When we use **width** in **%** then it will become responsive but in this case we cannot set fixed size of image upto a particular dimension
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-size: 24px;
+        }
+
+        .main {
+            margin: 20px auto 0px auto;
+            width: 700px;
+        }
+
+        .main img {
+            width: 100%;
+        }
+
+        .main article {
+            width: 100%;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+</body>
+<div class="main">
+    <img src="./test.jpg" alt="">
+    <article>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas deserunt est culpa, nihil debitis incidunt
+        facilis saepe. Atque, tempore praesentium doloremque minima ipsam maiores sunt officia molestiae sint, nam at?
+    </article>
+</div>
+
+</html>
+```
+1. When we using px
+
+![Min-width](./images/max-width-min-width-1.png)
+
+![Min-width](./images/max-width-min-width-2.png)
+
+2. When we using % 
+
+![Min-Width](./images/max-width-min-width-3.png)
+
+3. When we using min/max width
+
+
+![Min-width](./images/max-width-min-width-4.mp4)
+---
+
+## 📘Responsive Design
+
+Using HTML/CSS to make a website or app layout adapt to different screen size
+
+* **Practice To use**
+
+1. Set the viewport/scale
+2. Use Fluid widths as oppose to fixed (max-widths)
+3. Media-queries - different css styling for different screen sizes
+4. Rem units over px
+5. Mobile first methods
+
+* **Concept of max-min width screen**
+
+```js
+// max-width
+if(windowWidth < 500px) {
+    body {
+        background-color: red;
+    }
+}
+
+// min-width
+if(windowWidth > 500px) {
+    body {
+        background-color: green;
+    }
+}
+
+// Width is between ((min-width : 500px) and (max-width : 780px))
+if(windowWidth > 500px && windowWidth < 780px ) {
+    body {
+        background-color: green;
+    }
 }
 ```
-Example : In this example, the .container element can be any width up to 600 pixels. If the viewport or container is less than 600 pixels wide, the element will adjust accordingly. However, it will not exceed a width of 600 pixels, even if the container or viewport is wider.
 
+* **Types of media** 
+
+1. Screen : means it will work for screens only not for print etc
+
+```css
+@media only screen and (max-width:500px) {
+    .smartphone {
+        display: block;
+    }
+}
+
+```
+
+* **Screen Sizes (also called Break points)**
+
+| Sr No | Device Name            | Screen size |
+| ----- | ---------------------- | ----------- |
+| 1.    | Mobile                 | 480-500px   |
+| 2.    | Table                  | 768px       |
+| 3.    | Laptop (small screens) | 1024px      |
+
+
+
+Example
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: grey;
+            color: white;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-align: center;
+            font-size: large;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .widescreen,
+        .normal,
+        .tablet,
+        .smartphone,
+        .landscape {
+            display: none;
+        }
+
+        @media only screen and (max-width:500px) {
+            .smartphone {
+                display: block;
+            }
+        }
+
+        @media(min-width : 500px) and (max-width : 768px) {
+            .tablet {
+                display: block;
+                color: white;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="widescreen">Wide Screen</div>
+    <div class="normal">Normal</div>
+    <div class="tablet">Tablet</div>
+    <div class="smartphone">Smart Phone</div>
+    <div class="landscape">Landscape</div>
+</body>
+
+</html>
+```
 
 
 ---
