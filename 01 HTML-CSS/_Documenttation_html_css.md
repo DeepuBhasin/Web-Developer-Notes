@@ -252,7 +252,7 @@ Example :
 3. When we using min/max width
 
 
-![Min-width](./images/max-width-min-width-4.mp4)
+[![Min-width](./images/max-width-min-width-3.png)](./images/max-width-min-width-4.mp4)
 ---
 
 ## 📘Responsive Design
