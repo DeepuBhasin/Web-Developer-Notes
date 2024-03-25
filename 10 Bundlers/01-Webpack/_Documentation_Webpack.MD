@@ -455,7 +455,7 @@ color: green;
 font-weight: bold;
 }
 ```
-3. **HelloWorldButton.js**
+2. **HelloWorldButton.js**
 
 ```js
 // Loading CSS File as normal import
@@ -480,7 +480,7 @@ class HelloWorldButton {
 export default HelloWorldButton
 ```
 
-4. **index.js**
+3. **index.js**
 
 ```js
 import HelloWorldButton from './HelloWorldButton'
@@ -489,7 +489,7 @@ const helloWorldButton = new HelloWorldButton();
 helloWorldButton.render();
 ```
 
-5. **web.config.js** : Overall, this configuration tells Webpack to bundle your JavaScript application starting from index.js, outputting the result to bundle.js in the dist directory. It also includes a rule for processing CSS files using style-loader and css-loader.
+4. **web.config.js** : Overall, this configuration tells Webpack to bundle your JavaScript application starting from index.js, outputting the result to bundle.js in the dist directory. It also includes a rule for processing CSS files using style-loader and css-loader.
 
 ```js
 const path = require('path');
@@ -520,7 +520,7 @@ module.exports = {
 }
 ```
 
-6. **package.json**
+5. **package.json**
 
 ```js
 "scripts": {
@@ -528,7 +528,7 @@ module.exports = {
 },
 ```
 
-7. Run command
+6. Run command
 
 ```
 npm run build
@@ -837,6 +837,20 @@ module.exports = {
 ```
 
 
+5. **package.json**
+
+```js
+"scripts": {
+  "build": "webpack --config webpack.config.js"
+},
+```
+
+6. Run command
+
+```
+npm run build
+```
+
 **⚠️Note :** you can load other css/sass into another css/sass files by using
 
 1. For CSS
@@ -844,7 +858,7 @@ module.exports = {
 @import url("./path/to/css/file.css");
 ```
 
-1. For SASS
+2. For SASS
 
 ```css
 @import "./path/to/scss/file.scss";
@@ -853,62 +867,146 @@ module.exports = {
 
 ## 📘2. Loaders (SCSS/SASS)
 
-* Command to install package
+* We are loading Normal/Module scss or sass file just need to set rules only. 
+
+1. **Command to install package**
 
 ```
-npm install sass-loader sass --save-dev
+npm install sass-loader css-loader style-loader --save-dev
 ```
 
-* only this code is change rest of the above code is same
-```scss
-// hello-world-button.scss
-$font-size : 20px;
-$background-color : green;
+2. **HelloWorldButton.module.scss**
+
+```css
+$font-size: 20px;
+$background-color: green;
 $button-font-color: white;
-$text-font-color :red;
+$text-font-color: red;
 
 .hello-world-button {
-    font-size: $font-size;
-    padding: 7px 15px;
-    background: $background-color ;
-    color: $button-font-color;
-    outline: none;
+  font-size: $font-size;
+  padding: 7px 15px;
+  background: $background-color;
+  color: $button-font-color;
+  outline: none;
 }
 
 .hello-world-text {
-    color: $text-font-color;
-    font-weight: bold;
+  color: $text-font-color;
+  font-weight: bold;
 }
 ```
 
-* Webpack File
+2. **HelloWorldButton.js**
+
+```js
+// Loading CSS File
+import style from "./HelloWorldButton.module.scss"
+
+class HelloWorldButton {
+    render() {
+        const button = document.createElement('button');
+        button.innerHTML = 'Hello World';
+        button.classList.add(style['hello-world-button'])
+        button.onclick = function () {
+            const p = document.createElement('p');
+            p.innerHTML = 'Hello World';
+            p.classList.add(style['hello-world-text']);
+            body.appendChild(p);
+        }
+        const body = document.querySelector('body');
+        body.appendChild(button);
+    }
+}
+
+export default HelloWorldButton
+```
+
+3. **index.js**
+
+```js
+import HelloWorldButton from './HelloWorldButton'
+
+const helloWorldButton = new HelloWorldButton();
+helloWorldButton.render();
+```
+
+
+**A. Create Internal CSS using style tag with style-loader by using style-loader**
+
+*** web.config.js**
 
 ```js
 const path = require('path');
 
 module.exports = {
-    entry: './src/index.js',
+    entry: path(resolve, './src/index.js'),
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, './dist'),
+        clean: true
     },
-    mode: 'none',
+    mode: 'development',
     module: {
         rules: [
             {
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader']
-            },
-            {
-                // load scss/sass file
-                test: /\.s[ac]ss$/,
-                // loader will load from right to left
-                use: ['style-loader', 'css-loader', 'sass-loader']
+                // loading s[ac]ss files only
+                test: /\.module.s[ac]ss$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    'sass-loader'
+                ]
             }
         ]
     }
 }
 ```
+**B. Create External CSS files using mini-css-extract-plugin**
+
+* **webpack.config.js**
+```js
+const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+module.exports = {
+    entry: path(resolve, './src/index.js'),
+    output: {
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, './dist'),
+        clean: true
+    },
+    mode: 'development',
+    module: {
+        rules: [
+            {
+                // loading s[ac]ss files only
+                test: /\.module.s[ac]ss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            // creating class name
+                            modules: {
+                                localIdentName: '[local]--[md4:hash:7]'
+                            }
+                        }
+                    },
+                    'sass-loader'
+                ]
+            }
+        ]
+    },
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: 'styles.css'
+        })
+    ]
+}
+```
+
+
 
 ## 📘3. Loader (JS)
 * by default **we don't** need any loader to load JS files
