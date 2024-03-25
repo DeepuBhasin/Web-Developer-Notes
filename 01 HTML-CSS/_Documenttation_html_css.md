@@ -4,6 +4,7 @@
 3. Always follow Separation of concern like write css in css files and js in js files for good practice
 4. **kebab case** mostly use in CSS example **main-heading**
 5. Real world we mostly use classes instead of id for future use
+6. html validator is use to check html validations
 
 ---
 
@@ -65,36 +66,41 @@ h1 {
 
 ## 📘Selectors
 
-1. **Id** : #
-2. **Class** : .
-3. **Element** : body, h1 div etc
-4. **Nested** : in below example it will select all **p** elements in **about** id
 
-```css
-#about p {
-    color: red
-}
-```
+| Sr No | Name               | Selection Criteria                                                                       |
+| ----- | ------------------ | ---------------------------------------------------------------------------------------- |
+| 1     | Class              | . (dot symbol)                                                                           |
+| 2     | id                 | # (hash symbol)                                                                          |
+| 3     | Element            | name of element (body, p, h1)                                                            |
+| 4     | Nested Element     | article div p (selecting p element which exist in article then div)                      |
+| 5     | Multiple Selectors | h1, h2, h3, p, li {  color: green;}                                                      |
+| 6     | Adjacent Selectors | h1 + p (it will select all only those p elements which are immediately after h elements) |
+| 7     | Pseudo-Classes     | : (colon symbol)                                                                         |
+| 8     | Pseudo Element     | :: (double colon)                                                                        |
+
+
+1. **Adjacent Selector**
+
 ```html
- <div id="about">
-    <h2 id="about-heading">About</h2>
-    <!-- Apply here -->
-    <p>Hello</p>
-    <!-- Apply here -->
-    <p>Hello</p>
-    <!-- Not here -->
-    <span>Hello</span>
-</div>
-```
-
-5. **Multiple Selectors**
-```css
-h1, h2, h3, p, li {
-    color: green;
+<style>
+h2+p {
+    color: blue;
 }
+</style>
+
+<h2>This is a heading</h2>
+<p>This paragraph will be blue because it's immediately preceded by an h2 element.</p>
+
+<h2>Another heading</h2>
+<p>This paragraph will NOT be blue because it's not immediately preceded by an h2 element.</p>
+
+ <!-- Will not work here --->
+
+<h3>Yet another heading</h3>
+<p>This paragraph will be blue because it's immediately preceded by an h2 element.</p>
 ```
 
-6. **Pseudo-Classes**
+2. **Pseudo-Classes**
 * These classes are work on all elements like p, headings etc but it should always exist with in the select element eg in below we have selected article element
 
 ```css
@@ -133,7 +139,12 @@ article li:hover {
 }
 ```
 
+3. **Pseudo Elements**
 
+1. ::first-letter
+2. ::first-line
+3. ::after{content  : "Text Here", color : red, font-size:10px}
+4. ::before{content  : "Text Here", color : red, font-size:10px}
 
 ---
 
@@ -277,19 +288,20 @@ body {
 ## 📘Block-Inline
 
 * **Block Elements :**
-1. are those elements which takes whole width example **li, div, p, h1**
-2. We can apply margin, padding, positions like top, right etc
+1. Are those elements which takes whole width example **li, div, p, h1** and create line breaks after them.
+2. We can apply margin, padding, positions like top, right etc.
 
 ```css
 #box{
     display : block;
 }
 ```
+![BlockLevelElement](./images/block-element.png)
+
 
 * **Inline Elements :**
-1. are those elements which does not take
-whole width instead only takes element/content width example **img, a**
-2. We cannot apply margin, padding, positions etc
+1. Are those elements which does not take whole width instead only takes element/content width example **img, a, strong**
+2. We cannot apply margin-top/bottom, padding-top/bottom, positions like top, right etc
 
 ```css
 #box {
@@ -297,15 +309,23 @@ whole width instead only takes element/content width example **img, a**
 }
 ```
 
+![InlineElement](./images/inline.png)
+
+
 * **Inline-Block** :
 1. this will create element block and inline element in which will not take whole width
-2. We can also apply margin, padding, positions like top, right etc
+2. We can also apply margin-top/bottom, padding-top/bottom, positions like top, right etc
 
 ```css
 #box {
     display: inline-Block;
 }
 ```
+![InlineBlock](./images/inline-block.png)
+
+
+**⚠️Note :** **img** elements are inline-block elements, so margie-top/bottom & padding-top/width also width-height will work on it
+
 ---
 
 
@@ -316,6 +336,12 @@ whole width instead only takes element/content width example **img, a**
 3. Absolute : Positioned relative to its parent element that is positioned **relative**. If we does not provide relative to its parent then it will take **body** is reference.
 4. Fixed : Position relative to the **viewport**
 5. Sticky : Positioned based on scroll position
+
+![positions](./images/positions.png)
+
+![PositionedValues](./images/positioned-example.png)
+
+⚠️ **Note :** Never use these positions in real world for complex designs
 
 ---
 
