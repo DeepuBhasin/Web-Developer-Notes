@@ -66,25 +66,19 @@ module.exports= {
 
 
 ---
-## 📘How Webpack works
+## 📘How Webpack works & Why do we need
+
+![load-image](./images/use-of-webpack.png)
 
 ![WebpackDependencyGraph](./images/webpack-dependency-image.png)
 
 
 Webpack will locate the **index.js** file as the entry point for the project. Upon entry, it will identify files, such as JavaScript, CSS, or image files, with dependencies using **require or import statements**, while disregarding any files that are not imported into any other file. This demonstrates Webpack's intelligence in recognizing and managing dependencies within the project. After all optimizations, it will create bundle files (such as bundle.js, bundle.css). These bundle files are then used in the **index.html** file.
 
----
-
-
-## 📘Why do we need
-1. Eliminate the sequence of including javascript
+1. **Load all stuff from webpack rather than loading from different-different files in a single html file example Images, CSS files, Js Files, Json Files etc**
 2. Make Build, Js & CSS Minify & entry File
-3. **Load all stuff from webpack rather than loading from different-different files in a single html file example Images, CSS files, Js Files, Json Files etc**
+3. Eliminate the sequence of including javascript
 
-![load-image](./images/use-of-webpack.png)
-
-
-4. When we are loading every thing from **webpack** we have to load webpage after run **npx webpack** command
 
 Example
 ```html
@@ -101,14 +95,13 @@ Example
 </body>
 </html>
 ```
+
 ```javascript
 // hello-world.js
 function helloWorld() {
     console.log('Hello world')
 }
-```
 
-```javascript
 //index.js
 helleWorld();
 ```
@@ -116,37 +109,49 @@ helleWorld();
 
 ---
 ## 📘 Install Package
+1.  Folder Structure
 
-* It require 3 things to create Structure
-  * dist folder & create *index.html* file for **Entry Point**
-  * src folder & create *index.js* file for **Entry Point**
-  * package.json file
+```
+src/
+    ├── index.js (entry file)
+    ├── js
+    │   └── script.js
+    └── styles
+        └── style.css
+index.html
+```
 
-1. Run Commands
+2. Create package.json file
+
 ```
 npm inti -y
 ```
+3. Install packages
+
+   * webpack : To create bundler
+   * webpack-cli : its a tool which allow you to run webpack commands
+
 
 ```
 npm install webpack webpack-cli --save-dev
 ```
-* webpack-cli : its a tool which allow you to run webpack from terminal
 
-2. Create **src Folder** and Place all js files over there
-* hello-world.js
+4. Create **src Folder** and Place all js files over there
+
+* Javascript File
 
 ```javascript
+// HelloWorld.js
 export default function helloWorld() {
     console.log('Hello world')
 }
-```
 
-* Index.js
-```javascript
+// Index.js
 import helloWorld from './hello-world.js'
 helloWorld();
 ```
-3. Create **index.html** as same level of **src folder** and include only singel file
+
+* Html file
 
 ```html
 <!DOCTYPE html>
@@ -161,12 +166,12 @@ helloWorld();
 </body>
 </html>
 ```
-4. Run command
+5. Run command : This command will create **dist** folder and create **main.js** file in it
 
 ```
 npx webpack
 ```
-* this command will create **dist** folder and create **main.js** file in it
+
 
 ---
 
