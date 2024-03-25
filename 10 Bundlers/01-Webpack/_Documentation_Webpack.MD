@@ -16,7 +16,7 @@ npm install --save-dev <package-name>
 * To remove Package
 ```
 npm r <package-name>
-npm remove <package-name>
+npm uninstall <package-name>
 ```
 
 * To install multiple packages
@@ -44,19 +44,21 @@ module.exports= {
 
 ## 📘Syllabus
 
-1. Import Modules (es6 and common.js)
-2. Custom Configuration
-3. Asset (loading images)
-4. Loaders
+1. How Webpack works & Why do we need
+2. Basic Packages and Structure
+3. Import Modules (es6 and common.js)
+4. Custom Configuration
+5. Asset (loading images)
+6. Loaders
    1. CSS Loaders (CSS, S[AS]SS,POSTCSS)
    2. JS Loaders
-5. Multiple Entry Files
-6. Webpack plugins
-7. Improving Browser support
-8. Strategies for code splitting
-9. Source Maps
-10. Dev & Hot Middleware
-11. Optimization (production and development builds)
+7. Multiple Entry Files
+8. Webpack plugins
+9. Improving Browser support
+10. Strategies for code splitting
+11. Source Maps
+12. Dev & Hot Middleware
+13. Optimization (production and development builds)
     1.  Bundle analysis
     2.  Duplicating prevention
     3.  Lazy Loading
@@ -66,8 +68,8 @@ module.exports= {
     7.  CSS Splitting
     8.  Compressing your bundles
     9.  Optimization Images
-12. Module Federation
-13. Build React App using webpack
+14. Module Federation
+15. Build React App using webpack
     1.  React specification Configurations
     2.  Route Management
     3.  CSS enhancement
@@ -118,7 +120,7 @@ helleWorld();
 ![Image](./images/order-issues.png)
 
 ---
-## 📘 Install Package
+## 📘 Basic Packages and Structure
 1.  **Folder Structure**
 
 ```
@@ -187,28 +189,35 @@ npx webpack
 
 ## 📘Module Export/Import using Node & ES6
 
-**By using ES6 (Import/Export)**
-```js
+Create all files on root directory
 
-// sum1.js
+1. **By using ES6 (Import/Export)**
+
+```js
+// sumOfTwo.js
 export default (function (a, b) {
     return a + b
 })
 
-// sum2.js
+// sumOfThree.js
 export default (function (a, b, c) {
     return a + b + c;
 })
 
-//index.js
-import sumOfTwo from "./sum1.js";
-import sumOfThere from "./sum2.js";
+// index.js
 
+export * from "./SumOfTwo.js";
+export * from "./SumOfThree.js";
+
+//main.js
+import sumOfTwo from "./sumOfTwo.js";
+import sumOfThere from "./sumOfThree.js";
 
 console.log(sumOfTwo(1, 2));
 console.log(sumOfThere(1, 2, 3));
-
 ```
+**⚠️ Note :** Instead of multiple lines of import statements, you can create an **index.js or index.ts** file where you import all files. Then, you can import this index.js file to conveniently access all modules
+
 
 ```html
 <!-- index.html -->
@@ -227,50 +236,12 @@ console.log(sumOfThere(1, 2, 3));
 
 </html>
 ```
-OR
 
-```
-npm install webpack webpack-cli --save-dev
-```
+
+1. **By using Node.js (require)**
 
 ```js
-// using webpack
-const path = require('path');
-
-module.exports = {
-    // entry point for webpack
-    entry: './index.js',
-
-    output: {
-        // output file name
-        filename: 'bundle.js',
-
-        // it will create bundler.js file in dist folder
-        path: path.resolve(__dirname, './dist')
-    }
-}
-```
-
-```js
-//package.json
-"scripts": {
-    "build": "npx webpack --mode development --config webpack.config.js"
-}
-```
-```
-npm run start
-```
-```
-cd dist/
-node bundle.js
-```
-
-
-
-**By using Node.js (require)**
-
-```js
-//sum1.js
+// sumOfTwo.js
 function sum(a, b) {
     return a + b
 }
@@ -284,27 +255,29 @@ module.exports = {
     multiply
 }
 
-// sum.js
+// sumOfThree.js
 function sum(a, b, c) {
     return a + b + c;
 }
 
 module.exports = sum
 
-//index.js
-// no need to add ".js" because node.js understand automatically
-const { sum: sumOfTwoNumber, multiply } = require("./sum1");
-const sumOfThere = require("./sum2");
 
-// Note : instead of multiple line of import you can create a index.js file where you will import all files then we will import this index.js file
+// index.js
+const { sum: sumOfTwoNumber, multiply } = require("./sumOfTwo");
+const sumOfThere = require("./sumOfThree");
 
 console.log(sumOfTwoNumber(1, 2));
 console.log(sumOfThere(1, 2, 3));
 console.log(multiply(2, 2));
 ```
+
+* Run Command
+
 ```
 node index.js
 ```
+**⚠️ Note :** in **Node** No need to add ".js" because node.js understand automatically
 
 ---
 # 📔Environment variable
