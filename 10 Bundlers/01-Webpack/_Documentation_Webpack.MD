@@ -45,8 +45,8 @@ module.exports= {
 ## 📘Syllabus
 
 1. How Webpack works & Why do we need
-2. Basic Packages and Structure
-3. Import Modules (es6 and common.js)
+2. Import Modules (es6 and common.js)
+3. Basic Packages and Structure
 4. Basic Configurations
 5. Asset (loading images)
 6. Loaders
