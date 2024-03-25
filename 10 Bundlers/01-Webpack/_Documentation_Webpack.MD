@@ -85,7 +85,7 @@ module.exports= {
 
 Webpack will locate the **index.js** file as the entry point for the project. Upon entry, it will identify files, such as JavaScript, CSS, or image files, with dependencies using **require or import statements**, while disregarding any files that are not imported into any other file. This demonstrates Webpack's intelligence in recognizing and managing dependencies within the project. After all optimizations, it will create bundle files (such as bundle.js, bundle.css). These bundle files are then used in the **index.html** file.
 
-Why do we need 
+Why do we need
 
 1. **Load all stuff from webpack rather than loading from different-different files in a single html file example Images, CSS files, Js Files, Json Files etc**
 2. Make Build, Js & CSS Minify & entry File
@@ -162,6 +162,8 @@ export default function helloWorld() {
 import helloWorld from './hello-world.js'
 helloWorld();
 ```
+
+**⚠️ Note :** we always have to create **index.js** file always
 
 * Html file
 
@@ -3263,7 +3265,7 @@ createModelButton()
 
 
 
-**⚠️ Note :** we can load multiple dynamic loadings 
+**⚠️ Note :** we can load multiple dynamic loadings
 
 ```js
 // bootstrap & jquery are packages which are installed by using npm
