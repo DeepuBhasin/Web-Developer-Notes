@@ -311,7 +311,7 @@ module.exports = {
     entry: path.resolve(__dirname, './src/index.js'),
 
     output: {
-        // output file name 
+        // output file name
         filename: 'bundle.js',
 
         // it will create bundler.js file in dist folder
@@ -406,82 +406,58 @@ module.exports = {
 
 # 📔Loaders
 
+* In JavaScript, when using module systems like CommonJS or ES6 modules, the import statement is primarily used for loading JavaScript modules. For other file types like CSS, SASS, LESS, JSON, and images, you typically need loaders when using tools like Webpack or Parcel to handle their loading and processing within your application. These loaders transform the files into valid JavaScript modules or assets that can be consumed by the application
+* Loader always load from **right to left**
+
+**Various Types of Loader :**
+
 1. CSS Loader (loading css files)
 2. SCSS Loader (loading s[a|c]ss files)
 3. JS Loader (loading js files)
 4. File Loader (only loading png, svg, jpg, jpeg, gif files etc not optimizing)
 5. TypeScript Loader
 
-## 📘1. Loaders (CSS/Style)
+## 📘1. Load CSS Files
 
-a. Simple CSS
+**I. To Inject CSS Code into Internal CSS with in style tags**
 
-* It help to load that files which we cannot import using modules
-* Import **CSS** Files like *SASS, LESS, Handlebars, XML* and so much
-* Loaders are javascript libraries which allowed you to load all stuffs
-* These loader always inject our CSS code into **style tags**
+* We need following loaders : 
+   1. CSS Loader : For understand CSS Code
+   2. Style Loader : For ejecting CSS code into style tags but All Output build css code will inject into js build file (check in below example)
 
-**1. Normal CSS files**
+**1. Loading CSS as normal import using style loader**
 
 ```js
-const path = require('path');
-
-module.exports = {
-    entry: './src/index.js',
-    output: {
-        // by the way, using style loader bundles your CSS together with your javascript into a single resulting file called bundle
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, './dist'),
-    },
-    mode: 'none',
-    module: {
-        rules: [
-            {
-                test: /\.css$/,
-                use: [
-                    //Then second the style loader takes the CSS and inject it into the page using style tags
-                    'style-loader',
-
-                    //first the css loader reads the contents of the css file and return this contents, but it doesn't do anything  else with this css
-                    'css-loader'
-                ]
-            }
-        ]
-    }
-}
+import from "componentFile.css" 
 ```
-⚠️ **Note:**
-* Loader always load from **right to left**
-* When we were using asset modules **'asset/source'**, we didn't have to install any additional NPM packages because Webpack include asset modules out of the box
-* On the other hand, when using **loaders** we need to install them **explicitly**, Every Webpack loader comes as NPM package that you can add as a dependency to your application, so in this case we have to add loaders
-   1. CSS Loaders
-   2. Styles Loaders
+
+1. **Command to install packages**
 
 ```
 npm install css-loader style-loader --save-dev
 ```
 
-2. hello-world-button.css
+2. **HelloWorldButton.css**
 
 ```css
-.hello-world-button{
-    font-size: 20px;
-    padding :7px 15px;
-    background: green;
-    color: white;
-    outline: none;
+.hello-world-button {
+  font-size: 20px;
+  padding: 7px 15px;
+  background: green;
+  color: white;
+  outline: none;
 }
 
 .hello-world-text {
-    color : green;
-    font-weight: bold;
+  color: green;
+  font-weight: bold;
 }
 ```
-
-3. hello-world-button.js
+3. **HelloWorldButton.js**
 
 ```js
-import "./hello-world-button.css"
+// Loading CSS File as normal import
+import "./HelloWorldButton.css"
 
 class HelloWorldButton {
     render() {
@@ -501,51 +477,40 @@ class HelloWorldButton {
 
 export default HelloWorldButton
 ```
-4. index.js
+
+4. **index.js**
 
 ```js
-import HelloWorldButton from './components/hello-world-button'
+import HelloWorldButton from './HelloWorldButton'
 
 const helloWorldButton = new HelloWorldButton();
 helloWorldButton.render();
 ```
 
-5. Command
-
-```
-npx webpack
-```
-![Loader](./images/loader-js.png)
-
-
-**b. Module CSS**
-
-**1. By Using CSS-Loader**
-
-1. Webpack
+5. **web.config.js** : Overall, this configuration tells Webpack to bundle your JavaScript application starting from index.js, outputting the result to bundle.js in the dist directory. It also includes a rule for processing CSS files using style-loader and css-loader.
 
 ```js
 const path = require('path');
 
 module.exports = {
-    entry: './src/index.js',
+    entry: path.resolve(__dirname, './src/index.js'),
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, './dist'),
+        clean: true
     },
-    mode: 'none',
+    mode: 'development',
     module: {
         rules: [
             {
+                // this rule only deal with css files
                 test: /\.css$/,
                 use: [
-                    {
-                        loader: 'style-loader'
-                    },
-                    {
-                        // this option enable to load css as module
-                        loader: 'css-loader', options: { modules: true }
-                    }
+                    //  This loader takes the CSS and injects it into the page using <style> tags, allowing the styles to be applied to the document.
+                    'style-loader',
+
+                    //This loader reads the contents of the CSS file and returns the CSS as a string, allowing Webpack to process it further if needed.
+                    'css-loader'
                 ]
             }
         ]
@@ -553,7 +518,31 @@ module.exports = {
 }
 ```
 
-2. clearButton.css
+6. **package.json**
+
+```js
+"scripts": {
+    "build": "webpack --config webpack.config.js"
+},
+```
+
+7. Run command
+
+```
+npm run build
+```
+
+![Loader](./images/loader-js.png)
+
+
+
+**2. Loading CSS as variable like Module concept using style loader**
+
+```js
+import style from "./componentFile.css"
+```
+
+1. **ClearButton.css**
 
 ```css
 button {
@@ -563,16 +552,18 @@ button {
 .button {
   background-color: red;
 }
-
 ```
 
-3. clearButton.js
+3. **ClearButton.js**
 
 ```js
-import style from "./clearButton.css";
+// Loading CSS File as Variable
+import style from "./ClearButton.css";
 
 export default function renderTestButton() {
     const el = document.createElement("button");
+    
+    // Using variable here to access css classes
     el.classList.add([`${style.button}`])
     el.innerHTML = "clear";
     el.onclick = function () {
@@ -581,7 +572,7 @@ export default function renderTestButton() {
     document.body.appendChild(el);
 }
 ```
-4. index.js
+4. **index.js**
 
 ```js
 import renderTestButton from "./clearButton"
@@ -589,37 +580,39 @@ import renderTestButton from "./clearButton"
 renderTestButton();
 ```
 
-5. index.html
+5. **webpack.config.js**
 
-```html
-<!DOCTYPE html>
-<html lang="en">
+```js
+const path = require('path');
 
-<head>
-    <title>Document</title>
-    <link rel="stylesheet" href="./dist/styles.css">
-</head>
-
-<body>
-    <h1 class="header">Hey this is webpack</h1>
-    <button class="button">Click Me</button>
-    <script src="./dist/bundle.js"></script>
-</body>
-
-</html>
+module.exports = {
+    entry: path.resolve(__dirname, './src/index.js'),
+    output: {
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, './dist'),
+        clean: true
+    },
+    mode: 'development',
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    {
+                        loader: 'css-loader', options: { modules: true }
+                    }
+                ]
+            }
+        ]
+    }
+}
 ```
-6. Package.json
-```json
-"scripts": {
-    "build": "webpack --mode development --config=webpack.config.js"
-},
-```
-
 ![moduleCss](./images/module-css.png)
 
+**II. To Inject CSS Code into External File :** 
 
-
-**2. By Using MiniCssExtractPlugin (best one)**
+Using the MiniCssExtractPlugin in the Webpack configuration allows for the creation of an external CSS file containing all CSS code.
 
 1. webpack.config.js
 
@@ -841,6 +834,9 @@ export default HelloWorldButton
 ```
 
 ## 📘4. Loader (File Loader (png, svg, jpg, gif files etc))
+
+When we were using asset modules **'asset/source'**, we didn't have to install any additional NPM packages because Webpack include asset modules out of the box
+
 
 1. Command
 ```
