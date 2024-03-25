@@ -424,6 +424,11 @@ module.exports = {
 * We need following loaders : 
   1. css-loader : For understand CSS Code
   2. style-loader : For ejecting CSS code into style tags but All Output build css code will inject into js build file (check in below example)
+    
+    ```
+    npm install css-loader style-loader --save-dev
+    ```
+
 
 **1. Loading CSS as normal import using style loader**
 
@@ -431,13 +436,8 @@ module.exports = {
 import from "componentFile.css" 
 ```
 
-1. **Command to install packages**
 
-```
-npm install css-loader style-loader --save-dev
-```
-
-2. **HelloWorldButton.css**
+1. **HelloWorldButton.css**
 
 ```css
 .hello-world-button {
@@ -532,8 +532,6 @@ module.exports = {
 npm run build
 ```
 
-![Loader](./images/loader-js.png)
-
 **2. Loading CSS as variable like Module concept using style loader**
 
 ```js
@@ -611,23 +609,80 @@ module.exports = {
 **B. To Inject CSS Code into External File :** 
 
 * We need following loaders : 
-  1. CSS Loader : For understand CSS Code
+  1. css-loader : For understand CSS Code
   2. mini-css-extract-plugin : For ejecting CSS code into External file
+    
+    ```
+    npm i mini-css-extract-plugin css-loader --save-dev
+    ```
 
-
-**1. Loading CSS as normal import using style loader**
+**1. Loading CSS as normal import using mini-css-extract-plugin**
 
 ```js
 import from "componentFile.css" 
 ```
 
-1. webpack.config.js
+
+1. **HelloWorldButton.css**
+
+```css
+.hello-world-button {
+  font-size: 20px;
+  padding: 7px 15px;
+  background: green;
+  color: white;
+  outline: none;
+}
+
+.hello-world-text {
+  color: green;
+  font-weight: bold;
+}
+```
+
+2. **HelloWorldButton.js**
+
+```js
+// Loading CSS File
+import "./HelloWorldButton.css"
+
+class HelloWorldButton {
+    render() {
+        const button = document.createElement('button');
+        button.innerHTML = 'Hello World';
+        button.classList.add('hello-world-button')
+        button.onclick = function () {
+            const p = document.createElement('p');
+            p.innerHTML = 'Hello World';
+            p.classList.add('hello-world-text');
+            body.appendChild(p);
+        }
+        const body = document.querySelector('body');
+        body.appendChild(button);
+    }
+}
+
+export default HelloWorldButton
+```
+
+3. **index.js**
+
+```js
+import HelloWorldButton from './HelloWorldButton'
+
+const helloWorldButton = new HelloWorldButton();
+helloWorldButton.render();
+```
+
+
+4. **webpack.config.js**
 
 ```js
 const path = require("path");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
+    mode: "development",
     entry: path.resolve(__dirname, "./src/index.js"),
     output: {
         filename: "bundle.js",
@@ -637,27 +692,12 @@ module.exports = {
     module: {
         rules: [
             {
-                // for loading normal css
-                test: /\.css$/,
-                exclude: /\.module\.css$/,
-                use: ['style-loader', 'css-loader']
-            },
-            {
                 // for loading module css
-                test: /\.module\.css$/,
+                test: /\.css$/,
                 use: [
                     MiniCssExtractPlugin.loader,
                     {
-                        loader: 'css-loader',
-                        options: {
-                            modules: {
-                                // for production mode
-                                // localIdentName: '[hash:base64]'
-
-                                // for development mode
-                                localIdentName: '[local]--[md4:hash:7]'
-                            }
-                        }
+                        loader: 'css-loader'
                     }
                 ]
             },
@@ -665,39 +705,36 @@ module.exports = {
     },
     plugins: [
         new MiniCssExtractPlugin({
+            // Extracting CSS code into Style File
             filename: 'styles.css',
         })
     ]
 };
 ```
-
-2. clearButton.module.css
-
-```css
-button {
-  background-color: yellow;
-}
-
-.button {
-  background-color: red;
-}
-```
-
-3. clearButton.js
+5. Package.json
 
 ```js
-import style from "./clearButton.module.css";
-
-export default function renderTestButton() {
-    const el = document.createElement("button");
-    el.classList.add([`${style.button}`])
-    el.innerHTML = "clear";
-    el.onclick = function () {
-        alert("clear button")
-    }
-    document.body.appendChild(el);
-}
+"scripts": {
+    "build": "webpack --config webpack.config.js"
+},
 ```
+
+6. Run Command
+
+```
+npm run build
+```
+
+**2. Loading CSS as variable like Module concept using mini-css-extract-plugin**
+
+```js
+import style from "./componentFile.css"
+```
+
+1. 
+
+
+
 
 **⚠️Note :** you can load other css/sass into another css/sass files by using
 
@@ -706,7 +743,7 @@ export default function renderTestButton() {
 @import url("./path/to/css/file.css");
 ```
 
-2. For SASS
+1. For SASS
 
 ```css
 @import "./path/to/scss/file.scss";
