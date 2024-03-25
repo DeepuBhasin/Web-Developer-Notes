@@ -46,19 +46,21 @@ module.exports= {
 
 1. How Webpack works & Why do we need
 2. Import Modules (es6 and common.js)
-3. Basic Packages and Structure
-4. Basic Configurations
-5. Asset (loading images)
-6. Loaders
+3. Static and Dynamic loading
+4. Basic Packages and Structure
+5. Basic Configurations
+6. Setting Environment or Constant variables
+7. Asset (loading images)
+8. Loaders
    1. CSS Loaders (CSS, S[AS]SS,POSTCSS)
    2. JS Loaders
-7. Multiple Entry Files
-8. Webpack plugins
-9. Improving Browser support
-10. Strategies for code splitting
-11. Source Maps
-12. Dev & Hot Middleware
-13. Optimization (production and development builds)
+9. Multiple Entry Files
+10. Webpack plugins
+11. Improving Browser support
+12. Strategies for code splitting
+13. Source Maps
+14. Dev & Hot Middleware
+15. Optimization (production and development builds)
     1.  Bundle analysis
     2.  Duplicating prevention
     3.  Lazy Loading
@@ -68,8 +70,8 @@ module.exports= {
     7.  CSS Splitting
     8.  Compressing your bundles
     9.  Optimization Images
-14. Module Federation
-15. Build React App using webpack
+16. Module Federation
+17. Build React App using webpack
     1.  React specification Configurations
     2.  Route Management
     3.  CSS enhancement
@@ -212,8 +214,20 @@ node index.js
 ```
 **⚠️ Note :** in **Node** No need to add ".js" because node.js understand automatically
 
+---
+
+## 📘Static and Dynamic loading
+
+```js
+// synchronous
+import {} from "node_module";
+
+// asynchronous
+import('file.js');
+```
 
 ---
+
 ## 📘 Basic Packages and Structure
 1.  **Folder Structure**
 
@@ -331,82 +345,29 @@ npm run build
 ![OutputIntoSingleFile](./images/output-into-singel-file.png)
 
 
-
-# 📔Environment variable
-
-## 📘1. By using only NODE_ENV variable (not to much good)
-
-* **Parsing Environment variable on windows**
-
-1. By using package.json file
-
-```json
-"scripts": {
-"dev": "set NODE_ENV=development && webpack --config=webpack.development.js",
-"prod": "set NODE_ENV=production &&  webpack --config=webpack.production.js"
-},
-```
-
-2. By using webpack.config.js file
-
-```js
-mode : "production"
-// OR
-mode : "development"
-```
-
-* **For any platform like window, mack, linux**
-
-1. Package name
-
-```
-npm i cross-env
-```
-
-2. package.json
-
-```json
-"scripts": {
-"dev": "cross-env NODE_ENV=development && webpack --config=webpack.development.js",
-"prod": "cross-env NODE_ENV=production &&  webpack --config=webpack.production.js"
-},
-```
+## 📘Setting Environment or Constant variables
 
 
-* index.js
-
-```javascript
-
-console.log(process.env.NODE_ENV);
-
-if(process.env.NODE_ENV === 'development') {
-
-}
-```
----
-
-## 📘2. By Using Any Env Variable (best one)
-
-1. Package Names
+1. **Package Names**
 
 ```
 npm dotenv env-cmd
 ```
 
-2. .env.development
+2. **.env.development**
 ```
 #This is variable name
 FILE_TYPE="Uncompressed and Un-minify"
 ```
 
-3. .env.production
+3. **.env.production**
 
 ```
 #This is variable name
 FILE_TYPE="compressed and minify"
 ```
 
-4. webpack.config.js
+4. **webpack.config.js**
 
 ```js
 const path = require("path");
@@ -440,21 +401,6 @@ module.exports = {
 ![EnvironmentVariable](./images/environment-variable.png)
 
 ![EnvironmentVariable](./images/environment-variable-2.png)
----
-
-
-
-## 📘Static and Dynamic loading
-
-```js
-// synchronous
-import {} from "node_module";
-
-// asynchronous
-import('file.js');
-```
-
-
 
 ---
 
