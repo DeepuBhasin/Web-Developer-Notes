@@ -47,7 +47,7 @@ module.exports= {
 1. How Webpack works & Why do we need
 2. Basic Packages and Structure
 3. Import Modules (es6 and common.js)
-4. Custom Configuration
+4. Basic Configurations
 5. Asset (loading images)
 6. Loaders
    1. CSS Loaders (CSS, S[AS]SS,POSTCSS)
@@ -240,7 +240,7 @@ console.log(sumOfThere(1, 2, 3));
 ```
 
 
-1. **By using Node.js (require)**
+2. **By using Node.js (require)**
 
 ```js
 // sumOfTwo.js
@@ -264,7 +264,6 @@ function sum(a, b, c) {
 
 module.exports = sum
 
-
 // index.js
 const { sum: sumOfTwoNumber, multiply } = require("./sumOfTwo");
 const sumOfThere = require("./sumOfThree");
@@ -282,6 +281,57 @@ node index.js
 **⚠️ Note :** in **Node** No need to add ".js" because node.js understand automatically
 
 ---
+
+## 📘Basic Configurations
+
+1. **webpack.config.js**
+
+```js
+// to get the absolute path, it is available in node automatically
+const path = require('path');
+module.exports = {
+    // build mode
+    mode: 'production',
+
+    // entry point for webpack file
+    entry: path.resolve(__dirname, './src/index.js'),
+
+    output: {
+        // output file name 
+        filename: 'bundle.js',
+
+        // it will create bundler.js file in dist folder
+        path: path.resolve(__dirname, './dist'),
+
+        // for cleaning the dist folder
+        clean: true
+    },
+}
+```
+
+2. **package.json**
+
+```js
+"scripts": {
+    "build": "npx webpack --config webpack.config.js"
+},
+```
+
+3. Run Command
+
+```
+npm run build
+```
+
+![Basic-Custom-Configuration](./images/custom-configuration-basic.png)
+
+
+**⚠️ Note :** In both development and production environments, regardless of the number of JavaScript files involved, all code will be merged into a single file specified by the output filename parameter in the configuration. For example, if the output filename parameter is set to "bundle.js", the merged JavaScript code will be saved in a file named "bundle.js
+
+![OutputIntoSingleFile](./images/output-into-singel-file.png)
+
+
+
 # 📔Environment variable
 
 ## 📘1. By using only NODE_ENV variable (not to much good)
@@ -404,43 +454,7 @@ import {} from "node_module";
 import('file.js');
 ```
 
----
 
-
-## 📘Custom Configuration (Basic)
-* create **webpack.config.js**
-* Entry Point and Output Point
-
-
-```js
-// to get the absolute path, it is available in node automatically
-const path = require('path');
-
-module.exports = {
-    // entry point for webpack
-    entry: './src/index.js',
-
-    output: {
-         // output file name
-        filename: 'bundle.js',
-
-        // it will create bundler.js file in dist folder
-        path: path.resolve(__dirname, './dist')
-    },
-    mode: 'none'
-}
-```
-
-* Then run this command
-```
-npx webpack
-```
-![Basic-Custom-Configuration](./images/custom-configuration-basic.png)
-
-
-**⚠️ Note :** In both development and production environments, regardless of the number of JavaScript files involved, all code will be merged into a single file specified by the output filename parameter in the configuration. For example, if the output filename parameter is set to "bundle.js", the merged JavaScript code will be saved in a file named "bundle.js
-
-![OutputIntoSingleFile](./images/output-into-singel-file.png)
 
 ---
 
