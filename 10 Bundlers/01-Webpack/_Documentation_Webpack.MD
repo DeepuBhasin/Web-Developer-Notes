@@ -10,7 +10,15 @@
 * To install in dev we use
 ```
 npm i --save-dev <package-name>
+npm install --save-dev <package-name>
 ```
+
+* To remove Package
+```
+npm r <package-name>
+npm remove <package-name>
+```
+
 * To install multiple packages
 
 ```npm
@@ -75,6 +83,8 @@ module.exports= {
 
 Webpack will locate the **index.js** file as the entry point for the project. Upon entry, it will identify files, such as JavaScript, CSS, or image files, with dependencies using **require or import statements**, while disregarding any files that are not imported into any other file. This demonstrates Webpack's intelligence in recognizing and managing dependencies within the project. After all optimizations, it will create bundle files (such as bundle.js, bundle.css). These bundle files are then used in the **index.html** file.
 
+Why do we need 
+
 1. **Load all stuff from webpack rather than loading from different-different files in a single html file example Images, CSS files, Js Files, Json Files etc**
 2. Make Build, Js & CSS Minify & entry File
 3. Eliminate the sequence of including javascript
@@ -109,7 +119,7 @@ helleWorld();
 
 ---
 ## 📘 Install Package
-1.  Folder Structure
+1.  **Folder Structure**
 
 ```
 src/
@@ -121,12 +131,12 @@ src/
 index.html
 ```
 
-2. Create package.json file
+2. **Create package.json file**
 
 ```
-npm inti -y
+npm init -y
 ```
-3. Install packages
+3. **Install packages**
 
    * webpack : To create bundler
    * webpack-cli : its a tool which allow you to run webpack commands
@@ -136,7 +146,7 @@ npm inti -y
 npm install webpack webpack-cli --save-dev
 ```
 
-4. Create **src Folder** and Place all js files over there
+4. **Create src Folder and Place all js files over there**
 
 * Javascript File
 
@@ -162,11 +172,11 @@ helloWorld();
 </head>
 
 <body>
-    <script src="./src/index.js"></script>
+    <script src="./dist/main.js"></script>
 </body>
 </html>
 ```
-5. Run command : This command will create **dist** folder and create **main.js** file in it
+5. **Run command** : This command will create dist folder and create main.js file in it
 
 ```
 npx webpack
