@@ -120,74 +120,6 @@ helleWorld();
 ![Image](./images/order-issues.png)
 
 ---
-## 📘 Basic Packages and Structure
-1.  **Folder Structure**
-
-```
-src/
-    ├── index.js (entry file)
-    ├── js
-    │   └── script.js
-    └── styles
-        └── style.css
-index.html
-```
-
-2. **Create package.json file**
-
-```
-npm init -y
-```
-3. **Install packages**
-
-   * webpack : To create bundler
-   * webpack-cli : its a tool which allow you to run webpack commands
-
-
-```
-npm install webpack webpack-cli --save-dev
-```
-
-4. **Create src Folder and Place all js files over there**
-
-* Javascript File
-
-```javascript
-// HelloWorld.js
-export default function helloWorld() {
-    console.log('Hello world')
-}
-
-// Index.js
-import helloWorld from './hello-world.js'
-helloWorld();
-```
-
-**⚠️ Note :** we always have to create **index.js** file always
-
-* Html file
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title>Document</title>
-</head>
-
-<body>
-    <script src="./dist/main.js"></script>
-</body>
-</html>
-```
-5. **Run command** : This command will create dist folder and create main.js file in it
-
-```
-npx webpack
-```
-
-
----
 
 ## 📘Module Export/Import using Node & ES6
 
@@ -279,6 +211,74 @@ console.log(multiply(2, 2));
 node index.js
 ```
 **⚠️ Note :** in **Node** No need to add ".js" because node.js understand automatically
+
+
+---
+## 📘 Basic Packages and Structure
+1.  **Folder Structure**
+
+```
+src/
+    ├── index.js (entry file)
+    ├── js
+    │   └── script.js
+    └── styles
+        └── style.css
+index.html
+```
+
+2. **Create package.json file**
+
+```
+npm init -y
+```
+3. **Install packages**
+
+   * webpack : To create bundler
+   * webpack-cli : its a tool which allow you to run webpack commands
+
+
+```
+npm install webpack webpack-cli --save-dev
+```
+
+4. **Create src Folder and Place all js files over there**
+
+* Javascript File
+
+```javascript
+// HelloWorld.js
+export default function helloWorld() {
+    console.log('Hello world')
+}
+
+// Index.js
+import helloWorld from './hello-world.js'
+helloWorld();
+```
+
+**⚠️ Note :** we always have to create **index.js** file always
+
+* Html file
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="./dist/main.js"></script>
+</body>
+</html>
+```
+5. **Run command** : This command will create dist folder and create main.js file in it
+
+```
+npx webpack
+```
 
 ---
 
