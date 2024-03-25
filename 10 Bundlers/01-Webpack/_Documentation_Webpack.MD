@@ -51,8 +51,11 @@ module.exports= {
 5. Basic Configurations
 6. Setting Environment or Constant variables
 7. Loaders
-   1. CSS Loaders (CSS, S[AS]SS,POSTCSS)
-   2. JS Loaders
+   1. CSS Loader
+   2. SASS/SCSS Loader
+   3. JS Loaders
+   4. File Loader (Loading Images)
+   5. TypeScript Loader
 8. Multiple Entry Files
 9.  Webpack plugins
 10. Improving Browser support
@@ -421,11 +424,11 @@ module.exports = {
 
 **A. To Inject CSS Code into Internal CSS with in style tags**
 
-* We need following loaders : 
+* We need following loaders :
   1. css-loader : For understand CSS Code
   2. style-loader : For ejecting CSS code into style tags but All Output build css code will inject into js build file (check in below example)
-    
-* Install Packages    
+
+* Install Packages
 
 ```
 npm install css-loader style-loader --save-dev
@@ -435,7 +438,7 @@ npm install css-loader style-loader --save-dev
 **1. Loading CSS as normal import using style loader**
 
 ```js
-import from "componentFile.css" 
+import from "componentFile.css"
 ```
 
 
@@ -560,7 +563,7 @@ import style from "./ClearButton.css";
 
 export default function renderTestButton() {
   const el = document.createElement("button");
-  
+
   // Using variable here to access css classes
   el.classList.add([`${style.button}`])
   el.innerHTML = "clear";
@@ -608,13 +611,13 @@ module.exports = {
 ```
 ![moduleCss](./images/module-css.png)
 
-**B. To Inject CSS Code into External File :** 
+**B. To Inject CSS Code into External File :**
 
-* We need following loaders : 
+* We need following loaders :
   1. css-loader : For understand CSS Code
   2. mini-css-extract-plugin : For ejecting CSS code into External file
 
-* Install Packages    
+* Install Packages
 
 ```
 npm i mini-css-extract-plugin css-loader --save-dev
@@ -623,7 +626,7 @@ npm i mini-css-extract-plugin css-loader --save-dev
 **1. Loading CSS as normal import using mini-css-extract-plugin**
 
 ```js
-import from "componentFile.css" 
+import from "componentFile.css"
 ```
 
 
@@ -762,13 +765,13 @@ class HelloWorldButton {
         const button = document.createElement('button');
         button.innerHTML = 'Hello World';
 
-        // loading css from style variable 
+        // loading css from style variable
         button.classList.add(style['hello-world-button'])
         button.onclick = function () {
             const p = document.createElement('p');
             p.innerHTML = 'Hello World';
 
-            // loading css from style variable 
+            // loading css from style variable
             p.classList.add(style['hello-world-text']);
             body.appendChild(p);
         }
@@ -867,15 +870,9 @@ npm run build
 
 ## 📘2. Loaders (SCSS/SASS)
 
-* We are loading Normal/Module scss or sass file just need to set rules only. 
+* We are loading Normal/Module scss or sass file just need to set rules only.
 
-1. **Command to install package**
-
-```
-npm install sass-loader css-loader style-loader --save-dev
-```
-
-2. **HelloWorldButton.module.scss**
+1. **HelloWorldButton.module.scss**
 
 ```css
 $font-size: 20px;
@@ -934,7 +931,13 @@ helloWorldButton.render();
 
 **A. Create Internal CSS using style tag with style-loader by using style-loader**
 
-*** web.config.js**
+1. **Command to install package**
+
+```
+npm install sass-loader css-loader style-loader --save-dev
+```
+
+2. ** web.config.js**
 
 ```js
 const path = require('path');
@@ -964,7 +967,13 @@ module.exports = {
 ```
 **B. Create External CSS files using mini-css-extract-plugin**
 
-* **webpack.config.js**
+1. **Command to install package**
+
+```
+npm install sass-loader css-loader mini-css-extract-plugin --save-dev
+```
+
+2. **webpack.config.js**
 ```js
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -1006,8 +1015,6 @@ module.exports = {
 }
 ```
 
-
-
 ## 📘3. Loader (JS)
 * by default **we don't** need any loader to load JS files
 * But If we to add latest feature of javascript on not fully advanced browsers in that case we use JS loader called **babel**.
@@ -1022,7 +1029,6 @@ npm install @babel/core babel-loader @babel/preset-env @babel/plugin-proposal-cl
 * Webpack.config.js File
 ```js
 const path = require('path');
-
 module.exports = {
     entry: './src/index.js',
     output: {
@@ -1051,51 +1057,29 @@ module.exports = {
     }
 }
 ```
-* hello-world-button.js
 
-```js
-import "./hello-world-button.scss"
 
-class HelloWorldButton {
-    render() {
-        this.buttonCssClass = 'hello-world-text';
-        const button = document.createElement('button');
-        button.innerHTML = 'Hello World';
-        button.classList.add('hello-world-button')
-        button.onclick = function () {
-            const p = document.createElement('p');
-            p.innerHTML = 'Hello World';
-            p.classList.add(this.buttonCssClass);
-            body.appendChild(p);
-        }
-        const body = document.querySelector('body');
-        body.appendChild(button);
-    }
-}
-
-export default HelloWorldButton
-```
 
 ## 📘4. Loader (File Loader (png, svg, jpg, gif files etc))
 
 When we were using asset modules **'asset/source'**, we didn't have to install any additional NPM packages because Webpack include asset modules out of the box
 
 
-1. Command
+1. **Command to install package**
+
 ```
-npm install file-loader
+npm install file-loader html-webpack-plugin --save-dev
 ```
 
-2. webpack.config.js
+2. **webpack.config.js**
 
 ```js
 const path = require('path');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    mode: 'none',
-    entry: './src/work.js',
+    mode: 'development',
+    entry: path.resolve(__dirname, './src/index.js'),
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, './dist/'),
@@ -1110,24 +1094,20 @@ module.exports = {
         ]
     },
     plugins: [
-        new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
-            title: 'Hello World',
             filename: 'index.html',
-            user: 'Admin',
-            template: './index.html',
-            // to minify the output of file
-            minify : false
+            template: path.resolve(__dirname, './index.html'),
+            minify: false
         })
     ]
 }
 ```
 
-3. Work.js
+3. **Work.js**
 
 ```js
 // any random file
-import wok from "./download.png"
+import work from "./download.png"
 
 class WorkImage {
     render() {
@@ -1141,7 +1121,7 @@ class WorkImage {
 export default WorkImage;
 ```
 
-4. index.html
+4. **index.html**
 
 ```html
 <!DOCTYPE html>
@@ -1151,22 +1131,18 @@ export default WorkImage;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        <%= htmlWebpackPlugin.options.title %>
+        Demo Files
     </title>
 </head>
 
 <body>
-    <h1>Hello <%= htmlWebpackPlugin.options.user %>
-    </h1>
+
 </body>
 
 </html>
 ```
-5. Command
 
-```
-npx webpack
-```
+
 ![File-loader](./images/file-loader.png)
 
 ---
