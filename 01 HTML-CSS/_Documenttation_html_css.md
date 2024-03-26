@@ -76,7 +76,7 @@ h1 {
 | 5     | Multiple Selectors | h1, h2, h3, p, li {  color: green;}                                                      |
 | 6     | Adjacent Selectors | h1 + p (it will select all only those p elements which are immediately after h elements) |
 | 7     | Pseudo-Classes     | : (colon symbol)                                                                         |
-| 8     | Pseudo Element     | :: (double colon)                                                                        |
+| 8     | Pseudo Element     | :: (double colon) ,   it will create new element after or before the selected element    |
 
 
 1. **Adjacent Selector**
@@ -139,7 +139,7 @@ article li:hover {
 }
 ```
 
-3. **Pseudo Elements**
+3. **Pseudo Elements :** these are use to create new element also before or after the selected element
 
 1. ::first-letter
 2. ::first-line
@@ -223,7 +223,7 @@ body {
 ```
 ---
 
-## 📘Box-Model
+## 📘Box-Model and Box-sizing
 
 ![BoxModel](./images/box-model.png)
 
@@ -242,10 +242,14 @@ body {
     /* removing margin from view port/ Browser Window*/
     margin: 0;
 
-
+    /* to reset all width (best one)*/
     box-sizing: border-box;
 }
 ```
+
+![boxSizing](./images/box-model-with-border-box.png)
+
+
 **⚠️ Note :** All above properties are placed in **multi-selector** instead of body because it will apply on each and every element otherwise it will apply to body only, as we know only **text-properties** are inheritance.
 
 
@@ -337,13 +341,82 @@ body {
 4. Fixed : Position relative to the **viewport**
 5. Sticky : Positioned based on scroll position
 
-![positions](./images/positions.png)
 
 ![PositionedValues](./images/positioned-example.png)
 
-⚠️ **Note :** Never use these positions in real world for complex designs
+![positions](./images/positions.png)
 
 ---
+
+## 📘Page-Layouts
+
+![layout](./images/layout.png)
+
+1. **Float Concept** : by using float the element will out of flow from normal flow just like absolute position concept
+
+![FloatExample](./images/float.png)
+
+Solution For this example : by clear float from both the sides
+
+```html
+<!-- Example 1 -->
+ <style>
+    header {
+        background-color: red;
+        padding: 20px;
+    }
+
+    .heading-primary {
+        float: left;
+    }
+
+    .heading-secondary {
+        float: right;
+    }
+
+    /* This is use to fix the problem of flow out */
+    .clear {
+        clear: both;
+    }
+</style>
+
+<header>
+    <h2 class="heading-primary">Heading Primary</h2>
+    <h2 class="heading-secondary">Heading Secondary</h2>
+    
+    <!-- We have to use this all the time to fix the out of flow issue-->
+    <div class="clear"></div>
+</header>
+
+
+<!-- Example 2 -->
+ <style>
+    header {
+        background-color: red;
+        padding: 20px;
+    }
+
+    .heading-primary {
+        float: left;
+    }
+
+    .heading-secondary {
+        float: right;
+    }
+
+    .clearFix::after {
+        content: "";
+        clear: both;
+        display: block;
+    }
+</style>
+
+<header class="clearFix">
+    <h2 class="heading-primary ">Heading Primary</h2>
+    <h2 class="heading-secondary">Heading Secondary</h2>
+</header>
+```
+
 
 ## 📘Max-width & Min-Width
 
@@ -351,7 +424,7 @@ body {
 
 Example :
 * When we use **width** in **px** then it will fixed our image size hence responsiveness will not work
-* When we use **width** in **%** then it will become responsive but in this case we cannot set fixed size of image upto a particular dimension
+* When we use **width** in **%** then it will become responsive but in this case we cannot set fixed size of image up to a particular dimension
 
 ```html
 <!DOCTYPE html>
