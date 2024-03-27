@@ -417,6 +417,22 @@ Solution For this example : by clear float from both the sides
 </header>
 ```
 
+2. **Flex-box**
+
+![flexBox](./images/flex.png)
+
+![flex-1](./images/flex-1.png)
+
+![flexBoxCheatSheet](./images/flex-cheat-sheet.png)
+
+
+![flex-2](./images/flex-2.png)
+* Horizontally each of these elements takes up exactly the space that is necessary for its content. However, vertically things are little different so vertically by default all the flex items are tall as the tallest element 
+
+
+---
+
+
 
 ## 📘Max-width & Min-Width
 
@@ -612,25 +628,6 @@ Example
 </html>
 ```
 
----
-
-
-## 📘Flex
-
-* Display : flex (Creates a Flex Container)
-* All Direct child elements are Flex items
-
-
-![flex-1](./images/flex-1.png)
-
-* **flex-direction :** row/column
-* **justify-content :** Align Along the main axis (horizontal)
-* **align-items :** Align items along the cross axis (Vertical)
-* **align-content :** Align When extra space in cross axis
-* **flex-rap :**
-* **flex-shrink :**
-* **flex-grow :**
-* **flex-basis :**
 
 ---
 

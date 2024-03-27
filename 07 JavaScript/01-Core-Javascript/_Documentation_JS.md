@@ -361,6 +361,371 @@ isNew = 1;
 
 ---
 
+## 📘Booleans and Existence
+
+```javascript
+Boolean(undefined)  // false
+Boolean(null)       // false
+Boolean("")         // false
+Boolean(0)          // false
+Boolean(false)      // false
+
+// Example 1
+var a;
+if(a) {             // will not execute
+    console.log('Something is there');
+}
+
+// Example 2
+var a;
+a = 0;
+
+if(a || a === 0) {      // will execute
+//  because === has higher order precedence than || operator
+ console.log('Something is there');
+}
+
+// Example 3
+console.log(!true);     // false
+console.log(!!true);    // true
+```
+
+---
+
+## 📘Numbers
+* **Conversion :** from string to number
+
+```js
+let num = '10';
+
+console.log(typeof Number(num));    // number
+console.log(typeof (+num));         // number
+```
+* **Parsing :** getting number from string
+
+```js
+Number.parseInt('2px')      // 2
+Number.parseFloat('2.5rm')  // 2.5
+```
+
+* **Checking Number**
+```js
+// checking falsy values
+Number(undefined)   // NaN
+Number(null)        // 0
+Number(false)       // 0
+Number('')          // 0
+Number(0)           // 0
+Number(true)        // 1
+
+1 == '1'    // true
+1 === '1'   // false
+1 + null    // 1
+
+// Only check number or not
+Number.isNaN(10)        // false
+Number.isNaN('20')      // false
+Number.isNaN(+'20px')   // true
+Number.isNaN(20/0)      // false
+
+// For checking Integer Values
+Number.isInteger(10)        // true
+Number.isInteger(10.2)      // false
+Number.isInteger('20')      // false
+Number.isInteger(+'20px')   // false
+Number.isInteger(20/0)      // false
+
+// For checking Float Values (best)
+Number.isFinite(10)        // true
+Number.isFinite('20')      // false
+Number.isFinite(+'20px')   // false
+Number.isFinite(20/0)      // false
+```
+
+---
+
+## 📘Stings & String Methods
+* **Accessing value :** using index
+```js
+let firstName = "John Singh";
+
+console.log(firstName[0];)   // J
+console.log(firstName[1];)   // o
+console.log(firstName[2];)   // h
+```
+
+* **Conversion** : from any type to string
+```js
+let age = 10;
+
+console.log(typeof String(10))
+console.log(typeof ('' + 10))
+console.log(typeof age.toString())
+console.log(typeof [1, 2, 3].toString())
+```
+
+**⚠️ Note :** **toString()** is a method that is attached on the **base Object** that why get on string, array, number etc.
+
+* **Methods**
+
+1. length
+2. indexOf
+3. lastIndexOf
+4. slice
+5. includes
+6. replace
+7. replaceAll
+8. toLowerCase
+9. toUpperCase
+10. split
+11. at(1) & at(-1)
+12. trim
+13. charCodeAt()
+14. charAt()
+
+* Examples
+
+```js
+console.log('I am Web Developer'[0]);   // I
+console.log('I am Web Developer'[2]);   // a
+console.log('I am Web Developer'.length);   // 18
+
+// Methods
+// 1. indexOf
+console.log('I am Web Developer'.indexOf('a'));   // 2
+console.log('I am Web Developer'.indexOf('Web')); // 5
+
+// 2. lastIndexOf
+console.log('I am Web Developer'.lastIndexOf('Web')); // 5
+console.log('I am Web Developer'.lastIndexOf('e'));   // 16
+
+// 3. slice
+console.log('I am Web Developer'.slice(3));    // m Web Developer
+console.log('I am Web Developer'.slice(3, 7)); // m We
+
+// 4. includes
+console.log('I am Web Developer'.includes('Web'));  // true
+console.log('I am Web Developer'.includes('test')); // false
+
+// 5. charCodeAt
+"X".charCodeAt()    // ASCII Code 88
+
+// 6. charAt
+"Xabcd".charAt(1)   // 'a'
+```
+---
+
+## 📘Arrays (Collections of Anything)
+
+* Arrays are dynamically type in javascript
+
+```javascript
+var arr = new Array();
+
+// Array Literals
+var arr = [1, 2, 3];
+
+var array = [
+    1,                  // number
+    false,              // boolean
+    {                   // object
+        name : 'Tony',
+        address : '51 -d street no 3 ranjit nagar'
+    },
+    function (name) {   // function expression
+        var gretting = 'Hello',
+        console.log(greeting + ' ' + name)
+    },
+    "hello"             // string
+];
+
+arr[3](arra[2].name)   // Hello Tony
+```
+**📚 Conceptual Example :** Destructing of array method
+
+```js
+function test(arr) {
+    var length = arr.length;
+    console.log(length);
+}
+test([1, 2, 3, 4]);
+```
+
+**Arrays Methods**
+
+1. slice
+2. splice  (mutate original)
+3. reverse (mutate original)
+4. concate
+5. join
+6. at(1) & at(-1)
+7. Map
+8. Filter
+9. Reduce
+10. Sort
+11. some (return true/false)
+12. every (return true/false)
+13. include (return true/false)
+14. indexOf (return index)
+15. find (return first find value)
+16. findIndex(return first find index)
+17. flat
+18. flatMap
+19. new Array(7).fill(1)
+
+
+**⚠️ Note :** The all Above methods are coming from **Base Array Object**. You can see from below example
+```js
+const arr = [];
+
+console.log(arr.hasOwnProperty('length'));
+console.log(arr.hasOwnProperty('map'));
+console.log(arr.hasOwnProperty('filter'));
+
+console.log(arr.__proto__ == Array.Prototype)   // true
+```
+
+
+* Slice & Splice
+```js
+// Slice
+var startPosition = 0;
+var endPosition = 2;
+[1, 2, 3, 4, 5].slice();       // [1, 2, 3, 4, 5]   // shallow copy
+[1, 2, 3, 4, 5].slice(startPosition, endPosition);   // [1, 2]            // length = 2 - 0 = 2
+
+// Splice
+let arr = [1, 2, 3, 4, 5];
+var startPosition = 1;
+var howManyNeedToDelete = 1;
+var arrayNeedToAdd = [6, 7, 8, 9, 10];
+arr.splice(startPosition, howManyNeedToDelete, ...arrayNeedToAdd)
+console.log(arr);   // [1, 6, 7, 8, 9, 10, 3, 4, 5]
+```
+* Filter
+
+```js
+const fruits = [
+    { id: 1, name: "apple", price: 10, quantity: 5 },
+    { id: 2, name: "Banana", price: 15, quantity: 10 },
+    { id: 3, name: "Mango", price: 25, quantity: 15 },
+    { id: 1, name: "apple", price: 25, quantity: 15 },
+];
+
+let filterData = fruits.filter(e => {
+    return e.price < 20 && e.quantity < 14
+});
+
+console.log(filterData);
+
+// [
+//   { id: 1, name: 'apple', price: 10, quantity: 5 },
+//   { id: 2, name: 'Banana', price: 15, quantity: 10 }
+// ]
+```
+* Find
+```js
+const fruits = [
+    { id: 1, name: "apple", price: 10, quantity: 5 },
+    { id: 2, name: "Banana", price: 15, quantity: 10 },
+    { id: 3, name: "Mango", price: 25, quantity: 15 },
+    { id: 1, name: "apple", price: 25, quantity: 15 },
+];
+
+let filterData = fruits.find(e => {
+    return e.name === "apple"
+});
+
+console.log(filterData);
+//{ id: 1, name: 'apple', price: 10, quantity: 5 }
+```
+
+* Sort
+```js
+// Sort
+const arr = [3, 7, 1, 9, 6];
+const sorted = arr.sort((a, b) => a - b);
+sorted  // [ 1, 3, 6, 7, 9 ]
+
+const desc = arr.sort((a, b) => b - a)
+desc    // [ 9, 7, 6, 3, 1 ]
+```
+
+* Flatten Array
+```js
+var arr = [1, [2, [3, [4, [5, [6, [7, 8, [9, 10]]]]]]]];
+var result = arr.flat();
+console.log(result);
+
+var result = arr.flat(Infinity);
+console.log(result);
+
+var result = [1,2,,,,,,,,,,,3].flat();
+console.log(result) // [1,2,3]
+
+```
+* Creating & filling Array
+
+```js
+var arr = new Array(7).fill(1);
+console.log(arr);   //  [1, 1, 1, 1, 1, 1, 1]
+
+
+// basically this Array.from method create array from other data structure example array from iterable things example [...new Set()]
+var arr = Array.from(
+    { length: 10 },
+    (element, index) => index + 1
+);
+console.log(arr);   // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+```
+
+⚠️ **Note :**
+* in **forEach loops** you cannot add **continue & break** statements only in for loops you can.
+* **forEach methods** create **sideEffects** because of forEach we mutate the orginal array while in **map method** we cannot mutate the original array because it create new arra, and when we are doing sideEffect are not use *return* statement as well example in **forEach method**
+* In **for loops** we create extra variables to store the results which create Problem while reading variables. but **map, filter, reduce** also reduce this problem.
+```js
+let array = [1, 2, 3, 4, 5];
+
+let mapArray = array.map(element => element * element);
+
+// Map Method
+console.log(array);     // original Array
+console.log(mapArray);  // Map array
+
+array.forEach((element, i) => {
+    array[i] = element * element;
+});
+
+// Foreach Method
+console.log(array); // original & forEach array
+```
+
+![Image](./images/array-methods.png)
+
+---
+## 📘Delete Element from Object OR Array
+* **delete Method** (for array and Object)
+```js
+let array = [1, 2, 3, 4, 5];
+delete array[2];    // [1, 2, empty, 4, 5]
+console.log(array);
+
+let obj = {
+    firstName: "Deepinder",
+    lastName: "Singh"
+};
+delete obj['lastName'];
+console.log(obj);   // {firstName: 'Deepinder'}
+```
+* **splice method** (for array)
+
+```js
+let array = [1, 2, 3, 4, 5];
+array.splice(1, 1)  // [1, 3, 4, 5]
+```
+
+----
+
 ## 📘 Other Data-Structures (ES6)
 1. **Sets :**
 * A collection of unique values, so that means that a **Set** can never have any duplicates. (its kind of array not exactly array)
@@ -458,6 +823,36 @@ const array = [...questions];
 
 ---
 
+## 📘Major Falsy Values
+
+1. **false:** The boolean value false itself is falsy.
+
+2. **0 (zero) :** The number zero is falsy.
+
+3. **'' (empty string) :** An empty string is falsy.
+
+4. **null :** The absence of any value is falsy.
+
+5. **undefined :** A variable that has been declared but has not been assigned a value is falsy.
+
+6. **NaN (Not a Number) :** Represents a value that is not a legal number and is falsy.
+
+---
+
+## 📘Nullish
+
+* Only check **null** or **undefined** value
+* Not include **0 (zero)** or **"" (empty string)**
+
+```js
+const test = 0;
+console.log(test || 'Hello');   // hello
+
+// Nullish : null and undefined (Not 0 or '')
+console.log(test ?? 'Hello');   // 0
+```
+
+---
 
 ## 📘 Operators are functions
 
@@ -473,7 +868,6 @@ var b = 3 + 2;
 ```
 
 ---
-
 ## 📘 Operator Precedence and Associativity
 * **Operator Precedence :** which operator function gets called first. Functions are called in order of precedence (HIGHER precedence wins). Example : BDMAS
 ```javascript
@@ -498,22 +892,6 @@ console.log(outPut());  // 2
 
 ---
 
-
-## 📘Major Falsy Values
-
-1. **false:** The boolean value false itself is falsy.
-
-2. **0 (zero) :** The number zero is falsy.
-
-3. **'' (empty string) :** An empty string is falsy.
-
-4. **null :** The absence of any value is falsy.
-
-5. **undefined :** A variable that has been declared but has not been assigned a value is falsy.
-
-6. **NaN (Not a Number) :** Represents a value that is not a legal number and is falsy.
----
-
 ## 📘 Coercion
 * **Coercion :** Converting a value from one type to another. This happens quite in all dynamically typed languages like php, javascript etc.
 
@@ -533,158 +911,6 @@ console.log(a);
 ```
 **⚠️ Note :** you can use **Object.is(1, 1)** instead of **=== (strick quality check)**
 
----
-## 📘 Existence and Booleans
-
-```javascript
-Boolean(undefined)  // false
-Boolean(null)       // false
-Boolean("")         // false
-Boolean(0)          // false
-Boolean(false)      // false
-
-// Example 1
-var a;
-if(a) {             // will not execute
-    console.log('Something is there');
-}
-
-// Example 2
-var a;
-a = 0;
-
-if(a || a === 0) {      // will execute
-//  because === has higher order precedence than || operator
- console.log('Something is there');
-}
-
-// Example 3
-console.log(!true);     // false
-console.log(!!true);    // true
-```
-
----
-
-## 📘Numbers
-* **Conversion :** from string to number
-
-```js
-let num = '10';
-
-console.log(typeof Number(num));    // number
-console.log(typeof (+num));         // number
-```
-* **Parsing :** getting number from string
-
-```js
-Number.parseInt('2px')      // 2
-Number.parseFloat('2.5rm')  // 2.5
-```
-
-* **Checking Number**
-```js
-// checking falsy values
-Number(undefined)   // NaN
-Number(null)        // 0
-Number(false)       // 0
-Number('')          // 0
-Number(0)           // 0
-Number(true)        // 1
-
-1 == '1'    // true
-1 === '1'   // false
-1 + null    // 1
-
-// Only check number or not
-Number.isNaN(10)        // false
-Number.isNaN('20')      // false
-Number.isNaN(+'20px')   // true
-Number.isNaN(20/0)      // false
-
-// For checking Integer Values
-Number.isInteger(10)        // true
-Number.isInteger(10.2)      // false
-Number.isInteger('20')      // false
-Number.isInteger(+'20px')   // false
-Number.isInteger(20/0)      // false
-
-// For checking Float Values (best)
-Number.isFinite(10)        // true
-Number.isFinite('20')      // false
-Number.isFinite(+'20px')   // false
-Number.isFinite(20/0)      // false
-```
----
-
-## 📘Stings & String Methods
-* **Accessing value :** using index
-```js
-let firstName = "John Singh";
-
-console.log(firstName[0];)   // J
-console.log(firstName[1];)   // o
-console.log(firstName[2];)   // h
-```
-
-* **Conversion** : from any type to string
-```js
-let age = 10;
-
-console.log(typeof String(10))
-console.log(typeof ('' + 10))
-console.log(typeof age.toString())
-console.log(typeof [1, 2, 3].toString())
-```
-
-**⚠️ Note :** **toString()** is a method that is attached on the **base Object** that why get on string, array, number etc.
-
-* **Methods**
-
-1. length
-2. indexOf
-3. lastIndexOf
-4. slice
-5. includes
-6. replace
-7. replaceAll
-8. toLowerCase
-9. toUpperCase
-10. split
-11. at(1) & at(-1)
-12. trim
-13. charCodeAt()
-14. charAt()
-
-* Examples
-
-```js
-console.log('I am Web Developer'[0]);   // I
-console.log('I am Web Developer'[2]);   // a
-console.log('I am Web Developer'.length);   // 18
-
-// Methods
-// 1. indexOf
-console.log('I am Web Developer'.indexOf('a'));   // 2
-console.log('I am Web Developer'.indexOf('Web')); // 5
-
-// 2. lastIndexOf
-console.log('I am Web Developer'.lastIndexOf('Web')); // 5
-console.log('I am Web Developer'.lastIndexOf('e'));   // 16
-
-// 3. slice
-console.log('I am Web Developer'.slice(3));    // m Web Developer
-console.log('I am Web Developer'.slice(3, 7)); // m We
-
-// 4. includes
-console.log('I am Web Developer'.includes('Web'));  // true
-console.log('I am Web Developer'.includes('test')); // false
-
-// 5. charCodeAt
-"X".charCodeAt()    // ASCII Code 88
-
-// 6. charAt
-"Xabcd".charAt(1)   // 'a'
-```
 ---
 
 ## 📘 Default Value
@@ -728,21 +954,9 @@ console.log(libraryName);
     1 && 'john'    // john
     'hello' && 23 && null && 'jonas'    // null
     ```
+
 ---
 
-## 📘Nullish
-
-* Only check **null** or **undefined** value
-* Not include **0 (zero)** or **"" (empty string)**
-
-```js
-const test = 0;
-console.log(test || 'Hello');   // hello
-
-// Nullish : null and undefined (Not 0 or '')
-console.log(test ?? 'Hello');   // 0
-```
----
 ## 📘 Objects and Dot
 
 ![Image](./images/object-dot.png)
@@ -885,7 +1099,28 @@ console.log(obj.address?.near);     // undefined
 ```
 ⚠️ **Note :** in *Optional Chaining* instead of *reference error* it will return *undefined*, if the value does not exist.
 
+
 ---
+
+## 📘Namespace :
+* **Namespace :** a container for variables and functions. Typically to keep variables functions with the same name separate.
+
+```javascript
+var greet = 'Hello!';
+var greet = 'Ho!';
+console.log(greet);
+
+// name spacing helping to resolve the issue of namespace collisions (means same name variables)
+var english = {};
+var spanish = {};
+
+english.greet = 'Hello!';
+spanish.greet = 'Ho!';
+
+console.log(english.greet);
+console.log(spanish.greet);
+```
+
 ## 📘Useful In-built Objects Properties
 
 ```js
@@ -934,26 +1169,7 @@ for (const [firstName, lastName] of Object.entries(obj)) {
     console.log(firstName + ' : ' + lastName);
 }
 ```
----
 
-## 📘Namespace :
-* **Namespace :** a container for variables and functions. Typically to keep variables functions with the same name separate.
-
-```javascript
-var greet = 'Hello!';
-var greet = 'Ho!';
-console.log(greet);
-
-// name spacing helping to resolve the issue of namespace collisions (means same name variables)
-var english = {};
-var spanish = {};
-
-english.greet = 'Hello!';
-spanish.greet = 'Ho!';
-
-console.log(english.greet);
-console.log(spanish.greet);
-```
 ---
 
 ## 📘JSON and Object Literals
@@ -980,106 +1196,7 @@ console.log(objectLiteral)
 
 ---
 
-## 📘Functions are Object
-* **First Class Functions :** Everything you can do with other types you can do with functions. Assign them to variables, pass them around, create them on the fly.
 
-![Image](./images/funtions-are-object.png)
-
-```javascript
-
-function greet() {
-    console.log('hi');
-}
-
-// adding property to function
-greet.language = 'english';
-
-// print name property of function
-console.log(greet)
-
-// printing property which we are attaching to it
-console.log(greet.language)
-
-// what properties own by this function
-console.log(greet.hasOwnProperty('name'));      //true
-console.log(greet.hasOwnProperty('language'));  //true
-console.log(greet.hasOwnProperty('call'));      //false
-console.log(greet.hasOwnProperty('apply'));     //false
-console.log(greet.hasOwnProperty('bind'));      //false
-
-//Prototype inheritance
-console.log(greet.__proto__ == Function.prototype);
-```
-![Image](./images/example-functions-are-object.png)
-
----
-
-## 📘Function Statements and Function Expressions
-* **Expression :** A unit of code that results in a value. It does n't have to save to a variable (an expression is something that produces a value)
-
-```javascript
-// mean concept is that what ever the variable returning a value is called expression like number, object etc
-var a = 3
-var b = 1 + 2;
-var c = {greeting : 'hi'}
-
-// here (a === 3) is expression because it return some value && if is just simply statement it not returning any value.
-
-// so statement just does work and an expression results in a value
-if (a == 3) {
-
-}
-```
-* **Function Statement :** the statement which does not return any thing, it just statement.
-
-```javascript
-function greet() {
-    console.log('hi');
-}
-```
-* **Function Expression :** the statement which return any thing.
-
-```javascript
-// because here function is considered as object and creating on fly && it returns an object hence its a value
-var anonymousGreet = function () {
-    console.log('hi');
-}
-anonymousGreet();
-
-
-```
-![Image](./images/function-expressions-invoke.png)
-
-
-⚠️ **Note** : Function Expressions are not hoisted this is the only main difference between **Function Declaration** and **Function Expressions**
-
-```javascript
-// Functions expressions considered as variable and According to Hoisting variables are set to undefined
-
-anonymousGreet();   // error : undefined is not a function
-
-var anonymousGreet = function () {
-    console.log('hi');
-}
-```
-
-📚 **Conceptual Example :**
-
-```javascript
-function log(a) {
-    console.log(a);     // for not function
-    a();                // for function
-}
-
-log(1);             // create number on fly
-
-log('Hello');       // create string on fly
-
-log(function(){ console.log('Hi')}) // create function as  object on fly && it is considered as function expression
-```
-Functions can pass as parameter in which you can pass function as parameter use them like you do variables to other functions as well *introduces an entirely new class of programming called **Functional Programming***
-
----
 ## 📘Pass By Value Vs By Reference
 
 * **Mutate :** To change something.
@@ -1182,6 +1299,108 @@ obj2.lastName = "Bhasin";
 console.log('obj1', obj1);  // {firstName: 'Deepinder', lastName: 'Singh', age: 29}
 console.log('obj2', obj2)   // {firstName: 'Deepu', lastName: 'Bhasin', age: 29}
 ```
+
+---
+
+
+## 📘Functions are Object
+* **First Class Functions :** Everything you can do with other types you can do with functions. Assign them to variables, pass them around, create them on the fly.
+
+![Image](./images/funtions-are-object.png)
+
+```javascript
+
+function greet() {
+    console.log('hi');
+}
+
+// adding property to function
+greet.language = 'english';
+
+// print name property of function
+console.log(greet)
+
+// printing property which we are attaching to it
+console.log(greet.language)
+
+// what properties own by this function
+console.log(greet.hasOwnProperty('name'));      //true
+console.log(greet.hasOwnProperty('language'));  //true
+console.log(greet.hasOwnProperty('call'));      //false
+console.log(greet.hasOwnProperty('apply'));     //false
+console.log(greet.hasOwnProperty('bind'));      //false
+
+//Prototype inheritance
+console.log(greet.__proto__ == Function.prototype);
+```
+![Image](./images/example-functions-are-object.png)
+
+---
+
+## 📘Function Statements and Function Expressions
+* **Expression :** A unit of code that results in a value. It does n't have to save to a variable (an expression is something that produces a value)
+
+```javascript
+// mean concept is that what ever the variable returning a value is called expression like number, object etc
+var a = 3
+var b = 1 + 2;
+var c = {greeting : 'hi'}
+
+// here (a === 3) is expression because it return some value && if is just simply statement it not returning any value.
+
+// so statement just does work and an expression results in a value
+if (a == 3) {
+
+}
+```
+* **Function Statement :** the statement which does not return any thing, it just statement.
+
+```javascript
+function greet() {
+    console.log('hi');
+}
+```
+* **Function Expression :** the statement which return any thing.
+
+```javascript
+// because here function is considered as object and creating on fly && it returns an object hence its a value
+var anonymousGreet = function () {
+    console.log('hi');
+}
+anonymousGreet();
+
+
+```
+![Image](./images/function-expressions-invoke.png)
+
+
+⚠️ **Note** : Function Expressions are not hoisted this is the only main difference between **Function Declaration** and **Function Expressions**
+
+```javascript
+// Functions expressions considered as variable and According to Hoisting variables are set to undefined
+
+anonymousGreet();   // error : undefined is not a function
+
+var anonymousGreet = function () {
+    console.log('hi');
+}
+```
+
+📚 **Conceptual Example :**
+
+```javascript
+function log(a) {
+    console.log(a);     // for not function
+    a();                // for function
+}
+
+log(1);             // create number on fly
+
+log('Hello');       // create string on fly
+
+log(function(){ console.log('Hi')}) // create function as  object on fly && it is considered as function expression
+```
+Functions can pass as parameter in which you can pass function as parameter use them like you do variables to other functions as well *introduces an entirely new class of programming called **Functional Programming***
 
 ---
 
@@ -1342,44 +1561,6 @@ obj.getFullName();
 };
 obj.add(6).subtract(1).multiply(4).divide(2);
 ```
-
-
-## 📘 Arrays (Collections of Anything)
-
-* Arrays are dynamically type in javascript
-
-```javascript
-var arr = new Array();
-
-// Array Literals
-var arr = [1, 2, 3];
-
-var array = [
-    1,                  // number
-    false,              // boolean
-    {                   // object
-        name : 'Tony',
-        address : '51 -d street no 3 ranjit nagar'
-    },
-    function (name) {   // function expression
-        var gretting = 'Hello',
-        console.log(greeting + ' ' + name)
-    },
-    "hello"             // string
-];
-
-arr[3](arra[2].name)   // Hello Tony
-```
-**📚 Conceptual Example :** Destructing of array method
-
-```js
-function test(arr) {
-    var length = arr.length;
-    console.log(length);
-}
-test([1, 2, 3, 4]);
-```
-
 
 ---
 
@@ -1652,125 +1833,6 @@ var greeting = 'Hola';
 1. In **Node** we use **require("") with module.export {}**
 2. In **ES6** it is working is **import and export modules**, where named or default represent as public api and non-named or non-default represent as non-public api fot this understanding **bundler** help browser to understand this ES6 Code
 
-
-**By using ES6 (Import/Export)**
-```js
-
-// sum1.js
-export default (function (a, b) {
-    return a + b
-})
-
-// sum2.js
-export default (function (a, b, c) {
-    return a + b + c;
-})
-
-//index.js
-import sumOfTwo from "./sum1.js";
-import sumOfThere from "./sum2.js";
-
-
-console.log(sumOfTwo(1, 2));
-console.log(sumOfThere(1, 2, 3));
-
-```
-
-```html
-<!-- index.html -->
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-    <script type="module" src="./index.js"></script>
-</body>
-
-</html>
-```
-OR
-
-```
-npm install webpack webpack-cli --save-dev
-```
-
-```js
-// using webpack
-const path = require('path');
-
-module.exports = {
-    // entry point for webpack
-    entry: './index.js',
-
-    output: {
-        // output file name
-        filename: 'bundle.js',
-
-        // it will create bundler.js file in dist folder
-        path: path.resolve(__dirname, './dist')
-    }
-}
-```
-
-```js
-//package.json
-"scripts": {
-    "build": "npx webpack --mode development --config webpack.config.js"
-}
-```
-```
-npm run start
-```
-```
-cd dist/
-node bundle.js
-```
-
-
-
-**By using Node.js (require)**
-
-```js
-//sum1.js
-function sum(a, b) {
-    return a + b
-}
-
-function multiply(a, b) {
-    return a * b
-}
-
-module.exports = {
-    sum,
-    multiply
-}
-
-// sum.js
-function sum(a, b, c) {
-    return a + b + c;
-}
-
-module.exports = sum
-
-//index.js
-// no need to add ".js" because node.js understand automatically
-const { sum: sumOfTwoNumber, multiply } = require("./sum1");
-const sumOfThere = require("./sum2");
-
-// Note : instead of multiple line of import you can create a index.js file where you will import all files then we will import this index.js file
-
-console.log(sumOfTwoNumber(1, 2));
-console.log(sumOfThere(1, 2, 3));
-console.log(multiply(2, 2));
-```
-```
-node index.js
-```
 
 ---
 
@@ -4647,178 +4709,6 @@ function sum(...numbers) {
 sum(1, 2, 3, 4, 5, 6, 7, 8, 9);
 ```
 
----
-## 📘Arrays Methods
-1. slice
-2. splice  (mutate original)
-3. reverse (mutate original)
-4. concate
-5. join
-6. at(1) & at(-1)
-7. Map
-8. Filter
-9. Reduce
-10. Sort
-11. some (return true/false)
-12. every (return true/false)
-13. include (return true/false)
-14. indexOf (return index)
-15. find (return first find value)
-16. findIndex(return first find index)
-17. flat
-18. flatMap
-19. new Array(7).fill(1)
-
-
-**⚠️ Note :** The all Above methods are coming from **Base Array Object**. You can see from below example
-```js
-const arr = [];
-
-console.log(arr.hasOwnProperty('length'));
-console.log(arr.hasOwnProperty('map'));
-console.log(arr.hasOwnProperty('filter'));
-
-console.log(arr.__proto__ == Array.Prototype)   // true
-```
-
-
-* Slice & Splice
-```js
-// Slice
-var startPosition = 0;
-var endPosition = 2;
-[1, 2, 3, 4, 5].slice();       // [1, 2, 3, 4, 5]   // shallow copy
-[1, 2, 3, 4, 5].slice(startPosition, endPosition);   // [1, 2]            // length = 2 - 0 = 2
-
-// Splice
-let arr = [1, 2, 3, 4, 5];
-var startPosition = 1;
-var howManyNeedToDelete = 1;
-var arrayNeedToAdd = [6, 7, 8, 9, 10];
-arr.splice(startPosition, howManyNeedToDelete, ...arrayNeedToAdd)
-console.log(arr);   // [1, 6, 7, 8, 9, 10, 3, 4, 5]
-```
-* Filter
-
-```js
-const fruits = [
-    { id: 1, name: "apple", price: 10, quantity: 5 },
-    { id: 2, name: "Banana", price: 15, quantity: 10 },
-    { id: 3, name: "Mango", price: 25, quantity: 15 },
-    { id: 1, name: "apple", price: 25, quantity: 15 },
-];
-
-let filterData = fruits.filter(e => {
-    return e.price < 20 && e.quantity < 14
-});
-
-console.log(filterData);
-
-// [
-//   { id: 1, name: 'apple', price: 10, quantity: 5 },
-//   { id: 2, name: 'Banana', price: 15, quantity: 10 }
-// ]
-```
-* Find
-```js
-const fruits = [
-    { id: 1, name: "apple", price: 10, quantity: 5 },
-    { id: 2, name: "Banana", price: 15, quantity: 10 },
-    { id: 3, name: "Mango", price: 25, quantity: 15 },
-    { id: 1, name: "apple", price: 25, quantity: 15 },
-];
-
-let filterData = fruits.find(e => {
-    return e.name === "apple"
-});
-
-console.log(filterData);
-//{ id: 1, name: 'apple', price: 10, quantity: 5 }
-```
-
-* Sort
-```js
-// Sort
-const arr = [3, 7, 1, 9, 6];
-const sorted = arr.sort((a, b) => a - b);
-sorted  // [ 1, 3, 6, 7, 9 ]
-
-const desc = arr.sort((a, b) => b - a)
-desc    // [ 9, 7, 6, 3, 1 ]
-```
-
-* Flatten Array
-```js
-var arr = [1, [2, [3, [4, [5, [6, [7, 8, [9, 10]]]]]]]];
-var result = arr.flat();
-console.log(result);
-
-var result = arr.flat(Infinity);
-console.log(result);
-
-var result = [1,2,,,,,,,,,,,3].flat();
-console.log(result) // [1,2,3]
-
-```
-* Creating & filling Array
-
-```js
-var arr = new Array(7).fill(1);
-console.log(arr);   //  [1, 1, 1, 1, 1, 1, 1]
-
-
-// basically this Array.from method create array from other data structure example array from iterable things example [...new Set()]
-var arr = Array.from(
-    { length: 10 },
-    (element, index) => index + 1
-);
-console.log(arr);   // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-```
-
-⚠️ **Note :**
-* in **forEach loops** you cannot add **continue & break** statements only in for loops you can.
-* **forEach methods** create **sideEffects** because of forEach we mutate the orginal array while in **map method** we cannot mutate the original array because it create new arra, and when we are doing sideEffect are not use *return* statement as well example in **forEach method**
-* In **for loops** we create extra variables to store the results which create Problem while reading variables. but **map, filter, reduce** also reduce this problem.
-```js
-let array = [1, 2, 3, 4, 5];
-
-let mapArray = array.map(element => element * element);
-
-// Map Method
-console.log(array);     // original Array
-console.log(mapArray);  // Map array
-
-array.forEach((element, i) => {
-    array[i] = element * element;
-});
-
-// Foreach Method
-console.log(array); // original & forEach array
-```
-
-![Image](./images/array-methods.png)
-
----
-## 📘Delete Element from Object OR Array
-* **delete Method** (for array and Object)
-```js
-let array = [1, 2, 3, 4, 5];
-delete array[2];    // [1, 2, empty, 4, 5]
-console.log(array);
-
-let obj = {
-    firstname: "Deepinder",
-    lastname: "Singh"
-};
-delete obj['lastname'];
-console.log(obj);   // {firstname: 'Deepinder'}
-```
-* **splice method** (for array)
-
-```js
-let array = [1, 2, 3, 4, 5];
-array.splice(1, 1)  // [1, 3, 4, 5]
-```
 
 
 ---
