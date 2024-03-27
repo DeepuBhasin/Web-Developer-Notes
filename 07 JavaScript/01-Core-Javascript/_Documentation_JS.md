@@ -483,6 +483,7 @@ console.log(typeof [1, 2, 3].toString())
 12. trim
 13. charCodeAt()
 14. charAt()
+15. padStart & padEnd
 
 * Examples
 
@@ -513,6 +514,14 @@ console.log('I am Web Developer'.includes('test')); // false
 
 // 6. charAt
 "Xabcd".charAt(1)   // 'a'
+
+
+// 7. padStart
+let text = "Hello World";
+text = text.padStart(15, "*");
+
+console.log(text);  //  ****Hello World
+
 ```
 ---
 ## 📘Symbols & Using Symbols
@@ -634,9 +643,6 @@ test([1, 2, 3, 4]);
 
 **Methods**
 
-![Image](./images/array-methods.png)
-
-
 1. include (return true/false)
 2. indexOf (return index)
 3. findIndex(return first find index)slice
@@ -647,16 +653,15 @@ test([1, 2, 3, 4]);
 8. reverse (mutate original)
 9. concate
 10. join
-11. split
-12. map
-13. filter
-14. reduce
-15. sort
-16. some (return true/false)
-17. every (return true/false)
-18. flat
-19. flatMap
-20. new Array(7).fill(1)
+11. map
+12. filter
+13. reduce
+14. sort
+15. some (return true/false)
+16. every (return true/false)
+17. flat
+18. flatMap
+19. new Array(7).fill(1)
 
 
 **⚠️ Note :** The all Above methods are coming from **Base Array Object**. You can see from below example
@@ -669,28 +674,22 @@ console.log(arr.hasOwnProperty('map'));
 console.log(arr.hasOwnProperty('filter'));
 
 console.log(arr.__proto__ == Array.Prototype)   // true
-```
 
-
-* **Slice & Splice**
-```js
-// Slice
+// 1. Slice
 var startPosition = 0;
 var endPosition = 2;
-[1, 2, 3, 4, 5].slice();       // [1, 2, 3, 4, 5]   // shallow copy
-[1, 2, 3, 4, 5].slice(startPosition, endPosition);   // [1, 2]            // length = 2 - 0 = 2
+[1, 2, 3, 4, 5].slice();      // [1, 2, 3, 4, 5]   // shallow copy
 
-// Splice
+
+// 2. Splice
 let arr = [1, 2, 3, 4, 5];
 var startPosition = 1;
-var howManyNeedToDelete = 1;
+var howManyNeedToDelete = 2;
 var arrayNeedToAdd = [6, 7, 8, 9, 10];
 arr.splice(startPosition, howManyNeedToDelete, ...arrayNeedToAdd)
-console.log(arr);   // [1, 6, 7, 8, 9, 10, 3, 4, 5]
-```
-* **Filter**
+console.log(arr);   // [1, 6, 7, 8, 9, 10, 4, 5]
 
-```js
+//3. Filter
 const fruits = [
     { id: 1, name: "apple", price: 10, quantity: 5 },
     { id: 2, name: "Banana", price: 15, quantity: 10 },
@@ -703,14 +702,12 @@ let filterData = fruits.filter(e => {
 });
 
 console.log(filterData);
-
 // [
 //   { id: 1, name: 'apple', price: 10, quantity: 5 },
 //   { id: 2, name: 'Banana', price: 15, quantity: 10 }
 // ]
-```
-* **Find**
-```js
+
+// 4. Find
 const fruits = [
     { id: 1, name: "apple", price: 10, quantity: 5 },
     { id: 2, name: "Banana", price: 15, quantity: 10 },
@@ -722,23 +719,18 @@ let filterData = fruits.find(e => {
     return e.name === "apple"
 });
 
-console.log(filterData);
-//{ id: 1, name: 'apple', price: 10, quantity: 5 }
-```
+console.log(filterData); //{ id: 1, name: 'apple', price: 10, quantity: 5 }
 
-* **Sort**
-```js
-// Sort
+// 5. Sort
 const arr = [3, 7, 1, 9, 6];
 const sorted = arr.sort((a, b) => a - b);
 sorted  // [ 1, 3, 6, 7, 9 ]
 
 const desc = arr.sort((a, b) => b - a)
 desc    // [ 9, 7, 6, 3, 1 ]
-```
 
-* **Flatten Array**
-```js
+// 6. Flatten Array
+
 var arr = [1, [2, [3, [4, [5, [6, [7, 8, [9, 10]]]]]]]];
 var result = arr.flat();
 console.log(result);
@@ -749,10 +741,7 @@ console.log(result);
 var result = [1,2,,,,,,,,,,,3].flat();
 console.log(result) // [1,2,3]
 
-```
-* **Creating & filling Array**
-
-```js
+// 7. Creating & filling Array
 var arr = new Array(7).fill(1);
 console.log(arr);   //  [1, 1, 1, 1, 1, 1, 1]
 
@@ -764,6 +753,9 @@ var arr = Array.from(
 );
 console.log(arr);   // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 ```
+
+![Image](./images/array-methods.png)
+
 
 **⚠️Note :**
 * in **forEach loops** you cannot add **continue & break** statements only in for loops you can.
@@ -791,7 +783,7 @@ console.log(obj);   // {firstName: 'Deepinder'}
 
 ```js
 let array = [1, 2, 3, 4, 5];
-array.splice(1, 1)  // [1, 3, 4, 5]
+array.splice(1, 2)  // [1, 4, 5]
 ```
 
 ----
