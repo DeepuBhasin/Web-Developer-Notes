@@ -515,6 +515,84 @@ console.log('I am Web Developer'.includes('test')); // false
 "Xabcd".charAt(1)   // 'a'
 ```
 ---
+## 📘Symbols & Using Symbols
+* **Hash Code :** A value generated from another value. The same value is always generated from the same input.
+* Symbols use **Memory Address** as value and return that value because its always unique. The value which we are providing is called **label** for reference Example
+* To print Symbol value **toString()** method is used.
+
+```javascript
+// symbol returning a unique value which will be memory address and 'firstName' is label for that address
+const firstName = Symbol('firstName');
+```
+* Name is Really not important in **Symbol** Example
+
+```javascript
+const grt1 = Symbol('greet');
+const grt2 = Symbol('greet');
+
+console.log(grt1.toString()) // Symbol(greet)
+
+console.log(typeof grt1)    // symbol
+
+grt1 === grt2   // false
+```
+
+* Symbol Majorly use in **Object Properties** as *Property Name (string)* so cannot overwrite the property
+
+```javascript
+const firstName = Symbol('firstName');
+
+let obj = {};
+// its like obj[464847xvdgd646474] = 'Deepinder';
+obj[firstName] = 'Deepinder';
+
+obj.firstName = 'Dp';
+
+console.log(obj); // {firstName: 'Dp', Symbol(firstName): 'Deepinder'}
+
+console.log(obj.firstName)  // Dp
+
+// accessing Symbol Value
+console.log(obj[firstName]) // 'Deepinder'
+```
+
+* **Symbol are not iterable **, that means if you loop over an object with a for loop.
+
+* **Magic Strings :** Strings that have a special meaning or usage in your program. This makes your program fragile, easily susceptible to bugs.
+* For Global use, we create **Global variables** with **Symbol.for** to avoid *collision* and *stop redundancy*, example you might have the case where you want *two Symbols which actually share the same ID*.
+
+```javascript
+// Creating Symbol
+const HAIR_STRAIGHT = Symbol.for('Straight');
+const HAIR_CURLY = Symbol.for('Curly');
+const HAIR_WAVY = Symbol.for('Wavy');
+
+let curly = Symbol.for('Curly');
+console.log(curly === HAIR_CURLY); // true
+console.log(Symbol.keyFor(HAIR_CURLY));
+
+// Change Property of Symbol (its help you'u to not accidentally change properties)
+const ageSymbol1 = Symbol.for('age');
+
+let person = {
+    [ageSymbol1]: 29,
+    age : 32
+}
+
+function changeValue(person) {
+    const newAgeSymbol = Symbol.for('age');
+    person[newAgeSymbol] = 30;
+}
+changeValue(person);
+
+console.log(person["age"])          // 32
+// its not same, its different label for age === ageSymbol1 (false)
+console.log(person[ageSymbol1]);    // 30
+```
+
+**Well-Known Symbols :** Symbols already built into the javascript engine, used by the engine for certain tasks.
+
+---
 
 ## 📘Arrays (Collections of Anything)
 
@@ -1416,10 +1494,6 @@ createBooking('LH1')
 createBooking('LH1', 3);
 createBooking('LH1', undefined, 2);
 ```
-⚠️ **Note :**
-* *javascript does not have passing by reference, only passing* by value even though it look like it's passing by reference. so there are language like c++, where you can pass a reference to any value, instead of the value itself. this works even with primitives, so you could pass a reference to the value of five. and then the original value outside of the function, would be changed and this is called pass by reference.
-* for Objects, we do in fact pass in a reference so the memory address of the object. However that reference itself is still a value, it's simply a value that contains a memory address, so basically we pass a reference to the function but we do not pass by reference this is important thing.
-
 
 * Some More Examples on **Default Parameters**
 
@@ -1585,8 +1659,106 @@ var person = {
 }
 ```
 ---
+## 📘Arrow Functions
 
-## 📘 Objects, Functions and This
+* F(x) = x<sup>2</sup> (is Mathematic Expression)
+* F:x |-> x<sup>2 </sup> (isn Mathematic Expression)
+* by default **arrow functions** are *anonymous*
+```javascript
+// Normal Syntax
+let add = (a, b) => {
+    return a + b;
+}
+
+// Arrow Function Expression
+(()=>{console.log('Hello World')}());
+
+// Arrow Function on Fly
+function logThis(fn) {
+    console.log(fn(1,2));
+}
+
+logThis((a, b) => { return a + b});
+```
+
+---
+**Arrow with 'this'**
+
+* **Arrow Function** doen't have **this** keyword byDefault as other function.
+
+![Image](./images/arrow-this.jpeg)
+
+```javascript
+let me = {
+    firstname : 'Tony',
+    greet: function() {
+        console.log(this);
+
+        let logMe = () => {
+            console.log(this);
+        }
+        logMe();
+    }
+}
+
+me.greet();
+```
+---
+**Returning Value**
+
+* Arrow function has **Implicit (automatically return)** feature
+```javascript
+let add = (a, b) => a + b;
+
+let sqr = x => x * x;
+
+// this line will create Object : {firstName: 'Deepinder', lastName: 'Singh'}
+let obj = (()=> ({firstName : "Deepinder", lastName : "Singh"}))();
+```
+**Readability & Limitation**
+
+```javascript
+// good for if you are from mathematic background
+let longExpression = x => y => z => z ? y : x;
+
+// 1. Count '=>' , hence 3 functions
+// 2. check parameters
+
+// good for if you are not from mathematic background
+let longExpression = function(x) {
+    return function(y) {
+        return function (z) {
+            return z ? y : x;
+        }
+    }
+}
+let result1 = longExpression('Tony')('Anthony')(true);
+let result2 = longExpression('Tony')('Anthony')(false);
+```
+
+```javascript
+// limitation
+let me = {
+    firstname : 'Tony',
+    greet: function() {
+        console.log(this);
+
+        let logMe = () => {
+            console.log(this);
+        }
+        logMe();
+    },
+    greet2 : () => {
+        console.log(this.firstname);    // undefined
+    }
+}
+
+me.greet();
+me.greet2();
+```
+---
+
+## 📘Objects, Functions and This
 The __this__ keyword is actually pretty straightforward to understand __what is does is it refers to whatever object it is directly inside (property) of.__
 
 * On Global Level : __this === window object__
@@ -4017,185 +4189,6 @@ console.log(me.greet());
 console.log(me.fname);
 console.log(me.getFullName())
 ```
----
-## 📘 Arrow Functions
-
-Why ?
-
-* F(x) = x<sup>2</sup> (is Mathematic Expression)
-* F:x |-> x<sup>2 </sup> (isn Mathematic Expression)
-* by default **arrow functions** are *anonymous*
-```javascript
-// Normal Syntax
-let add = (a, b) => {
-    return a + b;
-}
-
-// Arrow Function Expression
-(()=>{console.log('Hello World')}());
-
-// Arrow Function on Fly
-function logThis(fn) {
-    console.log(fn(1,2));
-}
-
-logThis((a, b) => { return a + b});
-```
-
----
-## 📘Arrow with 'this'
-
-* **Arrow Function** doen't have **this** keyword byDefault as other function.
-
-![Image](./images/arrow-this.jpeg)
-
-```javascript
-let me = {
-    firstname : 'Tony',
-    greet: function() {
-        console.log(this);
-
-        let logMe = () => {
-            console.log(this);
-        }
-        logMe();
-    }
-}
-
-me.greet();
-```
----
-## 📘Returning Value
-* Arrow function has **Implecit (automatically return)** feature
-```javascript
-let add = (a, b) => a + b;
-
-let sqr = x => x * x;
-
-// this line will create Object : {firstName: 'Deepinder', lastName: 'Singh'}
-let obj = (()=> ({firstName : "Deepinder", lastName : "Singh"}))();
-```
-## 📘Readability & Limitation
-
-```javascript
-// good for if you are from mathematic background
-let longExpression = x => y => z => z ? y : x;
-
-// 1. Count '=>' , hence 3 functions
-// 2. check parameters
-
-// good for if you are not from mathematic background
-let longExpression = function(x) {
-    return function(y) {
-        return function (z) {
-            return z ? y : x;
-        }
-    }
-}
-let result1 = longExpression('Tony')('Anthony')(true);
-let result2 = longExpression('Tony')('Anthony')(false);
-```
-
-```javascript
-// limitation
-let me = {
-    firstname : 'Tony',
-    greet: function() {
-        console.log(this);
-
-        let logMe = () => {
-            console.log(this);
-        }
-        logMe();
-    },
-    greet2 : () => {
-        console.log(this.firstname);    // undefined
-    }
-}
-
-me.greet();
-me.greet2();
-```
-
-
-
-----
-## 📘Symbols & Using Symbols
-* **Hash Code :** A value generated from another value. The same value is always generated from the same input.
-* Symbols use **Memory Address** as value and return that value because its always unique. The value which we are providing is called **label** for reference Example
-* To print Symbol value **toString()** method is used.
-
-```javascript
-// symbol returning a unique value which will be memory address and 'firstname' is label for that address
-const firstname = Symbol('firstname');
-```
-* Name is Really not important in **Symbol** Example
-
-```javascript
-const grt1 = Symbol('greet');
-const grt2 = Symbol('greet');
-
-console.log(grt1.toString()) // Symbol(greet)
-
-console.log(typeof grt1)    // symbol
-
-grt1 === grt2   // false
-```
-
-* Symbol Majorly use in **Object Properties** as *Property Name (string)* so cannot overwrite the property
-
-```javascript
-const firstname = Symbol('firstname');
-
-let obj = {};
-// its like obj[464847xvdgd646474] = 'Deepinder';
-obj[firstname] = 'Deepinder';
-
-obj.firstname = 'Dp';
-
-console.log(obj); // {firstname: 'Dp', Symbol(firstname): 'Deepinder'}
-
-console.log(obj.firstname)  // Dp
-
-// accessing Symbol Value
-console.log(obj[firstname]) // 'Deepinder'
-```
-
-* **Symbol are not iterable **, that means if you loop over an object with a for loop.
-
-* **Magic Strings :** Strings that have a special meaning or usage in your program. This makes your program fragile, easily susceptible to bugs.
-* For Global use, we create **Global variables** with **Symbol.for** to avoid *collision* and *stop retendency*, example you might have the case where you want *two Symbols which actually share the same ID*.
-
-```javascript
-// Creating Symbol
-const HAIR_STRAIGHT = Symbol.for('Stright');
-const HAIR_CURLY = Symbol.for('Curly');
-const HAIR_WAVY = Symbol.for('Wavy');
-
-let curly = Symbol.for('Curly');
-console.log(curly === HAIR_CURLY); // true
-console.log(Symbol.keyFor(HAIR_CURLY));
-
-// Change Property of Symbol (its help you'u to not accidentally change properties)
-const ageSymbol1 = Symbol.for('age');
-
-let person = {
-    [ageSymbol1]: 29,
-    age : 32
-}
-
-function changeValue(person) {
-    const newAgeSymbol = Symbol.for('age');
-    person[newAgeSymbol] = 30;
-}
-changeValue(person);
-
-console.log(person["age"])          // 32
-// its not same, its different label for age === ageSymbol1 (false)
-console.log(person[ageSymbol1]);    // 30
-```
-
-**Well-Known Symbols :** Symboles already built into the javascript engine, used by the engine for certain tasks.
 
 ---
 ## 📘ITeration
