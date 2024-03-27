@@ -556,6 +556,9 @@ test([1, 2, 3, 4]);
 
 **Methods**
 
+![Image](./images/array-methods.png)
+
+
 1. include (return true/false)
 2. indexOf (return index)
 3. findIndex(return first find index)slice
@@ -684,28 +687,12 @@ var arr = Array.from(
 console.log(arr);   // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 ```
 
-⚠️ **Note :**
+**⚠️Note :**
 * in **forEach loops** you cannot add **continue & break** statements only in for loops you can.
 * **forEach methods** create **sideEffects** because of forEach we mutate the original array while in **map method** create new array, and when we are doing sideEffect we not use *return* statement as well example in **forEach method**
 * In **for loops** we create extra variables to store the results which create Problem while reading variables. but **map, filter, reduce** also reduce this problem.
-```js
-let array = [1, 2, 3, 4, 5];
 
-let mapArray = array.map(element => element * element);
 
-// Map Method
-console.log(array);     // original Array
-console.log(mapArray);  // Map array
-
-array.forEach((element, i) => {
-    array[i] = element * element;
-});
-
-// Foreach Method
-console.log(array); // original & forEach array
-```
-
-![Image](./images/array-methods.png)
 
 ---
 ## 📘Delete Element from Object OR Array
@@ -818,6 +805,7 @@ console.log(question)   //  {'question' => 'what is the best programming langua
 // Converting into array once again
 const array = [...questions];
 ```
+
 ---
 
 ## 📘Source of Data
@@ -825,37 +813,6 @@ const array = [...questions];
 ![Image](./images/source-of-data.png)
 
 ![Image](./images/arrays-vs-set-object-vs-maps.png)
-
----
-
-## 📘Major Falsy Values
-
-1. **false:** The boolean value false itself is falsy.
-
-2. **0 (zero) :** The number zero is falsy.
-
-3. **'' (empty string) :** An empty string is falsy.
-
-4. **null :** The absence of any value is falsy.
-
-5. **undefined :** A variable that has been declared but has not been assigned a value is falsy.
-
-6. **NaN (Not a Number) :** Represents a value that is not a legal number and is falsy.
-
----
-
-## 📘Nullish
-
-* Only check **null** or **undefined** value
-* Not include **0 (zero)** or **"" (empty string)**
-
-```js
-const test = 0;
-console.log(test || 'Hello');   // hello
-
-// Nullish : null and undefined (Not 0 or '')
-console.log(test ?? 'Hello');   // 0
-```
 
 ---
 
@@ -904,6 +861,7 @@ console.log(outPut());  // 2
 var a = 1 + '2';
 console.log(a);
 ```
+---
 
 ## 📘 Comparison
 
@@ -961,6 +919,38 @@ console.log(libraryName);
     ```
 
 ---
+
+## 📘Major Falsy Values
+
+1. **false:** The boolean value false itself is falsy.
+
+2. **0 (zero) :** The number zero is falsy.
+
+3. **'' (empty string) :** An empty string is falsy.
+
+4. **null :** The absence of any value is falsy.
+
+5. **undefined :** A variable that has been declared but has not been assigned a value is falsy.
+
+6. **NaN (Not a Number) :** Represents a value that is not a legal number and is falsy.
+
+---
+
+## 📘Nullish
+
+* Only check **null** or **undefined** value
+* Not include **0 (zero)** or **"" (empty string)**
+
+```js
+const test = 0;
+console.log(test || 'Hello');   // hello
+
+// Nullish : null and undefined (Not 0 or '')
+console.log(test ?? 'Hello');   // 0
+```
+
+---
+
 
 ## 📘 Objects and Dot
 
