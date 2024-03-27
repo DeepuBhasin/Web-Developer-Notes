@@ -1951,25 +1951,11 @@ console.log(greeting)       // Hello Tony
 
 ```javascript
 // Execution Context
-
 (function (name){
     var greeting = 'Hello';
     console.log(greeting +' '+ name);
 }('john'));
 ```
-
-**📚 conceptual Example:**
-
-```js
-var firstName = "deep";
-
-var test = (function (firstName) {
-    firstName = "newDeep";
-}(firstName))
-
-console.log(firstName);
-```
-
 
 ![Image](./images/iife.png)
 
@@ -1986,6 +1972,19 @@ var greeting = 'Hola';
 }('John'));
 ```
 ![Image](./images/iffe-module-pattern.png)
+
+
+**📚 conceptual Example:**
+
+```js
+var firstName = "deep";
+
+var test = (function (firstName) {
+    firstName = "newDeep";
+}(firstName))
+
+console.log(firstName); // deep
+```
 
 **⚠️ Note:**
 1. In **Node** we use **require("") with module.export {}**
@@ -2116,7 +2115,7 @@ const g = function () {
 g();
 f();
 ```
-* Top best Examples of Closures
+* Below are the best Examples of Closures
 
 1. Memoization/Caching
 2. Call once any function
