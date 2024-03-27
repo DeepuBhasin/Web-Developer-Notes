@@ -298,7 +298,8 @@ function test() {
 
 ---
 
-## 📘What about Asynchronous Callbacks
+## 📘Problem with Synchronous Code
+* **Synchronous :** one at a time.
 * **Asynchronous :** more than one at a time.
 
 ```javascript
@@ -545,36 +546,40 @@ arr[3](arra[2].name)   // Hello Tony
 
 ```js
 function test(arr) {
-    var length = arr.length;
+    var {length} = arr;
     console.log(length);
 }
 test([1, 2, 3, 4]);
 ```
 
-**Arrays Methods**
+**⚠️ Note :** toString() is a method that is attached on the base Object that why get on string, array, number etc and this method is use to compare the values
 
-1. slice
-2. splice  (mutate original)
-3. reverse (mutate original)
-4. concate
-5. join
-6. at(1) & at(-1)
-7. Map
-8. Filter
-9. Reduce
-10. Sort
-11. some (return true/false)
-12. every (return true/false)
-13. include (return true/false)
-14. indexOf (return index)
-15. find (return first find value)
-16. findIndex(return first find index)
-17. flat
-18. flatMap
-19. new Array(7).fill(1)
+**Methods**
+
+1. include (return true/false)
+2. indexOf (return index)
+3. findIndex(return first find index)slice
+4. find (return first find value)
+5. at(1) : for first Element & at(-1) : for last Element
+6. slice(start,end)
+7. splice(start, deleteCount, item1, item2, ...)  (mutate original)
+8. reverse (mutate original)
+9. concate
+10. join
+11. split
+12. map
+13. filter
+14. reduce
+15. sort
+16. some (return true/false)
+17. every (return true/false)
+18. flat
+19. flatMap
+20. new Array(7).fill(1)
 
 
 **⚠️ Note :** The all Above methods are coming from **Base Array Object**. You can see from below example
+
 ```js
 const arr = [];
 
@@ -586,7 +591,7 @@ console.log(arr.__proto__ == Array.Prototype)   // true
 ```
 
 
-* Slice & Splice
+* **Slice & Splice**
 ```js
 // Slice
 var startPosition = 0;
@@ -602,7 +607,7 @@ var arrayNeedToAdd = [6, 7, 8, 9, 10];
 arr.splice(startPosition, howManyNeedToDelete, ...arrayNeedToAdd)
 console.log(arr);   // [1, 6, 7, 8, 9, 10, 3, 4, 5]
 ```
-* Filter
+* **Filter**
 
 ```js
 const fruits = [
@@ -623,7 +628,7 @@ console.log(filterData);
 //   { id: 2, name: 'Banana', price: 15, quantity: 10 }
 // ]
 ```
-* Find
+* **Find**
 ```js
 const fruits = [
     { id: 1, name: "apple", price: 10, quantity: 5 },
@@ -640,7 +645,7 @@ console.log(filterData);
 //{ id: 1, name: 'apple', price: 10, quantity: 5 }
 ```
 
-* Sort
+* **Sort**
 ```js
 // Sort
 const arr = [3, 7, 1, 9, 6];
@@ -651,7 +656,7 @@ const desc = arr.sort((a, b) => b - a)
 desc    // [ 9, 7, 6, 3, 1 ]
 ```
 
-* Flatten Array
+* **Flatten Array**
 ```js
 var arr = [1, [2, [3, [4, [5, [6, [7, 8, [9, 10]]]]]]]];
 var result = arr.flat();
@@ -664,7 +669,7 @@ var result = [1,2,,,,,,,,,,,3].flat();
 console.log(result) // [1,2,3]
 
 ```
-* Creating & filling Array
+* **Creating & filling Array**
 
 ```js
 var arr = new Array(7).fill(1);
@@ -681,7 +686,7 @@ console.log(arr);   // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 ⚠️ **Note :**
 * in **forEach loops** you cannot add **continue & break** statements only in for loops you can.
-* **forEach methods** create **sideEffects** because of forEach we mutate the orginal array while in **map method** we cannot mutate the original array because it create new arra, and when we are doing sideEffect are not use *return* statement as well example in **forEach method**
+* **forEach methods** create **sideEffects** because of forEach we mutate the original array while in **map method** create new array, and when we are doing sideEffect we not use *return* statement as well example in **forEach method**
 * In **for loops** we create extra variables to store the results which create Problem while reading variables. but **map, filter, reduce** also reduce this problem.
 ```js
 let array = [1, 2, 3, 4, 5];
@@ -1404,167 +1409,8 @@ Functions can pass as parameter in which you can pass function as parameter use 
 
 ---
 
-## 📘 Objects, Functions and This
-The __this__ keyword is actually pretty straightforward to understand __what is does is it refers to whatever object it is directly inside (property) of.__
 
-* On Global Level : __this === window object__
-* On Object Level : __this === current Object__
-
-```javascript
-// globals execution context
-console.log(this);       // window object
-
-// Function A Execution context and getting own this keyword but it pointing to window object (same memory location)
-function a() {
-    console.log(this);   // window object
-    this.newVariable = 'hello';
-}
-a();
-
-// Function B Execution context and getting own this kwyword but it pointing to window object (same memory location)
-var b = function () {
-    console.log(this);   // window object
-}
-
-console.log(newVariable);   // hello
-
-b();
-```
-```javascript
-let obj = {
-    firstName: 'Deepu',
-    lastName: 'Singh',
-    // here this is attached to the current object by javascript engine
-    log: function(){
-        this.name = 'Deepinder',
-        console.log(this);
-    },
-    getFullName: function () {
-        return this.firstName + ' ' + this.lastName;
-    }
-}
-
-obj.firstName // Deepu
-obj.getFullName() // Deepu Bhasin
-```
-
-![Image](./images/this-key-word.png)
-
-### 📑Self and Scope (with This)
-Problem
-
-```javascript
-var firstName = "Deepinder";
-
-let obj = {
-    firstName: "Deepu",
-    getFullName: function () {
-        console.log('First Name', this.firstName);
-
-        function test() {
-        // here it 'this' will refere to the window object
-            console.log('First Name', this.firstName);
-        }
-        test();
-    }
-}
-
-obj.getFullName();
-```
-
-Solution
-
-1. By Passing reference of current object
-
-```javascript
-var firstName = "Deepinder";
-
-let obj = {
-    firstName: "Deepu",
-    getFullName: function () {
-        console.log('First Name', this.firstName);
-
-        // passing reference
-        var self = this;
-
-        function test() {
-            console.log('First Name', self.firstName);
-        }
-        test();
-    }
-}
-
-obj.getFullName();
-```
-2. By binding 'this' with bind function
-
-```javascript
-var firstName = "Deepinder";
-
-let obj = {
-    firstName: "Deepu",
-    getFullName: function () {
-        console.log('First Name', this.firstName);
-
-        function test() {
-            console.log('First Name', this.firstName);
-        }
-        test.bind(this)();
-    }
-}
-
-obj.getFullName();
-```
-
-3. By using Arrow function
-
-```javascript
-var firstName = "Deepinder";
-let obj = {
-    firstName: "Deepu",
-    getFullName: function () {
-        console.log('First Name', this.firstName);
-        const test = () => {
-            console.log('First Name', this.firstName);
-        }
-        test();
-    }
-}
-obj.getFullName();
-```
-
-**💻 Application Example :** **Method Chaining**, Calling one method after another, and each method. Affects the parent object. So obj.method1().method2() where both methods end up with a 'this' variable pointing at 'obj'
-
-```js
- let obj = {
-    value: 0,
-    add(number) {
-        this.value += number;
-        console.log('Current Value : ', this.value);
-        return this;
-    },
-    subtract(number) {
-        this.value -= number;
-        console.log('Current Value : ', this.value);
-        return this;
-    },
-    multiply(number) {
-        this.value *= number;
-        console.log('Current Value : ', this.value);
-        return this;
-    },
-    divide(number) {
-        this.value /= number;
-        console.log('Current Value : ', this.value);
-        return this;
-    }
-};
-obj.add(6).subtract(1).multiply(4).divide(2);
-```
-
----
-
-## 📘 Functions and Default Parameters
+## 📘Functions and Default Parameters
 
 ```js
 const bookings = [];
@@ -1747,6 +1593,165 @@ var person = {
     // lastname
     lastname : 'Doe'
 }
+```
+---
+
+## 📘 Objects, Functions and This
+The __this__ keyword is actually pretty straightforward to understand __what is does is it refers to whatever object it is directly inside (property) of.__
+
+* On Global Level : __this === window object__
+* On Object Level : __this === current Object__
+
+```javascript
+// globals execution context
+console.log(this);       // window object
+
+// Function A Execution context and getting own this keyword but it pointing to window object (same memory location)
+function a() {
+    console.log(this);   // window object
+    this.newVariable = 'hello';
+}
+a();
+
+// Function B Execution context and getting own this kwyword but it pointing to window object (same memory location)
+var b = function () {
+    console.log(this);   // window object
+}
+
+console.log(newVariable);   // hello
+
+b();
+```
+```javascript
+let obj = {
+    firstName: 'Deepu',
+    lastName: 'Singh',
+    // here this is attached to the current object by javascript engine
+    log: function(){
+        this.name = 'Deepinder',
+        console.log(this);
+    },
+    getFullName: function () {
+        return this.firstName + ' ' + this.lastName;
+    }
+}
+
+obj.firstName // Deepu
+obj.getFullName() // Deepu Bhasin
+```
+
+![Image](./images/this-key-word.png)
+
+### 📑Self and Scope (with This)
+Problem
+
+```javascript
+var firstName = "Deepinder";
+
+let obj = {
+    firstName: "Deepu",
+    getFullName: function () {
+        console.log('First Name', this.firstName);
+
+        function test() {
+        // here it 'this' will refere to the window object
+            console.log('First Name', this.firstName);
+        }
+        test();
+    }
+}
+
+obj.getFullName();
+```
+
+Solution
+
+1. By Passing reference of current object
+
+```javascript
+var firstName = "Deepinder";
+
+let obj = {
+    firstName: "Deepu",
+    getFullName: function () {
+        console.log('First Name', this.firstName);
+
+        // passing reference
+        var self = this;
+
+        function test() {
+            console.log('First Name', self.firstName);
+        }
+        test();
+    }
+}
+
+obj.getFullName();
+```
+2. By binding 'this' with bind function
+
+```javascript
+var firstName = "Deepinder";
+
+let obj = {
+    firstName: "Deepu",
+    getFullName: function () {
+        console.log('First Name', this.firstName);
+
+        function test() {
+            console.log('First Name', this.firstName);
+        }
+        test.bind(this)();
+    }
+}
+
+obj.getFullName();
+```
+
+3. By using Arrow function
+
+```javascript
+var firstName = "Deepinder";
+let obj = {
+    firstName: "Deepu",
+    getFullName: function () {
+        console.log('First Name', this.firstName);
+        const test = () => {
+            console.log('First Name', this.firstName);
+        }
+        test();
+    }
+}
+obj.getFullName();
+```
+
+**💻 Application Example :** **Method Chaining**, Calling one method after another, and each method. Affects the parent object. So obj.method1().method2() where both methods end up with a 'this' variable pointing at 'obj'
+
+```js
+ let obj = {
+    value: 0,
+    add(number) {
+        this.value += number;
+        console.log('Current Value : ', this.value);
+        return this;
+    },
+    subtract(number) {
+        this.value -= number;
+        console.log('Current Value : ', this.value);
+        return this;
+    },
+    multiply(number) {
+        this.value *= number;
+        console.log('Current Value : ', this.value);
+        return this;
+    },
+    divide(number) {
+        this.value /= number;
+        console.log('Current Value : ', this.value);
+        return this;
+    }
+};
+obj.add(6).subtract(1).multiply(4).divide(2);
 ```
 ---
 ## 📘 IIFEs
