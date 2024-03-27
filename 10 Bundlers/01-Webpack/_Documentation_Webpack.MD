@@ -943,7 +943,7 @@ npm install sass-loader css-loader style-loader --save-dev
 const path = require('path');
 
 module.exports = {
-    entry: path(resolve, './src/index.js'),
+    entry: path.resolve(__dirname, './src/index.js'),
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, './dist'),
@@ -979,7 +979,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-    entry: path(resolve, './src/index.js'),
+    entry: path.resolve(__dirname, './src/index.js'),
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, './dist'),

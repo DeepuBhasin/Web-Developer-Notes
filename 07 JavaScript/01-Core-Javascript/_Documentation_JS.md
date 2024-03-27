@@ -680,7 +680,6 @@ var startPosition = 0;
 var endPosition = 2;
 [1, 2, 3, 4, 5].slice();      // [1, 2, 3, 4, 5]   // shallow copy
 
-
 // 2. Splice
 let arr = [1, 2, 3, 4, 5];
 var startPosition = 1;
@@ -1466,67 +1465,6 @@ log('Hello');       // create string on fly
 log(function(){ console.log('Hi')}) // create function as  object on fly && it is considered as function expression
 ```
 Functions can pass as parameter in which you can pass function as parameter use them like you do variables to other functions as well *introduces an entirely new class of programming called **Functional Programming***
-
----
-
-
-## 📘Functions and Default Parameters
-
-```js
-const bookings = [];
-const createBooking = function (
-    flightNum,
-    numPassengers = 1,
-    price = 199 * numPassengers
-) {
-    console.log(flightNum, numPassengers, price);
-};
-
-createBooking('LH1')
-createBooking('LH1', 3);
-createBooking('LH1', undefined, 2);
-```
-
-* Some More Examples on **Default Parameters**
-
-```javascript
-function greet(fname = 'Tony', lname = 'Alicea') {
-    return `Hi ${fname} ${lname}`;
-}
-
-let greeting1 = greet();
-console.log(greeting1); //Hi Tony Alicea
-
-let greeting2 = greet('Anthony');
-console.log(greeting2); // Hi Anthony Alicea
-
-// Good Example
-let greeting3 = greet(null, 'p. Alicea');
-console.log(greeting3); // Hi null p.Alicea
-
-// Good Example
-let greeting4 = greet(undefined, 'P. Alicea');
-console.log(greeting4); // Hi Tony P.Alicea```
-```
-
-```javascript
-function greet(fname = 'Tony', lname = 'Alicea', phrase = () => {return `Hi ${fname} ${lname}`}) {
-    return phrase();
-}
-
-let greeting1 = greet();
-console.log(greeting1);     // Hi Tony Alicea
-
-
-// Good example
-function greet(fname = 'Tony', phrase = () => {return `Hi ${fname} ${lname}`}, lname = 'Alicea') {
-    return phrase();
-}
-
-let greeting1 = greet();
-console.log(greeting1);     // Hi Tony Alicea
-```
-
 ---
 
 ## 📘First-Class functions Vs Higher-Order functions
@@ -1596,6 +1534,67 @@ greet('john','Doe', 'es');  // john , Doe, es
 greet('john','Doe', 'es', 'patiala', 'punjab');  // john , Doe, es
 ```
 ⚠️ **Note** : In javascript *Function OverLoading Does not exist*.
+
+---
+
+
+## 📘Functions and Default Parameters
+
+```js
+const bookings = [];
+const createBooking = function (
+    flightNum,
+    numPassengers = 1,
+    price = 199 * numPassengers
+) {
+    console.log(flightNum, numPassengers, price);
+};
+
+createBooking('LH1')
+createBooking('LH1', 3);
+createBooking('LH1', undefined, 2);
+```
+
+* Some More Examples on **Default Parameters**
+
+```javascript
+function greet(fname = 'Tony', lname = 'Alicea') {
+    return `Hi ${fname} ${lname}`;
+}
+
+let greeting1 = greet();
+console.log(greeting1); //Hi Tony Alicea
+
+let greeting2 = greet('Anthony');
+console.log(greeting2); // Hi Anthony Alicea
+
+// Good Example
+let greeting3 = greet(null, 'p. Alicea');
+console.log(greeting3); // Hi null p.Alicea
+
+// Good Example
+let greeting4 = greet(undefined, 'P. Alicea');
+console.log(greeting4); // Hi Tony P.Alicea
+```
+
+```javascript
+function greet(fname = 'Tony', lname = 'Alicea', phrase = () => {return `Hi ${fname} ${lname}`}) {
+    return phrase();
+}
+
+let greeting1 = greet();
+console.log(greeting1);     // Hi Tony Alicea
+
+
+// Good example
+function greet(fname = 'Tony', phrase = () => {return `Hi ${fname} ${lname}`}, lname = 'Alicea') {
+    return phrase();
+}
+
+let greeting1 = greet();
+console.log(greeting1);     // Hi Tony Alicea
+```
+
 
 ---
 ## 📘Framework Aside
