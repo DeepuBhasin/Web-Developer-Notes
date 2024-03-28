@@ -430,6 +430,35 @@ Solution For this example : by clear float from both the sides
 * Horizontally each of these elements takes up exactly the space that is necessary for its content. However, vertically things are little different so vertically by default all the flex items are tall as the tallest element 
 
 
+3. **Grid-Box**
+
+![Grid](./images/grid-1.png)
+
+![Grid](./images/grid-2.png)
+
+![Grid](./images/grid-3.png)
+
+![Grid](./images/grid-4.png)
+
+
+unit
+
+* fr : 1frm (fractional, use in grid) it will shrink and grow in same proportion
+
+```css
+/*
+1fr 1fr 1fr 1fr = repeat(4, 1fr)
+
+1fr 1fr 1fr auto (the auto parameter will take remaining with automatically)
+
+*/
+
+
+.container {
+    grid-template-column : repeat(4, 1fr)
+}
+```
+
 ---
 
 
