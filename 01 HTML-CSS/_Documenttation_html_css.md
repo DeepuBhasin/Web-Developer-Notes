@@ -441,8 +441,6 @@ Solution For this example : by clear float from both the sides
 ![Grid](./images/grid-4.png)
 
 
-unit
-
 * fr : 1frm (fractional, use in grid) it will shrink and grow in same proportion
 
 ```css
@@ -458,6 +456,8 @@ unit
     grid-template-column : repeat(4, 1fr)
 }
 ```
+
+* use height and width for best use to container
 
 ---
 

@@ -12,6 +12,12 @@
 npm i --save-dev <package-name>
 npm install --save-dev <package-name>
 ```
+or 
+
+```
+npm install <package-name> -D
+```
+
 
 * To remove Package
 ```
