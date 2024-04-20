@@ -12,7 +12,7 @@
 * **TypeScript :**
 1. Helps us catch errors during development  (i.e before the code gets **compiled**) which force you to write Filter, cleaner and better code.
 2. **Uses 'type annotations' to analyze our code.**
-3. Our active during development.
+3. Only active during development.
 4. Doesn't provide any performance optimization.
 5. It fix all errors on **Compile-time**.
 
@@ -218,7 +218,7 @@ let person : Person = {
 // Because in tupal we cannot add more than two element
 person.role.push('operator')    // Error
 ```
-7. Enum Type : 
+7. Enum Type :
 * **Enumeration**
 * when want to **use like constants** (when we use *same words* all over that application)
 * Major difference between *enum and object* is **objects** are use to store various information where are **enum** are collection of very closely related values eg only User-Types : Admin, View, Operator etc like a constant.
