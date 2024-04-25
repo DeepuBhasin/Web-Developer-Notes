@@ -3,12 +3,16 @@
 2. Regular expression world exist between these **/Regular expression world/** (forward slash) and this syntax called regular expression literals
 3. Every thing in a string is called character example space, new-line, tab, special character, alpha character, numeric character etc
 
+---
+
 ### 📘Reference
 
 [Regexr](https://regexr.com/)
 
+---
+
 ### Flags
-1. Single and exact Match : it will check only first occurrence
+1. **Single and exact Match** : it will check only first occurrence
 
 ```js
 let str = "Hello World. Hello Deep";
@@ -16,19 +20,20 @@ let regex = /Hello/;    // only check first Hello
 ```
 
 
-2. Global flag : it will check whole string now
+2. **Global flag** : it will check whole string now
 
 ```js
 let str = "Hello World. Hello Deep";
 let regex = /Hello/g;   // check every Hello
 ```
 
-3. Case-insensitivity : it will check small and big characters
+3. **Case-insensitivity** : it will check small and big characters
 
 ```js
 let str = "Hello World. Hello Deep";
 let regex = /hello/i;
 ```
+---
 
 ### 📘Function to match expression
 1. **exec()** : This function will return an array for match or null for no match
@@ -90,6 +95,8 @@ let regex = /hello/gi;
 let output = str.replace(regex, "Universe");
 console.log(output);
 ```
+---
+
 
 ### 📘Meta Characters
 
@@ -106,7 +113,7 @@ let regex = /h./gm
 
 ![WildCart](./images/wildcard.png)
 
-2. Escaping Meta Character : Using the forward slash ('\'), basically behave meta characters as normal string(called literal value)
+2. **Escaping Meta Character** : Using the forward slash ('\'), basically behave meta characters as normal string(called literal value)
 
 ```js
 let regex = /h\./gm
@@ -120,7 +127,7 @@ let regex = /h\./gm
 let regex = /[.]/g  // it will check only dot not the whole character
 ```
 
-3. Control Characters : 
+3. **Control Characters** : 
    1. \t : tab
    2. \n : new line (best one)
    3. \r : carriage tab
@@ -128,7 +135,7 @@ let regex = /[.]/g  // it will check only dot not the whole character
 
 ![Tab](./images/control-chracter-for-tab.png)
 
-4. Character Sets : Matching the group of characters in the text using [] with characters sets but only exception with hyphen '-' character.
+4. **Character Sets** : Matching the group of characters in the text using [] with characters sets but only exception with hyphen '-' character.
 
 ```js
 let regex = /gr[ae]y/g
@@ -139,7 +146,7 @@ let regex = /gr[ae]y/g
 ![CharacterSet](./images/character-set-2.png)
 
 
-5. Specific Range : Specify range of characters using-meta characters
+5. **Specific Range** : Specify range of characters using-meta characters
 
 ```js
 let regex = /[1-4]/g
