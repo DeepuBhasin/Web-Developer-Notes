@@ -93,9 +93,63 @@ console.log(output);
 
 ### 📘Meta Characters
 
+Various Meta Characters : **^$.*+?=!|\/()[]{}**
+
 1. **Wild Card Meta Characters** : 
    1. The wild card is represented by a period(.). Wild card means it can be anything. so when a period is used in a regular expression, it represents any single character.
    2. But it has exceptions with some control characters like new line. 
    3. It is important to remember that it is only for single character not multiple characters.
 
+```js
+let regex = /h./gm
+```
+
 ![WildCart](./images/wildcard.png)
+
+2. Escaping Meta Character : Using the forward slash ('\'), basically behave meta characters as normal string(called literal value)
+
+```js
+let regex = /h\./gm
+```
+
+![EscapingCharacter](./images/escaping-characters.png)
+
+**⚠️Note :** if you put meta character into meta it will behave like normal string
+
+```js
+let regex = /[.]/g  // it will check only dot not the whole character
+```
+
+3. Control Characters : 
+   1. \t : tab
+   2. \n : new line (best one)
+   3. \r : carriage tab
+   4. \v : vertical tab
+
+![Tab](./images/control-chracter-for-tab.png)
+
+4. Character Sets : Matching the group of characters in the text using [] with characters sets but only exception with hyphen '-' character.
+
+```js
+let regex = /gr[ae]y/g
+```
+
+![CharacterSet](./images/character-set.png)
+
+![CharacterSet](./images/character-set-2.png)
+
+
+5. Specific Range : Specify range of characters using-meta characters
+
+```js
+let regex = /[1-4]/g
+```
+![Range](./images/range.png)
+
+**⚠️Note :** When you using '-' in starting then it behave like a normal string so no need to escape character.
+
+![Range](./images/range-2.png)
+
+
+![Range](./images/range-3.png)
+
