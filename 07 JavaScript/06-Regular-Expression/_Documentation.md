@@ -160,3 +160,112 @@ let regex = /[1-4]/g
 
 ![Range](./images/range-3.png)
 
+6. **Excluding Characters :** Excluding set of characters in character set using Caret Symbol (^) in Regular Expression.
+
+```js
+let regex = /[^a-z]/g   // it will not match with small a-z
+
+let regex = /[a-z^]/g   // it will match with small a-z and ^ character
+```
+
+![CharacterSet](./images/chracter-set.png)
+
+7. **Handling Repetition** : Handling Repetition of characters in the pattern using +,*,? Meta Character 
+* its basically match with group of words not for single word
+
+```js
+// * Matches zero or more occurrence
+// + Matches one or more occurrences 
+// ? Matches zero or one occurrence
+
+let regex = /apple/  // it will match with only apple word
+
+// apple[s]?,*,+/ it means we are performing actions only and only on s word
+
+let regex = /apples*/  // it will match with apple and the apple word which contains 's' on repeat 
+
+let regex = /apples+/  // it will match apples and the word which contains 's' on Repeat
+
+let regex = /apples?/  // it will match with either apple or apples word only (single word)
+``` 
+
+![Repeat](./images/repeat-1.png)
+
+![Repeat](./images/repeat-2.png)
+
+![Repeat](./images/repeat-3.png)
+
+
+
+8. **Greediness and Laziness** : 
+
+* **Greediness :** selecting whole line (start from end)
+* **Laziness :** selecting one line
+
+```js
+let regex = /<p>.*<\/p>/      // greediness
+
+let regex = /<p>.*?<\/p>/     // laziness
+
+<p>This is first paragraph</p> <p>This is first paragraph</p> 
+<p>This is first paragraph</p> <p>This is first paragraph</p> 
+```
+![Greediness](./images/greediness.png)
+
+![Laziness](./images/laziness.png)
+
+
+1. **Minimum and Maximum :** Specifying Characters repetition amount minimum and maximum in the pattern 
+
+* **{min,max}** matches with minimum number and maximum number
+* **{min}** matches with minimum number and maximum with any number
+* **{min,}** Matches with minimum and maximum any (greediness)
+
+
+```js
+let regex = /o{3,4}/;
+```
+
+![MinMax](./images/min-max-1.png)
+
+
+![MinMax](./images/min-max-2.png)
+
+![Greediness](./images/greediness-1.png)
+
+
+
+
+### 📘ShortHand
+
+1. For Digits 
+
+```js
+let regex = /\d/g    // [0-9]
+```
+![forDigit](./images/only-numbers.png)
+
+
+2. For small Characters, Big Character, Number, underscore
+
+```js
+let regex = /\w/g    //[a-zA-Z0-9_]
+```
+
+![AllCharacter](./images/w-short-hand.png)
+
+3. For white space
+
+```js
+let regex = /\s/g    //[\t\r\n]
+```
+
+![SCharacter](./images/s-short-hand.png)
+
+4. Not Select
+
+```js
+let regex = /\D/g    //[^0-9]
+let regex = /\W/g    //[^a-zA-Z0-9]
+let regex = /\S/g    //[^ \t\r\n]
+```

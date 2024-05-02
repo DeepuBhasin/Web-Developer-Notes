@@ -230,20 +230,32 @@ body {
 ![BoxModel](./images/box-model-2.png)
 
 
+For Width
+
+![With-Out-Box-Sizing](./images/without-box-sizing.png)
+
+For Height
+
+![With-Out-Box-Sizing](./images/without-box-sizing-2.png)
+
 * There is always **margin and padding** by default on elements such as h1, p, etc., in every browser.
 * To Eliminate this issue we us **CSS Reset**.
 * After using this we have to set margin and padding for each elements.
 ```css
 /* Called CSS Reset */
+*,
+*::after,
+*::before {
+     /* to reset all width (best one)*/
+    box-sizing: border-box;
+}
+
 * {
     /* Removing padding in body*/
     padding: 0;
 
     /* removing margin from view port/ Browser Window*/
     margin: 0;
-
-    /* to reset all width (best one)*/
-    box-sizing: border-box;
 }
 ```
 
@@ -335,6 +347,9 @@ body {
 
 
 ## 📘Position values
+
+[Position-Reference](https://www.youtube.com/watch?v=MxEtxo_AaZ4)
+
 1. Static : Not Effected by Top, Bottom, Left, Right properties/values
 2. Relative : tblr value cause element to be moved from its **normal position**
 3. Absolute : Positioned relative to its parent element that is positioned **relative**. If we does not provide relative to its parent then it will take **body** is reference.
@@ -383,7 +398,7 @@ Solution For this example : by clear float from both the sides
 <header>
     <h2 class="heading-primary">Heading Primary</h2>
     <h2 class="heading-secondary">Heading Secondary</h2>
-    
+
     <!-- We have to use this all the time to fix the out of flow issue-->
     <div class="clear"></div>
 </header>
@@ -419,6 +434,8 @@ Solution For this example : by clear float from both the sides
 
 2. **Flex-box**
 
+[CSS-Best-Tutorial](https://www.youtube.com/watch?v=phWxA89Dy94)
+
 ![flexBox](./images/flex.png)
 
 ![flex-1](./images/flex-1.png)
@@ -427,10 +444,10 @@ Solution For this example : by clear float from both the sides
 
 
 ![flex-2](./images/flex-2.png)
-* Horizontally each of these elements takes up exactly the space that is necessary for its content. However, vertically things are little different so vertically by default all the flex items are tall as the tallest element 
+* Horizontally each of these elements takes up exactly the space that is necessary for its content. However, vertically things are little different so vertically by default all the flex items are tall as the tallest element
 
 
-3. **Grid-Box**
+1. **Grid-Box**
 
 ![Grid](./images/grid-1.png)
 
@@ -441,16 +458,15 @@ Solution For this example : by clear float from both the sides
 ![Grid](./images/grid-4.png)
 
 
-* fr : 1frm (fractional, use in grid) it will shrink and grow in same proportion
+* fr : 1frm (fractional, use in grid) it will shrink and grow in same proportion its like flex-grow (will fill all the empty space)
 
 ```css
 /*
-1fr 1fr 1fr 1fr = repeat(4, 1fr)
+1fr 1fr 1fr 1fr = repeat(4, 1fr) = 1fr 1fr 1fr auto
 
 1fr 1fr 1fr auto (the auto parameter will take remaining with automatically)
 
 */
-
 
 .container {
     grid-template-column : repeat(4, 1fr)
