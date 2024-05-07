@@ -4,18 +4,41 @@
 3. Always follow Separation of concern like write css in css files and js in js files for good practice
 4. **kebab case** mostly use in CSS example **main-heading**
 5. Real world we mostly use classes instead of id for future use
-6. html validator is use to check html validations
+6. Always use Vector Images (SVG)
+7. For Icons [PhosphorIcons](https://phosphoricons.com/) [HeroIcons](https://heroicons.com/)
+8. Fallback Mechanism : means if one thing is fail then other will handle example
+
+```css
+* {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+/* if first font  does not exist then it will check for next and so on... */
+```
 
 ---
 
 # 📔Html
 
-* **Block Element** : Which takes **100% width** example **Div, header, footer, section, aside, nav, main, article or all Semantic tags**
-* **InLine Element** : which takes **content width** example **a , span**
+1. Block/Inline element
+* **Block Element** : Which takes **100% width** example **form, div, header, footer, section, aside, nav, main, article or all Semantic tags**
+* **InLine Element** : which takes **content width** example **a , span, button, all inputs**
+* **⚠️Note :** To check the weather element is block or inline use **Border Style Property**
 
-**⚠️ Note :** To check the weather element is block or inline use **Border Style Property**
+2. **Page layout** :
+   1. Semantics tags : like header,footer etc its a good practice and always use
+   2. Non-semantic tags : like div or span
 
+3. **Paths**
+   1.  **Absolute Path** : cdn links is called absolute path.
+   2.  **Relative Path** : Reference to current files/folder is called relative path.
+
+4. **Number System** :
+   1. Decimal : Means Dec means 10 digits (0-9), in mathematic we use decimal system example 2534161 etc
+   2. Binary : Means Bin means 2 digits (0-1), in computer sci we use Binary system example 1001001010
+   3. Hexadecimal : Means Hex means 6 and dec mean 10, means 16 digits [0-9, A-F] so we can write from 00 to ff example #00ff00 (green)  #ff0000 (red) #0000ff (blue)
 ---
+
+
 
 # 📔CSS
 
@@ -69,14 +92,15 @@ h1 {
 
 | Sr No | Name               | Selection Criteria                                                                       |
 | ----- | ------------------ | ---------------------------------------------------------------------------------------- |
-| 1     | Class              | . (dot symbol)                                                                           |
-| 2     | id                 | # (hash symbol)                                                                          |
-| 3     | Element            | name of element (body, p, h1)                                                            |
-| 4     | Nested Element     | article div p (selecting p element which exist in article then div)                      |
-| 5     | Multiple Selectors | h1, h2, h3, p, li {  color: green;}                                                      |
-| 6     | Adjacent Selectors | h1 + p (it will select all only those p elements which are immediately after h elements) |
-| 7     | Pseudo-Classes     | : (colon symbol)                                                                         |
-| 8     | Pseudo Element     | :: (double colon) ,   it will create new element after or before the selected element    |
+| 1     | Universe Selector  | * (asterisk symbol)                                                                      |
+| 2     | Class Selector     | . (dot symbol)                                                                           |
+| 3     | id Selector        | # (hash symbol)                                                                          |
+| 4     | Element Selector   | name of element (body, p, h1)                                                            |
+| 5     | Nested Element     | article div p (selecting p element which exist in article then div)                      |
+| 6     | Multiple Selectors | h1, h2, h3, p, li {  color: green;}                                                      |
+| 7     | Adjacent Selectors | h1 + p (it will select all only those p elements which are immediately after h elements) |
+| 8     | Pseudo-Classes     | : (colon symbol)                                                                         |
+| 9     | Pseudo Element     | :: (double colon) ,   it will create new element after or before the selected element    |
 
 
 1. **Adjacent Selector**
@@ -199,7 +223,8 @@ body {
     color: rgb(1, 1, 1);
 
     /* RGB with transparency ("alpha")*/
-    background-color: rgb(255, 0, 0, 0.6);
+    /* opacity : 0.6        values from 0 - 1 */
+    background-color: rgba(255, 0, 0, 0.6);
 
     /* Hexadecimal Notation*/
     color: #474638;
@@ -292,13 +317,35 @@ body {
 
 * px
 * % : to parent element
-* em : font size of parent element
+* em : font size of parent element. (font size of the parent, in the case of typographical like font-size, and font size of the element itself, in the case of the other properties like width)
+
+```html
+ <style>
+    #container {
+        font-size: 10px;
+    }
+
+    #btn {
+        display: inline-block;
+        /* This io depend upon parent */
+        font-size: 2em;
+        /* This is depend upon itself */
+        width: 10em;
+    }
+</style>
+ <div id="container">
+    <button id="btn">Click Button</button>
+</div>
+```
+
 * rem : to font size of root element (mostly use this and belongs to  root element : html)
 * vw : to 1% of viewport width
 * vh : to 1% of viewport height
 
 
-**⚠️Note :** by default **font-size** of html is **16px**
+**⚠️Note :**
+* em and rem units depends upon font-size property
+* by default **font-size** of html is **16px**
 
 ---
 ## 📘Block-Inline
@@ -556,6 +603,8 @@ in this case our image wil not get bigger in size up to 600px and will not get s
 
 ## 📘Responsive Design
 
+![MediaQuery](./images/media-query.png)
+
 Using HTML/CSS to make a website or app layout adapt to different screen size
 
 * **Practice To use**
@@ -573,14 +622,14 @@ Using HTML/CSS to make a website or app layout adapt to different screen size
 let backgroundColor = 'yellow';
 
 // max-width
-if(windowWidth < 500px) {
+if(windowWidth <= 500px) {
     body {
         backgroundColor: red;
     }
 }
 
 // min-width
-if(windowWidth > 500px) {
+if(windowWidth >= 500px) {
     body {
         backgroundColor: green;
     }
@@ -607,7 +656,11 @@ if(windowWidth > 500px && windowWidth < 780px ) {
 
 ```
 
-* **Screen Sizes (also called Break points)**
+* Break Points
+
+![BreakPoints](./images/breakpoint.png)
+
+**Screen Sizes (also called Break points)**
 
 | Sr No | Device Name            | Screen size |
 | ----- | ---------------------- | ----------- |
