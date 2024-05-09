@@ -240,10 +240,10 @@ body {
 
 ```css
 body {
-    background: url("./test.jpg");
+    background-image: url("./test.jpg");
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: cover;
 }
 ```
 ---
@@ -329,8 +329,12 @@ body {
         display: inline-block;
         /* This io depend upon parent */
         font-size: 2em;
+        
         /* This is depend upon itself */
         width: 10em;
+
+        /* This is depend upon root */
+        width: 10rem;
     }
 </style>
  <div id="container">
@@ -397,16 +401,18 @@ body {
 
 [Position-Reference](https://www.youtube.com/watch?v=MxEtxo_AaZ4)
 
-1. Static : Not Effected by Top, Bottom, Left, Right properties/values
-2. Relative : tblr value cause element to be moved from its **normal position**
+1. Static : Not Effected by Top, Bottom, Left, Right and z-index properties
+2. Relative : tblr value cause element to be moved from its **normal position** (itself position)
 3. Absolute : Positioned relative to its parent element that is positioned **relative**. If we does not provide relative to its parent then it will take **body** is reference.
-4. Fixed : Position relative to the **viewport**
+4. Fixed : Position relative to the **viewport** (browser)
 5. Sticky : Positioned based on scroll position
 
 
 ![PositionedValues](./images/positioned-example.png)
 
 ![positions](./images/positions.png)
+
+**⚠️Note :** **z-index** property play role in positions. it decides the stack level of elements.
 
 ---
 
@@ -488,6 +494,92 @@ Solution For this example : by clear float from both the sides
 ![flex-1](./images/flex-1.png)
 
 ![flexBoxCheatSheet](./images/flex-cheat-sheet.png)
+
+* **align-content :** alignment of space between and around the content along cross-axis
+* **flex-grow :** how much a flex item will grow relative to the rest of the flex items if space is available (use full when we items width is not exist or less than container width)
+
+```html
+<style>
+    #container {
+        background-color: grey;
+        width: 600px;
+        height: 200px;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .box {
+        /* we are not providing any width to any items */
+        padding: 10px;
+    }
+
+    .box1 {
+        background-color: brown;
+        /* box -1 will take automatically width according to ratio */
+        flex-grow: 1;
+    }
+
+    .box2 {
+        background-color: blue;
+    }
+
+    .box3 {
+        background-color: green;
+    }
+</style>
+<div id="container">
+    <div class="box box1">Box - 1</div>
+    <div class="box box2">Box - 2</div>
+    <div class="box box3">Box - 3</div>
+</div>
+```
+![Flex-grow](./images/flex-grow.png)
+
+* **flex-shrink :** how much a flex items will shrink relative to the rest of the items if space is available (use full when items width is greater than container width)
+
+```html
+<!-- flex-shrink example -->
+<style>
+    #container {
+        background-color: grey;
+        /* here container width is 600 px which is less then items width */
+        width: 600px;
+        height: 200px;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .box {
+        padding: 10px;
+        /* in flex-shrink case we need to provide width. here items width are greater then container width */
+        width: 500px;
+    }
+
+    .box1 {
+        background-color: brown;
+        /* This property when item width is greater than container width, it will not allow to resize or shrink when we set to zero */
+        flex-shrink: 0;
+    }
+
+    .box2 {
+        background-color: blue;
+    }
+
+    .box3 {
+        background-color: green;
+    }
+</style>
+<div id="container">
+    <div class="box box1">Box - 1</div>
+    <div class="box box2">Box - 2</div>
+    <div class="box box3">Box - 3</div>
+</div>
+```
+![Flex-Shrink](./images/flex-shrink.png)
+
+**⚠️Note :** 
+1. If the container width/height is smaller than the child width/height, the child will always remain fitted within the container until its content length becomes either too short or too long
+2. align-self > align-items
 
 
 ![flex-2](./images/flex-2.png)
@@ -603,7 +695,17 @@ in this case our image wil not get bigger in size up to 600px and will not get s
 
 ## 📘Responsive Design
 
+* Max-width property works with desktop first
+
 ![MediaQuery](./images/media-query.png)
+
+
+
+
+
+
+
+
 
 Using HTML/CSS to make a website or app layout adapt to different screen size
 
