@@ -89,7 +89,8 @@ h1 {
 
 ## 📘Selectors
 
-1. Simple Selectors
+**1. Simple Selectors**
+
 | Sr No | Name               | Selection Criteria                  |
 | ----- | ------------------ | ----------------------------------- |
 | 1     | Universe Selector  | * (asterisk symbol)                 |
@@ -99,27 +100,35 @@ h1 {
 | 5     | Multiple Selectors | h1, h2, h3, p, li {  color: green;} |
 
 
-2. Advanced Selectors
+**2. Advanced Selectors**
 
-| 6     | Attribute Selectors | input\[type="text"] will select on  the basis of attribute                               |
-| 7     | Nested Element      | div p (selecting  all p element which exist in div)                                      |
-| 8     | Direct Child        | div > p (it will select only those elements which are direct)                            |
-| 9     | Adjacent Selectors (like sibling)  | h1 + p (it will select all only those p elements which are immediately after h1 elements) |
-| 10    | Pseudo-Classes      | : (colon symbol)                                                                         |
-| 11    | Pseudo Element      | :: (double colon) ,   it will create new element after or before the selected element    |
+| Sr No | Name                              | Selection Criteria                                                                        |
+| ----- | --------------------------------- | ----------------------------------------------------------------------------------------- |
+| 6     | Attribute Selectors               | input\[type="text"] will select on  the basis of attribute                                |
+| 7     | Nested Element                    | div p (selecting  all p element which exist in div)                                       |
+| 8     | Direct Child                      | div > p (it will select only those elements which are direct)                             |
+| 9     | Adjacent Selectors (like sibling) | h1 + p (it will select all only those p elements which are immediately after h1 elements) |
+| 10    | Pseudo-Classes                    | : (colon symbol)                                                                          |
+| 11    | Pseudo Element                    | :: (double colon) ,   it will create new element after or before the selected element     |
 
 
 1. **Attribute Selector**
 
 ```html
 <style>
-    .input[name="firstName"] {
-        border: 2px solid red;
-        padding: 10px;
+    /* Selecting all elements which contains target attribute */
+    a[target] {
+        background-color: red;
+    }
+
+    /* Selecting all elements which contains target="_blank" attribute */
+    a[target="_blank"] {
+        background-color: skyblue;
     }
 </style>
-<input type="text" class="input" name="firstName" placeholder="Enter your name">
-<input type="text" class="input" name="lastName" placeholder="Enter your last name">
+<a href="#">Click Here</a>
+<a href="#" target="_self">Click Here</a>
+<a href="#" target="_blank">Click Here</a>
 ```
 
 
@@ -201,51 +210,131 @@ h1 {
 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, inventore.</p>
 ```
 
-3. **Pseudo-Classes**
-* These classes are work on all elements like p, headings etc but it should always exist with in the select element eg in below we have selected article element
+5. **Pseudo-Classes**
 
-```css
+```html
+<style>
 /*Selecting First element*/
-article li:first-child {
+li:first-child {
     color: red;
 }
 
 /*Selecting last element*/
-article li:first-child {
+li:first-child {
     color: red;
 }
 
 /*Selecting nth/any element
+
 selecting first
 */
-article li:nth-child(1) {
+/* Select first */
+li:nth-child(1) {
     color: red;
 }
 
-/* Selecting Second */
-article li:nth-child(2) {
+/* Every Odd */
+li:nth-child(odd) {
     color: red;
 }
 
-article li:nth-child(odd) {
+/* Every even */
+li:nth-child(even) {
     color: red;
 }
 
-article li:nth-child(even) {
+/* Every 3 */
+li:nth-child(3n+0) {
     color: red;
 }
 
-article li:hover {
+/* Every 3 after 7 */
+li:nth-child(3n+7) {
+    color: red;
+}
+
+li:hover {
     color: green;
 }
+</style>
+
+<ul>
+    <li>items 1</li>
+    <li>items 2</li>
+    <li>items 3</li>
+    <li>items 4</li>
+    <li>items 5</li>
+</ul>
 ```
 
-4. **Pseudo Elements :** these are use to create new element also before or after the selected element
+6. **Pseudo Elements :**
+* use to create before or after content
+* use to create new element also before or after the selected element
+  1. **::after or ::before** : application use 
+     1. Make astrict for form labels
+     2. Make overlays
 
-1. ::first-letter
-2. ::first-line
-3. ::after{content  : "Text Here", color : red, font-size:10px}
-4. ::before{content  : "Text Here", color : red, font-size:10px}
+    ```html
+    <!-- Make astrict for labels -->
+    <style>
+        .is_required::after {
+            content: "*";
+            color: red;
+        }
+    </style>
+    <label for="first-name" class="is_required">First Name</label>
+    <input type="text" name="firstName" id="first-name">
+    ```
+    ```html
+    <!-- Making overlays -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #333;
+            color: #fff;
+        }
+
+        header {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 100vh;
+            position: relative;
+        }
+
+        header>h1 {
+            font-size: 4rem;
+            margin: 1rem;
+        }
+
+        header::before {
+            background: url("./1.jpg") no-repeat center center/cover;
+            content: "";
+            opacity: 0.4;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+    </style>
+    <header>
+    <h1>Hello World</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+    </header>
+    ```
+   
+   
+   2. **::first-line or ::first-letter**
 
 ---
 
@@ -323,6 +412,15 @@ body {
     background-position: center center;
 }
 ```
+
+## 📘Box-shadow
+
+```css
+/*offset-x | offset-y | blur-radius | spread-radius | color*/
+box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.3);
+```
+
+
 ---
 
 ## 📘Box-Model and Box-sizing
@@ -413,7 +511,7 @@ body {
         /* This is depend upon root */
         width: 10rem;
     }
-</style>
+</>
  <div id="container">
     <button id="btn">Click Button</button>
 </div>
@@ -924,8 +1022,24 @@ Using HTML/CSS to make a website or app layout adapt to different screen size
     }
 }
 ```
+---
 
+## 📘CSS-Variables
 
+```css
+/* the variable which are define in root can access in any element like html body etc */
+:root {
+    --primary-color: steelblue;
+    --secondary-color: skyblue;
+    --light-color: #f4f4f4;
+    --center-text: center;
+}
+
+body {
+    background-color: var(--primary-color);
+    text-align: var(--center-text);
+}
+```
 
 ---
 
