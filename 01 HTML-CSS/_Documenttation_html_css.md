@@ -89,42 +89,119 @@ h1 {
 
 ## 📘Selectors
 
-
-| Sr No | Name               | Selection Criteria                                                                       |
-| ----- | ------------------ | ---------------------------------------------------------------------------------------- |
-| 1     | Universe Selector  | * (asterisk symbol)                                                                      |
-| 2     | Class Selector     | . (dot symbol)                                                                           |
-| 3     | id Selector        | # (hash symbol)                                                                          |
-| 4     | Element Selector   | name of element (body, p, h1)                                                            |
-| 5     | Nested Element     | article div p (selecting p element which exist in article then div)                      |
-| 6     | Multiple Selectors | h1, h2, h3, p, li {  color: green;}                                                      |
-| 7     | Adjacent Selectors | h1 + p (it will select all only those p elements which are immediately after h elements) |
-| 8     | Pseudo-Classes     | : (colon symbol)                                                                         |
-| 9     | Pseudo Element     | :: (double colon) ,   it will create new element after or before the selected element    |
+1. Simple Selectors
+| Sr No | Name               | Selection Criteria                  |
+| ----- | ------------------ | ----------------------------------- |
+| 1     | Universe Selector  | * (asterisk symbol)                 |
+| 2     | Class Selector     | . (dot symbol)                      |
+| 3     | id Selector        | # (hash symbol)                     |
+| 4     | Element Selector   | name of element (body, p, h1)       |
+| 5     | Multiple Selectors | h1, h2, h3, p, li {  color: green;} |
 
 
-1. **Adjacent Selector**
+2. Advanced Selectors
+
+| 6     | Attribute Selectors | input\[type="text"] will select on  the basis of attribute                               |
+| 7     | Nested Element      | div p (selecting  all p element which exist in div)                                      |
+| 8     | Direct Child        | div > p (it will select only those elements which are direct)                            |
+| 9     | Adjacent Selectors (like sibling)  | h1 + p (it will select all only those p elements which are immediately after h1 elements) |
+| 10    | Pseudo-Classes      | : (colon symbol)                                                                         |
+| 11    | Pseudo Element      | :: (double colon) ,   it will create new element after or before the selected element    |
+
+
+1. **Attribute Selector**
 
 ```html
 <style>
-h2+p {
-    color: blue;
-}
+    .input[name="firstName"] {
+        border: 2px solid red;
+        padding: 10px;
+    }
 </style>
-
-<h2>This is a heading</h2>
-<p>This paragraph will be blue because it's immediately preceded by an h2 element.</p>
-
-<h2>Another heading</h2>
-<p>This paragraph will NOT be blue because it's not immediately preceded by an h2 element.</p>
-
- <!-- Will not work here --->
-
-<h3>Yet another heading</h3>
-<p>This paragraph will be blue because it's immediately preceded by an h2 element.</p>
+<input type="text" class="input" name="firstName" placeholder="Enter your name">
+<input type="text" class="input" name="lastName" placeholder="Enter your last name">
 ```
 
-2. **Pseudo-Classes**
+
+2. **Nested Selectors**
+
+```html
+<style>
+   /* background color will apply on all p elements */
+    div p {
+        background-color: #f4f4f4;
+    }
+</style>
+
+
+<div>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, inventore.</p>
+    <ul>
+        <li>
+            <p>item 1</p>
+        </li>
+        <li>item 2</li>
+        <li>item 3
+        </li>
+    </ul>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, inventore.</p>
+</div>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, inventore.</p>
+```
+
+3. **Direct Child**
+```html
+<style>
+   /* background color will apply on all p elements */
+    div > p {
+        background-color: #f4f4f4;
+    }
+</style>
+
+
+<div>
+<!-- Background Color apply here -->
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, inventore.</p>
+    <ul>
+        <li>
+            <p>item 1</p>
+        </li>
+        <li>item 2</li>
+        <li>item 3
+        </li>
+    </ul>
+    <!-- Background Color apply here -->
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, inventore.</p>
+</div>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, inventore.</p>
+```
+
+4. **Adjacent Selector** (Like a sibling)
+
+```html
+<style>
+    div+p {
+        background-color: #f4f4f4;
+    }
+</style>
+<div>
+    <!-- It will not work here because its a child not a sibling -->
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, inventore.</p>
+    <ul>
+        <li>
+            <p>item 1</p>
+        </li>
+        <li>item 2</li>
+        <li>item 3
+        </li>
+    </ul>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, inventore.</p>
+</div>
+<!-- It will work here only -->
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, inventore.</p>
+```
+
+3. **Pseudo-Classes**
 * These classes are work on all elements like p, headings etc but it should always exist with in the select element eg in below we have selected article element
 
 ```css
@@ -163,7 +240,7 @@ article li:hover {
 }
 ```
 
-3. **Pseudo Elements :** these are use to create new element also before or after the selected element
+4. **Pseudo Elements :** these are use to create new element also before or after the selected element
 
 1. ::first-letter
 2. ::first-line
@@ -499,9 +576,11 @@ Solution For this example : by clear float from both the sides
 * **flex-grow :** how much a flex item will grow relative to the rest of the flex items if space is available (use full when we items width is not exist or less than container width)
 
 ```html
+<!-- Flex Grow Example but with container width -->
 <style>
     #container {
-        background-color: grey;
+        background-color: #f4f4f4;
+        /* this is initial width */
         width: 600px;
         height: 200px;
         display: flex;
@@ -525,6 +604,8 @@ Solution For this example : by clear float from both the sides
 
     .box3 {
         background-color: green;
+        /* setting width for box-3 */
+        flex-basis: 200px
     }
 </style>
 <div id="container">
@@ -535,13 +616,53 @@ Solution For this example : by clear float from both the sides
 ```
 ![Flex-grow](./images/flex-grow.png)
 
+```html
+<!-- Flex grow example but without container width  -->
+ <style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    .box {
+        /* this is initial width for all boxes */
+        width: 150px;
+        height: 50px;
+        background-color: #f4f4f4;
+        border: 2px solid #ccc;
+        border-radius: 6px;
+        padding: 10px;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .box-1 {
+        /* In box-1 case it will take whole remaining width (because we use div element in container which is 100%) and while resizing the browser window it will adjust size */
+        flex-grow: 1;
+    }
+</style>
+
+<div class="container">
+    <div class="box box-1">box-1</div>
+    <div class="box box-2">box-2</div>
+    <div class="box box-3">box-3</div>
+    <div class="box box-4">box-4</div>
+</div>
+```
+
+
+
 * **flex-shrink :** how much a flex items will shrink relative to the rest of the items if space is available (use full when items width is greater than container width)
 
 ```html
-<!-- flex-shrink example -->
+<!-- flex-shrink example with container width -->
 <style>
     #container {
-        background-color: grey;
+        background-color: #f4f4f4;
         /* here container width is 600 px which is less then items width */
         width: 600px;
         height: 200px;
@@ -576,6 +697,42 @@ Solution For this example : by clear float from both the sides
 </div>
 ```
 ![Flex-Shrink](./images/flex-shrink.png)
+
+```html
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    .box {
+        width: 150px;
+        height: 50px;
+        background-color: aliceblue;
+        background-color: #f4f4f4;
+        border: 2px solid #ccc;
+        padding: 10px;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: row;
+
+    }
+
+    .box-1 {
+        /* in box-1 case its width will not shrink but other will shrink while resizing browser window */
+        flex-shrink: 0;
+    }
+</style>
+<div class="container">
+    <div class="box box-1">box-1</div>
+    <div class="box box-2">box-2</div>
+    <div class="box box-3">box-3</div>
+    <div class="box box-4">box-4</div>
+</div>
+```
 
 **⚠️Note :** 
 1. If the container width/height is smaller than the child width/height, the child will always remain fitted within the container until its content length becomes either too short or too long
@@ -695,18 +852,6 @@ in this case our image wil not get bigger in size up to 600px and will not get s
 
 ## 📘Responsive Design
 
-* Max-width property works with desktop first
-
-![MediaQuery](./images/media-query.png)
-
-
-
-
-
-
-
-
-
 Using HTML/CSS to make a website or app layout adapt to different screen size
 
 * **Practice To use**
@@ -717,50 +862,48 @@ Using HTML/CSS to make a website or app layout adapt to different screen size
 4. Rem units over px
 5. Mobile first methods
 
+
+
+* Max-width property works with desktop first and **Min-Width** property works with mobile first
+
+![MediaQuery](./images/media-query.png)
+
 * **Concept of max-min width screen**
 
-```js
-// default value
-let backgroundColor = 'yellow';
-
-// max-width
-if(windowWidth <= 500px) {
-    body {
-        backgroundColor: red;
-    }
-}
-
-// min-width
-if(windowWidth >= 500px) {
-    body {
-        backgroundColor: green;
-    }
-}
-
-// Width is between ((min-width : 500px) and (max-width : 780px))
-if(windowWidth > 500px && windowWidth < 780px ) {
-    body {
-        background-color: green;
-    }
-}
-```
-
-* **Types of media**
-
-1. Screen : means it will work for screens only not for print etc
-
 ```css
-@media only screen and (max-width:500px) {
-    .smartphone {
-        display: block;
+/* means width is = 600px */
+@media(width:600px) {
+    body{
+        background-color : red
     }
 }
 
+/* means width is <= 600px */
+@media(max-width:600px) {
+    body{
+        background-color : red
+    }
+}
+/* means width is >= 600px */
+@media(min-width:600px) {
+    body{
+        background-color : red
+    }
+}
+
+/* means width is 600px - 700px (width >=600px and width <=700px)*/
+@media(min-width:600px) and (max-width:700px) {
+    body{
+        background-color : red
+    }
+}
 ```
 
-* Break Points
+
+* Break Points & Types of media
 
 ![BreakPoints](./images/breakpoint.png)
+
 
 **Screen Sizes (also called Break points)**
 
@@ -772,61 +915,16 @@ if(windowWidth > 500px && windowWidth < 780px ) {
 
 
 
-Example
+1. Screen : means it will work for screens only not for print etc
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body {
-            background-color: grey;
-            color: white;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            text-align: center;
-            font-size: large;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-        .widescreen,
-        .normal,
-        .tablet,
-        .smartphone,
-        .landscape {
-            display: none;
-        }
-
-        @media only screen and (max-width:500px) {
-            .smartphone {
-                display: block;
-            }
-        }
-
-        @media(min-width : 500px) and (max-width : 768px) {
-            .tablet {
-                display: block;
-                color: white;
-            }
-        }
-    </style>
-</head>
-
-<body>
-    <div class="widescreen">Wide Screen</div>
-    <div class="normal">Normal</div>
-    <div class="tablet">Tablet</div>
-    <div class="smartphone">Smart Phone</div>
-    <div class="landscape">Landscape</div>
-</body>
-
-</html>
+```css
+@media only screen and (max-width:500px) {
+    .smartphone {
+        display: block;
+    }
+}
 ```
+
 
 
 ---
