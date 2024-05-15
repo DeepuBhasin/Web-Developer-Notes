@@ -1040,6 +1040,189 @@ body {
     text-align: var(--center-text);
 }
 ```
+---
+
+## 📘keyframe
+```html
+<style>
+    body {
+        background-color: #000;
+        height: 100vh
+    }
+
+    .box {
+        position: relative;
+        width: 100px;
+        height: 300px;
+        background-color: #fff;
+
+        /* animation-name: animation1;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out; */
+
+        /* OR */
+        animation: animation1 3s infinite ease-in-out;
+    }
+
+    @keyframes animation1 {
+        from {
+            top: 0;
+            width: 100px;
+            background-color: #fff;
+        }
+
+        to {
+            top: 300px;
+            width: 700px;
+            background-color: red;
+        }
+    }
+
+    /* OR */
+        @keyframes animation1 {
+        0% {
+            top: 0;
+            width: 100px;
+            background-color: #fff;
+        }
+
+        100% {
+            top: 300px;
+            width: 700px;
+            background-color: red;
+        }
+    }
+
+    /* OR */
+        @keyframes animation1 {
+        25% {
+            top: 0px;
+            left: 300px;
+            background-color: red;
+            border-radius: 50% 0 0 0;
+        }
+
+        50% {
+            top: 300px;
+            left: 300px;
+            background-color: blue;
+            border-radius: 50% 50% 0 0;
+        }
+
+        75% {
+            top: 300px;
+            left: 0px;
+            background-color: green;
+            border-radius: 50% 50% 50% 0;
+        }
+
+        100% {
+            top: 0px;
+            left: 0px;
+            background-color: skyblue;
+            border-radius: 50% 50% 50% 50%;
+        }
+        }
+
+</style>
+<div class="box"></div>
+```
+
+
+
+## 📘Transitions
+* it occurs only on events like hover, active etc
+
+
+```html
+<style>
+    body {
+        background-color: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh
+    }
+
+    .box {
+        width: 100px;
+        height: 100px;
+        background-color: #fff;
+        /* transition-property: background-color, width, height;
+        transition-duration: 2s;
+        transition-timing-function: ease-in-out; */
+
+        /* if we put all means we are targeting all properties during hover event */
+        transition: background-color, width, height, 2s ease-in-out;
+
+        /* if we put all means we are targeting all properties during hover event */
+        transition: all 2s ease-in-out;
+    }
+
+    .box:hover {
+        background-color: red;
+        width: 200px;
+        height: 200px;
+    }
+
+     .box:active {
+        background-color: red;
+        width: 200px;
+        height: 200px;
+    }
+</style>
+<div class="box"></div>
+```
+---
+
+## 📘Transform
+* Change Shapes or rotate
+```html
+<!-- transition + transform -->
+<style>
+    body {
+        background-color: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh
+    }
+
+    .box {
+        width: 300px;
+        height: 300px;
+        background-color: #fff;
+
+        /* Rhombus */
+        /* transform: rotate(45deg); */
+
+        /* Parallelogram */
+        /* transform: skew(45deg); */
+
+        /* inc*/
+        /* transform: scale(3); */
+
+        transition: all 3s ease-in-out;
+    }
+
+    .box:hover {
+        transform: rotate(720deg);
+    }
+</style>
+<div class="box"></div>
+```
+* **Move any thing on screen** (its use origin concept)
+
+```css
+.box:hover {
+    transform: translateX(100px);
+    transform: translateY(100px);
+
+    /* OR */
+    transform: translate(100px, 100px);
+}
+```
 
 ---
 
