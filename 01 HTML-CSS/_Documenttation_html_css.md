@@ -1344,9 +1344,25 @@ Example Making a loader
 
 ```css
 body {
+    padding: 0;
+    margin: 0;
     height: 100vh;
     width: 100vw;
     display: flex;
+    justify-content: center;
+    align-items: center;
+}
+```
+
+3. using grid
+
+```css
+body {
+    padding: 0;
+    margin: 0;
+    display: grid;
+    height: 100vh;
+    width: 100vw;
     justify-content: center;
     align-items: center;
 }
