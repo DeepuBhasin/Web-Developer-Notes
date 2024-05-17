@@ -860,14 +860,87 @@ Solution For this example : by clear float from both the sides
 
 1fr 1fr 1fr auto (the auto parameter will take remaining with automatically)
 
+repeat(3, minmax(400px, 1fr)); (for fixing the minimum sizes)
+
 */
 
 .container {
     grid-template-column : repeat(4, 1fr)
 }
 ```
+* For **Positioning**
+```css
+.item-1 {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 3;
 
-* use height and width for best use to container
+    /* OR */
+    grid-column: 1/4;
+    grid-row: 1/3;
+
+    /* OR  */
+    grid-column: 1/span 3;
+    grid-row: 1/span 4;
+
+    /* OR  best one*/
+    /* row-start col-start row-end col-end */
+    grid-area: 1/1/1/4;
+}
+```
+
+* For **Centering**
+
+```html
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    #container {
+        height: 600px;
+        width: 600px;
+        display: grid;
+        grid-template-columns: repeat(2, 100px);
+        grid-template-rows: repeat(2, 100px);
+        margin: 10px;
+        background-color: #ccc;
+
+        /* To make entire thing into center */
+        justify-content: center;
+        align-content: center;
+
+        /* To make individual items into center */
+        /* space-between | space-around | space-evenly | center */
+        justify-items: center;
+        align-items: center;
+    }
+
+    .item {
+        background-color: #e448a0;
+        border: 2px solid rgb(232, 20, 73);
+        opacity: 0.6;
+        color: aquamarine;
+    }
+</style>
+<div id="container">
+    <div class="item item-1">1</div>
+    <div class="item item-2">2</div>
+    <div class="item item-3">3</div>
+    <div class="item item-4">4</div>
+</div>
+```
+* Making responsive without using media query
+
+```css
+#container {
+    /* while resizing the window it will stack on each other */
+    grid-template-columns : repeat(auto-fit, minmax(100px, 1fr))
+}
+```
 
 ---
 
@@ -1058,11 +1131,13 @@ body {
 
         /* animation-name: animation1;
         animation-duration: 3s;
-        animation-iteration-count: infinite;
-        animation-timing-function: ease-in-out; */
-
+        animation-timing-function: ease-in-out; 
+        animation-delay : 0s;
+        animation-iteration-count: infinite;*/
+        
         /* OR */
-        animation: animation1 3s infinite ease-in-out;
+        
+        animation: animation1 3s ease-in-out 0s infinite;
     }
 
     @keyframes animation1 {
@@ -1129,6 +1204,34 @@ body {
 <div class="box"></div>
 ```
 
+Example Making a loader
+
+```html
+<style>
+    .loader {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: 10px solid #FFE66D;
+        border-top: 10px solid #4ECDC4;
+        animation: spinAnimate 1s ease-in-out infinite;
+    }
+
+    @keyframes spinAnimate {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+<div class="loader"></div>
+```
+
+
+---
 
 
 ## 📘Transitions
