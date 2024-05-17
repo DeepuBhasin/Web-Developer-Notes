@@ -913,12 +913,12 @@ repeat(3, minmax(400px, 1fr)); (for fixing the minimum sizes)
         background-color: #ccc;
 
         /* To align item along grid */
-        /* space-between | space-around | space-evenly | center */
+        /* start | center | end | baseline |  space-between | space-around | space-evenly | center */
         justify-content: center;
         align-content: center;
 
-        /* To make content align along row/column axis */
-        /* start | center | end | baseline */
+        /* To make each item align along row/column axis */
+        /* start | center | end | baseline |  space-between | space-around | space-evenly | center */
         justify-items: center;
         align-items: center;
     }
