@@ -887,6 +887,9 @@ repeat(3, minmax(400px, 1fr)); (for fixing the minimum sizes)
     /* OR  best one*/
     /* row-start col-start row-end col-end */
     grid-area: 1/1/1/4;
+
+    /* For gaps in rows columns */
+    gap: 10px 10px;
 }
 ```
 
@@ -909,12 +912,13 @@ repeat(3, minmax(400px, 1fr)); (for fixing the minimum sizes)
         margin: 10px;
         background-color: #ccc;
 
-        /* To make entire thing into center */
+        /* To align item along grid */
+        /* space-between | space-around | space-evenly | center */
         justify-content: center;
         align-content: center;
 
-        /* To make individual items into center */
-        /* space-between | space-around | space-evenly | center */
+        /* To make content align along row/column axis */
+        /* start | center | end | baseline */
         justify-items: center;
         align-items: center;
     }
@@ -924,6 +928,10 @@ repeat(3, minmax(400px, 1fr)); (for fixing the minimum sizes)
         border: 2px solid rgb(232, 20, 73);
         opacity: 0.6;
         color: aquamarine;
+
+        /* For aligning items */
+        justify-self:center;
+        align-self:center;
     }
 </style>
 <div id="container">
