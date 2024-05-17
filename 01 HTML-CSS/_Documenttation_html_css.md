@@ -270,7 +270,7 @@ li:hover {
 6. **Pseudo Elements :**
 * use to create before or after content
 * use to create new element also before or after the selected element
-  1. **::after or ::before** : application use 
+  1. **::after or ::before** : application use
      1. Make astrict for form labels
      2. Make overlays
 
@@ -332,8 +332,8 @@ li:hover {
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
     </header>
     ```
-   
-   
+
+
    2. **::first-line or ::first-letter**
 
 ---
@@ -504,7 +504,7 @@ body {
         display: inline-block;
         /* This io depend upon parent */
         font-size: 2em;
-        
+
         /* This is depend upon itself */
         width: 10em;
 
@@ -832,7 +832,7 @@ Solution For this example : by clear float from both the sides
 </div>
 ```
 
-**⚠️Note :** 
+**⚠️Note :**
 1. If the container width/height is smaller than the child width/height, the child will always remain fitted within the container until its content length becomes either too short or too long
 2. align-self > align-items
 
@@ -939,6 +939,20 @@ repeat(3, minmax(400px, 1fr)); (for fixing the minimum sizes)
 #container {
     /* while resizing the window it will stack on each other */
     grid-template-columns : repeat(auto-fit, minmax(100px, 1fr))
+}
+```
+
+* Implicit Row/Columns
+
+```css
+#container {
+    /* if row added automatically in column direction */
+    grid-auto-flow: column;
+    grid-auto-columns:100px ;
+
+    /* if row added automatically in row direction */
+    grid-auto-flow: row;
+    grid-auto-rows:100px ;
 }
 ```
 
@@ -1131,12 +1145,12 @@ body {
 
         /* animation-name: animation1;
         animation-duration: 3s;
-        animation-timing-function: ease-in-out; 
+        animation-timing-function: ease-in-out;
         animation-delay : 0s;
         animation-iteration-count: infinite;*/
-        
+
         /* OR */
-        
+
         animation: animation1 3s ease-in-out 0s infinite;
     }
 
@@ -1354,7 +1368,7 @@ body {
 }
 ```
 
-3. using grid
+3. Using grid
 
 ```css
 body {
