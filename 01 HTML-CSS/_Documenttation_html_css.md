@@ -19,20 +19,40 @@
 
 # 📔Html
 
-1. Block/Inline element
-* **Block Element** : Which takes **100% width** example **form, div, header, footer, section, aside, nav, main, article or all Semantic tags**
-* **InLine Element** : which takes **content width** example **a , span, button, all inputs**
-* **⚠️Note :** To check the weather element is block or inline use **Border Style Property**
+1. Basic Structure : html, head, title, body and extension
+2. Tags : refer to individual tags like pair or un-pair tag
+3. Elements : is entire line (these are components)
+4. Attribute : Are use to alter the behavior of elements
+5. Block/Inline element
+   * **Block Element** : Which takes **100% width** example **form, div, header, footer, section, aside, nav, main, article or all Semantic tags**
+   * **InLine Element** : which takes **content width** example **a , span, button, all inputs**
+   * **⚠️Note :** To check the weather element is block or inline use **Border Style Property**
 
-2. **Page layout** :
-   1. Semantics tags : like header,footer etc its a good practice and always use
+6. Topography and Tags with their attributes:
+   1. Heading
+   2. paragraph tags
+   3. Strong and em
+   4. comments
+   5. List : Order List and Un-ordered list with attributes.
+   6. Hyperlinks : with attributes and path system.
+   7. Id Attribute : is selector to select element and use example to redirect to particular section.
+   8. image : alt, height, width attributes
+   9. table
+   10. forms: labels, various inputs, textarea, buttons and their attributes
+
+7. **Page layout** :
+   1. Semantics tags : Relating to meaning in language or logic. It help to make group contents like header,footer etc its a good practice and always use
+      1. Search engine and SEO optimization
+      2. Accessibility
+      3. Readability
+      4. Cleanliness (no need to write to many comments)
    2. Non-semantic tags : like div or span
 
-3. **Paths**
+8.  **Paths**
    1.  **Absolute Path** : cdn links is called absolute path.
    2.  **Relative Path** : Reference to current files/folder is called relative path.
 
-4. **Number System** :
+9.  **Number System** :
    1. Decimal : Means Dec means 10 digits (0-9), in mathematic we use decimal system example 2534161 etc
    2. Binary : Means Bin means 2 digits (0-1), in computer sci we use Binary system example 1001001010
    3. Hexadecimal : Means Hex means 6 and dec mean 10, means 16 digits [0-9, A-F] so we can write from 00 to ff example #00ff00 (green)  #ff0000 (red) #0000ff (blue)
@@ -220,7 +240,7 @@ li:first-child {
 }
 
 /*Selecting last element*/
-li:first-child {
+li:last-child {
     color: red;
 }
 
@@ -456,6 +476,9 @@ For Height
 
     /* removing margin from view port/ Browser Window*/
     margin: 0;
+
+    /* setting line height */
+    line-height: 1.5;
 }
 ```
 
