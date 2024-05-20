@@ -152,3 +152,31 @@ body {
 
 @import "box";
 ```
+
+### 📘Mixins
+* Work as functions and also with parameters (no parameter, required, default)
+* Allow you to reuse-code
+* 
+
+```scss
+// main.scss
+@mixin bgColor($color : red) {
+    background-color: $color;
+}
+
+body {
+    @include bgColor(steelblue);
+}
+
+div {
+    @include bgColor(red);
+}
+
+p {
+    @include bgColor(green);
+}
+
+h1 {
+    @include bgColor(blue);
+}
+```
