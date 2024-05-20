@@ -1143,7 +1143,7 @@ Using HTML/CSS to make a website or app layout adapt to different screen size
 ---
 
 ## 📘CSS-Variables
-
+* Only support by latest browsers only
 ```css
 /* the variable which are define in root can access in any element like html body etc */
 :root {
@@ -1450,7 +1450,7 @@ nav ul {
 }
 
 nav li {
-    display : inline-block 
+    display : inline-block
 }
 
 nav a {
@@ -1468,7 +1468,7 @@ nav {
     }
 
     li {
-        display : inline-block 
+        display : inline-block
     }
 
     a {
@@ -1478,18 +1478,18 @@ nav {
     }
 }
 
- 
-/* Sass syntax */ 
-nav 
-    ul 
+
+/* Sass syntax (best one)*/
+nav
+    ul
         margin : 0;
         padding : 0;
         list-style : none;
-    
-    li 
-      display : inline-block 
-    
-    a 
+
+    li
+      display : inline-block
+
+    a
         display : block;
         padding : 6px 12px;
         text-decoration : none;
@@ -1507,7 +1507,7 @@ npm i node-sass
 
 2. create scss folder and add file
 
-```css
+```scss
 $color : red;
 
 body {
@@ -1532,19 +1532,30 @@ npm run sass
 5. now create index.html file in dist-folder after above command (when ever you save the file it automatically create new main.js file)
 
 
-### 📘Partials-import
+### 📘Variables and Partials-import
+* Partials means parts, it like separating your code into a different files like button, modal, navigation code etc but at the end merge into single compiled file.
+* using under-score, this tell to SCSS compiler that i don't want to compile this file that we don't want variable.css file in my dist folder.
+* Major difference between css and scss is that you have to making extra HTTP Requests to the server to fetch these regular css files with scss, it just kind of takes them and builds them on the top of each other.
 
-* it like separating your code into a different files like button, modal, navigation code etc
-* Major difference between css and scss is that you have to making extra HTTP Requests to the server to fetch these regular css files with scss, it just kind of takes them and builds them on the top of each other
 
-1. Create Partial-file (using under-score, this tell to SCSS compiler that i don't want to compile this file that we don't want variable.css file in my dist folder).
+1. Create Partial-file
 
-```css
+```scss
 /* _variables.scss */
 $primary-color : steelblue;
 $secondary-color :skyblue;
 $light-color : #f4f4f4;
 $danger-color : #333;
+
+/* _box.scss */
+div {
+    display : inline-block;
+
+    &:hover{
+        background-color : red;
+        color : #fff;
+    }
+}
 
 /* main.scss */
 @import "variables";
@@ -1552,4 +1563,6 @@ $danger-color : #333;
 body {
     background-color: $primary-color;
 }
+
+@import "box";
 ```
