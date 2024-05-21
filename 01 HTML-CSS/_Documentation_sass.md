@@ -156,7 +156,7 @@ body {
 ### 📘Mixins
 * Work as functions and also with parameters (no parameter, required, default)
 * Allow you to reuse-code
-* 
+*
 
 ```scss
 // main.scss
@@ -180,3 +180,117 @@ h1 {
     @include bgColor(blue);
 }
 ```
+
+### 📘Extend and Placeholder
+* its like combine selectors
+
+```scss
+// Only Extend key word
+.div {
+    color: red;
+    font-size: 5px;
+    line-height: 5px;
+    text-transform: capitalize;
+}
+
+#test {
+    background-color: blue;
+}
+
+.h1 {
+    color: green;
+    @extend .div;
+    @extend #test;
+}
+```
+
+```scss
+// Place Holder (its like creating dummy code)
+%div {
+    color: #fff;
+    background-color: #000;
+    font-family: sans-serif;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+* {
+    // consuming that dummy code
+    @extend %div;
+}
+```
+
+### 📘Operators
+1. Equality (== , !==)
+2. Relational (<, >, <=, >=)
+3. Numeric (+, -, *, /, %)
+4. String (concatenation +, )
+5. Boolean (and, or, not)
+
+### 📘Interpolation
+
+```scss
+// Simple Example
+@mixin margin($position, $unit) {
+    // Interpolation
+    margin-#{$position}: $unit;
+}
+
+body {
+    @include margin(top, 10px);
+}
+
+//Good example (Creating dynamic class)
+@mixin input-class($type) {
+    .input-#{$type} {
+        background-color: #fff;
+        color: #000;
+        padding: 10px;
+        border-radius: 5px;
+    }
+}
+
+@include input-class(primary);
+```
+### 📘Functions
+* Major difference between mixins and functions that functions have return values.
+
+```scss
+// Syntax
+@function function-name($value) {
+    @return ($value / 2) + px;
+}
+
+// Example
+@function half($width) {
+    @return $width / 2+px;
+}
+
+.half-width {
+    width: half(800);
+}
+```
+
+### 📘Inbuilt Functions
+1. Numbers
+
+    ```scss
+    .test {
+        margin: abs(-10px); // 10px
+        margin: ceil(4.3px); // 5
+        margin: floor(4.3px); // 4
+        margin: round(4.3px); // 4
+        margin: max(3px, 7px, 10px, 5px); // 10
+        margin: min(3px, 7px, 10px, 5px); // 3
+        margin: percentage(50px/100px); // 50
+    }
+    ```
+2. Strings
+3. Colors
+4. Lists
+5. Selectors
+6. Introspection
+
