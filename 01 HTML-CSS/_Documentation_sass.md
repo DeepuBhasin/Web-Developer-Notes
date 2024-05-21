@@ -153,6 +153,37 @@ body {
 @import "box";
 ```
 
+### 📘Nesting
+
+
+```html
+<div class="section section-a">
+    <h1>Hello World</h1>
+    <p>Hello</p>
+</div>
+<div class="section section-b">
+    <h1>Hello World</h1>
+    <p>Hello</p>
+</div>
+```
+```scss
+.section{
+    background-color : red;
+    color : #fff;
+
+    // & will replace with section keyword
+    &-a{
+        font-size:20px
+    }
+
+     // & will replace with section keyword
+    &-b{
+        font-size:30px
+    }
+}
+```
+
+
 ### 📘Mixins
 * Work as functions and also with parameters (no parameter, required, default)
 * Allow you to reuse-code
