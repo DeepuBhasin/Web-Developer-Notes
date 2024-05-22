@@ -1,14 +1,13 @@
 {
   "name": "01_redux_only",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is basic redux library project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node counter.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Deepinder999@gmail.com",
   "license": "ISC",
   "dependencies": {
     "redux": "^4.2.1"

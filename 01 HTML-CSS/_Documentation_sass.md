@@ -154,7 +154,7 @@ body {
 ```
 
 ### 📘Nesting
-
+* We can structure like html
 
 ```html
 <div class="section section-a">
@@ -167,20 +167,43 @@ body {
 </div>
 ```
 ```scss
-.section{
-    background-color : red;
-    color : #fff;
+.section {
+    background-color: red;
+    color: #fff;
+
+    h1 {
+        font-size: 50px
+    }
 
     // & will replace with section keyword
-    &-a{
-        font-size:20px
+    &-a {
+        font-size: 20px
     }
 
-     // & will replace with section keyword
-    &-b{
-        font-size:30px
+    // & will replace with section keyword
+    &-b {
+        font-size: 30px
     }
 }
+
+/*
+Output
+
+.section {
+  background-color: red;
+  color: #fff;
+}
+.section h1 {
+  font-size: 50px;
+}
+.section-a {
+  font-size: 20px;
+}
+.section-b {
+  font-size: 30px;
+}
+
+*/
 ```
 
 
@@ -321,7 +344,51 @@ body {
     ```
 2. Strings
 3. Colors
-4. Lists
-5. Selectors
-6. Introspection
+   ```scss
+    // checking is it lightColor is greater then 50%
+   @function set-txt-color($color) {
+    @if (lightness($color) > 50) {
+        @return #000;
+    }
 
+    @else {
+        @return #fff;
+    }
+
+    body {
+        // calling function
+        color: set-txt-color(red);
+
+        // create dark color of current color on the basis of percentage
+        background-color: darken(pink, 20);
+
+        // create light color of current color on the basis of percentage
+        background-color: lighten(green, 60);
+
+        // create light or dark color of current color on the basis of percentage
+        background-color: adjust-hue(green, 60);
+
+        // mix two colors
+        background-color: mix(red, green, 50%);
+    }
+   ```
+4. Lists : not useFull
+5. Selectors : not useFull
+6. Introspection : not useFull
+
+### 📘If-Else
+
+```scss
+$test : 3;
+p {
+    @if($test==3){
+        background-color :red;
+    }
+    @else if($test < 3){
+        background-color :green;
+    }
+    @else{
+        background-color :blue;
+    }
+}
+```

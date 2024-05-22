@@ -5,15 +5,16 @@ const initialState = {
     count: 0
 };
 
-// constanst
+// constants
 const INCREMENT = "increment";
 const DECREMENT = "decrement";
 const RESET = "reset";
-const INCREASE_BY_AMT = "incerase_by_amt";
+const INCREASE_BY_AMT = "increase_by_amt";
 
 
-//Action + Action creator
-const incermentAction = () => {
+// Action Creators
+const incrementAction = () => {
+    // Actions
     return {
         type: INCREMENT
     }
@@ -31,7 +32,7 @@ const resetAction = () => {
     }
 }
 
-const incerementByAmt = (payload) => {
+const incrementByAmt = (payload) => {
     return {
         type: INCREASE_BY_AMT,
         payload: payload
@@ -68,10 +69,10 @@ store.subscribe(() => {
     console.log("------------------------------")
 })
 
-store.dispatch(incermentAction());
-store.dispatch(incermentAction());
+store.dispatch(incrementAction());
+store.dispatch(incrementAction());
 store.dispatch(resetAction());
-store.dispatch(incerementByAmt(10));
+store.dispatch(incrementByAmt(10));
 store.dispatch(decrementAction(10));
 
 
