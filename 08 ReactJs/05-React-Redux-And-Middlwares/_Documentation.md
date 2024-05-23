@@ -2,19 +2,25 @@
 1. Core Redux and Core Functions
 2. Combine Reducer
 
+---
 
-### What is Redux ?
+### 📘What is Redux ?
 * Redux is an open-source javascript library for __managing__ and __centralizing__ application state.
 * A __Predictable State Container__ for JS APP.
+
 ---  
-### Redux Road Map
+
+### 📘Redux Road Map
 ![Image](./images/redux_roadmap.png)
+
 ---
-### Whats is State ?
+
+### 📘Whats is State ?
 * Any data in your application that can change based on conditions. 
 * Its a data store that is used to manage the component data.
 ---
-### What is state management ?
+
+### 📘What is state management ?
 * it's the ability to control the information that is passed between React Component.
 * State management is the process of determining how to manage state information in a web application.
 * State management can be used to track
@@ -23,7 +29,8 @@
   * Application Data
   * Component Data
 ---
-### Type of Data Source
+
+### 📘Type of Data Source
 * Server Data (like from api)
 * Global state (like redux)
 * Local State (useState)
@@ -31,6 +38,7 @@
 * Routing (like queries)
 * Local Storage (save token or cart)
 ---
+
 ### Ways of managing state in react
 * useState()
 * useContext()
@@ -38,67 +46,74 @@
 * RTK (redux toolkit)
 * RTK (redux toolkit Query)
 ---
-### When to Use Redux
+
+### 📘When to Use Redux
 * You should use Redux when you have a complex state object that is difficult to manage with the local state alone.
 * The app state is updated frequently
 * The logic to update that state may be complex
 * The app has a medium or large-sized codebase and might be worked on bt many people
 ---
-### Redux Terminologies
+
+### 📘Redux Terminologies
 * __Actions__ : Actions are the driving force of every dynamic application, as they are the medium by which all changes are communicated within a Redux Application.
 * __Reducers__ : Reducers are event Listeners which handles event based on the actions type.
 * __Store__ : It stores the application data.
-
 ---  
-### How Redux Works
+
+### 📘How Redux Works
 ![Image](./images/how-redux-workd.png)
+
 ---
-### Example Of Redux
+
+### 📘Example Of Redux
 ![Image](./images/redux-example.png)
+
 ---
-### Store Methods
+
+### 📘Store Methods
 * __getState()__ : Returns the current State tree of your application.
 * __dispatch()__ : This is the only way to trigger a state change.
 * __subscribe()__ : Listening to any change.
 
 ---
-### Action Vs Action Creator
+### 📘Action Vs Action Creator
+
 * __Action__ : An Action is simply a __javascript object__ that contains information about an event that has occurred in your app.
 * __Action Creator__ : Action Creators are __function__ that create and returns actions.
----
-#### Action Properties (parameters)
+
+Action Properties (parameters)
+
 * It has a __type__ field as a property which is required.
 * It can accept additional properties __(payload)__. This is optional
+
+Action Types OR Action Constants
+
+* const **CONSTANT_NAME** = **"CONSTANT_VALUE"**;
+
 ---
 
-#### Action Types OR Action Contants
-
-* const __CONSTANT_NAME__ = __"constant_value"__;
-
----
-
-### Reducer
+### 📘Reducer
 A Reducer is a function that receives the __current state__ and __an action object__, _decides how to update the state base on the action and returns the new state._
 
----
+Rules of Reducers
 
-#### Rules of Reducers
 * The new state value should only be calculated based on the state and action arguments.
 * Reducers are not allowed to modify the **existing state.**
 ---
-### Store 
+
+### 📘Store 
 * __It store the application data__.
 * __It doesn't contain business logic.__
 * It receives actions and pass to all the registered middleware.
 * The only way to change the state inside it is to dispatch an action.
----
-⚠️ When it receives an actions that causes a change to the state, the store will notify all the registered listeners that a change to the state has been made. This allow various parts of the system, like the UI, to update themselves according to the new state. 
+
+**⚠️ Note :** When it receives an actions that causes a change to the state, the store will notify all the registered listeners that a change to the state has been made. This allow various parts of the system, like the UI, to update themselves according to the new state. 
 
 ---
 
-### Combine Reducer
+### 📘Combine Reducer
+
 * it's a function that combine individual reducers to pass to redux store.
-
 ---
 
 ### Asynchronous Redux
@@ -109,7 +124,8 @@ Problems
 * it can make it difficult to debug your code.
 * the redux store will not be updated and no changes will be made to your application state.
 
-Answer <br/>
+Answer
+
 ⚠️ **Reducers** are immediately return a new data if the correct action is dispatch without waiting for the action payload. 
 
 ### Configuration of store
