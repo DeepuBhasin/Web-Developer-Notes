@@ -114,6 +114,9 @@ Rules of Reducers
 ### 📘Combine Reducer
 
 * it's a function that combine individual reducers to pass to redux store.
+
+![combineReducer](./images/combine-redux.png)
+
 ---
 
 ### Asynchronous Redux
