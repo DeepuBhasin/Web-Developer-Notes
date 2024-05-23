@@ -10,49 +10,49 @@ const usersInitialState = {
     users: []
 }
 
-// Action constanst
-const ADDPOST = "add_post";
-const DELETEPOST = "delete_post";
-const ADDUSER = "add_user";
-const DELETEUSER = "delete_user";
+// Constants
+const ADD_POST = "ADD_POST";
+const DELETE_POST = "DELETE_POST";
+const ADD_USER = "ADD_USER";
+const DELETE_USER = "DELETE_USER";
 
-//Action + Action creator
+//Action creator
 const addPostAction = (payload) => {
+    // Action
     return {
-        type: ADDPOST,
-        payload: payload
-    }
-}
-
-const addUserAction = (payload) => {
-    return {
-        type: ADDUSER,
+        type: ADD_POST,
         payload: payload
     }
 }
 
 const deletePostAction = (payload) => {
     return {
-        type: DELETEPOST,
+        type: DELETE_POST,
+        payload: payload
+    }
+}
+
+const addUserAction = (payload) => {
+    return {
+        type: ADD_USER,
         payload: payload
     }
 }
 
 const deleteUserAction = (payload) => {
     return {
-        type: DELETEUSER,
+        type: DELETE_USER,
         payload: payload
     }
 }
 
-// Reducer
-
+// Post Reducer
 const postReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADDPOST: {
+        case ADD_POST: {
             return { ...state, posts: [...state.posts, action.payload] };
         }
-        case DELETEPOST: {
+        case DELETE_POST: {
             let tempPostArray = [...state.posts];
             let newPosts = tempPostArray.filter(item => item.id != action.payload.id);
             return { ...state, posts: newPosts }
@@ -63,15 +63,16 @@ const postReducer = (state = initialState, action) => {
     }
 };
 
+// User Reducer
 const userReducer = (state = usersInitialState, action) => {
     switch (action.type) {
-        case ADDUSER: {
+        case ADD_USER: {
             return { ...state, users: [...state.users, action.payload] };
         }
-        case DELETEUSER: {
+        case DELETE_USER: {
             let tempPostArray = [...state.users];
-            let newusers = tempPostArray.filter(item => item.id != action.payload.id);
-            return { ...state, users: newusers }
+            let newUsers = tempPostArray.filter(item => item.id != action.payload.id);
+            return { ...state, users: newUsers }
         }
         default: {
             return { ...state };
@@ -79,13 +80,13 @@ const userReducer = (state = usersInitialState, action) => {
     }
 };
 
-// rootReducer
+// rootReducer (combining reducers)
 const rootReducer = combineReducers({
     posts: postReducer,
     users: userReducer
 })
 
-// store
+// Creating Store and Registering Reducer 
 const store = createStore(rootReducer);
 
 // subscribe 

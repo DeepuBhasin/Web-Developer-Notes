@@ -6,10 +6,10 @@ const initialState = {
 };
 
 // constants
-const INCREMENT = "increment";
-const DECREMENT = "decrement";
-const RESET = "reset";
-const INCREASE_BY_AMT = "increase_by_amt";
+const INCREMENT = "INCREMENT";
+const DECREMENT = "DECREMENT";
+const RESET = "RESET";
+const INCREASE_BY_AMT = "INCREASE_BY_AMT";
 
 
 // Action Creators
@@ -40,7 +40,6 @@ const incrementByAmt = (payload) => {
 }
 
 // Reducer
-
 const counterReducer = (state = initialState, action) => {
     switch (action.type) {
         case INCREMENT: {
@@ -61,14 +60,21 @@ const counterReducer = (state = initialState, action) => {
     }
 };
 
-const store = createStore(counterReducer);
 
+// Root reducer (here is a single reducer)
+const rootReducer = counterReducer;
+
+// Creating Store and Registering Reducer 
+const store = createStore(rootReducer);
+
+// Subscribing
 store.subscribe(() => {
     const data = store.getState()
     console.log(data);
     console.log("------------------------------")
 })
 
+// Dispatching Actions
 store.dispatch(incrementAction());
 store.dispatch(incrementAction());
 store.dispatch(resetAction());
