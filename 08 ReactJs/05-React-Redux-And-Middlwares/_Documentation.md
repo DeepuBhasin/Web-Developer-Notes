@@ -5,7 +5,7 @@
 
 ### What is Redux ?
 * Redux is an open-source javascript library for __managing__ and __centralizing__ application state.
-* A __Predictable State Container__ for JS APP.
+* A __Predicatble State Container__ for JS APP.
 ---  
 ### Redux Road Map
 ![Image](./images/redux_roadmap.png)
@@ -59,21 +59,21 @@
 ### Store Methods
 * __getState()__ : Returns the current State tree of your application.
 * __dispatch()__ : This is the only way to trigger a state change.
-* __subscribe()__ : Listening to any change.
+* __subsribe()__ : Listening to any change.
 
 ---
-### Action Vs Action Creator
+### Acion Vs Action Creator
 * __Action__ : An Action is simply a __javascript object__ that contains information about an event that has occured in your app.
 * __Action Creator__ : Action Creators are __function__ that create and returns actions.
 ---
-#### Action Properties (parameters)
+#### Action Properties (paramters)
 * It has a __type__ field as a property which is required.
 * It can accept additional properties __(payload)__. This is optional
 ---
 
 #### Action Types OR Action Contants
 
-* const **CONSTANT_NAME** = **"constant_value"**;
+* const __CONSTANTNAME__ = __"constant_value"__;
 
 ---
 
@@ -110,7 +110,7 @@ Problems
 * the redux store will not be updated and no changes will be made to your application state.
 
 Answer <br/>
-⚠️ **Reducers** are immediately return a new data if the correct action is dispatch without waiting for the action payload. 
+⚠️ **Reducers** are imediatelly return a new data if the correct action is dipatch without waiting for the action payload. 
 
 ### Configuration of store
 #### Middleware
@@ -120,7 +120,7 @@ Answer <br/>
 #### Uses of Middleware
 * Handle the action
 * Dispatch new action (i.e create a side-effect such as making an API Call)
-* Log the action to the console / inside the browser by using **redux-dev-extension** tool.
+* Log the action to the console / inside the browser by using **redux-dev-extention** tool.
 
 ⚠️ Note
 * Middlewares are used to enable advanced functionality in a redux store that would not be possible with just a reducer alone.
@@ -459,8 +459,8 @@ export { fetchPostsAction, fetchPostAction, store };
 ---
 ### Redux Problems
 * Configuring a Redux store is too complicated
-* I have to add a lot of packages to get Redux to do anything useful
-* Redux requires too much boilerplate code
+* I have to add a lot of packages to get Redux to do anything usefull
+* Redux requires too much bolierplates code
 
 ### What is Redux Toolkit ?
 * Redux toolkit is complete rewrite of the standard Redux Library.
@@ -471,14 +471,14 @@ Importance of RTK <br/>
 
 * To make Redux development easier.
 * Easy Store Configuration.
-* To Redux the size of redux bundles.
+* To Reduc the size of redux bundles.
 
 ---
 ### Redux Toolkit common API's
 
 1. **CreateAction** : *Action Creator + Action Types*
 2. **CreateReducer** : *it's the easiest way of creating Redux red*ucer functions* 
-3. **createSlice** : *CreateAction + CreateReducer to generate act*ions and reducer*
+3. **creatSlice** : *CreateAction + CreateReducer to generate act*ions and reducer*
 4. **CreateAsyncThunk** : *Handle Async Actions (redux-thunk)*
 5. **ConfigureStore** : *Easiest way to create Redux Store*
 
@@ -493,8 +493,8 @@ Importance of RTK <br/>
 
 ### createReducer
 * It's the easiest way of creating Redux reducer functions.
-* we can directly mutate the data because it uses immer internally. 
-* It doesn't use switch or case statement.
+* we can directly mutate the data beacuse it uses immer internally. 
+* It doesn't use switch or case statment.
 * There are two types of creating reducers (builder callback or map object notation).
 ---
 #### Example (createAction && createReducer)
@@ -593,7 +593,7 @@ console.log(store.getState());
 * **It simplifies the creation of action creators and reducers.**
 * **createSlice = createAction + createReducer.**
 * It doesn't use switch or case statement.
-* Each Slice reducer "owns" it state independently. 
+* Each Slice reducer "owns" it state indpendently. 
 ---
 #### createSlice Arguments 
   * name
@@ -944,7 +944,7 @@ const ToDoComponent = () => {
 
     let content;
     if (isLoading) {
-        content = <p>Loading ....</p>
+        content = <p>Loadiing ....</p>
     } else if (isSuccess) {
         content = data.map(item => {
             return <div key={item.id} style={{ border: '2px solid red', margin: '10px', padding: '10px' }}>
