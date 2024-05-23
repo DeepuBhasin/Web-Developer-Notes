@@ -5,7 +5,7 @@
 
 ### What is Redux ?
 * Redux is an open-source javascript library for __managing__ and __centralizing__ application state.
-* A __Predicatble State Container__ for JS APP.
+* A __Predictable State Container__ for JS APP.
 ---  
 ### Redux Road Map
 ![Image](./images/redux_roadmap.png)
@@ -42,12 +42,12 @@
 * You should use Redux when you have a complex state object that is difficult to manage with the local state alone.
 * The app state is updated frequently
 * The logic to update that state may be complex
-* The app has a medium or large-sized codebase and might be wroked on bt many people
+* The app has a medium or large-sized codebase and might be worked on bt many people
 ---
 ### Redux Terminologies
 * __Actions__ : Actions are the driving force of every dynamic application, as they are the medium by which all changes are communicated within a Redux Application.
 * __Reducers__ : Reducers are event Listeners which handles event based on the actions type.
-* __Stroe__ : It stores the application data.
+* __Store__ : It stores the application data.
 
 ---  
 ### How Redux Works
@@ -59,21 +59,21 @@
 ### Store Methods
 * __getState()__ : Returns the current State tree of your application.
 * __dispatch()__ : This is the only way to trigger a state change.
-* __subsribe()__ : Listening to any change.
+* __subscribe()__ : Listening to any change.
 
 ---
-### Acion Vs Action Creator
-* __Action__ : An Action is simply a __javascript object__ that contains information about an event that has occured in your app.
+### Action Vs Action Creator
+* __Action__ : An Action is simply a __javascript object__ that contains information about an event that has occurred in your app.
 * __Action Creator__ : Action Creators are __function__ that create and returns actions.
 ---
-#### Action Properties (paramters)
+#### Action Properties (parameters)
 * It has a __type__ field as a property which is required.
 * It can accept additional properties __(payload)__. This is optional
 ---
 
 #### Action Types OR Action Contants
 
-* const __CONSTANTNAME__ = __"constant_value"__;
+* const __CONSTANT_NAME__ = __"constant_value"__;
 
 ---
 
@@ -110,7 +110,7 @@ Problems
 * the redux store will not be updated and no changes will be made to your application state.
 
 Answer <br/>
-⚠️ **Reducers** are imediatelly return a new data if the correct action is dipatch without waiting for the action payload. 
+⚠️ **Reducers** are immediately return a new data if the correct action is dispatch without waiting for the action payload. 
 
 ### Configuration of store
 #### Middleware
@@ -120,7 +120,7 @@ Answer <br/>
 #### Uses of Middleware
 * Handle the action
 * Dispatch new action (i.e create a side-effect such as making an API Call)
-* Log the action to the console / inside the browser by using **redux-dev-extention** tool.
+* Log the action to the console / inside the browser by using **redux-dev-extension** tool.
 
 ⚠️ Note
 * Middlewares are used to enable advanced functionality in a redux store that would not be possible with just a reducer alone.
@@ -143,7 +143,7 @@ const initialState = {
     posts: []
 };
 
-// custome middleware 
+// custom middleware 
 const customLogger = () => next => action => {
     console.log('Action Fired', action);
     next(action);
