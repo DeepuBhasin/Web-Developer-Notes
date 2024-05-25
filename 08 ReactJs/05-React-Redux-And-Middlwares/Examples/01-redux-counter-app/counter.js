@@ -5,7 +5,7 @@ const initialState = {
     count: 0
 };
 
-// constants
+// Actions Constants
 const INCREMENT = "INCREMENT";
 const DECREMENT = "DECREMENT";
 const RESET = "RESET";
@@ -64,7 +64,7 @@ const counterReducer = (state = initialState, action) => {
 // Root reducer (here is a single reducer)
 const rootReducer = counterReducer;
 
-// Creating Store and Registering Reducer 
+// Creating Store and Registering Reducer
 const store = createStore(rootReducer);
 
 // Subscribing
@@ -80,5 +80,3 @@ store.dispatch(incrementAction());
 store.dispatch(resetAction());
 store.dispatch(incrementByAmt(10));
 store.dispatch(decrementAction(10));
-
-

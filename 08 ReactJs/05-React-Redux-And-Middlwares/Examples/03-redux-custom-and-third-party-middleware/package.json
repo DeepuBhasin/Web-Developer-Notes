@@ -1,0 +1,16 @@
+{
+  "name": "03-redux-custom-and-third-party-middleware",
+  "version": "1.0.0",
+  "description": "This is basic redux library project with third party middleware",
+  "main": "index.js",
+  "scripts": {
+    "test": "node custom-middleware.js"
+  },
+  "keywords": [],
+  "author": "Deepinder999@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "redux": "^5.0.1",
+    "redux-logger": "^3.0.6"
+  }
+}

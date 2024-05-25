@@ -1,0 +1,16 @@
+{
+  "name": "04_redux_thunk_middleware_app",
+  "version": "1.0.0",
+  "description": "This is basic redux library project with thunk middleware",
+  "main": "index.js",
+  "scripts": {
+    "start": "node posts.js"
+  },
+  "keywords": [],
+  "author": "Deepinder999@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "redux": "^4.2.1",
+    "redux-logger": "^3.0.6"
+  }
+}

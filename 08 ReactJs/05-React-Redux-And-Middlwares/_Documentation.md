@@ -109,6 +109,7 @@ Rules of Reducers
 
 **⚠️ Note :** When it receives an actions that causes a change to the state, the store will notify all the registered listeners that a change to the state has been made. This allow various parts of the system, like the UI, to update themselves according to the new state. 
 
+> 01-redux-counter-app
 ---
 
 ### 📘Combine Reducer
@@ -117,221 +118,63 @@ Rules of Reducers
 
 ![combineReducer](./images/combine-redux.png)
 
+> 02-redux-user-post-app
 ---
 
-### Asynchronous Redux
+### 📘Asynchronous Redux
 
-Problems 
+* Problems 
+  * data is never received, or is received out of order.
+  * it can make it difficult to debug your code.
+  * the redux store will not be updated and no changes will be made to your application state.
 
-* data is never received, or is received out of order.
-* it can make it difficult to debug your code.
-* the redux store will not be updated and no changes will be made to your application state.
+* Answer
+  * **Reducers** are immediately return a new data if the correct action is dispatch without waiting for the action payload. 
 
-Answer
+**⚠️ Note :** we can add api fetch method in reducer but in that case our code will not become predictable, hence therefore we add middleware to make our code predictable. 
 
-⚠️ **Reducers** are immediately return a new data if the correct action is dispatch without waiting for the action payload. 
+---
 
-### Configuration of store
-#### Middleware
+### 📘Middleware
+* Middleware is a function that execute between request and response means that function hav access to their request and then response. 
 * Redux middleware is a powerful tool that can be used to customize and extend the functionality of Redux. 
-* **Middleware** is basically a **function** that takes in **an action** and can decide how to handle it.
+* **Middleware is basically a function that takes in an action and can decide how to handle it.**
 
-#### Uses of Middleware
-* Handle the action
-* Dispatch new action (i.e create a side-effect such as making an API Call)
-* Log the action to the console / inside the browser by using **redux-dev-extension** tool.
+* Types of Middleware
+  * Third-party Middlewares
+  * Custom Middleware
 
-⚠️ Note
+* Uses of Middleware
+  * Handle the action
+  * Dispatch new action (i.e create a side-effect such as making an API Call)
+  * Log the action to the console / inside the browser by using **redux-dev-extension** tool.
+
+**⚠️ Note :**
 * Middlewares are used to enable advanced functionality in a redux store that would not be possible with just a reducer alone.
 * Middlewares are composed and executed within a Redux store using the **applyMiddleware()** function.
 
-Example 
+> 03-redux-custom-and-third-party-middleware
+---
 
-```
-npm install redux-logger
-```
+### 📘Redux Thunk 
 
-```javascript
-const { createStore, applyMiddleware } = require("redux");
-
-// third party middleware
-const loggerMiddleware = require("redux-logger").createLogger();
-
-// initial Post State
-const initialState = {
-    posts: []
-};
-
-// custom middleware 
-const customLogger = () => next => action => {
-    console.log('Action Fired', action);
-    next(action);
-}
-
-// Action constanst
-const FETCHREQUEST = "fetch_request";
-const FETCHSUCCESS = "fetch_success";
-const FETCHFAILED = "fetch_failed"
-
-//Action + Action creator
-const fetchPostRequestAction = (payload) => {
-    return {
-        type: FETCHREQUEST,
-        payload: payload
-    }
-}
-
-const fetchPostSuccessAction = (payload) => {
-    return {
-        type: FETCHSUCCESS,
-        payload: payload
-    }
-}
-
-const FetchPostFailedAction = (payload) => {
-    return {
-        type: FETCHFAILED,
-        payload: payload
-    }
-}
-
-// Reducer
-const postReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case FETCHREQUEST: {
-            return { ...state, posts: ["HTML"] };
-        }
-        default: {
-            return { ...state };
-        }
-    }
-};
-
-
-// store
-const store = createStore(postReducer, applyMiddleware(loggerMiddleware, customLogger));
-
-// subscribe 
-store.subscribe(() => {
-    const data = store.getState()
-
-    console.log("--------------------Output ------------------------------");
-    console.log('users', data);
-
-});
-
-// dispatch
-store.dispatch(fetchPostRequestAction('ok'));
-```
-### Redux Thunk 
-* **Thunk** : the word thunk is a programming trem that means *"a piece of code that some delayed work"*. 
+* **Thunk** : the word thunk is a programming term that means *"a piece of code that some delayed work"*. 
 * Redux Thunk is a **middleware** that allows you to write **asynchronous** actions
+
+![Image](./images/without-redux-thunk-1.png)
 
 ![Image](./images/without-redux-thunk.png)
 
-
 ![Image](./images/with-redux-thunk.png)
 
-#### Facts about redux thunk (important)
 
-* it's function (action creator) that **return a function** instead of an action object.
-* This function *receives* this **dispatch** method as an *argument*, which allows you to **dispatch** *actions inside the function*
+**Facts about redux thunk (important)**
+
+* **it's function (action creator) that return a function instead of an action object.**
+* This function receives this dispatch method and getState as an argument, which allows you to dispatch actions inside the function
 * This is often used when you need to perform an async operation, such as making an **Ajax request**, before dispatching an action.
 
-#### Example of Thunk 
-```
-npm install redux
-npm install redux-thunk
-npm install axios
-```
-```javascript
-const axios = require("axios");
-const { createStore, applyMiddleware } = require("redux");
-const thunk = require("redux-thunk").default;
-
-// initial Post State
-const initialState = {
-    posts: [],
-    error: "",
-    loading: false
-};
-
-// Action constanst
-const REQUESTSTARTED = "REQUEST_STARTED";
-const FETCHSUCCESS = "FETCH_SUCCESS";
-const FETCHFAILED = "FETCH_FAILED";
-
-
-//Action + Action creator
-const fetchPostRequestAction = () => {
-    return {
-        type: REQUESTSTARTED,
-    }
-}
-
-const fetchPostSuccessAction = (payload) => {
-    return {
-        type: FETCHSUCCESS,
-        payload: payload
-    }
-}
-
-const FetchPostFailedAction = (payload) => {
-    return {
-        type: FETCHFAILED,
-        payload: payload
-    }
-}
-
-// MiddleWare [Redux Thunx] (action to make request)
-const fetchPosts = () => {
-    return async (dispatch, getState) => {
-        try {
-            console.log('Current State', getState());
-            dispatch(fetchPostRequestAction());
-            const data = await axios.get('https://jsonplaceholder.typicode.com/posts');
-            dispatch(fetchPostSuccessAction(data.data));
-
-        } catch (error) {
-            dispatch(FetchPostFailedAction(error.message))
-        }
-    }
-}
-
-
-// Reducer
-const postReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case REQUESTSTARTED: {
-            return { ...state, loading: true };
-        }
-        case FETCHSUCCESS: {
-            return { ...state, loading: false, posts: action.payload }
-        }
-        case FETCHFAILED: {
-            return { ...state, loading: false, error: action.payload }
-        }
-        default: {
-            return { ...state };
-        }
-    }
-};
-
-// store
-const store = createStore(postReducer, applyMiddleware(thunk));
-
-// subscribe 
-store.subscribe(() => {
-    const data = store.getState()
-
-    console.log("--------------------Output ------------------------------");
-    console.log('users', data);
-
-});
-
-// dispatch
-store.dispatch(fetchPosts());
-```
+> 04-redux-thunk-middleware-app
 ---
 
 ### Example of React-Reduc-Thunk

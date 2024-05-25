@@ -1,5 +1,5 @@
-const axios = require("axios");
 const { createStore, applyMiddleware } = require("redux");
+const axios = require("axios");
 const thunk = require("redux-thunk").default;
 
 // initial Post State
@@ -9,35 +9,36 @@ const initialState = {
     loading: false
 };
 
-// Action constanst
-const REQUESTSTARTED = "REQUEST_STARTED";
-const FETCHSUCCESS = "FETCH_SUCCESS";
-const FETCHFAILED = "FETCH_FAILED";
+// Action constants
+const FETCH_REQUEST = "FETCH_REQUEST";
+const FETCH_SUCCESS = "FETCH_SUCCESS";
+const FETCH_FAILED = "FETCH_FAILED";
 
 
-//Action + Action creator
+// Action creator
 const fetchPostRequestAction = () => {
+    // Action
     return {
-        type: REQUESTSTARTED,
+        type: FETCH_REQUEST,
     }
 }
 
 const fetchPostSuccessAction = (payload) => {
     return {
-        type: FETCHSUCCESS,
+        type: FETCH_SUCCESS,
         payload: payload
     }
 }
 
 const FetchPostFailedAction = (payload) => {
     return {
-        type: FETCHFAILED,
+        type: FETCH_FAILED,
         payload: payload
     }
 }
 
-// MiddleWare [Redux Thunx] (action to make request)
-const fetchPosts = () => {
+// MiddleWare [Redux Thunk] (action to make request)
+const getPostApi = () => {
     return async (dispatch, getState) => {
         try {
             console.log('Current State', getState());
@@ -55,13 +56,13 @@ const fetchPosts = () => {
 // Reducer
 const postReducer = (state = initialState, action) => {
     switch (action.type) {
-        case REQUESTSTARTED: {
+        case FETCH_REQUEST: {
             return { ...state, loading: true };
         }
-        case FETCHSUCCESS: {
+        case FETCH_SUCCESS: {
             return { ...state, loading: false, posts: action.payload }
         }
-        case FETCHFAILED: {
+        case FETCH_FAILED: {
             return { ...state, loading: false, error: action.payload }
         }
         default: {
@@ -70,8 +71,11 @@ const postReducer = (state = initialState, action) => {
     }
 };
 
-// store
-const store = createStore(postReducer, applyMiddleware(thunk));
+// Root Reducer
+const rootReducer = postReducer;
+
+// store with middleware
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 // subscribe 
 store.subscribe(() => {
@@ -83,4 +87,4 @@ store.subscribe(() => {
 });
 
 // dispatch
-store.dispatch(fetchPosts());
+store.dispatch(getPostApi());

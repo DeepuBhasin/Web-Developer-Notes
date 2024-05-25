@@ -1,0 +1,15 @@
+{
+  "name": "02_redux_user_post_app",
+  "version": "1.0.0",
+  "description": "This is basic redux library project with combine reducer",
+  "main": "index.js",
+  "scripts": {
+    "start": "node user-and-post.js"
+  },
+  "keywords": [],
+  "author": "Deepinder999@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "redux": "^4.2.1"
+  }
+}
