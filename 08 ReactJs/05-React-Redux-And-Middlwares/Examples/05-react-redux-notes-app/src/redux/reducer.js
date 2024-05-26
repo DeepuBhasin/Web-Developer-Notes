@@ -1,52 +1,26 @@
-import { createStore } from "redux"
-import { composeWithDevTools } from "redux-devtools-extension"
-// Actions Constants
-const ADDNOTE = "ADDNOTE";
-const DELETENOTE = "DELETENOTE";
-const FETCHNOTES = "FETCHNOTES";
-
-//Action Creator
-export const addNoteAction = (payload) => {
-    return {
-        type: ADDNOTE,
-        payload: payload
-    }
-}
-
-export const deleteNoteAction = (id) => {
-    return {
-        type: DELETENOTE,
-        payload: id
-    }
-}
-
-export const fetchNotesAction = () => {
-    return {
-        type: FETCHNOTES
-    }
-}
+import { ADD_NOTE, DELETE_NOTE, FETCH_NOTES } from "./constants"
 
 const initialState = {
     notes: []
 }
 
 // Reducer
-const notesReducer = (state = initialState, action) => {
+export const notesReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADDNOTE: {
+        case ADD_NOTE: {
             let tempNotes = [...state.notes, action.payload];
             const updateStates = { ...state, notes: tempNotes };
             localStorage.setItem("notes", JSON.stringify(updateStates));
             return updateStates;
         };
-        case DELETENOTE: {
+        case DELETE_NOTE: {
             let tempNotes = [...state.notes];
             let newNotes = tempNotes.filter(item => (item.id !== action.payload));
             let updateStates = { ...state, notes: newNotes }
             localStorage.setItem("notes", JSON.stringify(updateStates));
             return updateStates;
         };
-        case FETCHNOTES: {
+        case FETCH_NOTES: {
             const notes = JSON.parse(localStorage.getItem('notes'));
 
             if (!notes) return { notes: [] };
@@ -58,4 +32,3 @@ const notesReducer = (state = initialState, action) => {
         }
     }
 }
-export const store = createStore(notesReducer, composeWithDevTools());

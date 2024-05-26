@@ -177,6 +177,12 @@ Rules of Reducers
 > 04-redux-thunk-middleware-app
 ---
 
+### 📘React-Redux
+* React-redux is help us to connect with between React components and Redux library, which help components to dispatch actions and access store
+
+> 05-react-redux-notes-app
+
+
 ### Example of React-Reduc-Thunk
 
 ```

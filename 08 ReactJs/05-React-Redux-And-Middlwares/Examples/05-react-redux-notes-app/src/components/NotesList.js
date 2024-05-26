@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteNoteAction, fetchNotesAction } from "../redux/redux";
+import { deleteNoteAction, fetchNotesAction } from "../redux/actions";
 
-const NotesList = () => {
+export const NotesList = () => {
 
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchNotesAction());
-    }, []);
+    }, [dispatch]);
 
     const notes = useSelector(state => state.notes);
 
@@ -23,5 +23,3 @@ const NotesList = () => {
         </>
     )
 }
-
-export default NotesList;

@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import * as React from "react";
 import { useDispatch } from "react-redux";
-import { addNoteAction } from "../redux/redux";
+import { addNoteAction } from "../redux/actions";
+
 const initialNotesValues = {
     id: "",
     title: "",
     content: ""
 };
 
-const AddNotes = () => {
-
-    const [notes, setNote] = useState(initialNotesValues);
+export const AddNotes = () => {
+    const [notes, setNote] = React.useState(initialNotesValues);
     const dispatch = useDispatch();
 
     const handleChange = (e) => {
@@ -32,14 +32,13 @@ const AddNotes = () => {
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <label>Enter Title</label>
-                <input value={notes.title} onChange={handleChange} name="title" type="text" placeholder="Add Title" /><br />
-                <label>Enter Content</label>
-                <input value={notes.content} onChange={handleChange} name="content" type="text" placeholder="Add Content" /><br />
+                <label htmlFor="title">Enter Title</label>
+                <input id="title" value={notes.title} onChange={handleChange} name="title" type="text" placeholder="Add Title" /><br />
+                <label htmlFor="content">Enter Content</label>
+                <input id="content" value={notes.content} onChange={handleChange} name="content" type="text" placeholder="Add Content" /><br />
                 <button type="submit" onClick={handleSubmit}>Add</button>
+                <button type="reset">Clear</button>
             </form>
         </div>
     )
 }
-
-export default AddNotes;

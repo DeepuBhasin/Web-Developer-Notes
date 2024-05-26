@@ -1,8 +1,9 @@
+import * as React from "react"
 import { store } from "./redux/redux";
 import { Provider } from "react-redux"
-import AddNotes from "./components/AddNotes"
-import './App.css';
-import NotesList from "./components/NotesList";
+import { AddNotes } from "./components/AddNotes"
+import { NotesList } from "./components/NotesList";
+
 
 function App() {
   return (
@@ -12,7 +13,6 @@ function App() {
         <NotesList />
       </Provider>
     </div>
-
   );
 }
 
