@@ -1,6 +1,15 @@
 ## 📔Topics
 1. Core Redux and Core Functions
 2. Combine Reducer
+3. Middleware
+   1. Custom Middleware
+   2. Third-party like thunk, logger
+4. React-Redux and React-redux-thunk
+
+---
+### 📘Information
+1. Always create three states while calling any Api data, loading, error
+2. Always create three actions while calling any dispatch method request, success, fail
 
 ---
 
@@ -182,153 +191,12 @@ Rules of Reducers
 
 > 05-react-redux-notes-app
 
-
-### Example of React-Reduc-Thunk
-
-```
-npm install redux
-npm install react-redux
-npm install redux-thunk
-npm install axios
-npm install redux-devtools-extension
-```
-
-```javascript
-import axios from "axios";
-import { applyMiddleware, combineReducers, createStore } from "redux"
-import { composeWithDevTools } from "redux-devtools-extension";
-import thunk from "redux-thunk";
-
-// Url Address
-export const apiURL = 'https://jsonplaceholder.typicode.com/posts';
-
-// initial State
-const initialState = {
-    loading: false,
-    error: "",
-    posts: [],
-    post: {}
-}
-
-// Action Constants
-const FETCH_POSTS_REQUEST = "FETCH_POSTS_REQUEST";
-const FETCH_POSTS_SUCCESS = " FETCH_POSTS_SUCCESS";
-const FETCH_POSTS_FAILURE = " FETCH_POSTS_FAILURE";
-
-const SEARCH_POST_REQUEST = "SEARCH_POST_REQUEST";
-const SEARCH_POST_SUCCESS = " SEARCH_POST_SUCCESS";
-const SEARCH_POST_FAILURE = " SEARCH_POST_FAILURE";
-
-// Actions Creator
-const fetchPostsRequest = () => {
-    return {
-        type: FETCH_POSTS_REQUEST
-    }
-}
-
-const fetchPostsSuccess = (payload) => {
-    return {
-        type: FETCH_POSTS_SUCCESS,
-        payload: payload
-    }
-}
-
-const fetchPostsFail = (payload) => {
-    return {
-        type: FETCH_POSTS_FAILURE,
-        payload: payload
-    }
-}
-
-const fetchPostRequest = (payload) => {
-    return {
-        type: SEARCH_POST_REQUEST,
-        payload: payload
-    }
-}
-
-const fetchPostSuccess = (payload) => {
-    return {
-        type: SEARCH_POST_SUCCESS,
-        payload: payload
-    }
-}
-
-const fetchPostFail = (payload) => {
-    return {
-        type: SEARCH_POST_FAILURE,
-        payload: payload
-    }
-}
-
-
-
-// Redux Thunks
-const fetchPostsAction = () => {
-    return async (dispatch, getState) => {
-        dispatch(fetchPostsRequest());
-        try {
-            let data = await axios.get(apiURL);
-            dispatch(fetchPostsSuccess(data.data));
-        } catch (error) {
-            dispatch(fetchPostsFail(error.message))
-        }
-    }
-}
-
-const fetchPostAction = (id) => {
-    return async (dispatch, getState) => {
-        dispatch(fetchPostRequest());
-        try {
-            let data = await axios.get(`${apiURL}/${id}`);
-            dispatch(fetchPostSuccess(data.data));
-        } catch (error) {
-            dispatch(fetchPostFail(error.message))
-        }
-    }
-}
-
-// Reducers 
-const postsReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case FETCH_POSTS_REQUEST: {
-            return { ...state, loading: true, error: "" }
-        }
-        case FETCH_POSTS_SUCCESS: {
-            return { ...state, posts: action.payload, loading: false, error: "" }
-        }
-        case FETCH_POSTS_FAILURE: {
-            return { ...state, posts: [], loading: false, error: action.payload }
-        }
-        case SEARCH_POST_REQUEST: {
-            return { ...state, loading: true, error: "" }
-        }
-        case SEARCH_POST_SUCCESS: {
-            console.log(action.payload);
-            return { ...state, posts: [action.payload], loading: false, error: "" }
-        }
-        case SEARCH_POST_FAILURE: {
-            return { ...state, posts: {}, loading: false, error: action.payload }
-        }
-        default: {
-            return state;
-        }
-    }
-}
-
-
-const rootReducer = combineReducers({
-    postsData: postsReducer
-})
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
-
-export { fetchPostsAction, fetchPostAction, store };
-```
+> 06-react-redux-thunk-app
 ---
 ### Redux Problems
 * Configuring a Redux store is too complicated
-* I have to add a lot of packages to get Redux to do anything usefull
-* Redux requires too much bolierplates code
+* I have to add a lot of packages to get Redux to do anything useful
+* Redux requires too much boilerplate code
 
 ### What is Redux Toolkit ?
 * Redux toolkit is complete rewrite of the standard Redux Library.
@@ -346,7 +214,7 @@ Importance of RTK <br/>
 
 1. **CreateAction** : *Action Creator + Action Types*
 2. **CreateReducer** : *it's the easiest way of creating Redux red*ucer functions* 
-3. **creatSlice** : *CreateAction + CreateReducer to generate act*ions and reducer*
+3. **CreateSlice** : *CreateAction + CreateReducer to generate act*ions and reducer*
 4. **CreateAsyncThunk** : *Handle Async Actions (redux-thunk)*
 5. **ConfigureStore** : *Easiest way to create Redux Store*
 
@@ -361,8 +229,8 @@ Importance of RTK <br/>
 
 ### createReducer
 * It's the easiest way of creating Redux reducer functions.
-* we can directly mutate the data beacuse it uses immer internally. 
-* It doesn't use switch or case statment.
+* we can directly mutate the data because it uses immer internally. 
+* It doesn't use switch or case statement.
 * There are two types of creating reducers (builder callback or map object notation).
 ---
 #### Example (createAction && createReducer)
