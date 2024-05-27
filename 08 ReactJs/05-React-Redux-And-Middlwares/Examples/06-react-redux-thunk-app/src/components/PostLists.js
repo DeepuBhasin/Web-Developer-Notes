@@ -1,20 +1,22 @@
 import React, { useEffect } from "react";
 import SearchPost from "./SearchPost";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPostsAction } from "./redux";
+import { getAllPostThunk } from "./../redux/thunk";
 
 const PostsList = () => {
     const dispatch = useDispatch();
     const { loading, error, posts } = useSelector(state => state.postsData);
     useEffect(() => {
-        dispatch(fetchPostsAction());
-    }, []);
+        dispatch(getAllPostThunk());
+    }, [dispatch]);
 
     const style = { border: '2px red solid', textAlign: 'left', marginBottom: '20px', padding: '10px', borderRadius: '5px' };
 
     return (<div>
         <SearchPost />
+        <br />
         <h1>Total Post {posts.length}</h1>
+        <br />
         {loading ? <h2>Loading ..... </h2>
             : error ? <h2> {error}</h2>
                 : posts?.map(item => {
@@ -25,7 +27,6 @@ const PostsList = () => {
                     </div>
                 })
         }
-
     </div >
     )
 }

@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchPostAction } from "./redux";
+import { useDispatch } from "react-redux";
+import { getAllPostThunk, getSinglePostThunk } from "./../redux/thunk";
 const SearchPost = () => {
     const [search, setSearch] = useState("");
-    const { loading, error, post } = useSelector(state => state);
     const dispatch = useDispatch();
 
     const handleSubmit = e => {
@@ -12,8 +11,12 @@ const SearchPost = () => {
         if (search === "") {
             alert('provide values')
         } else {
-            dispatch(fetchPostAction(search))
+            dispatch(getAllPostThunk(search))
         }
+    }
+
+    const handleLoad = () => {
+        dispatch(getSinglePostThunk())
     }
 
     return (
@@ -21,6 +24,7 @@ const SearchPost = () => {
             <form onSubmit={handleSubmit}>
                 <input type="number" name="search" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Enter Post" />
                 <button type="submit">Search</button>
+                <button type="button" onClick={handleLoad}>Load all Data</button>
             </form>
         </div>
     )
