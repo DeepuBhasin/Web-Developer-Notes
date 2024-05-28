@@ -17,7 +17,7 @@
 * Redux is an open-source javascript library for __managing__ and __centralizing__ application state.
 * A __Predictable State Container__ for JS APP.
 
----  
+---
 
 ### 📘Redux Road Map
 ![Image](./images/redux_roadmap.png)
@@ -25,7 +25,7 @@
 ---
 
 ### 📘Whats is State ?
-* Any data in your application that can change based on conditions. 
+* Any data in your application that can change based on conditions.
 * Its a data store that is used to manage the component data.
 ---
 
@@ -67,7 +67,7 @@
 * __Actions__ : Actions are the driving force of every dynamic application, as they are the medium by which all changes are communicated within a Redux Application.
 * __Reducers__ : Reducers are event Listeners which handles event based on the actions type.
 * __Store__ : It stores the application data.
----  
+---
 
 ### 📘How Redux Works
 ![Image](./images/how-redux-workd.png)
@@ -110,13 +110,13 @@ Rules of Reducers
 * Reducers are not allowed to modify the **existing state.**
 ---
 
-### 📘Store 
+### 📘Store
 * __It store the application data__.
 * __It doesn't contain business logic.__
 * It receives actions and pass to all the registered middleware.
 * The only way to change the state inside it is to dispatch an action.
 
-**⚠️ Note :** When it receives an actions that causes a change to the state, the store will notify all the registered listeners that a change to the state has been made. This allow various parts of the system, like the UI, to update themselves according to the new state. 
+**⚠️ Note :** When it receives an actions that causes a change to the state, the store will notify all the registered listeners that a change to the state has been made. This allow various parts of the system, like the UI, to update themselves according to the new state.
 
 > 01-redux-counter-app
 ---
@@ -132,21 +132,21 @@ Rules of Reducers
 
 ### 📘Asynchronous Redux
 
-* Problems 
+* Problems
   * data is never received, or is received out of order.
   * it can make it difficult to debug your code.
   * the redux store will not be updated and no changes will be made to your application state.
 
 * Answer
-  * **Reducers** are immediately return a new data if the correct action is dispatch without waiting for the action payload. 
+  * **Reducers** are immediately return a new data if the correct action is dispatch without waiting for the action payload.
 
-**⚠️ Note :** we can add api fetch method in reducer but in that case our code will not become predictable, hence therefore we add middleware to make our code predictable. 
+**⚠️ Note :** we can add api fetch method in reducer but in that case our code will not become predictable, hence therefore we add middleware to make our code predictable.
 
 ---
 
 ### 📘Middleware
-* Middleware is a function that execute between request and response means that function hav access to their request and then response. 
-* Redux middleware is a powerful tool that can be used to customize and extend the functionality of Redux. 
+* Middleware is a function that execute between request and response means that function hav access to their request and then response.
+* Redux middleware is a powerful tool that can be used to customize and extend the functionality of Redux.
 * **Middleware is basically a function that takes in an action and can decide how to handle it.**
 
 * Types of Middleware
@@ -165,9 +165,9 @@ Rules of Reducers
 > 03-redux-custom-and-third-party-middleware
 ---
 
-### 📘Redux Thunk 
+### 📘Redux Thunk
 
-* **Thunk** : the word thunk is a programming term that means *"a piece of code that some delayed work"*. 
+* **Thunk** : the word thunk is a programming term that means *"a piece of code that some delayed work"*.
 * Redux Thunk is a **middleware** that allows you to write **asynchronous** actions
 
 ![Image](./images/without-redux-thunk-1.png)
@@ -192,29 +192,32 @@ Rules of Reducers
 > 05-react-redux-notes-app
 
 > 06-react-redux-thunk-app
----
-### Redux Problems
+
+**Redux Problems**
+
 * Configuring a Redux store is too complicated
 * I have to add a lot of packages to get Redux to do anything useful
 * Redux requires too much boilerplate code
 
-### What is Redux Toolkit ?
+###  📘What is Redux Toolkit (RTK) ?
 * Redux toolkit is complete rewrite of the standard Redux Library.
-* It is designed to make it easier to write redux applications by providing a set of helper functions.
-* The Redux toolkit library is divided into 2 parts: the core library and the react bindings.
+* It is designed to make it easier to write redux applications by providing a set of helper functions (like thunk etc).
+* The Redux toolkit library is divided into 2 parts: 
+  * The Core library.
+  * The React bindings.
 
-Importance of RTK <br/>
+**Importance of RTK**
 
-* To make Redux development easier.
+* To make Redux development easier like by default we have dev-tool extension configured on it.
 * Easy Store Configuration.
-* To Reduc the size of redux bundles.
-
+* To reduce the size of Redux bundles.
 ---
-### Redux Toolkit common API's
+
+### 📘Redux Toolkit common API's
 
 1. **CreateAction** : *Action Creator + Action Types*
-2. **CreateReducer** : *it's the easiest way of creating Redux red*ucer functions* 
-3. **CreateSlice** : *CreateAction + CreateReducer to generate act*ions and reducer*
+2. **CreateReducer** : *it's the easiest way of creating Redux reducer functions*
+3. **CreateSlice** : *CreateAction + CreateReducer to generate actions and reducer*
 4. **CreateAsyncThunk** : *Handle Async Actions (redux-thunk)*
 5. **ConfigureStore** : *Easiest way to create Redux Store*
 
@@ -229,7 +232,7 @@ Importance of RTK <br/>
 
 ### createReducer
 * It's the easiest way of creating Redux reducer functions.
-* we can directly mutate the data because it uses immer internally. 
+* we can directly mutate the data because it uses immer internally.
 * It doesn't use switch or case statement.
 * There are two types of creating reducers (builder callback or map object notation).
 ---
@@ -329,9 +332,9 @@ console.log(store.getState());
 * **It simplifies the creation of action creators and reducers.**
 * **createSlice = createAction + createReducer.**
 * It doesn't use switch or case statement.
-* Each Slice reducer "owns" it state indpendently. 
+* Each Slice reducer "owns" it state indpendently.
 ---
-#### createSlice Arguments 
+#### createSlice Arguments
   * name
   * initialState
   * reducer/extraReducer
@@ -339,7 +342,7 @@ console.log(store.getState());
 * name : is used in action type, and it must be unique, it represent a particular reducer in the state.
 * reducer : it handle specific action type/ implement business logic.
 
-#### Example (createSlice (action constants + actionCreator))  
+#### Example (createSlice (action constants + actionCreator))
 
 ```javascript
 const { configureStore, createSlice } = require("@reduxjs/toolkit");
@@ -409,7 +412,7 @@ console.log(store.getState());
 * Fulfilled
 * rejected
 
-Example 
+Example
 
 ```
 npm install axios
@@ -427,13 +430,13 @@ const initialState = {
     error: null
 }
 
-//Action Constant 
+//Action Constant
 const POST_CONST = "post/fetchPosts";
 
 // Action Type
 const posts = createAction(POST_CONST);
 
-//create Async Thunk 
+//create Async Thunk
 const fetchPosts = createAsyncThunk(posts.type, async () => {
     const data = await axios.get(API);
     return data.data;
@@ -455,7 +458,7 @@ const postsSlice = createSlice({
             state.loading = false;
         });
 
-        // rejected 
+        // rejected
         builder.addCase(fetchPosts.rejected, (state, action) => {
             state.posts = [];
             state.loading = false;
@@ -464,7 +467,7 @@ const postsSlice = createSlice({
     }
 });
 
-// generate reducer 
+// generate reducer
 const postsReducer = postsSlice.reducer;
 
 const store = configureStore({
@@ -476,7 +479,7 @@ store.subscribe(() => {
     console.log(data);
 })
 
-// dispatch 
+// dispatch
 store.dispatch(fetchPosts())
 ```
 #### Example React-Redux-toolkit-Async
@@ -522,7 +525,7 @@ const searchPost = createAsyncThunk('post/fetch', async (payload, { rejectWithVa
     return [res.data];
 });
 
-// slice 
+// slice
 const postsSlice = createSlice({
     name: 'posts',
     initialState,
@@ -559,7 +562,7 @@ const postsSlice = createSlice({
 });
 
 
-// Generate reducer 
+// Generate reducer
 const postsReducer = postsSlice.reducer;
 
 const store = configureStore({
@@ -579,10 +582,10 @@ npm install react-redux
 
 ```
 // for Js
-npm create-react-app --template redux 
+npm create-react-app --template redux
 
 // for Typescript
-npm create-react-app --template redux-typescript 
+npm create-react-app --template redux-typescript
 ```
 
 
@@ -593,9 +596,9 @@ import { createApi, fetchBaseQuery, setupListeners } from "@reduxjs/toolkit/quer
 
 
 export const todoApi = createApi({
-    reducerPath: 'api', // key name for caching 
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3004/' }),   // its like axios 
-    tagTypes: ['Todos'],  // slice name 
+    reducerPath: 'api', // key name for caching
+    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3004/' }),   // its like axios
+    tagTypes: ['Todos'],  // slice name
     endpoints: builder => ({
         getToDos: builder.query({           // for get method
             query: () => ({
@@ -627,7 +630,7 @@ export const todoApi = createApi({
             query: (payload) => ({
                 url: `todos/${payload.id}`,
                 method: 'PUT',
-                body: payload               // containing all data 
+                body: payload               // containing all data
             }),
             invalidatesTags: ['Todos']
         }),
