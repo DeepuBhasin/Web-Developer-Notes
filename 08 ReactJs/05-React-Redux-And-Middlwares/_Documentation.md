@@ -245,12 +245,9 @@ Rules of Reducers
 * Each Slice reducer "owns" it state independently.
 
 **createSlice Arguments**
-  * name
-  * initialState
-  * reducer/extraReducer
-
-* name : is used in action type, and it must be unique, it represent a particular reducer in the state.
-* reducer : it handle specific action type/ implement business logic.
+1. name : is used in action type, and it must be unique, it represent a particular reducer in the state.
+2. initialState
+3. reducer/extraReducer : it handle specific action type/ implement business logic.
 
 ---
 
