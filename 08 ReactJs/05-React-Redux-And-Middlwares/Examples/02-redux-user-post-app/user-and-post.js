@@ -53,12 +53,11 @@ const postReducer = (state = initialState, action) => {
             return { ...state, posts: [...state.posts, action.payload] };
         }
         case DELETE_POST: {
-            let tempPostArray = [...state.posts];
-            let newPosts = tempPostArray.filter(item => item.id != action.payload.id);
-            return { ...state, posts: newPosts }
+            const newPosts = state.posts.filter(item => item.id !== action.payload.id);
+            return { ...state, posts: newPosts };
         }
         default: {
-            return { ...state };
+            return state;
         }
     }
 };
@@ -70,12 +69,11 @@ const userReducer = (state = usersInitialState, action) => {
             return { ...state, users: [...state.users, action.payload] };
         }
         case DELETE_USER: {
-            let tempPostArray = [...state.users];
-            let newUsers = tempPostArray.filter(item => item.id != action.payload.id);
-            return { ...state, users: newUsers }
+            const newUsers = state.users.filter(item => item.id !== action.payload.id);
+            return { ...state, users: newUsers };
         }
         default: {
-            return { ...state };
+            return state;
         }
     }
 };
@@ -102,8 +100,8 @@ store.subscribe(() => {
 // dispatch
 store.dispatch(addPostAction({ id: 1, title: 'Computer' }));
 store.dispatch(addUserAction({ id: 1, name: 'Deepu Bhasin' }));
-store.dispatch(addPostAction({ id: 2, name: 'Mobile' }));
-store.dispatch(addPostAction({ id: 3, name: 'Keyboard' }));
+store.dispatch(addPostAction({ id: 2, title: 'Mobile' }));
+store.dispatch(addPostAction({ id: 3, title: 'Keyboard' }));
 store.dispatch(addUserAction({ id: 2, name: 'Dp' }));
 
 store.dispatch(deletePostAction({ id: 1 }));

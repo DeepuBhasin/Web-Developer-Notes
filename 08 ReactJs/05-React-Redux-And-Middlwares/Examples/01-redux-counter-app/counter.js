@@ -55,7 +55,7 @@ const counterReducer = (state = initialState, action) => {
             return { ...state, count: state.count + action.payload }
         }
         default: {
-            return { ...state };
+            return state;
         }
     }
 };
@@ -79,4 +79,4 @@ store.dispatch(incrementAction());
 store.dispatch(incrementAction());
 store.dispatch(resetAction());
 store.dispatch(incrementByAmt(10));
-store.dispatch(decrementAction(10));
+store.dispatch(decrementAction());
