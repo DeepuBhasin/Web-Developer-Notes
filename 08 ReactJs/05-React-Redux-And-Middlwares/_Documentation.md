@@ -198,6 +198,7 @@ Rules of Reducers
 * Configuring a Redux store is too complicated
 * I have to add a lot of packages to get Redux to do anything useful
 * Redux requires too much boilerplate code
+---
 
 ###  📘What is Redux Toolkit (RTK) ?
 * Redux toolkit is complete rewrite of the standard Redux Library.
@@ -207,10 +208,9 @@ Rules of Reducers
   * The React bindings.
 
 **Importance of RTK**
-
-* To make Redux development easier like by default we have dev-tool extension configured on it.
-* Easy Store Configuration.
-* To reduce the size of Redux bundles.
+  * To make Redux development easier like by default we have dev-tool extension configured on it.
+  * Easy Store Configuration.
+  * To reduce the size of Redux bundles.
 ---
 
 ### 📘Redux Toolkit common API's
@@ -222,14 +222,12 @@ Rules of Reducers
 5. ConfigureStore : Easiest way to create Redux Store
 
 **CreateAction (action + action-creator)**
-
 * It combines action type constants and the action together to create action creator.
 * The action creator can be called with or without a payload
 * By default it accept one parameter(action type) but can customized.
 * Action type is a required as a parameter.
 
 **CreateReducer**
-
 * It's the easiest way of creating Redux reducer functions.
 * We can directly mutate the data because it uses immer internally (immer is package name).
 * It doesn't use switch or case statement.
@@ -247,10 +245,9 @@ Rules of Reducers
 * Each Slice reducer "owns" it state independently.
 
 **createSlice Arguments**
-
-* name
-* initialState
-* reducer/extraReducer
+  * name
+  * initialState
+  * reducer/extraReducer
 
 * name : is used in action type, and it must be unique, it represent a particular reducer in the state.
 * reducer : it handle specific action type/ implement business logic.
