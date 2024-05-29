@@ -257,86 +257,19 @@ Rules of Reducers
 
 ---
 
-### createAsync Thunk
-* it's the recommended approach the handling **async request lifecycle**
+### 📘createAsync Thunk
+* it's the recommended approach the handling async request lifecycle
 * This API has eliminated the traditional of installing redux thunk for async actions.
 * This returns a promise
 
-#### lifeCycles of createAsyncThunk
+**lifeCycles of createAsyncThunk**
+
 * Pending
 * Fulfilled
 * rejected
 
-Example
+> 09-redux-toolkit-createAsync-post-app
 
-```
-npm install axios
-npm install @reduxjs/toolkit
-```
-
-```javascript
-const { createAsyncThunk, createSlice, configureStore, createAction } = require("@reduxjs/toolkit");
-const axios = require("axios");
-const API = "https://jsonplaceholder.typicode.com/posts";
-
-const initialState = {
-    posts: [],
-    loading: false,
-    error: null
-}
-
-//Action Constant
-const POST_CONST = "post/fetchPosts";
-
-// Action Type
-const posts = createAction(POST_CONST);
-
-//create Async Thunk
-const fetchPosts = createAsyncThunk(posts.type, async () => {
-    const data = await axios.get(API);
-    return data.data;
-});
-
-const postsSlice = createSlice({
-    name: 'postSliceName',
-    initialState,
-    // for handle promise based calls
-    extraReducers: (builder) => {
-        // pending
-        builder.addCase(fetchPosts.pending, (state, action) => {
-            state.loading = true;
-        });
-
-        // fullfilled
-        builder.addCase(fetchPosts.fulfilled, (state, action) => {
-            state.posts = action.payload;
-            state.loading = false;
-        });
-
-        // rejected
-        builder.addCase(fetchPosts.rejected, (state, action) => {
-            state.posts = [];
-            state.loading = false;
-            state.error = action.payload;
-        })
-    }
-});
-
-// generate reducer
-const postsReducer = postsSlice.reducer;
-
-const store = configureStore({
-    reducer: postsReducer
-});
-
-store.subscribe(() => {
-    const data = store.getState();
-    console.log(data);
-})
-
-// dispatch
-store.dispatch(fetchPosts())
-```
 #### Example React-Redux-toolkit-Async
 
 ```javascript

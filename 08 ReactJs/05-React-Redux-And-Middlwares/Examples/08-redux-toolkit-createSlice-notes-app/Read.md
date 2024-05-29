@@ -1,7 +1,8 @@
 ### 📗Simple Redux-toolkit-createSlice Project
-1. React redux-toolkit library core functions
+1. Core redux library with core functions
    1. getState()
-   2. dispatch()
+   2. subscribe()
+   3. dispatch()
 
 2. Notes application
    1. createSlice() for creating action creator & reducer

@@ -1,0 +1,16 @@
+{
+  "name": "09-redux-toolkit-createasyncthunk-post-app",
+  "version": "1.0.0",
+  "description": "This is basic redux-toolkit with createAsyncThunk Notes project",
+  "main": "post.js",
+  "scripts": {
+    "start": "node post.js"
+  },
+  "keywords": [],
+  "author": "deepinder999@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.2.5",
+    "axios": "^1.7.2"
+  }
+}
