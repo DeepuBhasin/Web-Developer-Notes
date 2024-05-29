@@ -1,0 +1,16 @@
+{
+  "name": "07-redux-toolkit-notes-app",
+  "version": "1.0.0",
+  "description": "This is basic redux-toolkit Notes project",
+  "main": "notes.js",
+  "scripts": {
+    "start": "node notes.js"
+  },
+  "keywords": [],
+  "author": "deepinder999@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.2.5",
+    "redux-logger": "^3.0.6"
+  }
+}
