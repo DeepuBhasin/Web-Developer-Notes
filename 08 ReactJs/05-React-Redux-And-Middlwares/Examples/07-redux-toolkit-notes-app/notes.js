@@ -23,7 +23,7 @@ const incrementByAction = createAction("INCREMENT_BY", (payload) => {
 // Reducer
 
 // 1. Builder callback notation
-const counterSlice = createReducer(initialState, builder => {
+const counterReducer = createReducer(initialState, builder => {
     builder.addCase(incrementAction, (state) => {
         // we are mutating the state directly here because of the immer library
         state.counter += 1
@@ -49,13 +49,13 @@ const counterSlice = createReducer(initialState, builder => {
 
 // root Reducer
 const rootReducer = combineReducers({
-    counter: counterSlice
+    counter: counterReducer
 })
 
 // Store
 const store = configureStore({
     reducer: rootReducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat((logger))
+    middleware: (getDefaultMiddleware) => [...getDefaultMiddleware(), logger]
 });
 
 

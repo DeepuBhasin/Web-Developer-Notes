@@ -1,8 +1,8 @@
 {
-  "name": "07-redux-toolkit-notes-app",
+  "name": "08-redux-toolkit-createslice-notes-app",
   "version": "1.0.0",
-  "description": "This is basic redux-toolkit with createActions and createReducer Notes project",
-  "main": "notes.js",
+  "description": "This is basic redux-toolkit with createSlice Notes project",
+  "main": "note.js",
   "scripts": {
     "start": "node notes.js"
   },

@@ -237,86 +237,29 @@ Rules of Reducers
   1. Builder callback 
   2. Map object notation).
 
+> 07-redux-toolkit-notes-app
 ---
 
-### 📘createSlice
-* **It simplifies the creation of action creators and reducers.**
-* **createSlice = createAction + createReducer.**
+### 📘createSlice (use in SavATree Project)
+* createSlice = createAction + createReducer.
+* It simplifies the creation of action creators and reducers.
 * It doesn't use switch or case statement.
 * Each Slice reducer "owns" it state independently.
----
 
-### 📘createSlice Arguments
-  * name
-  * initialState
-  * reducer/extraReducer
+**createSlice Arguments**
+
+* name
+* initialState
+* reducer/extraReducer
 
 * name : is used in action type, and it must be unique, it represent a particular reducer in the state.
 * reducer : it handle specific action type/ implement business logic.
 
-#### Example (createSlice (action constants + actionCreator))
-
-```javascript
-const { configureStore, createSlice } = require("@reduxjs/toolkit");
-const logger = require("redux-logger").createLogger();
-
-// initial state
-const initialState = {
-    counter: 0
-}
-
-// CreateSlice
-counterSlice = createSlice({
-    name: "COUNTER_APPLICATION",
-    initialState,
-    reducers: {
-        incrementAction: (state) => { state.counter += 1 },
-        decrementAction: (state) => { state.counter -= 1 },
-        resetAction: (state) => { state.counter = 0 },
-        incrementByAction: (state, action) => { state.counter += action.payload }
-    }
-});
-
-// Generate actions
-const { incrementAction, decrementAction, resetAction, incrementByAction } = counterSlice.actions;
-
-//Generate reducer
-const counterReducer = counterSlice.reducer;
-
-const store = configureStore({
-    reducer: counterReducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat((logger))
-});
-
-
-//dispatch action
-store.dispatch(incrementAction());
-console.log('------------output------------------');
-console.log(store.getState());
-
-store.dispatch(incrementAction());
-console.log('------------output------------------');
-console.log(store.getState());
-
-store.dispatch(decrementAction());
-console.log('------------output------------------');
-console.log(store.getState());
-
-
-store.dispatch(resetAction());
-console.log('------------output------------------');
-console.log(store.getState());
-
-
-store.dispatch(incrementByAction(40));
-console.log('------------output------------------');
-console.log(store.getState());
-
-```
 ---
+
 ### createAsync Thunk
-* it's the recommended approach the handling **async request lifecycls**
-* This API has eliminated the tradintional of installing redux thunk for async actions.
+* it's the recommended approach the handling **async request lifecycle**
+* This API has eliminated the traditional of installing redux thunk for async actions.
 * This returns a promise
 
 #### lifeCycles of createAsyncThunk
