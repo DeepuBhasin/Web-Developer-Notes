@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import SearchPost from "./SearchPost";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPosts } from "./../redux/thunk";
+import { fetchPosts } from "./../redux/postSlice";
 
 const PostsList = () => {
     const dispatch = useDispatch();
     const { loading, error, posts } = useSelector(state => state.posts);
     useEffect(() => {
         dispatch(fetchPosts());
-    }, []);
+    }, [dispatch]);
 
     const style = { border: '2px red solid', textAlign: 'left', marginBottom: '20px', padding: '10px', borderRadius: '5px' };
 

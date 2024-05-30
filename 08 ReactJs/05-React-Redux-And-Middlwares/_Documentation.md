@@ -203,7 +203,7 @@ Rules of Reducers
 ###  📘What is Redux Toolkit (RTK) ?
 * Redux toolkit is complete rewrite of the standard Redux Library.
 * It is designed to make it easier to write redux applications by providing a set of helper functions (like thunk etc).
-* The Redux toolkit library is divided into 2 parts: 
+* The Redux toolkit library is divided into 2 parts:
   * The Core library.
   * The React bindings.
 
@@ -231,8 +231,8 @@ Rules of Reducers
 * It's the easiest way of creating Redux reducer functions.
 * We can directly mutate the data because it uses immer internally (immer is package name).
 * It doesn't use switch or case statement.
-* There are two types of creating reducers 
-  1. Builder callback 
+* There are two types of creating reducers
+  1. Builder callback
   2. Map object notation).
 
 > 07-redux-toolkit-notes-app
@@ -247,8 +247,9 @@ Rules of Reducers
 **createSlice Arguments**
 1. name : is used in action type, and it must be unique, it represent a particular reducer in the state.
 2. initialState
-3. reducer/extraReducer : it handle specific action type/ implement business logic.
+3. reducer or extraReducer : it handle specific action type/ implement business logic. Reducer is use for synchronous and ExtraReducer is use for Asynchronous (it is use for promise handling).
 
+**⚠️ Note :** in Lates traditional Slice = Reducer + Action + Initial state
 ---
 
 ### 📘createAsync Thunk
@@ -264,6 +265,9 @@ Rules of Reducers
 
 > 09-redux-toolkit-createAsync-post-app
 
+> 10-react-redux-toolkit-createAsync-post-app
+
+**⚠️Note :** React-dev-tools is perDefault installed
 ### Example Redux-toolKit-RTK
 ```
 // Main Dependencies

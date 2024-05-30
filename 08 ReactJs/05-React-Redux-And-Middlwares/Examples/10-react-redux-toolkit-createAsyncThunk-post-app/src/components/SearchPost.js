@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { searchPost } from "./../redux/thunk";
+import { searchPost } from "./../redux/postSlice";
 const SearchPost = () => {
     const [search, setSearch] = useState("");
     const dispatch = useDispatch();
