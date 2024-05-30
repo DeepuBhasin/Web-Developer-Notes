@@ -4,13 +4,14 @@
 3. Middleware
    1. Custom Middleware
    2. Third-party like thunk, logger
-4. React-Redux and React-redux-thunk
+4. React-Redux with redux and redux-thunk
+5. Redux-toolkit with createAction, createReducer, createSlice, createAsyncThunk, configureStore
 
 ---
 ### 📘Information
 1. Always create three states while calling any Api data, loading, error
 2. Always create three actions while calling any dispatch method request, success, fail
-
+3. Refrence : https://github.com/tweneboah
 ---
 
 ### 📘What is Redux ?
