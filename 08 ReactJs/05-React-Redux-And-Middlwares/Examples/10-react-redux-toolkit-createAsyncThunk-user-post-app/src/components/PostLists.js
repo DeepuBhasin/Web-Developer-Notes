@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import SearchPost from "./SearchPost";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPosts } from "./redux";
+import { fetchPosts } from "./../redux/thunk";
 
 const PostsList = () => {
     const dispatch = useDispatch();

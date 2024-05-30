@@ -1,45 +1,13 @@
-import { configureStore, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice } from "@reduxjs/toolkit";
 
-// Url Address
-export const apiURL = 'https://jsonplaceholder.typicode.com/posts';
-
-// initial State
 const initialState = {
     loading: false,
     error: undefined,
     posts: [],
 }
 
-// action
-const fetchPosts = createAsyncThunk('posts/fetch', async (payload, { rejectWithValue, getState, dispatch }) => {
-    const res = await axios.get(apiURL);
-    return res.data;
-
-
-
-    // try {
-    //     const res = await axios.get(apiURL);
-    //     return res.data;
-    // } catch (error) {
-    //     // console.log(error);
-    //     // console.log(rejectWithValue(error.response));
-    //     // return rejectWithValue(error.response.message);
-    //     // return rejectWithValue(error.response.status);
-    //     return
-    // }
-
-});
-
-
-const searchPost = createAsyncThunk('post/fetch', async (payload, { rejectWithValue, getState, dispatch }) => {
-    const res = await axios.get(`${apiURL}/${payload}`);
-    return [res.data];
-});
-
-// slice 
 const postsSlice = createSlice({
-    name: 'posts',
+    name: 'POST_APP',
     initialState,
     extraReducers: (builder) => {
         builder.addCase(fetchPosts.pending, (state, action) => {
@@ -73,14 +41,5 @@ const postsSlice = createSlice({
     }
 });
 
-
 // Generate reducer 
-const postsReducer = postsSlice.reducer;
-
-const store = configureStore({
-    reducer: {
-        posts: postsReducer
-    }
-})
-
-export { store, fetchPosts, searchPost };
+export const postsReducer = postsSlice.reducer;
