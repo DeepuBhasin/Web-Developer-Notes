@@ -671,6 +671,7 @@ npx tsc
 ```
 npx tsc --watch
 ```
+---
 
 ### 📘Exclude and Include Files
 * Add this property in *tsconfig.json*
@@ -696,7 +697,6 @@ npx tsc --watch
 example
 const map = new Map() // will cause error
 ```
-
 
 ---
 ### 📘Understanding TypeScript Core Libs
@@ -725,6 +725,8 @@ const map = new Map() // will cause error
 ![Image](./images/source-map-1.png)
 
 ![Image](./images/source-map-2.png)
+
+---
 
 ### 📘Dir (outDir and rootDir)
 1. **outDir* :* use for output compiled files along with folders.
@@ -755,17 +757,29 @@ npx tsc
 ```
 npx tsc
 ```
+---
 
-### Other Best Configurations
+### 📘Other Best Configurations
 1. **ToRemove Comments** : It will remove all comments in compiled file after compilation.
 2. **noEmit** : It will not emit js files but it will compiled.
 3. **noEmitOnError** : it will not allow to emit any js file if ts files has any error in any file.
-4. **strict** : it is best
+4. **strict** : it is best.
+5. **noImplicitAny** : not allowed any type
+6. Additional Checks : use for code quality checks
+   1. **noUnUsedLocals**
+   2. **noUnUsedParameters**
+   3. **noImplicitReturn**
+   4. **noFallingThroughCaseInSwitch** : for if we forget break after case
+
 ```js
 "removeComments" : true,
 "noEmit" : true,
 "noEmitOnError": true,
-"strict" : true
+"strict" : true,
+"noImplicitAny" : true,
+"noUnUsedLocals" : true,
+"noUnUsedParameters" : true,
+"noImplicitReturn" : true
 ```
 
 ---
