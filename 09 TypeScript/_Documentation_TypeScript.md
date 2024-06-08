@@ -96,6 +96,32 @@ npx ts-node index.ts
 
 ---
 
+### 📘To execute on live-Server
+Its like live server
+
+* Create Package File
+```
+npm init -y
+```
+
+* Install package
+
+```
+npm i lite-server
+```
+* Package.json
+
+```js
+"scripts": {
+  "start": "lite-server"
+}
+```
+
+
+create index file in folder and add all path of css or js files into it.
+
+---
+
 ### 📘 Type Annotations Vs Type Inference
 * **Type annotations :** Code we add to tell typescript what type of value a variable will refer to
 *  **Type inference :** Typescript tries to figure out what type of value a variables refers to
@@ -311,6 +337,19 @@ function test(name: MyName) {
 }
 
 test("Dp");
+test("ok"); // cause error because value not in option
+
+// OR (with enm)
+enum MyNames {
+  Deepu = "Deepu",
+  Dp = "Dp",
+}
+
+function test(name: MyNames) {
+  return name;
+}
+
+test(MyNames.Dp);
 test("ok"); // cause error because value not in option
 ```
 11. unknown
@@ -650,6 +689,15 @@ npx tsc --watch
 "target": "es2016",
 ```
 
+```js
+// if you select es5 then you cannot use es6
+"target": "ES5"
+
+example
+const map = new Map() // will cause error
+```
+
+
 ---
 ### 📘Understanding TypeScript Core Libs
 
@@ -677,6 +725,48 @@ npx tsc --watch
 ![Image](./images/source-map-1.png)
 
 ![Image](./images/source-map-2.png)
+
+### 📘Dir (outDir and rootDir)
+1. **outDir* :* use for output compiled files along with folders.
+
+* tsconfig.json
+```js
+"sourceMap": true,
+"outDir": "./dist"
+```
+
+* Command
+```
+npx tsc
+```
+
+![Image](./images/outDir.png)
+
+2. rootDir : its just like targeting the folder to which we want to compile.
+
+* tsconfig.json
+```js
+"sourceMap": true,
+"outDir": "./dist",   // output folder name
+"rootDir": "./js",    // input folder name
+```
+
+* Command
+```
+npx tsc
+```
+
+### Other Best Configurations
+1. **ToRemove Comments** : It will remove all comments in compiled file after compilation.
+2. **noEmit** : It will not emit js files but it will compiled.
+3. **noEmitOnError** : it will not allow to emit any js file if ts files has any error in any file.
+4. **strict** : it is best
+```js
+"removeComments" : true,
+"noEmit" : true,
+"noEmitOnError": true,
+"strict" : true
+```
 
 ---
 
