@@ -787,42 +787,50 @@ npx tsc
 ## 📔Classes
 
 * Class, Object, Members, Functions
-* Inheritance (extends & super method)
-* Members and function over-ridding
+* ShortHand & Inheritance (extends & super method)
 * Access Specifiers (public private protected)
+* Read Only Property
+* Members and function over-ridding (replacing parent function by child function)
 * Static Members & Static methods
 * Abstract Classes (cannot create object of this class)
 * interfaces
 ---
 
-### 📘Private and public Access Modifiers
+### 📘Class and object
 
 ```js
-class Department {
-  public name: string;
+class department {
+  name: string;
   constructor(n: string) {
     this.name = n;
   }
-
-  public getName() {
-    console.log(this.name);
-  }
-
-  private describe(this: Department) {
-    console.log("ok", this.name);
-  }
 }
 
-let obj1 = new Department("Computer Sci");
-obj1.getName();
-//obj1.describe();  // this will cause Error
+const d = new department("IT");
+console.log(d.name);
+
 ```
+
+---
 
 ### 📘Shorthand Initialization
 * no need to create variables
 * no need to create variables with in constructor method
 * just only need to initialize in parameters
 ```js
+class Department {
+  name : string;
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  public getName(): void {
+    console.log(this.name);
+  }
+}
+
+//  same this above
+
 class Department {
   constructor(public name: string) {}
 
@@ -875,6 +883,81 @@ class User {
 
 const obj = new User();
 ```
+---
+
+### 📘Private and public Access Modifiers
+
+```js
+class Department {
+  public name: string;
+  constructor(n: string) {
+    this.name = n;
+  }
+
+  public getName() {
+    console.log(this.name);
+  }
+
+  private describe(this: Department) {
+    console.log("ok", this.name);
+  }
+}
+
+let obj1 = new Department("Computer Sci");
+obj1.getName();
+//obj1.describe();  // this will cause Error
+```
+---
+
+
+### 📘Read Only
+* By this option we cannot modified property from outside or inside, only can modified in constructor method.
+
+```js
+class department {
+  readonly name: string;
+
+  constructor(n: string) {
+    this.name = n; // can change here only
+  }
+
+  setName(n: string) {
+    this.name = n; // here you will get error
+  }
+}
+
+const d = new department("IT");
+d.name = "HR"; // here you will get error
+```
+
+---
+
+### 📘Function OverRidding
+
+* Calling parent function from child
+
+```js
+class Student {
+  getClassName(type: string): void {
+    console.log("From Student Class");
+  }
+}
+
+class Teacher extends Student {
+  getClassName(type: string): void {
+    if (type == "teacher") {
+      console.log("From Teacher Class");    // executing child function
+    } else {
+      super.getClassName(type);   // calling parent function
+    }
+  }
+}
+
+new Teacher().getClassName("student");
+```
+
+---
+
 ### 📘Abstract Classes
 
 ```js
