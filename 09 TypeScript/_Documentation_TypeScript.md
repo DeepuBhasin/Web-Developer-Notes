@@ -791,9 +791,10 @@ npx tsc
 * Access Specifiers (public private protected)
 * Read Only Property
 * Members and function over-ridding (replacing parent function by child function)
-* Static Members & Static methods
+* getter and setter functions (same as js)
+* Static Members & Static methods (same as js)
 * Abstract Classes (cannot create object of this class)
-* interfaces
+* interfaces with class
 ---
 
 ### 📘Class and object
@@ -956,39 +957,184 @@ class Teacher extends Student {
 new Teacher().getClassName("student");
 ```
 
+### 📘Singleton Design Pattern (Using static method concept)
+```js
+export class Singleton {
+  private static instance: Singleton;
+
+  private constructor() {}
+
+  public static getInstance(): Singleton {
+    if (!Singleton.instance) {
+      // or (!this.instance)
+      Singleton.instance = new Singleton();
+    }
+    return Singleton.instance;
+  }
+}
+
+let obj1 = Singleton.getInstance();
+// both are same instance
+let obj2 = Singleton.getInstance();
+```
+
+
 ---
 
 ### 📘Abstract Classes
 
 ```js
 abstract class College {
-  abstract name: string;
   abstract getName(): string;
   abstract setName(name: string): void;
 }
 
 class Student extends College {
-  name: string;
-  getName(): string {
-    return this.name;
+  private _name: string;
+
+  constructor(name: string) {
+    super();
+    this._name = name;
   }
-  setName(n: string) {
-    this.name = n;
+
+  getName(): string {
+    return this._name;
+  }
+
+  setName(name: string): void {
+    this._name = name;
   }
 }
 
-let obj = new Student();
+let obj = new Student("Initial Name");
+console.log(obj.getName()); // Output: Initial Name
+obj.setName("New Name");
+console.log(obj.getName()); // Output: New Name
 ```
 
+---
 ### 📘Abstract Vs Interface
 
 ![Image](./images/abstract-vs-interface.png)
 
+---
 
+### 📘 Interface with classes & extends
+
+1. We use interfaces and types for objects.
+2. Both type and interfaces can implement in classes, but interfaces are more acceptable.
+3. We can implement multiple interfaces on class and multiple types on object
+
+```js
+//Applying type and interface on Object only
+type Person = {
+  name: string;
+  age: number;
+  occupation: string;
+  hello(phrase: string): void;
+};
+
+// OR
+
+interface Person {
+  name: string;
+  age: number;
+  occupation: string;
+  hello(phrase: string): void;
+}
+
+let obj: Person = {
+  name: "John",
+  age: 16,
+  occupation: "",
+  hello: function (phrase: string): void {
+    console.log(phrase);
+  },
+};
+```
+```js
+// Applying interface on class
+interface IPerson {
+  name: string;
+  age: number;
+  occupation: string;
+  hello(phrase: string): void;
+}
+
+class Person implements IPerson {
+  public name: string;
+  public age: number;
+  public occupation: string;
+  public company : string;  // class own variable
+
+  constructor(name: string, age: number, occupation: string, company : string) {
+    this.name = name;
+    this.age = age;
+    this.occupation = occupation;
+    this.company = company; // class own variable
+  }
+
+  hello(phrase: string): void {
+    console.log(phrase + " " + this.name);
+  }
+}
+
+const obj = new Person("Max", 21, "Developer");
+
+// OR
+
+const obj2: IPerson = {
+  name: "",
+  age: 0,
+  occupation: "",
+  hello: function (phrase: string): void {
+    console.log(phrase);
+  },
+};
+```
+
+4. You can extend interfaces
+
+```js
+interface IDepartment {
+  name: string;
+}
+
+interface ICollege extends IDepartment {
+  name: string;
+  collegeName: string;
+  className: string;
+}
+```
 
 ---
 
-## 📔Advanced Types
+### 📘Interfaces as functions
+
+```js
+type add = (n1: number, n2: number) => number; // (best one)
+
+//OR
+
+interface add {
+  (n1: number, n2: number): number; // anonymous function
+}
+
+var sum: add;
+
+sum = (a : number, b : number) => a + b;
+```
+### 📘Interfaces with Optional parameter
+
+```js
+interface ICollege {
+  name: string;
+  collegeName: string;
+  className?: string;
+}
+```
+
+---
 
 ### 📘Intersection Types
 * Intersection allows us to combine the other types
@@ -1037,7 +1183,9 @@ const e1: ElevatedEmployee = {
   privileges: ["create-server"],
 };
 ```
-### 📘More on Type Guards
+---
+
+### 📘Type Guards
 
 1. **For Primitives** : we use *typeof* like : string, number, boolean, symbol
 
@@ -1103,7 +1251,38 @@ function useVehicle(vehicle: **Vehicle**) {
 useVehicle(v1);
 useVehicle(v2);
 ```
+4. **For interfaces**
 
+```js
+interface Bird {
+  type: "bird";
+  flyingSpeed: number;
+}
+interface Horse {
+  type: "horse";
+  runningSpeed: number;
+}
+
+interface snake {
+  type: "snake";
+  crawlingSpeed: number;
+}
+type Animal = Bird | Horse | snake;
+
+function checkingSpeed(animal: Animal) {
+  switch (animal.type) {
+    case "bird":
+      console.log("flying speed is " + animal.flyingSpeed);
+      break;
+    case "horse":
+      console.log("running speed is " + animal.runningSpeed);
+      break;
+    case "snake":
+      console.log("crawling speed is " + animal.crawlingSpeed);
+      break;
+  }
+}
+```
 ---
 
 ### 📘Type Casting
