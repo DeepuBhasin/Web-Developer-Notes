@@ -987,6 +987,26 @@ console.log(libraryName);
     'hello' && 23 && null && 'jonas'    // null
     ```
 
+**Example**
+```js
+const statement = "Hello World";
+
+var firstLetter = statement ? statement.at(0) : statement;
+// OR
+var firstLetter = statement && statement.at(0);
+
+interface IOpenROReportData {
+  name: string;
+  id: number;
+}
+
+const apiData = {};
+
+var openROReportData = apiData ? apiData : ({} as IOpenROReportData);
+// OR
+var openROReportData = apiData || ({} as IOpenROReportData);
+```
+
 ---
 
 ## 📘Major Falsy Values

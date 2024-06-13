@@ -1254,20 +1254,20 @@ useVehicle(v2);
 4. **For interfaces**
 
 ```js
-interface Bird {
+interface IBird {
   type: "bird";
   flyingSpeed: number;
 }
-interface Horse {
+interface IHorse {
   type: "horse";
   runningSpeed: number;
 }
 
-interface snake {
+interface ISnake {
   type: "snake";
   crawlingSpeed: number;
 }
-type Animal = Bird | Horse | snake;
+type Animal = IBird | IHorse | ISnake;
 
 function checkingSpeed(animal: Animal) {
   switch (animal.type) {
@@ -1282,27 +1282,138 @@ function checkingSpeed(animal: Animal) {
       break;
   }
 }
+
+const snake: ISnake = {
+  type: "snake",
+  crawlingSpeed: 10,
+};
+
+const bird: IBird = {
+  type: "bird",
+  flyingSpeed: 10,
+};
 ```
 ---
 
-### 📘Type Casting
+### 📘DOM and Type Casting
 
-* Typecasting : helps typescript that some value is of specific type where typescript not able to detected by its own but you as developer know.
+**Typecasting** : Forcefully convert one data type to another
+
+1. **Typescript Example**
+
+```js
+// Simple ts example
+type combined = number | string;
+
+function add(a: combined, b: combined): combined {
+  if (typeof a === "string" || typeof b === "string") {
+    return a.toString() + b.toString();
+  }
+  return a + b;
+}
+
+const fullName = add("john", "doe") as string;
+fullName.split(" "); // after type casting then we get this split method
+```
+
+![Image](./images/type-casting-1.png)
+
+![Image](./images/type-casting-2.png)
+
+
+2. **DOM Example**
+
+* **Some examples of html dom elements**
+  1. HTMLInputElement
+  2. HTMLDivElement
+  3. HTMLParagraphElement
+  4. HTMLLabelElement etc
+
+* these dom elements we are getting in typescript because DOM Library and DOM.Iterable
+
+```js
+"lib": [
+  "DOM",      // because of this option
+  "ES6",
+  "DOM.Iterable",
+  "ScriptHost"
+]
+```
 
 ```js
 let inputElement = document.getElementById("#firstName")!; // refer to not null by using ! sign
-let inputElement = <HTMLInputElement>document.getElementById("#firstName")!; // type casting
-let inputElement = document.getElementById("#firstName")! as HTMLInputElement; // type casting
+
+let inputElement = <HTMLInputElement>document.getElementById("#firstName")!; // type casting (best in react)
+
+// OR
+
+let inputElement = document.getElementById("#firstName")! as HTMLInputElement; // type casting (best one in ts)
 
 inputElement.value = "Deep Singh";
 
-// or
+// OR
+
 let inputElement = document.getElementById("#firstName");
 
 if (inputElement) {
   (inputElement as HTMLInputElement).value = "Deep Singh";
 }
 ```
+
+---
+
+### 📘Index Type properties
+
+```js
+interface IErrorContainer {
+  id: string; // we cannot set number for id because id is also dynamic property in the interface
+  [props: string]: string;
+}
+
+let errorBag: IErrorContainer = {
+  id: "13243", // you cannot set number for id because id is also dynamic property in the interface
+  error: "Email is Valid",
+  userName: "UserName is Valid",
+};
+```
+---
+
+### 📘Function overload
+
+```js
+type combined = number | string;
+
+function add(a: combined, b: combined) {
+  if (typeof a === "string" || typeof b === "string") {
+    return a.toString() + b.toString();
+  }
+  return a + b;
+}
+
+const fullName = add("john", "doe") as string;
+fullName.split(" "); // after type casting then we get this split method
+
+// OR
+
+type combined = number | string;
+
+function add(a: string, b: string): string;
+function add(a: number, b: number): number;
+function add(a: string, b: number): string;
+function add(a: number, b: string): string;
+function add(a: combined, b: combined) {
+  if (typeof a === "string" || typeof b === "string") {
+    return a.toString() + b.toString();
+  }
+  return a + b;
+}
+
+const fullName = add("john", "doe");
+fullName.split(" ");
+
+```
+
+
 ---
 
 ## 📔Generics
