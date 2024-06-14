@@ -56,6 +56,16 @@ add(1, 3);
 
 ![Image](./images/two-type.png)
 
+6. Various types
+   1. string
+   2. boolean
+   3. number
+   4. undefined
+   5. null
+   6. object
+   7. Date
+   8. void
+
 ---
 ### 📘Environment Setup
 * Command for installing Typescript on Globally
@@ -1412,18 +1422,34 @@ const fullName = add("john", "doe");
 fullName.split(" ");
 
 ```
-
-
 ---
 
 ## 📔Generics
 
 ## 📘Creating a Generic Function
 * Generic Type : is a type which is kind of connected with some other type and really flexible regarding which exact type that other type is.
+* Best application use in Promises.
+
+
+1. Built-In Generic type
 
 ```js
+// Array of string
 const names : Array<string> = [];
 
+
+// Promise with generic
+let promise: Promise<string> = new Promise((resolve, reject) => {
+  setTimeout(() => resolve("done!"), 1000);
+});
+
+promise.then((value) => {
+  value.split(" ");
+});
+```
+
+2. Custom Generic type
+```js
 // 1. For Type
 type DataStorage<T> = {
   // here T is called place holder
@@ -1447,6 +1473,7 @@ let userStorage: DataStorage<User> = {
 };
 
 //2. For Functions
+// declaring generic types (we created for object type specific)
 function merge<T, U>(a: T, b: U) {
   return {
     ...a,
@@ -1454,21 +1481,69 @@ function merge<T, U>(a: T, b: U) {
   };
 }
 
-const userFn1 = merge<{ name: string }, { age: number }>(
-  { name: "Dp" },
+interface IT {
+  name: string;
+  hobbies: string;
+}
+interface IU {
+  age: number;
+}
+
+const userFn1 = merge<IT, IU>(
+  {
+    name: "Dp",
+    hobbies: "Study",
+  },
   { age: 29 }
 );
 
 // type script is intelligent enough that what parameter you are sending and where we have to bind it
 const userFn2 = merge({ name: "Dp" }, { age: 29 });
+console.log(userFn2.name);
+
+// For Class
+class AddArray<T> {             // for specific class AddArray<T extends string | boolean | number>
+  public arr: T[] = [];
+  public add(...items: T[]): void {
+    this.arr.push(...items);
+  }
+
+  public get(): T[] {
+    return this.arr;
+  }
+}
+
+const str = new AddArray<string>();
+str.add("a", "b", "c");
+console.log(str.get());
+
+const obj = new AddArray<object>();
+obj.add({ name: "a" }, { name: "b" }, { name: "c" });
+console.log(obj.get());
+
+const num = new AddArray<number>();
+num.add(1, 2, 3);
+console.log(num.get());
 ```
 
 ---
 
 ### 📘Working with Constraints (extends)
-* Make Generic placeholder for specific type
+* Make Generic placeholder for specific type (make specific generic type)
 
 ```js
+// error code
+function merge<T, U>(objA: T, objB: U) {
+  return {
+    ...objA,
+    ...objB,
+  };
+}
+// we are trying to merge 3 (number) as second parameter, even we not getting any error for this
+const mergeObj = merge({ name: "Deep", hobbies: ["sports"] }, 3);
+
+
+// correct code
 function merge<T extends object, U extends object>(objA: T, objB: U) {
   return Object.assign(objA, objB);
 }
@@ -1484,11 +1559,15 @@ console.log(mergeObj);
 ---
 
 ### 📘Another Generic Function
-* We are just care about that *datatype* or *custom datatype* which have *length* property nothing else.
+* Here we are just care about that *datatype* or *custom datatype* which have *length* property nothing else.
 ```js
+// Example For length
 interface Lengthy {
   length: number;
 }
+
+// if we do not provide lengthy interface then ts will never know that what data type is coming
+// T is like string | array which become worst if we write in this way
 
 function countAndDescribe<T extends Lengthy>(element: T): [T, string] {
   let describeElement = "Got no Value";
@@ -1499,12 +1578,44 @@ function countAndDescribe<T extends Lengthy>(element: T): [T, string] {
   }
   return [element, describeElement];
 }
-
+// string has length property
 countAndDescribe("Hello World");
+
+// Array has length property
 countAndDescribe(["Hello World"]);
+
+// Array has length property
 countAndDescribe([]);
+
+// Number does not has length property there it will create error
 countAndDescribe(2525);
+
+// Object does not has length property there it will create error
+countAndDescribe({name : "DP", age : "29"});
+
+// Example For function
+interface IToString {
+  toString: () => string;
+}
+
+function countAndDescribe<T extends IToString>(element: T): [T, string] {
+  console.log(element, element.toString());
+  return [element, element.toString()];
+}
+
+// string has toString function
+countAndDescribe("Hello World");
+
+// Array has toString function
+countAndDescribe(["Hello World"]);
+
+// Number does not has toString function there it will create error
+countAndDescribe({})(2525);
+
+// Object has toString function
+countAndDescribe({ name: "Hello World" });
 ```
+
 ---
 
 ### 📘The keyof Constraint
@@ -1522,6 +1633,39 @@ extractAndConvert({ name: "Dp" }, "name");
 // cause Error
 extractAndConvert({}, "name");
 ```
+
+---
+
+### 📘Utility types Partial & ReadOnly 
+
+```js
+// Partial Utility
+interface ICourse {
+  title: string;
+  description: string;
+  addedDate: Date;
+}
+
+function addCourse(title: string, description: string, addDate: Date): ICourse {
+  let data: Partial<ICourse> = {};
+
+  data.title = title;
+
+  data.description = description;
+
+  data.addedDate = addDate;
+
+  return data as ICourse; // <ICourse>data
+}
+
+// ReadOnly utility
+let names: Readonly<string[]> = ["John", "Jane"];
+names.push("Dp"); // cause error
+```
+---
+
+
+
 ### 📘Type Definition Files
 
 * It create a bridge between typescript file and javascript file
