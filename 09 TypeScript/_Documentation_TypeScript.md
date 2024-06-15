@@ -1636,7 +1636,7 @@ extractAndConvert({}, "name");
 
 ---
 
-### 📘Utility types Partial & ReadOnly 
+### 📘Utility types Partial & ReadOnly
 
 ```js
 // Partial Utility
@@ -1664,7 +1664,46 @@ names.push("Dp"); // cause error
 ```
 ---
 
+## 📔Decorators
 
+* Decorators are special pieces of code that you can attach to classes, methods, properties, or parameters. Think of them like stickers you can put on your code to give it extra abilities or behaviors.
+* Majorly use with classes only
+
+```js
+function Logger(constructor: Function) {
+  console.log("Logging the data");
+  console.log(constructor);
+}
+
+@Logger
+class Person {
+  name = "DP";
+  constructor() {
+    console.log("creating Object");
+  }
+}
+```
+---
+### 📘Creating Decorators with Decorators Factories1 (anonymous function)
+
+```js
+function Logger(LogString: string) {
+  return function (constructor: Function) {
+    console.log(LogString);
+    console.log("Logging the data");
+    console.log(constructor);
+  };
+}
+
+@Logger("This is Logger")
+class Person {
+  name = "DP";
+  constructor() {
+    console.log("creating Object");
+  }
+}
+```
+---
 
 ### 📘Type Definition Files
 
