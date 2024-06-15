@@ -60,7 +60,7 @@ module.exports= {
 7. Loaders
    1. CSS Loader
    2. SASS/SCSS Loader
-   3. JS Loaders
+   3. JS Loaders & Babel Loader
    4. File Loader (Loading Images)
    5. TypeScript Loader
 8. Multiple Entry Files
@@ -1022,7 +1022,7 @@ module.exports = {
 }
 ```
 
-## 📘3. Loader (JS)
+## 📘3. Loader (JS) & Babel Loader
 * by default **we don't** need any loader to load JS files
 * But If we to add latest feature of javascript on not fully advanced browsers in that case we use JS loader called **babel**.
 * It is compiler which convert Latest javascript code into browser compatible.
@@ -1064,7 +1064,22 @@ module.exports = {
     }
 }
 ```
+* babel.config.json
 
+```js
+{
+  "presets": ["@babel/preset-env"]
+}
+```
+* Package.json
+
+```js
+"build": "webpack --config webpack.config.js",
+```
+
+![Image](./images/babel-loader-1.png)
+
+![Image](./images/babel-loader-2.png)
 
 
 ## 📘4. Loader (File Loader (png, svg, jpg, gif files etc))

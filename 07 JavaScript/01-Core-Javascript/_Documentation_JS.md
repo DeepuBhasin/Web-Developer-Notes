@@ -86,6 +86,13 @@ function testFn() {
 }
 var text = "Hi World"; // it overwritten the value of text
 testFn();
+
+// Example 5 (However, only the declarations are hoisted, not the initializations.)
+function fn() {
+    age = 30;
+}
+let age;
+fn();
 ```
 
 ⚠️ Note
@@ -5691,7 +5698,9 @@ import 'regenerator-runtime/runtime'
 ```
 ---
 ## 📘Clean Code
+
 ![Image](./images/clean-code.png)
+
 ![Image](./images/clean-code-1.png)
 
 ---
