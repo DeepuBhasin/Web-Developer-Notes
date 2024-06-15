@@ -1,18 +1,19 @@
 ## 📘Information
 
-* If you want more information about particular plugin you must go onto official documentation always
 * Main Concept of Webpack : **Load all stuff from webpack rather than loading from different-different files in a single html file example Images, CSS files, Js Files, Json Files etc**
+* Webpack acts as a module bundler for JavaScript. Modules are individual pieces of code stored in separate files. To manage how these modules interact and execute within our application, we utilize import and export statements
 
 * Reference : [https://github.com/gauravsoni1/webpack-udemy](https://github.com/gauravsoni1/webpack-udemy)
 
 * Make Starting point for directory : [https://github.com/vp-online-courses/webpack-optimization-starter](https://github.com/vp-online-courses/webpack-optimization-starter)
+* If you want more information about particular plugin you must go onto official documentation always
 
 * To install in dev we use
 ```
 npm i --save-dev <package-name>
 npm install --save-dev <package-name>
 ```
-or 
+or
 
 ```
 npm install <package-name> -D
@@ -1155,6 +1156,8 @@ export default WorkImage;
 
 ## 📘5.Typescript Loader
 
+**Using Babel Loaders**
+
 * Helps to catch more bugs at **compile type**
 
 1. Packages names
@@ -1175,7 +1178,7 @@ module.exports = {
         path: path.resolve(__dirname, './dist'),
     },
     resolve: {
-        // this will help you the check import file extensions
+        //it will add the appropriate file extension at the end of the file based on what Webpack finds example ts or js file
         extensions: [".ts", ".js"]
     },
     module: {
@@ -1258,6 +1261,102 @@ console.log(sum(1, 2));
 </html>
 ```
 
+**Using Ts-Loader**
+1. Packages
+```
+npm i webpack webpack-cli typescript ts-loader
+```
+
+2. tsconfig.json
+
+```
+npm tsc --init
+```
+
+3. webpack.config.js
+```js
+const path = require("path");
+
+module.exports = {
+    entry: "./src/index.ts",
+    mode: "development",
+    output: {
+        filename: "bundle.js",
+        path: path.resolve(__dirname, "dist"),
+    },
+    module: {
+        rules: [
+            {
+                test: /\.tsx?$/,
+                use: "ts-loader",
+                exclude: /node_modules/,
+            },
+        ],
+    },
+    resolve: {
+        extensions: [".ts", ".js"],
+    },
+}
+```
+
+3. Ts-files (in src folder)
+```js
+// IPots.ts
+export interface IPost {
+  id: number;
+  title: string;
+  body: string;
+
+  showData(): void;
+}
+
+
+// Post.ts
+import { IPost } from "./index";
+
+class Post implements IPost {
+  constructor(public id: number, public title: string, public body: string) {}
+
+  showData() {
+    console.log(this.id, this.title, this.body);
+  }
+}
+
+const post = new Post(1, "title", "body");
+
+post.showData();
+
+
+// index.ts
+export * from "./IPost";
+export * from "./Post";
+```
+
+* index.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="./dist/bundle.js"></script>
+</body>
+
+</html>
+```
+
+* Package.json
+```js
+"scripts": {
+    "build": "webpack --config webpack.config.js"
+},
+```
 ---
 
 ## 📔CSS-in-JS
@@ -1518,7 +1617,7 @@ module.exports = {
 * it will help you to read your code in development mode
 * It will help you to redirect to code file
 * It also increase the class-name readability
-
+* It while in webpack it will create source code of only bundled files (weather its a single file or multiple files) while in TypeScript it will create source map of each ts-files which we are creating in folder.
 1. Package Name
 
 ```
@@ -2679,6 +2778,9 @@ module.exports = {
 ## 📘1. Live Server
 * it will run our application as **live server**
 * When ever we change any thing in the file and then save the file, it will reload automatically.
+* We can achieve by using two ways
+  * Without files (it will store every thing into memory)
+  * With files, written below (it will not store every thing into memory)
 
 1. Package need to install
 ```

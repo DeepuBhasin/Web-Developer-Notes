@@ -123,7 +123,8 @@ npm i lite-server
 
 ```js
 "scripts": {
-  "start": "lite-server"
+  "start" : "npx tsc -w"
+  "build": "lite-server",
 }
 ```
 
@@ -727,6 +728,7 @@ const map = new Map() // will cause error
 
 * Create source map files for emitted JavaScript files, this will help to debug our code on the browser
 * This files help use for *Debugging and Development* like for example *just in case we want to see js files in our browser (source tab) in that case we are not able to understand that code because it get minified or compiled version*
+* This will create source map of each ts-files which we are creating in folder, while in webpack it will create source code of only bundled files (weather its a single file or multiple files)
 
 ```js
 "sourceMap": true
@@ -1140,9 +1142,10 @@ sum = (a : number, b : number) => a + b;
 interface ICollege {
   name: string;
   collegeName: string;
-  className?: string;
+  className?: string;    // className : string | undefined (is same thing)
 }
 ```
+⚠️
 
 ---
 
@@ -1705,6 +1708,101 @@ class Person {
 ```
 ---
 
+### 📘Namespace for exporting files (not good one)
+1. **By using namespace**
+* files
+```js
+// IPots.ts (interface file)
+namespace App {
+  interface IPost {
+    id: number;
+    title: string;
+  }
+
+  export class Post {
+    id: number;
+    title: string;
+    constructor(id: number, title: string) {
+      this.id = id;
+      this.title = title;
+    }
+  }
+}
+
+// Post.ts (ts file)
+
+// this is use to provide path
+///<reference path="IPost.ts"/>
+
+namespace App {
+  const post = new Post(1, "Hello");
+  console.log(post);
+}
+
+```
+* tsconfig.json
+```js
+"module": "AMD",
+"rootDir": "./src",
+"outFile": "./dist/bundle.js",
+"outDir": "./dist",
+"lib": [
+  "ES6",
+  "DOM",
+  "DOM.Iterable",
+  "ScriptHost"
+],
+"target": "es2016"
+```
+* package.json
+
+```js
+"scripts": {
+  "build": "npx tsc -w",
+  "start": "lite-server"
+},
+```
+2. **By using EsModule :** 
+   1. Without bundler example below (not a good way)
+   2. With bundler using ts loaders (already written in webpack documentation) (best one)
+
+* tsconfig.json 
+```js
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "es6",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  },
+  "include": ["src"]
+}
+```
+* index.html
+
+```html
+<script type="module" src="./dist/index.js"></script>
+```
+![Image](./images/import-export.png)
+
+### 📘TS-Loader in webpack
+
+1. **ts-loader** is use to convert ts files into js files.
+2. **typescript** is use to understand typescript code.
+3. this will install into global.
+```
+npm install -g typescript ts-node
+```
+4. This will install into local dependency of project.
+```
+npm install typescript ts-node
+```
+
+
+---
 ### 📘Type Definition Files
 
 * It create a bridge between typescript file and javascript file
