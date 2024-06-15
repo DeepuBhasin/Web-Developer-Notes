@@ -1081,6 +1081,8 @@ module.exports = {
 
 ![Image](./images/babel-loader-2.png)
 
+**⚠️ Note :** you can include this bundled file without using **type="module"**
+
 
 ## 📘4. Loader (File Loader (png, svg, jpg, gif files etc))
 
