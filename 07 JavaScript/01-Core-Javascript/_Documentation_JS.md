@@ -5341,6 +5341,8 @@ import add from "./ShoppingCart.js"
 
 addToCart('bread', 3);
 
+console.log(ShoppingCart);
+
 console.log(price);
 console.log(tq);
 
