@@ -132,14 +132,14 @@ h1 {
 
 **2. Advanced Selectors**
 
-| Sr No | Name                              | Selection Criteria                                                                        |
-| ----- | --------------------------------- | ----------------------------------------------------------------------------------------- |
-| 6     | Attribute Selectors               | input\[type="text"] will select on  the basis of attribute                                |
-| 7     | Nested Element                    | div p (selecting  all p element which exist in div)                                       |
-| 8     | Direct Child                      | div > p (it will select only those elements which are direct)                             |
-| 9     | Adjacent Selectors (like sibling) | h1 + p (it will select all only those p elements which are immediately after h1 elements) |
-| 10    | Pseudo-Classes                    | : (colon symbol)                                                                          |
-| 11    | Pseudo Element                    | :: (double colon) ,   it will create new element after or before the selected element     |
+| Sr No | Name                              | Selection Criteria                                                                                          |
+| ----- | --------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| 6     | Attribute Selectors               | input\[type="text"] will select on  the basis of attribute                                                  |
+| 7     | Nested Element                    | div p (selecting  all p element which exist in div)                                                         |
+| 8     | Direct Child                      | div > p (it will select only those elements which are direct)                                               |
+| 9     | Adjacent Selectors (like sibling) | h1 + p (it will select all only those p elements which are immediately after h1 elements)                   |
+| 10    | Pseudo-Classes                    | : (colon symbol)  select on the basis of state in which state element it is example hover, active state etc |
+| 11    | Pseudo Element                    | :: (double colon) ,   it will insert new element after or before the selected element                       |
 
 
 1. **Attribute Selector**
@@ -383,6 +383,17 @@ li:hover {
 
 
    2. **::first-line or ::first-letter**
+   3. Other
+      ```css
+      ::selection{
+        background-color : black;
+        color : #fff;
+      }
+
+      li::marker{
+        color : red;
+      }
+      ```
 
 ---
 
