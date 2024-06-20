@@ -14,6 +14,16 @@
 }
 /* if first font  does not exist then it will check for next and so on... */
 ```
+9. Intrinsic Sizing Vs Extrinsic Sizing
+```css
+div {
+    width : 100px;          /* This is Intrinsic */
+}
+
+div {
+    width : 100% or auto    /* This is Extrinsic*/
+}
+```
 
 ---
 
@@ -24,7 +34,7 @@
 3. Elements : is entire line (these are components)
 4. Attribute : Are use to alter the behavior of elements
 5. Block/Inline element
-   * **Block Element** : Which takes **100% width** example **form, div, header, footer, section, aside, nav, main, article or all Semantic tags**
+   * **Block Element** : Which takes **100% width or auto width ** example **form, div, header, footer, section, aside, nav, main, article or all Semantic tags**
    * **InLine Element** : which takes **content width** example **a , span, button, all inputs**
    * **⚠️Note :** To check the weather element is block or inline use **Border Style Property**
 
@@ -141,14 +151,29 @@ h1 {
         background-color: red;
     }
 
-    /* Selecting all elements which contains target="_blank" attribute */
+    /* Selecting all elements which has exact target="_blank" attribute */
     a[target="_blank"] {
         background-color: skyblue;
     }
+    
+    /* all attribute which contains google word */
+     a[href*="google"] {
+        background-color: green;
+    }
+
+    /* all attribute which contains google word at starting*/
+     a[href^="https"] {
+        background-color: yellow;
+    }
+
+    /* all attribute which contains google word at end */
+     a[href$=".com"] {
+        background-color: purple;
+    }
 </style>
-<a href="#">Click Here</a>
-<a href="#" target="_self">Click Here</a>
-<a href="#" target="_blank">Click Here</a>
+<a href="www.google.com">Click Here</a>
+<a href="http://www.google.com" target="_self">Click Here</a>
+<a href="https://www.google.com" target="_blank">Click Here</a>
 ```
 
 
@@ -231,7 +256,8 @@ h1 {
 ```
 
 5. **Pseudo-Classes**
-
+* **:nth-child()** selects items from a general group of elements.
+* **:nth-of-type()** selects items from a specified group of elements.
 ```html
 <style>
 /*Selecting First element*/
@@ -276,6 +302,8 @@ li:nth-child(3n+7) {
 li:hover {
     color: green;
 }
+
+/* Elect  */
 </style>
 
 <ul>
@@ -506,8 +534,22 @@ body {
 ---
 
 ## 📘Dimensions
-1. Height : px/auto
-2. width : px/%
+1. Height : px, auto
+2. width : Intrinsic Sizing Vs Extrinsic Sizing
+   1. Extrinsic : controlling with manually.
+   ```css
+    div {
+        width : 100px;          /* This is Intrinsic */
+    }
+   ```
+   2. Intrinsic : controlling width by browser.
+       1. min-content : take width which has longest word
+       2. max-content : whole statement
+       3. auto
+       4. fit-content
+    
+
+
 
 ---
 
@@ -1411,4 +1453,34 @@ body {
     justify-content: center;
     align-items: center;
 }
+```
+
+### 📘Basic BoilerPlate
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./style.css">
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+</body>
+
+</html>
 ```

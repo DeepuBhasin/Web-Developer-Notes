@@ -36,6 +36,12 @@ npm i --save lodash jquery validate.js toaster bootstrap
 "build" : "webpack --config=webpack.config.js --mode=development"
 ```
 
+* To check global package install in your system
+```
+npm ls -g --depth 0
+```
+
+
 * Concept of ("\*\*/\*") : This is a wildcard pattern often used in file path patterns. Here's what it means:
   1. /\*\*/: Matches any directory and any subdirectories recursively. The double asterisk (**) matches zero or more directories.
   2. \*: Matches any file within those directories.

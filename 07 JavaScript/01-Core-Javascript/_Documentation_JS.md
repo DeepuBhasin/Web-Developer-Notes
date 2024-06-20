@@ -570,9 +570,13 @@ console.log(obj.firstName)  // Dp
 
 // accessing Symbol Value
 console.log(obj[firstName]) // 'Deepinder'
+
+for (const key in obj) {
+    console.log(key);      // firstName only 
+}
 ```
 
-* **Symbol are not iterable **, that means if you loop over an object with a for loop.
+* **Symbol are not iterable**, that means if you loop over an object with a for loop.
 
 * **Magic Strings :** Strings that have a special meaning or usage in your program. This makes your program fragile, easily susceptible to bugs.
 * For Global use, we create **Global variables** with **Symbol.for** to avoid *collision* and *stop redundancy*, example you might have the case where you want *two Symbols which actually share the same ID*.
@@ -606,7 +610,7 @@ console.log(person["age"])          // 32
 console.log(person[ageSymbol1]);    // 30
 ```
 
-**Well-Known Symbols :** Symbols already built into the javascript engine, used by the engine for certain tasks.
+**Well-Known Symbols :** Symbols already built into the javascript engine, used by the engine for certain tasks. (you can check more about for md docs)
 
 ---
 
@@ -2936,6 +2940,8 @@ function getData(condition, time) {
 }
 
 const apiData = getData(true, 2000);
+
+// 
 ```
 
 
@@ -2976,6 +2982,22 @@ fetch('https://restcountries.com/v3.1/name/indiassss')
 .then(result => result.json())
 .then(response => console.log(response))
 .catch(error => console.log(error));
+
+
+// another way
+function promise() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            reject('done')
+        }, 1000)
+    })
+}
+
+promise().then(function (e) {
+    console.log(e);
+}, function (e) {
+    console.log(e);
+})
 ```
 ---
  ## 📘Finally Method
@@ -4236,6 +4258,7 @@ for(const name in names) {
 ```
 ## 📘 Iterators
 * Iterators are basically *all objects* that know how access values in a collection of one at a time for example *array is such an iterator*, that means yo can loop through it and has a collection of objects and it know to output them one after another. You can create your own objects with your own iterator logic which doesn't necessarily means that you only have array where user enters numbers or what ever he want to output one after another, you might have an object where you have a completly different logic.
+* Iterators automatically registered under for-of, for-in etc loops using iterator, that is the reason its iterate.
 
 * **Protocol :** Rules for how to exchange information
 * **Iteration Protocol :** The information that must be provided by an object to let itself be iterated over.
@@ -4269,9 +4292,14 @@ console.log(iterator.next());
 ---
 ## 📘Iterable and Symbol.Iterable
 
-* **iterable :** An object that has the expected function which returns an iterator.
+* **iterable :** Iterator is an object that has the expected function which returns an iterator.
 
 ```javascript
+// Custom iterator
+let numbers = [1, 2, 3];
+let itfn = numbers[Symbol.iterator]();
+console.log(itfn.next());  // {done : false , value : 1}
+
 // concept of iterator in javascript
 let numbers = {
     [Symbol.iterator] : function () {
