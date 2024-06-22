@@ -1,4 +1,4 @@
-## 📘Information
+### 📘Information
 1. HTML : Content Display/ Structure
 2. CSS : Style & Design
 3. Always follow Separation of concern like write css in css files and js in js files for good practice
@@ -17,17 +17,17 @@
 9. Intrinsic Sizing Vs Extrinsic Sizing
 ```css
 div {
-    width : 100px;          /* This is Intrinsic */
+    width : auto    /* This is Intrinsic*/
 }
 
 div {
-    width : 100% or auto    /* This is Extrinsic*/
+    width : 100px;  /* This is Extrinsic  */
 }
 ```
 
 ---
 
-# 📔Html
+## 📔Html
 
 1. Basic Structure : html, head, title, body and extension
 2. Tags : refer to individual tags like pair or un-pair tag
@@ -70,15 +70,15 @@ div {
 
 
 
-# 📔CSS
+## 📔CSS
 
-## 📘How we select and style element
+### 📘How we select and style element
 
 ![Syntax](./images/syntax.png)
 
 ---
 
-## 📘Various types of CSS
+### 📘Various types of CSS
 
 1. Inline
 2. Internal
@@ -86,7 +86,7 @@ div {
 
 ---
 
-## 📘Styling-Text
+### 📘Styling-Text
 * Serif : Has Edges
 * Sans Serif : has not Edges (best one)
 
@@ -102,7 +102,7 @@ h1 {
 ```
 ---
 
-## 📘Aligning Only Text
+### 📘Aligning Only Text
 
 * it will only align the text not the other elements like div etc
 
@@ -117,29 +117,29 @@ h1 {
 
 ---
 
-## 📘Selectors
+### 📘Selectors
 
 **1. Simple Selectors**
 
-| Sr No | Name               | Selection Criteria                  |
-| ----- | ------------------ | ----------------------------------- |
-| 1     | Universe Selector  | * (asterisk symbol)                 |
-| 2     | Class Selector     | . (dot symbol)                      |
-| 3     | id Selector        | # (hash symbol)                     |
-| 4     | Element Selector   | name of element (body, p, h1)       |
-| 5     | Multiple Selectors | h1, h2, h3, p, li {  color: green;} |
+| Sr No | Name               | Selection Criteria                                                                                           |
+| ----- | ------------------ | ------------------------------------------------------------------------------------------------------------ |
+| 1     | Universe Selector  | * (asterisk symbol)                                                                                          |
+| 2     | Class Selector     | . (dot symbol)                                                                                               |
+| 3     | id Selector        | # (hash symbol)                                                                                              |
+| 4     | Element Selector   | name of element (body, p, h1)                                                                                |
+| 5     | Multiple Selectors | h1, h2, h3, p, li {  color: green;} (very use full when you want to write single css for multiple selectors) |
 
 
 **2. Advanced Selectors**
 
-| Sr No | Name                              | Selection Criteria                                                                                          |
-| ----- | --------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| 6     | Attribute Selectors               | input\[type="text"] will select on  the basis of attribute                                                  |
-| 7     | Nested Element                    | div p (selecting  all p element which exist in div)                                                         |
-| 8     | Direct Child                      | div > p (it will select only those elements which are direct)                                               |
-| 9     | Adjacent Selectors (like sibling) | h1 + p (it will select all only those p elements which are immediately after h1 elements)                   |
-| 10    | Pseudo-Classes                    | : (colon symbol)  select on the basis of state in which state element it is example hover, active state etc |
-| 11    | Pseudo Element                    | :: (double colon) ,   it will insert new element after or before the selected element                       |
+| Sr No | Name                              | Selection Criteria                                                                                                                                                                                                                                                                                                                    |
+| ----- | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 6     | Attribute Selectors               | **input\[type="text"]** will select on  the basis of attribute                                                                                                                                                                                                                                                                        |
+| 7     | Nested Element                    | 1. **div p** (selecting  all p element which exist in div) <br/> 2. **p .my-class** (select all elements which has my-class in p element)                                                                                                                                                                                             |
+| 8     | Direct Child                      | **div > p** (it will select only those elements which are direct)                                                                                                                                                                                                                                                                     |
+| 9     | Adjacent Selectors (like sibling) | 1. **h1 + p**  (Adjacent selector, it will select all only those p elements which are immediately after h1 element)  <br/> 2. **h1 ~ p** (Subsequent sibling selector,  it will select all p elements which are after h1 element) <br/> 3. **p.my-class** (Compound selector, it will select all p elements which has my-class class) |
+| 10    | Pseudo-Classes                    | : (colon symbol)  select on the basis of state in which state element it is example hover, active state etc                                                                                                                                                                                                                           |
+| 11    | Pseudo Element                    | :: (double colon) ,   it will insert new element after or before the selected element                                                                                                                                                                                                                                                 |
 
 
 1. **Attribute Selector**
@@ -155,7 +155,7 @@ h1 {
     a[target="_blank"] {
         background-color: skyblue;
     }
-    
+
     /* all attribute which contains google word */
      a[href*="google"] {
         background-color: green;
@@ -232,28 +232,59 @@ h1 {
 
 4. **Adjacent Selector** (Like a sibling)
 
-```html
-<style>
-    div+p {
-        background-color: #f4f4f4;
-    }
-</style>
-<div>
-    <!-- It will not work here because its a child not a sibling -->
+    **1. Select Immediately sibling**
+    ```html
+    <style>
+        div+p {
+            background-color: #f4f4f4;
+        }
+    </style>
+    <div>
+        <!-- It will not work here because its a child not a sibling -->
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, inventore.</p>
+        <ul>
+            <li>
+                <p>item 1</p>
+            </li>
+            <li>item 2</li>
+            <li>item 3
+            </li>
+        </ul>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, inventore.</p>
+    </div>
+    <!-- It will work here only -->
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, inventore.</p>
-    <ul>
-        <li>
-            <p>item 1</p>
-        </li>
-        <li>item 2</li>
-        <li>item 3
-        </li>
-    </ul>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, inventore.</p>
-</div>
-<!-- It will work here only -->
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, inventore.</p>
-```
+    ```
+    **2. Select All Sibling**
+
+    ```html
+    <style>
+            div~p {
+                background-color: red;
+            }
+        </style>
+        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt impedit debitis tempora explicabo dicta
+            commodi magnam et, repudiandae quod voluptas.</div>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos, laboriosam.</p>
+        <div>
+            <!-- It will not work here because its a child not a sibling -->
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, inventore.</p>
+            <ul>
+                <li>
+                    <p>item 1</p>
+                </li>
+                <li>item 2</li>
+                <li>item 3
+                </li>
+            </ul>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, inventore.</p>
+        </div>
+        <!-- It will work here only -->
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, inventore.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, inventore.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, inventore.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, inventore.</p>
+    ```
 
 5. **Pseudo-Classes**
 * **:nth-child()** selects items from a general group of elements.
@@ -397,17 +428,79 @@ li:hover {
 
 ---
 
-## 📘Specificity (Associativity)
+### 📘Specificity (Associativity)
+1. Order & position base (positioning of internal css and external css)
+```css
+button  {
+    color : red;
+}
 
-**id > Class > Element**
+button {
+    color : blue;
+}
+```
+
+2. Selector base
 
 ![Associativity](./images/associativity.png)
 
+```html
+<!-- Good Example (points example of from leela web dev)-->
+<style>
+    /* Specificity  according to ascending numbers */
+    /* 1 */
+    button {
+        color: red;
+    }
+
+    /* 3 */
+    body button.btn {
+        color: yellow;
+    }
+
+    /* 4 */
+    body button[class="btn"] {
+        color: orange;
+    }
+
+    /* 5  (this will apply)*/
+    html body button[class="btn"] {
+        color: pink;
+    }
+
+    /* 2 */
+    .btn {
+        color: blue;
+    }
+</style>
+<button class="btn">Click Me</button>
+```
+
+
 ---
 
-## 📘Inheritance
+### 📘Inheritance
+
+Inheritance like be if we apply font property on parent element then child element will automatically get property (majorly font related properties) example if we apply color property on html then html become parent body become child then other element become grand child and so on. In below example red color will inherit by its all child automatically.
+
+```html
+<!-- Simple example of inheritance -->
+<style>
+    .container {
+        color: red;
+    }
+</style>
+<div class="container">
+    <h1>Hello World</h1>
+    <p class="text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Expedita, repellat?</p>
+</div>
+```
+
+**⚠️Note :** Some of the style properties are applied by the browser to various elements, like a div element which has a display: block property, coming from the user agent stylesheet.
+
 
 1. Inheritance by using **body element**
+
 ![Inheritance](./images/inheritance.png)
 
 ```css
@@ -435,9 +528,62 @@ body {
 ```
 ![UniversalProperty](./images/inheritance-3.png)
 
+
+3. inherit, initial & unset properties
+
+* **inherit** : it will inherit property from its parent.
+* **initial** : it will set to default values.
+* **unset** : It will do two things: first, it will take all inheritable values that are going to be inherited, and second, values that are not inheritable will be reset to their initial/default state.
+* **revert** : it will take the value from the browser stylesheet.
+```html
+<style>
+    .container {
+        color: red;
+        border: 4px solid grey;
+        padding: 20px;
+    }
+
+    .text {
+        box-sizing: border-box;
+        /* border Property get inherited */
+        border: inherit;
+        padding: inherit;
+    }
+
+    .container button {
+        all: unset;
+    }
+
+    .container .rvt button {
+        all: unset;
+        background-color: revert;
+    }
+</style>
+<div class="container">
+    <h1>Hello World</h1>
+    <p class="text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Expedita, repellat?</p>
+    <button onclick="alert('Hello World')">Click me</button>
+    <div class="rvt">
+        <button>Click me again</button>
+    </div>
+</div>
+```
+
+![Image](./images/inheritance-property.png)
+
+1. To Reset value
+
+```css
+.text {
+    /* it will reset property to initial */
+    color : initial;
+}
+```
+
+
 ---
 
-## 📘Color
+### 📘Color
 * We always use **hexadecimal** colors, and rgb when we need **transparency**
 ```css
 body {
@@ -461,7 +607,7 @@ body {
 ---
 
 
-## 📘Background
+### 📘Background
 
 ```css
 body {
@@ -472,7 +618,7 @@ body {
 }
 ```
 
-## 📘Box-shadow
+### 📘Box-shadow
 
 ```css
 /*offset-x | offset-y | blur-radius | spread-radius | color*/
@@ -482,7 +628,7 @@ box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.3);
 
 ---
 
-## 📘Box-Model and Box-sizing
+### 📘Box-Model and Box-sizing
 
 ![BoxModel](./images/box-model.png)
 
@@ -544,7 +690,7 @@ body {
 2. When we have two margins that occupied the same space only one of them is actually visible on the page and that is usually the larger of the two and this phenomena is called **collapsing margins** lets say one element has 40px margin-top and one has 20px margin bottom then distance between two margin will be 40px not 65px
 ---
 
-## 📘Dimensions
+### 📘Dimensions
 1. Height : px, auto
 2. width : Intrinsic Sizing Vs Extrinsic Sizing
    1. Extrinsic : controlling with manually.
@@ -558,13 +704,13 @@ body {
        2. max-content : whole statement
        3. auto
        4. fit-content
-    
+
 
 
 
 ---
 
-## 📘Units
+### 📘Units
 
 * px
 * % : to parent element
@@ -648,7 +794,7 @@ body {
 
 
 
-## 📘Position values
+### 📘Position values
 
 [Position-Reference](https://www.youtube.com/watch?v=MxEtxo_AaZ4)
 
@@ -667,7 +813,7 @@ body {
 
 ---
 
-## 📘Page-Layouts
+### 📘Page-Layouts
 
 ![layout](./images/layout.png)
 
@@ -1044,7 +1190,7 @@ repeat(3, minmax(400px, 1fr)); (for fixing the minimum sizes)
 
 
 
-## 📘Max-width & Min-Width
+### 📘Max-width & Min-Width
 
 * Width create horizontal scrollbar
 
@@ -1119,7 +1265,7 @@ in this case our image wil not get bigger in size up to 600px and will not get s
 
 ---
 
-## 📘Responsive Design
+### 📘Responsive Design
 
 Using HTML/CSS to make a website or app layout adapt to different screen size
 
@@ -1195,7 +1341,7 @@ Using HTML/CSS to make a website or app layout adapt to different screen size
 ```
 ---
 
-## 📘CSS-Variables
+### 📘CSS-Variables
 * Only support by latest browsers only
 ```css
 /* the variable which are define in root can access in any element like html body etc */
@@ -1213,7 +1359,7 @@ body {
 ```
 ---
 
-## 📘keyframe
+### 📘keyframe
 ```html
 <style>
     body {
@@ -1332,7 +1478,7 @@ Example Making a loader
 ---
 
 
-## 📘Transitions
+### 📘Transitions
 * it occurs only on events like hover, active etc
 
 
@@ -1377,7 +1523,7 @@ Example Making a loader
 ```
 ---
 
-## 📘Transform
+### 📘Transform
 * Change Shapes or rotate
 ```html
 <!-- transition + transform -->
@@ -1427,7 +1573,7 @@ Example Making a loader
 
 ---
 
-## 📘Center Div
+### 📘Center Div
 
 1. using margin auto
 
