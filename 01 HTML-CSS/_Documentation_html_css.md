@@ -926,14 +926,62 @@ In Previous years design created using table elements and layout history is writ
 
 ![layout](./images/layout.png)
 
-1. **Float Concept** : by using float the element will out of flow from normal flow just like absolute position concept
+1. **Float Concept** : 
+   1. Reference [Link](https://www.javatpoint.com/css-float)
+   2. The CSS float property is a positioning property. It is used to push an element to the left or right, allowing other element to wrap around it. It is generally used with images and layouts.
+   3. by using float the element will out of flow from normal flow just like absolute position concept.
+   4. Main difference between float and position is float always take some space but position will not, it like floating image around the text same as in text book page image.
 
 ![FloatExample](./images/float.png)
 
 Solution For this example : by clear float from both the sides
 
 ```html
-<!-- Example 1 -->
+<!-- Example-1 -->
+<style>
+    .image-1,
+    .image-2 {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        border: 1px solid grey;
+    }
+
+    .image-1 {
+        float: left;
+    }
+
+    .image-2 {
+        float: right;
+    }
+
+    .clear {
+        clear: both;
+    }
+</style>
+<div class="container">
+    <div class="image-1"></div>
+    <div class="image-2"></div>
+
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam suscipit ab deserunt officiis aperiam tempore
+        odio vitae asperiores eos quaerat nam neque ipsum voluptas, numquam architecto libero facere reprehenderit
+        rem.</p>
+    <p class="clear">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse cumque expedita facere
+        perspiciatis illo.
+        Totam quis aspernatur sapiente accusamus fuga dolorum soluta dicta perferendis molestias saepe. Corporis
+        odio harum quod.</p>
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maxime pariatur voluptatibus, placeat
+        iusto ex enim
+        adipisci in voluptates unde magni laborum nemo quasi vero fuga sunt perspiciatis. Est, ipsam rerum.</p>
+    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae, quae dolorum numquam, odio, consectetur
+        ullam obcaecati ducimus veniam omnis impedit error sunt fuga aliquid. Placeat minus perspiciatis aliquam
+        atque beatae!</p>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. A quam iste eos placeat! Soluta quae harum dolor
+        dolore eum voluptatem, laborum amet, culpa fuga, quas ducimus ipsam quidem enim laudantium.</p>
+</div>
+
+
+<!-- Real Application Example 1 -->
  <style>
     header {
         background-color: red;
@@ -963,7 +1011,7 @@ Solution For this example : by clear float from both the sides
 </header>
 
 
-<!-- Example 2 -->
+<!-- Real Application Example 2 -->
  <style>
     header {
         background-color: red;
