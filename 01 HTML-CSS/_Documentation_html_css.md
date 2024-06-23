@@ -781,12 +781,30 @@ div {
 ---
 ## 📘Block-Inline
 
+In Previous years design created using table elements and layout history is written below
+
+| No  | years   | css version    | Css Properties                   |
+| --- | ------- | -------------- | -------------------------------- |
+| 1   | 1996    | css1 introduce | floats property                  |
+| 2   | 1998    | css2 introduce |                                  |
+| 3   | 2010    | css2           | Responsive web designing         |
+| 4   | 2012    | css3           | Media Queries, Flex              |
+| 5   | 2017    | css3           | Grid                             |
+| 6   | 201   9 | css3           | Intrinsic web design             |
+| 7   | 2021    | css3           | container                queries |
+
+<br/>
+
+
+
+
 * **Block Elements :**
-1. Are those elements which takes whole width example **li, div, p, h1** and create line breaks after them.
+
+1. Are those elements which takes **whole** width example **li, div, p, h1** and create line breaks after them.
 2. We can apply margin, padding, positions like top, right etc.
 
 ```css
-#box{
+#box {
     display : block;
 }
 ```
@@ -794,8 +812,10 @@ div {
 
 
 * **Inline Elements :**
+
 1. Are those elements which does not take whole width instead only takes element/content width example **img, a, strong**
-2. We cannot apply margin-top/bottom, padding-top/bottom, positions like top, right etc
+2. We cannot set width height for these elements.
+3. We cannot apply margin-top/bottom, padding-top/bottom, positions like top, right etc
 
 ```css
 #box {
@@ -820,9 +840,68 @@ div {
 
 **⚠️Note :** **img** elements are inline-block elements, so margie-top/bottom & padding-top/width also width-height will work on it
 
+
+* **Table, table-row, table-cell**
+
+```html
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        border: 1px solid #000;
+    }
+
+    td {
+        padding: 10px;
+        border: 1px solid black;
+
+    }
+</style>
+<table>
+    <tr>
+        <td>Row 1, Cell 1</td>
+        <td>Row 1, Cell 2</td>
+    </tr>
+    <tr>
+        <td>Row 2, Cell 1</td>
+        <td>Row 2, Cell 2</td>
+    </tr>
+</table>
+
+<!-- Below is the same example of table -->
+<style>
+    .table {
+        display: table;
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .row {
+        display: table-row;
+    }
+
+    .cell {
+        display: table-cell;
+        padding: 10px;
+        border: 1px solid black;
+    }
+</style>
+
+<div class="table">
+    <div class="row">
+        <div class="cell">Row 1, Cell 1</div>
+        <div class="cell">Row 1, Cell 2</div>
+    </div>
+    <div class="row">
+        <div class="cell">Row 2, Cell 1</div>
+        <div class="cell">Row 2, Cell 2</div>
+    </div>
+</div>
+```
+![Image](./images/display-table.png)
+
 ---
-
-
 
 ### 📘Position values
 
