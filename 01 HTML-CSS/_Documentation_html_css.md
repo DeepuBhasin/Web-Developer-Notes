@@ -24,6 +24,9 @@ div {
     width : 100px;  /* This is Extrinsic  */
 }
 ```
+10. Some Extensions to determines css font properties
+    1.  What font - font finder
+    2.  Font finder (best one)
 
 ---
 
@@ -597,6 +600,9 @@ body {
     /* opacity : 0.6        values from 0 - 1 */
     background-color: rgba(255, 0, 0, 0.6);
 
+    /* OR */
+    background-color: rgba(255, 0, 0, 60%);
+
     /* Hexadecimal Notation*/
     color: #474638;
 }
@@ -662,7 +668,7 @@ For Height
     /* removing margin from view port/ Browser Window*/
     margin: 0;
 
-    /* setting line height */
+    /* setting line height (it will take 150% of font-size by inheritance, don't allow line-height into px)*/
     line-height: 1.5;
 }
 ```
@@ -711,33 +717,57 @@ body {
 ---
 
 ### 📘Units
+* unit less
 
-* px
-* % : to parent element
+```css
+div {
+    font-size : 14px;
+    /* unit less, it will become 28px automatically by font property inheritance concept */
+    line-height : 2; 
+}
+```
+
+* Pixel (px) : fixed value.
+* Percentage (%) : depend upon parent element properties.
 * em : font size of parent element. (font size of the parent, in the case of typographical like font-size, and font size of the element itself, in the case of the other properties like width)
 
 ```html
- <style>
-    #container {
-        font-size: 10px;
+<style>
+    html {
+        /* default value of font size */
+        font-size: 16px;
     }
 
-    #btn {
-        display: inline-block;
-        /* This io depend upon parent */
+    body {
+        font-size: 2em;
+    }
+
+    #container {
+        /* This is depend upon parent, now become 24px */
+        font-size: 1.5em;
+    }
+
+    #btn-1 {
+        /* This io depend upon parent, now become 48px */
         font-size: 2em;
 
-        /* This is depend upon itself */
+        /* This is depend upon itself, now become 480px */
         width: 10em;
+    }
 
-        /* This is depend upon root */
+    #btn-2 {
+        /* This is depend upon root, now become 160px */
         width: 10rem;
     }
-</>
- <div id="container">
-    <button id="btn">Click Button</button>
+</style>
+<div id="container">
+    <h1>Hello World</h1>
+    <button id="btn-1">Click Button</button>
+    <button id="btn-2">Click Button</button>
 </div>
 ```
+![Image](./images/units.png)
+
 
 * rem : to font size of root element (mostly use this and belongs to  root element : html)
 * vw : to 1% of viewport width
