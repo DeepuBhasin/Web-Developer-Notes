@@ -30,6 +30,14 @@ div {
 
 ---
 
+
+## 📔VS Code ShortCut
+
+![Vs-Code](./images/vs-code.png)
+
+![alt text](./images/vs-code-2.png))
+
+
 ## 📔Html
 
 1. Basic Structure : html, head, title, body and extension
@@ -723,7 +731,7 @@ body {
 div {
     font-size : 14px;
     /* unit less, it will become 28px automatically by font property inheritance concept */
-    line-height : 2; 
+    line-height : 2;
 }
 ```
 
@@ -913,12 +921,140 @@ In Previous years design created using table elements and layout history is writ
 4. Fixed : Position relative to the **viewport** (browser)
 5. Sticky : Positioned based on scroll position
 
-
 ![PositionedValues](./images/positioned-example.png)
 
 ![positions](./images/positions.png)
 
-**⚠️Note :** **z-index** property play role in positions. it decides the stack level of elements.
+**⚠️Note :** **z-index** property play role in positions. it decides the stack level of elements. It Does not work with static property.
+
+```html
+<!-- Good Example for model -->
+<style>
+    #root {
+        position: absolute/fixed;
+        top: 40%;
+        left: 40%;
+        right: 40%;
+        bottom: 40%;
+        background-color: red;
+    }
+</style>
+
+<!-- Good Example for fixed header and footer -->
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        line-height: 1.5;
+    }
+
+    body {
+        margin: 0;
+        background-color: #aaa;
+    }
+
+    .container {
+        width: 80%;
+        margin: 0 auto;
+        background-color: #fff;
+    }
+
+    header,
+    footer {
+        background-color: #000;
+        color: #fff;
+        text-align: center;
+        padding: 20px 0px;
+        position: fixed;
+        z-index: 10;
+        width: inherit;
+    }
+
+    header {
+        top: 0px;
+        width: 80%;
+    }
+
+    footer {
+        bottom: 0px;
+    }
+</style>
+<div class="container">
+    <header>Header</header>
+    <main> <!-- Add Code here --> </main>
+    <footer>Footer</footer>
+</div>
+
+<!-- Good Example of Sticky -->
+<style>
+    * {
+        background-color: #aaa;
+        margin: 0 auto;
+    }
+
+    body {
+        width: 80%;
+    }
+
+    .container {
+        background-color: lightcoral;
+        height: 400px;
+        width: inherit;
+        text-align: center;
+    }
+
+    #heading {
+        position: sticky;
+        top: 0px;
+        background-color: red;
+        width: 100%;
+    }
+</style>
+<main>
+    <!-- Add Too much content here -->
+        <div class="container">
+        <h1 id="heading">Hello World</h1>
+    </div>
+    <!-- Add Too much content here -->
+</main>
+
+<!-- Real Application Example -->
+<style>
+    * {
+        background-color: #aaa;
+        margin: 0 auto;
+    }
+
+    body {
+        width: 80%;
+        text-align: center;
+    }
+
+    h1 {
+        background-color: red;
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        position: sticky;
+        top: 0px;
+    }
+</style>
+<section>
+  <h1>Heading-1</h1>
+  <p><!-- Add To much text here -->
+</section> 
+<section>
+  <h1>Heading-2</h1>
+  <p><!-- Add To much text here -->
+</section>
+<section>
+<h1>Heading-2</h1>
+  <p><!-- Add To much text here -->
+</section> 
+```
+
+
 
 ---
 
@@ -926,7 +1062,7 @@ In Previous years design created using table elements and layout history is writ
 
 ![layout](./images/layout.png)
 
-1. **Float Concept** : 
+1. **Float Concept** :
    1. Reference [Link](https://www.javatpoint.com/css-float)
    2. The CSS float property is a positioning property. It is used to push an element to the left or right, allowing other element to wrap around it. It is generally used with images and layouts.
    3. by using float the element will out of flow from normal flow just like absolute position concept.
@@ -1767,6 +1903,22 @@ body {
     justify-content: center;
     align-items: center;
 }
+```
+
+4. Using Position Absolute
+
+```html
+<style>
+    #root {
+        position: absolute/fixed;
+        top: 40%;
+        left: 40%;
+        right: 40%;
+        bottom: 40%;
+        background-color: red;
+    }
+</style>
+<div id="root"></div>
 ```
 
 ### 📘Basic BoilerPlate
