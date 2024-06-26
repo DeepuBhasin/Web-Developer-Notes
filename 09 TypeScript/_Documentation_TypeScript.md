@@ -1635,6 +1635,28 @@ extractAndConvert({ name: "Dp" }, "name");
 
 // cause Error
 extractAndConvert({}, "name");
+
+
+// Perfect Example
+export interface ITechnicianPayrollGrandTotal {
+    departmentName?: string;
+    categoryName?: string;
+    flagHoursTotal?: number;
+    total?: number;
+    flaggedHoursTotal?: number;
+}
+ 
+const getDepartmentData = <U extends keyof ITechnicianPayrollGrandTotal>(
+    key: U
+): React.ReactElement[] | undefined => {
+    return (
+        grandTotal &&
+        grandTotal.grandDepartmentTotal &&
+        grandTotal.grandDepartmentTotal.map((consolidateValues: ITechnicianPayrollGrandTotal) => (
+            <StyledDiv key={consolidateValues[key]}>{consolidateValues[key]}</StyledDiv>
+        ))
+    );
+};
 ```
 
 ---
