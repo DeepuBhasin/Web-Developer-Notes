@@ -1043,7 +1043,7 @@ In Previous years design created using table elements and layout history is writ
 <section>
   <h1>Heading-1</h1>
   <p><!-- Add To much text here -->
-</section> 
+</section>
 <section>
   <h1>Heading-2</h1>
   <p><!-- Add To much text here -->
@@ -1051,7 +1051,7 @@ In Previous years design created using table elements and layout history is writ
 <section>
 <h1>Heading-2</h1>
   <p><!-- Add To much text here -->
-</section> 
+</section>
 ```
 
 
@@ -1185,8 +1185,29 @@ Solution For this example : by clear float from both the sides
 
 ![flexBoxCheatSheet](./images/flex-cheat-sheet.png)
 
+
+**⚠️Note :** if your flex-direct is row then flex-basis become width, and if your flex-direction is column then flex-basis become height. 
+
 * **align-content :** alignment of space between and around the content along cross-axis
+* **flex-grow, flex-shrink, flex-basis :** are use to controll space between flex items.
+  * Flex-grow : 0 means items will not grow, 0 is intial value
+  * Flex-shrink : 1 means items will shrink smaller than their flex-basis
+  * flex-basis : auto means it should have base size of auto
+
+```css
+div {
+    /* default values */
+    flex-grow : 0;
+    flex-shrink : 1;
+    flex-basis : auto;
+
+    /* OR */
+    flex : initial;
+}
+```
+
 * **flex-grow :** how much a flex item will grow relative to the rest of the flex items if space is available (use full when we items width is not exist or less than container width)
+* **Flex-flow :** short hand property of flex-direction + flex-wrap.
 
 ```html
 <!-- Flex Grow Example but with container width -->
@@ -1481,7 +1502,20 @@ repeat(3, minmax(400px, 1fr)); (for fixing the minimum sizes)
 
 ---
 
+### 📘Max-width Vs Width
 
+```html
+ <style>
+.container {
+    background-color: #fff;
+    width: 500px;   /* Desired width */
+    max-width: 200px; /* Maximum width allowed */
+    height: 500px;
+}
+</style>
+<div class="containr"></div>
+```
+Since the max-width is smaller than the width, the browser will render the element with the max-width of 200px, overriding the width of 500px. This is why you're seeing the element at 200px width in the browser.
 
 ### 📘Max-width & Min-Width
 
