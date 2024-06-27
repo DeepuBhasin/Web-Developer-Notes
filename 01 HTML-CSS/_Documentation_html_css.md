@@ -147,7 +147,7 @@ h1 {
 | ----- | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 6     | Attribute Selectors               | **input\[type="text"]** will select on  the basis of attribute                                                                                                                                                                                                                                                                        |
 | 7     | Nested Element                    | 1. **div p** (selecting  all p element which exist in div) <br/> 2. **p .my-class** (select all elements which has my-class in p element)                                                                                                                                                                                             |
-| 8     | Direct Child                      | **div > p** (it will select only those elements which are direct)                                                                                                                                                                                                                                                                     |
+| 8     | Direct Child                      | 1.  **div > p** (it will select only those elements which are direct)  <br/> 2. **div > \*** means selecting every thing with in div                                                                                                                                                                                                  |
 | 9     | Adjacent Selectors (like sibling) | 1. **h1 + p**  (Adjacent selector, it will select all only those p elements which are immediately after h1 element)  <br/> 2. **h1 ~ p** (Subsequent sibling selector,  it will select all p elements which are after h1 element) <br/> 3. **p.my-class** (Compound selector, it will select all p elements which has my-class class) |
 | 10    | Pseudo-Classes                    | : (colon symbol)  select on the basis of state in which state element it is example hover, active state etc                                                                                                                                                                                                                           |
 | 11    | Pseudo Element                    | :: (double colon) ,   it will insert new element after or before the selected element                                                                                                                                                                                                                                                 |
@@ -1391,10 +1391,21 @@ div {
 
 ![Grid](./images/grid-3.png)
 
+
+1. Grid Lines : a grid is made up of lines, which run horizontally and vertically. If your grid has four columns, it will have five column lines including the one after the last column.
+2. Grid Traks : A track is the space between two grid lines. A row track is between two row lines and a column track between two columns lines. when we create our grid these tracks by assigning a size to them.
+3. Grid Cell : A grid cell is the smallest space on a grid defibed by the intersection of row and column tracks. Its just like a table cell in a spreadsheet.
+4. Grid Area : Several grid cells together. Grid areas are created by causing an items to span over multiple trackes.
+5. Gaps : A gutter or alley between tracks. for sizing purposes these act like a regular track. You can't place content into a gap but you can span grid items across it.
+
 ![Grid](./images/grid-4.png)
 
 
-* fr : 1frm (fractional, use in grid) it will shrink and grow in same proportion its like flex-grow (will fill all the empty space)
+* Witdh
+  1. fr : 1frm (fractional, use in grid) it will shrink and grow in same proportion its like flex-grow (will fill all the empty space)
+  2. px
+  3. %
+  4. repeat
 
 ```css
 /*
@@ -1410,7 +1421,7 @@ repeat(3, minmax(400px, 1fr)); (for fixing the minimum sizes)
     grid-template-column : repeat(4, 1fr)
 }
 ```
-* For **Positioning**
+* For **Positioning** : (you can provide positive and negative values)
 ```css
 .item-1 {
     grid-column-start: 1;
@@ -1430,12 +1441,19 @@ repeat(3, minmax(400px, 1fr)); (for fixing the minimum sizes)
     /* row-start col-start row-end col-end */
     grid-area: 1/1/1/4;
 
-    /* For gaps in rows columns */
+    /* For gaps in rows columns*/
+    grid-row-gap : 10px;
+    grid-column-gap :10px
+
+    /* OR */
+    grid-gap : 10px 10px;
+
+    /* OR  (best one)*/
     gap: 10px 10px;
 }
 ```
 
-* For **Centering**
+* For **Align and Centering**
 
 ```html
 <style>
