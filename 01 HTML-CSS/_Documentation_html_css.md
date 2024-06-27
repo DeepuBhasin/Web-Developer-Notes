@@ -1174,6 +1174,7 @@ Solution For this example : by clear float from both the sides
     <h2 class="heading-secondary">Heading Secondary</h2>
 </header>
 ```
+---
 
 2. **Flex-box**
 
@@ -1186,7 +1187,11 @@ Solution For this example : by clear float from both the sides
 ![flexBoxCheatSheet](./images/flex-cheat-sheet.png)
 
 
-**⚠️Note :** if your flex-direct is row then flex-basis become width, and if your flex-direction is column then flex-basis become height. 
+**⚠️Note :**
+1. if your flex-direct is row then flex-basis become width, and if your flex-direction is column then flex-basis become height.
+2. If you donnot provide any width like width/flex-basis then it will take minimum width which will be of content width.
+3. To distribute space between flex-items we use **justify-content, align-content, place-content (its is short cut of both justify-conent & align-content)**, to aliment of items in the flex-box **align-self, align-items**
+4. **align-content** enables when we use **flex-wrap: wrap**, and default value of align-content os **stretch**
 
 * **align-content :** alignment of space between and around the content along cross-axis
 * **flex-grow, flex-shrink, flex-basis :** are use to controll space between flex items.
@@ -1374,10 +1379,11 @@ div {
 
 
 ![flex-2](./images/flex-2.png)
+
 * Horizontally each of these elements takes up exactly the space that is necessary for its content. However, vertically things are little different so vertically by default all the flex items are tall as the tallest element
+---
 
-
-1. **Grid-Box**
+3. **Grid-Box**
 
 ![Grid](./images/grid-1.png)
 
