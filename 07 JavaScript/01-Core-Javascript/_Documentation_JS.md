@@ -16,6 +16,23 @@
 * **enumerating** : objects
 ---
 
+### 📘What is javascript
+* Javascript was created to make webpages more dynamic (eg. changes content on a page directly from inside the browser). Originally, it was called LiveScript but due to the popularity of java it was renamed to javascript.
+* Javascript is dynamically weakly-typed programming language.
+* Interpreted programming language which means not pre-compiled instead parsed and compiled , "Interpreted on the fly" compiled language
+* "Hoisted language" Run in different environments (eg in browser) 
+* Most prominent use case : Run code in browser (on a webpage)
+
+**⚠️Note :** Javascript is totally independent from java and has nothing in common with java.
+
+![Image](./images/what-is-javascript-details.png)
+
+![Image](./images/what-in-the-course.png)
+
+![Image](./images/history.png)
+
+---
+
 ## 📘Conceptual Aside
 1. **Syntax Parsers** : A program that reads your code and determines what it does and if its grammar is valid e.g an interpreter or a compiler.
 2. **Execution Contexts** : *A Wrapper to help manage the code that is running*. There are lots of lexical environments which one is currently running is managed via execution context. It can contain things beyond what you've written in your code.
