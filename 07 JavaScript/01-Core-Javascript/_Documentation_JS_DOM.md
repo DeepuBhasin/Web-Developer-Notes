@@ -4,6 +4,10 @@
 
 * If you want to work in a browser environment, it's essential to understand the DOM (Document Object Model). However, on the Node.js side, understanding the DOM is not necessary.
 
+* Best Example to Understand DOM Tree (parent, child, siblings)
+    
+    ![Image](./images/dom-best-example.png)
+
 ---
 
 ### 📘What is the DOM? & How the DOM Works
@@ -502,3 +506,36 @@ Example
 ```
 
 ![Image](./images/nodeList.png)
+
+
+---
+
+### 📘DOM Traversing
+
+* DOM traversing is the process of moving through the HTML structure (Document Object Model) to access and manipulate different elements and nodes. This can include moving up to parent elements, down to child elements, or across to sibling elements.
+
+* Before understand Traversing you need to understand DOM Tree family. There are three types of nodes in the DOM can be expressed as parents, children and siblings
+
+
+**To Access Parent**
+
+| Sr No | property/Method Name        | Detail           |
+| ----- | --------------------------- | ---------------- |
+| 1     | document.body.parentNode    | Return html node |
+| 1     | document.body.parentElement | Return html node |
+
+
+### 📘Most 3 Objects in DOM Traversing
+
+ Best Example to Understand DOM Tree (parent, child, siblings)
+    
+![Image](./images/dom-best-example.png)
+
+
+Three objects
+
+* **window :** Which is accessible on global level 
+* **document :** which is accessible on global level and will returns all dom 
+* **document.documentElement** which will return all written Html element
+
+![Image](./images/dom-3-objects.png)
