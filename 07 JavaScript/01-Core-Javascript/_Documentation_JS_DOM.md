@@ -70,32 +70,32 @@ console.dir(document)
 1. HTML (HyperText Markup Language)
 
     * What it is: The standard language used to create and structure web pages.
-    
+
     * Purpose: Defines the structure and content of a web page (e.g., paragraphs, headings, links, images).
-    
+
     * Example: \<p>This is a paragraph.\</p>
 
 
 2. JavaScript
-    
+
     * What it is: A programming language used to create interactive and dynamic content on web pages.
-   
+
    * Purpose: Adds functionality and behavior to web pages (e.g., form validation, animations, responding to user actions).
-   
+
    * Example: document.getElementById("myButton").onclick = function() { alert("Button clicked!"); };
 
 3. DOM (Document Object Model)
     * What it is: A programming interface for HTML and XML documents.
-   
+
    * Purpose: Represents the structure of a document as a tree of objects, allowing JavaScript to access and manipulate the content, structure, and styles of a web page.
-   
+
    * Example: document.getElementById("myDiv").innerHTML = "Hello, World!";
 
 4. BOM (Browser Object Model)
    * What it is: A set of objects provided by the browser to interact with the web browser itself (outside of the document content).
-   
+
    * Purpose: Allows JavaScript to interact with the browser (e.g., control the browser window, manage cookies, retrieve browser information).
-   
+
    * Example: window.alert("This is a BOM example!");
 
 Summary
@@ -115,7 +115,7 @@ Summary
 
 * A DOM API (Document Object Model Application Programming Interface) is a set of tools that allows developers to interact with and manipulate the structure, style, and content of web pages using programming languages like JavaScript.
 
-* It plays a role of bridge in between Javascript and Browser. 
+* It plays a role of bridge in between Javascript and Browser.
 
 ---
 
@@ -187,7 +187,7 @@ Summary
     ```
 
 3. CSSOM
-    
+
     CSSOM (CSS Object Model) Tree represents the styles for the document. It is built from all the CSS rules in the document and any styles applied directly to the elements
 
     ```css
@@ -254,7 +254,7 @@ In summary:
 |       |
 | 5.    | document.getElementBySelectorAll(); | NodeList                                                                                    | **Always return multiple elements**                                                                                                                                                                                                   |
 
-**⚠️ Note :** on HtmlCollection forEach loop will not work only native for-loop will work, but on NodeList both will work 
+**⚠️ Note :** on HtmlCollection forEach loop will not work only native for-loop will work, but on NodeList both will work
 
 **Apply JS on the fly**
 
@@ -281,3 +281,224 @@ In summary:
 ```
 ---
 
+### 📘 Whats is node and How can Access
+
+* A text node is a part of the HTML structure that contains only text. It's the actual text content you see between the HTML tags.
+
+* Each node can have html attributes. Nodes can also have content including other nodes and text.
+
+**Why You Are Getting Text Nodes:**
+
+When you have spaces, tabs, or newlines between HTML elements, the browser treats these as text nodes. In your HTML:
+
+
+```html
+<body>
+    <div id="first-name">Deep</div>
+    <div class="header">header 1</div>
+    <div class="header">header 2</div>
+</body>
+```
+
+The spaces and newlines between the \<div> elements are counted as text nodes. So, when you look at the childNodes of the \<body> element, you see these text nodes along with the actual \<div> elements.
+
+Example:
+
+Imagine you have this simplified HTML:
+
+```html
+<div>Hello</div>
+
+```
+
+The DOM structure would be:
+
+```css
+div
+└── Hello
+```
+
+Here, the text node contains the word "Hello."
+
+In your case, the newlines and spaces are also text nodes, even though they don't contain visible text. They look like this:
+
+* "\n " (a newline and spaces)
+
+* "\n " (another newline and spaces)
+
+**Why They Matter:**
+
+its because every character in the document has to eventually become part of the DOM like spaces and newlines are valid characters
+
+This is because for the critical rendering process we had to form render tree. In order to display the data in browser, a render tree has to be constructed and part of that render tree is to combine DOM with CSSOM and in this forming of DOM we need to include all the characters within your html. In short, we need every character to from part of our DOM and that's why new lines or spaces are included in our nodes.
+
+
+* **Preserving Formatting :** Text nodes keep the formatting of your HTML (like spaces and newlines are valid characters).
+* **Accessing Content :** Text nodes let you access and change the text inside your elements.
+
+**How can access**
+
+```html
+<body>
+    <div id="first-name">Deep</div>
+    <div class="header">header 1</div>
+    <div class="header">header 2</div>
+</body>
+```
+
+![Image](./images/childNode.png)
+
+| Sr No | property/Method Name     | Detail                   |
+| ----- | ------------------------ | ------------------------ |
+| 1     | document.body.childNodes | Return all body elements |
+
+---
+
+### 📘Whats nodeType, nodeValue, nodeName
+
+1. nodeType
+
+   * What it is: A property of a DOM (Document Object Model) node.
+
+   * What it does: Tells you what kind of node it is.
+
+   * Types of values:
+        * 1: Element (like \<div>, \<p>)
+
+        * 3: Text (the text inside an element)
+        * 8: Comment (a comment in the HTML, like \<!-- comment -->)
+
+        Example:
+
+        ```js
+        Copy code
+        let element = document.getElementById('myElement');
+        console.log(element.nodeType); // 1 for element
+        ```
+
+2. nodeName
+
+   * What it is: Another property of a DOM node.
+
+   * What it does: Gives you the name of the node.
+
+   * For an element: It's the tag name (like DIV, P).
+
+   * For a text node: It's #text.
+
+    Example:
+
+    ```javascript
+    Copy code
+    let element = document.getElementById('myElement');
+    console.log(element.nodeName); // 'DIV' if the element is a <div>
+    ```
+3. nodeValue
+
+   * What it is: A property of a DOM node.
+
+   * What it does: Contains the value of the node.
+
+   * For a text node: It's the text content.
+
+   * For an element: It's usually null.
+
+   Example:
+   ```javascript
+   Copy code
+   let textNode = document.createTextNode('Hello, world!');
+   console.log(textNode.nodeValue); // 'Hello, world!'
+   ```
+
+**Quick Summary** (you can check on internet)
+
+* **nodeType**: Tells you what kind of node it is (e.g., element, text).
+  * 1 : Element
+  * 2 : Attr
+  * 3 : Text
+  * 8 : Comment
+  * 9 : Document
+
+* **nodeName**: Tells you the name of the node (e.g., DIV, #text).
+
+* **nodeValue**: Holds the value of the node (e.g., the text in a text node).
+
+
+**⚠️Note :** 
+
+* Use **tagName** when you specifically need to work with element tags.
+
+* Use **nodeName** when you need to identify the type of any node in the DOM.
+
+---
+
+### 📘What is $0
+
+![Image](./images/$0-1.png)
+
+
+![Image](./images/$0-2.png)
+
+---
+
+### 📘Difference between HTML Collection and NodeList
+
+1. **Html Collection :** 
+   1. can contains only one type of node, and that one type of node is element node. 
+
+2. **Node List :** 
+   1. can contains any NodeType. That means with its collection it can text nodes, comments nodes, elements nodes etc.
+
+
+**Major Difference between them**
+
+1. Html Collection can be accessed by their name, by the id or by the index number within that collection
+
+2. A Node list item though can only be accessed by their index number
+
+3. (Major one) HTML collections are live and node list items are typically static
+
+
+Example
+
+* Html Collection Example
+
+```html
+<!-- This will add element into live html -->
+<ul>
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+</ul>
+<script>
+    let listItem = document.getElementsByTagName('li');
+    console.log('Length', listItem.length)
+    listItem[0].parentNode.appendChild(document.createElement('li'));
+    console.log('Html Collection', listItem);
+    console.log('Length', listItem.length)
+</script>
+```
+![Image](./images/html-collections.png)
+
+
+* NodeList Example
+
+```html
+<ul>
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+</ul>
+<script>
+    let listItem = document.querySelectorAll('li');
+    console.log('Length', listItem.length)
+    listItem[0].parentNode.appendChild(document.createElement('li'));
+
+    console.log('Html Collection', listItem);
+
+    console.log('Length', listItem.length)
+
+</script>
+```
+
+![Image](./images/nodeList.png)
