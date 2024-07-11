@@ -516,14 +516,7 @@ Example
 
 * Before understand Traversing you need to understand DOM Tree family. There are three types of nodes in the DOM can be expressed as parents, children and siblings
 
-
-**To Access Parent**
-
-| Sr No | property/Method Name        | Detail           |
-| ----- | --------------------------- | ---------------- |
-| 1     | document.body.parentNode    | Return html node |
-| 1     | document.body.parentElement | Return html node |
-
+---
 
 ### 📘Most 3 Objects in DOM Traversing
 
@@ -539,3 +532,53 @@ Three objects
 * **document.documentElement** which will return all written Html element
 
 ![Image](./images/dom-3-objects.png)
+
+
+### 📘Accessing Nodes
+
+1. **To Access Parent**
+
+    | Sr No | property/Method Name        | Detail           |
+    | ----- | --------------------------- | ---------------- |
+    | 1     | document.body.parentNode    | Return html node |
+    | 2     | document.body.parentElement | Return html node |
+
+
+2. **To First and last Child**
+
+    | Sr No | property/Method Name | Detail                      |
+    | ----- | -------------------- | --------------------------- |
+    | 1     | .firstElementChild   | Return first element (best) |
+    | 2     | .firstChild          | Return child node           |
+    | 3     | .lastElementChild    | Return last (best)element   |
+    | 4     | .lastChild           | Return last node            |
+
+    **⚠️ Note**
+
+    * If element don't have any child then it will return empty HtmlCollection
+
+    * If element have only child then his first & last child will be same.
+
+    * If element have more then one then it will return HtmlCollection 
+
+
+3. **To Access all Children**
+
+
+    | Sr No | property/Method Name | Detail                                                  |
+    | ----- | -------------------- | ------------------------------------------------------- |
+    | 1     | .children            | Return all children element with html Collection (best) |
+    | 2     | .childNodes          | Return child node                                       |
+
+
+
+4. **To Access Sibling**
+
+    | Sr No | property/Method Name    | Detail                         |
+    | ----- | ----------------------- | ------------------------------ |
+    | 1     | .nextElementSibling     | Return sibling element (best)  |
+    | 2     | .nextSibling            | Return sibling node            |
+    | 3     | .previousElementSibling | Return previous element (best) |
+    | 4     | .previousSibling        | Return previous node           |
+
+
