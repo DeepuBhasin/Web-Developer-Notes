@@ -1,4 +1,4 @@
-<!-- ### 📘Information
+### 📘Information
 
 * The DOM is often referred as DOM Tree (the tree contains thousand of object called as nodes example head node body node etc)
 
@@ -257,16 +257,42 @@ In summary:
 
 **Various DOM methods to access elements (without nodes)**
 
-| Sr No | Method Name                         | Return type                                                                                 | notes                                                                                                                                                                                                                                 |
-| ----- | ----------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1.    | document.getElementById();          | element object                                                                              |                                                                                                                                                                                                                                       |
-| 2.    | document.getElementByClassName();   | HtmlCollection (its like an array but not an array but only native for loop will work here) |                                                                                                                                                                                                                                       |
-| 3.    | document.getElementByTagName();     | HtmlCollection (its like an array but not an array but only native for loop will work here) | Avoid as much you can because it create performance issue                                                                                                                                                                             |
-| 4.    | document.getElementBySelector();    | element Object                                                                              | **Always return single element** <br/> **#id**: select Id <br/> **.className** : select class <br/>      **a : hover** : select pseudo classes <br/> **#text.className** : Select that element which have text id and className class |
+| Sr No | Method Name                       | Return type                                                                                 | notes                                                                                                                                                                                                                                                                        |
+| ----- | --------------------------------- | ------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1.    | document.getElementById();        | element object                                                                              |                                                                                                                                                                                                                                                                              |
+| 2.    | document.getElementByClassName(); | HtmlCollection (its like an array but not an array but only native for loop will work here) |                                                                                                                                                                                                                                                                              |
+| 3.    | document.getElementByTagName();   | HtmlCollection (its like an array but not an array but only native for loop will work here) | Avoid as much you can because it create performance issue                                                                                                                                                                                                                    |
+| 4.    | document.querySelector();         | element Object                                                                              | **Always return single element** <br/> **#id**: select Id <br/> **.className** : select class <br/>      **a : hover** : select pseudo classes <br/> **#text.className** : Select that element which have text id and className class <br/> it work same as in css selectors |
 |       |
-| 5.    | document.getElementBySelectorAll(); | NodeList                                                                                    | **Always return multiple elements**                                                                                                                                                                                                   |
+| 5.    | document.querySelectorAll();      | NodeList                                                                                    | **Always return multiple elements**                                                                                                                                                                                                                                          |
 
-**⚠️ Note :** on HtmlCollection forEach loop will not work only native for-loop will work, but on NodeList both will work
+**⚠️ Note :**
+
+* on HtmlCollection forEach loop will not work only native for-loop will work, but on NodeList both will work. But both are not array type
+
+* to check various method availability just check their prototype
+
+* **(Best)** you can convert HtmlCollection into Array
+
+
+```html
+<ul>
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+</ul>
+
+<script>
+    let el = document.getElementsByTagName('li');
+
+    // convert into array
+    let arr = Array.from(el);
+
+    // will print into array
+    console.log(arr);
+</script>
+```
+
 
 **Apply JS on the fly**
 
@@ -291,19 +317,6 @@ In summary:
     }
 </script>
 ```
-
-### 📘Access Attributes
-
-```html
-<body>
-    <div id="heading" class="heading" title="Heading element">Heading One</div>
-</body>
-```
-
-![Image](./images/document.getElementById.png)
-
-
-
 
 ---
 
@@ -828,4 +841,75 @@ parentElement.removeChild(Node)
         ulElement.appendChild(liElement.cloneNode(true));
     </script>
 </body>
-``` -->
+```
+
+
+### 📘Attributes
+
+**Access and Set Attribute**
+
+1. Short way
+
+
+```html
+<body>
+    <div id="heading" class="heading" title="Heading element">Heading One</div>
+</body>
+```
+
+![Image](./images/document.getElementById.png)
+
+
+2. Long way
+
+```html
+<body>
+    <div id="heading">Heading One</div>
+    <script>
+        let headingElement = document.getElementById("heading");
+
+        // To Get Attribute
+        headingElement.setAttribute("class", "heading-class");
+        headingElement.setAttribute("title", "heading title");
+
+        // To Set Attribute
+        console.log(headingElement.getAttribute("class"));
+    </script>
+</body>
+```
+![Image](./images/attributes.png)
+
+**⚠️Note :** setAttribute method will always replace existing attributes.
+
+---
+
+### 📘CSS
+
+```js
+document.body.style.backgroundColor = "red";
+document.body.style.fontSize = "20px";
+document.body.style.padding = "10px";
+```
+
+---
+
+### 📘Text
+
+1. .textContent : it will give you hidden text as well
+
+2. .innerText : it will not give hidden text
+
+3. .innerHtml : it will give complete html elements
+
+
+```html
+<div id="">Hello <span style="display: none;">World</span></div>
+<script>
+    let div = document.querySelector("div");
+    console.log(div.innerText);     // Hello
+
+    console.log(div.textContent);   // Hello World
+
+    console.log(div.innerHTML);     // Hello <span style="display: none;">World</span>
+</script>
+```
