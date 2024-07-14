@@ -1,14 +1,21 @@
-### 📘Information
+<!-- ### 📘Information
 
 * The DOM is often referred as DOM Tree (the tree contains thousand of object called as nodes example head node body node etc)
 
 * If you want to work in a browser environment, it's essential to understand the DOM (Document Object Model). However, on the Node.js side, understanding the DOM is not necessary.
 
 * Best Example to Understand DOM Tree (parent, child, siblings)
-    
+
     ![Image](./images/dom-best-example.png)
 
 ---
+
+
+* Element change there name according to environment
+  * In html world its called **elements**
+  * In DOM world its called **Node**
+
+
 
 ### 📘What is the DOM? & How the DOM Works
 
@@ -243,12 +250,13 @@ In summary:
 
 ---
 
-### 📘Difference DOM Code and Javascript Code
+### 📘Difference DOM Code, Javascript Code & Access DOM Elements (without nodes)
 
 ![Image](./images/dom-code-vs-javascript-code.png)
 
 
-**Various DOM methods to access elements**
+**Various DOM methods to access elements (without nodes)**
+
 | Sr No | Method Name                         | Return type                                                                                 | notes                                                                                                                                                                                                                                 |
 | ----- | ----------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1.    | document.getElementById();          | element object                                                                              |                                                                                                                                                                                                                                       |
@@ -283,6 +291,20 @@ In summary:
     }
 </script>
 ```
+
+### 📘Access Attributes
+
+```html
+<body>
+    <div id="heading" class="heading" title="Heading element">Heading One</div>
+</body>
+```
+
+![Image](./images/document.getElementById.png)
+
+
+
+
 ---
 
 ### 📘 Whats is node and How can Access
@@ -428,7 +450,7 @@ This is because for the critical rendering process we had to form render tree. I
 * **nodeValue**: Holds the value of the node (e.g., the text in a text node).
 
 
-**⚠️Note :** 
+**⚠️Note :**
 
 * Use **tagName** when you specifically need to work with element tags.
 
@@ -447,10 +469,10 @@ This is because for the critical rendering process we had to form render tree. I
 
 ### 📘Difference between HTML Collection and NodeList
 
-1. **Html Collection :** 
-   1. can contains only one type of node, and that one type of node is element node. 
+1. **Html Collection :**
+   1. can contains only one type of node, and that one type of node is element node.
 
-2. **Node List :** 
+2. **Node List :**
    1. can contains any NodeType. That means with its collection it can text nodes, comments nodes, elements nodes etc.
 
 
@@ -521,14 +543,14 @@ Example
 ### 📘Most 3 Objects in DOM Traversing
 
  Best Example to Understand DOM Tree (parent, child, siblings)
-    
+
 ![Image](./images/dom-best-example.png)
 
 
 Three objects
 
-* **window :** Which is accessible on global level 
-* **document :** which is accessible on global level and will returns all dom 
+* **window :** Which is accessible on global level
+* **document :** which is accessible on global level and will returns all dom
 * **document.documentElement** which will return all written Html element
 
 ![Image](./images/dom-3-objects.png)
@@ -559,7 +581,7 @@ Three objects
 
     * If element have only child then his first & last child will be same.
 
-    * If element have more then one then it will return HtmlCollection 
+    * If element have more then one then it will return HtmlCollection
 
 
 3. **To Access all Children**
@@ -581,4 +603,229 @@ Three objects
     | 3     | .previousElementSibling | Return previous element (best) |
     | 4     | .previousSibling        | Return previous node           |
 
+**⚠️Note :** methods like XXXElementXXX are useful when you want to show data in console window, otherwise XXXSibling are very use while accessing nodes in codes
 
+```html
+<body>
+    <h1>Hello</h1>
+    <p>World</p>
+
+    <script>
+        let div = document.createElement('div');
+        div.innerHTML = 'Javascript';
+
+        let h1Element = document.querySelector('h1');
+        document.body.insertBefore(div, h1Element.nextSibling)
+
+        // OR
+
+        document.body.insertBefore(div, h1Element.nextElementSibling)
+
+    </script>
+</body>
+```
+
+
+---
+
+### 📘document Vs Document Vs Html Document
+
+
+
+![Image](./images/document-Document-Html-Document.png)
+
+
+**Document:**
+
+* Refers to the JavaScript global object that represents the entire web page loaded in the browser.
+
+* It's a standard object in the web programming language.
+
+**document:**
+
+* This is an instance of the Document object, representing the content of the web page.
+
+* It includes methods and properties to access and manipulate the content, like getElementById or createElement.
+
+**HTML Document:**
+
+* This is the specific type of document that is an HTML file.
+
+* When the Document object represents an HTML page, it's referred to as an HTML Document.
+
+* It contains elements like \<html>, \<body>, \<head>, etc.
+
+
+**Summary**
+* Document: Think of it as the big container holding everything you see on a web page.
+
+* document: This is like the blueprint or instructions inside the container that helps you find and change things on the web page.
+
+* HTML Document: This is the specific type of container for web pages that use HTML, with tags like <html>, <body>, etc.
+
+---
+
+### 📘CreateElement
+
+Steps
+
+1. Create an element and add some HTML content.
+
+2. Find the parent where you want to add the element.
+
+3. Attach the created element to the parent.
+
+
+**Syntax**
+
+
+```js
+document.createElement('div')
+```
+
+
+
+* **createElement**
+
+    ```js
+    let div = document.createElement('div');
+    console.log(div)    // <div><div>
+    div.innerHTML = 'hello';
+    document.body.appendChild(div);
+    ```
+
+**⚠️ Note :** we can create any element use createElement example div, script, head, html etc and created same like normal html tags
+
+----
+
+### 📘Insert Element
+
+**Syntax**
+
+```js
+parentElement.appendChild()
+
+parentElement.insertBefore()
+```
+
+
+* **appendChild :** always add element at last of selected element
+
+
+    ```js
+    let div = document.createElement('div');
+    console.log(div)    // <div><div>
+    div.innerHTML = 'hello';
+    document.body.appendChild(div);
+    ```
+
+* **insertBefore :** always add element before selected element
+
+    ```html
+    <body>
+
+        <h1>Hello World</h1>
+        <h2>Hello John</h2>
+
+        <script>
+            let div = document.createElement('div');
+
+            div.innerHTML = '<h1>Hello Deep</h1>'
+
+            document.body.insertBefore(div, document.body.firstChild);
+
+        </script>
+    </body>
+    ```
+
+    **⚠️Note :** There is no method like insertAfter so we can us hack
+
+
+    ```html
+    <body>
+        <h1>Hello</h1>
+        <p>World</p>
+
+        <script>
+            let div = document.createElement('div');
+            div.innerHTML = 'Javascript';
+
+            let h1Element = document.querySelector('h1');
+            document.body.insertBefore(div, h1Element.nextSibling)
+
+            // OR
+
+            document.body.insertBefore(div, h1Element.nextElementSibling)
+
+        </script>
+    </body>
+    ```
+
+---
+
+
+### 📘Remove Element
+
+
+**Syntax**
+
+```js
+// if you element directly (best one) & its a new method introduce in browser
+Node.remove()
+
+// In case if you know parent or can access to parent easily
+parentElement.removeChild(Node)
+```
+
+
+* **remove()**
+
+    ```html
+    <h1>Hello</h1>
+    <p>World</p>
+
+    <script>
+        document.body.children[0].remove()
+
+    </script>
+    ```
+* **removeChild()**
+
+    ```html
+    <h1>Hello</h1>
+    <p>World</p>
+
+    <script>
+      document.body.removeChild(document.querySelector('h1'));
+    </script>
+    ```
+
+---
+
+### 📘Copy
+
+```html
+<body>
+    <h1>Clone Node</h1>
+
+    <ul>
+        <li>Item 1</li>
+    </ul>
+
+    <script>
+        let ulElement = document.querySelector('ul');
+
+
+        let liElement1 = document.createElement('li');
+        liElement1.textContent = 'Item 1';
+        ulElement.appendChild(liElement1);
+
+        // OR
+
+        let liElement = document.querySelector('li');
+
+        // true means copy every thing like text also, false means copy only the element
+        ulElement.appendChild(liElement.cloneNode(true));
+    </script>
+</body>
+``` -->
