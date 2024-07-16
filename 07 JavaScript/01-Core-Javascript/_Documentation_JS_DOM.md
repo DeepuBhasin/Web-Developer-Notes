@@ -15,7 +15,7 @@
   * In html world its called **elements**
   * In DOM world its called **Node**
 
-
+---
 
 ### 📘What is the DOM? & How the DOM Works
 
@@ -120,8 +120,6 @@ Summary
 
 ---
 
-
-
 ### 📘Whats is DOM API ?
 
 * A DOM API (Document Object Model Application Programming Interface) is a set of tools that allows developers to interact with and manipulate the structure, style, and content of web pages using programming languages like JavaScript.
@@ -129,7 +127,6 @@ Summary
 * It plays a role of bridge in between Javascript and Browser.
 
 ---
-
 
 ### 📘DOM Vs Critical Render Vs CSSOM VS Node
 
@@ -266,6 +263,22 @@ In summary:
 |       |
 | 5.    | document.querySelectorAll();      | NodeList                                                                                    | **Always return multiple elements**                                                                                                                                                                                                                                          |
 
+
+```html
+<!-- Good Example of querySelector -->
+<ul class="language">
+    <li>JavaScript</li>
+    <li>PHP</li>
+    <li>MySql</li>
+    <li>React</li>
+</ul>
+<script>
+    let liElement = document.querySelector("li:nth-child(2)");
+    liElement.style.backgroundColor = 'red';
+</script>
+```
+
+
 **⚠️ Note :**
 
 * on HtmlCollection forEach loop will not work only native for-loop will work, but on NodeList both will work. But both are not array type
@@ -290,7 +303,7 @@ In summary:
 
     // will print into array
     console.log(arr);
-</script>
+</>
 ```
 
 
@@ -568,6 +581,7 @@ Three objects
 
 ![Image](./images/dom-3-objects.png)
 
+---
 
 ### 📘Accessing Nodes
 
@@ -600,10 +614,10 @@ Three objects
 3. **To Access all Children**
 
 
-    | Sr No | property/Method Name | Detail                                                  |
-    | ----- | -------------------- | ------------------------------------------------------- |
-    | 1     | .children            | Return all children element with html Collection (best) |
-    | 2     | .childNodes          | Return child node                                       |
+    | Sr No | property/Method Name | Detail                                                                 |
+    | ----- | -------------------- | ---------------------------------------------------------------------- |
+    | 1     | .children            | Return all children element with html Collection (best)                |
+    | 2     | .childNodes          | Return child node  (with all text nodes as well to maintain structure) |
 
 
 
@@ -642,7 +656,6 @@ Three objects
 ---
 
 ### 📘document Vs Document Vs Html Document
-
 
 
 ![Image](./images/document-Document-Html-Document.png)
@@ -709,7 +722,7 @@ document.createElement('div')
 
 **⚠️ Note :** we can create any element use createElement example div, script, head, html etc and created same like normal html tags
 
-----
+---
 
 ### 📘Insert Element
 
@@ -775,7 +788,6 @@ parentElement.insertBefore()
     ```
 
 ---
-
 
 ### 📘Remove Element
 
@@ -843,6 +855,7 @@ parentElement.removeChild(Node)
 </body>
 ```
 
+---
 
 ### 📘Attributes
 
@@ -860,7 +873,7 @@ parentElement.removeChild(Node)
 ![Image](./images/document.getElementById.png)
 
 
-2. Long way
+2. Long way (best one)
 
 ```html
 <body>
@@ -880,6 +893,24 @@ parentElement.removeChild(Node)
 ![Image](./images/attributes.png)
 
 **⚠️Note :** setAttribute method will always replace existing attributes.
+
+
+3. using Create Element
+
+```html
+<script>
+    let div = document.createElement('div');
+    div.innerHTML = "Hello world"
+    div.id = "div-id";
+    div.className = "div-class";
+    div.setAttribute('data-key', 'random-value');
+    div.style.backgroundColor = 'red';
+    div.style.color = "#fff"
+    div.style.padding = '10px'
+
+    document.body.appendChild(div);
+</script>
+```
 
 ---
 
@@ -911,5 +942,33 @@ document.body.style.padding = "10px";
     console.log(div.textContent);   // Hello World
 
     console.log(div.innerHTML);     // Hello <span style="display: none;">World</span>
+</script>
+```
+---
+
+### 📘Normal Vs Optimize
+
+```html
+<ul class="language">
+    <li>JavaScript</li>
+</ul>
+<script>
+    function addLanguage(langName) {
+        const li = document.createElement('li');
+        li.innerHTML = langName;
+        document.querySelector('.language').appendChild(li);
+    }
+
+    function addOptimizedLanguage(langName) {
+        const li = document.createElement('li');
+        const addText = document.createTextNode(langName);
+        li.appendChild(addText);
+        document.querySelector('.language').appendChild(li);
+    }
+
+    addOptimizedLanguage('C++');
+    addLanguage('Java');
+    addOptimizedLanguage('Python');
+    addLanguage('C#');
 </script>
 ```
