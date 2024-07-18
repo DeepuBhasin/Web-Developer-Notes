@@ -789,6 +789,30 @@ parentElement.insertBefore()
 
 ---
 
+### 📘Replace Element
+
+```html
+<ul id="myList">
+    <li id="item1">Item 1</li>
+    <li id="item2">Item 2</li>
+    <li id="item3">Item 3</li>
+</ul>
+<script>
+    // Create a new li element to replace the old one
+    const newItem = document.createElement('li');
+    newItem.textContent = 'This is the new item';
+
+    // Select the old li element
+    const oldItem = document.getElementById('item2');
+
+    // Replace the old li element with the new li element
+    oldItem.replaceWith(newItem);
+
+</script>
+```
+
+---
+
 ### 📘Remove Element
 
 
@@ -861,8 +885,7 @@ parentElement.removeChild(Node)
 
 **Access and Set Attribute**
 
-1. Short way
-
+1. DOM Property Method (Short way & best One) : it will give you dynamic value if change value from previous state
 
 ```html
 <body>
@@ -873,7 +896,7 @@ parentElement.removeChild(Node)
 ![Image](./images/document.getElementById.png)
 
 
-2. Long way (best one)
+1. HTML Attribute (Long way) : it will give you static value if change value from previous state
 
 ```html
 <body>
@@ -885,7 +908,7 @@ parentElement.removeChild(Node)
         headingElement.setAttribute("class", "heading-class");
         headingElement.setAttribute("title", "heading title");
 
-        // To Set Attribute
+        // To Set Attribute (it will give you static value if change value from previous state)
         console.log(headingElement.getAttribute("class"));
     </script>
 </body>
@@ -920,6 +943,11 @@ parentElement.removeChild(Node)
 document.body.style.backgroundColor = "red";
 document.body.style.fontSize = "20px";
 document.body.style.padding = "10px";
+
+// OR
+
+let h1Element = document.querySelector('h1');
+h1Element.setAttribute('style', 'color : red; background-color : pink');
 ```
 
 ---
@@ -931,6 +959,8 @@ document.body.style.padding = "10px";
 2. .innerText : it will not give hidden text
 
 3. .innerHtml : it will give complete html elements
+
+4. .outerHtml : similar to innerHtml
 
 
 ```html
@@ -971,4 +1001,173 @@ document.body.style.padding = "10px";
     addOptimizedLanguage('Python');
     addLanguage('C#');
 </script>
+```
+---
+
+### 📘Events
+Events are not part of the core JavaScript language. They are provided by the DOM (Document Object Model) API built into the browser.
+
+To master events, we need to understand two key concepts:
+
+1. Event Handlers (e.g., click, key press)
+
+2. Event Listeners
+
+
+
+An **Event listener** attaches a responsive interface to an element, allowing it to wait and listen for a specific event to occur.
+
+There are three ways to attach event listeners to an element:
+
+1. Inline Event Listeners
+
+```html
+<button onclick="alert('Hello World')">Click Me </button>
+```
+
+
+2. Inline Properties
+
+
+```html
+<button>Click me</button>
+
+<script>
+    let btn = document.querySelector('button');
+    btn.onclick = function () {
+        alert('Hello World!');
+    }
+</script>
+```
+* Can only attach single method on single eventListener( only last function will work)
+
+```html
+<button id="btn">Click Me</button>
+<script>
+    const btn = document.getElementById('btn');
+
+    function test() {
+        console.log('test');
+    }
+
+    function helloWorld() {
+        console.log('Hello World');
+    }
+
+    btn.onclick = test
+    btn.onclick = helloWorld;
+</script>
+```
+
+3. addEventListener Method : (best one)
+
+
+```html
+<button>Click me</button>
+
+<script>
+    let btn = document.querySelector('button');
+
+    /*
+        Parameters are
+        1. Event Type
+        2. Event Handler
+    */
+   btn.addEventListener('click', function () {
+       alert('Hello World!');
+    });
+</script>
+```
+* Can attach multiple methods on single eventListener (both method will work)
+
+```html
+<button id="btn">Click Me</button>
+<script>
+    const btn = document.getElementById('btn');
+
+    function test() {
+        console.log('test');
+    }
+
+    function helloWorld() {
+        console.log('Hello World');
+    }
+
+    btn.addEventListener('click', test);
+    btn.addEventListener('click', helloWorld);
+</script>
+```
+
+
+
+**Small Example for Read more**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #eee;
+        }
+
+        #content {
+            background-color: white;
+            width: 400px;
+            padding: 5px;
+            margin: auto;
+            max-height: 100px;
+            overflow: hidden;
+        }
+
+        #link {
+            display: block;
+            text-decoration: none;
+            width: 200px;
+            margin: 5px auto;
+            background-color: aqua;
+            padding: 5px;
+            text-align: center;
+            color: black;
+        }
+
+        #content.open {
+            max-height: 1000px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="content">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem fugiat recusandae id illum corporis
+            voluptas, possimus sed delectus? Officia a nisi necessitatibus quae itaque totam, distinctio velit maiores
+            atque at sunt! Aperiam porro natus nemo recusandae quam alias veritatis esse neque, placeat, minus amet
+            praesentium vitae iusto necessitatibus rem facere?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur debitis amet quidem, minima non, sed
+            blanditiis molestiae iste eveniet voluptatem voluptates alias natus accusamus provident tempore molestias
+            error quas obcaecati nihil perferendis hic. Quod labore quisquam reprehenderit nisi sequi aliquid ab
+            consequatur placeat atque error ullam alias, deleniti nesciunt mollitia!</p>
+    </div>
+    <div>
+        <a href="#" id="link">Click here for more details</a>
+    </div>
+    <script>
+        let content = document.querySelector("#content");
+        let btn = document.querySelector("#link");
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            if (content.className == "open") {
+                content.className = "";
+            } else {
+                content.className = "open";
+            }
+        })
+    </script>
+</body>
+
+</html>
 ```
