@@ -14,6 +14,7 @@
 * Element change there name according to environment
   * In html world its called **elements**
   * In DOM world its called **Node**
+  * In Javascript its called **object**
 
 ---
 
@@ -1103,6 +1104,7 @@ There are three ways to attach event listeners to an element:
 **Small Example for Read more**
 
 ```html
+<!-- Hide and show div height -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -1122,6 +1124,7 @@ There are three ways to attach event listeners to an element:
             margin: auto;
             max-height: 100px;
             overflow: hidden;
+            transition :max-height 1s;
         }
 
         #link {
@@ -1137,6 +1140,7 @@ There are three ways to attach event listeners to an element:
 
         #content.open {
             max-height: 1000px;
+            transition :max-height 1s;
         }
     </style>
 </head>
@@ -1171,3 +1175,78 @@ There are three ways to attach event listeners to an element:
 
 </html>
 ```
+
+```html
+<!-- Random Color -->
+<button id="btn">Click</button>
+<script>
+    function changeBgColor() {
+        let randomColor = Math.floor(Math.random() * 16777215).toString(16);
+        randomColor.padStart(6, "0");
+        document.body.style.backgroundColor = "#" + randomColor;
+    }
+
+    document.getElementById("btn").addEventListener("click", changeBgColor);
+</script>
+```
+---
+
+### 📘Host Objects Vs Native Objects
+
+**Host Objects :**  Host objects are objects provided by the environment in which your JavaScript code runs (like the browser or Node.js).
+
+Examples in a Browser:
+
+1. window: Represents the browser window.
+
+2. document: Represents the HTML document loaded in the window.
+
+3. XMLHttpRequest: Used to make network requests.
+
+Examples in Node.js:
+
+1. fs: Used for file system operations.
+
+2. http: Used to handle HTTP requests and responses.
+
+**Native Objects :** Definition: Native objects are built-in objects provided by the JavaScript language itself, regardless of the environment.
+
+Examples:
+
+1. Array: Used to create and manipulate arrays.
+2. String: Used to create and manipulate strings.
+3. Object: The base object that other objects inherit from.
+4. Function: Used to create and manipulate functions.
+
+Summary:
+
+1. Host Objects: Provided by the environment (like browser or Node.js).
+2. Native Objects: Built into the JavaScript language itself.
+
+In simple terms, host objects are like tools given by the place where your JavaScript runs, while native objects are like the basic building blocks provided by JavaScript itself.
+
+
+---
+
+### 📘Element Node Object Hierarchy and the prototype available for HTML element
+
+```js
+let p = document.createElement('p');
+console.log(p);     // <p></p>
+
+console.dir(p);     // p object
+
+console.log(p.__proto__)    // HTMLParagraphElement
+```
+
+![Image](./images/object-Hierarchy.png)
+
+* **EventTarget** : It is a root object and serves as the base for all event-handling objects in the DOM. In other words, EventTarget allows all nodes in our DOM to utilize events. It provides the addEventListener method, among others, to handle events. EventTarget is a DOM interface implemented by various objects, including all Node objects, Window, XMLHttpRequest, and others.
+
+* **NodeObject** : The Node object provides methods for traversing the DOM. It includes properties such as parentNode, childNodes, nextSibling, and others.
+
+* **Element** : This class is the base of all DOM elements. It allows us to traverse only element nodes. It provides properties and methods such as nextElementSibling, children, querySelector, and more.
+
+* **Html Element** :  This class provides specific operations and queries that can be performed on any HTML element. It includes properties and methods tailored for HTML elements.
+
+* **HtmlParagraph Element :** This is the object for the \<p> element. Each HTML tag has its own unique object, and the HTMLParagraphElement inherits properties and methods from its ancestors.
