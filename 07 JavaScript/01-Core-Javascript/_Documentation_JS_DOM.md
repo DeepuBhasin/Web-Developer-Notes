@@ -940,17 +940,35 @@ parentElement.removeChild(Node)
 
 ### 📘CSS
 
-```js
-document.body.style.backgroundColor = "red";
-document.body.style.fontSize = "20px";
-document.body.style.padding = "10px";
+* Adding Style
+    ```js
+    document.body.style.backgroundColor = "red";
+    document.body.style.fontSize = "20px";
+    document.body.style.padding = "10px";
 
-// OR
+    // OR
 
-let h1Element = document.querySelector('h1');
-h1Element.setAttribute('style', 'color : red; background-color : pink');
-```
+    let h1Element = document.querySelector('h1');
+    h1Element.setAttribute('style', 'color : red; background-color : pink');
+    ```
+* Toggling Class
 
+    ```html
+    <style>
+        .danger {
+            color: red;
+        }
+    </style>
+    <h1>Hello World</h1>
+    <button id="btn">Change Color</button>
+    <script>
+        let btn = document.getElementById('btn');
+        btn.addEventListener('click', function () {
+            let h1 = document.querySelector('h1');
+            h1.classList.toggle('danger');
+        })
+    </script>
+    ```
 ---
 
 ### 📘Text
@@ -1189,6 +1207,75 @@ There are three ways to attach event listeners to an element:
     document.getElementById("btn").addEventListener("click", changeBgColor);
 </script>
 ```
+
+---
+
+### 📘Bubbling, Capturing, Event Delegation, Event Propagation
+
+* All are written in JS documentation
+
+```html
+<!-- Event Delegation Example -->
+<style>
+    .hidden {
+        display: none;
+    }
+</style>
+<div id="food">
+    <ul>
+        <li>Meats
+            <ul>
+                <li>Red Meat
+                    <ul>
+                        <li>Beef</li>
+                        <li>Pork</li>
+                        <li>Lamb</li>
+                    </ul>
+                </li>
+                <li>Other
+                    <ul>
+                        <li>Fish</li>
+                        <li>Prawns</li>
+                        <li>Chicken</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>Vegetables
+            <ul>
+                <li>Favorite
+                    <ul>
+                        <li>Potatoes</li>
+                        <li>Sweet Corns</li>
+                        <li>Carrot</li>
+                    </ul>
+                </li>
+                <li>Not Favorite
+                    <ul>
+                        <li>Radish</li>
+                        <li>Beetroot</li>
+                        <li>Bottle guard</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<script>
+    let foodElement = document.querySelector('#food');
+    foodElement.addEventListener('click', function (e) {
+        let liElement = e.target;
+
+        let ulElement = liElement.querySelector('ul');
+
+        if (ulElement) {
+            ulElement.classList.toggle('hidden');
+        }
+    });
+</script>
+```
+
+
 ---
 
 ### 📘Host Objects Vs Native Objects
