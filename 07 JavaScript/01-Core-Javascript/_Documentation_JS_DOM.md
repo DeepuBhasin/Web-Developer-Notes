@@ -884,7 +884,7 @@ parentElement.removeChild(Node)
 
 ### 📘Attributes
 
-**Access and Set Attribute**
+**Access and Set Attribute :** like id, class, values, title, text etc
 
 1. DOM Property Method (Short way & best One) : it will give you dynamic value if change value from previous state
 
@@ -904,6 +904,8 @@ parentElement.removeChild(Node)
         console.log(element.textContent);
 
         console.log(element.tagName)    // 'DIV'
+
+        console.log(element.classList.contains('heading')); // true
     </script>
     ```
 
@@ -1006,6 +1008,40 @@ parentElement.removeChild(Node)
     console.log(div.innerHTML);     // Hello <span style="display: none;">World</span>
 </script>
 ```
+
+---
+
+
+### 📘Forms
+
+```html
+<form action="" id="user-details-forms">
+    <div>
+        <label for="first-name">First Name</label>
+        <input type="text" id="first-name" placeholder="Enter your first name" value="First Name Value">
+    </div>
+    <div>
+        <label for="last-name">Last Name</label>
+        <input type="text" id="last-name" placeholder="Enter your last name" value="Last Name Value">
+    </div>
+    <div>
+        <button>Submit</button>
+    </div>
+</form>
+<script>
+    let form = document.forms['user-details-forms'];
+        // OR 
+    let form = document.forms[0];
+
+    console.log(form[0].value);
+</script>
+```
+
+**⚠️Note :** Every form have two events always 
+
+1. Submitting the form
+2. Refreshing the form
+
 ---
 
 ### 📘Normal Vs Optimize
