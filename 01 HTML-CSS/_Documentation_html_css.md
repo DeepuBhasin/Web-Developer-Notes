@@ -1,11 +1,18 @@
 ### 📘Information
 1. HTML : Content Display/ Structure
+
 2. CSS : Style & Design
+
 3. Always follow Separation of concern like write css in css files and js in js files for good practice
+
 4. **kebab case** mostly use in CSS example **main-heading**
+
 5. Real world we mostly use classes instead of id for future use
+
 6. Always use Vector Images (SVG)
+
 7. For Icons [PhosphorIcons](https://phosphoricons.com/) [HeroIcons](https://heroicons.com/)
+
 8. Fallback Mechanism : means if one thing is fail then other will handle example
 
 ```css
@@ -27,6 +34,15 @@ div {
 10. Some Extensions to determines css font properties
     1.  What font - font finder
     2.  Font finder (best one)
+
+11. Best font-families
+
+```css
+body {
+    /* Best when want to show simple text */
+    font-family: 'Courier New', Courier, monospace;
+}
+```
 
 ---
 

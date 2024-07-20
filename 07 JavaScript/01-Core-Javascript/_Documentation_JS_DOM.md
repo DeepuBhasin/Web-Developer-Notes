@@ -903,7 +903,7 @@ parentElement.removeChild(Node)
 
         console.log(element.textContent);
 
-        console.log(element.tagName)
+        console.log(element.tagName)    // 'DIV'
     </script>
     ```
 
@@ -1227,66 +1227,7 @@ There are three ways to attach event listeners to an element:
 
 * All are written in JS documentation
 
-```html
-<!-- Event Delegation Example -->
-<style>
-    .hidden {
-        display: none;
-    }
-</style>
-<div id="food">
-    <ul>
-        <li>Meats
-            <ul>
-                <li>Red Meat
-                    <ul>
-                        <li>Beef</li>
-                        <li>Pork</li>
-                        <li>Lamb</li>
-                    </ul>
-                </li>
-                <li>Other
-                    <ul>
-                        <li>Fish</li>
-                        <li>Prawns</li>
-                        <li>Chicken</li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-        <li>Vegetables
-            <ul>
-                <li>Favorite
-                    <ul>
-                        <li>Potatoes</li>
-                        <li>Sweet Corns</li>
-                        <li>Carrot</li>
-                    </ul>
-                </li>
-                <li>Not Favorite
-                    <ul>
-                        <li>Radish</li>
-                        <li>Beetroot</li>
-                        <li>Bottle guard</li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-    </ul>
-</div>
-<script>
-    let foodElement = document.querySelector('#food');
-    foodElement.addEventListener('click', function (e) {
-        let liElement = e.target;
 
-        let ulElement = liElement.querySelector('ul');
-
-        if (ulElement) {
-            ulElement.classList.toggle('hidden');
-        }
-    });
-</script>
-```
 
 
 ---

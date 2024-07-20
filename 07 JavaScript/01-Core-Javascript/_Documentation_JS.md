@@ -2,25 +2,41 @@
 ## 📘Developer Responsibility
 
 * **Brendan Eich** is a person who created javascript.
+
 * Write good code so everyone can read and understand easily.
+
 * the harder is to understand code and to reason about the code the more difficult it will be to add new features add to more the functionality to the application. Hence it is called bad code.
+
 * An important part of web-development is actually handle the errors. because its very common that errors happen in web-application.
+
 * To test *APi* use *Network tab* with various **Throttling** options *fast/slow/offline*
+
 ---
+
 ## 📘Terminologies
 
+
 * **Implicit** : doing every thing by own.
+
 * **Imperative** : Explain every thing & **Declarative** : Do Automatically.
+
 * **TightCoupling** : means every thing is connected.
+
 * **Iterating** : arrays, strings
+
 * **enumerating** : objects
 ---
 
 ### 📘What is javascript
+
 * Javascript was created to make webpages more dynamic (eg. changes content on a page directly from inside the browser). Originally, it was called LiveScript but due to the popularity of java it was renamed to javascript.
+
 * Javascript is dynamically weakly-typed programming language.
+
 * Interpreted programming language which means not pre-compiled instead parsed and compiled , "Interpreted on the fly" compiled language
+
 * "Hoisted language" Run in different environments (eg in browser)
+
 * Most prominent use case : Run code in browser (on a webpage)
 
 **⚠️Note :** Javascript is totally independent from java and has nothing in common with java.
@@ -34,17 +50,24 @@
 ---
 
 ## 📘Conceptual Aside
+
 1. **Syntax Parsers** : A program that reads your code and determines what it does and if its grammar is valid e.g an interpreter or a compiler.
+
 2. **Execution Contexts** : *A Wrapper to help manage the code that is running*. There are lots of lexical environments which one is currently running is managed via execution context. It can contain things beyond what you've written in your code.
+
 3. **Lexical Environments** : *where something sits physically in the code you write*. 'Lexical' means 'having' to do with words or grammar. A lexical environment exists in programming languages in which **where** you write something is important.
 
 ---
 
 ## 📘Name/Value Pairs and Objects
 
+
 * A Name which **maps** to a **unique value**. eg *Address = '100 Main St.'*.
+
 * The name may be defined more than once, but only can have one value in any given **context**.
+
 * That value may be more name/value pairs.
+
 * **Object** : *A Collection of name values pairs*. The simplest definition when talking about javascript.
 
 ![Image](./images/name-value.png)
@@ -57,11 +80,13 @@
 Execution Context has two phase
 
 1. **Creation Phase** : Set up memory for variables and functions, also set placeholder for variables called **undefined**.
+
 2. **Execution Phase** : means assigns values to variables but not for functions.
 
 In javascript __variables and functions__ are all hoisted to the top of the scope in which they are declared. The scope is usually either global scope or a function scope.
 
  * variables are always __partially hoisted__ and set to __undefined__.
+
  * functions are always __fully hoisted__.
 
 
@@ -114,11 +139,17 @@ fn();
 
 ⚠️ Note
 
+
 * **let, const, function Expression (Arrows Functions), classes** are not hoisted.
+
 * In **const** : Only **Primitive Values** are **immutable** but *Array and Objects* are **non-primitive** types values so these are **mutable**
+
 * __Temporal Dead Zone__ :
+
   * is the time between the __declaration__ and __the initialization__ of _let_ and _const_ variables.
+
   * Temporal Dead Zone is the term to describe the state where variables are in the scope but they are not yet declared.
+
   * why TDZ : **Make it easier to avoid and catch errors**, accessing variables before declaration is a bad practice and should be avoided.
 
 ```js
@@ -5341,32 +5372,133 @@ gp.addEventListener('click', function (e) {
 
 ---
 
-
 ## 📘Event Delegation
-* In event delegation we use the fact the events bubble up and we do that by putting the eventListener on a comman parent of all the elements that we are interested in.
+
+* Event Delegation is a technique in which we use the fact the events bubble up and we do that by putting the eventListener on a comman parent of all the elements that we are interested in.
+
+* It help from adding various loops to access elements
+
+* Its also help in momery efficent because we are adding addEventListeners on Parent not on each child
 
 * In event delegation we need two things basically
-1. First, we add the event listener to a common parent element of all the elements that we're interested in.
-2. Determine what element originated the event so that we can than work with that element where the event was actually created.
 
-```html
-<ul id="categories">
-    <li data-category-value="apple">Apple</li>
-    <li data-category-value="mango">Mango</li>
-    <li data-category-value="banana">Banana</li>
-    <li data-category-value="kiwi">Kiwi</li>
-</ul>
-<script>
-    let cat = document.querySelector('#categories');
-    cat.addEventListener('click', function (e) {
-        console.log(e.target);
+  1. First, we add the event listener to a common parent element of all the elements that we're interested in.
 
-        if (e.target.dataset.categoryValue === 'apple') {
-            alert('You have Selected Apple')
+  2. Determine what element originated the event so that we can than work with that element where the event was actually created.
+
+  ```html
+  <ul id="categories">
+      <li data-category-value="apple">Apple</li>
+      <li data-category-value="mango">Mango</li>
+      <li data-category-value="banana">Banana</li>
+      <li data-category-value="kiwi">Kiwi</li>
+  </ul>
+  <script>
+      let cat = document.querySelector('#categories');
+      cat.addEventListener('click', function (e) {
+          console.log(e.target);
+
+          if (e.target.dataset.categoryValue === 'apple') {
+              alert('You have Selected Apple')
+          }
+      })
+  </script>
+  ```
+
+  ```html
+    <!-- Event Delegation Example for hide and show list-->
+    <style>
+        .hidden {
+            display: none;
         }
-    })
-</script>
-```
+    </style>
+    <div id="food">
+        <ul>
+            <li>Meats
+                <ul>
+                    <li>Red Meat
+                        <ul>
+                            <li>Beef</li>
+                            <li>Pork</li>
+                            <li>Lamb</li>
+                        </ul>
+                    </li>
+                    <li>Other
+                        <ul>
+                            <li>Fish</li>
+                            <li>Prawns</li>
+                            <li>Chicken</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>Vegetables
+                <ul>
+                    <li>Favorite
+                        <ul>
+                            <li>Potatoes</li>
+                            <li>Sweet Corns</li>
+                            <li>Carrot</li>
+                        </ul>
+                    </li>
+                    <li>Not Favorite
+                        <ul>
+                            <li>Radish</li>
+                            <li>Beetroot</li>
+                            <li>Bottle guard</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <script>
+        let foodElement = document.querySelector('#food');
+        foodElement.addEventListener('click', function (e) {
+            let liElement = e.target;
+
+            let ulElement = liElement.querySelector('ul');
+
+            if (ulElement) {
+                ulElement.classList.toggle('hidden');
+            }
+        });
+    </script>
+    ```
+    ```html
+    <!-- For removing div -->
+    <div id="delegation">
+        <div id="box-1">
+            <h2>Heading-1</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi hic magnam voluptatum quia. Officiis
+                voluptas veritatis sed cupiditate eos quia facilis aliquid! Laboriosam error quae, ipsa animi neque
+                officiis ea!</p>
+            <button>Close</button>
+        </div>
+        <div id="box-2">
+            <h2>Heading-2</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi hic magnam voluptatum quia. Officiis
+                voluptas veritatis sed cupiditate eos quia facilis aliquid! Laboriosam error quae, ipsa animi neque
+                officiis ea!</p>
+            <button>Close</button>
+        </div>
+        <div id="box-3">
+            <h2>Heading-3</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi hic magnam voluptatum quia. Officiis
+                voluptas veritatis sed cupiditate eos quia facilis aliquid! Laboriosam error quae, ipsa animi neque
+                officiis ea!</p>
+            <button>Close</button>
+        </div>
+    </div>
+    <script>
+        let divElement = document.querySelector("#delegation");
+        divElement.addEventListener("click", function (event) {
+            if (event.target.parentElement.tagName.toLowerCase() == "div") {
+                event.target.parentElement.remove();
+            }
+        })
+    </script>
+    ```
 
 ---
 
