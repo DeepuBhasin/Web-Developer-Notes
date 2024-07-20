@@ -20,7 +20,7 @@
 * Javascript was created to make webpages more dynamic (eg. changes content on a page directly from inside the browser). Originally, it was called LiveScript but due to the popularity of java it was renamed to javascript.
 * Javascript is dynamically weakly-typed programming language.
 * Interpreted programming language which means not pre-compiled instead parsed and compiled , "Interpreted on the fly" compiled language
-* "Hoisted language" Run in different environments (eg in browser) 
+* "Hoisted language" Run in different environments (eg in browser)
 * Most prominent use case : Run code in browser (on a webpage)
 
 **⚠️Note :** Javascript is totally independent from java and has nothing in common with java.
@@ -589,7 +589,7 @@ console.log(obj.firstName)  // Dp
 console.log(obj[firstName]) // 'Deepinder'
 
 for (const key in obj) {
-    console.log(key);      // firstName only 
+    console.log(key);      // firstName only
 }
 ```
 
@@ -2958,7 +2958,7 @@ function getData(condition, time) {
 
 const apiData = getData(true, 2000);
 
-// 
+//
 ```
 
 
@@ -5204,6 +5204,8 @@ document.querySelector('header').addEventListener('click', function (event) {
 
 ⚠️ **Note :** by Default **Bubbling** behaviour is active hence 3rd parameter of **addEventListener** is *false*, For **Capturing** behaviour we have set it *true*.
 
+* Capturing Phase Example (third parameter set to false)
+
 ```html
 <div id="gp"
     style="height: 200px;width: 200px; border: 2px solid red; display: flex; align-items: center; justify-content: center;">
@@ -5247,13 +5249,98 @@ document.querySelector('header').addEventListener('click', function (event) {
 
 ![Image](./images/event-delegation.png)
 
-* **To Stop this problem we use**
+* **To Stop this problem we use Stop Propagation :** It basically stop all other eventListeners while in bubbling and capturing phase, it will only execute that event where we are clicking example if click on child then child event will occur other will not occur.
+
+1. **StopPropagation Example :** This is use full when we have single event on particular element
 
 ```js
 c.addEventListener('click', function (e) {
     e.stopPropagation()
 })
+
+// Above Example with stop Propagation.
+gp.addEventListener('click', function (e) {
+        e.stopPropagation();
+        console.log('Grand Parent');
+        }, false);
+    p.addEventListener('click', function (e) {
+        e.stopPropagation();
+        console.log('Parent');
+        }, false);
+    c.addEventListener('click', function (e) {
+        e.stopPropagation();
+        console.log('Child');
+    }, false);
 ```
+
+2. **StopImmediatePropagation Example :**  This is use full when we have single event on particular element
+
+```js
+// In this example when you click on child it will stop the other events as well as child other events
+
+    let gp = document.querySelector('#gp');
+    let p = document.querySelector('#p');
+    let c = document.querySelector('#c');
+
+    gp.addEventListener('click', function (e) {
+        e.stopPropagation()
+        console.log('Grand Parent');
+    }, false);
+    p.addEventListener('click', function (e) {
+        e.stopPropagation()
+        console.log('Parent');
+    }, false);
+
+    // with stopPropagation (both event will fire in this case)
+    c.addEventListener('click', function (e) {
+        e.stopPropagation()
+        console.log('Child first event');
+    }, false);
+    c.addEventListener('click', function (e) {
+        e.stopPropagation()
+        console.log('Child second event');
+    }, false);
+
+    // with stopImmediatePropagation (only the first event will fire in this case)
+    c.addEventListener('click', function (e) {
+        e.stopImmediatePropagation()
+        console.log('Child first event');
+    }, false);
+    c.addEventListener('click', function (e) {
+        console.log('Child second event');
+    }, false);
+```
+
+
+**📚Concaptual Example :** Always capturing phase will occur first in all case then bubbling phase in all phase
+```html
+<!-- Capturing Phase and Bubbling -->
+<div>Div
+    <form>
+        Form
+        <p>P</p>
+    </form>
+</div>
+<script>
+    let div = document.querySelectorAll('*');
+    for (const element of div) {
+        // capturing phase
+        element.addEventListener('click', (event) => {
+            console.log('Capturing', element.tagName)
+        }, true);
+
+        // Bubbling phase
+        element.addEventListener('click', (event) => {
+            console.log('Bubbling Phase', element.tagName)
+        }, false);
+    }
+</script>
+```
+
+![Image](./images/event-delegation-2.png)
+
+---
+
 
 ## 📘Event Delegation
 * In event delegation we use the fact the events bubble up and we do that by putting the eventListener on a comman parent of all the elements that we are interested in.
@@ -5280,6 +5367,9 @@ c.addEventListener('click', function (e) {
     })
 </script>
 ```
+
+---
+
 ## 📘DOM Traversing
 * is basically walking through the DOM. which means that we can select an element based on another element for example a direct child or a direct parent element or sometimes we don't even know the structure of DOM at runtime.
 

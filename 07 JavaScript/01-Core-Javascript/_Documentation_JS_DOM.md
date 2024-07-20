@@ -888,53 +888,66 @@ parentElement.removeChild(Node)
 
 1. DOM Property Method (Short way & best One) : it will give you dynamic value if change value from previous state
 
-```html
-<body>
+    ```html
     <div id="heading" class="heading" title="Heading element">Heading One</div>
-</body>
-```
-
-![Image](./images/document.getElementById.png)
-
-
-1. HTML Attribute (Long way) : it will give you static value if change value from previous state
-
-```html
-<body>
-    <div id="heading">Heading One</div>
     <script>
-        let headingElement = document.getElementById("heading");
+        let element = document.querySelector('#heading');
 
-        // To Get Attribute
-        headingElement.setAttribute("class", "heading-class");
-        headingElement.setAttribute("title", "heading title");
+        console.log(element);
 
-        // To Set Attribute (it will give you static value if change value from previous state)
-        console.log(headingElement.getAttribute("class"));
+        console.log(element.id);
+
+        console.log(element.className);
+
+        console.log(element.title);
+
+        console.log(element.textContent);
+
+        console.log(element.tagName)
     </script>
-</body>
-```
-![Image](./images/attributes.png)
+    ```
 
-**⚠️Note :** setAttribute method will always replace existing attributes.
+    ![Image](./images/document.getElementById.png)
+
+
+2. HTML Attribute (Long way) : it will give you static value if change value from previous state
+
+    ```html
+    <body>
+        <div id="heading">Heading One</div>
+        <script>
+            let headingElement = document.getElementById("heading");
+
+            // To Get Attribute
+            headingElement.setAttribute("class", "heading-class");
+            headingElement.setAttribute("title", "heading title");
+
+            // To Set Attribute (it will give you static value if change value from previous state)
+            console.log(headingElement.getAttribute("class"));
+        </script>
+    </body>
+    ```
+    ![Image](./images/attributes.png)
+
+    **⚠️Note :** setAttribute method will always replace existing attributes.
 
 
 3. using Create Element
 
-```html
-<script>
-    let div = document.createElement('div');
-    div.innerHTML = "Hello world"
-    div.id = "div-id";
-    div.className = "div-class";
-    div.setAttribute('data-key', 'random-value');
-    div.style.backgroundColor = 'red';
-    div.style.color = "#fff"
-    div.style.padding = '10px'
+    ```html
+    <script>
+        let div = document.createElement('div');
+        div.innerHTML = "Hello world"
+        div.id = "div-id";
+        div.className = "div-class";
+        div.setAttribute('data-key', 'random-value');
+        div.style.backgroundColor = 'red';
+        div.style.color = "#fff"
+        div.style.padding = '10px'
 
-    document.body.appendChild(div);
-</script>
-```
+        document.body.appendChild(div);
+    </script>
+    ```
 
 ---
 
@@ -1210,7 +1223,7 @@ There are three ways to attach event listeners to an element:
 
 ---
 
-### 📘Bubbling, Capturing, Event Delegation, Event Propagation
+### 📘Bubbling, Capturing, StopPropagation, StopImmediatePropagation and Event Delegation,
 
 * All are written in JS documentation
 
