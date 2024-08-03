@@ -16,10 +16,10 @@ fs.readFileSync('./input.txt', 'utf-8', (error, data) => {
 ```
 
 3. Data Can be store in following modules
-   
+
    1. Json-File
    2. Mysql
-   3. MondoDB 
+   3. MondoDB
 
 ---
 
@@ -187,9 +187,9 @@ const http = require('http');
 
 
 * Steps to build server
-  
+
   1. Create a server
-  
+
   2. Start a server to consume
 
 
@@ -201,8 +201,8 @@ const http = require('http');
 ```js
 const http = require('http');
 
-/* 
-    use to create server 
+/*
+    use to create server
     1. First parameter will be request Parameter
     2. Second Parameter will be response Parameter
 */
@@ -211,7 +211,7 @@ const http = require('http');
 
 // creating server
 const server = http.createServer((request, response) => {
-    
+
     // use to send response to client
     console.log(request)
 
@@ -220,8 +220,8 @@ const server = http.createServer((request, response) => {
 });
 
 
-/* 
-    use to create server 
+/*
+    use to create server
     1. First parameter will be Port Number
     2. Second Parameter will be Address
     3. Optional parameter for response
@@ -244,7 +244,7 @@ http://127.0.0.1:8000/
 ```
 
 
-**📖 Theory :** 
+**📖 Theory :**
 
 ```js
 const server = http.createServer((request, response) => {
@@ -377,3 +377,82 @@ app('Deepinder Singh')
 ```
 node script.js
 ```
+
+
+---
+
+
+### 📘Commands for Packages, Types of Packages, Version, Version Indicators
+
+* **Commands**
+
+    1. To Install specific Package : npm i \<package-name>
+
+    2. Install package with specific version : npm i \<package-name>@\<version-number>
+
+    3. To Remove package : npm r or npm uninstall \<package-name>
+    
+    4. To update the packages : npm update
+    
+    5. To check outdate package : npm outdate (run this command in terminal directly)
+
+    ![Image](./images/npm-outdate.png)
+
+    **⚠️Note :** package-lock.json file is also very important file because it store the versions of the dependency packages.
+
+* **Normal Dependency :** These are those packages which provide core functionality to run application, **without these packages we cannot run our applications**. 
+
+* **Dev Dependency :** These package are those packages which provide just additional features while developing application in development mode, **without these package we can run our applications as well.**
+
+
+* **Versions** : This Indicate version of the package this will be like **MajorVersion.MinorVersion.PatchVersion** (12.3.11)
+  
+  * Patch Version : it defines that its only fix bugs.
+
+  * MinorVersion : It defines that it introduce new feature but it does not include breaking changes
+  
+  * MajorVersion : It defines that its a huge change which can have breaking changes 
+
+
+* **Version Indicator :**
+  
+  * *: Matches any version of the package. It is the most permissive and allows any update, regardless of major, minor, or patch changes. (not good one can lead to breaking changes code)
+  
+  * ^ (caret): Allows updates that do not change the first non-zero number. For example, ^1.2.3 will allow updates to 1.x.x but not 2.x.x. It is more permissive.
+
+  * ~ (tilde): Allows updates that do not change the minor version number. For example, ~1.2.3 will allow updates to 1.2.x but not 1.3.x. It is more restrictive.(this one is more save because its only accept patches)
+
+
+
+
+**Some useful Packages**
+
+
+
+1. **Slugify :** it is use to make readable url's. It is basically a function use to create slugs, slugs is basically just the last part of the url that contains a unique string that identify the resource that the website is displaying example 127.0.0.1:8000/product/**fresh-avocados** (in simple words use slugs instead of numbers like ?id=1 use this ?id=fresh-avocado).
+
+    ```
+    npm i slugify
+    ```
+
+    ```js
+    const slugify = require('slugify');
+    console.log(slugify('Some Title', { lower: true }));    // some-title
+    ```
+
+
+    Check the documentation for various options
+
+2. **Nodemon :** It helps node js applications by automatically restarting when ever we change some files. (here index.js file will be server file)
+
+    ```js
+    "scripts": {
+        "start": "nodemon index.js"
+    },
+    ```
+
+    **⚠️Note :**
+
+    1. when you want to run any thing locally you have to write command under **scripts** otherwise in case of global install you will write direct command example : *nodemon index.js*
+
+    2. **start** is kind of default one for development you we can write *npm start* instead of *npm run start*

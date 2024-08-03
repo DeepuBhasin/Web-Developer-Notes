@@ -248,6 +248,68 @@ In summary:
 
 ---
 
+
+### 📘Host Objects Vs Native Objects
+
+**Host Objects :**  Host objects are objects provided by the environment in which your JavaScript code runs (like the browser or Node.js).
+
+Examples in a Browser:
+
+1. window: Represents the browser window.
+
+2. document: Represents the HTML document loaded in the window.
+
+3. XMLHttpRequest: Used to make network requests.
+
+Examples in Node.js:
+
+1. fs: Used for file system operations.
+
+2. http: Used to handle HTTP requests and responses.
+
+**Native Objects :** Definition: Native objects are built-in objects provided by the JavaScript language itself, regardless of the environment.
+
+Examples:
+
+1. Array: Used to create and manipulate arrays.
+2. String: Used to create and manipulate strings.
+3. Object: The base object that other objects inherit from.
+4. Function: Used to create and manipulate functions.
+
+Summary:
+
+1. Host Objects: Provided by the environment (like browser or Node.js).
+2. Native Objects: Built into the JavaScript language itself.
+
+In simple terms, host objects are like tools given by the place where your JavaScript runs, while native objects are like the basic building blocks provided by JavaScript itself.
+
+
+---
+
+### 📘Element Node Object Hierarchy and the prototype available for HTML element
+
+```js
+let p = document.createElement('p');
+console.log(p);     // <p></p>
+
+console.dir(p);     // p object
+
+console.log(p.__proto__)    // HTMLParagraphElement
+```
+
+![Image](./images/object-Hierarchy.png)
+
+* **EventTarget** : It is a root object and serves as the base for all event-handling objects in the DOM. In other words, EventTarget allows all nodes in our DOM to utilize events. It provides the addEventListener method, among others, to handle events. EventTarget is a DOM interface implemented by various objects, including all Node objects, Window, XMLHttpRequest, and others.
+
+* **NodeObject** : The Node object provides methods for traversing the DOM. It includes properties such as parentNode, childNodes, nextSibling, and others.
+
+* **Element** : This class is the base of all DOM elements. It allows us to traverse only element nodes. It provides properties and methods such as nextElementSibling, children, querySelector, and more.
+
+* **Html Element** :  This class provides specific operations and queries that can be performed on any HTML element. It includes properties and methods tailored for HTML elements.
+
+* **HtmlParagraph Element :** This is the object for the \<p> element. Each HTML tag has its own unique object, and the HTMLParagraphElement inherits properties and methods from its ancestors.
+
+
 ### 📘Difference DOM Code, Javascript Code & Access DOM Elements (without nodes)
 
 ![Image](./images/dom-code-vs-javascript-code.png)
@@ -1263,67 +1325,100 @@ There are three ways to attach event listeners to an element:
 
 * All are written in JS documentation
 
-
-
-
 ---
 
-### 📘Host Objects Vs Native Objects
+### 📘Find Positions
 
-**Host Objects :**  Host objects are objects provided by the environment in which your JavaScript code runs (like the browser or Node.js).
+* For Cursor
+    ```js
+    function mouseCursor(e) {
+        e.clientX
+        e.clientY
+    }
+    ```
 
-Examples in a Browser:
+* For ElementPositions
+    
+    ```js
+    function mouseCursor(e) {
+        console.log(card.offsetTop);        // for Top
+        console.log(card.offsetLeft);       // for left
+        console.log(card.offsetRight);      // for right
+        console.log(card.offsetBottom);     // for bottom
+    }
+    ```  
 
-1. window: Represents the browser window.
+### 📘Various Mouse Events
 
-2. document: Represents the HTML document loaded in the window.
+1. click
 
-3. XMLHttpRequest: Used to make network requests.
-
-Examples in Node.js:
-
-1. fs: Used for file system operations.
-
-2. http: Used to handle HTTP requests and responses.
-
-**Native Objects :** Definition: Native objects are built-in objects provided by the JavaScript language itself, regardless of the environment.
-
-Examples:
-
-1. Array: Used to create and manipulate arrays.
-2. String: Used to create and manipulate strings.
-3. Object: The base object that other objects inherit from.
-4. Function: Used to create and manipulate functions.
-
-Summary:
-
-1. Host Objects: Provided by the environment (like browser or Node.js).
-2. Native Objects: Built into the JavaScript language itself.
-
-In simple terms, host objects are like tools given by the place where your JavaScript runs, while native objects are like the basic building blocks provided by JavaScript itself.
+2. dblclick
+3. mouseup
+4. mousedown
+5. mouseenter
+6. mousemove
+7. mouseleave
 
 
----
 
-### 📘Element Node Object Hierarchy and the prototype available for HTML element
+## 📔Events Examples
 
-```js
-let p = document.createElement('p');
-console.log(p);     // <p></p>
+1. Mouse Drag
 
-console.dir(p);     // p object
+```html
+<style>
+    body {
+        padding: 0;
+        margin: 0;
+    }
 
-console.log(p.__proto__)    // HTMLParagraphElement
+    #container {
+        background-color: #212228;
+        height: 100vh;
+        width: 100vw;
+    }
+
+    #card {
+        width: 400px;
+        height: 400px;
+        background-color: #AFDA9F;
+        border-radius: 5px;
+        cursor: pointer;
+
+        /* Most important Point */
+        position: fixed;
+    }
+</style>
+<div id="container">
+    <div id="card"></div>
+</div>
+<script>
+    let startX = 0;
+    let startY = 0;
+
+    const card = document.getElementById('card');
+
+    card.addEventListener('mousedown', (e) => {
+        startX = e.clientX;
+        startY = e.clientY;
+
+        console.log(card.offsetTop);
+
+        function fnMouseMove(e) {
+            const newX = e.clientX - startX;
+            const newY = e.clientY - startY;
+
+            startX = e.clientX;
+            startY = e.clientY;
+            card.style.top = (card.offsetTop + newY) + 'px';
+            card.style.left = (card.offsetLeft + newX) + 'px';
+        }
+
+        document.addEventListener('mousemove', fnMouseMove);
+
+        document.addEventListener('mouseup', () => {
+            document.removeEventListener('mousemove', fnMouseMove);
+        }, { once: true });
+    });
+</script>
 ```
-
-![Image](./images/object-Hierarchy.png)
-
-* **EventTarget** : It is a root object and serves as the base for all event-handling objects in the DOM. In other words, EventTarget allows all nodes in our DOM to utilize events. It provides the addEventListener method, among others, to handle events. EventTarget is a DOM interface implemented by various objects, including all Node objects, Window, XMLHttpRequest, and others.
-
-* **NodeObject** : The Node object provides methods for traversing the DOM. It includes properties such as parentNode, childNodes, nextSibling, and others.
-
-* **Element** : This class is the base of all DOM elements. It allows us to traverse only element nodes. It provides properties and methods such as nextElementSibling, children, querySelector, and more.
-
-* **Html Element** :  This class provides specific operations and queries that can be performed on any HTML element. It includes properties and methods tailored for HTML elements.
-
-* **HtmlParagraph Element :** This is the object for the \<p> element. Each HTML tag has its own unique object, and the HTMLParagraphElement inherits properties and methods from its ancestors.
