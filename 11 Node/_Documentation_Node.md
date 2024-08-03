@@ -522,3 +522,5 @@ here is what you need to know. First, the job of TCP is to break out the request
 
 ![Image](./images/dynamic-websites-vs-api.png)
 
+![Image](./images/one-api-many-consumer.png)
+
