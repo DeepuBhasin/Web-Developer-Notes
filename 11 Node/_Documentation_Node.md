@@ -2,10 +2,26 @@
 
 1. For Node Documentations (all api's)
 
-```
-https://nodejs.org/docs/latest/api/
-```
-2. In Node first parameter in every function (callback) will be **error** parameter and second one will be **data**
+    ```
+    https://nodejs.org/docs/latest/api/
+    ```
+
+2. Node is single threaded language but it is async in nature.
+
+
+3. Data Can be store in following modules
+
+   1. Json-File
+   2. Mysql
+   3. MondoDB
+
+4. Node Vs Npm
+
+   1. node and npm are different things npm stands for node package manager. This thing get install automatically to deal with packages while node is run time environment.
+
+   2. node -v to check version of node & npm -v  to check version of npm (their version can be different from each other)
+
+5. In Node first parameter in every function (callback) will be **error** parameter and second one will be **data**
 
 ```js
 // Example
@@ -14,12 +30,6 @@ fs.readFileSync('./input.txt', 'utf-8', (error, data) => {
     console.log('error', error);
 })
 ```
-
-3. Data Can be store in following modules
-
-   1. Json-File
-   2. Mysql
-   3. MondoDB
 
 ---
 
@@ -33,18 +43,25 @@ fs.readFileSync('./input.txt', 'utf-8', (error, data) => {
 
 ### 📘Javascript on the server Side
 
-* Build fast, highly scalable network applications (back-end).
+* Node is not a language. Its a Server Environment but Code syntax of javascript and Node is same (but it is not exactly same).
 
-* Node.js can access file system.
+* Build fast, highly scalable network applications (back-end) like create api, database connections but javascript not.
+
+* Node.js can access file system but javascript not.
+
+* Node can connect with Database but javascript not.
 
 * Better networking capabilities.
 
+* Node.js use chrome's V8 engine to execute code.
+
+* Node.js mostly used for api and its is super fast, so we can connect the same database with web App, Mobile App. Node is super-fast for api's
 
 
 ![Image](./images/why-and-when-to-use-node-js.png)
 
 
-### 📘Global variables
+### 📘Global variables, Global modules and Non Global Modules
 
 * Open terminal and type **node** then hit enter
 
@@ -61,7 +78,24 @@ fs.readFileSync('./input.txt', 'utf-8', (error, data) => {
 
 * We can write any thing in terminal like js example creating variable, print output etc
 
+
+* Global & Non-Global Module : Global module are those module which we do not import and accessible all the time and Non-Global are those which we need to import to access.
+
+    ```js
+    console.log('Hello World')  // This is global module
+
+    const fs = require('fs');   // This is non-global module
+    fs.writeFileSync('hello.txt', 'Hello World');
+    ```
+
 ---
+
+
+### 📘UseFul Variables
+
+* __dirname : to print current working directory.
+
+* __filename : to print current working file name.
 
 
 ## 📘Synchronous Vs Asynchronous
@@ -388,7 +422,7 @@ node script.js
 
     1. To Install specific Package : npm i \<package-name>
 
-    2. Install package with specific version : npm i \<package-name>@\<version-number>
+    2. Install package with specific version : npm i \<package-name>@\<version-number> example npm i @4.1.1 or npm i @4 (it will install best version related to 4)
 
     3. To Remove package : npm r or npm uninstall \<package-name>
 
@@ -524,3 +558,72 @@ here is what you need to know. First, the job of TCP is to break out the request
 
 ![Image](./images/one-api-many-consumer.png)
 
+---
+
+### 📘Node Architecture and Node Thread
+
+![Image](./images/node-architecture.png)
+
+![Image](./images/node-process-and-thread.png)
+
+---
+
+### 📘Asynchronous
+
+This is same as in javascript
+
+---
+
+### 📘Whats is express and why use it and Basic Code
+
+* Express is minimal node.js framework, a higher level of abstraction and it is built on the node.js
+
+* Express contains a very  robust set of features: complex routing, easier handling of request and response, middlewares, server-side rendering etc.
+
+* Express allows for rapid development of node.js application. we don't have to re-invent the wheel;
+
+* Express makes it easier to organize our application into the MVC architecture.
+
+Basic Code
+
+* Install package name
+
+    ```
+    npm i express
+    ```
+
+* Package.json
+
+    ```js
+    "scripts": {
+        "start": "node app.js"
+    }
+    ```
+
+* app.js
+
+    ```js
+    const express = require('express');
+
+    // call express
+    const app = express();
+
+    // Routes with http method
+    app.get('/', (req, res) => {
+        // return type of res.send() is string
+        //   res.send('Hello World')
+
+        // return type of res.json() is object with convert into string
+        res.status(200).json({ message: 'Hello World' });
+    });
+
+    // listen to port
+    const port = 3000;
+    app.listen(port, () => console.log(`Server started on port ${port}...`));
+    ```
+
+* command
+
+  ```
+  npm run start
+  ```
