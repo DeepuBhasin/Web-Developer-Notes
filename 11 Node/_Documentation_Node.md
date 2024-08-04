@@ -556,6 +556,9 @@ here is what you need to know. First, the job of TCP is to break out the request
 
 ![Image](./images/dynamic-websites-vs-api.png)
 
+API : Application Programming Interface: a piece of software that can be used by another piece of software, in order to allow applications to talk to each other. 
+
+
 ![Image](./images/one-api-many-consumer.png)
 
 ---
@@ -627,3 +630,41 @@ Basic Code
   ```
   npm run start
   ```
+
+### 📘API and Rest Architecture
+
+* Application Programming Interface: a piece of software that can be used by another piece of software, in order to allow applications to talk to each other. 
+
+
+* Why json is used 
+  
+  * Its very light weight can easily transfer on internet.
+  
+  * Every one is using and readable for humans and computers as well.
+
+  * Right now it is majorly use in every softwares.
+
+
+Rest Architecture
+
+1. Separate API into logic
+
+2. Expose Structure resource-based URL's
+
+3. Use HTTP methods (verb)
+
+4. Send Data as JSON (usually)
+
+5. Be Stateless
+
+![Image](./images/rest-architecture-1.png)
+
+![Image](./images/rest-architecture-2.png)
+
+![Image](./images/rest-architecture-3.png)
+
+![Image](./images/rest-architecture-4.png)
+
+![Image](./images/rest-architecture-5.png)
+
+
