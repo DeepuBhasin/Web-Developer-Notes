@@ -23,14 +23,25 @@
 
 5. In Node first parameter in every function (callback) will be **error** parameter and second one will be **data**
 
-```js
-// Example
-fs.readFileSync('./input.txt', 'utf-8', (error, data) => {
-    console.log('data : ', data);
-    console.log('error', error);
-})
-```
+    ```js
+    // Example
+    fs.readFileSync('./input.txt', 'utf-8', (error, data) => {
+        console.log('data : ', data);
+        console.log('error', error);
+    })
+    ```
 
+6. In Node when every we pass any *callback* that means that function is asynchronous function. Example when *readFile* read file completely then it will call that callback function.
+
+
+
+    ```js
+    // Example
+    fs.readFile('./input.txt', 'utf-8', (error, data) => {
+        console.log('data : ', data);
+        console.log('error', error);
+    })
+    ```
 ---
 
 ### 📘What is Node.js
@@ -60,24 +71,45 @@ fs.readFileSync('./input.txt', 'utf-8', (error, data) => {
 
 ![Image](./images/why-and-when-to-use-node-js.png)
 
+---
 
-### 📘Global variables, Global modules and Non Global Modules
+### 📘REPL & Global variables,
 
-* Open terminal and type **node** then hit enter
+1. Node terminal called REPL (Read Evaluate Print Loop)
 
-* Press **tab** key word you can see a list of global variables
+2. type *node* to enter into REPL & type *.exit* to exit from REPL
 
-* You can see various methods in function constructor using **String.** then press tab
-
-* _ (underscore) it will store your previous result.
+3. Last result always store in *_* (underscore)
 
     ```js
-    3 + 4   // 7
-    _ + 5   // 12
+        var a = 10;
+        _  // 10
+
+        var c = "Hello World";
+        _  // "Hello World"
+
+        var b = 10 + 10;
+        _  // 20
     ```
 
-* We can write any thing in terminal like js example creating variable, print output etc
+4. Press **tab** key word you can see a list of global variables
 
+5. You can see various methods in function constructor using **String.** then press tab
+
+
+6.  We can write any thing in terminal like js example creating variable, print output etc
+
+---
+
+### 📘Modules
+
+* There are 3 Types of Modules
+
+  1. Inbuilt : fs. http etc
+
+  2. User-defined : import or export type
+
+  3. Third party modules : express
 
 * Global & Non-Global Module : Global module are those module which we do not import and accessible all the time and Non-Global are those which we need to import to access.
 
@@ -88,14 +120,22 @@ fs.readFileSync('./input.txt', 'utf-8', (error, data) => {
     fs.writeFileSync('hello.txt', 'Hello World');
     ```
 
----
 
+---
 
 ### 📘UseFul Variables
 
 * __dirname : to print current working directory.
 
 * __filename : to print current working file name.
+
+* path : to get current directory path (best one)
+
+    ```js
+    const path = require('path');
+
+    const redirectToFolder = path.join(__dirname, '/any-folder-name');
+    ```
 
 
 ## 📘Synchronous Vs Asynchronous
@@ -187,6 +227,10 @@ console.log('Executed End');
     error null */
 ```
 
+
+**⚠️Note :** If we do not pass *'utf-8'* as parameter then it will return *Buffer* instead of text. This Buffer means its data is saved into temporary memory.
+
+
 * **Reading and writing Data**
 
 ```js
@@ -277,6 +321,7 @@ node index.js
 http://127.0.0.1:8000/
 ```
 
+**⚠️ Note :** if you mention other the *80* then we have to write complete address example http://127.0.0.1:8000 otherwise we don't need to add port number
 
 **📖 Theory :**
 
@@ -412,6 +457,81 @@ app('Deepinder Singh')
 node script.js
 ```
 
+---
+
+
+### 📘Getting inputs from command line
+
+* You can get parameters from terminal in node using ```process.argv``` (argument Vector). It will return array in which first two elements are predefined.
+
+* index.js
+
+    ```js
+    // index.js
+    const fs = require('fs');
+
+    const action = process.argv[2];
+    const fileName = process.argv[3];
+    const fileContent = process.argv[4];
+
+    if (action === 'add') {
+        fs.writeFileSync(fileName, fileContent, (err) => {
+            if (err) {
+            console.log(err);
+            } else {
+            console.log('File created successfully');
+            }
+        });
+    } else if (action === 'remove') {
+        fs.unlinkSync(fileName, (err) => {
+            if (err) {
+            console.log(err);
+            } else {
+            console.log('File removed successfully');
+            }
+        });
+    } else {
+        console.log('Invalid action');
+    }
+    ```
+
+* Command
+
+    ```
+    node index.js add hello.txt 'Hello World from react'
+
+    node index.js remove hello.txt
+    ```
+---
+
+---
+
+### 📘Create Files and Directory
+
+```js
+const path = require('path');
+const fs = require('fs');
+const directoryName = 'files';
+
+fs.mkdirSync(directoryName);
+
+const dirPath = path.join(__dirname, directoryName);
+for (let i = 1; i <= 5; i++) {
+  fs.writeFileSync(`${dirPath}/file-${i}.txt`, 'hello world');
+}
+
+fs.readdir(dirPath, (err, files) => {
+  if (err) {
+    console.log(err);
+  } else {
+    files.forEach((file) => {
+      console.log(file);
+    });
+  }
+});
+```
+
+**⚠️Note :** When ever we run node in any folder it will create that folder as web server or kind of server therefore we cannot access any files outside of this server link in D drive, C Drive etc it is good other wise hacker can easily access your data.
 
 ---
 
@@ -429,6 +549,8 @@ node script.js
     4. To update the packages : npm update
 
     5. To check outdate package : npm outdate (run this command in terminal directly)
+
+    6. To check version of package : npm view \<package-name> version
 
     ![Image](./images/npm-outdate.png)
 
@@ -556,7 +678,7 @@ here is what you need to know. First, the job of TCP is to break out the request
 
 ![Image](./images/dynamic-websites-vs-api.png)
 
-API : Application Programming Interface: a piece of software that can be used by another piece of software, in order to allow applications to talk to each other. 
+API : Application Programming Interface: a piece of software that can be used by another piece of software, in order to allow applications to talk to each other.
 
 
 ![Image](./images/one-api-many-consumer.png)
@@ -579,7 +701,7 @@ This is same as in javascript
 
 ### 📘Whats is express and why use it and Basic Code
 
-* Express is minimal node.js framework, a higher level of abstraction and it is built on the node.js
+* Express is minimal **node.js framework**, a higher level of abstraction and it is built on the node.js
 
 * Express contains a very  robust set of features: complex routing, easier handling of request and response, middlewares, server-side rendering etc.
 
@@ -633,13 +755,13 @@ Basic Code
 
 ### 📘API and Rest Architecture
 
-* Application Programming Interface: a piece of software that can be used by another piece of software, in order to allow applications to talk to each other. 
+* Application Programming Interface: a piece of software that can be used by another piece of software, in order to allow applications to talk to each other.
 
 
-* Why json is used 
-  
+* Why json is used
+
   * Its very light weight can easily transfer on internet.
-  
+
   * Every one is using and readable for humans and computers as well.
 
   * Right now it is majorly use in every softwares.
@@ -668,3 +790,109 @@ Rest Architecture
 ![Image](./images/rest-architecture-5.png)
 
 
+### 📘Get Method with express
+
+* user.json
+
+    ```js
+    {
+        "firstName": "John",
+        "lastName": "Doe",
+        "email": "joe@doe",
+        "password": "joe123"
+    }
+    ```
+
+* app.js
+
+    ```js
+    const express = require('express');
+    const fs = require('fs');
+
+    const app = express();
+
+    const user = JSON.parse(fs.readFileSync(`user.json`, 'utf-8'));
+
+    app.get('/', (req, res) => {
+        res.status(200).json({
+            status: 'success',
+            data: {
+            user,
+            },
+        });
+    });
+
+    const port = process.env.PORT || 3000;
+    app.listen(port, () => {
+        console.log(`App running on port ${port}...`);
+    });
+    ```
+* package.json
+
+    ```js
+    "scripts": {
+        "start": "node app.js"
+    }
+    ```
+
+### 📘Post Method with express
+
+* app.js
+
+```js
+const express = require('express');
+
+const app = express();
+
+// its a middleware to use body parser
+app.use(express.json());
+
+app.post('/', (req, res) => {
+  // all data come into req.body object
+  console.log(req.body);
+  res.status(200).send('Hello World');
+});
+
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`App running on port ${port}...`);
+});
+```
+
+* From postman
+
+```js
+{
+    "username" : "Deepinder"
+}
+```
+
+### 📘Params and Query Params in address-bar with express
+
+```js
+const express = require('express');
+
+const app = express();
+
+// its a middleware to use body parser
+app.use(express.json());
+
+app.post('/:id/:name/:age?', (req, res) => {
+  // This is for normal params (age is optional parameter)
+  console.log(req.params);
+
+  // This is for query params
+  console.log(req.query);
+
+  res.status(200).send('Hello World');
+});
+
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`App running on port ${port}...`);
+});
+```
+
+```
+http://127.0.0.1:3000/1/jhon/24?testing=true
+```
