@@ -421,42 +421,62 @@ server.listen(8000, '127.0.0.1', () => {
 
 
 * Exporting with using Object
-```js
-// app.js
-function sayHello(name) {
-    console.log('Hello ' + name)
-}
+  ```js
+  // app.js
+  function sayHello(name) {
+      console.log('Hello ' + name)
+  }
 
-module.exports.sayHello = sayHello;
-```
+  module.exports.sayHello = sayHello;
+  ```
 
-```js
-// script.js
-var app = require('./app');
+  ```js
+  // script.js
+  var app = require('./app');
 
-app.sayHello('Deepinder Singh')
-```
+  app.sayHello('Deepinder Singh')
+  ```
 * Exporting with names
-```js
-// app.js
-function sayHello(name) {
-    console.log('Hello ' + name)
-}
 
-module.exports= sayHello;
-```
+  ```js
+  // app.js
+  function sayHello(name) {
+      console.log('Hello ' + name)
+  }
 
-```js
-// script.js
-var app = require('./app');
+  module.exports= sayHello;
+  ```
 
-app('Deepinder Singh')
-```
+  ```js
+  // script.js
+  var app = require('./app');
 
-```
-node script.js
-```
+  app('Deepinder Singh')
+  ```
 
+  ```
+  node script.js
+  ```
+* Export Everything 
+  ```js
+  // index.js
+  exports.sum = (a, b) => {
+    return a + b;
+  };
+
+  exports.isAdmin = true;
+
+  exports.subtract = (a, b) => {
+    return a - b;
+  };
+  ```
+
+  ```js
+  // app.js
+  const d = require('./index');
+
+  console.log(d.sum(1, 2));
+  ```
 ---
 
 
@@ -701,6 +721,8 @@ This is same as in javascript
 
 ### 📘Whats is express and why use it and Basic Code
 
+* You can check document for more details.
+
 * Express is minimal **node.js framework**, a higher level of abstraction and it is built on the node.js
 
 * Express contains a very  robust set of features: complex routing, easier handling of request and response, middlewares, server-side rendering etc.
@@ -752,6 +774,7 @@ Basic Code
   ```
   npm run start
   ```
+---
 
 ### 📘API and Rest Architecture
 
@@ -789,8 +812,9 @@ Rest Architecture
 
 ![Image](./images/rest-architecture-5.png)
 
+---
 
-### 📘Get Method with express
+### 📘Get Method with express (show json data and html page)
 
 * user.json
 
@@ -813,6 +837,7 @@ Rest Architecture
 
     const user = JSON.parse(fs.readFileSync(`user.json`, 'utf-8'));
 
+    // for json
     app.get('/', (req, res) => {
         res.status(200).json({
             status: 'success',
@@ -822,11 +847,19 @@ Rest Architecture
         });
     });
 
+    // for html
+    app.get('/', (req, res) => {
+        res.status(200).send('<h1>Hello from express</h1>');
+    });
+
     const port = process.env.PORT || 3000;
     app.listen(port, () => {
         console.log(`App running on port ${port}...`);
     });
     ```
+    **⚠️Note :** you can create links as well using same href tag
+
+
 * package.json
 
     ```js
@@ -834,38 +867,41 @@ Rest Architecture
         "start": "node app.js"
     }
     ```
+---
 
 ### 📘Post Method with express
 
 * app.js
 
-```js
-const express = require('express');
+  ```js
+  const express = require('express');
 
-const app = express();
+  const app = express();
 
-// its a middleware to use body parser
-app.use(express.json());
+  // its a middleware to use body parser
+  app.use(express.json());
 
-app.post('/', (req, res) => {
-  // all data come into req.body object
-  console.log(req.body);
-  res.status(200).send('Hello World');
-});
+  app.post('/', (req, res) => {
+    // all data come into req.body object
+    console.log(req.body);
+    res.status(200).send('Hello World');
+  });
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`App running on port ${port}...`);
-});
-```
+  const port = process.env.PORT || 3000;
+  app.listen(port, () => {
+    console.log(`App running on port ${port}...`);
+  });
+  ```
 
 * From postman
 
-```js
-{
-    "username" : "Deepinder"
-}
-```
+  ```js
+  {
+      "username" : "Deepinder"
+  }
+  ```
+
+---
 
 ### 📘Params and Query Params in address-bar with express
 
@@ -878,11 +914,11 @@ const app = express();
 app.use(express.json());
 
 app.post('/:id/:name/:age?', (req, res) => {
-  // This is for normal params (age is optional parameter)
-  console.log(req.params);
 
+  // This is for normal params (age is optional parameter)
+  console.log(req.params);      // { id: '1', name: 'jhon', age: '24' }
   // This is for query params
-  console.log(req.query);
+  console.log(req.query);       // { testing: 'true' }
 
   res.status(200).send('Hello World');
 });
@@ -896,3 +932,421 @@ app.listen(port, () => {
 ```
 http://127.0.0.1:3000/1/jhon/24?testing=true
 ```
+---
+
+### 📘Patch Request using express
+
+
+* Put : is use for update the whole object.
+
+* Patch : is use for update the some properties.
+
+
+```js
+const express = require('express');
+const app = express();
+
+app.use(express.json()); // Middleware to parse JSON bodies
+
+// Sample data - a list of users
+let users = [
+  { id: 1, name: 'Alice', age: 25 },
+  { id: 2, name: 'Bob', age: 30 },
+  { id: 3, name: 'Charlie', age: 35 },
+];
+
+// PATCH endpoint to update a user's age
+app.patch('/users/:id', (req, res) => {
+  const userId = parseInt(req.params.id);
+  const { age } = req.body;
+
+  // Find the user by ID
+  const user = users.find((u) => u.id === userId);
+  if (!user) {
+    return res.status(404).send('User not found');
+  }
+
+  // Update the user's age
+  if (age !== undefined) {
+    user.age = age;
+  }
+
+  res.send(user);
+});
+
+// Start the server
+const port = 3000;
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
+```
+
+```
+http://127.0.0.1:3000/users/1
+```
+
+```js
+// postman value
+{
+    "age" : "63"
+}
+```
+---
+
+### 📘Delete method using express
+
+* use Delete method
+
+---
+
+### 📘All Methods with Route function
+
+Use get, post and patch method. For post and patch use body props
+
+```js
+const express = require('express');
+const app = express();
+
+app.use(express.json()); // Middleware to parse JSON bodies
+
+const getRequest = (req, res) => {
+  res.status(200).send({
+    message: 'Hello from the server',
+  });
+};
+
+const postRequest = (req, res) => {
+  res.status(200).send({
+    message: { ...req.body },
+  });
+};
+
+const putRequest = (req, res) => {
+  res.status(200).send({
+    message: { ...req.body },
+  });
+};
+
+// without id
+app.route('/api/v1/tours').get(getRequest).post(postRequest);
+
+// with id
+app.route('/api/vi/tours/:id').get('functionName').patch('functionName').put(putRequest);
+
+const port = 3000;
+app.listen(port, () => {
+  console.log(`App running on port ${port}...`);
+});
+```
+
+```js
+// for post and patch
+{
+    "name" : "john"
+}
+```
+
+```
+http://127.0.0.1:3000/api/v1/tours
+```
+
+---
+
+### 📘Middleware and Request-Response Cycle
+
+* Middleware are functions which are only use with routes. With the help of middleware we can access or modify http request and response.
+
+* It is very easy to create and can use easily.
+
+![Image](./images/middleware-1.png)
+
+![Image](./images/middleware-2.png)
+
+![Image](./images/middleware-3.png)
+
+**⚠️Note :** **route()** method is the last middleware of middleware stack
+
+
+Various Types of Middlewares
+
+1. Application-level : it apply on whole routes
+
+2. Route-level : it will apply on specific route or group of route
+
+3. Error-handling
+
+4. Built-in
+
+5. Third-party
+
+
+**Example of Application-level middleware**
+
+```js
+const express = require('express');
+const app = express();
+
+app.use(express.json());
+
+// first middleware
+const firstCustomMiddleWare = (req, resp, next) => {
+  console.log('Hello from the first middleware 👋');
+  // without this next method next middleware will not be executed
+  next();
+};
+
+const secondCustomMiddleWare = (req, resp, next) => {
+  console.log('Hello from the second middleware 👋');
+
+  // checking some conditions
+  if (!req.query.age) {
+    return resp.status(422).send({ error: 'You must provide an age' });
+  }
+
+  if (req.query.age < 18) {
+    return resp.status(422).send({ error: 'You must be at least 18 years old' });
+  }
+
+  // without this next method next middleware will not be executed
+  next();
+};
+
+// This is called application middleware
+app.use(firstCustomMiddleWare);
+app.use(secondCustomMiddleWare);
+
+app.get('/', (req, resp) => {
+  // route is our last middleware in chain
+  console.log('Hello World');
+  resp.status(200).send({ message: 'Welcome to the server' });
+});
+
+app.listen(3000, () => {
+  console.log('Application is running on port 3000');
+});
+```
+
+**Example of Route level middleware (single and group)**
+
+```js
+// Single level middleware
+
+const express = require('express');
+const app = express();
+
+app.use(express.json());
+
+const authentication = (req, resp, next) => {
+  if (!req.query.admin) {
+    return resp.status(401).send({ error: 'Unauthorized' });
+  }
+  if (req.query.admin !== '12345') {
+    return resp.status(401).send({ error: 'Unauthorized' });
+  }
+  next();
+};
+
+const ageRequired = (req, resp, next) => {
+  console.log('Hello from the second middleware 👋');
+
+  if (!req.query.age) {
+    return resp.status(422).send({ error: 'You must provide an age' });
+  }
+
+  if (req.query.age < 18) {
+    return resp.status(422).send({ error: 'You must be at least 18 years old' });
+  }
+  next();
+};
+
+// This is called single middleware
+app.get('/home', ageRequired, (req, resp) => {
+  console.log('Hello World');
+  resp.status(200).send({ message: 'Welcome to the server' });
+});
+
+// This is called single middleware
+app.get('/admin', authentication, (req, resp) => {
+  resp.status(200).send({ message: 'Welcome to the admin dashboard' });
+});
+
+// This is use for all routes
+app.get('*', (req, resp) => {
+  resp.status(404).send({ error: 'Page not found' });
+});
+
+app.listen(3000, () => {
+  console.log('Application is running on port 3000');
+});
+```
+
+```js
+// Group level middleware
+
+const express = require('express');
+const app = express();
+
+app.use(express.json());
+
+// To create group routes (this is called real middleware)
+const adminRoute = express.Router();
+const userRoute = express.Router();
+
+const authentication = (req, res, next) => {
+  console.log('Hello from the authentication middleware 👋');
+  if (!req.query.admin) {
+    return res.status(401).send({ error: 'Unauthorized' });
+  }
+  if (req.query.admin !== '12345') {
+    return res.status(401).send({ error: 'Unauthorized' });
+  }
+  next();
+};
+
+const ageRequired = (req, res, next) => {
+  console.log('Hello from the age middleware 👋');
+
+  if (!req.query.age) {
+    return res.status(422).send({ error: 'You must provide an age' });
+  }
+
+  if (req.query.age < 18) {
+    return res.status(422).send({ error: 'You must be at least 18 years old' });
+  }
+  next();
+};
+
+// Apply middleware to group routes
+adminRoute.use(authentication);
+userRoute.use(ageRequired);
+
+// All admin routes
+adminRoute.get('/home', (req, res) => {
+  res.status(200).send({ message: 'Welcome to the admin dashboard' });
+});
+
+adminRoute.get('/profile', (req, res) => {
+  res.status(200).send({ message: 'Welcome to your profile' });
+});
+
+adminRoute.get('/change-password', (req, res) => {
+  res.status(200).send({ message: 'Change your password' });
+});
+
+// User route
+userRoute.get('/home', (req, res) => {
+  console.log('Hello World');
+  res.status(200).send({ message: 'Welcome to the server' });
+});
+
+// Default path with middleware instance
+app.use('/admin', adminRoute);
+app.use('/user', userRoute);
+
+// This is used for all other routes
+app.get('*', (req, res) => {
+  res.status(404).send({ error: 'Page not found' });
+});
+
+app.listen(3000, () => {
+  console.log('Application is running on port 3000');
+});
+
+/*
+Example URLs:
+- http://localhost:3000/admin/home?admin=12345
+- http://localhost:3000/user/home?age=18
+*/
+
+// OR
+
+const express = require('express');
+const app = express();
+
+app.use(express.json());
+
+// To create group routes
+const adminRoute = express.Router();
+const userRoute = express.Router();
+
+// Apply middleware to group routes (called mounting routing)
+adminRoute.use((req, res, next) => {
+  console.log('Hello from the middleware 👋');
+  next();
+});
+
+// Mount the admin routes under /api/v1
+app.use('/api/v1', adminRoute);
+app.use('/api/v1', userRoute);
+
+// All admin routes (using route keyword)
+adminRoute
+  .route('/admin')
+  .get((req, res) => {
+    res.status(200).send({ message: 'Welcome to the admin dashboard' });
+  })
+  .post((req, res) => {
+    res.status(200).send({ message: { ...req.body } });
+  });
+
+userRoute
+  .route('/user')
+  .get((req, res) => {
+    res.status(200).send({ message: 'Welcome to the user dashboard' });
+  })
+  .post((req, res) => {
+    res.status(200).send({ message: { ...req.body } });
+  });
+
+app.get('*', (req, res) => {
+  res.status(404).send({ message: 'Page not found' });
+});
+
+app.listen(3000, () => {
+  console.log('Application is running on port 3000');
+});
+
+
+
+```
+
+
+---
+
+### 📘Morgan
+
+* It is very popular logging middleware, this is useful to show request data in console.
+
+* Very useful package
+
+```
+npm i morgan
+```
+
+```js
+const express = require('express');
+const app = express();
+const morgan = require('morgan');
+
+// This is used to add Middleware stack
+app.use(morgan('dev'));
+app.use(express.json());
+
+app.get('/', (req, res) => {
+  res.status(200).send('Hello from express');
+});
+
+app.get('/about', (req, res) => {
+  res.status(200).send('Hello from about');
+});
+
+app.get('/home', (req, res) => {
+  res.status(200).send('Hello from home');
+});
+
+app.listen(3000, () => {
+  console.log('Listening on port 3000');
+});
+```
+
+![Image](./images/morgan-1.png)
