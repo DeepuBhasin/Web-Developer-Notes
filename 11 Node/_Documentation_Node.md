@@ -457,7 +457,7 @@ server.listen(8000, '127.0.0.1', () => {
   ```
   node script.js
   ```
-* Export Everything 
+* Export Everything
   ```js
   // index.js
   exports.sum = (a, b) => {
@@ -560,17 +560,42 @@ fs.readdir(dirPath, (err, files) => {
 
 * **Commands**
 
-    1. To Install specific Package : npm i \<package-name>
+    1. To Install specific Package :
 
-    2. Install package with specific version : npm i \<package-name>@\<version-number> example npm i @4.1.1 or npm i @4 (it will install best version related to 4)
+       ```
+       npm i <package-name>
+       ```
 
-    3. To Remove package : npm r or npm uninstall \<package-name>
+    2. Install package with specific version : example npm i @4.1.1 or npm i @4 (it will install best version related to 4)
 
-    4. To update the packages : npm update
+        ```
+         npm i \<package-name>@\<version-number>
+        ```
 
-    5. To check outdate package : npm outdate (run this command in terminal directly)
+    3. Install multiple packages
 
-    6. To check version of package : npm view \<package-name> version
+       ```
+       npm i <package-name> <package-name> ...
+       ```
+
+    4. To Remove package :
+        ```
+        npm r or npm uninstall <package-name>
+        ```
+    5. To update the packages :
+        ```
+        npm update <package-name>
+        ```
+
+    6. To check outdate package : run this command in terminal directly
+        ```
+        npm outdate
+        ```
+
+    7. To check version of package :
+        ```
+        npm view \<package-name> version
+        ```
 
     ![Image](./images/npm-outdate.png)
 
@@ -1309,11 +1334,92 @@ app.listen(3000, () => {
 
 
 ```
-
-
 ---
 
-### 📘Morgan
+
+### 📘Param Middleware
+
+```js
+const express = require('express');
+const app = express();
+const adminRouter = express.Router();
+
+// This middle ware will run only :id
+adminRouter.param('id', (req, res, next, value) => {
+  console.log('this is middleware', value);
+  next();
+});
+
+adminRouter.route('/home/:id').get((req, res) => {
+  res.status(200).send('admin page');
+});
+
+app.use('/admin', adminRouter);
+
+app.get('*', (req, res) => {
+  res.status(404).send('page not found');
+});
+
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
+});
+```
+```
+http://localhost:3000/admin/home/30
+```
+
+---
+### 📘Chaining middleware
+```js
+const express = require('express');
+const app = express();
+const adminRouter = express.Router();
+app.use(express.json());
+
+const firstMiddleware = (req, res, next) => {
+  if (!req.body.name) {
+    return res.status(400).send('name is required');
+  }
+  next();
+};
+
+const secondMiddleware = (req, res, next) => {
+  if (!req.body.age) {
+    return res.status(400).send('age is required');
+  }
+  next();
+};
+
+const thirdMiddleware = (req, res, next) => {
+  if (!req.body.email) {
+    return res.status(400).send('email is required');
+  }
+  next();
+};
+
+adminRouter
+  .route('/home')
+  .get((req, res) => {
+    res.status(200).send('admin page');
+  })
+  // Chaining middlewares
+  .post(firstMiddleware, secondMiddleware, thirdMiddleware, (req, res) => {
+    res.status(200).send('admin post');
+  });
+
+app.use('/admin', adminRouter);
+
+app.get('*', (req, res) => {
+  res.status(404).send('page not found');
+});
+
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
+});
+```
+---
+
+### 📘Morgan (Third-part middleware)
 
 * It is very popular logging middleware, this is useful to show request data in console.
 
@@ -1350,3 +1456,123 @@ app.listen(3000, () => {
 ```
 
 ![Image](./images/morgan-1.png)
+
+---
+
+### 📘Run Static Files
+* public/index.js
+
+  ```html
+  <!DOCTYPE html>
+  <html lang="en">
+
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+  </head>
+
+  <body>
+      <h1>Hello World</h1>
+  </body>
+
+  </html>
+  ```
+
+* App.js
+
+  ```js
+  // app.js
+  const express = require('express');
+  const app = express();
+
+  app.use(express.static('public'));
+
+  app.listen(3000, () => {
+    console.log('app is listening on port 3000');
+  });
+  ```
+* Address
+  ```
+  http://localhost:3000/
+  ```
+
+We are not mentioning **public** folder in address bar because express is pointing to root address, if it do not find any route or address then it will find the file into public folder.
+
+
+---
+
+### 📘Environment variables
+
+1. Direct way(not good one)
+
+  ```js
+  const express = require('express');
+  const app = express();
+
+  // this will print only development mode
+  console.log(app.get('env'));
+
+  // its a print all environment variables which are defined in computer
+  console.log(process.env);
+  ```
+  * package.json (these commands for windows)
+
+  ```js
+  "scripts": {
+    "start": "set NODE_ENV=development && set X=20 && set Y=20 && nodemon app.js"
+
+    // OR
+
+    "start": "set NODE_ENV=development && set X=20 && set Y=20 && node app.js"
+  },
+
+  // If run directly in terminal
+  NODE_ENV=production X=29 Y=20 node app.js
+  ```
+
+![Image](./images/environment-variables.png)
+
+
+1. Using dot env Package( best one)
+
+* Create file with any name
+
+  * **.env** (i think this is best one)
+  * **.env.development**
+  * **config.env**
+
+  ```
+  NODE_ENV=development
+  PORT=8000
+  USER=jonas
+  PASSWORD=12345
+  X=20
+  Y=30
+  ```
+* Package name
+
+  ```
+  npm i dotenv
+  ```
+
+* app.js
+
+  ```js
+  // it should always on the top of every package
+  const dotenv = require('dotenv');
+
+  // provide file name path & it should be placed immediately after import of dotenv
+  dotenv.config({ path: './.env' });
+
+  // printing all environment variables
+  console.log(process.env);
+  ```
+
+* command
+
+  ```
+  node app.js
+  ```
+
+![Image](./images/environment-variables-2.png)
