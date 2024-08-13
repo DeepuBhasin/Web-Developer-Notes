@@ -321,7 +321,7 @@ node index.js
 http://127.0.0.1:8000/
 ```
 
-**⚠️ Note :** if you mention other the *80* then we have to write complete address example http://127.0.0.1:8000 otherwise we don't need to add port number
+**⚠️ Note :** if you mention other the *80* then we have to write complete address example http://127.0.0.1:8000 otherwise we don't need to add port number you can write like http://127.0.0.1 only
 
 **📖 Theory :**
 
@@ -362,6 +362,7 @@ This line starts the server, making it listen for incoming requests on port 8000
 
 ### 📘Routing using Http Module & Returning json Data
 
+This same thing will achieve by express in better way.
 
 ```js
 const http = require('http');
@@ -748,6 +749,8 @@ This is same as in javascript
 
 * You can check document for more details.
 
+* Its is complete replacement of http package for routing
+
 * Express is minimal **node.js framework**, a higher level of abstraction and it is built on the node.js
 
 * Express contains a very  robust set of features: complex routing, easier handling of request and response, middlewares, server-side rendering etc.
@@ -777,13 +780,15 @@ Basic Code
     ```js
     const express = require('express');
 
-    // call express
+    // call express to create app
     const app = express();
 
     // Routes with http method
     app.get('/', (req, res) => {
         // return type of res.send() is string
-        //   res.send('Hello World')
+        res.send('Hello World')
+
+        //OR
 
         // return type of res.json() is object with convert into string
         res.status(200).json({ message: 'Hello World' });
@@ -1576,3 +1581,100 @@ We are not mentioning **public** folder in address bar because express is pointi
   ```
 
 ![Image](./images/environment-variables-2.png)
+
+---
+
+### 📘MongoDB
+
+![Image](./images/mongodb-1.png)
+
+* MongoDb is a NoSql database
+
+* The data stored in a collection
+
+* collection don't have a row and columns
+
+* Data is stored in the form of object.
+
+![Image](./images/mongodb-2.png)
+
+
+### 📘Commands
+
+1. Create Database and select : this command will create database no matter database exist or not.
+
+```
+use Database-name
+```
+
+2. To Show Databases
+
+```
+show dbs
+```
+
+3. Create collection with single entry
+
+```
+db.tours.insertOne({firstName : "Deep", lastName : "Singh"})
+```
+
+4. Create collection with multiple enter
+
+```
+ db.tours.insertMany([{"name":"Product A","price":19.99,"rating":4.5},{"name":"Product B","price":29.49,"rating":4.0},{"name":"Product C","price":9.99,"rating":3.8},{"name":"Product D","price":45.00,"rating":4.7},{"name":"Product E","price":15.75,"rating":3.9}]
+);
+```
+
+5. To see collections
+
+```
+db.tours.find()
+```
+
+6. To Find any record among collections (easy way)
+
+```
+db.tours.find({name : "Product A"})
+```
+7. To find less then or equal to (<=) : `$` sign is use as operator in mongoDB
+
+```
+ db.tours.find({price : {$lte : 10}})
+```
+
+8. AND Query : To find less then and greater then or equal to
+
+```
+db.tours.find({price : {$lt : 25}, rating : {$gte : 4}})
+```
+
+9. OR Query
+
+```
+db.tours.find({$or :  [{ price : {$lt : 10}}, {rating : {$lte : 4}}]});
+```
+
+10. OR Query with selection of specific key
+
+```
+db.tours.find({$or :  [{ price : {$lt : 10}}, {rating : {$lte : 4}}]}, {name : 1});
+```
+
+11. Update Query : first object is use to select and second one is use to set value or can insert new value
+
+```
+db.tours.updateOne({ name : 'Product A'}, {$set : {price : 1000, color : white}});
+```
+
+12. To Delete One Row
+
+```
+db.tours.deleteOne({name : "Product E"})
+```
+
+13. To Delete all records (be careful this command )
+
+```
+db.tours.deleteMany({});
+```
