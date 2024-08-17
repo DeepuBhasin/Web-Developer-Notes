@@ -77,7 +77,7 @@
 
 1. Node terminal called REPL (Read Evaluate Print Loop)
 
-2. type *node* to enter into REPL & type *.exit* to exit from REPL
+2. type *node* to enter into REPL & type *.exit* to exit from REPL. **.help** command is use for check all commands.
 
 3. Last result always store in *_* (underscore)
 
@@ -842,6 +842,7 @@ Rest Architecture
 
 ![Image](./images/rest-architecture-5.png)
 
+**⚠️Note :** major advantage of these rest full methods is that we can apply all method on same route
 ---
 
 ### 📘Get Method with express (show json data and html page)
@@ -1584,97 +1585,431 @@ We are not mentioning **public** folder in address bar because express is pointi
 
 ---
 
-### 📘MongoDB
+### 📘Connections to MongoDB using Node & CRUD Commands
 
-![Image](./images/mongodb-1.png)
-
-* MongoDb is a NoSql database
-
-* The data stored in a collection
-
-* collection don't have a row and columns
-
-* Data is stored in the form of object.
-
-![Image](./images/mongodb-2.png)
+* Before proceeding into mongoDB commands first create Database with name **test** and collection name with **tours**.
 
 
-### 📘Commands
-
-1. Create Database and select : this command will create database no matter database exist or not.
-
+Package
 ```
-use Database-name
+npm i mongodb;
 ```
 
-2. To Show Databases
+Database
 
 ```
-show dbs
+use test
+
+db.tours.insertMany([{"name":"Product A","price":19.99,"rating":4.5},{"name":"Product B","price":29.49,"rating":4.0},{"name":"Product C","price":9.99,"rating":3.8},{"name":"Product D","price":45.00,"rating":4.7},{"name":"Product E","price":15.75,"rating":3.9}])
 ```
 
-3. Create collection with single entry
+**Connection with MongoDB**
 
+```js
+// app.js
+const { MongoClient } = require("mongodb");
+const url = "mongodb://127.0.0.1:27017";
+
+const client = new MongoClient(url);
+
+async function dbConnection(databaseName, collectionName) {
+  let result = await client.connect();
+  db = result.db(databaseName);
+  return db.collection(collectionName);
+}
+
+// toArray return promise
+
+// using then methods
+dbConnection("test", "tours").then((res) => {
+  res
+    .find()
+    .toArray()
+    .then((data) => {
+      console.log(data);
+    });
+});
+
+// using async and await
+const main = async () => {
+  let result = await dbConnection("test", "tours");
+  let data = await result.find().toArray();
+  console.log(data);
+};
+
+main();
 ```
-db.tours.insertOne({firstName : "Deep", lastName : "Singh"})
+**Insert Into MongoDB**
+
+```js
+const { MongoClient } = require("mongodb");
+const url = "mongodb://127.0.0.1:27017";
+
+const client = new MongoClient(url);
+
+// connection
+async function dbConnection(databaseName, collectionName) {
+  let result = await client.connect();
+  db = result.db(databaseName);
+  return db.collection(collectionName);
+}
+
+// insert
+async function insert() {
+  let data = await dbConnection("test", "tours");
+
+  // for single
+  let result = await data.insertOne({ name: "test", age: 24 });
+
+  // for multiple
+  let result = await data.insertMany([
+    { name: "test", age: 24 },
+    { name: "test", age: 24 },
+  ]);
+
+  if (result.acknowledged) {
+    console.log("Insert Data successfully");
+  } else {
+    console.log("Insert Data failed");
+  }
+}
+insert();
 ```
 
-4. Create collection with multiple enter
+**Update into MongoDB**
 
+* dbConnection file is already created above
+
+```js
+async function update() {
+  let data = await dbConnection("test", "tours");
+  let result = await data.updateOne(
+    { name: "Product A" },
+    { $set: { price: 100, dollarRate: 10, test: true } }
+  );
+  if (result.modifiedCount) {
+    console.log("updated successfully");
+  } else {
+    console.log("not updated");
+  }
+}
+update();
 ```
- db.tours.insertMany([{"name":"Product A","price":19.99,"rating":4.5},{"name":"Product B","price":29.49,"rating":4.0},{"name":"Product C","price":9.99,"rating":3.8},{"name":"Product D","price":45.00,"rating":4.7},{"name":"Product E","price":15.75,"rating":3.9}]
+
+
+**Delete into MangoDB**
+
+```js
+async function deleteMethod() {
+  let data = await dbConnection("test", "tours");
+  let result = await data.deleteOne({ name: "Product A" });
+  if (result.deletedCount) {
+    console.log("deleted successfully");
+  } else {
+    console.log("not deleted");
+  }
+}
+deleteMethod();
+```
+
+---
+
+### 📘Express API + MongoDB
+
+* Get, Post, Put, Patch, Delete Methods
+
+```js
+// this point is main one
+const { MongoClient, ObjectId } = require("mongodb");
+const url = "mongodb://127.0.0.1:27017";
+const express = require("express");
+
+const app = express();
+
+app.use(express.json());
+
+const client = new MongoClient(url);
+
+// connection
+async function dbConnection(databaseName, collectionName) {
+  let result = await client.connect();
+  db = result.db(databaseName);
+  return db.collection(collectionName);
+}
+
+// get method
+app.get("/", async (req, res) => {
+  let data = await dbConnection("test", "tours");
+  let result = await data.find({}).toArray();
+  return res.status(200).send({ message: result });
+});
+
+
+// delete method
+app.delete("/:id", async (req, res) => {
+  let data = await dbConnection("test", "tours");
+  let result = await data.deleteOne({
+    _id: new ObjectId(req.params.id),
+  });
+  return res.status(200).send({ message: result });
+});
+
+app.listen(80, () => {
+  console.log("listening on port 80");
+});
+```
+
+---
+
+### 📘Mongoose (best one)
+
+* Its a advance version of mongoDB package which provide schemes and model
+
+```js
+// Importing the Mongoose library to interact with MongoDB
+const mongoose = require("mongoose");
+
+// Function to establish a connection to the MongoDB database
+async function dbConnection(databaseName) {
+  try {
+    // Connect to the MongoDB instance running locally, specifying the database name
+    await mongoose.connect(`mongodb://127.0.0.1:27017/${databaseName}`);
+    console.log("Connected to the database");
+  } catch (error) {
+    // Log an error message if the connection fails
+    console.error("Error connecting to the database:", error);
+  }
+}
+
+// Defining a schema for the products collection
+// A schema defines the structure of the documents in a collection
+const productSchema = new mongoose.Schema({
+  name: String, // Name of the product (String)
+  price: Number, // Price of the product (Number)
+  brand: String, // Brand of the product (String)
+});
+
+// Creating a model based on the productSchema
+// A model is a wrapper for the schema and provides an interface to interact with the collection
+const ProductModel = mongoose.model("Product", productSchema);
+
+// CRUD Operations
+
+// Create: Insert a new product into the collection
+async function createProduct(data) {
+  try {
+    // Create a new instance of the ProductModel with the provided data
+    const product = new ProductModel(data);
+    // Save the product to the database
+    const response = await product.save();
+    console.log("Product Created:", response);
+  } catch (error) {
+    // Log an error message if the creation fails
+    console.error("Error creating product:", error);
+  }
+}
+
+// Read: Fetch products from the collection based on a filter
+// If no filter is provided, it will return all products
+async function readProducts(filter = {}) {
+  try {
+    // Find documents in the collection that match the filter criteria
+    const products = await ProductModel.find(filter);
+    console.log("Products Found:", products);
+  } catch (error) {
+    // Log an error message if the read operation fails
+    console.error("Error reading products:", error);
+  }
+}
+
+// Update: Update existing products in the collection that match the filter
+async function updateProduct(filter, updateData) {
+  try {
+    // Update the documents that match the filter with the new data
+    const response = await ProductModel.updateMany(filter, updateData);
+    console.log("Product Updated:", response);
+  } catch (error) {
+    // Log an error message if the update fails
+    console.error("Error updating product:", error);
+  }
+}
+
+// Delete: Remove products from the collection that match the filter
+async function deleteProduct(filter) {
+  try {
+    // Delete the documents that match the filter criteria
+    const response = await ProductModel.deleteMany(filter);
+    console.log("Product Deleted:", response);
+  } catch (error) {
+    // Log an error message if the deletion fails
+    console.error("Error deleting product:", error);
+  }
+}
+
+// Example usage of the CRUD operations
+async function main() {
+  // Establish a connection to the database named "test"
+  await dbConnection("test");
+
+  // Create a new product
+  await createProduct({ name: "iPhone", price: 1000, brand: "Apple" });
+
+  // Read products with the brand "Apple"
+  await readProducts({ brand: "Apple" });
+
+  // Update products with the brand "Apple" to change the price
+  await updateProduct({ brand: "Apple" }, { $set: { price: 1100 } });
+
+  // Delete products with the brand "Apple"
+  await deleteProduct({ brand: "Apple" });
+
+  // Close the connection to the database when done
+  await mongoose.connection.close();
+}
+
+// Run the example operations
+main();
+```
+
+* You can also create API using mongoose + express
+
+
+---
+
+### 📘Upload Image
+
+```js
+const express = require("express");
+const multer = require("multer");
+const directoryName = "uploads";
+const fs = require("fs");
+const formFileInputName = "image";
+
+const app = express();
+const port = 3001;
+
+// checking if directory exists
+const directoryExistMiddleware = (req, res, next) => {
+  if (!fs.existsSync(directoryName)) {
+    fs.mkdirSync(directoryName);
+  }
+  next();
+};
+
+// Set up multer to store uploaded files in the 'uploads' folder
+const uploadImageMiddleware = multer({
+  storage: multer.diskStorage({
+    destination: (req, file, callBack) => {
+      callBack(null, directoryName);
+    },
+    filename: (req, file, callBack) => {
+      callBack(null, `${file.originalname}-${Date.now()}.jpg`);
+    },
+  }),
+}).single(formFileInputName); // for uploading single image
+
+// Define the upload route
+app.post(
+  "/upload",
+  directoryExistMiddleware,
+  uploadImageMiddleware,
+  (req, res) => {
+    try {
+      // File uploaded successfully
+      res.status(200).json({
+        success: true,
+        message: "Image uploaded successfully",
+        filename: req.file.filename,
+      });
+    } catch (error) {
+      // Handle any error
+      res.status(500).json({
+        success: false,
+        message: "Failed to upload image",
+        error: error.message,
+      });
+    }
+  }
 );
-```
 
-5. To see collections
+// Start the server
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
+```
+![Image](./images/upload-image.png)
 
-```
-db.tours.find()
-```
+---
 
-6. To Find any record among collections (easy way)
+### 📘OS-Module
 
-```
-db.tours.find({name : "Product A"})
-```
-7. To find less then or equal to (<=) : `$` sign is use as operator in mongoDB
+```js
+const express = require("express");
+const os = require("os");
+const app = express();
 
-```
- db.tours.find({price : {$lte : 10}})
-```
+app.get("/", (req, res) => {
+  res.status("200").send({
+    hostName: os.hostname(),
+    platform: os.platform(),
+    userInfo: os.userInfo(),
+    architecture: os.arch(),
+    freeMemory: `${os.freemem() / (1024 * 1024 * 1024)} GB`,
+    totalMemory: `${os.totalmem() / (1024 * 1024 * 1024)} GB`,
+    OS: os, // not very useful
+  });
+});
 
-8. AND Query : To find less then and greater then or equal to
-
+// Start the server
+app.listen(80, () => {
+  console.log(`Server running on port 80`);
+});
 ```
-db.tours.find({price : {$lt : 25}, rating : {$gte : 4}})
-```
+---
 
-9. OR Query
+### 📘Events and Event Emitter in node.js
 
-```
-db.tours.find({$or :  [{ price : {$lt : 10}}, {rating : {$lte : 4}}]});
-```
+* In node every thing is event based (ist same like javascript)
 
-10. OR Query with selection of specific key
+* **event** is like signal pass by emitter
 
-```
-db.tours.find({$or :  [{ price : {$lt : 10}}, {rating : {$lte : 4}}]}, {name : 1});
-```
+* **event emitter** is like generating event on any event signal for example button
 
-11. Update Query : first object is use to select and second one is use to set value or can insert new value
+* In node js you cannot make any button click, then only event you can create is api.
 
-```
-db.tours.updateOne({ name : 'Product A'}, {$set : {price : 1000, color : white}});
-```
+```js
+const express = require("express");
+let count = 0;
 
-12. To Delete One Row
+// its a class that why we use capital letter
+const EventEmitter = require("events");
 
-```
-db.tours.deleteOne({name : "Product E"})
-```
+// creating event instance
+const event = new EventEmitter();
 
-13. To Delete all records (be careful this command )
+// event name
+event.on("count", () => {
+  count++;
+});
 
-```
-db.tours.deleteMany({});
+const app = express();
+const port = 80;
+
+app.get("/", (req, res) => {
+
+  // calling event
+  event.emit("count");
+  res.status(200).send({ count });
+});
+
+app.get("/home", (req, res) => {
+
+  // calling event
+  event.emit("count");
+  res.status(200).send({ count });
+});
+
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`);
+});
 ```
