@@ -6,22 +6,23 @@
     https://nodejs.org/docs/latest/api/
     ```
 
-2. Node is single threaded language but it is async in nature.
+2. In Node, every file is Module so variables and functions are defined in that file are scoped to that module they are not available outside the module
 
+3. Node is single threaded language but it is async in nature.
 
-3. Data Can be store in following modules
+4. Data Can be store in following modules
 
    1. Json-File
    2. Mysql
    3. MondoDB
 
-4. Node Vs Npm
+5. Node Vs Npm
 
    1. node and npm are different things npm stands for node package manager. This thing get install automatically to deal with packages while node is run time environment.
 
    2. node -v to check version of node & npm -v  to check version of npm (their version can be different from each other)
 
-5. In Node first parameter in every function (callback) will be **error** parameter and second one will be **data**
+6. In Node first parameter in every function (callback) will be **error** parameter and second one will be **data**
 
     ```js
     // Example
@@ -31,9 +32,7 @@
     })
     ```
 
-6. In Node when every we pass any *callback* that means that function is asynchronous function. Example when *readFile* read file completely then it will call that callback function.
-
-
+7. In Node when every we pass any *callback* that means that function is asynchronous function. Example when *readFile* read file completely then it will call that callback function.
 
     ```js
     // Example
@@ -43,7 +42,33 @@
     })
     ```
 ---
+### 📘Syllabus
 
+* Module System
+
+  * File System
+
+  * OS
+
+  * events
+
+  * http
+
+* Node Package Manager (NPM)
+
+* Building restFull apis with express
+
+* Asynchronous Javascript
+
+* Storing Data into MongoDB using mongoose
+
+* Authentication and Authorization using JWT (Json Web Token) system
+
+* Handling and logging Errors
+
+* Deployment
+
+---
 ### 📘What is Node.js
 
 ![Image](images/what-is-node.jpg)
@@ -51,14 +76,13 @@
 ![Image](images/javascript-run-out-side.png)
 
 ---
+### 📘Node Vs Javascript
 
-### 📘Javascript on the server Side
+* Node is not a language or any framework. Its a runtime Environment but Code syntax of javascript and Node is same (but it is not exactly same).
 
-* Node is not a language. Its a Server Environment but Code syntax of javascript and Node is same (but it is not exactly same).
+* Build fast, highly scalable network applications (back-end) like create api, due to their non-blocking asynchronous nature. Its a default behavior of node.
 
-* Build fast, highly scalable network applications (back-end) like create api, database connections but javascript not.
-
-* Node.js can access file system but javascript not.
+* Node.js can access file system, Operating system, Database but javascript not.
 
 * Node can connect with Database but javascript not.
 
@@ -72,36 +96,57 @@
 ![Image](./images/why-and-when-to-use-node-js.png)
 
 ---
+### 📘Node vs Browser
 
-### 📘REPL & Global variables,
-
-1. Node terminal called REPL (Read Evaluate Print Loop)
-
-2. type *node* to enter into REPL & type *.exit* to exit from REPL. **.help** command is use for check all commands.
-
-3. Last result always store in *_* (underscore)
+* Node provide module scope while browser provide global scope. So in Node every file is Module and variables, functions are defined in that file are scoped to that module
 
     ```js
-        var a = 10;
-        _  // 10
+    // For Node
+    // index-1.js
+    function sum(a + b) {
+      return a + b;
+    }
+    module.exports = sum;
 
-        var c = "Hello World";
-        _  // "Hello World"
+    // index-2.js
+    function sum(a + b) {
+      return a + b;
+    }
+    module.exports = sum;
 
-        var b = 10 + 10;
-        _  // 20
+    // index-3.js
+    function sum(a + b) {
+      return a + b;
+    }
+    module.exports = sum;
+
+    // For Browser
+    // index-1.js
+    function sum(a + b) {
+      return a + b;
+    }
+    window.sum(1, 2);
     ```
 
-4. Press **tab** key word you can see a list of global variables
+* window, this and document object does not exist in node we will get undefined because the scope of any code only exist in current file due to module system.
 
-5. You can see various methods in function constructor using **String.** then press tab
+* Node and Chrome both have V8 engine
+
+* Browser functions such as console, setInterval, setTimeout these are different from javascript because window object does not exist
+
+  ```js
+  window.console.log('Hello World') // browser and this will not work in node environment
+  console.log("Hello World")        // node
 
 
-6.  We can write any thing in terminal like js example creating variable, print output etc
-
+  var a = 10;
+  window.a = 20;    // this line will not work in window
+  global.a = 30     // this line will not work in window
+  console.log(a)    // 30
+  ```
 ---
+### 📘Modules, Module Wrapper function Types, and Useful variables
 
-### 📘Modules
 
 * There are 3 Types of Modules
 
@@ -121,10 +166,25 @@
     ```
 
 
----
+* In Node, every file is Module so variables and functions are defined in that file are scoped to that module they are not available outside the module. see in below example module variable exist in local scope.
 
-### 📘UseFul Variables
+  ```js
+  // Module wrapper function
+  function(exports, require, module, __filename, __dirname) {
 
+    // your code...
+
+    var log = 10;
+
+    // all are same thing
+    module.exports = log;
+    module.exports.log = log;
+    exports.log = log;  // its a shortcut of module.export
+
+    // don't use this
+    exports = log;  // it will change the reference of module.exports
+  }
+  ```
 * __dirname : to print current working directory.
 
 * __filename : to print current working file name.
@@ -137,6 +197,77 @@
     const redirectToFolder = path.join(__dirname, '/any-folder-name');
     ```
 
+**Exporting Modules**
+
+* Exporting with using Object
+  ```js
+  // app.js
+  function sayHello(name) {
+      console.log('Hello ' + name)
+  }
+
+  module.exports.sayHello = sayHello;
+
+  // script.js
+  var app = require('./app');
+
+  app.sayHello('John Singh')
+  ```
+* Exporting with names
+
+  ```js
+  // app.js
+  function sayHello(name) {
+      console.log('Hello ' + name)
+  }
+
+  module.exports= sayHello;
+
+  // script.js
+  var app = require('./app');
+
+  app('John Singh')
+  ```
+
+* Export Everything
+  ```js
+  // index.js
+  exports.sum = (a, b) => {
+    return a + b;
+  };
+
+  exports.isAdmin = true;
+
+  exports.subtract = (a, b) => {
+    return a - b;
+  };
+
+  // app.js
+  const d = require('./index');
+
+  console.log(d.sum(1, 2));
+  ```
+---
+### 📘REPL & Global variables,
+
+1. Node terminal called REPL (Read Evaluate Print Loop), type *node* to enter into REPL & type *.exit* to exit from REPL. **.help** command is use for check all commands. Last result always store in *_* (underscore)
+
+    ```js
+        var a = 10;
+        _  // 10
+
+        var c = "Hello World";
+        _  // "Hello World"
+
+        var b = 10 + 10;
+        _  // 20
+    ```
+
+2. Press **tab** key word you can see a list of global variables, You can see various methods in function constructor using **String.** then press tab, We can write any thing in terminal like js example creating variable, print output etc
+
+3. Various global variables are `console.log()`, `setTimeout`, `setInterval`, `clearInterval` instead of this node have other.
+
+---
 
 ## 📘Synchronous Vs Asynchronous
 
@@ -152,12 +283,12 @@
 
 ## 📘Reading and Writing Files in Synchronous way VS Asynchronous way
 
+* In file system module you will get synch and async code always. Synch files are given for simplicity (to understand) but avoid as much as you can and try async in real application because node is single threaded language & synchronous code can block that whole thread.
+
 ```js
 // This 'fs' module allows us to read, write functions on files
 const fs = require('fs');
 ```
-
-
 
 **Synchronous Way**
 
@@ -252,17 +383,86 @@ fs.readFile('./input.txt', 'utf-8', (error, data) => {
 console.log('Executed End');
 ```
 ---
+### 📘Getting inputs from command line
 
+* You can get parameters from terminal in node using ```process.argv``` (argument Vector). It will return array in which first two elements are predefined.
+
+* index.js
+
+    ```js
+    // index.js
+    const fs = require('fs');
+
+    const action = process.argv[2];
+    const fileName = process.argv[3];
+    const fileContent = process.argv[4];
+
+    if (action === 'add') {
+        fs.writeFileSync(fileName, fileContent, (err) => {
+            if (err) {
+            console.log(err);
+            } else {
+            console.log('File created successfully');
+            }
+        });
+    } else if (action === 'remove') {
+        fs.unlinkSync(fileName, (err) => {
+            if (err) {
+            console.log(err);
+            } else {
+            console.log('File removed successfully');
+            }
+        });
+    } else {
+        console.log('Invalid action');
+    }
+    ```
+
+* Command
+
+    ```
+    node index.js add hello.txt 'Hello World from react'
+
+    node index.js remove hello.txt
+    ```
+---
+
+---
+### 📘Create Files and Directory
+
+```js
+const path = require('path');
+const fs = require('fs');
+const directoryName = 'files';
+
+fs.mkdirSync(directoryName);
+
+const dirPath = path.join(__dirname, directoryName);
+for (let i = 1; i <= 5; i++) {
+  fs.writeFileSync(`${dirPath}/file-${i}.txt`, 'hello world');
+}
+
+fs.readdir(dirPath, (err, files) => {
+  if (err) {
+    console.log(err);
+  } else {
+    files.forEach((file) => {
+      console.log(file);
+    });
+  }
+});
+```
+
+**⚠️Note :** When ever we run node in any folder it will create that folder as web server or kind of server therefore we cannot access any files outside of this server link in D drive, C Drive etc it is good other wise hacker can easily access your data.
+
+---
 ## 📘Creating a Simple Web Server with server response
-
 
 This built-in http module, which allows you to create an HTTP server.
 
 ```js
 const http = require('http');
 ```
-
-
 
 * Steps to build server
 
@@ -271,12 +471,8 @@ const http = require('http');
   2. Start a server to consume
 
 
-
-**Create Server**
-
-
-* app.js
 ```js
+// app.js
 const http = require('http');
 
 /*
@@ -284,8 +480,6 @@ const http = require('http');
     1. First parameter will be request Parameter
     2. Second Parameter will be response Parameter
 */
-
-const http = require('http');
 
 // creating server
 const server = http.createServer((request, response) => {
@@ -297,12 +491,10 @@ const server = http.createServer((request, response) => {
     response.end('Hello from server!');
 });
 
-
 /*
     use to create server
     1. First parameter will be Port Number
-    2. Second Parameter will be Address
-    3. Optional parameter for response
+    2. Second Parameter will be callback
 */
 
 // Listening request
@@ -311,6 +503,9 @@ server.listen(8000, '127.0.0.1', () => {
 });
 ```
 
+**⚠️Note :** This code `const server = http.createServer()` This **server** variable is eventEmitter so you can do this `server.on`, `server.addEventListener`, `server.emit`.
+
+
 * Run Command
 ```
 node index.js
@@ -318,7 +513,7 @@ node index.js
 
 * Hit this address in google chrome
 ```
-http://127.0.0.1:8000/
+http://127.0.0.1:8000
 ```
 
 **⚠️ Note :** if you mention other the *80* then we have to write complete address example http://127.0.0.1:8000 otherwise we don't need to add port number you can write like http://127.0.0.1 only
@@ -362,7 +557,7 @@ This line starts the server, making it listen for incoming requests on port 8000
 
 ### 📘Routing using Http Module & Returning json Data
 
-This same thing will achieve by express in better way.
+z`
 
 ```js
 const http = require('http');
@@ -415,148 +610,6 @@ server.listen(8000, '127.0.0.1', () => {
 ```
 
 ---
-
-## 📘Creating and Loading Modules
-
-* In Node every single file ic called Module
-
-
-* Exporting with using Object
-  ```js
-  // app.js
-  function sayHello(name) {
-      console.log('Hello ' + name)
-  }
-
-  module.exports.sayHello = sayHello;
-  ```
-
-  ```js
-  // script.js
-  var app = require('./app');
-
-  app.sayHello('Deepinder Singh')
-  ```
-* Exporting with names
-
-  ```js
-  // app.js
-  function sayHello(name) {
-      console.log('Hello ' + name)
-  }
-
-  module.exports= sayHello;
-  ```
-
-  ```js
-  // script.js
-  var app = require('./app');
-
-  app('Deepinder Singh')
-  ```
-
-  ```
-  node script.js
-  ```
-* Export Everything
-  ```js
-  // index.js
-  exports.sum = (a, b) => {
-    return a + b;
-  };
-
-  exports.isAdmin = true;
-
-  exports.subtract = (a, b) => {
-    return a - b;
-  };
-  ```
-
-  ```js
-  // app.js
-  const d = require('./index');
-
-  console.log(d.sum(1, 2));
-  ```
----
-
-
-### 📘Getting inputs from command line
-
-* You can get parameters from terminal in node using ```process.argv``` (argument Vector). It will return array in which first two elements are predefined.
-
-* index.js
-
-    ```js
-    // index.js
-    const fs = require('fs');
-
-    const action = process.argv[2];
-    const fileName = process.argv[3];
-    const fileContent = process.argv[4];
-
-    if (action === 'add') {
-        fs.writeFileSync(fileName, fileContent, (err) => {
-            if (err) {
-            console.log(err);
-            } else {
-            console.log('File created successfully');
-            }
-        });
-    } else if (action === 'remove') {
-        fs.unlinkSync(fileName, (err) => {
-            if (err) {
-            console.log(err);
-            } else {
-            console.log('File removed successfully');
-            }
-        });
-    } else {
-        console.log('Invalid action');
-    }
-    ```
-
-* Command
-
-    ```
-    node index.js add hello.txt 'Hello World from react'
-
-    node index.js remove hello.txt
-    ```
----
-
----
-
-### 📘Create Files and Directory
-
-```js
-const path = require('path');
-const fs = require('fs');
-const directoryName = 'files';
-
-fs.mkdirSync(directoryName);
-
-const dirPath = path.join(__dirname, directoryName);
-for (let i = 1; i <= 5; i++) {
-  fs.writeFileSync(`${dirPath}/file-${i}.txt`, 'hello world');
-}
-
-fs.readdir(dirPath, (err, files) => {
-  if (err) {
-    console.log(err);
-  } else {
-    files.forEach((file) => {
-      console.log(file);
-    });
-  }
-});
-```
-
-**⚠️Note :** When ever we run node in any folder it will create that folder as web server or kind of server therefore we cannot access any files outside of this server link in D drive, C Drive etc it is good other wise hacker can easily access your data.
-
----
-
-
 ### 📘Commands for Packages, Types of Packages, Version, Version Indicators
 
 * **Commands**
@@ -1975,50 +2028,87 @@ app.listen(80, () => {
 
 * In node every thing is event based (ist same like javascript)
 
-* **event** is like signal pass by emitter
+* **event :** A Signal that something has happened and it is pass by emitter
 
-* **event emitter** is like generating event on any event signal for example button
+* **EventEmitter :** is a Class and is like generating event on any event signal for example button.
 
 * In node js you cannot make any button click, then only event you can create is api.
 
-```js
-const express = require("express");
-let count = 0;
+* Emit means making noise, produce something - signalling that event is occurring.
 
-// its a class that why we use capital letter
-const EventEmitter = require("events");
+  ```js
+  const express = require("express");
+  let count = 0;
+  let cake = 0;
 
-// creating event instance
-const event = new EventEmitter();
+  // its a class that why we use capital letter
+  const EventEmitter = require("events");
 
-// event name
-event.on("count", () => {
-  count++;
-});
+  // creating event instance
+  const event = new EventEmitter();
 
-const app = express();
-const port = 80;
+  // event name
+  event.on("countIncrement", (e) => {
+    count = count + e.count;
+    cake = cake + e.cake;
+  });
 
-app.get("/", (req, res) => {
+  const app = express();
+  const port = 80;
 
-  // calling event
-  event.emit("count");
-  res.status(200).send({ count });
-});
+  app.get("/", (req, res) => {
+    // calling event
+    event.emit("countIncrement", { count: 1, cake: 2 });
+    res.status(200).send({ count, cake });
+  });
 
-app.get("/home", (req, res) => {
+  app.get("/home", (req, res) => {
+    // calling event
+    event.emit("countIncrement", { count: 2, cake: 2 });
+    res.status(200).send({ count, cake });
+  });
 
-  // calling event
-  event.emit("count");
-  res.status(200).send({ count });
-});
+  app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`);
+  });
+  ```
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-});
-```
+* Emitter hav always module scope it cannot be called into another file. To make it common you have to create common class.
+*
+  ```js
+  // index.js
+  const EventEmitter = require("events");
+  class Logger extends EventEmitter {
+    constructor() {
+      super();
+    }
+    log(fnName, e) {
+      this.emit(fnName, e);
+    }
+  }
+
+  module.exports = Logger;
+
+  // app.js
+  const express = require("express");
+  const Logger = require("./index");
+  const app = express();
+  const logger = new Logger();
+  let count = 0;
+
+  logger.on("countIncrement", (e) => {
+    count = count + e.count;
+  });
+
+  app.get("/", (req, res) => {
+    logger.log("countIncrement", { count: 1 });
+    res.status(200).send({ count });
+  });
+
+  app.listen(80);
+  ```
+
 ---
-
 ### 📘Mysql with Node (CRUD)
 
 ```
