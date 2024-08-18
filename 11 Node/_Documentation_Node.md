@@ -1878,6 +1878,10 @@ main();
 
 ### 📘Upload Image
 
+```
+npm i multer
+```
+
 ```js
 const express = require("express");
 const multer = require("multer");
@@ -2013,3 +2017,171 @@ app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
 ```
+---
+
+### 📘Mysql with Node (CRUD)
+
+```
+npm i mysql
+```
+
+```sql
+create database testing;
+
+use testing;
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL PRIMARY KEY  AUTO_INCREMENT,
+  `first_name` varchar(150) NOT NULL,
+  `last_name` varchar(150) NOT NULL,
+  `created_dt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO `users` (`first_name`, `last_name`, `created_dt`) VALUES ('John', 'Doe', NOW()),('Jane', 'Smith', NOW()),('Alice', 'Johnson', NOW()),('Bob', 'Williams', NOW());
+```
+
+```js
+const express = require("express");
+const mysql = require("mysql");
+
+const app = express();
+
+// Middleware
+app.use(express.json());
+
+// MySQL Connection
+const db = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "testing",
+});
+
+// applying middleware to db to check if connected
+app.use((req, res, next) => {
+  if (db.state === "disconnected") {
+    db.connect((err) => {
+      if (err) {
+        console.error("Error connecting to MySQL:", err.message);
+        return res.status(500).send({ status: "error", message: err });
+      }
+      next();
+    });
+  } else {
+    next();
+  }
+});
+
+// Get all users
+app.get("/", (req, res) => {
+  const sql = "SELECT * FROM users ORDER BY first_name";
+  db.query(sql, (err, results) => {
+    if (err) {
+      res.status(500).send({ status: "error", message: err });
+      return;
+    }
+    res.status(200).send({ status: "success", data: results });
+  });
+});
+
+// Create a user
+app.post("/users", (req, res) => {
+  console.log(req.body);
+
+  const { firstName, lastName } = req.body;
+
+  if (!firstName || !lastName) {
+    res.status(400).send({
+      status: "error",
+      message: "firstName and lastName are required fields",
+    });
+    return;
+  }
+
+  const dateTime = new Date().toISOString().slice(0, 19).replace("T", " ");
+
+  const sql =
+    "INSERT INTO users (first_name, last_name, created_dt) VALUES (?, ?, ?)";
+  db.query(sql, [firstName, lastName, dateTime], (err, result) => {
+    if (err) {
+      res.status(500).send({ status: "error", message: err });
+      return;
+    }
+    res.status(201).send({
+      status: "success",
+      message: `User created with id: ${result.insertId}`,
+    });
+  });
+});
+
+// Get a single user
+app.get("/users/:id", (req, res) => {
+  const userId = req.params.id;
+  const sql = "SELECT * FROM users WHERE id = ?";
+  db.query(sql, [userId], (err, result) => {
+    if (err) {
+      res.status(500).send({ status: "error", message: err });
+      return;
+    }
+    if (result.length === 0) {
+      res.status(404).send({ status: "error", message: "User not found" });
+      return;
+    }
+    res.status(200).json(result[0]);
+  });
+});
+
+// Update a user
+app.put("/users/:id", (req, res) => {
+  const userId = req.params.id;
+  const { firstName, lastName } = req.body;
+  const sql = "UPDATE users SET first_name = ?, last_name = ? WHERE id = ?";
+  db.query(sql, [firstName, lastName, userId], (err, result) => {
+    if (err) {
+      res.status(500).send({ status: "error", message: err });
+      return;
+    }
+    if (result.affectedRows === 0) {
+      res.status(404).send({ status: "error", message: "User not found" });
+      return;
+    }
+    res.status(200).send({ status: "success", message: "User updated" });
+  });
+});
+
+// Delete a user
+app.delete("/users/:id", (req, res) => {
+  const userId = req.params.id;
+
+  const sql = "DELETE FROM users WHERE id = ?";
+  db.query(sql, [userId], (err, result) => {
+    if (err) {
+      res.status(500).send({ status: "error", message: err });
+      return;
+    }
+    if (result.affectedRows === 0) {
+      res.status(404).send({ status: "error", message: "User not found" });
+      return;
+    }
+    res.status(200).send({ status: "success", message: "User deleted" });
+  });
+});
+
+// Start server
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+```
+
+### 📘NODE VS PHP
+
+* Node become very costly for developing small applications while php not
+
+* Both languages are stable and from very long in market
+
+* Node provide Performance, speed and request handling which is soo much better than php due their asynchronous nature.
+
+* Node Hosting mainly done on cloud
+
+* Both language can connect with database but stand alone javascript not.
+
+* Apis are more powerful than creating website in php or node js.
