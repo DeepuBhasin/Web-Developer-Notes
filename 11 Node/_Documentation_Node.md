@@ -6,37 +6,17 @@
     https://nodejs.org/docs/latest/api/
     ```
 
-2. In Node, every file is Module so variables and functions are defined in that file are scoped to that module they are not available outside the module
-
-3. Node is single threaded language but it is async in nature.
-
-4. Data Can be store in following modules
+2. Data Can be store in following modules
 
    1. Json-File
    2. Mysql
    3. MondoDB
 
-5. Node Vs Npm
-
-   1. node and npm are different things npm stands for node package manager. This thing get install automatically to deal with packages while node is run time environment.
-
-   2. node -v to check version of node & npm -v  to check version of npm (their version can be different from each other)
-
-6. In Node first parameter in every function (callback) will be **error** parameter and second one will be **data**
+3. In Node first parameter in every function (callback) will be **error** parameter and second one will be **data**. In Node when every we pass any *callback* that means that function is asynchronous function. Example when *readFile* read file completely then it will call that callback function.
 
     ```js
     // Example
     fs.readFileSync('./input.txt', 'utf-8', (error, data) => {
-        console.log('data : ', data);
-        console.log('error', error);
-    })
-    ```
-
-7. In Node when every we pass any *callback* that means that function is asynchronous function. Example when *readFile* read file completely then it will call that callback function.
-
-    ```js
-    // Example
-    fs.readFile('./input.txt', 'utf-8', (error, data) => {
         console.log('data : ', data);
         console.log('error', error);
     })
@@ -80,18 +60,15 @@
 
 * Node is not a language or any framework. Its a runtime Environment but Code syntax of javascript and Node is same (but it is not exactly same).
 
+* Node is single threaded language but it is async in nature.
+
 * Build fast, highly scalable network applications (back-end) like create api, due to their non-blocking asynchronous nature. Its a default behavior of node.
 
 * Node.js can access file system, Operating system, Database but javascript not.
 
-* Node can connect with Database but javascript not.
-
-* Better networking capabilities.
-
 * Node.js use chrome's V8 engine to execute code.
 
-* Node.js mostly used for api and its is super fast, so we can connect the same database with web App, Mobile App. Node is super-fast for api's
-
+* Node.js mostly used for api and its is super fast, so we can connect the same database with web App and Mobile App.
 
 ![Image](./images/why-and-when-to-use-node-js.png)
 
@@ -147,6 +124,7 @@
 ---
 ### 📘Modules, Module Wrapper function Types, and Useful variables
 
+* Every code we write in node its a module.
 
 * There are 3 Types of Modules
 
@@ -553,11 +531,7 @@ server.listen(8000, '127.0.0.1', () => {
 This line starts the server, making it listen for incoming requests on port 8000 and the IP address 127.0.0.1 (localhost). The callback function inside server.listen will be executed once the server starts listening, logging 'Listening to request on port 8000' to the console.
 
 ---
-
-
 ### 📘Routing using Http Module & Returning json Data
-
-z`
 
 ```js
 const http = require('http');
@@ -610,7 +584,21 @@ server.listen(8000, '127.0.0.1', () => {
 ```
 
 ---
-### 📘Commands for Packages, Types of Packages, Version, Version Indicators
+### 📘Npm package, Commands for Packages, Types of Packages, Version, Version Indicators
+
+* Node Vs Npm
+
+   1. node and npm are different things npm stands for node package manager. This thing get install automatically to deal with packages while node is run time environment.
+
+   2. node -v to check version of node & npm -v  to check version of npm (their version can be different from each other)
+
+
+
+* Install package.json file
+
+  ```
+  npm init -y
+  ```
 
 * **Commands**
 
@@ -620,10 +608,10 @@ server.listen(8000, '127.0.0.1', () => {
        npm i <package-name>
        ```
 
-    2. Install package with specific version : example npm i @4.1.1 or npm i @4 (it will install best version related to 4)
+    2. Install package with specific version : example npm i @4.1.1 or npm i @4 (it will install best version related to 4). This is also called downgrade version.
 
         ```
-         npm i \<package-name>@\<version-number>
+         npm i <package-name>@<version-number>
         ```
 
     3. Install multiple packages
@@ -634,22 +622,95 @@ server.listen(8000, '127.0.0.1', () => {
 
     4. To Remove package :
         ```
-        npm r or npm uninstall <package-name>
+        npm r or npm uninstall or npm un <package-name>
         ```
     5. To update the packages :
         ```
         npm update <package-name>
         ```
 
-    6. To check outdate package : run this command in terminal directly
+    6. To check outdate package : run this command in terminal directly. If all the packages are update to date then this command will not return any thing.
         ```
-        npm outdate
+        npm outdated
+        ```
+        Example : suppose this is not latest version of  "express": "^2.3.0" then the above command will return you latest **current, wanted, latest**, current means current version, wanted means which us near to "^2.3.0" because of cap sign and latest means full latest.
+
+
+
+    7. To check installed packages with their versions
+
+        See local packages list without depth
+
+          ```
+          npm list
+          ```
+
+          ```
+          npm list --depth=0
+          ```
+        See local packages list without depth
+
+          ```
+          npm list -g
+          ```
+
+        See list with depth
+
+          ```
+          npm list --depth=1
+          ```
+
+    8. To check complete detail of package:
+
+        Complete information about package
+        ```
+        npm view <package-name>
         ```
 
-    7. To check version of package :
+        Show current version
         ```
-        npm view \<package-name> version
+        npm view <package-name> -v
         ```
+
+        Show express dependencies
+        ```
+        npm view express dependencies
+        ```
+
+        Show all version histories
+        ```
+        npm view express versions
+        ```
+
+    9. To publish package : follow these steps
+
+       ```
+        npm login
+       ```
+       ```
+       username :
+       ```
+       ```
+       password :
+       ```
+       ```
+       email :
+       ```
+
+       ```
+        npm publish
+       ```
+
+    10. Updating a published package : Do changes and then run command according to change like minor, major, patch
+
+        ```
+         npm version minor
+        ```
+
+        ```
+         npm publish
+        ```
+
 
     ![Image](./images/npm-outdate.png)
 
@@ -668,20 +729,17 @@ server.listen(8000, '127.0.0.1', () => {
 
   * MajorVersion : It defines that its a huge change which can have breaking changes
 
-
 * **Version Indicator :**
 
   * *: Matches any version of the package. It is the most permissive and allows any update, regardless of major, minor, or patch changes. (not good one can lead to breaking changes code)
 
-  * ^ (caret): Allows updates that do not change the first non-zero number. For example, ^1.2.3 will allow updates to 1.x.x but not 2.x.x. It is more permissive.
+  * ^ (caret): Allows updates that do not change the first non-zero number (Major Version). For example, ^1.2.3 will allow updates to 1.x.x but not 2.x.x. It is more permissive.
 
-  * ~ (tilde): Allows updates that do not change the minor version number. For example, ~1.2.3 will allow updates to 1.2.x but not 1.3.x. It is more restrictive.(this one is more save because its only accept patches)
+  * ~ (tilde): Allows updates that do not change the minor version number (Patch version). For example, ~1.2.3 will allow updates to 1.2.x but not 1.3.x. It is more restrictive.(this one is more save because its only accept patches)
 
-
-
+  * Exact Version : "1.1.1" it will download exact version
 
 **Some useful Packages**
-
 
 
 1. **Slugify :** it is use to make readable url's. It is basically a function use to create slugs, slugs is basically just the last part of the url that contains a unique string that identify the resource that the website is displaying example 127.0.0.1:8000/product/**fresh-avocados** (in simple words use slugs instead of numbers like ?id=1 use this ?id=fresh-avocado).
