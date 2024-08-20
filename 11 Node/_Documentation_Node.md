@@ -756,7 +756,7 @@ server.listen(8000, '127.0.0.1', () => {
 
     Check the documentation for various options
 
-2. **Nodemon :** It helps node js applications by automatically restarting when ever we change some files. (here index.js file will be server file)
+2. **Nodemon :** called Node Monitor,  It helps node js applications by automatically restarting when ever we change some files. (here index.js file will be server file)
 
     ```js
     "scripts": {
@@ -770,6 +770,7 @@ server.listen(8000, '127.0.0.1', () => {
 
     2. **start** is kind of default one for development you we can write *npm start* instead of *npm run start*
 
+3. **Joi** : to validate input data
 ---
 
 ### 📘What Happen when we access a webpage
@@ -864,11 +865,13 @@ This is same as in javascript
 
 * Express is minimal **node.js framework**, a higher level of abstraction and it is built on the node.js
 
-* Express contains a very  robust set of features: complex routing, easier handling of request and response, middlewares, server-side rendering etc.
+* Express contains a very robust set of features: complex routing, easier handling of request and response, middlewares, server-side rendering etc.
 
 * Express allows for rapid development of node.js application. we don't have to re-invent the wheel;
 
 * Express makes it easier to organize our application into the MVC architecture.
+
+* Core Fundamentals of express is Middlewares. Express is al about middlewares. Example app.use(express.json()) this method read the request and if there is json object in the body then it will parse the body object into a json object then it will set to req.body property
 
 Basic Code
 
@@ -894,7 +897,10 @@ Basic Code
     // call express to create app
     const app = express();
 
-    // Routes with http method
+    // this is a middleware
+    app.use(express.json())
+
+    // Routes with http method (this callback function use for request and response is also a middleware)
     app.get('/', (req, res) => {
         // return type of res.send() is string
         res.send('Hello World')
@@ -953,7 +959,12 @@ Rest Architecture
 
 ![Image](./images/rest-architecture-5.png)
 
-**⚠️Note :** major advantage of these rest full methods is that we can apply all method on same route
+**⚠️Note :**
+
+1. major advantage of these rest full methods is that we can apply all method on same route
+
+2. Always use return statements while sending response.
+
 ---
 
 ### 📘Get Method with express (show json data and html page)
@@ -981,7 +992,7 @@ Rest Architecture
 
     // for json
     app.get('/', (req, res) => {
-        res.status(200).json({
+       return  res.status(200).json({
             status: 'success',
             data: {
             user,
@@ -991,7 +1002,7 @@ Rest Architecture
 
     // for html
     app.get('/', (req, res) => {
-        res.status(200).send('<h1>Hello from express</h1>');
+        return res.status(200).send('<h1>Hello from express</h1>');
     });
 
     const port = process.env.PORT || 3000;
@@ -1019,14 +1030,19 @@ Rest Architecture
   const express = require('express');
 
   const app = express();
-
-  // its a middleware to use body parser
+  // its a middleware to use body parser (it is use to enabling parsing of json object in the body of request)
   app.use(express.json());
 
+  // this is use if body data send in x-www-form-urlencoded
+  app.use(express.urlencoded({ extended: true }));0
+
   app.post('/', (req, res) => {
-    // all data come into req.body object
+
+    // all data come into req.body for json & urlencoded
     console.log(req.body);
-    res.status(200).send('Hello World');
+
+    return res.status(200).send('Hello World');
+
   });
 
   const port = process.env.PORT || 3000;
@@ -1039,13 +1055,80 @@ Rest Architecture
 
   ```js
   {
-      "username" : "Deepinder"
+      "username" : "John"
   }
   ```
+
+
+**⚠️Note :**
+
+1. Body-Form:
+
+  * Description: The body-form refers to sending data as JSON or another format in the request body. It's commonly used in APIs where you need to send structured data, like a JSON object.
+
+  * Content-Type: Typically application/json.
+
+  * Example: Sending **{ "name": "John", "age": 25 }** as data.
+
+  * Usage: Suitable when you need to send complex data structures.
+
+    ```js
+    // JSON data in body-form
+    {
+      "username": "john",
+      "password": "secret123"
+    }
+    ```
+
+2. Form-URL-Encode:
+  * Description: The form-url-encode sends data as key-value pairs, similar to how data is sent in a URL query string, but in the request body. It's commonly used for submitting HTML forms.
+
+  * Content-Type: application/x-www-form-urlencoded.
+
+  * Example: Sending **name=john&age=25** as data.
+
+  * Usage: Often used when sending simple form data or working with traditional web forms.
+
+    ```
+    // Data in form-url-encode
+    username=john&password=secret123
+    ```
+
+Key Difference:
+
+ * Body-Form is for more complex data.
+
+ * Form-URL-Encode is for simpler, form-like data.
+
+```js
+// Body-form example
+fetch('https://example.com/api/login', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    username: 'john',
+    password: 'secret123'
+  })
+});
+
+// Form-url-encode example
+fetch('https://example.com/api/login', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  },
+  body: 'username=john&password=secret123'
+});
+```
+
 
 ---
 
 ### 📘Params and Query Params in address-bar with express
+
+* Params are use when parameter are required while query params are use when parameters are optional example : xyz.com/isAdmin/true?age=18
 
 ```js
 const express = require('express');
@@ -1058,11 +1141,11 @@ app.use(express.json());
 app.post('/:id/:name/:age?', (req, res) => {
 
   // This is for normal params (age is optional parameter)
-  console.log(req.params);      // { id: '1', name: 'jhon', age: '24' }
+  console.log(req.params);      // { id: '1', name: 'john', age: '24' }
   // This is for query params
   console.log(req.query);       // { testing: 'true' }
 
-  res.status(200).send('Hello World');
+  return res.status(200).send('Hello World');
 });
 
 const port = process.env.PORT || 3000;
@@ -1113,7 +1196,7 @@ app.patch('/users/:id', (req, res) => {
     user.age = age;
   }
 
-  res.send(user);
+  return res.send(user);
 });
 
 // Start the server
@@ -1193,7 +1276,42 @@ http://127.0.0.1:3000/api/v1/tours
 ```
 
 ---
+### 📘Simplest Example Express API without any database
 
+```js
+const express = require("express");
+const course = [];
+
+const app = express();
+
+app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+
+app.get("/api/courses", (req, res) => {
+  return res.json({ status: "success", data: course });
+});
+
+app.get("/api/courses/:id", (req, res) => {
+  const course = course.find((c) => c.id === parseInt(req.params.id));
+  return res.json({ status: "success", data: course });
+});
+
+app.post("/api/courses", (req, res) => {
+  const temp = {
+    id: course.length + 1,
+    name: req.body.name,
+  };
+  course.push(temp);
+  res.json({ status: "success", data: temp });
+});
+
+app.listen(3000);
+```
+
+---
 ### 📘Middleware and Request-Response Cycle
 
 * Middleware are functions which are only use with routes. With the help of middleware we can access or modify http request and response.
@@ -1222,7 +1340,7 @@ Various Types of Middlewares
 5. Third-party
 
 
-**Example of Application-level middleware**
+**Example of Application-level middleware (with custom middlewares)**
 
 ```js
 const express = require('express');
@@ -1267,6 +1385,9 @@ app.listen(3000, () => {
   console.log('Application is running on port 3000');
 });
 ```
+
+**⚠️Note :**  When ever you create custom middleware you should place in separate files its a good practice
+
 
 **Example of Route level middleware (single and group)**
 
@@ -1447,13 +1568,9 @@ app.get('*', (req, res) => {
 app.listen(3000, () => {
   console.log('Application is running on port 3000');
 });
-
-
-
 ```
+
 ---
-
-
 ### 📘Param Middleware
 
 ```js
@@ -1692,7 +1809,7 @@ We are not mentioning **public** folder in address bar because express is pointi
   node app.js
   ```
 
-![Image](./images/environment-variables-2.png)
+  ![Image](./images/environment-variables-2.png)
 
 ---
 
@@ -1984,9 +2101,7 @@ main();
 
 * You can also create API using mongoose + express
 
-
 ---
-
 ### 📘Upload Image
 
 ```
