@@ -255,7 +255,97 @@
 
 ![Image](./images/sync-vs-async-2.png)
 
+There are three ways in which we can deal with asynchronous code
+
+1. Callbacks
+
+2. Promises
+
+3. Async/Await
+
 ![Image](./images/sync-vs-async-3.png)
+
+
+```js
+// callback example
+console.log("Before");
+
+getUser(1, (user) => {
+  console.log("User", user);
+  getRepositories(user, (repos) => {
+    getCommits(repos, (commits) => {
+      console.log("Commits", commits);
+    });
+  });
+});
+
+console.log("After");
+
+// to return from these functions we use callback
+function getUser(id, callback) {
+  setTimeout(() => {
+    callback({ id: id, name: "John Doe" });
+  }, 2000);
+}
+
+// to return from these functions we use callback
+function getRepositories(user, callback) {
+  setTimeout(() => {
+    callback(["repo1", "repo2", "repo3"]);
+  }, 2000);
+}
+
+// to return from these functions we use callback
+function getCommits(repo, callback) {
+  setTimeout(() => {
+    callback(["commit1", "commit2", "commit3"]);
+  }, 2000);
+}
+```
+
+```js
+// Named callback functions to remove callback hell
+console.log("Before");
+
+getUser(1, getRepositoriesCallback);
+
+console.log("After");
+
+function getRepositoriesCallback(user) {
+  console.log(user);
+  getRepositories(user.name, getCommitsCallback);
+}
+
+function getCommitsCallback(repos) {
+  console.log("Repositories:", repos);
+  getCommits(repos[0], displayCommits);
+}
+
+function displayCommits(commits) {
+  console.log("Commits:", commits);
+}
+
+function getUser(id, callback) {
+  setTimeout(() => {
+    callback({ id: id, name: "John Doe", gitHubUsername: "johnDoe" });
+  }, 2000);
+}
+
+function getRepositories(username, callback) {
+  setTimeout(() => {
+    callback(["repo1", "repo2", "repo3"]);
+  }, 2000);
+}
+
+function getCommits(repo, callback) {
+  setTimeout(() => {
+    callback(["commit1", "commit2", "commit3"]);
+  }, 2000);
+}
+```
+
+**⚠️Note :** In real life we use mostly promises all the times. If you see callbacks hell just convert them into promises
+
 
 ---
 
@@ -1738,7 +1828,7 @@ We are not mentioning **public** folder in address bar because express is pointi
 
 ### 📘Environment variables
 
-1. Direct way(not good one)
+1. Direct way(not good one) : use to store small values
 
   ```js
   const express = require('express');
@@ -1754,11 +1844,11 @@ We are not mentioning **public** folder in address bar because express is pointi
 
   ```js
   "scripts": {
-    "start": "set NODE_ENV=development && set X=20 && set Y=20 && nodemon app.js"
+    "start": "set NODE_ENV=development&&set X=20&&set Y=20&&nodemon app.js"
 
     // OR
 
-    "start": "set NODE_ENV=development && set X=20 && set Y=20 && node app.js"
+    "start": "set NODE_ENV=development&&set X=20 && set Y=20 && node app.js"
   },
 
   // If run directly in terminal
@@ -1768,7 +1858,7 @@ We are not mentioning **public** folder in address bar because express is pointi
 ![Image](./images/environment-variables.png)
 
 
-1. Using dot env Package( best one)
+2. Using dot env Package(best one) : use to store large data
 
 * Create file with any name
 
@@ -1811,9 +1901,72 @@ We are not mentioning **public** folder in address bar because express is pointi
 
   ![Image](./images/environment-variables-2.png)
 
----
+3. Using Config Package
 
+* Package Name
+
+   ```
+   npm i config
+   ```
+
+* Create three files in config folder
+
+   ```js
+   // default.json
+   {
+       "file": "default.json",
+       "name": "Default app",
+       "application": {
+           "port": 3000
+       }
+   }
+
+   // development.json
+   {
+       "file": "default.json",
+       "name": "Development App",
+       "application": {
+           "port": 3000
+       }
+   }
+
+   // production.json
+   {
+       "file": "default.json",
+       "name": "Production App",
+       "application": {
+           "port": 3000
+       }
+   }
+   ```
+
+* app.js
+
+   ```js
+   const config = require("config");
+
+   console.log("file :", config.get("file"));
+   console.log("name :", config.get("name"));
+   console.log("application.port :", config.get("application.port"));
+   ```
+
+ * package.json
+
+   ```js
+     "scripts": {
+       "default": "nodemon app.js",
+       "dev": "set NODE_ENV=development&& nodemon app.js",
+       "prod": "set NODE_ENV=production&& nodemon app.js"
+   },
+   ```
+
+
+**⚠️Note :** Secrete key should be store in **.env** files or environment variables
+
+---
 ### 📘Connections to MongoDB using Node & CRUD Commands
+
+You can connect to the various Database like mongoDB, Mysql, SqlLite, Oracle, PostgreSql etc. You can check various details regarding Databases in *Database Integration* section of documentation.
 
 * Before proceeding into mongoDB commands first create Database with name **test** and collection name with **tours**.
 
