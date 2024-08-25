@@ -149,3 +149,101 @@
     ```
     db.tours.deleteMany({});
     ```
+---
+
+### 📘Select Query
+
+```sql
+SELECT name , author from authors ORDER BY name ASC
+```
+
+```
+db.authors.find({}, { name: 1, author: 1, _id: 0 }).sort({ name: 1 });
+```
+
+**⚠️ Note :** in mongoose package some query write in different way like select('name author id'), sort('-price')
+
+---
+
+
+### 📘Comparison Commands
+
+1. eq : equal
+
+2. ne : not equal
+
+3. gt : greater than
+
+4. gte : greater than or equal to
+
+5. lt : less than
+
+6. lte : less than or equal to
+
+7. in & or : to select defined values
+
+    ```
+    db.tours.find({ price : {$in : [10, 15, 20]}});
+
+    db.tours.find({ price : {$or : [10, 15, 20]}});
+    ```
+
+8. nin : not in
+
+---
+
+### 📘logical Operators (or & and)
+
+1. OR
+
+    ```
+    db.tours.find().or([{price : 100}, { isPublished : true }]);
+    ```
+
+2. AND
+
+    ```
+    db.tours.find().and([{price : 100}, { isPublished : true }]);
+    ```
+
+---
+
+### 📘Regular Express
+
+* Start with Test: It will find those authors which start with Test word.
+
+    ```
+    db.tours.find({author : /^Test/});
+    ```
+
+* End with test :  It will find those authors which end with Test word.
+
+    ```
+    db.tours.find({author : /$test/i});
+    ```
+* Contain test :  It will find those authors which contains Test word.
+
+    ```
+    db.tours.find({author : /.*test.*/i});
+    ```
+---
+
+### 📘Count
+
+To get Count
+
+```
+db.tours.find().count();
+```
+
+---
+
+### 📘Pagination
+
+```js
+const pageNumber = 2;
+const pageSize = 10;
+
+db.tours.find().skip((pageNumber-1) * pageSize).limit(pageSize);
+```
+

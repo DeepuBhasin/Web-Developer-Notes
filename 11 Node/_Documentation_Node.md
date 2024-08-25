@@ -2146,6 +2146,14 @@ app.listen(80, () => {
 
 * Its a advance version of mongoDB package which provide schemes and model
 
+* Some queries get changed in mongoose package
+
+  1. findById : to find data by id
+
+  2. select : to select keys
+
+  3. set : to get value example .set({isPublished : true, author : 'Author Name'})
+
 ```js
 // Importing the Mongoose library to interact with MongoDB
 const mongoose = require("mongoose");
@@ -2153,7 +2161,7 @@ const mongoose = require("mongoose");
 // Function to establish a connection to the MongoDB database
 async function dbConnection(databaseName) {
   try {
-    // Connect to the MongoDB instance running locally, specifying the database name
+    // Connect to the MongoDB instance running locally, specifying the database name and it return promise
     await mongoose.connect(`mongodb://127.0.0.1:27017/${databaseName}`);
     console.log("Connected to the database");
   } catch (error) {
@@ -2165,9 +2173,10 @@ async function dbConnection(databaseName) {
 // Defining a schema for the products collection
 // A schema defines the structure of the documents in a collection
 const productSchema = new mongoose.Schema({
-  name: String, // Name of the product (String)
+  name: {type : String, default : 'Default Name'}, // Name of the product (String)
   price: Number, // Price of the product (Number)
   brand: String, // Brand of the product (String)
+  tags : [String]  // array of string
 });
 
 // Creating a model based on the productSchema
@@ -2195,7 +2204,14 @@ async function createProduct(data) {
 async function readProducts(filter = {}) {
   try {
     // Find documents in the collection that match the filter criteria
-    const products = await ProductModel.find(filter);
+    const products = await ProductModel
+    .find(filter)
+    .limit(3)
+    .sort({name : -1})  // sorting in descending order
+    .select({
+      name: 1,  // to select key name
+      tags: 1,
+    });
     console.log("Products Found:", products);
   } catch (error) {
     // Log an error message if the read operation fails
@@ -2233,7 +2249,13 @@ async function main() {
   await dbConnection("test");
 
   // Create a new product
-  await createProduct({ name: "iPhone", price: 1000, brand: "Apple" });
+    // Create a new product
+  await createProduct({
+    name: "iPhone",
+    price: 1000,
+    brand: "Apple",
+    tags: ["node", "backend"],
+  });
 
   // Read products with the brand "Apple"
   await readProducts({ brand: "Apple" });
