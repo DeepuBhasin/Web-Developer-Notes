@@ -1544,6 +1544,7 @@ log('Hello');       // create string on fly
 log(function(){ console.log('Hi')}) // create function as  object on fly && it is considered as function expression
 ```
 Functions can pass as parameter in which you can pass function as parameter use them like you do variables to other functions as well *introduces an entirely new class of programming called **Functional Programming***
+
 ---
 
 ## 📘First-Class functions Vs Higher-Order functions

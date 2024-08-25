@@ -1592,6 +1592,7 @@ Various Types of Middlewares
   ```js
   const express = require('express');
   const app = express();
+  const port = 80;
   const adminRouter = express.Router();
   app.use(express.json());
 
@@ -1633,8 +1634,8 @@ Various Types of Middlewares
     res.status(404).send('page not found');
   });
 
-  app.listen(3000, () => {
-    console.log('Server is running on port 3000');
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
   });
   ```
 ---
@@ -1820,184 +1821,158 @@ We are not mentioning **public** folder in address bar because express is pointi
 **⚠️Note :** Secrete key should be store in **.env** files or environment variables
 
 ---
-### 📘Connections to MongoDB using Node & CRUD Commands
+### 📘Connections to MongoDB using Node & CRUD Commands (not good one)
 
-You can connect to the various Database like mongoDB, Mysql, SqlLite, Oracle, PostgreSql etc. You can check various details regarding Databases in *Database Integration* section of documentation.
+1. You can connect to the various Database like MongoDB, Mysql, SqlLite, Oracle, PostgreSql etc in Node. You can check each Databases documentation in *Database Integration*
 
-* Before proceeding into mongoDB commands first create Database with name **test** and collection name with **tours**.
+2. You can check various commands in MongoDB notes
 
+3. Mongoose provide better commands than mongoDB package and it have also some different commands
 
-Package
-```
-npm i mongodb;
-```
+**CRUD**
 
-Database
+* Package name
 
-```
-use test
+  ```
+  npm i mongodb;
+  ```
 
-db.tours.insertMany([{"name":"Product A","price":19.99,"rating":4.5},{"name":"Product B","price":29.49,"rating":4.0},{"name":"Product C","price":9.99,"rating":3.8},{"name":"Product D","price":45.00,"rating":4.7},{"name":"Product E","price":15.75,"rating":3.9}])
-```
+* Database (using terminal)
 
-**Connection with MongoDB**
+  1. Create Database
+  ```
+  use test
+  ```
 
-```js
-// app.js
-const { MongoClient } = require("mongodb");
-const url = "mongodb://127.0.0.1:27017";
+  2. Insert Data
+  ```
+  db.tours.insertMany([{"name":"Product A","price":19.99,"rating":4.5},{"name":"Product B","price":29.49,"rating":4.0},{"name":"Product C","price":9.99,"rating":3.8},{"name":"Product D","price":45.00,"rating":4.7},{"name":"Product E","price":15.75,"rating":3.9}])
+  ```
 
-const client = new MongoClient(url);
+* app.js
 
-async function dbConnection(databaseName, collectionName) {
-  let result = await client.connect();
-  db = result.db(databaseName);
-  return db.collection(collectionName);
-}
+  ```js
+  const { MongoClient } = require("mongodb");
 
-// toArray return promise
+  // default address
+  const url = "mongodb://127.0.0.1:27017";
+  const client = new MongoClient(url);
 
-// using then methods
-dbConnection("test", "tours").then((res) => {
-  res
-    .find()
-    .toArray()
-    .then((data) => {
-      console.log(data);
+  // Database Name
+  const dbName = "test";
+
+  // Collection Name
+  const collectionName = "tours";
+
+  // Connection
+  async function dbConnection(databaseName, collectionName) {
+    let result = await client.connect();
+    return result.db(databaseName).collection(collectionName);
+  }
+
+  // Insert
+  async function insert() {
+    let data = await dbConnection(dbName, collectionName);
+
+    // for single
+    let result = await data.insertOne({
+      name: "Apple 15 pro",
+      price: 100000,
+      rating: 4.8,
     });
-});
 
-// using async and await
-const main = async () => {
-  let result = await dbConnection("test", "tours");
-  let data = await result.find().toArray();
-  console.log(data);
-};
-
-main();
-```
-**Insert Into MongoDB**
-
-```js
-const { MongoClient } = require("mongodb");
-const url = "mongodb://127.0.0.1:27017";
-
-const client = new MongoClient(url);
-
-// connection
-async function dbConnection(databaseName, collectionName) {
-  let result = await client.connect();
-  db = result.db(databaseName);
-  return db.collection(collectionName);
-}
-
-// insert
-async function insert() {
-  let data = await dbConnection("test", "tours");
-
-  // for single
-  let result = await data.insertOne({ name: "test", age: 24 });
-
-  // for multiple
-  let result = await data.insertMany([
-    { name: "test", age: 24 },
-    { name: "test", age: 24 },
-  ]);
-
-  if (result.acknowledged) {
-    console.log("Insert Data successfully");
-  } else {
-    console.log("Insert Data failed");
+    if (result.acknowledged) {
+      console.log("Insert Data successfully");
+    } else {
+      console.log("Insert Data failed");
+    }
   }
-}
-insert();
-```
 
-**Update into MongoDB**
+  // Read
+  const read = async () => {
+    let data = await dbConnection(dbName, collectionName);
+    let result = await data.find().toArray();
+    console.log(result);
+  };
 
-* dbConnection file is already created above
-
-```js
-async function update() {
-  let data = await dbConnection("test", "tours");
-  let result = await data.updateOne(
-    { name: "Product A" },
-    { $set: { price: 100, dollarRate: 10, test: true } }
-  );
-  if (result.modifiedCount) {
-    console.log("updated successfully");
-  } else {
-    console.log("not updated");
+  // Update
+  async function update() {
+    let data = await dbConnection(dbName, collectionName);
+    let result = await data.updateOne(
+      { name: "Product A" },
+      { $set: { price: 100, dollarRate: 10, test: true } }
+    );
+    if (result.modifiedCount) {
+      console.log("updated successfully");
+    } else {
+      console.log("not updated");
+    }
   }
-}
-update();
-```
 
-
-**Delete into MangoDB**
-
-```js
-async function deleteMethod() {
-  let data = await dbConnection("test", "tours");
-  let result = await data.deleteOne({ name: "Product A" });
-  if (result.deletedCount) {
-    console.log("deleted successfully");
-  } else {
-    console.log("not deleted");
+  // Delete
+  async function deleteMethod() {
+    let data = await dbConnection("test", "tours");
+    let result = await data.deleteOne({ name: "Product A" });
+    if (result.deletedCount) {
+      console.log("deleted successfully");
+    } else {
+      console.log("not deleted");
+    }
   }
-}
-deleteMethod();
-```
 
+  // All Actions
+  insert();
+  read();
+  update();
+  deleteMethod();
+  ```
 ---
 
-### 📘Express API + MongoDB
+### 📘MongoDB using Express
 
 * Get, Post, Put, Patch, Delete Methods
 
-```js
-// this point is main one
-const { MongoClient, ObjectId } = require("mongodb");
-const url = "mongodb://127.0.0.1:27017";
-const express = require("express");
+* app.js
 
-const app = express();
+  ```js
+  const { MongoClient, ObjectId } = require("mongodb");
+  const express = require("express");
+  const port = 80;
+  const app = express();
 
-app.use(express.json());
+  app.use(express.json());
 
-const client = new MongoClient(url);
+  const url = "mongodb://127.0.0.1:27017";
+  const client = new MongoClient(url);
 
-// connection
-async function dbConnection(databaseName, collectionName) {
-  let result = await client.connect();
-  db = result.db(databaseName);
-  return db.collection(collectionName);
-}
+  // connection
+  async function dbConnection(databaseName, collectionName) {
+    let result = await client.connect();
+    return result.db(databaseName).collection(collectionName);
+  }
 
-// get method
-app.get("/", async (req, res) => {
-  let data = await dbConnection("test", "tours");
-  let result = await data.find({}).toArray();
-  return res.status(200).send({ message: result });
-});
-
-
-// delete method
-app.delete("/:id", async (req, res) => {
-  let data = await dbConnection("test", "tours");
-  let result = await data.deleteOne({
-    _id: new ObjectId(req.params.id),
+  // get method
+  app.get("/", async (req, res) => {
+    let data = await dbConnection("test", "tours");
+    let result = await data.find({}).toArray();
+    return res.status(200).send({ status: "success", data: result });
   });
-  return res.status(200).send({ message: result });
-});
 
-app.listen(80, () => {
-  console.log("listening on port 80");
-});
-```
+  // delete method
+  app.delete("/:id", async (req, res) => {
+    let data = await dbConnection("test", "tours");
+    let result = await data.deleteOne({
+      _id: new ObjectId(req.params.id),
+    });
+    return res.status(200).send({ status: "success", data: result });
+  });
+
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
+  ```
 
 ---
-
 ### 📘Mongoose (best one)
 
 * Its a advance version of mongoDB package which provide schemes and model
