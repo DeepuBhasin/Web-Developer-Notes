@@ -1821,6 +1821,186 @@ We are not mentioning **public** folder in address bar because express is pointi
 **⚠️Note :** Secrete key should be store in **.env** files or environment variables
 
 ---
+### 📘Upload Image
+
+```
+npm i multer
+```
+
+```js
+const express = require("express");
+const multer = require("multer");
+const directoryName = "uploads";
+const fs = require("fs");
+const formFileInputName = "image";
+
+const app = express();
+const port = 3001;
+
+// checking if directory exists
+const directoryExistMiddleware = (req, res, next) => {
+  if (!fs.existsSync(directoryName)) {
+    fs.mkdirSync(directoryName);
+  }
+  next();
+};
+
+// Set up multer to store uploaded files in the 'uploads' folder
+const uploadImageMiddleware = multer({
+  storage: multer.diskStorage({
+    destination: (req, file, callBack) => {
+      callBack(null, directoryName);
+    },
+    filename: (req, file, callBack) => {
+      callBack(null, `${file.originalname}-${Date.now()}.jpg`);
+    },
+  }),
+}).single(formFileInputName); // for uploading single image
+
+// Define the upload route
+app.post(
+  "/upload",
+  directoryExistMiddleware,
+  uploadImageMiddleware,
+  (req, res) => {
+    try {
+      // File uploaded successfully
+      res.status(200).json({
+        success: true,
+        message: "Image uploaded successfully",
+        filename: req.file.filename,
+      });
+    } catch (error) {
+      // Handle any error
+      res.status(500).json({
+        success: false,
+        message: "Failed to upload image",
+        error: error.message,
+      });
+    }
+  }
+);
+
+// Start the server
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
+```
+![Image](./images/upload-image.png)
+
+---
+
+### 📘OS-Module
+
+```js
+const express = require("express");
+const os = require("os");
+const app = express();
+
+app.get("/", (req, res) => {
+  res.status("200").send({
+    hostName: os.hostname(),
+    platform: os.platform(),
+    userInfo: os.userInfo(),
+    architecture: os.arch(),
+    freeMemory: `${os.freemem() / (1024 * 1024 * 1024)} GB`,
+    totalMemory: `${os.totalmem() / (1024 * 1024 * 1024)} GB`,
+    OS: os, // not very useful
+  });
+});
+
+// Start the server
+app.listen(80, () => {
+  console.log(`Server running on port 80`);
+});
+```
+---
+
+### 📘Events and Event Emitter in node.js
+
+* In node every thing is event based (ist same like javascript)
+
+* **event :** A Signal that something has happened and it is pass by emitter
+
+* **EventEmitter :** is a Class and is like generating event on any event signal for example button.
+
+* In node js you cannot make any button click, then only event you can create is api.
+
+* Emit means making noise, produce something - signalling that event is occurring.
+
+  ```js
+  const express = require("express");
+  let count = 0;
+  let cake = 0;
+
+  // its a class that why we use capital letter
+  const EventEmitter = require("events");
+
+  // creating event instance
+  const event = new EventEmitter();
+
+  // event name
+  event.on("countIncrement", (e) => {
+    count = count + e.count;
+    cake = cake + e.cake;
+  });
+
+  const app = express();
+  const port = 80;
+
+  app.get("/", (req, res) => {
+    // calling event
+    event.emit("countIncrement", { count: 1, cake: 2 });
+    res.status(200).send({ count, cake });
+  });
+
+  app.get("/home", (req, res) => {
+    // calling event
+    event.emit("countIncrement", { count: 2, cake: 2 });
+    res.status(200).send({ count, cake });
+  });
+
+  app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`);
+  });
+  ```
+
+* Emitter hav always module scope it cannot be called into another file. To make it common you have to create common class.
+
+  ```js
+  // index.js
+  const EventEmitter = require("events");
+  class Logger extends EventEmitter {
+    constructor() {
+      super();
+    }
+    log(fnName, e) {
+      this.emit(fnName, e);
+    }
+  }
+
+  module.exports = Logger;
+
+  // app.js
+  const express = require("express");
+  const Logger = require("./index");
+  const app = express();
+  const logger = new Logger();
+  let count = 0;
+
+  logger.on("countIncrement", (e) => {
+    count = count + e.count;
+  });
+
+  app.get("/", (req, res) => {
+    logger.log("countIncrement", { count: 1 });
+    res.status(200).send({ count });
+  });
+
+  app.listen(80);
+  ```
+---
+
 ### 📘Connections to MongoDB using Node & CRUD Commands (not good one)
 
 1. You can connect to the various Database like MongoDB, Mysql, SqlLite, Oracle, PostgreSql etc in Node. You can check each Databases documentation in *Database Integration*
@@ -2123,186 +2303,7 @@ main();
 * You can also create API using mongoose + express
 
 ---
-### 📘Upload Image
 
-```
-npm i multer
-```
-
-```js
-const express = require("express");
-const multer = require("multer");
-const directoryName = "uploads";
-const fs = require("fs");
-const formFileInputName = "image";
-
-const app = express();
-const port = 3001;
-
-// checking if directory exists
-const directoryExistMiddleware = (req, res, next) => {
-  if (!fs.existsSync(directoryName)) {
-    fs.mkdirSync(directoryName);
-  }
-  next();
-};
-
-// Set up multer to store uploaded files in the 'uploads' folder
-const uploadImageMiddleware = multer({
-  storage: multer.diskStorage({
-    destination: (req, file, callBack) => {
-      callBack(null, directoryName);
-    },
-    filename: (req, file, callBack) => {
-      callBack(null, `${file.originalname}-${Date.now()}.jpg`);
-    },
-  }),
-}).single(formFileInputName); // for uploading single image
-
-// Define the upload route
-app.post(
-  "/upload",
-  directoryExistMiddleware,
-  uploadImageMiddleware,
-  (req, res) => {
-    try {
-      // File uploaded successfully
-      res.status(200).json({
-        success: true,
-        message: "Image uploaded successfully",
-        filename: req.file.filename,
-      });
-    } catch (error) {
-      // Handle any error
-      res.status(500).json({
-        success: false,
-        message: "Failed to upload image",
-        error: error.message,
-      });
-    }
-  }
-);
-
-// Start the server
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
-```
-![Image](./images/upload-image.png)
-
----
-
-### 📘OS-Module
-
-```js
-const express = require("express");
-const os = require("os");
-const app = express();
-
-app.get("/", (req, res) => {
-  res.status("200").send({
-    hostName: os.hostname(),
-    platform: os.platform(),
-    userInfo: os.userInfo(),
-    architecture: os.arch(),
-    freeMemory: `${os.freemem() / (1024 * 1024 * 1024)} GB`,
-    totalMemory: `${os.totalmem() / (1024 * 1024 * 1024)} GB`,
-    OS: os, // not very useful
-  });
-});
-
-// Start the server
-app.listen(80, () => {
-  console.log(`Server running on port 80`);
-});
-```
----
-
-### 📘Events and Event Emitter in node.js
-
-* In node every thing is event based (ist same like javascript)
-
-* **event :** A Signal that something has happened and it is pass by emitter
-
-* **EventEmitter :** is a Class and is like generating event on any event signal for example button.
-
-* In node js you cannot make any button click, then only event you can create is api.
-
-* Emit means making noise, produce something - signalling that event is occurring.
-
-  ```js
-  const express = require("express");
-  let count = 0;
-  let cake = 0;
-
-  // its a class that why we use capital letter
-  const EventEmitter = require("events");
-
-  // creating event instance
-  const event = new EventEmitter();
-
-  // event name
-  event.on("countIncrement", (e) => {
-    count = count + e.count;
-    cake = cake + e.cake;
-  });
-
-  const app = express();
-  const port = 80;
-
-  app.get("/", (req, res) => {
-    // calling event
-    event.emit("countIncrement", { count: 1, cake: 2 });
-    res.status(200).send({ count, cake });
-  });
-
-  app.get("/home", (req, res) => {
-    // calling event
-    event.emit("countIncrement", { count: 2, cake: 2 });
-    res.status(200).send({ count, cake });
-  });
-
-  app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`);
-  });
-  ```
-
-* Emitter hav always module scope it cannot be called into another file. To make it common you have to create common class.
-*
-  ```js
-  // index.js
-  const EventEmitter = require("events");
-  class Logger extends EventEmitter {
-    constructor() {
-      super();
-    }
-    log(fnName, e) {
-      this.emit(fnName, e);
-    }
-  }
-
-  module.exports = Logger;
-
-  // app.js
-  const express = require("express");
-  const Logger = require("./index");
-  const app = express();
-  const logger = new Logger();
-  let count = 0;
-
-  logger.on("countIncrement", (e) => {
-    count = count + e.count;
-  });
-
-  app.get("/", (req, res) => {
-    logger.log("countIncrement", { count: 1 });
-    res.status(200).send({ count });
-  });
-
-  app.listen(80);
-  ```
-
----
 ### 📘Mysql with Node (CRUD)
 
 ```
