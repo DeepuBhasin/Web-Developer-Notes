@@ -1230,9 +1230,7 @@ Key Difference:
 
 * From Postman
   ```js
-  {
-      "age" : "63"
-  }
+  { "age" : "63" }
   ```
 
 **⚠️ Note :**
@@ -1286,15 +1284,13 @@ app.get('/user').get('/user/:id').post('/user').put('/user/:id').delete('/user/:
 ---
 ### 📘Middleware and Request-Response Cycle
 
-* Middleware are functions which are only use with routes. With the help of middleware we can access or modify http request and response.
+* Middleware are functions which are only use with routes. With the help of middleware we can access or modify http request and response. It is very easy to create and can use easily.
 
-* It is very easy to create and can use easily.
+  ![Image](./images/middleware-1.png)
 
-![Image](./images/middleware-1.png)
+  ![Image](./images/middleware-2.png)
 
-![Image](./images/middleware-2.png)
-
-![Image](./images/middleware-3.png)
+  ![Image](./images/middleware-3.png)
 
 **⚠️Note :** **route()** method is the last middleware of middleware stack
 
@@ -1305,364 +1301,342 @@ Various Types of Middlewares
 
 2. Route-level : it will apply on specific route or group of route
 
-3. Error-handling
+  1. Single Middleware
 
-4. Built-in
+  2. Group Middleware
 
-5. Third-party
-
-
-**Example of Application-level middleware (with custom middlewares)**
-
-```js
-const express = require('express');
-const app = express();
-
-app.use(express.json());
-
-// first middleware
-const firstCustomMiddleWare = (req, resp, next) => {
-  console.log('Hello from the first middleware 👋');
-  // without this next method next middleware will not be executed
-  next();
-};
-
-const secondCustomMiddleWare = (req, resp, next) => {
-  console.log('Hello from the second middleware 👋');
-
-  // checking some conditions
-  if (!req.query.age) {
-    return resp.status(422).send({ error: 'You must provide an age' });
-  }
-
-  if (req.query.age < 18) {
-    return resp.status(422).send({ error: 'You must be at least 18 years old' });
-  }
-
-  // without this next method next middleware will not be executed
-  next();
-};
-
-// This is called application middleware
-app.use(firstCustomMiddleWare);
-app.use(secondCustomMiddleWare);
-
-app.get('/', (req, resp) => {
-  // route is our last middleware in chain
-  console.log('Hello World');
-  resp.status(200).send({ message: 'Welcome to the server' });
-});
-
-app.listen(3000, () => {
-  console.log('Application is running on port 3000');
-});
-```
-
-**⚠️Note :**  When ever you create custom middleware you should place in separate files its a good practice
+3. Third-party : Like morgan
 
 
-**Example of Route level middleware (single and group)**
+**Application-level middleware**
 
-```js
-// Single level middleware
+  ```js
+  const express = require("express");
+  const app = express();
+  const port = 80;
 
-const express = require('express');
-const app = express();
+  app.use(express.json());
 
-app.use(express.json());
+  // first middleware
+  const firstCustomMiddleWare = (req, resp, next) => {
+    console.log("Hello from the first middleware 👋");
+    // without this next method next middleware will not be executed
+    next();
+  };
 
-const authentication = (req, resp, next) => {
-  if (!req.query.admin) {
-    return resp.status(401).send({ error: 'Unauthorized' });
-  }
-  if (req.query.admin !== '12345') {
-    return resp.status(401).send({ error: 'Unauthorized' });
-  }
-  next();
-};
+  const secondCustomMiddleWare = (req, resp, next) => {
+    // checking some conditions
+    if (!req.query.age) {
+      return resp
+        .status(422)
+        .send({ status: "error", data: "You must provide an age" });
+    }
 
-const ageRequired = (req, resp, next) => {
-  console.log('Hello from the second middleware 👋');
+    if (req.query.age < 18) {
+      return resp
+        .status(422)
+        .send({ status: "error", data: "You must be at least 18 years old" });
+    }
+    next();
+  };
 
-  if (!req.query.age) {
-    return resp.status(422).send({ error: 'You must provide an age' });
-  }
+  // This is called application middleware
+  app.use(firstCustomMiddleWare);
+  app.use(secondCustomMiddleWare);
 
-  if (req.query.age < 18) {
-    return resp.status(422).send({ error: 'You must be at least 18 years old' });
-  }
-  next();
-};
-
-// This is called single middleware
-app.get('/home', ageRequired, (req, resp) => {
-  console.log('Hello World');
-  resp.status(200).send({ message: 'Welcome to the server' });
-});
-
-// This is called single middleware
-app.get('/admin', authentication, (req, resp) => {
-  resp.status(200).send({ message: 'Welcome to the admin dashboard' });
-});
-
-// This is use for all routes
-app.get('*', (req, resp) => {
-  resp.status(404).send({ error: 'Page not found' });
-});
-
-app.listen(3000, () => {
-  console.log('Application is running on port 3000');
-});
-```
-
-```js
-// Group level middleware
-
-const express = require('express');
-const app = express();
-
-app.use(express.json());
-
-// To create group routes (this is called real middleware)
-const adminRoute = express.Router();
-const userRoute = express.Router();
-
-const authentication = (req, res, next) => {
-  console.log('Hello from the authentication middleware 👋');
-  if (!req.query.admin) {
-    return res.status(401).send({ error: 'Unauthorized' });
-  }
-  if (req.query.admin !== '12345') {
-    return res.status(401).send({ error: 'Unauthorized' });
-  }
-  next();
-};
-
-const ageRequired = (req, res, next) => {
-  console.log('Hello from the age middleware 👋');
-
-  if (!req.query.age) {
-    return res.status(422).send({ error: 'You must provide an age' });
-  }
-
-  if (req.query.age < 18) {
-    return res.status(422).send({ error: 'You must be at least 18 years old' });
-  }
-  next();
-};
-
-// Apply middleware to group routes
-adminRoute.use(authentication);
-userRoute.use(ageRequired);
-
-// All admin routes
-adminRoute.get('/home', (req, res) => {
-  res.status(200).send({ message: 'Welcome to the admin dashboard' });
-});
-
-adminRoute.get('/profile', (req, res) => {
-  res.status(200).send({ message: 'Welcome to your profile' });
-});
-
-adminRoute.get('/change-password', (req, res) => {
-  res.status(200).send({ message: 'Change your password' });
-});
-
-// User route
-userRoute.get('/home', (req, res) => {
-  console.log('Hello World');
-  res.status(200).send({ message: 'Welcome to the server' });
-});
-
-// Default path with middleware instance
-app.use('/admin', adminRoute);
-app.use('/user', userRoute);
-
-// This is used for all other routes
-app.get('*', (req, res) => {
-  res.status(404).send({ error: 'Page not found' });
-});
-
-app.listen(3000, () => {
-  console.log('Application is running on port 3000');
-});
-
-/*
-Example URLs:
-- http://localhost:3000/admin/home?admin=12345
-- http://localhost:3000/user/home?age=18
-*/
-
-// OR
-
-const express = require('express');
-const app = express();
-
-app.use(express.json());
-
-// To create group routes
-const adminRoute = express.Router();
-const userRoute = express.Router();
-
-// Apply middleware to group routes (called mounting routing)
-adminRoute.use((req, res, next) => {
-  console.log('Hello from the middleware 👋');
-  next();
-});
-
-// Mount the admin routes under /api/v1
-app.use('/api/v1', adminRoute);
-app.use('/api/v1', userRoute);
-
-// All admin routes (using route keyword)
-adminRoute
-  .route('/admin')
-  .get((req, res) => {
-    res.status(200).send({ message: 'Welcome to the admin dashboard' });
-  })
-  .post((req, res) => {
-    res.status(200).send({ message: { ...req.body } });
+  app.get("/", (req, resp) => {
+    resp.status(200).send({ status: "error", message: "Welcome to the server" });
   });
 
-userRoute
-  .route('/user')
-  .get((req, res) => {
-    res.status(200).send({ message: 'Welcome to the user dashboard' });
-  })
-  .post((req, res) => {
-    res.status(200).send({ message: { ...req.body } });
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
   });
 
-app.get('*', (req, res) => {
-  res.status(404).send({ message: 'Page not found' });
-});
+  // http://localhost?age=90
+  ```
 
-app.listen(3000, () => {
-  console.log('Application is running on port 3000');
-});
-```
+  **⚠️Note :**  When ever you create custom middleware you should place in separate files its a good practice
 
----
-### 📘Param Middleware
 
-```js
-const express = require('express');
-const app = express();
-const adminRouter = express.Router();
+**Route level middleware**
 
-// This middle ware will run only :id
-adminRouter.param('id', (req, res, next, value) => {
-  console.log('this is middleware', value);
-  next();
-});
+* Single Level
 
-adminRouter.route('/home/:id').get((req, res) => {
-  res.status(200).send('admin page');
-});
+  ```js
+  const express = require("express");
+  const app = express();
+  const port = 80;
+  app.use(express.json());
 
-app.use('/admin', adminRouter);
+  const ageRequiredMiddleware = (req, resp, next) => {
+    if (!req.query.age) {
+      return resp
+        .status(422)
+        .send({ status: "error", data: "You must provide an age" });
+    }
 
-app.get('*', (req, res) => {
-  res.status(404).send('page not found');
-});
+    if (req.query.age < 18) {
+      return resp
+        .status(422)
+        .send({ status: "error", data: "You must be at least 18 years old" });
+    }
+    next();
+  };
+  const authenticationMiddleware = (req, resp, next) => {
+    if (!req.query.admin) {
+      return resp.status(401).send({ status: "error", data: "Unauthorized" });
+    }
+    if (req.query.admin !== "12345") {
+      return resp.status(401).send({ status: "error", data: "Unauthorized" });
+    }
+    next();
+  };
 
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
-});
-```
-```
-http://localhost:3000/admin/home/30
-```
-
----
-### 📘Chaining middleware
-```js
-const express = require('express');
-const app = express();
-const adminRouter = express.Router();
-app.use(express.json());
-
-const firstMiddleware = (req, res, next) => {
-  if (!req.body.name) {
-    return res.status(400).send('name is required');
-  }
-  next();
-};
-
-const secondMiddleware = (req, res, next) => {
-  if (!req.body.age) {
-    return res.status(400).send('age is required');
-  }
-  next();
-};
-
-const thirdMiddleware = (req, res, next) => {
-  if (!req.body.email) {
-    return res.status(400).send('email is required');
-  }
-  next();
-};
-
-adminRouter
-  .route('/home')
-  .get((req, res) => {
-    res.status(200).send('admin page');
-  })
-  // Chaining middlewares
-  .post(firstMiddleware, secondMiddleware, thirdMiddleware, (req, res) => {
-    res.status(200).send('admin post');
+  // This is called single middleware
+  app.get("/", ageRequiredMiddleware, (req, resp) => {
+    return resp
+      .status(200)
+      .send({ status: "success", data: "Welcome to the server" });
   });
 
-app.use('/admin', adminRouter);
+  // This is called single middleware
+  app.get("/admin", authenticationMiddleware, (req, resp) => {
+    resp
+      .status(200)
+      .send({ status: "success", data: "Welcome to the admin dashboard" });
+  });
 
-app.get('*', (req, res) => {
-  res.status(404).send('page not found');
-});
+  app.get("*", (req, resp) => {
+    resp.status(404).send({ status: "error", data: "Page not found" });
+  });
 
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
-});
-```
----
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
+  ```
 
-### 📘Morgan (Third-part middleware)
+* Group Level middleware
+
+  ```js
+  const express = require("express");
+  const app = express();
+  const port = 80;
+
+  app.use(express.json());
+
+  // To create group routes (this is called real middleware)
+  const adminRoute = express.Router();
+  const userRoute = express.Router();
+
+  // Middlewares
+  const authenticationMiddleware = (req, res, next) => {
+    if (!req.query.admin) {
+      return res.status(401).send({ status: "error", data: "Unauthorized" });
+    }
+    if (req.query.admin !== "12345") {
+      return res.status(401).send({ status: "error", data: "Unauthorized" });
+    }
+    next();
+  };
+
+  const ageRequiredMiddleware = (req, res, next) => {
+    if (!req.query.age) {
+      return res
+        .status(422)
+        .send({ status: "error", data: "You must provide an age" });
+    }
+
+    if (req.query.age < 18) {
+      return res
+        .status(422)
+        .send({ status: "error", data: "You must be at least 18 years old" });
+    }
+    next();
+  };
+
+  // Apply middleware to group routes
+  adminRoute.use(authenticationMiddleware);
+  userRoute.use(ageRequiredMiddleware);
+
+  // All admin routes
+  adminRoute
+    .get("/dashboard", (req, res) => {
+      res
+        .status(200)
+        .send({ status: "success", data: "Welcome to the admin dashboard" });
+    })
+    .get("/profile", (req, res) => {
+      res
+        .status(200)
+        .send({ status: "success", data: "Welcome to admin profile" });
+    });
+
+  // User route
+  userRoute
+    .get("/dashboard", (req, res) => {
+      res
+        .status(200)
+        .send({ status: "success", data: "Welcome to the user dashboard" });
+    })
+    .get("/profile", (req, res) => {
+      res
+        .status(200)
+        .send({ status: "success", data: "Welcome to user profile" });
+    });
+
+  // All routes
+  app.use("/admin", adminRoute);
+  app.use("/user", userRoute);
+
+  app.get("*", (req, res) => {
+    res.status(404).send({ status: "error", data: "Page not found" });
+  });
+
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
+
+  /*
+  Example URLs:
+  - http://localhost:3000/admin/home?admin=12345
+  - http://localhost:3000/user/home?age=18
+  */
+  ```
+
+**Morgan (Third-part middleware)**
 
 * It is very popular logging middleware, this is useful to show request data in console.
 
-* Very useful package
+* Package Name
+  ```
+  npm i morgan
+  ```
+* app.js
 
-```
-npm i morgan
-```
+  ```js
+  const express = require("express");
+  const app = express();
+  const morgan = require("morgan");
+  const port = 80;
 
-```js
-const express = require('express');
-const app = express();
-const morgan = require('morgan');
+  // This is used to add Middleware stack
+  app.use(morgan("dev"));
+  app.use(express.json());
 
-// This is used to add Middleware stack
-app.use(morgan('dev'));
-app.use(express.json());
+  app
+    .get("/", (req, res) => {
+      res.status(200).json({ status: "success", data: "Hello from express" });
+    })
+    .get("/about", (req, res) => {
+      res.status(200).json({ status: "success", data: "Hello from about" });
+    })
+    .get("/home", (req, res) => {
+      res.status(200).json({ status: "success", data: "Hello from home" });
+    });
 
-app.get('/', (req, res) => {
-  res.status(200).send('Hello from express');
-});
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
+  ```
 
-app.get('/about', (req, res) => {
-  res.status(200).send('Hello from about');
-});
+  ![Image](./images/morgan-1.png)
 
-app.get('/home', (req, res) => {
-  res.status(200).send('Hello from home');
-});
+---
+### 📘Param Middleware & Passing value to next Middleware
 
-app.listen(3000, () => {
-  console.log('Listening on port 3000');
-});
-```
+* app.js
 
-![Image](./images/morgan-1.png)
+  ```js
+  const express = require("express");
+  const app = express();
+  const port = 80;
+  const adminRouter = express.Router();
 
+  // This middleware will run only for :id parameter in the adminRouter
+  adminRouter.param("id", (req, res, next, value) => {
+    console.log("request param value:", value);
+
+    // Update req.params.id with the modified value
+    req.params.id = parseInt(value) + 1;
+    next();
+  });
+
+  adminRouter.route("/:id").get((req, res) => {
+    res.status(200).json({
+      status: "success",
+      data: req.params,
+    });
+  });
+
+  app.use("/admin", adminRouter);
+
+  app.get("*", (req, res) => {
+    res.status(404).send("page not found");
+  });
+
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
+  ```
+* Http Method
+
+  ```
+  http://localhost:3000/admin/home/30
+  ```
+---
+
+### 📘Chaining middleware
+
+* app.js
+
+  ```js
+  const express = require('express');
+  const app = express();
+  const adminRouter = express.Router();
+  app.use(express.json());
+
+  const firstMiddleware = (req, res, next) => {
+    if (!req.body.name) {
+      return res.status(400).send('name is required');
+    }
+    next();
+  };
+
+  const secondMiddleware = (req, res, next) => {
+    if (!req.body.age) {
+      return res.status(400).send('age is required');
+    }
+    next();
+  };
+
+  const thirdMiddleware = (req, res, next) => {
+    if (!req.body.email) {
+      return res.status(400).send('email is required');
+    }
+    next();
+  };
+
+  adminRouter
+    .route('/home')
+    .get((req, res) => {
+      res.status(200).send('admin page');
+    })
+
+    // Chaining middlewares
+    .post(firstMiddleware, secondMiddleware, thirdMiddleware, (req, res) => {
+      res.status(200).send('admin post');
+    });
+
+  app.use('/admin', adminRouter);
+
+  app.get('*', (req, res) => {
+    res.status(404).send('page not found');
+  });
+
+  app.listen(3000, () => {
+    console.log('Server is running on port 3000');
+  });
+  ```
 ---
 
 ### 📘Run Static Files
