@@ -632,7 +632,7 @@ server.listen(8000, '127.0.0.1', () => {
 });
 ```
 ---
-### 📘Npm package, Commands for Packages, Types of Packages, Version, Version Indicators
+### 📘Node Vs Npm, Package.json, Commands for Packages, Types of Packages, Version, Version Indicators
 
 * **Node Vs Npm**
 
@@ -683,7 +683,7 @@ server.listen(8000, '127.0.0.1', () => {
         ```
         Example : suppose this is not latest version of  "express": "^2.3.0" then the above command will return you latest **current, wanted, latest**, current means current version, wanted means which us near to "^2.3.0" because of cap sign and latest means full latest.
 
-
+        ![Image](./images/npm-outdate.png)
 
     7. To check installed packages with their versions
 
@@ -757,36 +757,35 @@ server.listen(8000, '127.0.0.1', () => {
         ```
          npm publish
         ```
+**⚠️Note :** package-lock.json file is also very important file because it store the versions of the dependency packages.
 
+* **Type of packages**
 
-    ![Image](./images/npm-outdate.png)
+  * **Normal Dependency :** These are those packages which provide core functionality to run application, **without these packages we cannot run our applications**.
 
-    **⚠️Note :** package-lock.json file is also very important file because it store the versions of the dependency packages.
-
-* **Normal Dependency :** These are those packages which provide core functionality to run application, **without these packages we cannot run our applications**.
-
-* **Dev Dependency :** These package are those packages which provide just additional features while developing application in development mode, **without these package we can run our applications as well.**
+  * **Dev Dependency :** These package are those packages which provide just additional features while developing application in development mode, **without these package we can run our applications as well.**
 
 
 * **Versions** : This Indicate version of the package this will be like **MajorVersion.MinorVersion.PatchVersion** (12.3.11)
 
-  * Patch Version : it defines that its only fix bugs.
+    * Patch Version : it defines that its only fix bugs.
 
-  * MinorVersion : It defines that it introduce new feature but it does not include breaking changes
+    * MinorVersion : It defines that it introduce new feature but it does not include breaking changes
 
-  * MajorVersion : It defines that its a huge change which can have breaking changes
+    * MajorVersion : It defines that its a huge change which can have breaking changes
 
-* **Version Indicator :**
+  * **Version Indicator :**
 
-  * *: Matches any version of the package. It is the most permissive and allows any update, regardless of major, minor, or patch changes. (not good one can lead to breaking changes code)
+    * *: Matches any version of the package. It is the most permissive and allows any update, regardless of major, minor, or patch changes. (not good one can lead to breaking changes code)
 
-  * ^ (caret): Allows updates that do not change the first non-zero number (Major Version). For example, ^1.2.3 will allow updates to 1.x.x but not 2.x.x. It is more permissive.
+    * ^ (caret): Allows updates that do not change the first non-zero number (Major Version). For example, ^1.2.3 will allow updates to 1.x.x but not 2.x.x. It is more permissive.
 
-  * ~ (tilde): Allows updates that do not change the minor version number (Patch version). For example, ~1.2.3 will allow updates to 1.2.x but not 1.3.x. It is more restrictive.(this one is more save because its only accept patches)
+    * ~ (tilde): Allows updates that do not change the minor version number (Patch version). For example, ~1.2.3 will allow updates to 1.2.x but not 1.3.x. It is more restrictive.(this one is more save because its only accept patches)
 
-  * Exact Version : "1.1.1" it will download exact version
+    * Exact Version : "1.1.1" it will download exact version
+---
 
-**Some useful Packages**
+### 📘Some useful packages
 
 
 1. **Slugify :** it is use to make readable url's. It is basically a function use to create slugs, slugs is basically just the last part of the url that contains a unique string that identify the resource that the website is displaying example 127.0.0.1:8000/product/**fresh-avocados** (in simple words use slugs instead of numbers like ?id=1 use this ?id=fresh-avocado).
@@ -817,7 +816,6 @@ server.listen(8000, '127.0.0.1', () => {
 
     2. **start** is kind of default one for development you we can write *npm start* instead of *npm run start*
 
-3. **Joi** : to validate input data
 ---
 
 ### 📘What Happen when we access a webpage
