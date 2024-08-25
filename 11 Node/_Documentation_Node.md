@@ -1840,14 +1840,16 @@ We are not mentioning **public** folder in address bar because express is pointi
 * Database (using terminal)
 
   1. Create Database
-  ```
-  use test
-  ```
+
+      ```
+      use test
+      ```
 
   2. Insert Data
-  ```
-  db.tours.insertMany([{"name":"Product A","price":19.99,"rating":4.5},{"name":"Product B","price":29.49,"rating":4.0},{"name":"Product C","price":9.99,"rating":3.8},{"name":"Product D","price":45.00,"rating":4.7},{"name":"Product E","price":15.75,"rating":3.9}])
-  ```
+
+      ```
+      db.tours.insertMany([{"name":"Product A","price":19.99,"rating":4.5},{"name":"Product B","price":29.49,"rating":4.0},{"name":"Product C","price":9.99,"rating":3.8},{"name":"Product D","price":45.00,"rating":4.7},{"name":"Product E","price":15.75,"rating":3.9}])
+      ```
 
 * app.js
 
