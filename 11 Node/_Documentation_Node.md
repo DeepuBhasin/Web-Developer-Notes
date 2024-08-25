@@ -470,7 +470,7 @@ fs.readdir(dirPath, (err, files) => {
 });
 ```
 
-**⚠️Note :** When ever we run node in any folder it will create that folder as web server or kind of server therefore we cannot access any files outside of this server link in D drive, C Drive etc it is good other wise hacker can easily access your data.
+**⚠️Note :** When ever we run node in any folder it will create that folder as web server or kind of server therefore we cannot access any files outside of this server like in D drive, C Drive etc it is good other wise hacker can easily access your data.
 
 ---
 ### 📘Getting inputs from command line
@@ -578,41 +578,8 @@ http://127.0.0.1:8000
 
 **⚠️ Note :** if you mention other the *80* then we have to write complete address example http://127.0.0.1:8000 otherwise we don't need to add port number you can write like http://127.0.0.1 only
 
-**📖 Theory :**
-
-```js
-const server = http.createServer((request, response) => {
-    // use to send response to client
-    console.log(request)
-
-    // use to send response to client
-    response.end('Hello from server!');
-});
-```
-
-Here, an HTTP server is created using the http.createServer method. This method takes a callback function that will be executed every time a request is received. The callback function has two parameters: request and response.
-
-* request: Contains information about the client's request (e.g., URL, headers, method).
-
-* response: Used to send a response back to the client.
-
-Inside the callback function:
-
-* console.log(request): Logs the request object to the console.
-
-* response.end('Hello from server!'): Sends a response back to the client with the message 'Hello from server!' and ends the response.
-
-
-
-```js
-server.listen(8000, '127.0.0.1', () => {
-    console.log('Listening to request on port 8000');
-});
-```
-
-This line starts the server, making it listen for incoming requests on port 8000 and the IP address 127.0.0.1 (localhost). The callback function inside server.listen will be executed once the server starts listening, logging 'Listening to request on port 8000' to the console.
-
 ---
+
 ### 📘Routing using Http Module & Returning json Data
 
 ```js
@@ -664,25 +631,24 @@ server.listen(8000, '127.0.0.1', () => {
     console.log('Listening to request on port 8000');
 });
 ```
-
 ---
 ### 📘Npm package, Commands for Packages, Types of Packages, Version, Version Indicators
 
-* Node Vs Npm
+* **Node Vs Npm**
 
    1. node and npm are different things npm stands for node package manager. This thing get install automatically to deal with packages while node is run time environment.
 
-   2. node -v to check version of node & npm -v  to check version of npm (their version can be different from each other)
+   2. `node -v` to check version of node & `npm -v` to check version of npm (their version can be different from each other)
 
 
 
-* Install package.json file
+* **Install package.json file**
 
   ```
   npm init -y
   ```
 
-* **Commands**
+* **Various Commands**
 
     1. To Install specific Package :
 
@@ -754,34 +720,33 @@ server.listen(8000, '127.0.0.1', () => {
         npm view <package-name> -v
         ```
 
-        Show express dependencies
+        Show installed packages dependencies
         ```
-        npm view express dependencies
+        npm view <package-name> dependencies
         ```
 
-        Show all version histories
+        Show all installed packages histories
         ```
-        npm view express versions
+        npm view express <package-name>
         ```
 
     9. To publish package : follow these steps
 
-       ```
+        ```
         npm login
-       ```
-       ```
-       username :
-       ```
-       ```
-       password :
-       ```
-       ```
-       email :
-       ```
-
-       ```
+        ```
+        ```
+        username :
+        ```
+        ```
+        password :
+        ```
+        ```
+        email :
+        ```
+        ```
         npm publish
-       ```
+        ```
 
     10. Updating a published package : Do changes and then run command according to change like minor, major, patch
 
