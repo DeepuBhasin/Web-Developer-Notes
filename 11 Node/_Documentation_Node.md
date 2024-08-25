@@ -947,13 +947,9 @@ Basic Code
 
     // Routes with http method (this callback function use for request and response is also a middleware)
     app.get('/', (req, res) => {
+
         // return type of res.send() is string
         res.send('Hello World')
-
-        //OR
-
-        // return type of res.json() is object with convert into string
-        res.status(200).json({ message: 'Hello World' });
     });
 
     // listen to port
@@ -1012,85 +1008,70 @@ Rest Architecture
 
 ---
 
-### 📘Get Method with express (show json data and html page)
+### 📘Get ,Post, Put, Delete, Param & Query Params in Express
 
-* user.json
+* Package Name
 
-    ```js
-    {
-        "firstName": "John",
-        "lastName": "Doe",
-        "email": "joe@doe",
-        "password": "joe123"
-    }
-    ```
-
-* app.js
-
-    ```js
-    const express = require('express');
-    const fs = require('fs');
-
-    const app = express();
-
-    const user = JSON.parse(fs.readFileSync(`user.json`, 'utf-8'));
-
-    // for json
-    app.get('/', (req, res) => {
-       return  res.status(200).json({
-            status: 'success',
-            data: {
-            user,
-            },
-        });
-    });
-
-    // for html
-    app.get('/', (req, res) => {
-        return res.status(200).send('<h1>Hello from express</h1>');
-    });
-
-    const port = process.env.PORT || 3000;
-    app.listen(port, () => {
-        console.log(`App running on port ${port}...`);
-    });
-    ```
-    **⚠️Note :** you can create links as well using same href tag
+  ```
+  npm i express nodemon
+  ```
 
 
-* package.json
+* Package.json
 
-    ```js
-    "scripts": {
-        "start": "node app.js"
-    }
-    ```
----
+  ```js
+  "scripts": {
+      "start": "nodemon app.js"
+  }
+  ```
 
-### 📘Post Method with express
+**GET Method**
 
 * app.js
 
   ```js
-  const express = require('express');
-
+  const express = require("express");
   const app = express();
+  const port = 80;
+
+  // for json
+  app.get("/", (req, res) => {
+    return res.status(200).json({
+      status: "success",
+      data: {
+        firstName: "John",
+        lastName: "Doe",
+        email: "joe@doe",
+        password: "joe123",
+      },
+    });
+  });
+
+  app.listen(port, () => {
+    console.log(`App running on port ${port}...`);
+  });
+  ```
+**⚠️Note :** you can create links as well using same href tag
+
+**Post Method**
+
+* app.js
+
+  ```js
+  const express = require("express");
+  const app = express();
+  const port = 80;
+
   // its a middleware to use body parser (it is use to enabling parsing of json object in the body of request)
   app.use(express.json());
 
   // this is use if body data send in x-www-form-urlencoded
-  app.use(express.urlencoded({ extended: true }));0
+  app.use(express.urlencoded({ extended: true }));
 
-  app.post('/', (req, res) => {
-
-    // all data come into req.body for json & urlencoded
-    console.log(req.body);
-
-    return res.status(200).send('Hello World');
-
+  app.post("/", (req, res) => {
+    return res.status(200).send({ status: "success", data: req.body });
   });
 
-  const port = process.env.PORT || 3000;
   app.listen(port, () => {
     console.log(`App running on port ${port}...`);
   });
@@ -1126,6 +1107,7 @@ Rest Architecture
     ```
 
 2. Form-URL-Encode:
+
   * Description: The form-url-encode sends data as key-value pairs, similar to how data is sent in a URL query string, but in the request body. It's commonly used for submitting HTML forms.
 
   * Content-Type: application/x-www-form-urlencoded.
@@ -1145,215 +1127,160 @@ Key Difference:
 
  * Form-URL-Encode is for simpler, form-like data.
 
-```js
-// Body-form example
-fetch('https://example.com/api/login', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    username: 'john',
-    password: 'secret123'
-  })
-});
+  ```js
+  // Body-form example
+  fetch('https://example.com/api/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      username: 'john',
+      password: 'secret123'
+    })
+  });
 
-// Form-url-encode example
-fetch('https://example.com/api/login', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/x-www-form-urlencoded'
-  },
-  body: 'username=john&password=secret123'
-});
-```
+  // Form-url-encode example
+  fetch('https://example.com/api/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: 'username=john&password=secret123'
+  });
+  ```
 
+**Params and Query Params in address-bar with express**
 
----
+* *Params* are use when parameter are required & while *Query Params* are use when parameters are optional example : xyz.com/page/true?age=18 here page is param and age is query param
 
-### 📘Params and Query Params in address-bar with express
+* app.js
 
-* Params are use when parameter are required while query params are use when parameters are optional example : xyz.com/isAdmin/true?age=18
+  ```js
+  // app.js
+  const express = require("express");
+  const app = express();
+  const port = 80;
 
-```js
-const express = require('express');
+  app.use(express.json());
 
-const app = express();
+  app.get("/:id/:name/:age?", (req, res) => {
+    return res.status(200).send({
+      status: "success",
+      data: {
+        param: req.params,
+        query: req.query,
+      },
+    });
+  });
 
-// its a middleware to use body parser
-app.use(express.json());
+  app.listen(port, () => {
+    console.log(`App running on port ${port}...`);
+  });
 
-app.post('/:id/:name/:age?', (req, res) => {
+  ```
+* Http address
 
-  // This is for normal params (age is optional parameter)
-  console.log(req.params);      // { id: '1', name: 'john', age: '24' }
-  // This is for query params
-  console.log(req.query);       // { testing: 'true' }
-
-  return res.status(200).send('Hello World');
-});
-
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`App running on port ${port}...`);
-});
-```
-
-```
-http://127.0.0.1:3000/1/jhon/24?testing=true
-```
----
-
-### 📘Patch Request using express
+  ```
+  http://localhost/1/john/15?isAdmin=true
+  ```
 
 
-* Put : is use for update the whole object.
+**Put Method**
 
-* Patch : is use for update the some properties.
+* app.js
 
+  ```js
+  const express = require("express");
+  const app = express();
+  const port = 80;
+  app.use(express.json());
 
-```js
-const express = require('express');
-const app = express();
+  let users = [
+    { id: 1, name: "Alice", age: 25 },
+    { id: 2, name: "Bob", age: 30 },
+    { id: 3, name: "Charlie", age: 35 },
+  ];
 
-app.use(express.json()); // Middleware to parse JSON bodies
+  app.put("/:id", (req, res) => {
+    const userId = parseInt(req.params.id);
+    const { age } = req.body;
 
-// Sample data - a list of users
-let users = [
-  { id: 1, name: 'Alice', age: 25 },
-  { id: 2, name: 'Bob', age: 30 },
-  { id: 3, name: 'Charlie', age: 35 },
-];
+    const user = users.find((u) => u.id === userId);
+    if (!user) {
+      return res.status(404).send({ status: "error", data: "User not found" });
+    }
 
-// PATCH endpoint to update a user's age
-app.patch('/users/:id', (req, res) => {
-  const userId = parseInt(req.params.id);
-  const { age } = req.body;
+    if (age !== undefined) {
+      user.age = age;
+    }
 
-  // Find the user by ID
-  const user = users.find((u) => u.id === userId);
-  if (!user) {
-    return res.status(404).send('User not found');
+    return res.send({ status: "success", data: user });
+  });
+
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
+  ```
+* Http address
+
+  ```
+  http://127.0.0.1:3000/1
+  ```
+
+* From Postman
+  ```js
+  {
+      "age" : "63"
   }
+  ```
 
-  // Update the user's age
-  if (age !== undefined) {
-    user.age = age;
-  }
+**⚠️ Note :**
 
-  return res.send(user);
-});
+1. Put : is use for update the whole object.
 
-// Start the server
-const port = 3000;
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
-```
+2. Patch : is use for update the some properties.
 
-```
-http://127.0.0.1:3000/users/1
-```
+**Delete method**
 
-```js
-// postman value
-{
-    "age" : "63"
-}
-```
+* app.js
+
+  ```js
+  const express = require("express");
+  const app = express();
+  const port = 80;
+  app.use(express.json());
+
+  let users = [
+    { id: 1, name: "Alice", age: 25 },
+    { id: 2, name: "Bob", age: 30 },
+    { id: 3, name: "Charlie", age: 35 },
+  ];
+
+  app.delete("/:id", (req, res) => {
+    const userId = parseInt(req.params.id);
+    const index = users.findIndex((u) => u.id === userId);
+    if (index === -1) {
+      return res.status(404).send({ status: "error", data: "User not found" });
+    }
+    users.splice(index, 1);
+    return res.send({ status: "success", data: users });
+  });
+
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
+  ```
 ---
 
-### 📘Delete method using express
-
-* use Delete method
-
----
-
-### 📘All Methods with Route function
-
-Use get, post and patch method. For post and patch use body props
+**⚠️ Note :** You can combine all routes as well
 
 ```js
-const express = require('express');
-const app = express();
+// for root address
+app.get('/').post('/').put('/').delete('/')
 
-app.use(express.json()); // Middleware to parse JSON bodies
-
-const getRequest = (req, res) => {
-  res.status(200).send({
-    message: 'Hello from the server',
-  });
-};
-
-const postRequest = (req, res) => {
-  res.status(200).send({
-    message: { ...req.body },
-  });
-};
-
-const putRequest = (req, res) => {
-  res.status(200).send({
-    message: { ...req.body },
-  });
-};
-
-// without id
-app.route('/api/v1/tours').get(getRequest).post(postRequest);
-
-// with id
-app.route('/api/vi/tours/:id').get('functionName').patch('functionName').put(putRequest);
-
-const port = 3000;
-app.listen(port, () => {
-  console.log(`App running on port ${port}...`);
-});
-```
-
-```js
-// for post and patch
-{
-    "name" : "john"
-}
-```
-
-```
-http://127.0.0.1:3000/api/v1/tours
-```
-
----
-### 📘Simplest Example Express API without any database
-
-```js
-const express = require("express");
-const course = [];
-
-const app = express();
-
-app.use(express.json());
-
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
-
-app.get("/api/courses", (req, res) => {
-  return res.json({ status: "success", data: course });
-});
-
-app.get("/api/courses/:id", (req, res) => {
-  const course = course.find((c) => c.id === parseInt(req.params.id));
-  return res.json({ status: "success", data: course });
-});
-
-app.post("/api/courses", (req, res) => {
-  const temp = {
-    id: course.length + 1,
-    name: req.body.name,
-  };
-  course.push(temp);
-  res.json({ status: "success", data: temp });
-});
-
-app.listen(3000);
+// for user
+app.get('/user').get('/user/:id').post('/user').put('/user/:id').delete('/user/:id')
 ```
 
 ---
