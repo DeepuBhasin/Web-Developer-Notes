@@ -381,7 +381,6 @@ console.log(textIn);
 
 const textOut = `this is text which is adding through coding. ${textIn}\n Created on ${Date.now()}`;
 
-
 /*
     writing content in file
     1. First parameter is path name (it wll generate new file)
@@ -396,46 +395,25 @@ node app.js
 
 **Asynchronous Way**
 
+* **input.txt**
+```
+Hello may name is Deep Singh. I am working as front end engineer. My Primary technology is React.
+```
 
 * **Reading Data**
 
 ```js
 console.log('Execute Start');
 
+const fs = require('fs');
+
 /*
     Read data from file
     1. First parameter is path name
     2. second parameter is character set
-    3. Callback function
+    3. Third is callback
 */
 
-const fs = require('fs');
-fs.readFile('./input.txt', 'utf-8', (error, data) => {
-    console.log('data : ', data);
-    console.log('error', error);
-})
-
-console.log('Executed End');
-
-/*
-    Output
-
-    Execute Start
-    Executed End
-    data :  Hello may name is Deep Singh. I am working as front end engineer. My Primary technology is React.
-    error null */
-```
-
-
-**⚠️Note :** If we do not pass *'utf-8'* as parameter then it will return *Buffer* instead of text. This Buffer means its data is saved into temporary memory.
-
-
-* **Reading and writing Data**
-
-```js
-console.log('Execute Start');
-
-const fs = require('fs');
 fs.readFile('./input.txt', 'utf-8', (error, data) => {
     if (error) {
         return console.log('Error !!! file not found')
@@ -443,13 +421,57 @@ fs.readFile('./input.txt', 'utf-8', (error, data) => {
     console.log('data : ', data);
     console.log('error', error);
 
+    /*
+        Write data into file
+        1. First parameter is path name
+        2. second parameter is character set
+        3. Third is callback
+    */
+
     fs.writeFile('./output.txt', data + ' Coming data from async code', 'utf-8', err => {
         console.log('Your fetch file and code written successfully');
     })
 })
 
 console.log('Executed End');
+/*
+  Execute Start
+  data :  Hello may name is Deep Singh. I am working as front end engineer. My Primary technology is React.
+  error null
+  Your fetch file and code written successfully
+*/
 ```
+
+**⚠️Note :** If we do not pass *'utf-8'* as parameter then it will return *Buffer* instead of text. This Buffer means its data is saved into temporary memory.
+
+---
+### 📘Create Files and Directory
+
+```js
+const path = require('path');
+const fs = require('fs');
+const directoryName = 'files';
+
+fs.mkdirSync(directoryName);
+
+const dirPath = path.join(__dirname, directoryName);
+for (let i = 1; i <= 5; i++) {
+  fs.writeFileSync(`${dirPath}/file-${i}.txt`, 'hello world');
+}
+
+fs.readdir(dirPath, (err, files) => {
+  if (err) {
+    console.log(err);
+  } else {
+    files.forEach((file) => {
+      console.log(file);
+    });
+  }
+});
+```
+
+**⚠️Note :** When ever we run node in any folder it will create that folder as web server or kind of server therefore we cannot access any files outside of this server link in D drive, C Drive etc it is good other wise hacker can easily access your data.
+
 ---
 ### 📘Getting inputs from command line
 
@@ -493,36 +515,6 @@ console.log('Executed End');
 
     node index.js remove hello.txt
     ```
----
-
----
-### 📘Create Files and Directory
-
-```js
-const path = require('path');
-const fs = require('fs');
-const directoryName = 'files';
-
-fs.mkdirSync(directoryName);
-
-const dirPath = path.join(__dirname, directoryName);
-for (let i = 1; i <= 5; i++) {
-  fs.writeFileSync(`${dirPath}/file-${i}.txt`, 'hello world');
-}
-
-fs.readdir(dirPath, (err, files) => {
-  if (err) {
-    console.log(err);
-  } else {
-    files.forEach((file) => {
-      console.log(file);
-    });
-  }
-});
-```
-
-**⚠️Note :** When ever we run node in any folder it will create that folder as web server or kind of server therefore we cannot access any files outside of this server link in D drive, C Drive etc it is good other wise hacker can easily access your data.
-
 ---
 ## 📘Creating a Simple Web Server with server response
 
@@ -2222,6 +2214,8 @@ async function readProducts(filter = {}) {
 // Update: Update existing products in the collection that match the filter
 async function updateProduct(filter, updateData) {
   try {
+    // You can also use save method here to update data (for single record)
+
     // Update the documents that match the filter with the new data
     const response = await ProductModel.updateMany(filter, updateData);
     console.log("Product Updated:", response);
@@ -2231,17 +2225,28 @@ async function updateProduct(filter, updateData) {
   }
 }
 
+/*
+  1. findById
+  2. findByIdAndUpdate('66caacf2c3f84327f498e8be', {$set : {price : true}}, {new : true})
+
+*/
+
+
 // Delete: Remove products from the collection that match the filter
 async function deleteProduct(filter) {
   try {
     // Delete the documents that match the filter criteria
-    const response = await ProductModel.deleteMany(filter);
+    const response = await ProductModel.(filter);
     console.log("Product Deleted:", response);
   } catch (error) {
     // Log an error message if the deletion fails
     console.error("Error deleting product:", error);
   }
 }
+
+/*
+  1. findByIdAndUpdate('66caacf2c3f84327f498e8be', {$set : {price : true}}, {new : true})
+*/
 
 // Example usage of the CRUD operations
 async function main() {

@@ -247,3 +247,23 @@ const pageSize = 10;
 db.tours.find().skip((pageNumber-1) * pageSize).limit(pageSize);
 ```
 
+### 📘Update operators
+
+1. $currentDate : Sets the value of a field to current date, either as a Date or a Timestamp.
+
+2. $inc : Increments the value of the field by the specified amount.
+
+3. $min : Only updates the field if the specified value is less than the existing field value.
+
+4. $max : Only updates the field if the specified value is greater than the existing field value.
+
+5. $mul : Multiplies the value of the field by the specified amount.
+
+6. $rename : Renames a field.
+
+7. $set : Sets the value of a field in a document.
+ 
+8. $setOnInsert : Sets the value of a field if an update results in an insert of a document. Has no effect on update operations that modify existing documents.
+
+9. $unset : Removes the specified field from a document.
+
