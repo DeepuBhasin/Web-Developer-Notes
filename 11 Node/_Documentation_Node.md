@@ -2155,17 +2155,106 @@ app.listen(80, () => {
   ```
 
 ---
-### 📘Mongoose (best one)
+### 📘Mongoose (best one), CRUD
 
-* Its a advance version of mongoDB package which provide schemes and model
+* Its a advance version of mongoDB package which provide Schemes and Model.
 
-* Some queries get changed in mongoose package
+* You can run basic queries as well of mongoDB as well.
 
-  1. findById : to find data by id
 
-  2. select : to select keys
+**CRUD**
 
-  3. set : to get value example .set({isPublished : true, author : 'Author Name'})
+* Package Name
+
+  ```
+  npm i mongoose
+  ```
+
+* **Connection Query**
+
+  ```js
+  const mongoose = require("mongoose");
+
+  const dbName = "test";
+  const collectionName = "products";
+
+  async function dbConnection(databaseName) {
+    try {
+      await mongoose.connect(`mongodb://127.0.0.1:27017/${databaseName}`);
+      console.log("Connected to the database");
+    } catch (error) {
+      console.error("Error connecting to the database:", error);
+    }
+  }
+  dbConnection(dbName);
+  ```
+
+* **Insert Query**
+
+  ```js
+  async function insert(data) {
+    const productSchema = new mongoose.Schema({
+      productName: { type: String, default: "Default Name" },
+      price: Number,
+      brand: String,
+      tags: [String],
+    });
+
+    const ProductModel = mongoose.model(collectionName, productSchema);
+
+    try {
+      const product = new ProductModel({
+        name: "iPhone",
+        price: 1000,
+        brand: "Apple",
+        tags: ["node", "backend"],
+      });
+
+      const response = await product.save();
+      console.log("Product Created:", response);
+    } catch (error) {
+      console.error("Error creating product:", error);
+    }
+  }
+
+  insert();
+  ```
+
+* **Find Query**
+
+  ![Image](./images/mongo-find-method.png)
+
+  * Some queries get changed in mongoose package
+
+    1. findById() : to find data by id
+
+    2. select() : to select keys, you can pass object or string eg : `.select({ name : 1}, {price : 1})`, `.select("courseName price")`
+
+    3. set : to get value example .set({isPublished : true, author : 'Author Name'})
+    
+    4. sort() : To sort Data, you can pass object `.find().sort({ sort : -1 })`  and Single string with negative sign `.find().sort("price")` for ASC & `.find().sort("-price")` for DESC; 
+    
+    5. or : its like OR condition example `find().or([{ tags: "php" },{ tags: "node" }]);` this is use to find php or node
+    
+    6. and : its like AND condition example `find().and([{ tags: "php" },{ tags: "node" }]);` this is use to find php and node
+
+    7. Regular Expression : these are use to select case-insensitive or sensitive data on the basis of wild card (written in mongoDB notes)
+
+  ```js
+  async function read() {
+    try {
+      const products = await CourseModel.find()
+        .or([{ tags: "php" }, { tags: "node" }])
+        .limit(5)
+        .select("courseName author");
+      console.log("Products:", products);
+    } catch (error) {
+      console.error("Error reading products:", error);
+    }
+  }
+  read()
+  ```
+
 
 ```js
 // Importing the Mongoose library to interact with MongoDB

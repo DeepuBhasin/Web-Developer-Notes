@@ -180,12 +180,11 @@ db.authors.find({}, { name: 1, author: 1, _id: 0 }).sort({ name: 1 });
 
 6. lte : less than or equal to
 
-7. in & or : to select defined values
+7. in : to select defined values its like OR operator
 
     ```
-    db.tours.find({ price : {$in : [10, 15, 20]}});
+    db.tours.find({ price : {$in : [value1, value2, value3]}});
 
-    db.tours.find({ price : {$or : [10, 15, 20]}});
     ```
 
 8. nin : not in
@@ -205,6 +204,8 @@ db.authors.find({}, { name: 1, author: 1, _id: 0 }).sort({ name: 1 });
     ```
     db.tours.find().and([{price : 100}, { isPublished : true }]);
     ```
+
+**⚠️Note :** These Queries work in mongoose
 
 ---
 
@@ -262,7 +263,7 @@ db.tours.find().skip((pageNumber-1) * pageSize).limit(pageSize);
 6. $rename : Renames a field.
 
 7. $set : Sets the value of a field in a document.
- 
+
 8. $setOnInsert : Sets the value of a field if an update results in an insert of a document. Has no effect on update operations that modify existing documents.
 
 9. $unset : Removes the specified field from a document.
