@@ -2159,7 +2159,7 @@ app.listen(80, () => {
 
 * Its a advance version of mongoDB package which provide Schemes and Model.
 
-* You can run basic queries as well of mongoDB as well.
+* You can run basic queries as well of mongoDB as well for insert, read, update and delete.
 
 
 **CRUD**
@@ -2170,57 +2170,58 @@ app.listen(80, () => {
   npm i mongoose
   ```
 
-* **Connection Query**
+* Connection Query
 
-  ```js
-  const mongoose = require("mongoose");
+    ```js
+    const mongoose = require("mongoose");
 
-  const dbName = "test";
-  const collectionName = "products";
+    const dbName = "test";
+    const collectionName = "course";
 
-  async function dbConnection(databaseName) {
-    try {
-      await mongoose.connect(`mongodb://127.0.0.1:27017/${databaseName}`);
-      console.log("Connected to the database");
-    } catch (error) {
-      console.error("Error connecting to the database:", error);
+    async function dbConnection(databaseName) {
+      try {
+        await mongoose.connect(`mongodb://127.0.0.1:27017/${databaseName}`);
+        console.log("Connected to the database");
+      } catch (error) {
+        console.error("Error while connecting to database:", error.message);
+      }
     }
-  }
-  dbConnection(dbName);
-  ```
+    dbConnection(dbName);
 
-* **Insert Query**
-
-  ```js
-  async function insert(data) {
-    const productSchema = new mongoose.Schema({
-      productName: { type: String, default: "Default Name" },
+    const courseSchema = new mongoose.Schema({
+      courseName: { type: String, default: "Default Name" },
       price: Number,
-      brand: String,
+      authorName: String,
       tags: [String],
     });
 
-    const ProductModel = mongoose.model(collectionName, productSchema);
+    const CourseModel = mongoose.model(collectionName, courseSchema);
+    ```
 
-    try {
-      const product = new ProductModel({
-        name: "iPhone",
+* Insert Query
+
+  ```js
+  async function insert() {
+
+   try {
+      const course = new CourseModel({
+        courseName: "Node.js",
         price: 1000,
-        brand: "Apple",
-        tags: ["node", "backend"],
+        authorName: "John",
+        tags: ["backend", "api-development"],
       });
 
-      const response = await product.save();
-      console.log("Product Created:", response);
+      const response = await course.save();
+      console.log("Course Created:", response);
     } catch (error) {
-      console.error("Error creating product:", error);
+      console.error("Error while creating course:", error.message);
     }
   }
 
   insert();
   ```
 
-* **Find Query**
+* Read Query
 
   ![Image](./images/mongo-find-method.png)
 
@@ -2231,11 +2232,11 @@ app.listen(80, () => {
     2. select() : to select keys, you can pass object or string eg : `.select({ name : 1}, {price : 1})`, `.select("courseName price")`
 
     3. set : to get value example .set({isPublished : true, author : 'Author Name'})
-    
-    4. sort() : To sort Data, you can pass object `.find().sort({ sort : -1 })`  and Single string with negative sign `.find().sort("price")` for ASC & `.find().sort("-price")` for DESC; 
-    
+
+    4. sort() : To sort Data, you can pass object `.find().sort({ sort : -1 })`  and Single string with negative sign `.find().sort("price")` for ASC & `.find().sort("-price")` for DESC;
+
     5. or : its like OR condition example `find().or([{ tags: "php" },{ tags: "node" }]);` this is use to find php or node
-    
+
     6. and : its like AND condition example `find().and([{ tags: "php" },{ tags: "node" }]);` this is use to find php and node
 
     7. Regular Expression : these are use to select case-insensitive or sensitive data on the basis of wild card (written in mongoDB notes)
@@ -2249,148 +2250,106 @@ app.listen(80, () => {
         .select("courseName author");
       console.log("Products:", products);
     } catch (error) {
-      console.error("Error reading products:", error);
+      console.error("Error reading product:", error.message);
     }
   }
   read()
   ```
 
+* Update Query
+
+   1. findByIdAndUpdate('66caacf2c3f84327f498e8be', {$set : {price : true}}, {new : true})
 
 ```js
-// Importing the Mongoose library to interact with MongoDB
-const mongoose = require("mongoose");
-
-// Function to establish a connection to the MongoDB database
-async function dbConnection(databaseName) {
+async function update(id) {
   try {
-    // Connect to the MongoDB instance running locally, specifying the database name and it return promise
-    await mongoose.connect(`mongodb://127.0.0.1:27017/${databaseName}`);
-    console.log("Connected to the database");
-  } catch (error) {
-    // Log an error message if the connection fails
-    console.error("Error connecting to the database:", error);
-  }
-}
-
-// Defining a schema for the products collection
-// A schema defines the structure of the documents in a collection
-const productSchema = new mongoose.Schema({
-  name: {type : String, default : 'Default Name'}, // Name of the product (String)
-  price: Number, // Price of the product (Number)
-  brand: String, // Brand of the product (String)
-  tags : [String]  // array of string
-});
-
-// Creating a model based on the productSchema
-// A model is a wrapper for the schema and provides an interface to interact with the collection
-const ProductModel = mongoose.model("Product", productSchema);
-
-// CRUD Operations
-
-// Create: Insert a new product into the collection
-async function createProduct(data) {
-  try {
-    // Create a new instance of the ProductModel with the provided data
-    const product = new ProductModel(data);
-    // Save the product to the database
-    const response = await product.save();
-    console.log("Product Created:", response);
-  } catch (error) {
-    // Log an error message if the creation fails
-    console.error("Error creating product:", error);
-  }
-}
-
-// Read: Fetch products from the collection based on a filter
-// If no filter is provided, it will return all products
-async function readProducts(filter = {}) {
-  try {
-    // Find documents in the collection that match the filter criteria
-    const products = await ProductModel
-    .find(filter)
-    .limit(3)
-    .sort({name : -1})  // sorting in descending order
-    .select({
-      name: 1,  // to select key name
-      tags: 1,
+    const response = await CourseModel.findByIdAndUpdate(id, {
+      $set: { courseName: "php" },
     });
-    console.log("Products Found:", products);
+    console.log("response:", response);
   } catch (error) {
-    // Log an error message if the read operation fails
-    console.error("Error reading products:", error);
+    console.error("Error while updating course :", error.message);
   }
 }
-
-// Update: Update existing products in the collection that match the filter
-async function updateProduct(filter, updateData) {
-  try {
-    // You can also use save method here to update data (for single record)
-
-    // Update the documents that match the filter with the new data
-    const response = await ProductModel.updateMany(filter, updateData);
-    console.log("Product Updated:", response);
-  } catch (error) {
-    // Log an error message if the update fails
-    console.error("Error updating product:", error);
-  }
-}
-
-/*
-  1. findById
-  2. findByIdAndUpdate('66caacf2c3f84327f498e8be', {$set : {price : true}}, {new : true})
-
-*/
-
-
-// Delete: Remove products from the collection that match the filter
-async function deleteProduct(filter) {
-  try {
-    // Delete the documents that match the filter criteria
-    const response = await ProductModel.(filter);
-    console.log("Product Deleted:", response);
-  } catch (error) {
-    // Log an error message if the deletion fails
-    console.error("Error deleting product:", error);
-  }
-}
-
-/*
-  1. findByIdAndUpdate('66caacf2c3f84327f498e8be', {$set : {price : true}}, {new : true})
-*/
-
-// Example usage of the CRUD operations
-async function main() {
-  // Establish a connection to the database named "test"
-  await dbConnection("test");
-
-  // Create a new product
-    // Create a new product
-  await createProduct({
-    name: "iPhone",
-    price: 1000,
-    brand: "Apple",
-    tags: ["node", "backend"],
-  });
-
-  // Read products with the brand "Apple"
-  await readProducts({ brand: "Apple" });
-
-  // Update products with the brand "Apple" to change the price
-  await updateProduct({ brand: "Apple" }, { $set: { price: 1100 } });
-
-  // Delete products with the brand "Apple"
-  await deleteProduct({ brand: "Apple" });
-
-  // Close the connection to the database when done
-  await mongoose.connection.close();
-}
-
-// Run the example operations
-main();
+update('66cf2f99962e25e7661407c4');
 ```
+
+* Delete Query
+
+  1. You can use basic queries deleteOne & deleteMany
+
+  ```js
+  async function remove(id) {
+    try {
+      const response = await CourseModel.findByIdAndDelete(id);
+      console.log("response:", response);
+    } catch (error) {
+      console.error("Error while deleting product:", error);
+    }
+  }
+  remove("66cf2cc534dd609594e45aa2");
+  ```
 
 * You can also create API using mongoose + express
 
+---
+
+### 📘Validator
+
+* Its only work in mongoose package
+
+* These will work when you try to insert data
+
+
+1. Required Parameter
+
+    ```js
+    const courseSchema = new mongoose.Schema({
+      courseName: { type: String, required: true }, // required
+      author: String,
+    });
+    ```
+
+2. Depending property
+
+    ```js
+    const courseSchema = new mongoose.Schema({
+      courseName: { type: String, required: true },
+      isPublished : Boolean,
+      price : {
+        type : Number,
+        required : function () { return this.isPublished} // depending upon isPublished property
+      }
+    });
+    ```
+3. String and Number validates
+
+    ```js
+    const courseSchema = new mongoose.Schema({
+
+      // string validations
+      courseName: {
+        type: String,
+        required: true,
+        minLength: 5,
+        maxLength: 10,
+        // match: /pattern/ (regular expression),
+      },
+      category: {
+        type: String,
+        required: true,
+        enum: ["web", "mobile", "network"],
+      },
+      author: String,
+
+      // number validations
+      price: {
+        type: Number,
+        min: 10,
+        max: 200,
+      },
+    });
+    ```
 ---
 
 ### 📘Mysql with Node (CRUD)
