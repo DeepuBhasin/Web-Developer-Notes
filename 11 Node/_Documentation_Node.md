@@ -2350,6 +2350,86 @@ update('66cf2f99962e25e7661407c4');
       },
     });
     ```
+3. Custom Validation
+
+    ```js
+    const courseSchema = new mongoose.Schema({
+      courseName: {
+        type: String,
+        required: true,
+      },
+      tags: {
+        type: Array,
+        validate: {
+          validator: function (v) {
+            return v && v.length > 1;
+          },
+          message: "Tags must have at least two elements",
+        },
+      },
+    });
+    ```
+4. Async Validator
+
+    ```js
+    const courseSchema = new mongoose.Schema({
+      courseName: {
+        type: String,
+        required: true,
+      },
+      tags: {
+        isAsync: true,    // set this parameter as true for async operation
+        type: Array,
+        validate: {
+          validator: function (v, callback) {
+            setTimeout(() => {
+              const result = v && v.length > 1;
+              callback(result);   // this is async code
+            }, 4000);
+          },
+          message: "Tags must have at least two elements",
+        },
+      },
+    });
+    ```    
+
+5. To Print Error
+
+    ```js
+    // need connection file also
+    const courseSchema = new mongoose.Schema({
+      courseName: {
+        type: String,
+        required: true,
+      },
+      tags: {
+        isAsync: true,
+        type: Array,
+        validate: {
+          validator: function (v) {
+            return v && v.length > 1;
+          },
+          message: "Tags must have at least two elements",
+        },
+      },
+    });
+
+    // Making Class
+    const CourseModel = mongoose.model(collectionName, courseSchema);
+
+    async function insert() {
+      try {
+        // making an object
+        const course = new CourseModel({});
+        const response = await course.save();
+        console.log("Course Created:", response);
+      } catch (ex) {
+        for (const key in ex.errors) {
+          console.log(ex.errors[key].message);
+        }
+      }
+    }
+    ```
 ---
 
 ### 📘Mysql with Node (CRUD)
