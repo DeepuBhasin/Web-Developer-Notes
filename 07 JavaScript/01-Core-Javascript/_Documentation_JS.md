@@ -13,7 +13,7 @@
 
 ---
 
-## 📘Terminologies
+### 📘Terminologies
 
 
 * **Implicit** : doing every thing by own.
@@ -6202,37 +6202,38 @@ Promise.resolve('hello Code')
     }
     console.log("Executed Try and catch");
 }());
-
 ```
 * **Extends Error**: these are various usefull because in normal errors some time all information is printing so hacker can use that information.
 
-```js
-class AuthenticationError extends Error {
-    constructor(message) {
-        super(message);
-        this.name = 'authenticationError';
-        this.favoriteSnack = "apple"
+    ```js
+    class AuthenticationError extends Error {
+        constructor(message) {
+            super(message);
+            this.name = 'authenticationError';
+            this.favoriteSnack = "apple"
+        }
     }
-}
 
-const a = new AuthenticationError("This is custom error");
+    const a = new AuthenticationError("This is custom error");
 
-console.log(a.name);
-console.log(a.message);
-console.log(a.stack);
-```
-
-
+    console.log(a.name);
+    console.log(a.message);
+    console.log(a.stack);
+    ```
 ---
+
 # 📔Extra
+
 * To Excape characters
 
 ```js
 var firstname = "Deepinder";
 console.log(`i am \${firstname} Singh`);
 ```
+---
 
 ### 📘Form Data
+
 ```html
 <form onsubmit="getFormData(event)">
     <label for="name">Name:</label>
@@ -6251,9 +6252,10 @@ console.log(`i am \${firstname} Singh`);
 </script>
 ```
 
-![Thankyou](./images/thankyou.png)
 
-## 📘Console
+---
+
+### 📘Console
 
 * console.time
     ```js
@@ -6333,3 +6335,5 @@ console.log(`i am \${firstname} Singh`);
     ```js
      console.log("Hello my name is %s and my age is %i", "Deepinder", 30)
     ```
+
+![Thankyou](./images/thankyou.png)
