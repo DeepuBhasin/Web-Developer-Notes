@@ -844,7 +844,7 @@ let array = [1, 2, 3, 4, 5];
 array.splice(1, 2)  // [1, 4, 5]
 ```
 
-----
+---
 
 ## 📘 Other Data-Structures (ES6)
 1. **Sets :**
@@ -1875,7 +1875,7 @@ obj.getFullName() // Deepu Bhasin
 
 ![Image](./images/this-key-word.png)
 
-### 📑Self and Scope (with This)
+**📑Self and Scope (with This)**
 Problem
 
 ```javascript
@@ -1901,64 +1901,64 @@ Solution
 
 1. By Passing reference of current object
 
-```javascript
-var firstName = "Deepinder";
+    ```javascript
+    var firstName = "Deepinder";
 
-let obj = {
-    firstName: "Deepu",
-    getFullName: function () {
-        console.log('First Name', this.firstName);
+    let obj = {
+        firstName: "Deepu",
+        getFullName: function () {
+            console.log('First Name', this.firstName);
 
-        // passing reference
-        var self = this;
+            // passing reference
+            var self = this;
 
-        function test() {
-            console.log('First Name', self.firstName);
+            function test() {
+                console.log('First Name', self.firstName);
+            }
+            test();
         }
-        test();
     }
-}
 
-obj.getFullName();
-```
+    obj.getFullName();
+    ```
 2. By binding 'this' with bind function
 
-```javascript
-var firstName = "Deepinder";
+    ```javascript
+    var firstName = "Deepinder";
 
-let obj = {
-    firstName: "Deepu",
-    getFullName: function () {
-        console.log('First Name', this.firstName);
-
-        function test() {
+    let obj = {
+        firstName: "Deepu",
+        getFullName: function () {
             console.log('First Name', this.firstName);
-        }
-        test.bind(this)();
-    }
-}
 
-obj.getFullName();
-```
+            function test() {
+                console.log('First Name', this.firstName);
+            }
+            test.bind(this)();
+        }
+    }
+
+    obj.getFullName();
+    ```
 
 3. By using Arrow function
 
-```javascript
-var firstName = "Deepinder";
-let obj = {
-    firstName: "Deepu",
-    getFullName: function () {
-        console.log('First Name', this.firstName);
-        const test = () => {
+    ```javascript
+    var firstName = "Deepinder";
+    let obj = {
+        firstName: "Deepu",
+        getFullName: function () {
             console.log('First Name', this.firstName);
+            const test = () => {
+                console.log('First Name', this.firstName);
+            }
+            test();
         }
-        test();
     }
-}
-obj.getFullName();
-```
+    obj.getFullName();
+    ```
 
-**💻 Application Example :** **Method Chaining**, Calling one method after another, and each method. Affects the parent object. So obj.method1().method2() where both methods end up with a 'this' variable pointing at 'obj'
+**💻Application Example :** **Method Chaining**, Calling one method after another, and each method. Affects the parent object. So obj.method1().method2() where both methods end up with a 'this' variable pointing at 'obj'
 
 ```js
  let obj = {
@@ -1986,6 +1986,7 @@ obj.getFullName();
 };
 obj.add(6).subtract(1).multiply(4).divide(2);
 ```
+
 ---
 ## 📘 IIFEs
 * **Immediately Invoked Function Expressions** - A function that is executed right after it is created.
@@ -2845,89 +2846,93 @@ class InformalPerson extends Person {
 ```
 ---
 ## 📘 Odds and Ends
-### 1. typeOf , instanceOf and FiguringOut what Something is
 
-```javascript
-var a = 3;
-console.log(typeof a);              // number
+1. **typeOf , instanceOf and FiguringOut what Something is**
 
-var b = "Hello";
-console.log(typeof b);              // string
+    ```javascript
+    var a = 3;
+    console.log(typeof a);              // number
 
-var c = {};
-console.log(typeof c);              // Object
+    var b = "Hello";
+    console.log(typeof b);              // string
 
-var d = [];
-console.log(typeof d);  // weird
-console.log(Object.prototype.toString.call(d)); // [object Array]
-console.log(Array.isArray(d));      // true
+    var c = {};
+    console.log(typeof c);              // Object
 
-function Person(name) {
-    this.name = name;
-}
+    var d = [];
+    console.log(typeof d);  // weird
+    console.log(Object.prototype.toString.call(d)); // [object Array]
+    console.log(Array.isArray(d));      // true
 
-console.log(typeof Person);         // function
+    function Person(name) {
+        this.name = name;
+    }
 
-var e = new Person('Jane');
-console.log(typeof e);              // object
-console.log(e instanceof Person);   // true
+    console.log(typeof Person);         // function
 
-console.log(typeof undefined);      // undefined
-console.log(typeof null);           // object
+    var e = new Person('Jane');
+    console.log(typeof e);              // object
+    console.log(e instanceof Person);   // true
 
-var z = function () { };
-console.log(typeof z)               // function
-console.log(typeof Array);          // function
-console.log(typeof Object)          // function
-```
+    console.log(typeof undefined);      // undefined
+    console.log(typeof null);           // object
 
-### 2. Strict Mode
+    var z = function () { };
+    console.log(typeof z)               // function
+    console.log(typeof Array);          // function
+    console.log(typeof Object)          // function
+    ```
+
+2. **Strict Mode**
 
 __Main Purpose :__ Enforce stricter parsing and error handling in your code.
 
 1. Prevents the use of global variables
 
-```javascript
-// Example 1
-city = 'London';    // become global variable
+    ```javascript
+    // Example 1
+    city = 'London';    // become global variable
 
-console.log(city);
+    console.log(city);
 
-// Example 2
-var city;
+    // Example 2
+    var city;
 
-cityy = 'London';    // cityy is undefined
-console.log(cityy);
+    cityy = 'London';    // cityy is undefined
+    console.log(cityy);
 
-// another example
-function test(){
-   'use strict'
-    var a = b = 10;
-    console.log(a); // error
-    console.log(b); // error
-}
-test();
-```
-⚠️ Note : it is very usefull but every browser do not work according "use strict mode"
+    // another example
+    function test(){
+    'use strict'
+        var a = b = 10;
+        console.log(a); // error
+        console.log(b); // error
+    }
+    test();
+    ```
+⚠️ Note : it is very useful but every browser do not work according "use strict mode"
 
 ---
 ## 📘Transpile
 Convert the syntax of one programming language, to another. In this case language that don't really ever run anywhere, but instead are processed by 'transpilers' that generate javascript.
 
 ---
-## How Internet works
+### 📘How Internet works
 
 ![Image](./images/how-internet-work'.png)
 ![Image](./images/how-internet-work-2.png)
 
 ---
-## Asynchronouse Code
+
+### 📘Asynchronous Code
 
 ![Image](./images/asycnhronouse-code.png)
 ![Image](./images/asycnhronouse-code-2.png)
+
 ---
 
-## 📘Ajax
+### 📘Ajax
+
 * **https://github.com/public-apis/public-apis** : Free Public api for various data
 
 ```js
@@ -3770,6 +3775,7 @@ console.log(fullname);
 ![Image](./images/oop-5.png)
 
 ![Image](./images/oop-prototypal.png)
+
 ---
 ## 📘Declarations and Expressions
 ```javascript
@@ -5624,7 +5630,8 @@ console.log(ShoppingCart.cart);
 ```
 ⚠️ **Note :**  best practice is just use one default export per module.
 
-![Image](./images/name-export-module.png)
+![Image](./images/name-export-module.png)\
+
 ---
 ## 📘await with module (Top level await)
 * It is *best and worst* for us as well because all code will block untill inless *await* does not get result from api.
@@ -6249,66 +6256,80 @@ console.log(`i am \${firstname} Singh`);
 ## 📘Console
 
 * console.time
-```js
-console.time();
-var arr = Array(1000).fill('Hello world')
-console.timeEnd();
-```
+    ```js
+    console.time();
+    var arr = Array(1000).fill('Hello world')
+    console.timeEnd();
+    ```
 * console.table
-```js
-// Array Example
-var teckBrand = [
-    {
-        id: 1,
-        name: 'Deepinder',
-        job: 'Web developer'
-    },
-    {
-        id: 2,
-        name: 'Deepu',
-        job: 'Web developer'
-    },
-    {
-        id: 3,
-        name: 'Dp',
-        job: 'Web developer'
+    ```js
+    // Array Example
+    var teckBrand = [
+        {
+            id: 1,
+            name: 'Deepinder',
+            job: 'Web developer'
+        },
+        {
+            id: 2,
+            name: 'Deepu',
+            job: 'Web developer'
+        },
+        {
+            id: 3,
+            name: 'Dp',
+            job: 'Web developer'
+        }
+    ];
+    console.table(teckBrand);
+
+    // Object Example
+
+    var response = {
+        approvedPrograms: [
+            { id: 1, name: 'Deepu' },
+            { id: 2, name: 'Deepinder' },
+            { id: 3, name: 'Deepi' }
+        ],
+        recomendedPrograms: [
+            { id: 1, name: 'Deepu' },
+            { id: 2, name: 'Deepinder' },
+            { id: 3, name: 'Deepi' }
+        ]
     }
-];
-console.table(teckBrand);
-
-// Object Example
-
-var response = {
-    approvedPrograms: [
-        { id: 1, name: 'Deepu' },
-        { id: 2, name: 'Deepinder' },
-        { id: 3, name: 'Deepi' }
-    ],
-    recomendedPrograms: [
-        { id: 1, name: 'Deepu' },
-        { id: 2, name: 'Deepinder' },
-        { id: 3, name: 'Deepi' }
-    ]
-}
-console.table(response)
-```
+    console.table(response)
+    ```
 * Color in Console
 
-```js
-console.log("%c Hello %cWorld", "color:yellow;", "background-color: red;")
-```
+    ```js
+    console.log("%c Hello %cWorld", "color:yellow;", "background-color: red;")
+    ```
 * console.group
 
-```js
-console.group("New Group");
-console.log('Hello world 1');
-console.log('Hello world 2');
-console.log('Hello world 3');
-console.log('Hello world 4');
-console.groupEnd();
-```
+    ```js
+    console.group("New Group");
+    console.log('Hello world 1');
+    console.log('Hello world 2');
+    console.log('Hello world 3');
+    console.log('Hello world 4');
+    console.groupEnd();
+    ```
 * console.clear : it will clear all values
 
-```js
-console.clear();
-```
+    ```js
+    console.clear();
+    ```
+
+* Formatting console
+
+    1. %s for string
+
+    2. %d for numbers
+
+    3. %i for initiger part
+
+    4. %o for object
+
+    ```js
+     console.log("Hello my name is %s and my age is %i", "Deepinder", 30)
+    ```
