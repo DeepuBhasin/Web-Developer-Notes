@@ -4725,241 +4725,258 @@ const company = [...products, {     // creating new Object
 
 ```
 * **Conceptual Example :** for destructring of object in which order does not matter (Application Use)
-```js
-function test({ first = 'default', last = 'default', job = 'default', dob = 'default' }) {
-    console.log(dob, job, last, first);
-}
 
-test({
-    job: "Web Developer",
-    dob: "24-11-1993",
-    last: "Singh",
-    first: "Deepu"
-});
-```
+    ```js
+    function test({ first = 'default', last = 'default', job = 'default', dob = 'default' }) {
+        console.log(dob, job, last, first);
+    }
+
+    test({
+        job: "Web Developer",
+        dob: "24-11-1993",
+        last: "Singh",
+        first: "Deepu"
+    });
+    ```
 ---
-## 📘 Spread Operator
-* basically use to expand an array into all its elements, so basically unpacking all the array element at one.
+### 📘 Spread Operator
+
+* Basically use to expand an array into all its elements, so basically unpacking all the array element at one.
+
 * All the **data structures** in Javascript are **iterables** eg arrays, strings, maps, sets but **Objects** are not.
+
 * Sperad Operators work with both **iterables** and Objects
+
 
 * Spread Opertor do this
 
-```js
-const arr = [1, 2, 3];
-console.log(..arr)  // (1, 2, 3)
-console.log(1, 2, 3)
-```
+    ```js
+    const arr = [1, 2, 3];
+    console.log(..arr)  // (1, 2, 3)
+    console.log(1, 2, 3)
+    ```
 
-```js
-// Problem
-const arr = [7, 8, 6];
-const badNewArr = [1, 2, arr[0], arr[1], arr[2]];
-console.log(badNewArr); //[1, 2, 7, 8, 6]
+    ```js
+    // Problem
+    const arr = [7, 8, 6];
+    const badNewArr = [1, 2, arr[0], arr[1], arr[2]];
+    console.log(badNewArr); //[1, 2, 7, 8, 6]
 
-// Solution (creating new array)
-const arr = [7, 8, 6];
-const badNewArr = [1, 2, arr[0], arr[1], arr[2]];
-console.log(badNewArr); //[1, 2, 7, 8, 6]
+    // Solution (creating new array)
+    const arr = [7, 8, 6];
+    const badNewArr = [1, 2, arr[0], arr[1], arr[2]];
+    console.log(badNewArr); //[1, 2, 7, 8, 6]
 
-// Solution (creating new object)
-const obj = {first : 'Deepu'}
-const obj1 = {...obj, last : 'Singh'}
-console.log(obj1);
-```
+    // Solution (creating new object)
+    const obj = {first : 'Deepu'}
+    const obj1 = {...obj, last : 'Singh'}
+    console.log(obj1);
+    ```
 ---
-## 📘Rest Operator
+
+### 📘Rest Operator
+
 * The **spread operator** is to unpack an array while **rest operator** is to pack elements into an array
 
 * For Arrays
-```js
-// spread because on right side of =
-const arr = [1, 2, ...[3, 4]];
 
-// Rest because on the left side of =
-const [a, b, ...others] = [1, 2, 3, 4, 5];
-console.log(a, b, others);
-```
+    ```js
+    // spread because on right side of =
+    const arr = [1, 2, ...[3, 4]];
+
+    // Rest because on the left side of =
+    const [a, b, ...others] = [1, 2, 3, 4, 5];
+    console.log(a, b, others);
+    ```
 * For Objects
-```js
-let obj = { first: 'Deepu', last: 'Singh', phone: '9915099247' };
-const { first, ...others } = obj
-console.log(first);
-console.log(others);
-```
+
+    ```js
+    let obj = { first: 'Deepu', last: 'Singh', phone: '9915099247' };
+    const { first, ...others } = obj
+    console.log(first);
+    console.log(others);
+    ```
 
 * For Functions
-```js
-function sum(...numbers) {
-     // its now array
-    console.log(numbers);
-}
-sum(1, 2, 3, 4, 5, 6, 7, 8, 9);
-```
+
+    ```js
+    function sum(...numbers) {
+        // its now array
+        console.log(numbers);
+    }
+    sum(1, 2, 3, 4, 5, 6, 7, 8, 9);
+    ```
 
 
 
 ---
 ## 📘Math
-* squaroot
+* Squaroot
 
-```js
-Math.sqrt(25)   // 5
-```
+    ```js
+    Math.sqrt(25)   // 5
+    ```
 
 * Min and Max
-```js
-Math.max(5, 1, 2, 3, 4)  // 5
-Math.min(5, 1, 2, 3, 4)  // 1
-```
+
+    ```js
+    Math.max(5, 1, 2, 3, 4)  // 5
+    Math.min(5, 1, 2, 3, 4)  // 1
+    ```
 
 * Creating Random Number
 
-```js
-// this will give number between 0 and 1
-Math.random()
+    ```js
+    // this will give number between 0 and 1
+    Math.random()
 
-// this will give number between 0 and 6
-Math.random() * 6
+    // this will give number between 0 and 6
+    Math.random() * 6
 
-// this will convert 19.9999999 into 19
-Math.trunc(Math.random() * 6)
+    // this will convert 19.9999999 into 19
+    Math.trunc(Math.random() * 6)
 
-// this will add 1 so we cannot get 0
-let dice = Math.trunc(Math.random() * 6) + 1;
+    // this will add 1 so we cannot get 0
+    let dice = Math.trunc(Math.random() * 6) + 1;
 
-console.log(dice)
+    console.log(dice)
 
-//OR
-let max = 6;
-let min = 2;
-console.log(Math.trunc(Math.random() * (max - min + 1) + min));
-```
+    //OR
+    let max = 6;
+    let min = 2;
+    console.log(Math.trunc(Math.random() * (max - min + 1) + min));
+    ```
 
 * Round, ceil, floor, trunc
-```js
-Math.round(23.4) // 23
-Math.round(23.7) // 24
 
-Math.ceil(23.3)  // 24
-Math.ceil(23.7)  // 24
+    ```js
+    Math.round(23.4) // 23
+    Math.round(23.7) // 24
 
-Math.floor(23.4) // 23
-Math.floor(23.7) // 23
+    Math.ceil(23.3)  // 24
+    Math.ceil(23.7)  // 24
 
-Math.trunc(23.4) // 23
-Math.trunc(23.4) // 23
-```
+    Math.floor(23.4) // 23
+    Math.floor(23.7) // 23
+
+    Math.trunc(23.4) // 23
+    Math.trunc(23.4) // 23
+    ```
 
 * for Decimal
 
-```js
-(23.345).toFixed(2)     // 23.34
-```
+    ```js
+    (23.345).toFixed(2)     // 23.34
+    ```
 ---
 ## 📘Dates and Time
-* create Date
-```js
-let now = new Date();
-console.log(now);
-//Thu Sep 07 2023 15:43:55 GMT+0530 (India Standard Time)
 
-now = new Date('Aug 02 2023');
-console.log(now);
-// Wed Aug 02 2023 00:00:00 GMT+0530 (India Standard Time)
+* Create Date
 
-now = new Date('December 24, 2015');
-console.log(now);
-//Thu Dec 24 2015 00:00:00 GMT+0530 (India Standard Time)
-```
+    ```js
+    let now = new Date();
+    console.log(now);
+    //Thu Sep 07 2023 15:43:55 GMT+0530 (India Standard Time)
+
+    now = new Date('Aug 02 2023');
+    console.log(now);
+    // Wed Aug 02 2023 00:00:00 GMT+0530 (India Standard Time)
+
+    now = new Date('December 24, 2015');
+    console.log(now);
+    //Thu Dec 24 2015 00:00:00 GMT+0530 (India Standard Time)
+    ```
 * Get Date Paramters : **getMethods()**
 
-```js
-const d = new Date();
-console.log(d.getDate());
-console.log(d.getMonth());
-console.log(d.getFullYear());
-console.log(d.getHours());
-console.log(d.getMinutes());
-console.log(d.getSeconds());
-console.log(d.toLocaleString());
-console.log(d.getTime());
-console.log(Date.now());
-```
+    ```js
+    const d = new Date();
+    console.log(d.getDate());
+    console.log(d.getMonth());
+    console.log(d.getFullYear());
+    console.log(d.getHours());
+    console.log(d.getMinutes());
+    console.log(d.getSeconds());
+    console.log(d.toLocaleString());
+    console.log(d.getTime());
+    console.log(Date.now());
+    ```
 
 * Set Date Parameters : **setMethods()**
-```js
-// Set Month
-const d = new Date();
-d.setMonth(1);
-console.log(d);
-//Tue Feb 07 2023 15:56:57 GMT+0530 (India Standard Time)
 
-// Set Date
-const date = new Date("june 21 2017");
-// Adding One Day in given Date
-date.setDate(date.getDate() + 1)
-// Subtracting One Day in given Date
-date.setDate(date.getDate() - 1)
-date.toDateString()
+    ```js
+    // Set Month
+    const d = new Date();
+    d.setMonth(1);
+    console.log(d);
+    //Tue Feb 07 2023 15:56:57 GMT+0530 (India Standard Time)
 
-// Set Minute
-const c = new Date();
-c.setMinutes(c.getMinutes() + 2);
-let t = c.getTime();
-console.log(t)
-```
+    // Set Date
+    const date = new Date("june 21 2017");
+    // Adding One Day in given Date
+    date.setDate(date.getDate() + 1)
+    // Subtracting One Day in given Date
+    date.setDate(date.getDate() - 1)
+    date.toDateString()
+
+    // Set Minute
+    const c = new Date();
+    c.setMinutes(c.getMinutes() + 2);
+    let t = c.getTime();
+    console.log(t)
+    ```
 * Operations on Dates (minus two dates)
 
-```js
-let d = (new Date(2023, 8, 7) - new Date(2023, 8, 5)) / (60 * 60 * 1000 * 24)
-console.log(Math.abs(d));   // 2 days
-```
+    ```js
+    let d = (new Date(2023, 8, 7) - new Date(2023, 8, 5)) / (60 * 60 * 1000 * 24)
+    console.log(Math.abs(d));   // 2 days
+    ```
+---
 
 ## 📘Internationlisation
 * Show data according to Countries like date format, currenct format, time, 5 days ago etc
 
 1. Dates : day, month, year, hours, minuts, seconds,  date, weekend, week,
-```js
-let now = new Date();
-let d = new Intl.DateTimeFormat('en-US', {
-    hour: 'numeric',
-    minute: 'numeric',
-    day: "numeric",
-    month: "long",
-    year: "2-digit",
-    weekday: "long"
-});
-console.log(d.format(now));
 
-// Thursday, September 7, 23 at 11:24 PM
-```
+    ```js
+    let now = new Date();
+    let d = new Intl.DateTimeFormat('en-US', {
+        hour: 'numeric',
+        minute: 'numeric',
+        day: "numeric",
+        month: "long",
+        year: "2-digit",
+        weekday: "long"
+    });
+    console.log(d.format(now));
 
-```js
-// Simple
-const f = new Intl.DateTimeFormat('en-us', {
-})
-console.log(f.format());        //  6/17/2023
+    // Thursday, September 7, 23 at 11:24 PM
+    ```
 
-// Simple
-const f = new Intl.DateTimeFormat('en-us', {
-    dateStyle: "full",
-    timeStyle: "full"
-})
-console.log(f.format());        // Saturday, June 17, 2023 at 7:30:41 PM India Standard Time
+    ```js
+    // Simple
+    const f = new Intl.DateTimeFormat('en-us', {
+    })
+    console.log(f.format());        //  6/17/2023
 
-// Complex One
-const today = new Date();
-console.log(today.toLocaleString());    // 17/6/2023, 7:21:53 pm
+    // Simple
+    const f = new Intl.DateTimeFormat('en-us', {
+        dateStyle: "full",
+        timeStyle: "full"
+    })
+    console.log(f.format());        // Saturday, June 17, 2023 at 7:30:41 PM India Standard Time
 
-const f = new Intl.DateTimeFormat('en-us', {
-    dateStyle: "full",
-    timeStyle: "full"
-    // dayPeriod: "long"
-})
+    // Complex One
+    const today = new Date();
+    console.log(today.toLocaleString());    // 17/6/2023, 7:21:53 pm
 
-console.log(f.format(today));   // Saturday, June 17, 2023 at 7:22:03 PM India Standard Time
-```
+    const f = new Intl.DateTimeFormat('en-us', {
+        dateStyle: "full",
+        timeStyle: "full"
+        // dayPeriod: "long"
+    })
+
+    console.log(f.format(today));   // Saturday, June 17, 2023 at 7:22:03 PM India Standard Time
+    ```
 * Relative Time
 ```js
 const f = new Intl.RelativeTimeFormat('en-us', {
@@ -4967,7 +4984,6 @@ const f = new Intl.RelativeTimeFormat('en-us', {
 })
 console.log(f.format(-4, "days"))
 ```
-
 
 2. Numbers : currency, style, units, useGroping
 
@@ -6015,52 +6031,53 @@ console.log('new', arrNew);
 ## 📘 Errors, Throw, SyntaxError, ReferenceError and Error handling
 
 * **Error** is constructor function so we can create instance, But creating instance is not useful for us untill we **throw** it.
+
 * **throw** keyword is stop the execution of code
 
-```js
-// not useful
-new Error("Error Message")
+    ```js
+    // not useful
+    new Error("Error Message")
 
-// fully useful
-throw new Error("Error Message")
-```
+    // fully useful
+    throw new Error("Error Message")
+    ```
 * We can throw any thing, it will stop execution of the code
 
-```js
-throw "string"  // string
+    ```js
+    throw "string"  // string
 
-throw true // boolean
+    throw true // boolean
 
-throw 1 // number
+    throw 1 // number
 
-throw {message : 'Error', status : '404'} // object
+    throw {message : 'Error', status : '404'} // object
 
-// Example
-throw "string"
-console.log("Hello world")  // this line will not work
-```
+    // Example
+    throw "string"
+    console.log("Hello world")  // this line will not work
+    ```
 
 * Error has three properties
     1. name : actual name of the error
     2. message : error message
     3. stack trace : show call stack
 
-```js
-const b = new Error("Error Message");
-console.log(b.name);
-console.log(b.message);
-console.log(b.stack);
-```
-* SyntaxError : grammer mistake of javascript and it has throw keyword inbuilt thats why code execution stop.
+    ```js
+    const b = new Error("Error Message");
+    console.log(b.name);
+    console.log(b.message);
+    console.log(b.stack);
+    ```
+    * SyntaxError : grammer mistake of javascript and it has throw keyword inbuilt thats why code execution stop.
 
-```js
-new SyntaxError("Hello Error")
-```
-* RefernceError : when you are not declaring any varaiable and it has throw keyword inbuilt thats why code execution stop.
+    ```js
+    new SyntaxError("Hello Error")
+    ```
+    * RefernceError : when you are not declaring any varaiable and it has throw keyword inbuilt thats why code execution stop.
 
-```js
-new ReferenceError("Hello Error")
-```
+    ```js
+    new ReferenceError("Hello Error")
+    ```
 
 * **Error Hanlding** : Some we might want to catch that error instead of stopping the entire program. So if we get any error in any **Execution Context** if we do not any **catch statment** then that error will catch by browers inbuilt catch statment.
 
@@ -6071,77 +6088,78 @@ new ReferenceError("Hello Error")
     2. catch : only handle asynchronous errors
 
 * Try-Catch Method
-```js
-//1 try-catch
-function test() {
-    // try block means we want to try a code
-    try {
-        // here i make a mistake by wrong spellings
-        consol.log("this works")
 
-        // or
-        throw new Error("Making mistake");
-    }
-    // catch block means if any error occur in try block i will catch it automatically
-    catch (e) {
-        console.log(e.message);
-    }
-    // finally
-    finally {
-        console.log("This line of code will always work");
-        return true;
-    }
-
-    // this will never work because we return our function from finally
-    console.log("This line of code will not work")
-}
-
-test();
-
-/*
-output :
-consol is not defined
-This line of code will always work
-*/
-
-//Nested Try-Catch
-function test() {
-    try {
+    ```js
+    //1 try-catch
+    function test() {
+        // try block means we want to try a code
         try {
-            something();
-        } catch (e) {
-            throw new Error(e)
-        }
-    } catch (error) {
-        console.log(error.message);
-    }
-}
+            // here i make a mistake by wrong spellings
+            consol.log("this works")
 
-test();
-// outout : ReferenceError: something is not defined
-```
+            // or
+            throw new Error("Making mistake");
+        }
+        // catch block means if any error occur in try block i will catch it automatically
+        catch (e) {
+            console.log(e.message);
+        }
+        // finally
+        finally {
+            console.log("This line of code will always work");
+            return true;
+        }
+
+        // this will never work because we return our function from finally
+        console.log("This line of code will not work")
+    }
+
+    test();
+
+    /*
+    output :
+    consol is not defined
+    This line of code will always work
+    */
+
+    //Nested Try-Catch
+    function test() {
+        try {
+            try {
+                something();
+            } catch (e) {
+                throw new Error(e)
+            }
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+    test();
+    // outout : ReferenceError: something is not defined
+    ```
 * Catch Method
 
-```js
-// this code will not work according to try-catch (synchronous error) because setTimeout work as asynchronous
-function test() {
-    try {
-        setTimeout(function () {
-            ok
-        }, 1000);
-    } catch (e) {
-        console.log(e.message);
+    ```js
+    // this code will not work according to try-catch (synchronous error) because setTimeout work as asynchronous
+    function test() {
+        try {
+            setTimeout(function () {
+                ok
+            }, 1000);
+        } catch (e) {
+            console.log(e.message);
+        }
     }
-}
 
-test();
+    test();
 
-// Example
-Promise.resolve('hello Code')
-    .then(response => {
-        throw new Error("#1 Fail")
-    }).catch(e => console.log(e.message))
-```
+    // Example
+    Promise.resolve('hello Code')
+        .then(response => {
+            throw new Error("#1 Fail")
+        }).catch(e => console.log(e.message))
+    ```
 
 **📚 Conceptual Example:**
 
