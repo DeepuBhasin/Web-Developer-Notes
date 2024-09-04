@@ -1,5 +1,6 @@
 # 📔 ES5
-## 📘Developer Responsibility
+
+### 📘Developer Responsibility
 
 * **Brendan Eich** is a person who created javascript.
 
@@ -49,7 +50,7 @@
 
 ---
 
-## 📘Conceptual Aside
+### 📘Conceptual Aside
 
 1. **Syntax Parsers** : A program that reads your code and determines what it does and if its grammar is valid e.g an interpreter or a compiler.
 
@@ -59,7 +60,7 @@
 
 ---
 
-## 📘Name/Value Pairs and Objects
+### 📘Name/Value Pairs and Objects
 
 
 * A Name which **maps** to a **unique value**. eg *Address = '100 Main St.'*.
@@ -75,7 +76,7 @@
 ![Image](./images/example-name-value.png)
 
 ---
-## 📘Creation & Hoisting
+### 📘Creation & Hoisting
 
 Execution Context has two phase
 
@@ -152,14 +153,14 @@ fn();
 
   * why TDZ : **Make it easier to avoid and catch errors**, accessing variables before declaration is a bad practice and should be avoided.
 
-```js
-age = 10;
-console.log(age);   // cause error because of TDZ
-let age;
-```
+    ```js
+    age = 10;
+    console.log(age);   // cause error because of TDZ
+    let age;
+    ```
 ---
 
-## 📘Block Scope Vs Functional scope
+### 📘Block Scope Vs Functional scope
 
 ![Image](./images/1-hositing-scope.png)
 
@@ -213,51 +214,57 @@ console.log(num2)   // 20 because it become global variable
 logNumber();
 ```
 ---
-## 📘Undefined vs Not Defined
+### 📘Undefined vs Not Defined
+
 * **undefined** : is special value in javascript and assign by JS Engine while hoisting, it will take memory space.
 
-```js
-// undefined : means value is not set
-var number1;
-console.log(number1);   // undefined
+    ```js
+    // undefined : means value is not set
+    var number1;
+    console.log(number1);   // undefined
 
-// Not defined : means does not exist
-console.log(number1);
-```
+    // Not defined : means does not exist
+    console.log(number1);
+    ```
 ---
-## 📘The Global Environment and The Global Object
+### 📘The Global Environment and The Global Object
+
 * When ever code is run in javascript it's run inside an execution context. Meaning a wrapper that the javascript engine wrap that up, that code that you've written in **global execution**.
 
-![globalExecutionEnvironment](./images/gloabl-environment.png)
+
+    ![globalExecutionEnvironment](./images/gloabl-environment.png)
 
 * There will be always a **Global Object**. in *Browser* it is **window**, each new tab have there own Global Execution context hence has its own window object
+
   * in **Browser** : *window == this* && *window == globalThis*
+
   * in **Node.js** : *global == this* && *global == globalThis*
 
-```js
-var a = 10;
-console.log(a)  // 10
-window.a        // 10
-console.log(b)  // 10
+    ```js
+    var a = 10;
+    console.log(a)  // 10
+    window.a        // 10
+    console.log(b)  // 10
 
-function b() {
-    console.log('hello world');
-}
-b();                // hello world
-window.b();         // hello world
-this.window.b();    // hello world
-```
+    function b() {
+        console.log('hello world');
+    }
+    b();                // hello world
+    window.b();         // hello world
+    this.window.b();    // hello world
+    ```
 ---
-## 📘The Execution Context : Code Execution (Your Code)
+### 📘The Execution Context : Code Execution (Your Code)
+
 * Code Execute line by line in javascript
 
-```js
-console.log(a);     // undefined
-var a = 'Hello world';
-console.log(a);     // Hello world
-```
+    ```js
+    console.log(a);     // undefined
+    var a = 'Hello world';
+    console.log(a);     // Hello world
+    ```
 ---
-## 📘Single Threaded, Synchronous Execution
+### 📘Single Threaded, Synchronous Execution
 
  * **Single Threaded :**
    * one command at a time. Under the hood of the browser, maybe not.
@@ -266,7 +273,7 @@ console.log(a);     // Hello world
  * **Synchronous :** one at a time.
 ---
 
-## 📘Function Invocation and The Execution Stack
+### 📘Function Invocation and The Execution Stack
 * **Invocation** : Running a function. in javascript, by using **parenthesis()**
 * When ever a function get invoke it will create new **Execution Context** for it for example **a() && b()** creating its own execution context.
 
@@ -274,7 +281,7 @@ console.log(a);     // Hello world
 
 ---
 
-## 📘 Functions, Context and Variable Environments
+### 📘 Functions, Context and Variable Environments
 * **Variable Environments :** Where the variables live and how they related to each other in memory.
 
 ![var](./images/function-context-and-variables-environment.png)
@@ -299,7 +306,7 @@ console.log(myVar);
 ```
 ---
 
-## 📘The Scope Chain
+### 📘The Scope Chain
 
 * **Scope :** where a variable is available in your code. and if it's truly the same variable or a new copy
 
@@ -353,29 +360,31 @@ function test() {
 
 ---
 
-## 📘Problem with Synchronous Code
+### 📘Problem with Synchronous Code
+
 * **Synchronous :** one at a time.
+
 * **Asynchronous :** more than one at a time.
 
-```javascript
-// long running function
+    ```javascript
+    // long running function
 
-function waitThreeSeconds() {
-    var ms = 3000 + new Date().getTime();
-    while(new Date() < ms){}
-    console.log('finished function');
-}
+    function waitThreeSeconds() {
+        var ms = 3000 + new Date().getTime();
+        while(new Date() < ms){}
+        console.log('finished function');
+    }
 
-function clickHandler() {
-    console.log('click event!');
-}
+    function clickHandler() {
+        console.log('click event!');
+    }
 
-// listen for the click event
-document.addEventListener('click', clickHandler)
+    // listen for the click event
+    document.addEventListener('click', clickHandler)
 
-waitThreeSeconds();
-console.log('finished execution');
-```
+    waitThreeSeconds();
+    console.log('finished execution');
+    ```
 
 * Long running code also effect eventLoops for example while executing this code if you click immediately it will not print because while loop is executing that time.
 
@@ -400,24 +409,32 @@ isNew = 1;
 * **Primitive type :** A type of data that represents a single value. That is, not an object.
 
 1. **undefined :** undefined represents lack of existence or undefined is the absence of a definition (you should'nt set a variable to undefined in any case because javascript Engine is already doing this)
+
 2. **Null :** null represents lack of existence (you can set a variable to this)
+
 3. **Boolean** : true or false
+
 4. **Number :**
    1. Floating point number (there's always some decimals). Unlike other programming languages, there's only one 'number' type ... and it can make math weird.
    2. *in javaScript, all numbers are represented internally as floating point numbers so basically always as decimals no matter we are writing as integer or as decimal*. example *23 == 23.00 (true)*
+
 5. **String :** a sequence of character (both '' and "" can be used)
+
 6. **Symbol :** used in ES6, which represent unique value mostly use in object keys
 
 * **Non-Primitive** : A type of data that represents multiple value.
 
 1. **Object**
+
 2. **Array**
+
 3. **Functions**
+
 4. **Classes**
 
 ---
 
-## 📘Booleans and Existence
+### 📘Booleans and Existence
 
 ```javascript
 Boolean(undefined)  // false
@@ -448,77 +465,83 @@ console.log(!!true);    // true
 
 ---
 
-## 📘Numbers
+### 📘Numbers
+
 * **Conversion :** from string to number
 
-```js
-let num = '10';
+    ```js
+    let num = '10';
 
-console.log(typeof Number(num));    // number
-console.log(typeof (+num));         // number
-```
+    console.log(typeof Number(num));    // number
+    console.log(typeof (+num));         // number
+    ```
+
 * **Parsing :** getting number from string
 
-```js
-Number.parseInt('2px')      // 2
-Number.parseFloat('2.5rm')  // 2.5
-```
+    ```js
+    Number.parseInt('2px')      // 2
+    Number.parseFloat('2.5rm')  // 2.5
+    ```
 
 * **Checking Number**
-```js
-// checking falsy values
-Number(undefined)   // NaN
-Number(null)        // 0
-Number(false)       // 0
-Number('')          // 0
-Number(0)           // 0
-Number(true)        // 1
 
-1 == '1'    // true
-1 === '1'   // false
-1 + null    // 1
+    ```js
+    // checking falsy values
+    Number(undefined)   // NaN
+    Number(null)        // 0
+    Number(false)       // 0
+    Number('')          // 0
+    Number(0)           // 0
+    Number(true)        // 1
 
-// Only check number or not
-Number.isNaN(10)        // false
-Number.isNaN('20')      // false
-Number.isNaN(+'20px')   // true
-Number.isNaN(20/0)      // false
+    1 == '1'    // true
+    1 === '1'   // false
+    1 + null    // 1
 
-// For checking Integer Values
-Number.isInteger(10)        // true
-Number.isInteger(10.2)      // false
-Number.isInteger('20')      // false
-Number.isInteger(+'20px')   // false
-Number.isInteger(20/0)      // false
+    // Only check number or not
+    Number.isNaN(10)        // false
+    Number.isNaN('20')      // false
+    Number.isNaN(+'20px')   // true
+    Number.isNaN(20/0)      // false
 
-// For checking Float Values (best)
-Number.isFinite(10)        // true
-Number.isFinite('20')      // false
-Number.isFinite(+'20px')   // false
-Number.isFinite(20/0)      // false
-```
+    // For checking Integer Values
+    Number.isInteger(10)        // true
+    Number.isInteger(10.2)      // false
+    Number.isInteger('20')      // false
+    Number.isInteger(+'20px')   // false
+    Number.isInteger(20/0)      // false
+
+    // For checking Float Values (best)
+    Number.isFinite(10)        // true
+    Number.isFinite('20')      // false
+    Number.isFinite(+'20px')   // false
+    Number.isFinite(20/0)      // false
+    ```
 
 ---
 
-## 📘Stings & String Methods
-* **Accessing value :** using index
-```js
-let firstName = "John Singh";
+### 📘Stings & String Methods
 
-console.log(firstName[0];)   // J
-console.log(firstName[1];)   // o
-console.log(firstName[2];)   // h
-```
+* **Accessing value :** using index
+
+    ```js
+    let firstName = "John Singh";
+
+    console.log(firstName[0];)   // J
+    console.log(firstName[1];)   // o
+    console.log(firstName[2];)   // h
+    ```
 
 * **Conversion** : from any type to string
-```js
-let age = 10;
 
-console.log(typeof String(10))
-console.log(typeof ('' + 10))
-console.log(typeof age.toString())
-console.log(typeof [1, 2, 3].toString())
-```
+    ```js
+    let age = 10;
+
+    console.log(typeof String(10))
+    console.log(typeof ('' + 10))
+    console.log(typeof age.toString())
+    console.log(typeof [1, 2, 3].toString())
+    ```
 
 **⚠️ Note :** **toString()** is a method that is attached on the **base Object** that why get on string, array, number etc.
 
@@ -540,123 +563,121 @@ console.log(typeof [1, 2, 3].toString())
 14. charAt()
 15. padStart & padEnd
 
-* Examples
 
-```js
-console.log('I am Web Developer'[0]);   // I
-console.log('I am Web Developer'[2]);   // a
-console.log('I am Web Developer'.length);   // 18
+    ```js
+    console.log('I am Web Developer'[0]);   // I
+    console.log('I am Web Developer'[2]);   // a
+    console.log('I am Web Developer'.length);   // 18
 
-// Methods
-// 1. indexOf
-console.log('I am Web Developer'.indexOf('a'));   // 2
-console.log('I am Web Developer'.indexOf('Web')); // 5
+    // Methods
+    // 1. indexOf
+    console.log('I am Web Developer'.indexOf('a'));   // 2
+    console.log('I am Web Developer'.indexOf('Web')); // 5
 
-// 2. lastIndexOf
-console.log('I am Web Developer'.lastIndexOf('Web')); // 5
-console.log('I am Web Developer'.lastIndexOf('e'));   // 16
+    // 2. lastIndexOf
+    console.log('I am Web Developer'.lastIndexOf('Web')); // 5
+    console.log('I am Web Developer'.lastIndexOf('e'));   // 16
 
-// 3. slice
-console.log('I am Web Developer'.slice(3));    // m Web Developer
-console.log('I am Web Developer'.slice(3, 7)); // m We
+    // 3. slice
+    console.log('I am Web Developer'.slice(3));    // m Web Developer
+    console.log('I am Web Developer'.slice(3, 7)); // m We
 
-// 4. includes
-console.log('I am Web Developer'.includes('Web'));  // true
-console.log('I am Web Developer'.includes('test')); // false
+    // 4. includes
+    console.log('I am Web Developer'.includes('Web'));  // true
+    console.log('I am Web Developer'.includes('test')); // false
 
-// 5. charCodeAt
-"X".charCodeAt()    // ASCII Code 88
+    // 5. charCodeAt
+    "X".charCodeAt()    // ASCII Code 88
 
-// 6. charAt
-"Xabcd".charAt(1)   // 'a'
+    // 6. charAt
+    "Xabcd".charAt(1)   // 'a'
 
 
-// 7. padStart
-let text = "Hello World";
-text = text.padStart(15, "*");
+    // 7. padStart
+    let text = "Hello World";
+    text = text.padStart(15, "*");
 
-console.log(text);  //  ****Hello World
-
-```
+    console.log(text);  //  ****Hello World
+    ```
 ---
 ## 📘Symbols & Using Symbols
 * **Hash Code :** A value generated from another value. The same value is always generated from the same input.
 * Symbols use **Memory Address** as value and return that value because its always unique. The value which we are providing is called **label** for reference Example
 * To print Symbol value **toString()** method is used.
 
-```javascript
-// symbol returning a unique value which will be memory address and 'firstName' is label for that address
-const firstName = Symbol('firstName');
-```
+    ```javascript
+    // symbol returning a unique value which will be memory address and 'firstName' is label for that address
+    const firstName = Symbol('firstName');
+    ```
 * Name is Really not important in **Symbol** Example
 
-```javascript
-const grt1 = Symbol('greet');
-const grt2 = Symbol('greet');
+    ```javascript
+    const grt1 = Symbol('greet');
+    const grt2 = Symbol('greet');
 
-console.log(grt1.toString()) // Symbol(greet)
+    console.log(grt1.toString()) // Symbol(greet)
 
-console.log(typeof grt1)    // symbol
+    console.log(typeof grt1)    // symbol
 
-grt1 === grt2   // false
-```
+    grt1 === grt2   // false
+    ```
 
 * Symbol Majorly use in **Object Properties** as *Property Name (string)* so cannot overwrite the property
 
-```javascript
-const firstName = Symbol('firstName');
+    ```javascript
+    const firstName = Symbol('firstName');
 
-let obj = {};
-// its like obj[464847xvdgd646474] = 'Deepinder';
-obj[firstName] = 'Deepinder';
+    let obj = {};
+    // its like obj[464847xvdgd646474] = 'Deepinder';
+    obj[firstName] = 'Deepinder';
 
-obj.firstName = 'Dp';
+    obj.firstName = 'Dp';
 
-console.log(obj); // {firstName: 'Dp', Symbol(firstName): 'Deepinder'}
+    console.log(obj); // {firstName: 'Dp', Symbol(firstName): 'Deepinder'}
 
-console.log(obj.firstName)  // Dp
+    console.log(obj.firstName)  // Dp
 
-// accessing Symbol Value
-console.log(obj[firstName]) // 'Deepinder'
+    // accessing Symbol Value
+    console.log(obj[firstName]) // 'Deepinder'
 
-for (const key in obj) {
-    console.log(key);      // firstName only
-}
-```
+    for (const key in obj) {
+        console.log(key);      // firstName only
+    }
+    ```
 
 * **Symbol are not iterable**, that means if you loop over an object with a for loop.
 
 * **Magic Strings :** Strings that have a special meaning or usage in your program. This makes your program fragile, easily susceptible to bugs.
 * For Global use, we create **Global variables** with **Symbol.for** to avoid *collision* and *stop redundancy*, example you might have the case where you want *two Symbols which actually share the same ID*.
 
-```javascript
-// Creating Symbol
-const HAIR_STRAIGHT = Symbol.for('Straight');
-const HAIR_CURLY = Symbol.for('Curly');
-const HAIR_WAVY = Symbol.for('Wavy');
+    ```javascript
+    // Creating Symbol
+    const HAIR_STRAIGHT = Symbol.for('Straight');
+    const HAIR_CURLY = Symbol.for('Curly');
+    const HAIR_WAVY = Symbol.for('Wavy');
 
-let curly = Symbol.for('Curly');
-console.log(curly === HAIR_CURLY); // true
-console.log(Symbol.keyFor(HAIR_CURLY));
+    let curly = Symbol.for('Curly');
+    console.log(curly === HAIR_CURLY); // true
+    console.log(Symbol.keyFor(HAIR_CURLY));
 
-// Change Property of Symbol (its help you'u to not accidentally change properties)
-const ageSymbol1 = Symbol.for('age');
+    // Change Property of Symbol (its help you'u to not accidentally change properties)
+    const ageSymbol1 = Symbol.for('age');
 
-let person = {
-    [ageSymbol1]: 29,
-    age : 32
-}
+    let person = {
+        [ageSymbol1]: 29,
+        age : 32
+    }
 
-function changeValue(person) {
-    const newAgeSymbol = Symbol.for('age');
-    person[newAgeSymbol] = 30;
-}
-changeValue(person);
+    function changeValue(person) {
+        const newAgeSymbol = Symbol.for('age');
+        person[newAgeSymbol] = 30;
+    }
+    changeValue(person);
 
-console.log(person["age"])          // 32
-// its not same, its different label for age === ageSymbol1 (false)
-console.log(person[ageSymbol1]);    // 30
-```
+    console.log(person["age"])          // 32
+    // its not same, its different label for age === ageSymbol1 (false)
+    console.log(person[ageSymbol1]);    // 30
+    ```
 
 **Well-Known Symbols :** Symbols already built into the javascript engine, used by the engine for certain tasks. (you can check more about for md docs)
 
@@ -666,28 +687,28 @@ console.log(person[ageSymbol1]);    // 30
 
 * Arrays are dynamically type in javascript
 
-```javascript
-var arr = new Array();
+    ```javascript
+    var arr = new Array();
 
-// Array Literals
-var arr = [1, 2, 3];
+    // Array Literals
+    var arr = [1, 2, 3];
 
-var array = [
-    1,                  // number
-    false,              // boolean
-    {                   // object
-        name : 'Tony',
-        address : '51 -d street no 3 ranjit nagar'
-    },
-    function (name) {   // function expression
-        var gretting = 'Hello',
-        console.log(greeting + ' ' + name)
-    },
-    "hello"             // string
-];
+    var array = [
+        1,                  // number
+        false,              // boolean
+        {                   // object
+            name : 'Tony',
+            address : '51 -d street no 3 ranjit nagar'
+        },
+        function (name) {   // function expression
+            var gretting = 'Hello',
+            console.log(greeting + ' ' + name)
+        },
+        "hello"             // string
+    ];
 
-arr[3](arra[2].name)   // Hello Tony
-```
+    arr[3](arra[2].name)   // Hello Tony
+    ```
 **📚 Conceptual Example :** Destructing of array method
 
 ```js
@@ -703,6 +724,7 @@ test([1, 2, 3, 4]);
 **Methods**
 
 1. include (return true/false)
+
 2. indexOf (return index)
 3. findIndex(return first find index)slice
 4. find (return first find value)
@@ -823,120 +845,124 @@ console.log(arr);   // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 
 ---
-## 📘Delete Element from Object OR Array
-* **delete Method** (for array and Object)
-```js
-let array = [1, 2, 3, 4, 5];
-delete array[2];    // [1, 2, empty, 4, 5]
-console.log(array);
+### 📘Delete Element from Object OR Array
+* Delete Method (for array and Object)
 
-let obj = {
-    firstName: "Deepinder",
-    lastName: "Singh"
-};
-delete obj['lastName'];
-console.log(obj);   // {firstName: 'Deepinder'}
-```
-* **splice method** (for array)
+    ```js
+    let array = [1, 2, 3, 4, 5];
+    delete array[2];    // [1, 2, empty, 4, 5]
+    console.log(array);
 
-```js
-let array = [1, 2, 3, 4, 5];
-array.splice(1, 2)  // [1, 4, 5]
-```
+    let obj = {
+        firstName: "Deep",
+        lastName: "Singh"
+    };
+    delete obj['lastName'];
+    console.log(obj);   // {firstName: 'Deep'}
+    ```
+* Splice method (for array)
 
+    ```js
+    let array = [1, 2, 3, 4, 5];
+    array.splice(1, 2)  // [1, 4, 5]
+    ```
 ---
 
-## 📘 Other Data-Structures (ES6)
+### 📘Other Data-Structures (ES6)
 1. **Sets :**
+
 * A collection of unique values, so that means that a **Set** can never have any duplicates. (its kind of array not exactly array)
+
 * In **set** order does not matter, hence we cannot access values by using **index**, Only use to check the values exist or not.
+
 * **Set** are iterable.
-```js
-const orderSet = new Set(['pasta', 'pizza', 'pizza', 'Risotto', 'pasta', 'pizza']);
 
-console.log(typeof orderSet);   // object
+    ```js
+    const orderSet = new Set(['pasta', 'pizza', 'pizza', 'Risotto', 'pasta', 'pizza']);
 
-console.log(orderSet);  //  {'pasta', 'pizza', 'Risotto'}
+    console.log(typeof orderSet);   // object
 
-console.log(orderSet.size);             // 3
-console.log(orderSet.has('pizza'));     // true
-console.log(orderSet.has('toffee'));    // false
+    console.log(orderSet);  //  {'pasta', 'pizza', 'Risotto'}
 
-orderSet.add('Garlic Bread');
-orderSet.add('Garlic Bread');   // this will not added
+    console.log(orderSet.size);             // 3
+    console.log(orderSet.has('pizza'));     // true
+    console.log(orderSet.has('toffee'));    // false
 
-console.log(orderSet);  // {'pasta', 'pizza', 'Risotto', 'Garlic Bread'}
+    orderSet.add('Garlic Bread');
+    orderSet.add('Garlic Bread');   // this will not added
 
-orderSet.delete('pasta');
-console.log(orderSet);  // {'pizza', 'Risotto', 'Garlic Bread'}
+    console.log(orderSet);  // {'pasta', 'pizza', 'Risotto', 'Garlic Bread'}
 
-// Set are iterable hence for-of loop can be use
-for(let i of orderSet) {
-    console.log(i)          // 'pizza', 'Risotto', 'Garlic Bread'
-}
-```
+    orderSet.delete('pasta');
+    console.log(orderSet);  // {'pizza', 'Risotto', 'Garlic Bread'}
+
+    // Set are iterable hence for-of loop can be use
+    for(let i of orderSet) {
+        console.log(i)          // 'pizza', 'Risotto', 'Garlic Bread'
+    }
+    ```
 
 **💻 Application Use :**
-* Remove Duplicate values from array
-```js
-const arr = ['pasta', 'pizza', 'pizza', 'Risotto', 'pasta', 'pizza'];
-const orderSet = [...new Set(arr)];
-console.log(orderSet);  //  {'pasta', 'pizza', 'Risotto'}
-```
 
-2. **Maps :**
-* its like *Objects* but the major difference is that, in objects the **keys are always strings**, but in **Maps** we can have any type of key. it could even **be objects, or arrays or other maps.**
+1. Remove Duplicate values from array
 
-```js
-// 1. Creating Map in this way
+    ```js
+    const arr = ['pasta', 'pizza', 'pizza', 'Risotto', 'pasta', 'pizza'];
+    const orderSet = [...new Set(arr)];
+    console.log(orderSet);  //  {'pasta', 'pizza', 'Risotto'}
+    ```
 
-const rest = new Map()  // always create empty map here
-rest.set('name', 'John Singh');
-rest.set(1, 'web-developer');
-rest.set(true, 'apple')
+2. Maps : its like *Objects* but the major difference is that, in objects the **keys are always strings**, but in **Maps** we can have any type of key. it could even **be objects, or arrays or other maps.**
 
-const arr = [1, 2];
-rest.set(arr, 'array value')
+    ```js
+    // 1. Creating Map in this way
 
-console.log(rest.get(arr)); // array value
-console.log(rest.get(1));   //web-developer
-console.log(rest.get('1')); // undefined
+    const rest = new Map()  // always create empty map here
+    rest.set('name', 'John Singh');
+    rest.set(1, 'web-developer');
+    rest.set(true, 'apple')
 
-console.log(rest.has(true));    // true
-console.log(rest.has('test'));  // false
+    const arr = [1, 2];
+    rest.set(arr, 'array value')
 
-console.log(rest.size);     // 3
+    console.log(rest.get(arr)); // array value
+    console.log(rest.get(1));   //web-developer
+    console.log(rest.get('1')); // undefined
 
+    console.log(rest.has(true));    // true
+    console.log(rest.has('test'));  // false
 
-// 2. Creating Map in this way
-const question = new Map([
-    ['question', 'what is the best programming language in the world'],
-    [1, 'c'],
-    [2, 'java'],
-    [true, 'correct'],
-    [false, 'Try Again']
-]);
-
-console.log(question)   //  {'question' => 'what is the best programming language in the world', 1 => 'c', 2 => 'java', true => 'correct', false => 'Try Again'}
-
- for (let [key, value] of question) {
-    console.log(key + ' : ' + value);
-}
-
-// question : what is the best programming language in the world
-// 1 : c
-// 2 : java
-// true : correct
-// false : Try Again
+    console.log(rest.size);     // 3
 
 
-// Converting into array once again
-const array = [...questions];
-```
+    // 2. Creating Map in this way
+    const question = new Map([
+        ['question', 'what is the best programming language in the world'],
+        [1, 'c'],
+        [2, 'java'],
+        [true, 'correct'],
+        [false, 'Try Again']
+    ]);
 
+    console.log(question)   //  {'question' => 'what is the best programming language in the world', 1 => 'c', 2 => 'java', true => 'correct', false => 'Try Again'}
+
+    for (let [key, value] of question) {
+        console.log(key + ' : ' + value);
+    }
+
+    // question : what is the best programming language in the world
+    // 1 : c
+    // 2 : java
+    // true : correct
+    // false : Try Again
+
+
+    // Converting into array once again
+    const array = [...questions];
+    ```
 ---
 
-## 📘Source of Data
+### 📘Source of Data
 
 ![Image](./images/source-of-data.png)
 
@@ -944,7 +970,7 @@ const array = [...questions];
 
 ---
 
-## 📘 Operators are functions
+### 📘 Operators are functions
 
 * in Example 1 : **=** is an *operator (function)*  which takes **2** parameters **a** and **3** and then assign value.
 * in Example 2 : **+** is an *operator (function)*  which takes **2** parameters **3** and **2** and then return and expression.
@@ -958,40 +984,42 @@ var b = 3 + 2;
 ```
 
 ---
-## 📘 Operator Precedence and Associativity
+### 📘 Operator Precedence and Associativity
+
 * **Operator Precedence :** which operator function gets called first. Functions are called in order of precedence (HIGHER precedence wins). Example : BDMAS
-```javascript
-var a = 3 + 4 * 5;
-console.log(a); //23
-```
+
+    ```javascript
+    var a = 3 + 4 * 5;
+    console.log(a); //23
+    ```
+
 * **Associativity :** What order operator functions get called in: LEFT-TO-RIGHT or RIGHT-TO-LEFT. when functions have the *same* precedence. Example : 1+2+3/3/4
 
-```js
-function test() {
-    let count = 0;
-    return function () {
-        return count++;
+    ```js
+    function test() {
+        let count = 0;
+        return function () {
+            return count++;
+        }
     }
-}
 
-const outPut = test();
-console.log(outPut());  // 0
-console.log(outPut());  // 1
-console.log(outPut());  // 2
-```
-
+    const outPut = test();
+    console.log(outPut());  // 0
+    console.log(outPut());  // 1
+    console.log(outPut());  // 2
+    ```
 ---
+### 📘 Coercion
 
-## 📘 Coercion
 * **Coercion :** Converting a value from one type to another. This happens quite in all dynamically typed languages like php, javascript etc.
 
-```javascript
-var a = 1 + '2';
-console.log(a);
-```
+    ```javascript
+    var a = 1 + '2';
+    console.log(a);
+    ```
 ---
 
-## 📘 Comparison
+### 📘 Comparison
 
 ```javascript
 var a = 3 < 2 < 1 ;
@@ -1000,6 +1028,7 @@ console.log(a);     // true (true > false)
 var a = 1 < 2 < 3;  // true (true > false)
 console.log(a);
 ```
+
 **⚠️ Note :** you can use **Object.is(1, 1)** instead of **=== (strick quality check)**
 
 ---
@@ -1411,48 +1440,51 @@ console.log(obj2)
 
 1. **Shallow Cloning :** Copy all properties up to only for *first level*, it is done by **Object.assign({}, alreadyDeclaredObject)**
 
-```js
- const obj1 = {
-    firstName: "Deepinder",
-    lastName: "Singh",
-    age: 29
-}
+    ```js
+    const obj1 = {
+        firstName: "Deepinder",
+        lastName: "Singh",
+        age: 29
+    }
 
-const obj2 = Object.assign({}, obj1, {job : "React"});
-obj2.firstName = "Deepu";
-obj2.lastName = "Bhasin";
+    const obj2 = Object.assign({}, obj1, {job : "React"});
+    obj2.firstName = "Deepu";
+    obj2.lastName = "Bhasin";
 
-console.log('obj1', obj1);  // {firstName: 'Deepinder', lastName: 'Singh', age: 29}
-console.log('obj2', obj2)   // {firstName: 'Deepu', lastName: 'Bhasin', age: 29, job: 'React'}
-```
+    console.log('obj1', obj1);  // {firstName: 'Deepinder', lastName: 'Singh', age: 29}
+    console.log('obj2', obj2)   // {firstName: 'Deepu', lastName: 'Bhasin', age: 29, job: 'React'}
+    ```
+
 2. **Deep Cloning :** Copy all properties up to *all level*. it is done by
+
 * **JSON.parse(JSON.stringify(alreadyDeclaredObject))**
+
 * Lodash library
-```js
-const obj1 = {
-    firstName: "Deepinder",
-    lastName: "Singh",
-    age: 29
-}
 
-const obj2 = JSON.parse(JSON.stringify(obj1));
-obj2.firstName = "Deepu";
-obj2.lastName = "Bhasin";
+    ```js
+    const obj1 = {
+        firstName: "Deepinder",
+        lastName: "Singh",
+        age: 29
+    }
 
-console.log('obj1', obj1);  // {firstName: 'Deepinder', lastName: 'Singh', age: 29}
-console.log('obj2', obj2)   // {firstName: 'Deepu', lastName: 'Bhasin', age: 29}
-```
+    const obj2 = JSON.parse(JSON.stringify(obj1));
+    obj2.firstName = "Deepu";
+    obj2.lastName = "Bhasin";
+
+    console.log('obj1', obj1);  // {firstName: 'Deepinder', lastName: 'Singh', age: 29}
+    console.log('obj2', obj2)   // {firstName: 'Deepu', lastName: 'Bhasin', age: 29}
+    ```
 
 ---
 
-
 ## 📘Functions are Object
-* **First Class Functions :** Everything you can do with other types you can do with functions. Assign them to variables, pass them around, create them on the fly.
+
+**First Class Functions :** Everything you can do with other types you can do with functions. Assign them to variables, pass them around, create them on the fly.
 
 ![Image](./images/funtions-are-object.png)
 
 ```javascript
-
 function greet() {
     console.log('hi');
 }
@@ -1483,41 +1515,40 @@ console.log(greet.__proto__ == Function.prototype);
 ## 📘Function Statements and Function Expressions
 * **Expression :** A unit of code that results in a value. It does n't have to save to a variable (an expression is something that produces a value)
 
-```javascript
-// mean concept is that what ever the variable returning a value is called expression like number, object etc
-var a = 3
-var b = 1 + 2;
-var c = {greeting : 'hi'}
+    ```javascript
+    // mean concept is that what ever the variable returning a value is called expression like number, object etc
+    var a = 3
+    var b = 1 + 2;
+    var c = {greeting : 'hi'}
 
-// here (a === 3) is expression because it return some value && if is just simply statement it not returning any value.
+    // here (a === 3) is expression because it return some value && if is just simply statement it not returning any value.
 
-// so statement just does work and an expression results in a value
-if (a == 3) {
+    // so statement just does work and an expression results in a value
+    if (a == 3) {
 
-}
-```
+    }
+    ```
 * **Function Statement :** the statement which does not return any thing, it just statement.
 
-```javascript
-function greet() {
-    console.log('hi');
-}
-```
+    ```javascript
+    function greet() {
+        console.log('hi');
+    }
+    ```
 * **Function Expression :** the statement which return any thing.
 
-```javascript
-// because here function is considered as object and creating on fly && it returns an object hence its a value
-var anonymousGreet = function () {
-    console.log('hi');
-}
-anonymousGreet();
+    ```javascript
+    // because here function is considered as object and creating on fly && it returns an object hence its a value
+    var anonymousGreet = function () {
+        console.log('hi');
+    }
+    anonymousGreet();
+    ```
+
+    ![Image](./images/function-expressions-invoke.png)
 
 
-```
-![Image](./images/function-expressions-invoke.png)
-
-
-⚠️ **Note** : Function Expressions are not hoisted this is the only main difference between **Function Declaration** and **Function Expressions**
+**⚠️Note :** Function Expressions are not hoisted this is the only main difference between **Function Declaration** and **Function Expressions**
 
 ```javascript
 // Functions expressions considered as variable and According to Hoisting variables are set to undefined
@@ -1547,7 +1578,7 @@ Functions can pass as parameter in which you can pass function as parameter use 
 
 ---
 
-## 📘First-Class functions Vs Higher-Order functions
+### 📘First-Class functions Vs Higher-Order functions
 
 ![Image](./images/first-class-functions-higher-order-functions.png)
 
