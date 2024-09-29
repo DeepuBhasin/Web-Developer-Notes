@@ -28,28 +28,6 @@
 * **enumerating** : objects
 ---
 
-### 📘What is javascript
-
-* Javascript was created to make webpages more dynamic (eg. changes content on a page directly from inside the browser). Originally, it was called LiveScript but due to the popularity of java it was renamed to javascript.
-
-* Javascript is dynamically weakly-typed programming language.
-
-* Interpreted programming language which means not pre-compiled instead parsed and compiled , "Interpreted on the fly" compiled language
-
-* "Hoisted language" Run in different environments (eg in browser)
-
-* Most prominent use case : Run code in browser (on a webpage)
-
-**⚠️Note :** Javascript is totally independent from java and has nothing in common with java.
-
-![Image](./images/what-is-javascript-details.png)
-
-![Image](./images/what-in-the-course.png)
-
-![Image](./images/history.png)
-
----
-
 ### 📘Conceptual Aside
 
 1. **Syntax Parsers** : A program that reads your code and determines what it does and if its grammar is valid e.g an interpreter or a compiler.
@@ -97,12 +75,10 @@ so during the creation phase javascript engine moves your variables and function
 
 ```js
 // Example 1
-
 console.log(number1);   // undefined
 var number1 = 10;
 
 // Example 2 (best one)
-
 //  declaring then initializing
 var number1;
 console.log(number1);   // undefined
@@ -114,7 +90,6 @@ console.log(number1);   // 10
 var number1;
 
 // Example 3
-
 var num = 50;
 function logNumber() {
     console.log(num);   // undefined
@@ -141,7 +116,7 @@ fn();
 ⚠️ Note
 
 
-* **let, const, function Expression (Arrows Functions), classes** are not hoisted.
+* **let, const, function Expression, Arrows Functions, classes** are not hoisted.
 
 * In **const** : Only **Primitive Values** are **immutable** but *Array and Objects* are **non-primitive** types values so these are **mutable**
 
@@ -190,7 +165,6 @@ console.log(age);   // 10 because age variable has global scope due to let varia
 
 
 // Example 3
-
 var firstName = "javascript";
 
 if (true) {
@@ -389,23 +363,25 @@ function test() {
 * Long running code also effect eventLoops for example while executing this code if you click immediately it will not print because while loop is executing that time.
 
 ---
-## 📘 Types in Javascript
+### 📘 Types in Javascript
+
 * **Dynamic Typing :** you don't tell to the engine that what type of data a variable holds, it figures it out while your coding is running. Variables can hold different types of values because it's all figured out during execution.
 
-``` javascript
-// Static  Typing
-bool isNew = 'hello'; // an error
+    ``` javascript
+    // Static  Typing
+    bool isNew = 'hello'; // an error
 
-// Dynamic Typing
-var isNew = true;   // no error
-isNew = 'yup!';
-isNew = 1;
-```
+    // Dynamic Typing
+    var isNew = true;   // no error
+    isNew = 'yup!';
+    isNew = 1;
+    ```
 
 * **typeOf :** is operator which returns the type of variable.
 
 ---
-## 📘 Primitive types and Non Primitives types
+### 📘 Primitive types and Non Primitives types
+
 * **Primitive type :** A type of data that represents a single value. That is, not an object.
 
 1. **undefined :** undefined represents lack of existence or undefined is the absence of a definition (you should'nt set a variable to undefined in any case because javascript Engine is already doing this)
@@ -428,9 +404,9 @@ isNew = 1;
 
 2. **Array**
 
-3. **Functions**
+3. **Function**
 
-4. **Classes**
+4. **Class**
 
 ---
 
@@ -442,6 +418,7 @@ Boolean(null)       // false
 Boolean("")         // false
 Boolean(0)          // false
 Boolean(false)      // false
+Boolean(NaN)        // false
 
 // Example 1
 var a;
@@ -458,9 +435,10 @@ if(a || a === 0) {      // will execute
  console.log('Something is there');
 }
 
-// Example 3
+// Example 3 (converting into boolean)
 console.log(!true);     // false
 console.log(!!true);    // true
+console.log(!!'hi')     // true
 ```
 
 ---
@@ -497,19 +475,6 @@ console.log(!!true);    // true
     1 == '1'    // true
     1 === '1'   // false
     1 + null    // 1
-
-    // Only check number or not
-    Number.isNaN(10)        // false
-    Number.isNaN('20')      // false
-    Number.isNaN(+'20px')   // true
-    Number.isNaN(20/0)      // false
-
-    // For checking Integer Values
-    Number.isInteger(10)        // true
-    Number.isInteger(10.2)      // false
-    Number.isInteger('20')      // false
-    Number.isInteger(+'20px')   // false
-    Number.isInteger(20/0)      // false
 
     // For checking Float Values (best)
     Number.isFinite(10)        // true
@@ -600,9 +565,12 @@ console.log(!!true);    // true
     console.log(text);  //  ****Hello World
     ```
 ---
-## 📘Symbols & Using Symbols
+### 📘Symbols & Using Symbols
+
 * **Hash Code :** A value generated from another value. The same value is always generated from the same input.
+
 * Symbols use **Memory Address** as value and return that value because its always unique. The value which we are providing is called **label** for reference Example
+
 * To print Symbol value **toString()** method is used.
 
     ```javascript
@@ -648,6 +616,7 @@ console.log(!!true);    // true
 * **Symbol are not iterable**, that means if you loop over an object with a for loop.
 
 * **Magic Strings :** Strings that have a special meaning or usage in your program. This makes your program fragile, easily susceptible to bugs.
+
 * For Global use, we create **Global variables** with **Symbol.for** to avoid *collision* and *stop redundancy*, example you might have the case where you want *two Symbols which actually share the same ID*.
 
     ```javascript
@@ -683,7 +652,7 @@ console.log(!!true);    // true
 
 ---
 
-## 📘Arrays (Collections of Anything)
+### 📘Arrays(Collections of Anything)
 
 * Arrays are dynamically type in javascript
 
@@ -1110,6 +1079,19 @@ var openROReportData = apiData || ({} as IOpenROReportData);
 5. **undefined :** A variable that has been declared but has not been assigned a value is falsy.
 
 6. **NaN (Not a Number) :** Represents a value that is not a legal number and is falsy.
+
+
+**📚Conceptual Example :**
+
+```js
+let userName;           // undefined
+
+let userName = 'john';  // 'john'
+
+userName = null;        // if we want to reset our value we use null always
+
+'hi' + undefined;       // NaN
+```
 
 ---
 
