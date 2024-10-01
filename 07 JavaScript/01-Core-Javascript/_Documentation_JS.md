@@ -712,6 +712,7 @@ test([1, 2, 3, 4]);
 17. flat
 18. flatMap
 19. new Array(7).fill(1)
+20. Array.from({}, ()=> {}))
 
 
 **⚠️ Note :** The all Above methods are coming from **Base Array Object**. You can see from below example
@@ -871,9 +872,7 @@ console.log(arr);   // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     }
     ```
 
-**💻 Application Use :**
-
-1. Remove Duplicate values from array
+**💻 Application Use Set:** Remove Duplicate values from array
 
     ```js
     const arr = ['pasta', 'pizza', 'pizza', 'Risotto', 'pasta', 'pizza'];
@@ -939,7 +938,7 @@ console.log(arr);   // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 ---
 
-### 📘 Operators are functions
+### 📘Operators are functions
 
 * in Example 1 : **=** is an *operator (function)*  which takes **2** parameters **a** and **3** and then assign value.
 * in Example 2 : **+** is an *operator (function)*  which takes **2** parameters **3** and **2** and then return and expression.
@@ -953,7 +952,7 @@ var b = 3 + 2;
 ```
 
 ---
-### 📘 Operator Precedence and Associativity
+### 📘Operator Precedence and Associativity
 
 * **Operator Precedence :** which operator function gets called first. Functions are called in order of precedence (HIGHER precedence wins). Example : BDMAS
 
@@ -978,7 +977,7 @@ var b = 3 + 2;
     console.log(outPut());  // 2
     ```
 ---
-### 📘 Coercion
+### 📘Coercion
 
 * **Coercion :** Converting a value from one type to another. This happens quite in all dynamically typed languages like php, javascript etc.
 
@@ -988,7 +987,7 @@ var b = 3 + 2;
     ```
 ---
 
-### 📘 Comparison
+### 📘Comparison
 
 ```javascript
 var a = 3 < 2 < 1 ;
@@ -1002,7 +1001,7 @@ console.log(a);
 
 ---
 
-## 📘 Default Value
+### 📘Default Value
 * operators are functions example || (OR Operator is a function)
 ```javascript
 undefined || 'hi'       // hi
@@ -1066,7 +1065,7 @@ var openROReportData = apiData || ({} as IOpenROReportData);
 
 ---
 
-## 📘Major Falsy Values
+### 📘Major Falsy Values
 
 1. **false:** The boolean value false itself is falsy.
 
@@ -1095,7 +1094,7 @@ userName = null;        // if we want to reset our value we use null always
 
 ---
 
-## 📘Nullish
+### 📘Nullish
 
 * Only check **null** or **undefined** value
 * Not include **0 (zero)** or **"" (empty string)**
@@ -1111,7 +1110,7 @@ console.log(test ?? 'Hello');   // 0
 ---
 
 
-## 📘 Objects and Dot
+### 📘Objects and Dot
 
 ![Image](./images/object-dot.png)
 
@@ -1138,101 +1137,107 @@ console.log(person.address.street);
 console.log(person['address']['street']);
 ```
 ⚠️ **Note** :
+
 1. Major difference between **Dot** and **Brackets** by using *brackets* we can *access or create* any dynamic value for example
 
-```js
-const NameKey = "Name";
-var obj = {
-    firstName : "John",
-    lastName : "Doe"
-}
+    ```js
+    const NameKey = "Name";
+    var obj = {
+        firstName : "John",
+        lastName : "Doe"
+    }
 
-obj['first' + NameKey];
-obj['last' + NameKey];
-```
+    obj['first' + NameKey];
+    obj['last' + NameKey];
+    ```
+
 2. If we try to **access** value which does not exist in Object then we will get **undefined**
+
 ---
-## 📘Objects and Object Literals and Advance features
+
+### 📘Objects and Object Literals and Advance features
 
 * **Object Literals**
 
-```javascript
-// comparing current example with above example the object literals are easy to write and easy to read
-var person = {
-    firstName : 'Tony',
-    lastName : 'Doe',
-    address : {
-        street : "New York Street 3 51-d"
+    ```javascript
+    // comparing current example with above example the object literals are easy to write and easy to read
+    var person = {
+        firstName : 'Tony',
+        lastName : 'Doe',
+        address : {
+            street : "New York Street 3 51-d"
+        }
+    };
+    console.log(person);
+
+
+    function greet(person) {
+        console.log('Hi' + person.firstName);
     }
-};
-console.log(person);
 
+    var Tony = {
+        firstName : 'Tony',
+        lastName : 'Doe',
+        address : {
+            street : "New York Street 3 51-d"
+        }
+    };
 
-function greet(person) {
-    console.log('Hi' + person.firstName);
-}
+    greet(Tony);
 
-var Tony = {
-    firstName : 'Tony',
-    lastName : 'Doe',
-    address : {
-        street : "New York Street 3 51-d"
-    }
-};
-
-greet(Tony);
-
-// creating object on fly
-greet({
-    firstName : 'Mary',
-    lastName : 'Doe'
-});
-
-```
+    // creating object on fly
+    greet({
+        firstName : 'Mary',
+        lastName : 'Doe'
+    });
+    ```
 * **Properties short-cut**
-```js
-const firstName = "John";
-let obj = {
-    firstName
-}
-console.log(obj);
-```
-* **Function Short-cut**
-```js
-const firstName = "John";
-let obj = {
-    firstName,
-    getFullName() {     // writing short name
-        return this.firstName
-    },
-    "getFName"() {
-        return this.firstName
-    },
-    "get Full name"() {
-        return this.firstName
+    
+    ```js
+    const firstName = "John";
+    let obj = {
+        firstName
     }
-}
-console.log(obj.getFullName());
-console.log(obj["getFName"]());
-console.log(obj["get Full name"]());
-```
+    console.log(obj);
+    ```
+
+* **Function Short-cut**
+ 
+    ```js
+    const firstName = "John";
+    let obj = {
+        firstName,
+        getFullName() {     // writing short name
+            return this.firstName
+        },
+        "getFName"() {
+            return this.firstName
+        },
+        "get Full name"() {
+            return this.firstName
+        }
+    }
+    console.log(obj.getFullName());
+    console.log(obj["getFName"]());
+    console.log(obj["get Full name"]());
+    ```
 * **Computed Properties**
 
-```js
-const weeks = [1, 2, 3, 4, 5, 6, 7];
-let obj = {
-    [weeks[0]]: "Monday",
-    [weeks[1]]: "Tuesday",
-    [weeks[2]]: "Wednesday",
-    [weeks[3]]: "Thursday",
-    [weeks[4]]: "Friday",
-    [weeks[5]]: "Saturday",
-    [weeks[6]]: "Sunday"
-}
-console.log(obj);   // {1: 'Monday', 2: 'Tuesday', 3: 'Wednesday', 4: 'Thursday', 5: 'Friday', 6: 'Saturday', 7: 'Sunday'}
-```
+    ```js
+    const weeks = [1, 2, 3, 4, 5, 6, 7];
+    let obj = {
+        [weeks[0]]: "Monday",
+        [weeks[1]]: "Tuesday",
+        [weeks[2]]: "Wednesday",
+        [weeks[3]]: "Thursday",
+        [weeks[4]]: "Friday",
+        [weeks[5]]: "Saturday",
+        [weeks[6]]: "Sunday"
+    }
+    console.log(obj);   // {1: 'Monday', 2: 'Tuesday', 3: 'Wednesday', 4: 'Thursday', 5: 'Friday', 6: 'Saturday', 7: 'Sunday'}
+    ```
 ---
-## 📘 Chaining and Optional-Chaining
+### 📘Chaining and Optional-Chaining
 
 To access the properties we have to use **(.) Dot operator** for nested or deeply nested.
 
@@ -1251,66 +1256,74 @@ console.log(obj.address.streetNo);  // 3
 // Optional Chaining
 console.log(obj.address?.near);     // undefined
 ```
-⚠️ **Note :** in *Optional Chaining* instead of *reference error* it will return *undefined*, if the value does not exist.
+
+**⚠️Note :** in *Optional Chaining* instead of *reference error* it will return *undefined*, if the value does not exist.
 
 
 ---
 
-## 📘Namespace :
-* **Namespace :** a container for variables and functions. Typically to keep variables functions with the same name separate.
+### 📘Namespace 
 
-```javascript
-var greet = 'Hello!';
-var greet = 'Ho!';
-console.log(greet);
+**Namespace :** a container for variables and functions. Typically to keep variables functions with the same name separate.
 
-// name spacing helping to resolve the issue of namespace collisions (means same name variables)
-var english = {};
-var spanish = {};
+    ```javascript
+    var greet = 'Hello!';
+    var greet = 'Ho!';
+    console.log(greet);
 
-english.greet = 'Hello!';
-spanish.greet = 'Ho!';
+    // name spacing helping to resolve the issue of namespace collisions (means same name variables)
+    var english = {};
+    var spanish = {};
 
-console.log(english.greet);
-console.log(spanish.greet);
-```
+    english.greet = 'Hello!';
+    spanish.greet = 'Ho!';
 
-## 📘Useful In-built Objects Properties
+    console.log(english.greet);
+    console.log(spanish.greet);
+    ```
 
-```js
-let obj = {
-    firstName: "Deep",
-    lastName: "Singh"
-}
-```
-**1. Object.keys() :** it will only returns **keys of object as array**
+### 📘Useful In-built Objects Properties
 
-```js
-console.log(Object.keys(obj));
-//Output :  ['firstName', 'lastName']
-```
+Example 
+
+    ```js
+    let obj = {
+        firstName: "Deep",
+        lastName: "Singh"
+    }
+    ```
+1. **Object.keys() :** it will only returns **keys of object as array**
+
+    ```js
+    console.log(Object.keys(obj));
+    //Output :  ['firstName', 'lastName']
+    ```
 
 
-**2. Object.values() :** it will only returns **values of Object as array**
-```js
-console.log(Object.values(obj));
-//Output : ['Deep', 'Singh']
-```
+2. **Object.values() :** it will only returns **values of Object as array**
+   
+    ```js
+    console.log(Object.values(obj));
+    //Output : ['Deep', 'Singh']
+    ```
 
-**3. Object.entries() :** Array which include **key-value as individual arrays**
-```js
-console.log(Object.entries(obj));
-// [Array(2), Array(2)]
-// 0 : ['firstName', 'Deep']
-// 1 : ['lastName', 'Singh']
-```
-**4. Object.fromEntries()** : it will create object from nested array
-```js
-const entries = [['name', 'John'], ['age', 30], ['city', 'New York']];
-const obj = Object.fromEntries(entries);
-console.log(obj);
-// Output: { name: 'John', age: 30, city: 'New York' }
-```
+3. **Object.entries() :** Array which include **key-value as individual arrays**
+    
+    ```js
+    console.log(Object.entries(obj));
+    // [Array(2), Array(2)]
+    // 0 : ['firstName', 'Deep']
+    // 1 : ['lastName', 'Singh']
+    ```
+4. **Object.fromEntries()** : it will create object from nested array
+
+    ```js
+    const entries = [['name', 'John'], ['age', 30], ['city', 'New York']];
+    const obj = Object.fromEntries(entries);
+    console.log(obj);
+    // Output: { name: 'John', age: 30, city: 'New York' }
+    ```
+
 **⚠️ Conceptual Example :** Destructuring using for-of loop
 
 ```js
@@ -1326,34 +1339,36 @@ for (const [firstName, lastName] of Object.entries(obj)) {
 
 ---
 
-## 📘JSON and Object Literals
+### 📘JSON and Object Literals
 
 * **JSON :** javascript object notation.
 
-```javascript
+    ```javascript
 
-var objectLiteral = {
-    firstName : 'Mary',
-    isAProgrammer : true
-}
+    var objectLiteral = {
+        firstName : 'Mary',
+        isAProgrammer : true
+    }
 
-console.log(objectLiteral)
+    console.log(objectLiteral)
 
-// json format
-{
-    "firstName" : "Mary",
-    "isAProgrammer" : true
-}
-```
+    // json format
+    {
+        "firstName" : "Mary",
+        "isAProgrammer" : true
+    }
+    ```
+
 1. **JSON.stringify(ObjectLiteral) :** it will convert JS Object into JSON String.
-2. **JSON.parse(string) :** it will convert JSON string into JS Object.
 
+2. **JSON.parse(string) :** it will convert JSON string into JS Object.
 ---
 
 
-## 📘Pass By Value Vs By Reference
+### 📘Pass By Value Vs By Reference
 
 * **Mutate :** To change something.
+
 * **Immutable :** means it can't be changed.
 
 ![image](./images/pass-by-value.png)
@@ -1373,52 +1388,49 @@ console.log(b) // 10
 
 *  __Pass by Reference__ : Objects in javascript are stored in memory and are passed by reference. This means that we don't copy the value are did with primitive types. All **Objects types** are *Pass by reference* examples. array, functions and objects
 
-![image](./images/pass-by-refrence.png)
+    ![image](./images/pass-by-refrence.png)
 
-```javascript
-let obj1 = { name: "Deepu", password: "123" };
-let obj2 = obj1;
-obj2.password = '456';
+    ```javascript
+    let obj1 = { name: "Deepu", password: "123" };
+    let obj2 = obj1;
+    obj2.password = '456';
 
-// { name: "Deepu", password: "456" };
-console.log(obj1);
+    // { name: "Deepu", password: "456" };
+    console.log(obj1);
 
-// { name: "Deepu", password: "456" };
-console.log(obj2);
-```
+    // { name: "Deepu", password: "456" };
+    console.log(obj2);
+    ```
 
 * **By Reference (even as Parameter)**
 
+    ```javascript
+    function changeGreeting(obj) {
+        obj.name = 'dp'; // mutate
+    }
 
+    changeGreeting(obj2);
 
-```javascript
-function changeGreeting(obj) {
-    obj.name = 'dp'; // mutate
-}
+    // { name: "dp", password: "456" };
+    console.log(obj1);
 
-changeGreeting(obj2);
+    // { name: "dp", password: "456" };
+    console.log(obj2);
 
-// { name: "dp", password: "456" };
-console.log(obj1);
+    // equals operators sets up a new memory space (new Address)
+    obj1 = {name : 'Noni', password : '123'};
 
-// { name: "dp", password: "456" };
-console.log(obj2);
+    console.log(obj1)
+    // {name : 'Noni', password : '123'}
 
-// equals operators sets up a new memory space (new Address)
-obj1 = {name : 'Noni', password : '123'};
+    console.log(obj2)
+    // { name: "dp", password: "456" };
+    ```
 
-console.log(obj1)
-// {name : 'Noni', password : '123'}
-
-console.log(obj2)
-// { name: "dp", password: "456" };
-```
-
-![Image](./images/pass-by-refrence-2.png)
+    ![Image](./images/pass-by-refrence-2.png)
 
 ---
-
-## 📘Cloning of Object
+### 📘Cloning of Object
 
 1. **Shallow Cloning :** Copy all properties up to only for *first level*, it is done by **Object.assign({}, alreadyDeclaredObject)**
 
@@ -1457,10 +1469,9 @@ console.log(obj2)
     console.log('obj1', obj1);  // {firstName: 'Deepinder', lastName: 'Singh', age: 29}
     console.log('obj2', obj2)   // {firstName: 'Deepu', lastName: 'Bhasin', age: 29}
     ```
-
 ---
 
-## 📘Functions are Object
+### 📘Functions are Object
 
 **First Class Functions :** Everything you can do with other types you can do with functions. Assign them to variables, pass them around, create them on the fly.
 
