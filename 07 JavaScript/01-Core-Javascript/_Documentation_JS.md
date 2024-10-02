@@ -1284,14 +1284,13 @@ console.log(obj.address?.near);     // undefined
 
 ### 📘Useful In-built Objects Properties
 
-Example 
-
-    ```js
-    let obj = {
-        firstName: "Deep",
-        lastName: "Singh"
-    }
-    ```
+```js
+// Example 
+let obj = {
+    firstName: "Deep",
+    lastName: "Singh"
+}
+```
 1. **Object.keys() :** it will only returns **keys of object as array**
 
     ```js
@@ -1374,8 +1373,6 @@ for (const [firstName, lastName] of Object.entries(obj)) {
 ![image](./images/pass-by-value.png)
 
 ![Image](./images/pass-by-refrence-1.png)
-
-
 
 ```javascript
 var a = 10;
@@ -1505,7 +1502,7 @@ console.log(greet.__proto__ == Function.prototype);
 
 ---
 
-## 📘Function Statements and Function Expressions
+### 📘Function Statements and Function Expressions
 * **Expression :** A unit of code that results in a value. It does n't have to save to a variable (an expression is something that produces a value)
 
     ```javascript
@@ -1604,15 +1601,18 @@ transform('Javascript is the best !', oneWord); // here oneWord is a callback fu
 ```
 
 ---
-## 📘 arguments and Spread
+### 📘arguments and Spread
 * **Arguments :** The parameters you pass to a function. javascript gives you keyword of the same name which contains them all. These are useful when you want to **send more parameter then defined**.
-* 'arguments' : is something special that the javascript engine sets up for you.
+
+* arguments : is something special that the javascript engine sets up for you.
+
 * **Arrow Functions** do not have this **arguments** keyword. means it will not work in arrow functions
+
 ![Image](./images/arguments-and-spread.png)
 
 ```javascript
 
-function greet(firstname, lastname, language, ...other){
+function greet(firstName, lastName, language, ...other){
 
     language = language || 'en';
 
@@ -1622,8 +1622,8 @@ function greet(firstname, lastname, language, ...other){
         return;
     }
 
-    console.log(firstname);
-    console.log(lastname);
+    console.log(firstName);
+    console.log(lastName);
     console.log(language);
     console.log(arguments);    //["john", "Doe", "en"]
     console.log('arg 0 ' + arguments[0]);      // john
@@ -1642,7 +1642,7 @@ greet('john','Doe', 'es', 'patiala', 'punjab');  // john , Doe, es
 ---
 
 
-## 📘Functions and Default Parameters
+### 📘Functions and Default Parameters
 
 ```js
 const bookings = [];
@@ -1661,74 +1661,75 @@ createBooking('LH1', undefined, 2);
 
 * Some More Examples on **Default Parameters**
 
-```javascript
-function greet(fname = 'Tony', lname = 'Alicea') {
-    return `Hi ${fname} ${lname}`;
-}
+    ```javascript
+    function greet(fName = 'Tony', lName = 'Alicea') {
+        return `Hi ${fName} ${lName}`;
+    }
 
-let greeting1 = greet();
-console.log(greeting1); //Hi Tony Alicea
+    let greeting1 = greet();
+    console.log(greeting1); //Hi Tony Alicea
 
-let greeting2 = greet('Anthony');
-console.log(greeting2); // Hi Anthony Alicea
+    let greeting2 = greet('Anthony');
+    console.log(greeting2); // Hi Anthony Alicea
 
-// Good Example
-let greeting3 = greet(null, 'p. Alicea');
-console.log(greeting3); // Hi null p.Alicea
+    // Good Example
+    let greeting3 = greet(null, 'p. Alicea');
+    console.log(greeting3); // Hi null p.Alicea
 
-// Good Example
-let greeting4 = greet(undefined, 'P. Alicea');
-console.log(greeting4); // Hi Tony P.Alicea
-```
+    // Good Example
+    let greeting4 = greet(undefined, 'P. Alicea');
+    console.log(greeting4); // Hi Tony P.Alicea
+    ```
 
-```javascript
-function greet(fname = 'Tony', lname = 'Alicea', phrase = () => {return `Hi ${fname} ${lname}`}) {
-    return phrase();
-}
+    ```javascript
+    function greet(fName = 'Tony', lName = 'Alicea', phrase = () => {return `Hi ${fName} ${lName}`}) {
+        return phrase();
+    }
 
-let greeting1 = greet();
-console.log(greeting1);     // Hi Tony Alicea
-
-
-// Good example
-function greet(fname = 'Tony', phrase = () => {return `Hi ${fname} ${lname}`}, lname = 'Alicea') {
-    return phrase();
-}
-
-let greeting1 = greet();
-console.log(greeting1);     // Hi Tony Alicea
-```
+    let greeting1 = greet();
+    console.log(greeting1);     // Hi Tony Alicea
 
 
+    // Good example
+    function greet(fName = 'Tony', phrase = () => {return `Hi ${fName} ${lName}`}, lName = 'Alicea') {
+        return phrase();
+    }
+
+    let greeting1 = greet();
+    console.log(greeting1);     // Hi Tony Alicea
+    ```
 ---
-## 📘Framework Aside
+
+### 📘Framework Aside
+
 * *Dangerous Aside :* Automatic Semicolon Insertion, means its not compulsory to add Semicolon at the end of line because javascript do automatically.
+
 * It only occurs in the case of **returns**
 
-![Image](./images/syntax-parser.png)
+    ![Image](./images/syntax-parser.png)
 
-```javascript
-// Problem
-function getPerson() {
-    return
-    {
-        firstname : 'Tony'
+    ```javascript
+    // Problem
+    function getPerson() {
+        return
+        {
+            firstName : 'Tony'
+        }
     }
-}
 
-// because of automatic semicolon
-console.log(getPerson());       // undefined
+    // because of automatic semicolon
+    console.log(getPerson());       // undefined
 
 
-// Solution
-function getPerson() {
-    return {
-        firstname : 'Tony'
+    // Solution
+    function getPerson() {
+        return {
+            firstName : 'Tony'
+        }
     }
-}
 
-console.log(getPerson());       // {firstname : 'Tony'}
-```
+    console.log(getPerson());       // {firstName : 'Tony'}
+    ```
 * **WhiteSpace :** invisible character that create literal 'space' in your written code. Carriage returns, tabs, spaces.
 
 * javascript remove automatically white space if we provided.
@@ -1736,166 +1737,171 @@ console.log(getPerson());       // {firstname : 'Tony'}
 
 ```javascript
 var
-    // firstname
-    firstname,
+    // firstName
+    firstName,
 
-    //lastname
-    lastname,
+    //lastName
+    lastName,
 
     // language
     language
 
 var person = {
-    // firstname
-    firstname : 'john',
+    // firstName
+    firstName : 'john',
 
-    // lastname
-    lastname : 'Doe'
+    // lastName
+    lastName : 'Doe'
 }
 ```
 ---
-## 📘Arrow Functions
+### 📘Arrow Functions
 
 * F(x) = x<sup>2</sup> (is Mathematic Expression)
+
 * F:x |-> x<sup>2 </sup> (isn Mathematic Expression)
+
 * by default **arrow functions** are *anonymous*
-```javascript
-// Normal Syntax
-let add = (a, b) => {
-    return a + b;
-}
 
-// Arrow Function Expression
-(()=>{console.log('Hello World')}());
+    ```javascript
+    // Normal Syntax
+    let add = (a, b) => {
+        return a + b;
+    }
 
-// Arrow Function on Fly
-function logThis(fn) {
-    console.log(fn(1,2));
-}
+    // Arrow Function Expression
+    (()=>{console.log('Hello World')}());
 
-logThis((a, b) => { return a + b});
-```
+    // Arrow Function on Fly
+    function logThis(fn) {
+        console.log(fn(1,2));
+    }
 
----
+    logThis((a, b) => { return a + b});
+    ```
+
 **Arrow with 'this'**
 
-* **Arrow Function** doen't have **this** keyword byDefault as other function.
+* **Arrow Function** doesn't have **this** keyword byDefault as other function.
 
-![Image](./images/arrow-this.jpeg)
+    ![Image](./images/arrow-this.jpeg)
 
-```javascript
-let me = {
-    firstname : 'Tony',
-    greet: function() {
-        console.log(this);
-
-        let logMe = () => {
+    ```javascript
+    let me = {
+        firstname : 'Tony',
+        greet: function() {
             console.log(this);
-        }
-        logMe();
-    }
-}
 
-me.greet();
-```
----
+            let logMe = () => {
+                console.log(this);
+            }
+            logMe();
+        }
+    }
+
+    me.greet();
+    ```
+
 **Returning Value**
 
 * Arrow function has **Implicit (automatically return)** feature
-```javascript
-let add = (a, b) => a + b;
+    
+    ```javascript
+    let add = (a, b) => a + b;
 
-let sqr = x => x * x;
+    let sqr = x => x * x;
 
-// this line will create Object : {firstName: 'Deepinder', lastName: 'Singh'}
-let obj = (()=> ({firstName : "Deepinder", lastName : "Singh"}))();
-```
-**Readability & Limitation**
+    // this line will create Object : {firstName: 'Deepinder', lastName: 'Singh'}
+    let obj = (()=> ({firstName : "Deepinder", lastName : "Singh"}))();
+    ```
+    **Readability & Limitation**
 
-```javascript
-// good for if you are from mathematic background
-let longExpression = x => y => z => z ? y : x;
+    ```javascript
+    // good for if you are from mathematic background
+    let longExpression = x => y => z => z ? y : x;
 
-// 1. Count '=>' , hence 3 functions
-// 2. check parameters
+    // 1. Count '=>' , hence 3 functions
+    // 2. check parameters
 
-// good for if you are not from mathematic background
-let longExpression = function(x) {
-    return function(y) {
-        return function (z) {
-            return z ? y : x;
+    // good for if you are not from mathematic background
+    let longExpression = function(x) {
+        return function(y) {
+            return function (z) {
+                return z ? y : x;
+            }
         }
     }
-}
-let result1 = longExpression('Tony')('Anthony')(true);
-let result2 = longExpression('Tony')('Anthony')(false);
-```
+    let result1 = longExpression('Tony')('Anthony')(true);
+    let result2 = longExpression('Tony')('Anthony')(false);
+    ```
 
-```javascript
-// limitation
-let me = {
-    firstname : 'Tony',
-    greet: function() {
-        console.log(this);
-
-        let logMe = () => {
+    ```javascript
+    // limitation
+    let me = {
+        firstName : 'Tony',
+        greet: function() {
             console.log(this);
-        }
-        logMe();
-    },
-    greet2 : () => {
-        console.log(this.firstname);    // undefined
-    }
-}
 
-me.greet();
-me.greet2();
-```
+            let logMe = () => {
+                console.log(this);
+            }
+            logMe();
+        },
+        greet2 : () => {
+            console.log(this.firstName);    // undefined
+        }
+    }
+
+    me.greet();
+    me.greet2();
+    ```
 ---
 
-## 📘Objects, Functions and This
+### 📘Objects, Functions and This
 The __this__ keyword is actually pretty straightforward to understand __what is does is it refers to whatever object it is directly inside (property) of.__
 
 * On Global Level : __this === window object__
+  
 * On Object Level : __this === current Object__
 
-```javascript
-// globals execution context
-console.log(this);       // window object
+    ```javascript
+    // globals execution context
+    console.log(this);       // window object
 
-// Function A Execution context and getting own this keyword but it pointing to window object (same memory location)
-function a() {
-    console.log(this);   // window object
-    this.newVariable = 'hello';
-}
-a();
-
-// Function B Execution context and getting own this kwyword but it pointing to window object (same memory location)
-var b = function () {
-    console.log(this);   // window object
-}
-
-console.log(newVariable);   // hello
-
-b();
-```
-```javascript
-let obj = {
-    firstName: 'Deepu',
-    lastName: 'Singh',
-    // here this is attached to the current object by javascript engine
-    log: function(){
-        this.name = 'Deepinder',
-        console.log(this);
-    },
-    getFullName: function () {
-        return this.firstName + ' ' + this.lastName;
+    // Function A Execution context and getting own this keyword but it pointing to window object (same memory location)
+    function a() {
+        console.log(this);   // window object
+        this.newVariable = 'hello';
     }
-}
+    a();
 
-obj.firstName // Deepu
-obj.getFullName() // Deepu Bhasin
-```
+    // Function B Execution context and getting own this kwyword but it pointing to window object (same memory location)
+    var b = function () {
+        console.log(this);   // window object
+    }
+
+    console.log(newVariable);   // hello
+
+    b();
+    ```
+    
+    ```javascript
+    let obj = {
+        firstName: 'Deepu',
+        lastName: 'Singh',
+        // here this is attached to the current object by javascript engine
+        log: function(){
+            this.name = 'Deepinder',
+            console.log(this);
+        },
+        getFullName: function () {
+            return this.firstName + ' ' + this.lastName;
+        }
+    }
+
+    obj.firstName // Deepu
+    obj.getFullName() // Deepu Bhasin
+    ```
 
 ![Image](./images/this-key-word.png)
 
@@ -1911,7 +1917,7 @@ let obj = {
         console.log('First Name', this.firstName);
 
         function test() {
-        // here it 'this' will refere to the window object
+        // here it 'this' will refers to the window object
             console.log('First Name', this.firstName);
         }
         test();
@@ -2012,55 +2018,57 @@ obj.add(6).subtract(1).multiply(4).divide(2);
 ```
 
 ---
-## 📘 IIFEs
+### 📘IIFEs
+
 * **Immediately Invoked Function Expressions** - A function that is executed right after it is created.
+
 * This function run once means not get store any where so we cannot call at any instance.
 
-```javascript
+    ```javascript
 
-3;                  // valid
-"Hello World";      // valid
-{
-    name : "Deepu"  // valid
-};
+    3;                  // valid
+    "Hello World";      // valid
+    {
+        name : "Deepu"  // valid
+    };
 
-function(name) {    // invalid
-    return name
-}
+    function(name) {    // invalid
+        return name
+    }
 
-// () is a operator which help to execute expressions like (3+4)
-(3 + 5) * 5;        // valid
+    // () is a operator which help to execute expressions like (3+4)
+    (3 + 5) * 5;        // valid
 
-// we are creating function and running it all the same time
-(function (name){   // valid
-    return name
-}('Deepu'))
+    // we are creating function and running it all the same time
+    (function (name){   // valid
+        return name
+    }('Deepu'))
 
-// you never put statements in expressions
-(if () {})          // invalid
+    // you never put statements in expressions
+    (if () {})          // invalid
 
-// function are special objects, here we are creating function object and function has special property that '() invoking a function' hence called IIFE
-(function doubleNumber(num){
-    return num * 2;
-}(5));  // 10
-
-
-// Function object get called
-var greeting = function(name) {
-    return 'Hello' + name;
-}('Tony');
-
-console.log(greeting)       // Hello Tony
-```
+    // function are special objects, here we are creating function object and function has special property that '() invoking a function' hence called IIFE
+    (function doubleNumber(num){
+        return num * 2;
+    }(5));  // 10
 
 
-```javascript
-// Execution Context
-(function (name){
-    var greeting = 'Hello';
-    console.log(greeting +' '+ name);
-}('john'));
-```
+    // Function object get called
+    var greeting = function(name) {
+        return 'Hello' + name;
+    }('Tony');
+
+    console.log(greeting)       // Hello Tony
+    ```
+
+
+    ```javascript
+    // Execution Context
+    (function (name){
+        var greeting = 'Hello';
+        console.log(greeting +' '+ name);
+    }('john'));
+    ```
 
 ![Image](./images/iife.png)
 
@@ -2092,61 +2100,71 @@ console.log(firstName); // deep
 ```
 
 **⚠️ Note:**
+
 1. In **Node** we use **require("") with module.export {}**
+
 2. In **ES6** it is working is **import and export modules**, where named or default represent as public api and non-named or non-default represent as non-public api fot this understanding **bundler** help browser to understand this ES6 Code
 
 
 ---
 
-## 📘Closure
+### 📘Closure
+
 * **closure** is an inner function that has access to the scope of an enclosing function.
+
 * we don't create closure manually like we create a new array or a new function so a closure simply happens automatically in certain situations, we just need to recognize those situations.
 
 > Closure has access to **variables** in 3 separate Scopes :
+
 1. Variables in its own scope.
+
 2. Variables in the scope of the outer function.
+
 3. Variables in the global scope.
 
 The closure also has access to __parameters__ :
+
 1. Its own Parameters.
+
 2. Parameters of outer function(s).
 
-```javascript
-const globalVariable = 'global var';
+    ```javascript
+    const globalVariable = 'global var';
 
-function outerFunc(param1) {
+    function outerFunc(param1) {
 
-    const variable1 = 'var one';
+        const variable1 = 'var one';
 
-    function innerFunc(param2) {
-        const variable2 = 'var two';
-        console.log('globalVariable: ', globalVariable);
-        console.log('variable1: ', variable1);
-        console.log('variable2: ', variable2);
-        console.log('param1: ', param1);
-        console.log('param2: ', param2);
+        function innerFunc(param2) {
+            const variable2 = 'var two';
+            console.log('globalVariable: ', globalVariable);
+            console.log('variable1: ', variable1);
+            console.log('variable2: ', variable2);
+            console.log('param1: ', param1);
+            console.log('param2: ', param2);
+        }
+
+        innerFunc('param one');
     }
 
-    innerFunc('param one');
-}
+    outerFunc('param two');
+    ```
 
-outerFunc('param two');
-```
-
-```javascript
-function greet(whatToSay){
-    // it return function object which is created on fly
-    return function (name) {
-        console.log(whatToSay + ' ' + name)
+    ```javascript
+    function greet(whatToSay){
+        // it return function object which is created on fly
+        return function (name) {
+            console.log(whatToSay + ' ' + name)
+        }
     }
-}
 
-var sayHi = greet('Hi');
+    var sayHi = greet('Hi');
 
-// then we are invoking a function
-sayHi('Tony');
-```
+    // then we are invoking a function
+    sayHi('Tony');
+    ```
 ![Image](./images/closures-1.png)
+
 ![Image](./images/closures-2.png)
 
 ```javascript
@@ -2203,8 +2221,11 @@ greetEnglish('john', 'Doe');
 greetSpanish('john', 'Doe');
 ```
 ![Image](./images/function-factories-1.png)
+
 ![Image](./images/function-factories-2.png)
+
 ![Image](./images/function-factories-3.png)
+
 ![Image](./images/function-factories-4.png)
 
 ⚠️ **Note :** conceptual Example
@@ -2220,14 +2241,18 @@ const g = function () {
 g();
 f();
 ```
+
 * Below are the best Examples of Closures
 
-1. Memoization/Caching
-2. Call once any function
-3. Getting 3 in for loop
+  1. Memoization/Caching
+
+  2. Call once any function
+
+  3. Getting 3 in for loop
+
 ---
 
-## 📘Closures and Callbacks
+### 📘Closures and Callbacks
 
 * **Callback Function :** A function you give to another function, to be run when the other function is finished. so the function you call (i.e invoke), 'calls back' by calling the function you gave it when it finishes.
 
@@ -2250,8 +2275,10 @@ tellMeWhenDone(function() {
 })
 ```
 ---
-## 📘Currying
+### 📘Currying
+
 * This is technique in which, __function can take multiple parameters and__ instead using __currying , modify it into a function that takes one parameter at a time__
+
 * **Function Currying :** Creating a copy of a function but with some preset parameters. Very useful in mathematical situations.
 
 ```javascript
