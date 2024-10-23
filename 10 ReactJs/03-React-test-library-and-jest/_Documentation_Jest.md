@@ -5,6 +5,24 @@ https://jestjs.io/docs/api
 ```
 ---
 
+### 📘What is Test
+
+```js
+const getFullName = (fname, lname) => {
+  return `${fname} ${lname}`;
+};
+
+const actualFullName = getFullName("John", "Doe");
+const expectedFullName = "John Doe";
+
+if (actualFullName === expectedFullName) {
+  console.log("Test passed");
+} else {
+  console.log("Test failed");
+}
+```
+---
+
 ### 📘Testing Libraries
 
 ![Images](./images/1-various-pacakages.png)
@@ -281,7 +299,7 @@ describe("Check UI", () => {
 
 ---
 
-### Jest Vs RTL
+### 📘Jest Vs RTL
 
 __JEST__ :
 * Jest is javascript testing framework
@@ -300,10 +318,13 @@ __RTL__ :
 test(name, fn, timeout);
 ```
 1. __name__ : This first argument is the test name used to identify the test.
+
 2. __fn__ : The second argument is a function that contains the expectations to test.
+
 3. __timeout__ : The Third argument is timeout which is an optional argument for specifying how long to wait before aborting the test. The default timeout value is 5 second.
 
 📖 Example
+
 ```javascript
 // Greet.tsx
 type GreetProps  = {
@@ -336,47 +357,72 @@ test('Greet Render Correctly',()=> {
 ```
 npm run test
 ```
-⚠️Note :  __test__ and __expect__ we are getting _globally_ from the _jest library_
+**⚠️Note :**
+1. __test__ and __expect__ we are getting _globally_ from the _jest library_
 
+2. render() method generate virtual DOM
+
+---
 
 ### 📘Test Drive Development
 ![Images](./images/1-tdd-approach.png)
+
 ---
 
 ### 📘Jest Watch Mode
+
 * Watch mode is an option that we can pass to **jest asking** to watch files that have changed since the last commit and execute tests related only to those changed files.
+
 * An Optimization designed to make your tests run fast regardless of how many tests you have.
+
+---
 
 ### 📘Code Coverage
 A metric that can help you understand how much of your software code is tested.
 
 * __Statement Coverage__ : how many of the statements in the software code have been executed.
+
 * __Branches coverage__ : how many of the branches of the control strcutues(if statement for instance) have been executed.
+
 * __Function Coverage__ : how many of the function defined have been called and finally.
+
 * __Line Coverage__ : how many of lines of source code have been tested.
 
+Command
+
 ```javascript
-// add this line into json-packege.json
+// add this line into json-package.json
 "coverage" : "npm run test --coverage"
 ```
 1. _npm run test --coverage_ : will return data when files get changed.
+
 2. _npm run test --coverage --watchAll_ : will return all test with meaningful report.
+
 3. _npm run test --coverage --watchAll --collectCoverageFrom='src/components/**/*.{ts,tsx}'_ : it will cover all the files which are located in __src/component/__ folders with __ts__ or __tsx__ extensions
+
 4. _npm run test --coverage --watchAll --collectCoverageFrom='!src/components/**/*.{types, stories,constants,test,spec}.{ts,tsx}'_ : this is use for ignoring all other files which are located in src folder using __!__ (not operator)
 
 ![Image](./images/coverager.png)
+
 ---
 
 ### 📘Extensions
 1. For Files
+
    * App.test.js
+
    * App.test.tsx
+
    * App.test.jsx
+
    * App.spec.js
+
    * App.spec.tsx
+
    * App.spec.jsx
 
 2. For Folder
+
    * \_\_tests\_\_ : You can put any file name in this folder it will run that file automatically
 
 ---
@@ -418,15 +464,19 @@ describe('Greet', ()=> {
 
 ---
 
-
 ### 📘Assertions & All Expect functions
+
 * When writing tests, we often need to check that values meet certain conditions.
+
 * its use **expect** method
 
 > expect(value)
 
+
 * The argument should be the value that your code produces
+
 * Typically, you will use expect along with a matcher function to assert something about value
+
 * A matcher can optionally accept an argument which is the correct expected value
 
 > Table 3.1 - For Positive Assertion Cases
@@ -574,13 +624,13 @@ test("Driven Approach", () => {
 
 > Table of all getByQueries
 
-| Sr No | Type                    | Description                                                                        |
-| ----- | ----------------------- | ---------------------------------------------------------------------------------- |
+| Sr No | Type                    | Description                                                                        | Information      |
+| ----- | ----------------------- | ---------------------------------------------------------------------------------- | ---------------- |
 | 1     | getByRole               | use for Semantics tags                                                             |
-| 2     | getAllByRole            | use for Semantics tags                                                             |  |  |
-| 3     | getByPlaceholderText    | use for elements which have placeholder attribute                                  |  |  |
-| 4     | getAllByPlaceholderText | use for elements which have placeholder attribute                                  |  |
-| 5     | getByText               | use for div, p,headings, buttons                                                   |
+| 2     | getAllByRole            | use for Semantics tags                                                             |                  |  |
+| 3     | getByPlaceholderText    | use for elements which have placeholder attribute                                  |                  |  |
+| 4     | getAllByPlaceholderText | use for elements which have placeholder attribute                                  |                  |
+| 5     | getByText               | use for div, p,headings, buttons                                                   | Use to find text |
 | 6     | getAllByPlaceHolder     | use for div, p,headings, buttons                                                   |
 | 7     | getByTestId             | use for attach data-testId attribute to any element                                |
 | 8     | getAllByTestId          | use for attach data-testId attribute to any element                                |
