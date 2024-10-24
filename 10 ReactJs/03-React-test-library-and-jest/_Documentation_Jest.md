@@ -303,12 +303,17 @@ describe("Check UI", () => {
 
 __JEST__ :
 * Jest is javascript testing framework
+
 * Jest is a test runner that find tests, runs the tests, determines whether the tests passed or failed and reports it back in a human readable manner.
 
 __RTL__ :
+
 * javascript testing utility that provides virtual DOM for testing React Component.
+
 * Testing library is infect a family packages which helps test UI components
+
 * The core library is called DOM testing library and RTL is simply a wrapper around this core library to test React applications in an easier way.
+
 ---
 
 ### 📘Anatomy of a Test
@@ -506,18 +511,22 @@ describe('Greet', ()=> {
 ### 📘What to test / What not to test
 1. Should
    1. Test Component renders
+
    2. Test component renders with props
+
    3. Test component renders in different states
+
    4. Test Component reacts to events
 
 2. Not
+
    1. Implementation details (login)
+
    2. Third party code
+
    3. Code that is not important from a user point of view
 
 ---
-
-
 
 ### 📘Extend expected (customize our own code)
 
@@ -572,26 +581,43 @@ test("Driven Approach", () => {
 ---
 
 ### 📘RTL (React Testing Library)
+
 * This is test library which is use to find UI Elements on the page like button, input, heading, any thing etc.
 
 * Steps in testing UI
-  1. Render Component
-  2. Find element and action
-  3. Assertions
+
+  1. Render Component.
+
+  2. Find element rendered by the component.
+
+  3. Assert against the element found in step 2 which will pass or fail the test.
+
+
+To render the component, we use the render method from RTL
+
+For assertion, we use expect passing in a value and combine it with a matcher function from jest or jest-dom.
+
+Queries are the methods that Testing library provides to find elements on the page.
 
 * Type of RTL Queries
 
   1. Find Single elements
-     1. getBy : **if not found return error**
+
+     1. getBy : Throw a descriptive error if no elements match or if more than one match is found.
+
      2. queryBy : **return null if no elements match**
+
      3. findBy: **return a Promise which resolves when an element is found**
 
   2. Find Multiple elements
+
      1. getAllBy :
+
      2. queryAllBy
+
      3. findAllBy
 
-📚 **Note :  The suffix can be one of Role, LabelText, PlaceHolderText, Text, DisplayValue, AltText, Title and finally TestId**
+**⚠️Note :**  The suffix can be one of Role, LabelText, PlaceHolderText, Text, DisplayValue, AltText, Title and finally TestId.
 
 
 ---
@@ -614,12 +640,19 @@ test("Driven Approach", () => {
 
 > 8 Different query methods & Priority Order for Queries
 1. getByRole
+
 2. getByLabelText
+
 3. getByPlaceholderText
+
 4. getByText
+
 5. getByDisplayValue
+
 6. getByAltText
+
 7. getByTitle
+
 8. getByTestId (because we are modifying the html Code)
 
 > Table of all getByQueries
@@ -651,42 +684,50 @@ test("Driven Approach", () => {
 
 1. **getByRole**
 
+
 * Always give high priority than other **getBy...**
+
 * **getByRole** queries for elements with the given role.
+
 * **Role** refers to the **ARIA (Accessible Rich Internet Applications)** role which provides **semantic meaning** to content to ensure people using assistive technologies are able to use them.
 
 
 * By default, **many semantics elements in HTML have a role**
 
-  | Sr  | Type              | Role                        |
-  | --- | ----------------- | --------------------------- |
-  | 1   | input,type="text" | screen.getbyRole('textbox') |
-  | 2   | Button            | button role                 |
-  | 3   | anchor            | link role                   |
-  | 4   | h1 to h6          | Heading role                |
-  | 5   | checkbox          | checkbox role               |
-  | 6   | Radio buttons     | radio role                  |
-  | 7   | ul                | list                        |
-  | 7   | li                | listitem                    |
-  | 8   | table thead       | rowgroup                    |
-  | 9   | table tbody       | rowgroup                    |
-  | 10  | table td          | cell                        |
-  | 11  | table tr          | row                         |
-  | 10  | table th          | columnheader                |
+* Table with their various role
+
+  | Sr no. | Type              | Role                        |
+  | ------ | ----------------- | --------------------------- |
+  | 1      | input,type="text" | screen.getbyRole('textbox') |
+  | 2      | Button            | button role                 |
+  | 3      | anchor            | link role                   |
+  | 4      | h1 to h6          | Heading role                |
+  | 5      | checkbox          | checkbox role               |
+  | 6      | Radio buttons     | radio role                  |
+  | 7      | ul                | list                        |
+  | 7      | li                | listitem                    |
+  | 8      | table thead       | rowgroup                    |
+  | 9      | table tbody       | rowgroup                    |
+  | 10     | table td          | cell                        |
+  | 11     | table tr          | row                         |
+  | 10     | table th          | columnheader                |
 
 
 * if you can want to make **custom-role**
 
   ```html
-  <div role="hello-world-text"> Hello Worl </div>
+  <div role="hello-world-text"> Hello World </div>
   ```
 
 
 > Various options for getRole
 
 1. **name** : the accessible name is for simple cases equal to
+
    1. label for a form element
+
    2. text content of a button
+
    3. the value of the aria-label attribute
 
 ```js
