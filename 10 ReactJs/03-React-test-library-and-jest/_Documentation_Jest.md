@@ -630,7 +630,7 @@ Queries are the methods that Testing library provides to find elements on the pa
 
 ### 📘getByRole & getAllByRole
 
-1. **getByRole**
+**1. getByRole**
 
 
 * Always give high priority than other **getBy...**
@@ -672,7 +672,7 @@ Queries are the methods that Testing library provides to find elements on the pa
 
 > Various options for getRole
 
-1. **name** : the accessible name is for simple cases equal to
+1. name : the accessible name is for simple cases equal to
 
    1. label for a form element
 
@@ -680,72 +680,98 @@ Queries are the methods that Testing library provides to find elements on the pa
 
    3. the value of the aria-label attribute
 
-```js
-// 1. Label & 2. button Example
-function App() {
-  return (
-    <div>
-      <form>
-        <label htmlFor="firstName">First Name</label>
-        <input type="text" name="firstName" id="firstName" />
-        <label htmlFor="lastName">Last Name</label>
-        <input type="text" name="lastName" id="lastName" />
-        <button type="button">Submit</button>
-      </form>
-    </div>
-  );
-}
+2. level
 
-export default App;
+3. hidden
 
-// test
-import { render, screen } from "@testing-library/react";
-import App from "./App";
-test("Testing getByRole with name option", () => {
-  render(<App />);
-  const firstNameInput = screen.getByRole("textbox", { name: /First Name/i });
-  const lastNameInput = screen.getByRole("textbox", { name: /Last Name/i });
-  const submitBtn = screen.getByRole("button", { name: "Submit" });
+4. selected
 
-  expect(firstNameInput).toBeInTheDocument();
-  expect(lastNameInput).toBeInTheDocument();
-  expect(submitBtn).toBeInTheDocument();
-});
+5. checked
+
+6. pressed
 
 
-// 3. Aria-Label Example
-// this is use when we don't have any label for button etc
-import React from "react";
-import log from "./logo.svg";
+* Name and Level Option Example
 
-function App() {
-  return (
-    <div>
-      <button aria-label="sign-up">
-        <img src="log" alt="" />
-      </button>
-      <button aria-label="sign-out">
-        <img src="log" alt="" />
-      </button>
-    </div>
-  );
-}
-export default App;
+  ```js
+  // Label + button Example
+  function App() {
+    return (
+      <div>
+        <form>
+          <h1>Create React App Sample</h1>
+          <h2>rtl testing library</h2>
+          <label htmlFor="firstName">First Name</label>
+          <input type="text" name="firstName" id="firstName" />
+          <label htmlFor="lastName">Last Name</label>
+          <input type="text" name="lastName" id="lastName" />
+          <button type="button">Submit</button>
+        </form>
+      </div>
+    );
+  }
+
+  export default App;
 
 
-// test
-import { render, screen } from "@testing-library/react";
-import App from "./App";
+  // test
+  import { render, screen } from "@testing-library/react";
+  import App from "./App";
+  test("Testing getByRole with name option", () => {
+    render(<App />);
+    const firstNameInput = screen.getByRole("textbox", { name: /First Name/i });
+    const lastNameInput = screen.getByRole("textbox", { name: /Last Name/i });
+    const submitBtn = screen.getByRole("button", { name: "Submit" });
+    const heading = screen.getByRole("heading", {
+      name: "Create React App Sample",
+    });
+    const heading2 = screen.getByRole("heading", {
+      level: 2, // use for h2
+    });
 
-test("Driven Approach", () => {
-  render(<App />);
-  const signUpBtn = screen.getByRole("button", { name: /sign-up/i });
-  const signOutBtn = screen.getByRole("button", { name: /sign-out/i });
-  expect(signUpBtn).toBeInTheDocument();
-  expect(signOutBtn).toBeInTheDocument();
-});
-```
-2. **getAllByRoles**
+    expect(firstNameInput).toBeInTheDocument();
+    expect(lastNameInput).toBeInTheDocument();
+    expect(submitBtn).toBeInTheDocument();
+    expect(heading).toBeInTheDocument();
+    expect(heading2).toBeInTheDocument();
+  });
+
+
+  // Aria-Label Example
+  // this is use when we don't have any label for button etc
+  import React from "react";
+  import log from "./logo.svg";
+
+  function App() {
+    return (
+      <div>
+        <button aria-label="sign-up">
+          <img src="log" alt="" />
+        </button>
+        <button aria-label="sign-out">
+          <img src="log" alt="" />
+        </button>
+      </div>
+    );
+  }
+  export default App;
+
+
+  // test
+  import { render, screen } from "@testing-library/react";
+  import App from "./App";
+
+  test("Driven Approach", () => {
+    render(<App />);
+    const signUpBtn = screen.getByRole("button", { name: /sign-up/i });
+    const signOutBtn = screen.getByRole("button", { name: /sign-out/i });
+    expect(signUpBtn).toBeInTheDocument();
+    expect(signOutBtn).toBeInTheDocument();
+  });
+  ```
+
+
+**2. getAllByRoles**
 
 ```js
 const userName = ["Deep", "Dp", "Deepinder Singh"];
