@@ -477,7 +477,6 @@ describe('Greet', ()=> {
 
 > expect(value)
 
-
 * The argument should be the value that your code produces
 
 * Typically, you will use expect along with a matcher function to assert something about value
@@ -509,6 +508,7 @@ describe('Greet', ()=> {
 ![Images](./images/4-4-expect.png)
 
 ### 📘What to test / What not to test
+
 1. Should
    1. Test Component renders
 
@@ -525,58 +525,6 @@ describe('Greet', ()=> {
    2. Third party code
 
    3. Code that is not important from a user point of view
-
----
-
-### 📘Extend expected (customize our own code)
-
-```js
-function App() {
-  return (
-    <div>
-      <form action="" aria-label="form">
-        <button>Save </button>
-        <button>Login</button>
-      </form>
-    </div>
-  );
-}
-
-export default App;
-
-
-// test
-import { render, screen, within } from "@testing-library/react";
-import App from "./App";
-
-function toContainRole(
-  container: HTMLElement,
-  role: string,
-  quantity: number = 1,
-) {
-  const elements = within(container).getAllByRole(role);
-
-  if (elements.length === quantity) {
-    return {
-      pass: true,
-    };
-  }
-
-  return {
-    pass: false,
-    message: () =>
-      `Expected to find ${quantity} ${role} elements. Found ${elements.length} instead`,
-  };
-}
-
-expect.extend({ toContainRole });
-
-test("Driven Approach", () => {
-  render(<App />);
-  const form = screen.getByRole("form");
-  expect(form).toContainRole("button", 2);
-});
-```
 
 ---
 
@@ -657,24 +605,24 @@ Queries are the methods that Testing library provides to find elements on the pa
 
 > Table of all getByQueries
 
-| Sr No | Type                    | Description                                                                        | Information      |
-| ----- | ----------------------- | ---------------------------------------------------------------------------------- | ---------------- |
-| 1     | getByRole               | use for Semantics tags                                                             |
-| 2     | getAllByRole            | use for Semantics tags                                                             |                  |  |
-| 3     | getByPlaceholderText    | use for elements which have placeholder attribute                                  |                  |  |
-| 4     | getAllByPlaceholderText | use for elements which have placeholder attribute                                  |                  |
-| 5     | getByText               | use for div, p,headings, buttons                                                   | Use to find text |
-| 6     | getAllByPlaceHolder     | use for div, p,headings, buttons                                                   |
-| 7     | getByTestId             | use for attach data-testId attribute to any element                                |
-| 8     | getAllByTestId          | use for attach data-testId attribute to any element                                |
-| 9     | getByDisplayValue       | returns the input, textarea, or select element that has the matching display value |
-| 10    | getAllByDisplayValue    | returns the input, textarea, or select element that has the matching display value |
-| 11    | getByTitle              | use for title attribute                                                            |
-| 12    | getAllByTitle           | use for title attribute                                                            |
-| 13    | getByAltText            | use for image alt attribute                                                        |
-| 14    | getAllByAltText         | use for image alt attribute                                                        |
-| 15    | getByLabelText          | use for label of form elements                                                     |
-| 16    | getAllByLabelText       | use for label of form elements                                                     |
+| Sr No | Type                    | Description                                                                        | Information             |
+| ----- | ----------------------- | ---------------------------------------------------------------------------------- | ----------------------- |
+| 1     | getByRole               | use for Semantics tags                                                             | }                       |
+| 2     | getAllByRole            | use for Semantics tags                                                             |                         |
+| 3     | getByPlaceholderText    | use for elements which have placeholder attribute                                  |                         |
+| 4     | getAllByPlaceholderText | use for elements which have placeholder attribute                                  |                         |
+| 5     | getByText               | use for div, p,headings, buttons                                                   | Use to find text        |
+| 6     | getAllByPlaceHolder     | use for div, p,headings, buttons                                                   | use to find placeholder |
+| 7     | getByTestId             | use for attach data-testId attribute to any element                                |                         |
+| 8     | getAllByTestId          | use for attach data-testId attribute to any element                                |                         |
+| 9     | getByDisplayValue       | returns the input, textarea, or select element that has the matching display value |                         |
+| 10    | getAllByDisplayValue    | returns the input, textarea, or select element that has the matching display value |                         |
+| 11    | getByTitle              | use for title attribute                                                            |                         |
+| 12    | getAllByTitle           | use for title attribute                                                            |                         |
+| 13    | getByAltText            | use for image alt attribute                                                        |                         |
+| 14    | getAllByAltText         | use for image alt attribute                                                        |                         |
+| 15    | getByLabelText          | use for label of form elements                                                     |                         |
+| 16    | getAllByLabelText       | use for label of form elements                                                     |                         |
 
 
 
@@ -699,21 +647,23 @@ Queries are the methods that Testing library provides to find elements on the pa
   | Sr no. | Type              | Role                        |
   | ------ | ----------------- | --------------------------- |
   | 1      | input,type="text" | screen.getbyRole('textbox') |
-  | 2      | Button            | button role                 |
-  | 3      | anchor            | link role                   |
-  | 4      | h1 to h6          | Heading role                |
-  | 5      | checkbox          | checkbox role               |
-  | 6      | Radio buttons     | radio role                  |
-  | 7      | ul                | list                        |
-  | 7      | li                | listitem                    |
-  | 8      | table thead       | rowgroup                    |
-  | 9      | table tbody       | rowgroup                    |
-  | 10     | table td          | cell                        |
-  | 11     | table tr          | row                         |
-  | 10     | table th          | columnheader                |
+  | 2      | select            | combobox                    |
+  | 3      | Button            | button                      |
+  | 4      | anchor            | link                        |
+  | 5      | h1 to h6          | Heading                     |
+  | 6      | checkbox          | checkbox                    |
+  | 7      | Radio buttons     | radio                       |
+  | 8      | ul                | list                        |
+  | 9      | li                | listitem                    |
+  | 10     | table thead       | rowgroup                    |
+  | 11     | table tbody       | rowgroup                    |
+  | 12     | table td          | cell                        |
+  | 13     | table tr          | row                         |
+  | 14     | table th          | columnheader                |
 
 
-* if you can want to make **custom-role**
+
+* **Custom Role** :  if you can want to make custom roles
 
   ```html
   <div role="hello-world-text"> Hello World </div>
@@ -731,7 +681,7 @@ Queries are the methods that Testing library provides to find elements on the pa
    3. the value of the aria-label attribute
 
 ```js
-// Label + button Example
+// 1. Label & 2. button Example
 function App() {
   return (
     <div>
@@ -763,7 +713,7 @@ test("Testing getByRole with name option", () => {
 });
 
 
-// Aria-Label Example
+// 3. Aria-Label Example
 // this is use when we don't have any label for button etc
 import React from "react";
 import log from "./logo.svg";
@@ -1617,3 +1567,56 @@ test("Checking to be in the document", () => {
   }
 });
 ```
+
+
+### 📘Extend expected (customize our own code)
+
+```js
+function App() {
+  return (
+    <div>
+      <form action="" aria-label="form">
+        <button>Save </button>
+        <button>Login</button>
+      </form>
+    </div>
+  );
+}
+
+export default App;
+
+
+// test
+import { render, screen, within } from "@testing-library/react";
+import App from "./App";
+
+function toContainRole(
+  container: HTMLElement,
+  role: string,
+  quantity: number = 1,
+) {
+  const elements = within(container).getAllByRole(role);
+
+  if (elements.length === quantity) {
+    return {
+      pass: true,
+    };
+  }
+
+  return {
+    pass: false,
+    message: () =>
+      `Expected to find ${quantity} ${role} elements. Found ${elements.length} instead`,
+  };
+}
+
+expect.extend({ toContainRole });
+
+test("Driven Approach", () => {
+  render(<App />);
+  const form = screen.getByRole("form");
+  expect(form).toContainRole("button", 2);
+});
+```
+
+---
