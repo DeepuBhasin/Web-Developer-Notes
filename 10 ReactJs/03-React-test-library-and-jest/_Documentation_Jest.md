@@ -257,7 +257,7 @@ describe("External Component Functions", () => {
 });
 ```
 
-### Overriding test-id
+### 📘Overriding test-id
 ```js
 import { useState } from "react";
 
@@ -403,7 +403,7 @@ Command
 
 2. _npm run test --coverage --watchAll_ : will return all test with meaningful report.
 
-3. _npm run test --coverage --watchAll --collectCoverageFrom='src/components/**/*.{ts,tsx}'_ : it will cover all the files which are located in __src/component/__ folders with __ts__ or __tsx__ extensions
+3. *npm run test -- --coverage --watchAll --collectCoverageFrom='src/components/**/*.{ts,tsx}'* : it will cover all the files which are located in __src/component/__ folders with __ts__ or __tsx__ extensions
 
 4. _npm run test --coverage --watchAll --collectCoverageFrom='!src/components/**/*.{types, stories,constants,test,spec}.{ts,tsx}'_ : this is use for ignoring all other files which are located in src folder using __!__ (not operator)
 
@@ -605,24 +605,24 @@ Queries are the methods that Testing library provides to find elements on the pa
 
 > Table of all getByQueries
 
-| Sr No | Type                    | Description                                                                        | Information             |
-| ----- | ----------------------- | ---------------------------------------------------------------------------------- | ----------------------- |
-| 1     | getByRole               | use for Semantics tags                                                             | }                       |
-| 2     | getAllByRole            | use for Semantics tags                                                             |                         |
-| 3     | getByPlaceholderText    | use for elements which have placeholder attribute                                  |                         |
-| 4     | getAllByPlaceholderText | use for elements which have placeholder attribute                                  |                         |
-| 5     | getByText               | use for div, p,headings, buttons                                                   | Use to find text        |
-| 6     | getAllByPlaceHolder     | use for div, p,headings, buttons                                                   | use to find placeholder |
-| 7     | getByTestId             | use for attach data-testId attribute to any element                                |                         |
-| 8     | getAllByTestId          | use for attach data-testId attribute to any element                                |                         |
-| 9     | getByDisplayValue       | returns the input, textarea, or select element that has the matching display value |                         |
-| 10    | getAllByDisplayValue    | returns the input, textarea, or select element that has the matching display value |                         |
-| 11    | getByTitle              | use for title attribute                                                            |                         |
-| 12    | getAllByTitle           | use for title attribute                                                            |                         |
-| 13    | getByAltText            | use for image alt attribute                                                        |                         |
-| 14    | getAllByAltText         | use for image alt attribute                                                        |                         |
-| 15    | getByLabelText          | use for label of form elements                                                     |                         |
-| 16    | getAllByLabelText       | use for label of form elements                                                     |                         |
+| Sr No | Type                    | Description                                                                        | Information                                           |
+| ----- | ----------------------- | ---------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| 1     | getByRole               | use for Semantics tags                                                             | Use to find role                                      |
+| 2     | getAllByRole            | use for Semantics tags                                                             | use to find roles                                     |
+| 3     | getByPlaceholderText    | use for elements which have placeholder attribute                                  |                                                       |
+| 4     | getAllByPlaceholderText | use for elements which have placeholder attribute                                  |                                                       |
+| 5     | getByText               | use for div, p,headings, buttons                                                   | Use to find text                                      |
+| 6     | getAllByText            | use for div, p,headings, buttons                                                   | use to find placeholder                               |
+| 7     | getByTestId             | use for attach data-testId attribute to any element                                |                                                       |
+| 8     | getAllByTestId          | use for attach data-testId attribute to any element                                |                                                       |
+| 9     | getByDisplayValue       | returns the input, textarea, or select element that has the matching display value |                                                       |
+| 10    | getAllByDisplayValue    | returns the input, textarea, or select element that has the matching display value |                                                       |
+| 11    | getByTitle              | use for title attribute                                                            |                                                       |
+| 12    | getAllByTitle           | use for title attribute                                                            |                                                       |
+| 13    | getByAltText            | use for image alt attribute                                                        |                                                       |
+| 14    | getAllByAltText         | use for image alt attribute                                                        |                                                       |
+| 15    | getByLabelText          | use for label of form elements                                                     | use to find label element which is associative to it. |
+| 16    | getAllByLabelText       | use for label of form elements                                                     |                                                       |
 
 
 
