@@ -609,10 +609,10 @@ Queries are the methods that Testing library provides to find elements on the pa
 | ----- | ----------------------- | ---------------------------------------------------------------------------------- | ----------------------------------------------------- |
 | 1     | getByRole               | use for Semantics tags                                                             | Use to find role                                      |
 | 2     | getAllByRole            | use for Semantics tags                                                             | use to find roles                                     |
-| 3     | getByPlaceholderText    | use for elements which have placeholder attribute                                  |                                                       |
-| 4     | getAllByPlaceholderText | use for elements which have placeholder attribute                                  |                                                       |
+| 3     | getByPlaceholderText    | use for elements which have placeholder attribute                                  | Use to find placeholder                               |
+| 4     | getAllByPlaceholderText | use for elements which have placeholder attribute                                  | Use to find placeholders                              |
 | 5     | getByText               | use for div, p,headings, buttons                                                   | Use to find text                                      |
-| 6     | getAllByText            | use for div, p,headings, buttons                                                   | use to find placeholder                               |
+| 6     | getAllByText            | use for div, p,headings, buttons                                                   | use to find texts                                     |
 | 7     | getByTestId             | use for attach data-testId attribute to any element                                |                                                       |
 | 8     | getAllByTestId          | use for attach data-testId attribute to any element                                |                                                       |
 | 9     | getByDisplayValue       | returns the input, textarea, or select element that has the matching display value |                                                       |
@@ -809,6 +809,55 @@ describe("App.test", () => {
 ```
 ---
 
+### 📘getByTestId
+
+```js
+// Component File
+import * as React from "react";
+
+export const TestId = () => {
+  return <div data-testid="test-id">Hello World</div>;
+};
+
+
+// test file
+import { render, screen } from "@testing-library/react";
+import { TestId } from "./TestId";
+
+describe("Test suite for TestId", () => {
+  it("should render TestId Component", () => {
+    render(<TestId />);
+  });
+
+  it("should render TestId", () => {
+    render(<TestId />);
+    const testIdElement = screen.getByTestId("test-id");
+    expect(testIdElement).toBeInTheDocument();
+  });
+});
+
+```
+
+---
+### 📘Priority Order for Queries
+
+1. getByRole (always use this in maximum cases)
+
+2. getByLabelText (always use this in form cases)
+
+3. getByPlaceholderText
+
+4. getByText (mostly use in case of non interaction elements  like div, span, p)
+
+5. getByDisplayValue (mostly use with filled values of forms)
+
+6. getByAltText (less use)
+
+7. getByTitle (less use)
+
+8. getByTestId (less use)
+
+---
 ### 📘Throw-Error
 * When are already know in advance that it will throw error
 ```js
