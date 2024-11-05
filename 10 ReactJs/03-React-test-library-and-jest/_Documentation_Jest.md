@@ -773,40 +773,42 @@ Queries are the methods that Testing library provides to find elements on the pa
 
 **2. getAllByRoles**
 
-```js
-const userName = ["Deep", "Dp", "Deepinder Singh"];
-function App() {
-  return (
-    <div>
-      <ul>
-        {userName.map((e) => (
-          <li key={e}>{e}</li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+* These are use to find multiple elements in the DOM
 
-export default App;
+  ```js
+  const userName = ["Deep", "Dp", "Deepinder Singh"];
+  function App() {
+    return (
+      <div>
+        <ul>
+          {userName.map((e) => (
+            <li key={e}>{e}</li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
 
-// test
-import { render, screen } from "@testing-library/react";
-import App from "./App";
+  export default App;
 
-describe("App.test", () => {
-  test("Render Ul element", () => {
-    render(<App />);
-    const ulElement = screen.getByRole("list");
-    expect(ulElement).toBeInTheDocument();
+  // test
+  import { render, screen } from "@testing-library/react";
+  import App from "./App";
+
+  describe("App.test", () => {
+    test("Render Ul element", () => {
+      render(<App />);
+      const ulElement = screen.getByRole("list");
+      expect(ulElement).toBeInTheDocument();
+    });
+
+    test("Render li elements", () => {
+      render(<App />);
+      const liItems = screen.getAllByRole("listitem");
+      expect(liItems).toHaveLength(liItems.length);
+    });
   });
-
-  test("Render li elements", () => {
-    render(<App />);
-    const liItems = screen.getAllByRole("listitem");
-    expect(liItems).toHaveLength(liItems.length);
-  });
-});
-```
+  ```
 ---
 
 ### 📘getByTestId
@@ -859,34 +861,39 @@ describe("Test suite for TestId", () => {
 
 ---
 ### 📘Throw-Error
+
 * When are already know in advance that it will throw error
-```js
-function App() {
-  return <div>App</div>;
-}
 
-export default App;
+  ```js
+  function App() {
+    return <div>App</div>;
+  }
 
-// test
+  export default App;
 
-import { render, screen } from "@testing-library/react";
-import App from "./App";
+  // test
 
-test("Driven Approach", () => {
-  render(<App />);
-  // we already know that, this textbox role does not exist so it will throw error
-  expect(() => screen.getByRole("textbox")).toThrow();
-});
-```
+  import { render, screen } from "@testing-library/react";
+  import App from "./App";
+
+  test("Driven Approach", () => {
+    render(<App />);
+    // we already know that, this textbox role does not exist so it will throw error
+    expect(() => screen.getByRole("textbox")).toThrow();
+  });
+  ```
 
 
 ---
 
-### 📘textMatch
+### 📘TextMatch
 
 * TextMatch represents a type which can be either a
+
   1. String
+
   2. Regex
+
   3. Function (no need to learn)
 
 Example
@@ -897,176 +904,212 @@ Example
 
 1. String
 
-```js
-screen.getByText('Hello World') // full string match
+  ```js
+  screen.getByText('Hello World') // full string match
 
-screen.getByText('llo Wor', {exact : false}) // substring match
+  screen.getByText('llo Wor', {exact : false}) // substring match
 
-screen.getByText('hello world', {exact : false}) // ignore case
-```
+  screen.getByText('hello world', {exact : false}) // ignore case
+  ```
 
 2. Regex
 
-```js
-screen.getByText(/World/) // substring match
+  ```js
+  screen.getByText(/World/) // substring match
 
-screen.getByText(/world/i) // substring match, ignore case
+  screen.getByText(/world/i) // substring match, ignore case
 
-screen.getByText(/^hello world$/i) // full string match ignore case
-```
+  screen.getByText(/^hello world$/i) // full string match ignore case
+  ```
 
 3. Function
 
-```js
-screen.getByText((content)=> content.startsWith('Hello'))
-```
+  ```js
+  screen.getByText((content)=> content.startsWith('Hello'))
+  ```
 
 ---
 
 ## 📔queryBy... & queryAllBy... Queries
+
 1. **queryBy**
 
-* Returns the matching node for a query and **return null if no elements match**
-* **UseFull for asserting an element that is not present in the DOM**
-* Throws an error if more than one match is found
+  * Returns the matching node for a query and **return null if no elements match**
+
+  * **UseFull for asserting an element that is not present in the DOM**
+
+  * Throws an error if more than one match is found
 
 2. **queryAllBy**
 
-* Returns an array of all matching nodes for a query and return an empty array no elements match
+   * Returns an array of all matching nodes for a query and return an empty array no elements match
+
 ---
 
 ### 📘queryByRole
-* is use for not visible in DOM
 
-```js
-import { useState } from "react";
+* Problem with getBy & getByAll is the that if they do not find any element it will throw an error, even though if you use .not.toBeInTheDocument();
 
-function App() {
-  const [show, setShow] = useState<boolean>(false);
+  ```js
+  import * as React from "react";
 
-  return (
-    <div>
-      <button type="button" onClick={() => setShow((n) => !n)}>
-        Toggle Button
-      </button>
-      <br />
-      {show && <h1>Hello World</h1>}
-    </div>
-  );
-}
-export default App;
+  export const ConditionalRendering = () => {
+    const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
-// test
-import { render, screen } from "@testing-library/react";
-import App from "./App";
+    return (
+      <div>
+        <h3>Conditional Rendering</h3>
+        {isLoggedIn ? (
+          <button onClick={() => setIsLoggedIn(false)}>Logout</button>
+        ) : (
+          <button onClick={() => setIsLoggedIn(true)}>Login</button>
+        )}
+      </div>
+    );
+  };
+  import { render, screen } from "@testing-library/react";
+  import { ConditionalRendering } from "./ConditionalRendering";
 
-test("testing with queryByAll", () => {
-  render(<App />);
-  let btn = screen.queryByRole("heading", { name: /Hello World/i });
-  expect(btn).not.toBeInTheDocument();
-});
-```
+  describe("ConditionalRendering Component", () => {
+    it("should render ConditionalRendering Component", () => {
+      render(<ConditionalRendering />);
+    });
 
+    it("should render Login Button", () => {
+      render(<ConditionalRendering />);
+      const loginButtonElement = screen.getByRole("button", {
+        name: /Login/i,
+      });
+      expect(loginButtonElement).toBeInTheDocument();
+    });
+
+    // this test will fail here, because we are using getByRole
+    it("should render Logout Button", () => {
+      render(<ConditionalRendering />);
+      const logoutButtonElement = screen.getByRole("button", {
+        name: /Logout/i,
+      });
+      expect(logoutButtonElement).not.toBeInTheDocument();
+    });
+  });
+  ```
+* Solution for above problem by using queryByRole
+
+  ```js
+    it("should render Logout Button", () => {
+      render(<ConditionalRendering />);
+      const logoutButtonElement = screen.queryByRole("button", {
+        name: /Logout/i,
+      });
+      expect(logoutButtonElement).not.toBeInTheDocument();
+    });
+  ```
 ---
 
 ## 📔findBy... & findAllBy... Queries
 
 * What if elements are not present in the DOM to begin but make their way into the DOM after some time ?
-  * For example, data that is fetched from a server will be rendered only after a few milliseconds
+
+* For example, data that is fetched from a server will be rendered only after a few milliseconds
 
 1. **findBy**
-* Returns a Promise which resolves when an element is found which matches the given query
-* **The Promises is rejected of no element is found or if more than one element is found after a default timeout of 1000ms**
+
+  * Returns a Promise which resolves when an element is found which matches the given query
+
+  * **The Promises is rejected of no element is found or if more than one element is found after a default timeout of 1000ms**
 
 ---
 
 ### 📘findByRole
+
 * is use for async/await task
 
 1. **SetTimeOut**
-```js
-import { useEffect, useState } from "react";
 
-function App() {
-  const [show, setShow] = useState<boolean>(false);
+  ```js
+  import { useEffect, useState } from "react";
 
-  useEffect(() => {
-    let id = setTimeout(() => {
-      setShow((n) => !n);
-    }, 1000);
-    return () => clearTimeout(id);
-  }, []);
+  function App() {
+    const [show, setShow] = useState<boolean>(false);
 
-  return (
-    <div>
-      <button type="button" onClick={() => setShow((prevShow) => !prevShow)}>
-        Toggle Button
-      </button>
-      <br />
-      {show && <h1>Hello World</h1>}
-    </div>
-  );
-}
+    useEffect(() => {
+      let id = setTimeout(() => {
+        setShow((n) => !n);
+      }, 1000);
+      return () => clearTimeout(id);
+    }, []);
 
-export default App;
+    return (
+      <div>
+        <button type="button" onClick={() => setShow((prevShow) => !prevShow)}>
+          Toggle Button
+        </button>
+        <br />
+        {show && <h1>Hello World</h1>}
+      </div>
+    );
+  }
 
-// test
-import { render, screen } from "@testing-library/react";
-import App from "./App";
+  export default App;
 
-test("testing useEffect with findBy", async () => {
-  render(<App />);
-  let btn = await screen.findByRole(
-    "button",
-    { name: /Toggle Button/i },
-    { timeout: 3000 }
-  );
-  expect(btn).toBeInTheDocument();
-});
-```
+  // test
+  import { render, screen } from "@testing-library/react";
+  import App from "./App";
+
+  test("testing useEffect with findBy", async () => {
+    render(<App />);
+    let btn = await screen.findByRole(
+      "button",
+      { name: /Toggle Button/i },
+      { timeout: 3000 }
+    );
+    expect(btn).toBeInTheDocument();
+  });
+  ```
+
 2. **Real Api**
 
-```js
-import React, { useEffect, useState } from "react";
+  ```js
+  import React, { useEffect, useState } from "react";
 
-function App() {
-  const [users, setUsers] = useState<string[]>([]);
-  const [error, setError] = useState<string | null>(null);
+  function App() {
+    const [users, setUsers] = useState<string[]>([]);
+    const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((res) => res.json())
-      .then((data) => setUsers(data.map((user: { name: string }) => user.name)))
-      .catch((error) => setError("Error fetching users"));
-  }, []);
+    useEffect(() => {
+      fetch("https://jsonplaceholder.typicode.com/users")
+        .then((res) => res.json())
+        .then((data) => setUsers(data.map((user: { name: string }) => user.name)))
+        .catch((error) => setError("Error fetching users"));
+    }, []);
 
-  return (
-    <div>
-      <h1>Users</h1>
-      {error && <p>{error}</p>}
-      <ul>
-        {users.map((user) => (
-          <li key={user}>{user}</li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+    return (
+      <div>
+        <h1>Users</h1>
+        {error && <p>{error}</p>}
+        <ul>
+          {users.map((user) => (
+            <li key={user}>{user}</li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
 
-export default App;
+  export default App;
 
-// test
-import { render, screen } from "@testing-library/react";
-import App from "./App";
+  // test
+  import { render, screen } from "@testing-library/react";
+  import App from "./App";
 
-describe("App component", () => {
-  it("Calling real API", async () => {
-    render(<App />);
-    const users = await screen.findAllByRole("listitem");
-    expect(users).toHaveLength(users.length);
+  describe("App component", () => {
+    it("Calling real API", async () => {
+      render(<App />);
+      const users = await screen.findAllByRole("listitem");
+      expect(users).toHaveLength(users.length);
+    });
   });
-});
-```
+  ```
 
 
 ---
