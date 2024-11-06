@@ -50,214 +50,219 @@ in this image, we can access the element that are created in Fake Browser Enviro
 
 * To run test
 
-```
-npm run test
-```
+  ```
+  npm run test
+  ```
 * To run Particular File
 
-```
-npm run test App
-```
+  ```
+  npm run test App
+  ```
 
 
-```js
-export const sum = (a: number, b: number): number => {
-  return a + b;
-};
+  ```js
+  export const sum = (a: number, b: number): number => {
+    return a + b;
+  };
 
-import { sum } from "./sum";
+  import { sum } from "./sum";
 
-test("Sum of two numbers", () => {
-  const number1 = 10;
-  const number2 = 20;
-  const output = 30;
+  test("Sum of two numbers", () => {
+    const number1 = 10;
+    const number2 = 20;
+    const output = 30;
 
-  // this code is use to test things
-  expect(sum(number1, number2)).toBe(output);
-});
-```
+    // this code is use to test things
+    expect(sum(number1, number2)).toBe(output);
+  });
+  ```
 
+---
 
 ### 📘Events
 
-1. OnChange Event on input
+1. **OnChange Event on input**
 
-```js
-import React, { useState } from "react";
+    ```js
+    import React, { useState } from "react";
 
-export const App = () => {
-  const [firstName, setFirstName] = useState<string>("");
+    export const App = () => {
+      const [firstName, setFirstName] = useState<string>("");
 
-  function handleSetFirstName(e: React.ChangeEvent<HTMLInputElement>): void {
-    setFirstName(e.target.value);
-  }
+      function handleSetFirstName(e: React.ChangeEvent<HTMLInputElement>): void {
+        setFirstName(e.target.value);
+      }
 
-  return (
-    <div className="App">
-      <input
-        type="text"
-        placeholder="Enter First Name"
-        name="firstName"
-        value={firstName}
-        onChange={handleSetFirstName}
-      />
-    </div>
-  );
-};
-
-// Test File
-import { fireEvent, render, screen } from "@testing-library/react";
-import { App } from "./App";
-
-describe("Testing only UI Elements", () => {
-  test("Testing input Element", () => {
-    render(<App />);
-
-    // creating event object
-    const eventObject = {
-      target: {
-        value: "Deepinder Singh",
-      },
+      return (
+        <div className="App">
+          <input
+            type="text"
+            placeholder="Enter First Name"
+            name="firstName"
+            value={firstName}
+            onChange={handleSetFirstName}
+          />
+        </div>
+      );
     };
-    const toBeText = screen.getByRole("textbox") as HTMLInputElement;
 
-    // Means we are trigging event like putting values into input
-    fireEvent.change(toBeText, eventObject);
+    // Test File
+    import { fireEvent, render, screen } from "@testing-library/react";
+    import { App } from "./App";
 
-    // expecting that value after entering value
-    expect(toBeText.value).toBe(eventObject.target.value);
-  });
-});
-```
-2. OnClick of Button
+    describe("Testing only UI Elements", () => {
+      test("Testing input Element", () => {
+        render(<App />);
 
-```js
-import React, { useState } from "react";
+        // creating event object
+        const eventObject = {
+          target: {
+            value: "Deepinder Singh",
+          },
+        };
+        const toBeText = screen.getByRole("textbox") as HTMLInputElement;
 
-function App() {
-  const [firstName, setFirstName] = useState<string>("Deepu Bhasin");
+        // Means we are trigging event like putting values into input
+        fireEvent.change(toBeText, eventObject);
 
-  function handleSetFirstName(
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ): void {
-    setFirstName("Deepinder Singh");
-  }
+        // expecting that value after entering value
+        expect(toBeText.value).toBe(eventObject.target.value);
+      });
+    });
+    ```
+2. **OnClick of Button**
 
-  return (
-    <div>
-      <p>{firstName}</p>
-      <button type="button" onClick={handleSetFirstName}>
-        Click Me
-      </button>
-    </div>
-  );
-}
+    ```js
+    import React, { useState } from "react";
 
-export default App;
+    function App() {
+      const [firstName, setFirstName] = useState<string>("Deepu Bhasin");
 
-// Test File
-import { fireEvent, render, screen } from "@testing-library/react";
-import App from "./App";
+      function handleSetFirstName(
+        e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+      ): void {
+        setFirstName("Deepinder Singh");
+      }
 
-describe("Testing only UI Elements", () => {
-  test("Rendering Button Only", () => {
-    render(<App />);
-    const firstName = screen.getByText("Deepu Bhasin");
-    expect(firstName).toBeInTheDocument();
-  });
+      return (
+        <div>
+          <p>{firstName}</p>
+          <button type="button" onClick={handleSetFirstName}>
+            Click Me
+          </button>
+        </div>
+      );
+    }
 
-  test("Firing event from button", () => {
-    render(<App />);
-    const btn = screen.getByRole("button") as HTMLButtonElement;
+    export default App;
 
-    // Means we are trigging event like clicking button
-    fireEvent.click(btn);
+    // Test File
+    import { fireEvent, render, screen } from "@testing-library/react";
+    import App from "./App";
 
-    // expecting that value after entering value
-    expect(screen.getByText("Deepinder Singh")).toBeInTheDocument();
-  });
-});
-```
+    describe("Testing only UI Elements", () => {
+      test("Rendering Button Only", () => {
+        render(<App />);
+        const firstName = screen.getByText("Deepu Bhasin");
+        expect(firstName).toBeInTheDocument();
+      });
+
+      test("Firing event from button", () => {
+        render(<App />);
+        const btn = screen.getByRole("button") as HTMLButtonElement;
+
+        // Means we are trigging event like clicking button
+        fireEvent.click(btn);
+
+        // expecting that value after entering value
+        expect(screen.getByText("Deepinder Singh")).toBeInTheDocument();
+      });
+    });
+    ```
+---
+
 ### 📘Functional Component Method(functions) Testing
 
 * Helper.ts
-```js
-export const getString = (): string => {
-  console.log("hi");
 
-  return "hi";
-};
+  ```js
+  export const getString = (): string => {
+    console.log("hi");
 
-export const getSum = (a: number, b: number): number => {
-  console.log(a + b);
-  return a + b;
-};
-```
+    return "hi";
+  };
+
+  export const getSum = (a: number, b: number): number => {
+    console.log(a + b);
+    return a + b;
+  };
+  ```
 
 * App.tsx
 
-```js
-import React, { useState } from "react";
-import { getString, getSum } from "./helper";
+  ```js
+  import React, { useState } from "react";
+  import { getString, getSum } from "./helper";
 
-function App() {
-  const [firstName, setFirstName] = useState<string>("Deepu Bhasin");
+  function App() {
+    const [firstName, setFirstName] = useState<string>("Deepu Bhasin");
 
-  function handleSetFirstName(
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ): void {
-    setFirstName("Deepinder Singh");
+    function handleSetFirstName(
+      e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ): void {
+      setFirstName("Deepinder Singh");
+    }
+
+    return (
+      <div>
+        <p>{firstName}</p>
+        <button
+          type="button"
+
+          // using of test data id
+
+          data-testid="btn-click"
+          onClick={handleSetFirstName}
+        >
+          Click Me
+        </button>
+        <button onClick={getString}>Get String</button>
+        <button onClick={() => getSum(1, 2)}>get Sum</button>
+      </div>
+    );
   }
 
-  return (
-    <div>
-      <p>{firstName}</p>
-      <button
-        type="button"
-
-        // using of test data id
-
-        data-testid="btn-click"
-        onClick={handleSetFirstName}
-      >
-        Click Me
-      </button>
-      <button onClick={getString}>Get String</button>
-      <button onClick={() => getSum(1, 2)}>get Sum</button>
-    </div>
-  );
-}
-
-export default App;
-```
+  export default App;
+  ```
 
 * App.test.tsx
 
-```js
-import { fireEvent, render, screen } from "@testing-library/react";
-import App from "./App";
-import { getString, getSum } from "./helper";
+    ```js
+    import { fireEvent, render, screen } from "@testing-library/react";
+    import App from "./App";
+    import { getString, getSum } from "./helper";
 
-describe("Internal Component Functions", () => {
-  test("Firing event from button", () => {
-    render(<App />);
+    describe("Internal Component Functions", () => {
+      test("Firing event from button", () => {
+        render(<App />);
 
-    // get value from the test id
-    const btn = screen.getByTestId("btn-click") as HTMLButtonElement;
-    fireEvent.click(btn);
-    expect(screen.getByText("Deepinder Singh")).toBeInTheDocument();
-  });
-});
+        // get value from the test id
+        const btn = screen.getByTestId("btn-click") as HTMLButtonElement;
+        fireEvent.click(btn);
+        expect(screen.getByText("Deepinder Singh")).toBeInTheDocument();
+      });
+    });
 
-describe("External Component Functions", () => {
-  test("Helper functions", () => {
-    expect(getString()).toMatch("hi");
-    expect(getSum(1, 2)).toBe(3);
-  });
-});
-```
+    describe("External Component Functions", () => {
+      test("Helper functions", () => {
+        expect(getString()).toMatch("hi");
+        expect(getSum(1, 2)).toBe(3);
+      });
+    });
+    ```
 
 ### 📘Overriding test-id
+
 ```js
 import { useState } from "react";
 
@@ -428,7 +433,7 @@ Command
 
 2. For Folder
 
-   * \_\_tests\_\_ : You can put any file name in this folder it will run that file automatically
+   * \_\_tests\_\_ : You can put any file name (not even any above extensions) in this folder it will run that file automatically
 
 ---
 
