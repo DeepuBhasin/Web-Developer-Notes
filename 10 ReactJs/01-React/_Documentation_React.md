@@ -1,4 +1,4 @@
-## 📘Informatics Things
+### 📘Informatics Things
 
 * Type **React.new** in Address bar for open react code panel
 * Values Persist
@@ -16,13 +16,15 @@ let total = 0;
 ```
 * **React only cares about showing content and handling user events**
 
-## 📘How Bundle.js files create
+---
+
+### 📘How Bundle.js files create
 
 ![BundleFiles](./images/output.png)
 
+---
 
-
-## 📘Why we require React
+### 📘Why we require React
 * Server-Side-Rendering vs Client-Side-Rendering
 
 ![Image](./images/why-require-of-react.png)
@@ -39,7 +41,9 @@ let total = 0;
 
 ![Image](./images/why-do-front-end-exist.png)
 
-## 📘What is react
+---
+
+### 📘What is react
 * **React is Javascript Library for building user interfaces**
 
 ![1](./images/what-is-react.png)
@@ -64,7 +68,8 @@ let total = 0;
 
 ![6](./images/summary.png)
 
-## 📘Pure React (CDN Links)
+---
+### 📘Pure React (CDN Links)
 * Pure React means **writing react with react Objects and React Elements**
 
 ![7](./images/react-librar-react-dom.png)
@@ -73,7 +78,9 @@ let total = 0;
 
 ![8](./images/pure-rect-code-cnd.png)
 
-## 📘Create-React-App
+---
+
+### 📘Create-React-App
 
 ![9](./images/react-app-vs-vite.png)
 
@@ -82,128 +89,143 @@ npx create-react-app project-name
 ```
 ---
 
-## 📘Review of Essential javascript for React
+### 📘Review of Essential javascript for React
+
 * Destructuring, spread Operator, Template Literals, ternaries
+
 * Short-Circuiting and Logical Operators (||, &&, ??)
-  * falsy Values : **0, null, undefined, ''**
-```js
-// && Operator
-true && "some things"   //some things
-false && "some things"  // false
+  
+  * falsy Values : **0, null, undefined, '', false**
+  
+  ```js
+  // && Operator
+  true && "some things"   //some things
+  false && "some things"  // false
 
-// || Operator
-true || "Some thing" // true
-false|| "Some thing" // Some thing
+  // || Operator
+  true || "Some thing" // true
+  false|| "Some thing" // Some thing
 
-// ?? Nullish coalescing Operator
-CheckDataExist ?? "no Data exist"
+  // ?? Nullish coalescing Operator
+  CheckDataExist ?? "no Data exist"
 
-CheckDataExist == null      //  no data exist
-CheckDataExist == undefined //  no data exist
-CheckDataExist == 0         //  CheckDataExist means 0
-CheckDataExist == false     //  CheckDataExist means false
-```
+  CheckDataExist == null      //  no data exist
+  CheckDataExist == undefined //  no data exist
+  CheckDataExist == 0         //  CheckDataExist means 0
+  CheckDataExist == false     //  CheckDataExist means false
+  ```
+
 * Optional Chaining
-```js
-let obj = {};
 
-obj?.employee?.firstname
-```
+  ```js
+  let obj = {};
+
+  obj?.employee?.firstName
+  ```
 
 * Promises
+
 * Async/Await
+
 * Map, Filter, Reduce, sort (in react you mostly work with immutable Arrays)
 
-```js
-const arr = [3, 7, 1, 9, 6];
-const sorted = arr.sort((a, b) => a - b);
-sorted  // [ 1, 3, 6, 7, 9 ]
+  ```js
+  const arr = [3, 7, 1, 9, 6];
+  const sorted = arr.sort((a, b) => a - b);
+  sorted  // [ 1, 3, 6, 7, 9 ]
 
-const desc = arr.sort((a, b) => b - a)
-desc    // [ 9, 7, 6, 3, 1 ]
+  const desc = arr.sort((a, b) => b - a)
+  desc    // [ 9, 7, 6, 3, 1 ]
 
 
-const sorted = books.slice().sort((a , b) => a.pages - b.pages);
-```
+  const sorted = books.slice().sort((a , b) => a.pages - b.pages);
+  ```
 
 * Working with immutable Arrays
 
-```js
-const books = [
-    {
-        id: 1,
-        title: "book 1",
-        author: "book 1"
-    },
-    {
-        id: 2,
-        title: "book 2",
-        author: "book 2"
-    },
-    {
-        id: 3,
-        title: "book 3",
-        author: "book 3"
-    }
-]
+  ```js
+  const books = [
+      {
+          id: 1,
+          title: "book 1",
+          author: "book 1"
+      },
+      {
+          id: 2,
+          title: "book 2",
+          author: "book 2"
+      },
+      {
+          id: 3,
+          title: "book 3",
+          author: "book 3"
+      }
+  ]
 
-const newBook = {
-    id: 6,
-    title: "Harry Potter and the Chamber of Secrets",
-    author: "J.k Rowling"
-}
+  // 1) Add book object to array
+  const newBook = {
+      id: 6,
+      title: "Harry Potter and the Chamber of Secrets",
+      author: "J.k Rowling"
+  }
 
-const booksAfterAdded = [...books, newBook];
+  const booksAfterAdded = [...books, newBook];
 
-booksAfterAdded
-/*
-[ { id: 1, title: 'book 1', author: 'book 1' },
-  { id: 2, title: 'book 2', author: 'book 2' },
-  { id: 3, title: 'book 3', author: 'book 3' },
-  { id: 6,
-    title: 'Harry Potter and the Chamber of Secrets',
-    author: 'J.k Rowling' } ]
-*/
+  booksAfterAdded
+  /*
+  [ { id: 1, title: 'book 1', author: 'book 1' },
+    { id: 2, title: 'book 2', author: 'book 2' },
+    { id: 3, title: 'book 3', author: 'book 3' },
+    { id: 6,
+      title: 'Harry Potter and the Chamber of Secrets',
+      author: 'J.k Rowling' } ]
+  */
 
-// 2) Delete book object from array
-const booksAfterDelete = booksAfterAdded.filter(item => item.id != 1);
+  // 2) Delete book object from array
+  const booksAfterDelete = booksAfterAdded.filter(item => item.id != 1);
 
-booksAfterDelete
-/*
-[ { id: 2, title: 'book 2', author: 'book 2' },
-  { id: 3, title: 'book 3', author: 'book 3' },
-  { id: 6,
-    title: 'Harry Potter and the Chamber of Secrets',
-    author: 'J.k Rowling' } ]
-*/
+  booksAfterDelete
+  /*
+  [ { id: 2, title: 'book 2', author: 'book 2' },
+    { id: 3, title: 'book 3', author: 'book 3' },
+    { id: 6,
+      title: 'Harry Potter and the Chamber of Secrets',
+      author: 'J.k Rowling' } ]
+  */
 
-// 3) Update book object in the array
-const booksAfterUpdate = booksAfterDelete.map(book => book.id == 2 ? {...book, nickName : 'Deepu Bhasin'} : book);
+  // 3) Update book object in the array
+  const booksAfterUpdate = booksAfterDelete.map(book => book.id == 2 ? {...book, nickName : 'John'} : book);
 
-booksAfterUpdate
-/*
-[ {id: 2, title: 'book 2', author: 'book 2', nickName : 'Deepu Bhasin'},
-  { id: 3, title: 'book 3', author: 'book 3' },
-  { id: 6,
-    title: 'Harry Potter and the Chamber of Secrets',
-    author: 'J.k Rowling' } ]
-*/
-```
+  booksAfterUpdate
+  /*
+  [ {id: 2, title: 'book 2', author: 'book 2', nickName : 'John'},
+    { id: 3, title: 'book 3', author: 'book 3' },
+    { id: 6,
+      title: 'Harry Potter and the Chamber of Secrets',
+      author: 'J.k Rowling' } ]
+  */
+  ```
 ----
-## 📘Component as Building Blocks
-* Component
+### 📘Component as Building Blocks
+
 * **Component has main three features :**
+
   1. Data
+
   2. Logic
+
   3. Appearance
 
-![Image](./images/component-as-building-block.png)
+  
+  ![Image](./images/component-as-building-block.png)
 
 * Component Tree
+  
+  ![image](./images/component-tree.png)
 
-![image](./images/component-tree.png)
 ---
-## 📘JSX
+### 📘JSX
+
 ![Image](./images/jsx-1.png)
 
 ![Image](./images/jsx-2.png)
@@ -217,7 +239,9 @@ booksAfterUpdate
 
 ⚠️ **Note :** in Strict mode every thing print twice
 
-## 📘 Separation of concern
+---
+
+### 📘 Separation of concern
 * One Technology per File
 
 ![Image](./images/one-technolgy-perf-file.png)
