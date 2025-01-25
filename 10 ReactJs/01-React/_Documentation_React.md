@@ -94,9 +94,9 @@ npx create-react-app project-name
 * Destructuring, spread Operator, Template Literals, ternaries
 
 * Short-Circuiting and Logical Operators (||, &&, ??)
-  
+
   * falsy Values : **0, null, undefined, '', false**
-  
+
   ```js
   // && Operator
   true && "some things"   //some things
@@ -216,11 +216,11 @@ npx create-react-app project-name
 
   3. Appearance
 
-  
+
   ![Image](./images/component-as-building-block.png)
 
 * Component Tree
-  
+
   ![image](./images/component-tree.png)
 
 ---
@@ -244,164 +244,166 @@ npx create-react-app project-name
 ### 📘 Separation of concern
 * One Technology per File
 
-![Image](./images/one-technolgy-perf-file.png)
+  ![Image](./images/one-technolgy-perf-file.png)
 
 * One Component per file
 
-![Image](./images/one-component-perf-file.png)
+  ![Image](./images/one-component-perf-file.png)
 
 * Separation Summary
 
-![Image](./images/serparation-summary.png)
+  ![Image](./images/serparation-summary.png)
 
 ---
 
-## 📘Style in JSX
+### 📘Style in JSX
 
 ![Image](./images/style.png)
 
 1. Inline CSS
-```js
-<h1 style={{color : 'Red', height : '20px'}}>
-    Hello World
-</h1>
-```
+
+    ```html
+    <h1 style={{color : 'Red', height : '20px'}}>
+        Hello World
+    </h1>
+    ```
 2. Module CSS
 
-```js
-import { NavLink } from "react-router-dom";
-import styles from "./PageNav.module.css";
+    ```js
+    import { NavLink } from "react-router-dom";
+    import styles from "./PageNav.module.css";
 
-function PageNav() {
-  return (
-    <nav className={styles.nav}>
-      <ul>
-        <li>
-          <NavLink to="/">Home</NavLink>
-        </li>
-        <li>
-          <NavLink to="/price">Price</NavLink>
-        </li>
-        <li>
-          <NavLink to="/product">Product</NavLink>
-        </li>
-      </ul>
-    </nav>
-  );
-}
+    function PageNav() {
+      return (
+        <nav className={styles.nav}>
+          <ul>
+            <li>
+              <NavLink to="/">Home</NavLink>
+            </li>
+            <li>
+              <NavLink to="/price">Price</NavLink>
+            </li>
+            <li>
+              <NavLink to="/product">Product</NavLink>
+            </li>
+          </ul>
+        </nav>
+      );
+    }
 
-export default PageNav;
-```
+    export default PageNav;
+    ```
 
-```css
-.nav {
-  background-color: orangered;
-}
+    ```css
+    .nav {
+      background-color: orangered;
+    }
 
-.nav ul {
-  list-style-type: none;
-  display: flex;
-  justify-content: space-between;
-}
-```
-![Image](./images/module-css.png)
+    .nav ul {
+      list-style-type: none;
+      display: flex;
+      justify-content: space-between;
+    }
+    ```
+    ![Image](./images/module-css.png)
 
-1. Make *Global CSS* From Module CSS, majorly use when classes are provided from external resources
+3. Make *Global CSS* From Module CSS, majorly use when classes are provided from external resources
 
-```css
-.nav ul {
-  list-style-type: none;
-  display: flex;
-  justify-content: space-between;
-}
+    ```css
+    .nav ul {
+      list-style-type: none;
+      display: flex;
+      justify-content: space-between;
+    }
 
-/* using global function */
-.nav :global(.active) {
-  background-color: lightgreen;
-}
-```
+    /* using global function */
+    .nav :global(.active) {
+      background-color: lightgreen;
+    }
+    ```
 
 
 4. Global CSS : just like normal class which we include normally. it majorly *includes common elements* css like *forms, body, \*, heading elements, variables etc*
 
-```css
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+    ```css
+    :root {
+      font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+      line-height: 1.5;
+      font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+      color-scheme: light dark;
+      color: rgba(255, 255, 255, 0.87);
+      background-color: #242424;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-text-size-adjust: 100%;
+    }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
+    a {
+      font-weight: 500;
+      color: #646cff;
+      text-decoration: inherit;
+    }
+    a:hover {
+      color: #535bf2;
+    }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
+    body {
+      margin: 0;
+      display: flex;
+      place-items: center;
+      min-width: 320px;
+      min-height: 100vh;
+    }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
+    h1 {
+      font-size: 3.2em;
+      line-height: 1.1;
+    }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-```
+    button {
+      border-radius: 8px;
+      border: 1px solid transparent;
+      padding: 0.6em 1.2em;
+      font-size: 1em;
+      font-weight: 500;
+      font-family: inherit;
+      background-color: #1a1a1a;
+      cursor: pointer;
+      transition: border-color 0.25s;
+    }
+    button:hover {
+      border-color: #646cff;
+    }
+    button:focus,
+    button:focus-visible {
+      outline: 4px auto -webkit-focus-ring-color;
+    }
+    ```
 ---
 
-## 📘Props
+### 📘Props
+
 * Definition about Props
 
-![Image](./images/props-1.png)
+  ![Image](./images/props-1.png)
 
 * Props are Read Only
 
-![Image](./images/props-2.png)
+  ![Image](./images/props-2.png)
 
-⚠️ **Note :** **Side Effect** means changing some data that's located outside of the current function. React How ever is all about pure functions, sp functions without side effects, at least when it's about a component's data.
+  ⚠️ **Note :** **Side Effect** Side effect happens when ever you change some data that's located outside of the current function (current component). React How ever is all about pure functions, so functions without Side Effects, at least when it's about a component's data (props and state).
 
-![Image](./images/props-3.png)
+  ![Image](./images/props-3.png)
 
 * One way data Flow
 
-![Image](./images/props-4.png)
+  ![Image](./images/props-4.png)
 
-**📚 conceptual Example :**
+**📚 conceptual Example :** using of destructing of props {...rest}
 
 ```js
 import React from 'react'
@@ -538,7 +540,7 @@ function App() {
   const [book, setBook] = React.useState([]);
 
   function handleSetBook() {
-    // bad code 
+    // bad code
     book.push({ id: Date.now(), name: "John" });
     console.log(book);
     setBook(book)
@@ -3771,7 +3773,7 @@ const App = () => {
 export default App;
 ```
 
-**⚠️ Note :** 
+**⚠️ Note :**
 
 1. **take()** method work in sequence / blocking sequence flow. It also work one once not matter how many time you called any function. you will use **take() & Call()**
 2. **takeEvery()** method work in non-sequence / non-blocking sequence (will create a parallel thread)
