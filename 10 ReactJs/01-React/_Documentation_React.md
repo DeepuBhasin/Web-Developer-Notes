@@ -436,66 +436,70 @@ export default App
 
 ---
 
-## 📘Rules in JSX
+### 📘Rules in JSX
 
 ![Image](./images/rule-of-jsx.png)
 
 ---
 
-## 📘Conditional Rendering
-1. && (Short circuit)
+### 📘Conditional Rendering
 
-```js
-// Good practice
-{true && <Loading/> }
+1. Short circuit (&&) : in short circuit always use booleans variables.
 
-// Bad Practice
-{propertyArray.length && <Loading/>}
-```
-2. ternary Operator ( true ? 'yes' : 'no')
+    ```js
+    // Good practice
+    {true && <Loading/> }
 
-```js
-{ condition ? <h1>Hello yes</h1> : <h1>Hello No</h1> }
-```
+    // Bad Practice
+    {propertyArray.length && <Loading/>}
+    ```
+2. Ternary Operator (true ? 'yes' : 'no')
+
+    ```js
+    { condition ? <h1>Hello yes</h1> : <h1>Hello No</h1> }
+    ```
 
 3. Element Variables
 
-```js
-let outPut;
+    ```js
+    let outPut;
 
-if(condition){
-    output = <h1>Hello yes</h1>
-} else {
-    output =  <h1>Hello No</h1>;
-}
+    if(condition){
+        output = <h1>Hello yes</h1>
+    } else {
+        output =  <h1>Hello No</h1>;
+    }
 
-{outPut}
-```
+    {outPut}  // jsx code
+    ```
 4. Multiple Rendering
 
-```js
-if(true) {
-    return ()
-} else {
-    return ()
-}
+    ```js
+    if(condition) {
+        return ()
+    } else if (condition) {
+        return ()
+    } else {
+        return ()
+    }
 
-// if-else is not work in jsx
-```
+    // if-else is not work in jsx
+    ```
 ---
 ## 📗Section-Summary-1
 
 ![Image](./images/section-summary-one.png)
+
 ---
 
-## 📘Event Handling
+### 📘Event Handling
 
 ```js
-
 <button onClick="()=>{alert('Hello World')}">Click Me</button>
 ```
 ---
-## 📘What is state
+
+### 📘What is state
 
 * What is State
 
