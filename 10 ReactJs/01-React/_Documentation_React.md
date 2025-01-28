@@ -486,7 +486,8 @@ export default App
     // if-else is not work in jsx
     ```
 ---
-## 📗Section-Summary-1
+
+### 📗Section-Summary-1
 
 ![Image](./images/section-summary-one.png)
 
@@ -503,39 +504,48 @@ export default App
 
 * What is State
 
-![Image](./images/state-in-rect.png)
+  ![Image](./images/state-in-rect.png)
 
 * It give us Two Major things
 
-![Image](./images/state-in-rect-2.png)
+  ![Image](./images/state-in-rect-2.png)
 
-```js
-const [total, setTotal] = useState(0);
-```
-* First parameter is **value**
-* Second Parameter is **Setter Function** for updating value
+* Syntax
 
-⚠️**Note :**
-1. The value of **state** always preserve until it gets **unmount**
-2. we can only call hooks like use state on the top level of the function, not inside an if statement or inside another function or inside of loop.
+  ```js
+  const [total, setTotal] = useState(0);
+  ```
+  * First parameter is **value**
 
-* Update the current state
+  * Second Parameter is **Setter Function** for updating value
 
-```js
-const [count, setCount] = useState(0);
+  * Update the current state
 
-const eventHandlerCount() => {
+  ```js
+  const [count, setCount] = useState(0);
 
-    // passing here callback function for update value with asynchronously
-    setCount(old => old  + 1)
-}
-```
+  const eventHandlerCount() => {
 
-![Image](./images/use-state-rule.png)
+      // passing here callback function for update value with asynchronously
+      setCount(old => old  + 1)
+  }
+  ```
 
-![Image](./images/use-state-rule.-1png.png)
+  ⚠️**Note :**
+  1. The value of **state** always preserve until it gets **unmount**
 
-![Image](./images/use-state-rule-practicle-use.png)
+  2. we can only call hooks like useState on the top level of the function, not inside an if statement or inside another function or inside of loop.
+
+
+* State GuidLine
+
+  ![Image](./images/use-state-rule.png)
+
+
+  ![Image](./images/use-state-rule.-1png.png)
+
+
+  ![Image](./images/use-state-rule-practicle-use.png)
 
 **📚 Conceptual Example :** if the current state pointing to same array/object address then React assumes no rerender is required
 
@@ -575,17 +585,23 @@ export default App
 
 
 ---
-## 📘Controlled Elements
+
+### 📘Controlled Elements
 
 * In Normal cases Every inputs maintain their own states like **values** in **DOM**
-* *In **Controlled Elements** react can controls and owns the states of input fields no longer by the DOM,* So since we want to keep to now keep **input field** data inside the application so we **create states**. because that form data of course changes over time and we also want to maintain out application in sync with it.
+
+* *In **Controlled Elements** with this technique react who can controls and own the state of input fields and no longer the DOM,* So since we want to now keep **input field** data inside the application so we **create states** because that form data of course changes over time and we also want to maintain out application in sync with it.
 
 ---
-## 📘State Vs Props
+
+### 📘State Vs Props
+
 ![Image](./images/state-vs-props.png)
 
 ---
+
 # 📔Thinking in React State Management
+
 
 ## 📘Local Vs Global State
 
