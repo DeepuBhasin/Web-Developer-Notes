@@ -600,21 +600,24 @@ export default App
 
 ---
 
-# 📔Thinking in React State Management
+## 📔Thinking in React State Management
 
 
-## 📘Local Vs Global State
+### 📘Local Vs Global State
 
 ![Image](./images/local-vs-global.png)
 
 ---
 
-## 📘When and Where State Use
+### 📘When and Where State Use
+
 ![Image](./images/when-where-state-use.png)
 
 
 ---
-## 📘Lift-Up-State
+### 📘Lift-Up-State
+
+  This Means is that whenever multiple sibling components need access to the same state, we move that piece of state (state, setter function) up to the first common parent component
 
 ![Image](./images/lift-up-state.png)
 
@@ -622,15 +625,15 @@ export default App
 
 ## 📘Derived State
 
-* More you have **states** more you have **re-rendering**
+More you have **states** more you have **re-rendering**
 
 ![image](./images/driver-state.png)
 
 ---
 
-## 📘Children Props
+### 📘Children Props
 
-* when we avoid to pass to many props then we use **children props**
+When we avoid to pass to many props then we use **children props**
 
 ```js
 import React from 'react';
@@ -655,11 +658,16 @@ function App() {
 
 export default App;
 ```
+
 ![Image](./images/children-prop.png)
 
-# 📔Thinking in React Components, Composition, and Reusability
 ---
-## 📘How to Split a UI into component
+
+## 📔Thinking in React Components, Composition, and Reusability
+
+---
+
+### 📘How to Split a UI into component
 
 ![Image](./images/component-size-matter.png)
 
