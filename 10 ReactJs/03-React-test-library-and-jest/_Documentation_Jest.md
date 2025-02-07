@@ -181,7 +181,12 @@ in this image, we can access the element that are created in Fake Browser Enviro
     ```
 ---
 
-### 📘Functional Component Method(functions) Testing
+### 📘Functional Component
+
+1. Testing External function 
+
+2. Testing State using fireEvent 
+
 
 * Helper.ts
 
@@ -512,9 +517,12 @@ describe('Greet', ()=> {
 
 ![Images](./images/4-4-expect.png)
 
+---
+
 ### 📘What to test / What not to test
 
 1. Should
+   
    1. Test Component renders
 
    2. Test component renders with props
@@ -522,6 +530,12 @@ describe('Greet', ()=> {
    3. Test component renders in different states
 
    4. Test Component reacts to events
+   
+   5. API testing
+   
+   6. UI conditions testing | UI State testing 
+   
+   7. Functions which we write
 
 2. Not
 
@@ -530,6 +544,10 @@ describe('Greet', ()=> {
    2. Third party code
 
    3. Code that is not important from a user point of view
+   
+   4. Sometime we should mock function rather than testing it in details.
+   
+   5. No Need to test default function of JS and React.  
 
 ---
 
@@ -591,6 +609,8 @@ Queries are the methods that Testing library provides to find elements on the pa
 
 * **getAllBy...** returns an array of all matching nodes for a query and throws an error if no elements match.
 
+* It majorly test those elements which has semantic meaning.
+
 > 8 Different query methods & Priority Order for Queries
 1. getByRole
 
@@ -637,13 +657,11 @@ Queries are the methods that Testing library provides to find elements on the pa
 
 **1. getByRole**
 
+* **getByRole** queries for elements with the given role.
 
 * Always give high priority than other **getBy...**
 
-* **getByRole** queries for elements with the given role.
-
 * **Role** refers to the **ARIA (Accessible Rich Internet Applications)** role which provides **semantic meaning** to content to ensure people using assistive technologies are able to use them.
-
 
 * By default, **many semantics elements in HTML have a role**
 
@@ -668,7 +686,7 @@ Queries are the methods that Testing library provides to find elements on the pa
 
 
 
-* **Custom Role** :  if you can want to make custom roles
+* **Custom Role** :  if you can want to make custom roles, then you can use **role** attribute
 
   ```html
   <div role="hello-world-text"> Hello World </div>
@@ -1628,18 +1646,41 @@ test("Testing WithIn", () => {
 
 ### 📘Hooks
 
+These hooks are use to clean Database, or reset Environment.
+
 1. beforeAll() : run only once before all test
+
 2. beforeEach() : run every time before each test
+
 3. afterAll() : run only once after all test
+
 4. afterEach() :  run every time after each test
 
 ```js
-before(("Text Here")=> {
+beforeAll(("Text Here")=> {
     // initialization every thing here
+})
+
+beforeEach(()=> {
+
+})
+
+describe("", ()=> {
+  test("", ()=> {
+    // write test cases
+  })
+})
+
+afterAll(() => {
+
+})
+
+afterEach(() => {
+
 })
 ```
 
-⚠️ **Note :** Avoid BeforeHooks if you can instead you can make this
+⚠️ **Note :** Avoid BeforeHooks if you can instead you can make this (example at bottom)
 
 ```js
 import React from "react";

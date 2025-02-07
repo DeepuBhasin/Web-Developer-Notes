@@ -894,9 +894,9 @@ The solution for the prop drilling is written below with composition component.
 
 * **prop-types** this package automatically comes with **react-create-app**
 
-```js
-import PropTypes from "prop-types";
-```
+    ```js
+    import PropTypes from "prop-types";
+    ```
 
 ```js
 // in example sending wrong data type for background property
