@@ -661,26 +661,10 @@ export default App;
 
 ![Image](./images/children-prop.png)
 
----
-
-## 📔Thinking in React Components, Composition, and Reusability
 
 ---
 
-### 📘How to Split a UI into component
-
-![Image](./images/component-size-matter.png)
-
-![Image](./images/how-to-split.png)
-
-![Image](./images/new-component.png)
-
-![Image](./images/some-more-guidlines-1.png)
-
-![Image](./images/app-component.png)
-
----
-## 📘Key
+### 📘Key
 
 ```js
 import React from 'react'
@@ -729,18 +713,91 @@ export default App
 
 ---
 
-## 📘Component Categories
+## 📔Thinking in React Components, Composition, and Reusability
+
+
+### 📘How to Split a UI into component
+
+![Image](./images/component-size-matter.png)
+
+![Image](./images/how-to-split.png)
+
+![Image](./images/new-component.png)
+
+![Image](./images/some-more-guidlines-1.png)
+
+![Image](./images/app-component.png)
+
+---
+
+### 📘Component Categories
 
 ![Image](./images/component-category.png)
 
 ---
-## 📘Props Drilling
+
+### 📘Props Drilling
 
 * When we passing props down up to nth child is called props drilling
 
+* Example
+
+  ```js
+  function Main({ userList }) {
+    return (
+      <div>
+        <h1>Main Component</h1>
+        <ChildComponent userList={userList} />
+      </div>
+    );
+  }
+
+  function ChildComponent({ userList }) {
+    return (
+      <ol>
+        {userList.map((item) => {
+          return <User key={item.id} id={item.id} name={item.name} />;
+        })}
+      </ol>
+    );
+  }
+
+  function User({ id, name }) {
+    return (
+      <li>
+        {" "}
+        id : {id} & name : {name}
+      </li>
+    );
+  }
+
+  export function App() {
+    const array = [
+      {
+        id: 1,
+        name: "John",
+      },
+      {
+        id: 2,
+        name: "Silvester",
+      },
+      {
+        id: 3,
+        name: "Henry",
+      },
+    ];
+    return (
+      // Prop drilling
+      <Main userList={array} />
+    );
+  }
+  ```
+
+The solution for the prop drilling is written below with composition component.
+
 ---
 
-## 📘Composition Component
+### 📘Composition Component
 
 ![Image](./images/composition-component-1.png)
 
@@ -748,89 +805,93 @@ export default App
 
 ![Image](./images/composition-component-3.png)
 
-* Simple Example of Composition (Removing Prop-Drilling)
+1. Simple Example of Composition (Removing Prop-Drilling) : Make Header Links in SavaTree, infoGain Report Header example
 
-```js
-import React from 'react'
-import './App.css';
+    ```js
+    import React from 'react'
+    import './App.css';
 
 
-function Main({ children }) {
-  return (
-    <div>
-      <h1>Main Component</h1>
-      {children}
-    </div>
-  )
-}
-
-function ChildComponent({ userList }) {
-  return (
-    <ol>
-      {userList.map(item => {
-        return (<User key={item.id} id={item.id} name={item.name} />)
-      })}
-    </ol>)
-}
-
-function User({ id, name }) {
-  return (<li> id : {id} & name : {name}</li>)
-}
-
-function App() {
-  const array = [
-    {
-      id: 1,
-      name: 'Deepinder'
-    },
-    {
-      id: 2,
-      name: 'Prerana Mam'
-    },
-    {
-      id: 3,
-      name: 'Pramlila Mam'
+    function Main({ children }) {
+      return (
+        <div>
+          <h1>Main Component</h1>
+          {children}
+        </div>
+      )
     }
-  ];
-  return (
-    // using composition
-    <Main>
-      <ChildComponent userList={array} />
-    </Main>
-  )
-}
-export default App
-```
-## 📘Passing Elements as Props (Alternative to children)
-* mostly use in React-Router
-```js
-import React from 'react';
-import "./App.css"
 
-function MyRender({ element }) {
-  return <div>
-    {element}
-  </div>
-}
+    function ChildComponent({ userList }) {
+      return (
+        <ol>
+          {userList.map(item => {
+            return (<User key={item.id} id={item.id} name={item.name} />)
+          })}
+        </ol>)
+    }
 
-function Button({ onClick, backgroundColor, color, children }) {
-  return <button style={{ backgroundColor, color }} onClick={onClick}>{children}</button>
-}
+    function User({ id, name }) {
+      return (<li> id : {id} & name : {name}</li>)
+    }
 
-function App() {
-  return <div className='App'>
-    <MyRender element={<Button onClick={() => alert('Hello World')} color={'black'} backgroundColor={'white'}>
-      Alert
-    </Button>}>
-    </MyRender>
-  </div>
-}
+    function App() {
+      const array = [
+        {
+          id: 1,
+          name: 'John'
+        },
+        {
+          id: 2,
+          name: 'Silvester'
+        },
+        {
+          id: 3,
+          name: 'Henry'
+        }
+      ];
+      return (
+        // using composition
+        <Main>
+          <ChildComponent userList={array} />
+        </Main>
+      )
+    }
+    export default App
+    ```
 
-export default App;
-```
+1. Passing Elements as Props (Alternative to children) : Mostly use in React-Router
+
+    ```js
+    import React from 'react';
+    import "./App.css"
+
+    function MyRender({ element }) {
+      return <div>
+        {element}
+      </div>
+    }
+
+    function Button({ onClick, backgroundColor, color, children }) {
+      return <button style={{ backgroundColor, color }} onClick={onClick}>{children}</button>
+    }
+
+    function App() {
+      return <div className='App'>
+        <MyRender element={<Button onClick={() => alert('Hello World')} color={'black'} backgroundColor={'white'}>
+          Alert
+        </Button>}>
+        </MyRender>
+      </div>
+    }
+
+    export default App;
+    ```
 ---
-## 📘PropTypes
+
+### 📘PropTypes
+
 * Best use with **Typescript**
+
 * **prop-types** this package automatically comes with **react-create-app**
 
 ```js
