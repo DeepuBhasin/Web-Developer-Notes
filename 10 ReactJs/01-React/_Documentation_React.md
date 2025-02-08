@@ -859,7 +859,7 @@ The solution for the prop drilling is written below with composition component.
     export default App
     ```
 
-1. Passing Elements as Props (Alternative to children) : Mostly use in React-Router
+2. Passing Elements as Props (Alternative to children) : Mostly use in React-Router
 
     ```js
     import React from 'react';
@@ -898,48 +898,48 @@ The solution for the prop drilling is written below with composition component.
     import PropTypes from "prop-types";
     ```
 
-```js
-// in example sending wrong data type for background property
-import React from 'react';
-import PropTypes from "prop-types";
-import "./App.css";
+    ```js
+    // in example sending wrong data type for background property
+    import React from 'react';
+    import PropTypes from "prop-types";
+    import "./App.css";
 
-function Button({ onClick, backgroundColor, color, children }) {
-  const buttonStyle = {
-    backgroundColor,
-    color,
-  };
+    function Button({ onClick, backgroundColor, color, children }) {
+      const buttonStyle = {
+        backgroundColor,
+        color,
+      };
 
-  return <button style={buttonStyle} onClick={onClick}>{children}</button>;
-}
+      return <button style={buttonStyle} onClick={onClick}>{children}</button>;
+    }
 
-Button.propTypes = {
-  onClick: PropTypes.func,
-  backgroundColor: PropTypes.string,
-  color: PropTypes.string.isRequired,
-  children: PropTypes.node
-};
+    Button.propTypes = {
+      onClick: PropTypes.func,
+      backgroundColor: PropTypes.string,
+      color: PropTypes.string.isRequired,
+      children: PropTypes.node
+    };
 
-function App() {
-  return (
-    <div className='App'>
-      <Button onClick={() => alert('Hello World')} color={'red'} backgroundColor={111}>
-        Alert
-      </Button>
-    </div>
-  );
-}
+    function App() {
+      return (
+        <div className='App'>
+          <Button onClick={() => alert('Hello World')} color={'red'} backgroundColor={111}>
+            Alert
+          </Button>
+        </div>
+      );
+    }
 
-export default App;
-```
+    export default App;
+    ```
 
-![Image](./images/propstype.png)
+    ![Image](./images/propstype.png)
 
 ---
 
-# 📔How React Works Behind the Scenes
+## 📔How React Works Behind the Scenes
 
-## 📘Components Vs Instances Vs Elements
+### 📘Components Vs Instances Vs Elements
 
 ![Image](./images/component-instance-element.png)
 
@@ -950,39 +950,40 @@ export default App;
 ![Image](./images/component-instance-element-4.png)
 
 ---
-## 📘Re-Rendering (Complete process)
+
+### 📘Re-Rendering (Complete process)
+
 * Component -> Component Instance -> Rect Element -> Dom Element
 
-
-![Image](./images/re-rendering.png)
+  ![Image](./images/re-rendering.png)
 
 * Render Means = Render Phase + Commit Phase
 
-![Image](./images/re-rendering-2.png)
+  ![Image](./images/re-rendering-2.png)
 
 * Two Situations that Render Triggers
 
-![Image](./images/re-rendering-3.png)
+  ![Image](./images/re-rendering-3.png)
 
 * The Render Phase - Creating virtual Dom
 
-![Image](./images/the-render-phase.png)
+  ![Image](./images/the-render-phase.png)
 
 * How Virtual Dom get create behind the scene
 
-![Image](./images/re-rendering-3-virtual-dom.png)
+  ![Image](./images/re-rendering-3-virtual-dom.png)
 
 * After creating Virtual Dom
 
-![Image](./images/the-reneder-phase-2.png)
+  ![Image](./images/the-reneder-phase-2.png)
 
 * Reconciliation
 
-![Image](./images/re-rendering-5-reconciliation.png)
+  ![Image](./images/re-rendering-5-reconciliation.png)
 
 * Fiber Tree
 
-![Image](./images/re-rendering-6-reconciliation-fiber.png)
+  ![Image](./images/re-rendering-6-reconciliation-fiber.png)
 
 > Reconciler
 * Reconciliation is processed by a **reconciler** and we can say that the reconciler really is the **engine of react**. Its like **heart** of react. So its this reconciler that allows us to never touch the DOM directly and instead simply tell react what the next snapshot of the UI should look like based on state
@@ -991,21 +992,21 @@ export default App;
 > Fiber Tree
 * **Fiber Tree :** : so during the initial  render of the application fiber takes the entire React element tree. so the virtual Dom and based on it builds yet another tree, which is the fiber tree. The fiber tree is a special internal tree where for each component instance and DOM element in the app there is one so-called fiber. Now what's special about this tree is that unlike react element in the virtual DOM, fibers are not recrated on every render, So the fiber tree is never destroyed, instead, it's a mutable data structure And once it has created during the initial render, it simply mutated over and over again in the future reconciliation steps. and this makes fibers the perfect place for keeping track of things like the current component state, props, side effects, list of used hooks and more, So the actual state and props of any component instance that we see the screen are internally stored inside the corresponding fiber in the fiber tree. Now, each fiber also contains a queue of work to do like updating state updating refs, running registered, side effects, performing Dom updates and so on. This is why a fiber is also defined as a unit of work.
 
+  ![Image](./images/re-rendering-7-reconciliation-fiber.png)
 
+  ![Image](./images/re-rendering-8.png)
 
-![Image](./images/re-rendering-7-reconciliation-fiber.png)
-
-![Image](./images/re-rendering-8.png)
-
-![Image](./images/re-rendering-9-painting.png)
+  ![Image](./images/re-rendering-9-painting.png)
 
 * **The once the commit phase is completed, the work in progress fiber tree becomes the current tree for the next render cycle that's because Fiber tree are never discard and never recreated from scratch, instead they are reused in order to save precious rendering time and with that, we close up the commit phase.**
 
-![Image](./images/re-rendering-9-painting-2.png)
+  ![Image](./images/re-rendering-9-painting-2.png)
 
-![Image](./images/react-putting-all-together.png)
+  ![Image](./images/react-putting-all-together.png)
 
-## 📘How Diffing Works
+---
+
+### 📘How Diffing Works
 
 ![Image](./images/diffing-1.png)
 
@@ -1013,7 +1014,7 @@ export default App;
 
 ![Image](./images/diffing-2.png)
 
-* simple meaning of below photo : if the **attributes or props** of a component change, the component will retain its current state without resetting.
+* Simple meaning of below photo : if the **attributes or props** of a component change, the component will retain its current state without resetting.
 
 ![Image](./images/diffing-3.png)
 
