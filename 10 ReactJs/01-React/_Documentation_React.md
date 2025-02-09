@@ -661,56 +661,6 @@ export default App;
 
 ![Image](./images/children-prop.png)
 
-
----
-
-### 📘Key
-
-```js
-import React from 'react'
-import './App.css';
-
-
-function ChildComponent({ userList, name }) {
-  console.log(userList);
-  console.log(name);
-
-  return (
-    <ol>
-      {userList.map(item => {
-        return (<User key={item.id} id={item.id} name={item.name} />)
-      })}
-    </ol>)
-}
-
-function User({ id, name }) {
-  return (<li> id : {id} & name : {name}</li>)
-}
-
-function App() {
-  const array = [
-    {
-      id: 1,
-      name: 'Deepinder'
-    },
-    {
-      id: 2,
-      name: 'Prerana Mam'
-    },
-    {
-      id: 3,
-      name: 'Pramlila Mam'
-    }
-  ];
-  return <div>
-    <ChildComponent userList={array} name="Hello World" />
-  </div>
-}
-
-export default App
-```
-![Image](./images/key.png)
-
 ---
 
 ## 📔Thinking in React Components, Composition, and Reusability
@@ -1010,58 +960,116 @@ The solution for the prop drilling is written below with composition component.
 
 ![Image](./images/diffing-1.png)
 
+![Image](./images/diffing-1-components.png)
+
+**⚠️Note :** For the above image use react component dev toll to check which component is render and which component is not.
+
 * The below photo conveys message :  when an element is removed from the Document Object Model (DOM), its associated state values are also removed, resulting in a reset of all values.
 
-![Image](./images/diffing-2.png)
+  ![Image](./images/diffing-2.png)
 
 * Simple meaning of below photo : if the **attributes or props** of a component change, the component will retain its current state without resetting.
 
-![Image](./images/diffing-3.png)
+  ![Image](./images/diffing-3.png)
 
-Example of **key & without Key**
+---
 
-```js
-import React, { useState } from 'react';
-import "./App.css";
-
-function CountButton({ parentCount }) {
-  const [count, setCount] = useState(0);
-
-  return <div>
-    <hr />
-    <h1>Parent Count : {parentCount}</h1>
-    <h1>Child Count : {count}</h1>
-    <button onClick={() => setCount(e => e + 1)}>Child Click</button>
-  </div>
-}
-
-function App() {
-  const [parentCount, setParentCount] = useState(0);
-  return (
-    <div className='App'>
-      <button onClick={() => setParentCount(e => e + 1)}>Parent Click</button>
-      <CountButton parentCount={parentCount} />
-      <CountButton parentCount={parentCount} key={parentCount} />
-    </div>
-  );
-}
-
-export default App;
-```
-
-## 📘Keys
+### 📘Keys
 
 * Key help to re-render the component (reset values or state) Example : **When we are using Tabs**
 
-![Image](./images/key-1.png)
+  ![Image](./images/key-1.png)
 
-![Image](./images/key-2.png)
+  ![Image](./images/key-2.png)
 
-![Image](./images/key-3.png)
+  ![Image](./images/key-3.png)
 
-![Image](./images/key-4.png)
+  ![Image](./images/key-4.png)
 
-## 📘Render Logics
+* Example wit **Key and Without Key**
+
+  ```js
+  import React, { useState } from "react";
+
+  function CountButton({ parentCount }) {
+    const [count, setCount] = useState(0);
+
+    return (
+      <div>
+        <hr />
+        <h1>Parent Count : {parentCount}</h1>
+        <h1>Child Count : {count}</h1>
+        <button onClick={() => setCount((e) => e + 1)}>Child Click</button>
+      </div>
+    );
+  }
+
+  export function App() {
+    const [parentCount, setParentCount] = useState(0);
+    return (
+      <div className="App">
+        <button onClick={() => setParentCount((e) => e + 1)}>Parent Click</button>
+
+        {/* without key prop, it will not reset the state value when parent re-render*/}
+        <CountButton parentCount={parentCount} />
+
+        {/* with key prop, it will reset the state value when parent re-render*/}
+        <CountButton parentCount={parentCount} key={parentCount} />
+      </div>
+    );
+  }
+  ```
+
+* Use full example for **keys in list** with screen shot
+
+  ```js
+  // use full example
+  import React from 'react'
+  import './App.css';
+
+
+  function ChildComponent({ userList, name }) {
+    console.log(userList);
+    console.log(name);
+
+    return (
+      <ol>
+        {userList.map(item => {
+          return (<User key={item.id} id={item.id} name={item.name} />)
+        })}
+      </ol>)
+  }
+
+  function User({ id, name }) {
+    return (<li> id : {id} & name : {name}</li>)
+  }
+
+  function App() {
+    const array = [
+      {
+        id: 1,
+        name: 'John'
+      },
+      {
+        id: 2,
+        name: 'Deo'
+      },
+      {
+        id: 3,
+        name: 'Silvester'
+      }
+    ];
+    return <div>
+      <ChildComponent userList={array} name="Hello World" />
+    </div>
+  }
+
+  export default App
+  ```
+  ![Image](./images/key.png)
+---
+
+### 📘Render Logics
 
 ![Image](./images/types-of-render-logic.png)
 
