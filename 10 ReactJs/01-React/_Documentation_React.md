@@ -1045,18 +1045,18 @@ The solution for the prop drilling is written below with composition component.
   }
 
   function App() {
-    const array = [
+      const array = [
       {
         id: 1,
-        name: 'John'
+        name: 'Deepinder'
       },
       {
         id: 2,
-        name: 'Deo'
+        name: 'Prerana Mam'
       },
       {
         id: 3,
-        name: 'Silvester'
+        name: 'Pramlila Mam'
       }
     ];
     return <div>
@@ -1069,15 +1069,19 @@ The solution for the prop drilling is written below with composition component.
   ![Image](./images/key.png)
 ---
 
-### 📘Render Logics
+### 📘Render Logics, Side Effect & Pure Functions
 
 ![Image](./images/types-of-render-logic.png)
 
-![Image](./images/rules-for-render-logic.png)
 
 ![Image](./images/functional-programming.png)
 
-## 📘How state updates are batched
+
+![Image](./images/rules-for-render-logic.png)
+
+---
+
+### 📘How state updates are batched
 
 ![Image](./images/how-state-updates-are-batched-1.png)
 
@@ -1089,30 +1093,37 @@ The solution for the prop drilling is written below with composition component.
 
 ![Image](./images/how-state-updates-are-batched-5.png)
 
-example
 
 ```js
-import React, { useState } from 'react';
-import "./App.css";
-function App() {
+import React, { useState } from "react";
+export function App() {
   const [count, setCount] = useState(0);
 
-  function updateCount() {
-    setCount(e => e + 1);
-    setCount(e => e + 1);
-    setCount(e => e + 1);
+  function updateSingleCount() {
+    setCount(count + 1);
+
+    // this will print one step back value because state value always update after commit
+    console.log(count);
   }
 
-  return (<div>
-    <h1>count : {count}</h1>
-    <button onClick={updateCount}>Increment by 3</button>
-  </div>)
+  function updateThreeCount() {
+    setCount((e) => e + 1);
+    setCount((e) => e + 1);
+    setCount((e) => e + 1);
+  }
+
+  return (
+    <div>
+      <h1>count : {count}</h1>
+      <button onClick={updateSingleCount}>Increment by 1</button>
+      <button onClick={updateThreeCount}>Increment by 3</button>
+    </div>
+  );
 }
-
-export default App;
 ```
+---
 
-## 📘Event Propagation and Delegation
+### 📘Event Propagation and Delegation
 
 ![Image](./images/event-propagation-event-delegation-1.png)
 
@@ -1120,37 +1131,58 @@ export default App;
 
 ![Image](./images/event-propagation-event-delegation-2.png)
 
-*  all the way until it reaches the target element and the target element is simply the element on which the event was actually first triggered. So at the target, we can choose to handle the event by placing and event handler function on that element.
-*  Then immediately after the target element has been reached, the event object travels all the way back up the entire tree during the so-called bubbling phase.
+* all the way until it reaches the target element and the target element is simply the element on which the event was actually first triggered. So at the target, we can choose to handle the event by placing and event handler function on that element.
+
+* Then immediately after the target element has been reached, the event object travels all the way back up the entire tree during the so-called bubbling phase.
 
 ![Image](./images/event-propagation-event-delegation-3.png)
 
 > Now there are two very important things to understand about this process
 
-* 1. The first is that during the capturing and bubbling phase, the event really goes through every single child and parent element one by one. in fact, it's as if the event originated or happened in each of these dom elements
+* The first is that during the capturing and bubbling phase, the event really goes through every single child and parent element one by one. in fact, it's as if the event originated or happened in each of these dom elements
+
 * The Second important thing is that by default, event handlers listen to events not only on the target but element also during the bubbling phase. so if we put these two things together, it means that every single event handler in a parent element will also be executed during the bubbling phase, as long as it's also listening for the same type of event **For example** *if we added another click event handler to the handler element, then during this whole process, both the handlers at the target and the header element would be executed when the click happens.*
 
 * Now, sometimes we actually don't want this behavior and so in that case, we can prevent the event from bubbling up any further simply by calling the **stop propagation** method on the event object
+
 * and this work in vanilla javascript and also in react, but it's actually very rarely necessary so only use this if there really is no other solution.
+
 * Okay, so this essentially how events work in the browser.
 
 ![Image](./images/event-propagation-event-delegation-4.png)
 
 ![Image](./images/event-propagation-event-delegation-5.png)
 
-## 📘Synthetic Events
+---
+
+### 📘Synthetic Events
 
 ![Image](./images/synthetic-events.png)
 
-## 📘React Third Party Library
+---
+
+### 📘React Third Party Library
 
 ![Image](./images/react-3rd-party-library.png)
 
+---
 
-# 📔Effects and Data Fetching
+### Summary
 
-## 📘Component lifecycle
+![Image](./images/summary-part-1.png)
+
+![Image](./images/summary-part-2.png)
+
+![Image](./images/summary-part-3.png)
+
+---
+
+## 📔Effects and Data Fetching
+
+### 📘Component lifecycle
+
 * Major point is here that component life cycle is totally depend upon **useEffect**
+
 * **useEffect** works only after the **painting on the browser** because if we Making an API request may cause the browser to become unresponsive until it receives a response from the server.
 
 
@@ -1158,7 +1190,7 @@ export default App;
 
 ---
 
-## 📘SideEffect
+### 📘SideEffect
 
 ![Image](./images/side-effect-in-react.png)
 
@@ -1496,9 +1528,9 @@ export default App;
 ```
 ---
 
-# 📔Custom Hooks, Refs, and More State
+## 📔Custom Hooks, Refs, and More State
 
-## 📘React Hooks and their rules
+### 📘React Hooks and their rules
 
 ![Image](./images/what-are-hooks.png)
 
