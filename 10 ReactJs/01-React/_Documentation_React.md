@@ -1,20 +1,31 @@
 ### 📘Informatics Things
 
 * Type **React.new** in Address bar for open react code panel
+
 * Values Persist
-```js
-// useState
-const [total,setTotal] = useState(0)
+  ```js
+  // useState
+  const [total,setTotal] = useState(0)
 
-//useRef
-const inputRef = useRef(0)
+  //useRef
+  const inputRef = useRef(0)
 
-// Normal Variable
-let total = 0;
+  // Normal Variable
+  let total = 0;
 
-// On every render normal total variable value get reset to zero but in useState and useRef value will not reset on every render it will persist the value
-```
+  // On every render normal total variable value get reset to zero but in useState and useRef value will not reset on every render it will persist the value
+  ```
 * **React only cares about showing content and handling user events**
+
+* Always create variables (any variable) outside the the render method
+
+```js
+const NAME = 'John';
+
+function App() {
+  return <h1>{NAME}</h1>
+}
+```
 
 ---
 
@@ -1186,20 +1197,41 @@ export function App() {
 * **useEffect** works only after the **painting on the browser** because if we Making an API request may cause the browser to become unresponsive until it receives a response from the server.
 
 
-![Image](./images/component-life-cyle.png)
+  ![Image](./images/component-life-cyle.png)
 
 ---
 
 ### 📘SideEffect
 
-![Image](./images/side-effect-in-react.png)
+UnderStand the Problem first
 
-![Image](./images/side-effect-in-react-1.png)
+  ```js
+  // This will create infinite api call because it creating re-rendering which leads to infinite loop
 
-* Use **useEffect** with **async/await** method
+  import React, {useState } from "react";
+
+  export function App() {
+    const [posts, setPosts] = useState([]);
+
+    fetch("https://jsonplaceholder.typicode.com/posts").then((response) => {
+      response.json().then((data) => {
+        setPosts(data);
+      });
+    });
+
+    return null;
+  }
+  ```
+
+  ![Image](./images/side-effect-in-react.png)
+
+  ![Image](./images/side-effect-in-react-1.png)
+
+  
 ```js
+// Use useEffect with async/await method
+
 import React, { useEffect } from 'react';
-import "./App.css";
 function App() {
 
   useEffect(() => {
@@ -1218,58 +1250,60 @@ export default App;
 ```
 ---
 
-## 📘Error Handling in useEffect
+### 📘Error Handling in useEffect
+
 * when ever your do any kind of **api** call you always must do **Error Handling**, always use **try-catch**
+
 * When ever user **Lost Internet Connection**
+
 * **1xx, 2xx, 3xx, 4xx, 5xx** Errors
-```js
-import { useEffect, useState } from 'react';
-import "./App.css";
-function App() {
-  const [loading, setLoading] = useState(false);
-  const [posts, setPosts] = useState([]);
-  const [error, setError] = useState('');
 
-  useEffect(() => {
-    (async function () {
-      setLoading(true);
+  ```js
+  import { useEffect, useState } from 'react';
+  function App() {
+    const [loading, setLoading] = useState(false);
+    const [posts, setPosts] = useState([]);
+    const [error, setError] = useState('');
 
-      try {
-        let result = await fetch('https://jsonplaceholder.typicode.com/posts');
+    useEffect(() => {
+      (async function () {
+        setLoading(true);
 
-        if (!result.ok) throw new Error("Something went wrong with fetching posts")
+        try {
+          let result = await fetch('https://jsonplaceholder.typicode.com/posts');
 
-        let data = await result.json();
-        setPosts(data);
-        setError('');
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    }()
-    )
-  }, [])
+          if (!result.ok) throw new Error("Something went wrong with fetching posts")
 
-  return <div>
-    {loading && <h2>Loading...</h2>}
-    {!loading && !error && posts.length > 0 ? <ul>
-      {posts.map(item => {
-        return (<li key={item.id}>{item.title}</li>)
-      })}
-    </ul> : null}
+          let data = await result.json();
+          setPosts(data);
+          setError('');
+        } catch (error) {
+          setError(error.message);
+        } finally {
+          setLoading(false);
+        }
+      }()
+      )
+    }, [])
 
-    {error && <h2> {error}</h2>}
+    return <div>
+      {loading && <h2>Loading...</h2>}
+      {!loading && !error && posts.length > 0 ? <ul>
+        {posts.map(item => {
+          return (<li key={item.id}>{item.title}</li>)
+        })}
+      </ul> : null}
 
-  </div>;
-}
-export default App;
-```
+      {error && <h2> {error}</h2>}
+
+    </div>;
+  }
+  export default App;
+  ```
 ---
 
+### 📘Dependency Array
 
-
-## 📘Dependency Array
 ![Image](./images/dependency-array.png)
 
 ![Image](./images/dependency-array-1.png)
