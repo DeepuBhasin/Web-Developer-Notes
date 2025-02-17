@@ -1227,7 +1227,7 @@ UnderStand the Problem first
 
   ![Image](./images/side-effect-in-react-1.png)
 
-  
+
 ```js
 // Use useEffect with async/await method
 
@@ -1248,6 +1248,9 @@ function App() {
 
 export default App;
 ```
+
+**⚠️ Note :** One of the best example changing of title bar from react its a side effect, in which we are changing thing outside the world.
+
 ---
 
 ### 📘Error Handling in useEffect
@@ -1310,6 +1313,8 @@ export default App;
 
 ![Image](./images/dependency-array-2.png)
 
+![Image](./images/dependency-array-3-1.png)
+
 ![Image](./images/dependency-array-3.png)
 
 
@@ -1317,21 +1322,19 @@ Example : How useEffect Works after painting
 
 ```js
 import { useEffect } from 'react';
-import "./App.css";
 function App() {
 
-  // render on initial render
+  // render on initial render, useEffect only run after paint
   useEffect(() => {
     console.log('A');
   }, [])
 
-  // render on every sideEffect
+  // render on every sideEffect, useEffect only run after paint
   useEffect(() => {
     console.log('B');
   })
 
-  // render on every render
-  // it will print first because it render first in browser hence its a render logic
+  // render on every render, This code is placed in render logic which will execute on render
   console.log('C');
   return null;
 }
@@ -1339,6 +1342,9 @@ function App() {
 export default App;
 
 /*output
+We are getting C very first instead of A and B because C placed in render login will other place in useEffect. useEffect always work after paint while render logics work when component renders.
+
+
 // initial render
 C
 A
@@ -1350,216 +1356,254 @@ B
 */
 ```
 
-**📚 conceptual example :**
-
-```js
-import React, { useEffect, useState } from 'react'
-
-function App() {
-
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    document.body.addEventListener("click", function () {
-      console.log(count);
-    })
-  }, [])
-
-  return (
-    <div>
-      <h2>{count}</h2>
-      <button onClick={() => setCount(c => c + 1)} > Increment</button>
-    </div >
-  )
-}
-
-export default App
-```
-
 ---
 
-## 📘Clean-up Function
-
-```js
-// open console and see the problem first
-import React, { useEffect, useState } from 'react'
-
-function App() {
-
-  const [count, setCount] = useState(0);
-
-  // this is not a good code
-  useEffect(() => {
-    const t = function () {
-      console.log(count);
-    }
-    document.body.addEventListener("click", t);
-  }, [])
-
-  return (
-    <div>
-      <h2>{count}</h2>
-      <button onClick={() => setCount(c => c + 1)} > Increment</button>
-    </div >
-  )
-}
-
-export default App
-```
-
-
+### 📘Clean-up Function
 
 ![Image](./images/cleanup-function.png)
 
 * Clean-up function always works in two situation
+
 1. Unmount
+
 2. Re-Rendering
 
 ```js
-import { useEffect, useState } from 'react';
-import "./App.css";
+import { useEffect, useState } from "react";
 
-function List() {
+export function App() {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    return function () {
-      console.log('unmount count :', count);
-    }
-  }, [count])
-  return (<div>
-    <h3>count : {count}</h3>
-    <button onClick={() => setCount(n => n + 1)}>Count</button>
-  </div>)
+    console.log("Mount");
+
+    return () => {
+      console.log("Unmount");
+    };
+  }, [count]);
+
+  return (
+    <>
+      <h3>count : {count}</h3>
+      <button onClick={() => setCount((n) => n + 1)}>Count</button>
+    </>
+  );
 }
-
-function App() {
-  const [show, setShow] = useState(true);
-
-  return (<div>
-    <button onClick={() => setShow(n => !n)}>{show ? 'Hide' : 'Show'}</button>
-    {show && <List />}
-  </div>)
-}
-
-export default App;
 ```
 
-```js
-// clean up function for http request (with dependency array)
+* Attaching addEventListener Problem
 
-import { useEffect, useState } from 'react';
-import "./App.css";
+  ```js
+  // Problem is here when list component is unmount click function still exist
+  import { useEffect, useState } from "react";
 
-function UserDetails({ post }) {
-  return (<div>
-    <h3> Id : {post.id}</h3>
-    <h3> User Id : {post.userId}</h3>
-    <h3> Title : {post.title}</h3>
-    <h3> Body : {post.body}</h3>
-  </div>)
-}
+  function List() {
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+      document.querySelector(".main").addEventListener("click", () => {
+        console.log("unmount count :", count);
+      });
+    }, []);
+
+    // OR
+
+    useEffect(() => {
+      // In this case event will accumulate and attach multiple events listener
+      document.querySelector(".main").addEventListener("click", () => {
+        console.log("unmount count :", count);
+      });
+    }, [count]);
+
+    return (
+      <>
+        <h3>count : {count}</h3>
+        <button onClick={() => setCount((n) => n + 1)}>Count</button>
+      </>
+    );
+  }
+
+  export function App() {
+    const [show, setShow] = useState(true);
+
+    return (
+      <div
+        className="main"
+        style={{ height: "200px", width: "200px", backgroundColor: "red" }}
+      >
+        <p>Click in the red box</p>
+        <button onClick={() => setShow((n) => !n)}>
+          {show ? "Hide" : "Show"}
+        </button>
+        {show && <List />}
+      </div>
+    );
+  }
+
+  export default App;
+
+  //Solution : Clean up function will remove the event which is register on body element.
+  import { useEffect, useState } from "react";
+
+  function List() {
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+      const clickFn = () => {
+        console.log("clicked");
+      };
+
+      document.querySelector(".main").addEventListener("click", clickFn);
+
+      return () => {
+        document.querySelector(".main").removeEventListener("click", clickFn);
+      };
+    }, []);
+
+    return (
+      <>
+        <h3>count : {count}</h3>
+        <button onClick={() => setCount((n) => n + 1)}>Count</button>
+      </>
+    );
+  }
+
+  export function App() {
+    const [show, setShow] = useState(true);
+
+    return (
+      <div
+        className="main"
+        style={{ height: "200px", width: "200px", backgroundColor: "red" }}
+      >
+        <p>Click in the red box</p>
+        <button onClick={() => setShow((n) => !n)}>
+          {show ? "Hide" : "Show"}
+        </button>
+        {show && <List />}
+      </div>
+    );
+  }
+
+  export default App;
+  ```
+* Api Abort Cancel with cleanup function
+
+  ```js
+  // clean up function for http request (with dependency array)
+  import { useEffect, useState } from 'react';
+
+  function UserDetails({ post }) {
+    return (<div>
+      <h3> Id : {post.id}</h3>
+      <h3> User Id : {post.userId}</h3>
+      <h3> Title : {post.title}</h3>
+      <h3> Body : {post.body}</h3>
+    </div>)
+  }
 
 
-function App() {
-  const [loading, setLoading] = useState(false);
-  const [post, setPost] = useState({});
-  const [error, setError] = useState('');
-  const [id, setId] = useState('');
+  function App() {
+    const [loading, setLoading] = useState(false);
+    const [post, setPost] = useState({});
+    const [error, setError] = useState('');
+    const [id, setId] = useState('');
 
-  useEffect(() => {
-    const controller = new AbortController();
-    (async function (id) {
-      if (id) {
-        setLoading(true);
-        try {
-          let result = await fetch('https://jsonplaceholder.typicode.com/posts/' + id, { signal: controller.signal });
-          if (!result.ok) throw new Error("Something went wrong with fetching posts")
+    useEffect(() => {
+      const controller = new AbortController();
+      (async function (id) {
+        if (id) {
+          setLoading(true);
+          try {
+            let result = await fetch('https://jsonplaceholder.typicode.com/posts/' + id, { signal: controller.signal });
+            if (!result.ok) throw new Error("Something went wrong with fetching posts")
 
-          let data = await result.json();
-          setPost(data);
-          setError('');
-        } catch (error) {
-          console.log('name', error.name);
-          console.log('message', error.message);
-          if (error.name !== "AbortError") {
-            setError(error.message);
+            let data = await result.json();
+            setPost(data);
+            setError('');
+          } catch (error) {
+            console.log('name', error.name);
+            console.log('message', error.message);
+            if (error.name !== "AbortError") {
+              setError(error.message);
+            }
+          } finally {
+            setLoading(false);
           }
-        } finally {
-          setLoading(false);
+        }
+      }(id)
+      )
+      return function () {
+        controller.abort();
+      }
+    }, [id])
+
+    return <div>
+      <input type='text' name='id' onChange={(e) => setId(e.target.value)} value={id} />
+      {loading && <h2>Loading...</h2>}
+      {!loading && !error && <UserDetails post={post} />}
+      {error && <h2> {error}</h2>}
+
+    </div>;
+  }
+  export default App;
+  ```
+
+* Keydown example with cleanup function
+
+  ```js
+  // clean up function with empty dependency array
+  import { useEffect, useState } from 'react';
+  import "./App.css";
+
+  function HelloWorldTwo() {
+    useEffect(() => {
+      const keydownHandler = function (e) {
+        if (e.code === "Escape") {
+          console.log('close Hello world one');
         }
       }
-    }(id)
-    )
-    return function () {
-      controller.abort();
-    }
-  }, [id])
-
-  return <div>
-    <input type='text' name='id' onChange={(e) => setId(e.target.value)} value={id} />
-    {loading && <h2>Loading...</h2>}
-    {!loading && !error && <UserDetails post={post} />}
-    {error && <h2> {error}</h2>}
-
-  </div>;
-}
-export default App;
-```
-
-```js
-// clean up function with empty dependency array
-import { useEffect, useState } from 'react';
-import "./App.css";
-
-function HelloWorldTwo() {
-  useEffect(() => {
-    const keydownHandler = function (e) {
-      if (e.code === "Escape") {
-        console.log('close Hello world one');
+      document.addEventListener("keydown", keydownHandler);
+      return () => {
+        document.removeEventListener("keydown", keydownHandler);
       }
-    }
-    document.addEventListener("keydown", keydownHandler);
-    return () => {
-      document.removeEventListener("keydown", keydownHandler);
-    }
-  }, [])
-}
+    }, [])
+  }
 
-function HelloWorldOne() {
-  useEffect(() => {
-    const keydownHandler = function (e) {
-      if (e.code === "Escape") {
-        console.log('close Hello world Two');
+  function HelloWorldOne() {
+    useEffect(() => {
+      const keydownHandler = function (e) {
+        if (e.code === "Escape") {
+          console.log('close Hello world Two');
+        }
       }
-    }
-    document.addEventListener("keydown", keydownHandler);
-    return () => {
-      document.removeEventListener("keydown", keydownHandler);
-    }
-  }, [])
+      document.addEventListener("keydown", keydownHandler);
+      return () => {
+        document.removeEventListener("keydown", keydownHandler);
+      }
+    }, [])
 
 
-  return <div>
-    Hello World
-  </div>
-}
+    return <div>
+      Hello World
+    </div>
+  }
 
 
-function App() {
-  const [showOne, setShowOne] = useState(false);
-  const [showTwo, setShowTwo] = useState(false);
-  return <div>
-    <button onClick={() => setShowOne(e => !e)}> {showOne ? 'Hide One' : 'Show One'}</button>
-    <button onClick={() => setShowTwo(e => !e)}> {showTwo ? 'Hide Two' : 'Show Two'}</button>
-    {showOne && <HelloWorldOne />}
-    {showTwo && <HelloWorldTwo />}
-  </div>
+  function App() {
+    const [showOne, setShowOne] = useState(false);
+    const [showTwo, setShowTwo] = useState(false);
+    return <div>
+      <button onClick={() => setShowOne(e => !e)}> {showOne ? 'Hide One' : 'Show One'}</button>
+      <button onClick={() => setShowTwo(e => !e)}> {showTwo ? 'Hide Two' : 'Show Two'}</button>
+      {showOne && <HelloWorldOne />}
+      {showTwo && <HelloWorldTwo />}
+    </div>
 
-}
+  }
 
-export default App;
-```
+  export default App;
+  ```
 ---
 
 ## 📔Custom Hooks, Refs, and More State
