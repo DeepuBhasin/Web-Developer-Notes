@@ -634,7 +634,7 @@ export default App
 
 ---
 
-## 📘Derived State
+### 📘Derived State
 
 More you have **states** more you have **re-rendering**
 
@@ -1620,9 +1620,10 @@ export function App() {
 
 ![Image](./images/react-hooks-4.png)
 
-example
+![Image](./images/react-hooks-5.png)
 
 ```js
+// Example : if don't follow the rules of hooks like in below example  if hook use as conditionally it could mess up this entire order here.
 import { useState } from 'react';
 import "./App.css";
 
@@ -1645,135 +1646,142 @@ function App() {
 export default App;
 ```
 ![Image](images/practical-example-of-react-rules.png)
+
 ---
 
-## 📘More Details of useState
+### 📘More Details of useState
 
-* we can initialize the values in useState Hooks by **callback function** as well
+* We can initialize the values in useState Hooks by **callback function** as well
+
 * It only works on **initial render**
-* we cannot send parameters in **callback function**
-* So whenever the initial value of the state depends on some sort of computation we should always pass the callback function example value from localstorage. otherwise we use separate **useEffect** function to get the value from **localstorage** and then set the value for that state
-Example
-```js
-import { useEffect, useState } from 'react';
-import "./App.css";
 
-function App() {
+* We cannot send parameters in **callback function**
 
-  const [count, setCount] = useState(() => {
-    return Number(localStorage.getItem('count')) || 0
-  });
+* So whenever the initial value of the state depends on some sort of computation we should always pass the callback function example value from localstorage. otherwise we use separate **useEffect** function to get the value from **localstorage** and then set the value for that state.
 
-  useEffect(() => {
-    localStorage.setItem('count', count);
-  }, [count])
+  ```js
+  import { useEffect, useState } from 'react';
 
-  return <div>
-    <h3>count : {count}</h3>
-    <button onClick={() => setCount(e => e + 1)}> Increment</button>
-  </div>
+  function App() {
 
-}
+    // this is the best practice to set state using callback
+    const [count, setCount] = useState(() => {
+      return Number(localStorage.getItem('count')) || 0
+    });
 
-export default App;
-```
-![Image](./images/sumarry-usestate-hook.png)
+    useEffect(() => {
+      localStorage.setItem('count', count);
+    }, [count])
 
-## 📘UseRef
+    return <div>
+      <h3>count : {count}</h3>
+      <button onClick={() => setCount(e => e + 1)}> Increment</button>
+    </div>
 
-* **useRef** is use to *stop manually selecting DOM element*
-* Selecting any element by using *document.getElementBy('id')* is not good idea because you already know that *React is all about being declarative and so manually selecting a Dom element like this is not really the react way of doing things* example not doing adding classes, id etc
-* **Majorly use** for
-  1. Selecting element
-  2. Storing Data for inputs or timer (setIntervale or setTimeout)
-
-![Image](./images/useRef-1.png)
-
-![Image](./images/useRef-2.png)
-
-Example
-
-```js
-import React, { useEffect, useRef, useState } from 'react'
-import './App.css';
-
-const App = () => {
-  //1. creating reference like creating element or class in vanilla javascript
-  const inputElement = useRef(null);
-  const [inputValue, setInputValue] = useState('');
-
-  useEffect(() => {
-    function callback(e) {
-
-      // checking the current element
-      if (document.activeElement === inputElement.current) return
-
-      if (e.code === "Enter") {
-        // make focus on selected element
-        inputElement.current.focus();
-        setInputValue('');
-      }
-    }
-    document.addEventListener('keydown', callback)
-
-    // printing the selected element which is in current property
-    console.log(inputElement.current);
-
-    // remove event listener when component get unmount
-    return () => document.removeEventListener("keydown", callback)
-
-  }, [])
-
-  return (<div>
-    <input
-      type='text'
-      name=''
-      //2. attaching that reference which is provided by useRef by react, because react is declarative in nature
-      ref={inputElement}
-      value={inputValue}
-      onChange={(e) => setInputValue(e.target.value)}
-    />
-  </div>
-  )
-}
-
-export default App
-```
-
-![Image](./images/useRef-3.png)
-
----
-## 📘Refs to persist data between Renders
-
-* In this example Component will not re-render but the value will *persist between Renders* for example *for count value*
-* best use when we don't want to show any data on DOM
-
-
-```js
-import React, { useRef } from 'react'
-import './App.css';
-
-const App = () => {
-  const inputElement = useRef(1);
-
-  const incrementHandler = function () {
-    inputElement.current += 1
-    console.log('ref', inputElement.current);
   }
 
-  return (<div>
-    <h1>Count : {inputElement.current}</h1>
-    <button onClick={() => incrementHandler()}>
-      Increment
-    </button>
-  </div>)
-}
+  export default App;
+  ```
 
-export default App
-```
-![Image](./images/use-ref-value-persist.png)
+  ![Image](./images/sumarry-usestate-hook.png)
+
 ---
-## 📘Whats are Custom Hooks When to create One
+
+### 📘UseRef
+
+* **useRef** is use to *stop manually selecting DOM element*
+
+* Selecting any element by using *document.getElementBy('id')* is not good idea because you already know that *React is all about being declarative and so manually selecting a Dom element like this is not really the react way of doing things* example not doing adding classes, id etc
+
+  ![Image](./images/useRef-1.png)
+
+  ![Image](./images/useRef-2.png)
+
+
+  ```js
+  import React, { useEffect, useRef, useState } from 'react'
+
+  const App = () => {
+    //1. creating reference like creating element or class in vanilla javascript
+    const inputElement = useRef(null);
+    const [inputValue, setInputValue] = useState('');
+
+    useEffect(() => {
+      function callback(e) {
+
+        // checking the current element
+        if (document.activeElement === inputElement.current) return
+
+        if (e.code === "Enter") {
+          // make focus on selected element
+          inputElement.current.focus();
+          setInputValue('');
+        }
+      }
+      document.addEventListener('keydown', callback)
+
+      // printing the selected element which is in current property
+      console.log(inputElement.current);
+
+      // remove event listener when component get unmount
+      return () => document.removeEventListener("keydown", callback)
+
+    }, [])
+
+    return (<div>
+      <input
+        type='text'
+        name=''
+        //2. attaching that reference which is provided by useRef by react, because react is declarative in nature
+        ref={inputElement}
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+      />
+    </div>
+    )
+  }
+
+  export default App
+  ```
+
+  ![Image](./images/useRef-3.png)
+
+---
+
+### 📘Refs to persist data between Renders
+
+* In this example Component will not re-render but the value will *persist between Renders* for example *for count value*
+
+* Best use when we don't want to show any data on DOM
+
+  ```js
+  import React, { useRef } from 'react'
+
+  const App = () => {
+    const inputElement = useRef(1);
+
+    const incrementHandler = function () {
+      inputElement.current += 1
+      console.log('ref', inputElement.current);
+    }
+
+    return (<div>
+      {/* Will not re-render in JSX */}
+      <h1>Count : {inputElement.current}</h1>
+      <button onClick={() => incrementHandler()}>
+        Increment
+      </button>
+    </div>)
+  }
+
+  export default App
+  ```
+  ![Image](./images/use-ref-value-persist.png)
+
+
+---
+
+### 📘Whats are Custom Hooks When to create One
 
 ![Image](./images/custome-hook.png)
 
