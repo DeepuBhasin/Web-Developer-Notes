@@ -1699,6 +1699,7 @@ export default App;
 
 
   ```js
+  // use full example
   import React, { useEffect, useRef, useState } from 'react'
 
   const App = () => {
@@ -1709,11 +1710,11 @@ export default App;
     useEffect(() => {
       function callback(e) {
 
-        // checking the current element
+        // document.activeElement checking the current selected element
         if (document.activeElement === inputElement.current) return
 
         if (e.code === "Enter") {
-          // make focus on selected element
+          // inputElement.current is your current DOM element, to make focus on selected element we use .focus() method
           inputElement.current.focus();
           setInputValue('');
         }
@@ -1755,29 +1756,38 @@ export default App;
 * Best use when we don't want to show any data on DOM
 
   ```js
-  import React, { useRef } from 'react'
+  import * as React from "react";
 
-  const App = () => {
-    const inputElement = useRef(1);
+  export const App = () => {
+    const [count, setCount] = React.useState(0);
+    const inputElement = React.useRef(1);
 
-    const incrementHandler = function () {
-      inputElement.current += 1
-      console.log('ref', inputElement.current);
-    }
+    const incrementHandlerByState = function () {
+      // This function will re-render in JSX
+      setCount((count) => count + 1);
+    };
 
-    return (<div>
-      {/* Will not re-render in JSX */}
-      <h1>Count : {inputElement.current}</h1>
-      <button onClick={() => incrementHandler()}>
-        Increment
-      </button>
-    </div>)
-  }
+    const incrementHandlerByRef = function () {
+      // This function will not re-render any thing in JSX
+      inputElement.current += 1;
+      console.log("inputElement", inputElement.current);
+    };
 
-  export default App
+    return (
+      <div>
+        <h2>Input : {inputElement.current}</h2>
+        {/* Will not re-render in JSX until state is update*/}
+        <h2>Count : {count}</h2>
+        <button onClick={() => incrementHandlerByState()}>
+          Increment By State
+        </button>
+        <button onClick={() => incrementHandlerByRef()}>Increment By Ref</button>
+      </div>
+    );
+  };
+
+  export default App;
   ```
-  ![Image](./images/use-ref-value-persist.png)
-
 
 ---
 
@@ -1789,7 +1799,6 @@ Example : Custom Hook with callback function
 
 ```js
 import React, { useEffect, useState } from 'react';
-import './App.css';
 
 function useFetch(url) {
   const [data, setData] = useState([]);
@@ -1840,7 +1849,6 @@ export default App;
 ```js
 // Another Example
 import { useEffect } from 'react';
-import "./App.css";
 
 function useEventHook(event, key, callback) {
   const fn = function (e) {
@@ -1872,9 +1880,9 @@ export default App;
 ```
 ---
 
-# 📔React Before Hooks Class-Based React
+## 📔React Before Hooks Class-Based React
 
-## 📘Functional Vs Class Component
+### 📘Functional Vs Class Component
 
 ```js
 import React, { Component } from 'react'
