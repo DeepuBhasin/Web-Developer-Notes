@@ -255,9 +255,13 @@ let person : Person = {
 // Because in tupal we cannot add more than two element
 person.role.push('operator')    // Error
 ```
+
 7. Enum Type :
-* **Enumeration**
+
+* Enumeration : set of constants
+
 * when want to **use like constants** (when we use *same words* all over that application)
+
 * Major difference between *enum and object* is **objects** are use to store various information where are **enum** are collection of very closely related values eg only User-Types : Admin, View, Operator etc like a constant.
 
 ```javascript
@@ -1645,7 +1649,7 @@ export interface ITechnicianPayrollGrandTotal {
     total?: number;
     flaggedHoursTotal?: number;
 }
- 
+
 const getDepartmentData = <U extends keyof ITechnicianPayrollGrandTotal>(
     key: U
 ): React.ReactElement[] | undefined => {
@@ -1784,11 +1788,11 @@ namespace App {
   "start": "lite-server"
 },
 ```
-2. **By using EsModule :** 
+2. **By using EsModule :**
    1. Without bundler example below (not a good way)
    2. With bundler using ts loaders (already written in webpack documentation) (best one)
 
-* tsconfig.json 
+* tsconfig.json
 ```js
 {
   "compilerOptions": {

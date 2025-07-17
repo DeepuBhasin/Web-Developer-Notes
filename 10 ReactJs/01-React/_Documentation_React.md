@@ -1930,10 +1930,11 @@ export default class App extends Component {
 
 ---
 
-# 📔The Advanced useReducer Hook
+## 📔The Advanced useReducer Hook
 
 
-## 📘useReducer
+### 📘useReducer
+
 ![Image](./images/user-reducer-1.png)
 
 ![Image](./images/user-reducer-2.png)
@@ -1941,6 +1942,7 @@ export default class App extends Component {
 ![Image](./images/user-reducer-3.png)
 
 ![Image](./images/user-reducer-4.png)
+
 
 ```js
 import React from 'react';
@@ -2041,7 +2043,7 @@ export default App
 ```
 ---
 
-## 📘useState Vs useReducer
+### 📘useState Vs useReducer
 
 ![Image](./images/usestate-vs-usereducer.png)
 

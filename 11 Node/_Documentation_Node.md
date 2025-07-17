@@ -241,7 +241,7 @@
         _  // 20
     ```
 
-2. Press **tab** key word you can see a list of global variables, You can see various methods in function constructor using **String.** then press tab, We can write any thing in terminal like js example creating variable, print output etc
+2. Press **tab** key word you can see a list of global variables.  Write `Number.` or `String.` or `global` then you can see various methods. We can write any thing in terminal like js example creating variable, print output etc
 
 3. Various global variables are `console.log()`, `setTimeout`, `setInterval`, `clearInterval` instead of this node have other.
 
@@ -816,7 +816,24 @@ server.listen(8000, '127.0.0.1', () => {
 
     2. **start** is kind of default one for development you we can write *npm start* instead of *npm run start*
 
+3. Chalk : To print data in colorful way into terminal
+
+4. ProgressBar : To show download bar in console
 ---
+
+### 📘Generate Random Number 
+
+```js
+const crypto = require("crypto");
+
+// a55a80ab-7177-4319-868b-85c739bc8f40
+const randomUUID = crypto.randomUUID();
+console.log(randomUUID);
+
+const randomBytes = crypto.randomBytes(64).toString("hex");
+console.log(randomBytes);
+```
+
 
 ### 📘What Happen when we access a webpage
 
@@ -962,6 +979,13 @@ Basic Code
   ```
   npm run start
   ```
+---
+
+### 📘Install Express generator
+
+```
+npx express-generator express-app
+```
 ---
 
 ### 📘API and Rest Architecture
@@ -2193,6 +2217,8 @@ app.listen(80, () => {
       price: Number,
       authorName: String,
       tags: [String],
+      emailId : { type : String, required : [true, "Please add the user email address"], unique : [true , 'Email Address already taken']},
+      timestamps : true
     });
 
     const CourseModel = mongoose.model(collectionName, courseSchema);
@@ -2391,7 +2417,7 @@ update('66cf2f99962e25e7661407c4');
         },
       },
     });
-    ```    
+    ```
 
 5. To Print Error
 
@@ -2598,3 +2624,58 @@ app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 * Both language can connect with database but stand alone javascript not.
 
 * Apis are more powerful than creating website in php or node js.
+
+
+---
+### 📘JWT
+
+* Package name
+
+  ```
+  npm i jsonwebtoken
+  ```
+* app.js
+
+  ```js
+  const jwt = require("jsonwebtoken");
+  const express = require("express");
+  const app = express();
+  const port = 80;
+  const secretKey = "Test123";
+
+  app.use(express.json());
+
+  app.get("/", (req, res) => {
+    // Generating a token with an expiration time of 1 hour
+    const token = jwt.sign({ user: "admin" }, secretKey, { expiresIn: '1h' });
+
+    // Sending the response with the generated token
+    res.json({ auth: `Bearer ${token}` });
+  });
+
+  app.post("/", (req, res) => {
+    const authHeader = req.headers["authorization"];
+
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      // Handle the case where no Bearer token is provided
+      return res.status(400).send({ auth: false, message: "No token provided or invalid format" });
+    }
+
+    // Extract the token by removing the 'Bearer ' prefix
+    const token = authHeader.split(" ")[1];
+
+    jwt.verify(token, secretKey, (err, valid) => {
+      if (err) {
+        // Send a 401 response if the token is invalid or expired
+        return res.status(401).send({ auth: false, message: "Invalid or expired token" });
+      } else {
+        // Send a 200 response if the token is valid
+        return res.status(200).send({ auth: true, message: "Valid token" });
+      }
+    });
+  });
+
+  app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`);
+  });
+  ```

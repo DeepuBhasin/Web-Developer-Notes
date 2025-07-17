@@ -2256,24 +2256,24 @@ f();
 
 * **Callback Function :** A function you give to another function, to be run when the other function is finished. so the function you call (i.e invoke), 'calls back' by calling the function you gave it when it finishes.
 
-```javascript
-function tellMeWhenDone(callback) {
-    var a = 1000;
-    var b = 2000;
+    ```javascript
+    function tellMeWhenDone(callback) {
+        var a = 1000;
+        var b = 2000;
 
-    callback();
-}
+        callback();
+    }
 
-// send function expression
-tellMeWhenDone(function() {
-    console.log('I am Done !');
-})
+    // send function expression
+    tellMeWhenDone(function() {
+        console.log('I am Done !');
+    })
 
-// send function expression
-tellMeWhenDone(function() {
-   alert('I am Done !');
-})
-```
+    // send function expression
+    tellMeWhenDone(function() {
+    alert('I am Done !');
+    })
+    ```
 ---
 ### 📘Currying
 
@@ -2281,17 +2281,18 @@ tellMeWhenDone(function() {
 
 * **Function Currying :** Creating a copy of a function but with some preset parameters. Very useful in mathematical situations.
 
-```javascript
-function tripleAdd(num1, num2, num3) {
-    return num1 + num2 + num3;
-}
+    ```javascript
+    function tripleAdd(num1, num2, num3) {
+        return num1 + num2 + num3;
+    }
 
-// converted into currying function
+    // converted into currying function
 
-const tripleAdd = num1 => num2 => num3 => num1 + num2 + num3;
+    const tripleAdd = num1 => num2 => num3 => num1 + num2 + num3;
 
-tripleAdd(10)(20)(30); // 60
-```
+    tripleAdd(10)(20)(30); // 60
+    ```
+    
 Why is this useful ? <br/>
 
 Because now i can create __multiple utility functions__ out of this For example:
